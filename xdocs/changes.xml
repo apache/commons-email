@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<document>
+  <properties>
+    <title>Changes</title>
+    <author email="epugh@STOPSPAMopensourceconnections.com">Eric Pugh</author>
+  </properties>
+
+  <body>
+    <release version="1.0" date="IN CVS">
+      <action dev="epugh" type="add">
+        Add to /lib required jars not on Ibiblio.  Tweak Ant and Maven builds to include
+        them.
+      </action>
+      <action dev="epugh" type="remove">
+        Removed deprecated MailMessage and ByteArrayDataSource.
+      </action>         
+      <action dev="epugh" type="add">
+        Output test emails to /target/test-emails as .txt files for manual
+        review.
+      </action>          
+      <action dev="epugh" type="add" due-to="Mark Lowe" issue="31904">
+        Inline attatchment encoding was incorrect.
+      </action>          
+      <action dev="epugh" type="add">
+        Integrate our own checkstyle config instead of using Turbine style only.
+      </action>         
+      <action dev="epugh" type="add" due-to="Joe Germuska" issue="18968">
+        Clone the System.getProperties() call instead of putting random properties
+        into it.
+      </action>         
+      <action dev="epugh" type="add" issue="16859">
+        Can't supply a javax.mail.Session to Commons Email component
+      </action>           
+      <action dev="epugh" type="add" issue="30973" due-to="Corey Scott">
+        HTML email with plain text alternative and attachments
+      </action>         
+      <action dev="epugh" type="add" issue="31762" due-to="Corey Scott">
+        Integrate use of Dumbster to supply a fake SMTP server.
+      </action>           
+      <action dev="epugh" type="add" due-to="Corey Scott">
+        Lots of new unit tests and cleanup of code.
+      </action>    
+      <action dev="epugh" type="update">
+        Update dependencies to latest available.
+      </action>
+      <action dev="germuska" type="add" issue="18968">
+        Support the delivery of bounced messages to an address other than "from".
+      </action>           
+    </release>
+  </body>
+</document>

@@ -1,0 +1,15 @@
+*~
+.nbattrs
+docs
+target
+test-reports
+velocity.log*
+maven.log
+bin
+.classpath
+.project
+build.properties
+jcoverage.ser
+target2
+target3
+junit*.properties
