@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 ( the "License" );
  * you may not use this file except in compliance with the License.
@@ -49,8 +49,8 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:matthias@wessendorf.net">Matthias Wessendorf</a>
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Revision: 1.5 $ $Date: 2005/01/15 17:15:31 $
- * @version $Id: Email.java,v 1.5 2005/01/15 17:15:31 matzew Exp $
+ * @version $Revision: 1.6 $ $Date: 2005/01/26 15:49:42 $
+ * @version $Id: Email.java,v 1.6 2005/01/26 15:49:42 dims Exp $
  */
 public abstract class Email
 {
@@ -797,11 +797,11 @@ public abstract class Email
     
             if (this.headers.size() > 0)
             {
-                Enumeration enum = this.headers.keys();
+                Enumeration enumHeaderKeys = this.headers.keys();
     
-                while (enum.hasMoreElements())
+                while (enumHeaderKeys.hasMoreElements())
                 {
-                    String name = (String) enum.nextElement();
+                    String name = (String) enumHeaderKeys.nextElement();
                     String value = (String) headers.get(name);
                     this.message.addHeader(name, value);
                 }
