@@ -16,7 +16,6 @@
 package org.apache.commons.mail.mocks;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -29,7 +28,7 @@ import org.apache.commons.mail.HtmlEmail;
  * (used to allow testing only)
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MockHtmlEmailConcrete.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id$
  */
 public class MockHtmlEmailConcrete extends HtmlEmail
 {
@@ -90,7 +89,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     /**
      * @return toList
      */
-    public ArrayList getToList()
+    public List getToList()
     {
         return this.toList;
     }
@@ -98,7 +97,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     /**
      * @return bccList
      */
-    public ArrayList getBccList()
+    public List getBccList()
     {
         return this.bccList;
     }
@@ -106,7 +105,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     /**
      * @return ccList
      */
-    public ArrayList getCcList()
+    public List getCcList()
     {
         return this.ccList;
     }

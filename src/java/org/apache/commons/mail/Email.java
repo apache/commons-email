@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -49,8 +50,8 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:matthias@wessendorf.net">Matthias Wessendorf</a>
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Revision: 1.6 $ $Date: 2005/01/26 15:49:42 $
- * @version $Id: Email.java,v 1.6 2005/01/26 15:49:42 dims Exp $
+ * @version $Revision: 1.6 $ $Date$
+ * @version $Id$
  */
 public abstract class Email
 {
@@ -151,16 +152,16 @@ public abstract class Email
     protected String smtpPort = "25";
 
     /** List of "to" email adresses */
-    protected ArrayList toList = new ArrayList();
+    protected List toList = new ArrayList();
 
     /** List of "cc" email adresses */
-    protected ArrayList ccList = new ArrayList();
+    protected List ccList = new ArrayList();
 
     /** List of "bcc" email adresses */
-    protected ArrayList bccList = new ArrayList();
+    protected List bccList = new ArrayList();
 
     /** List of "replyTo" email adresses */
-    protected ArrayList replyList = new ArrayList();
+    protected List replyList = new ArrayList();
 
     /** 
      * Address to which undeliverable mail should be sent. 
@@ -380,17 +381,14 @@ public abstract class Email
     
     /**
     * Creates a InternetAddress
-    * @param name
-    * @param email
+    * @param email An Email
+    * @param name A Name.  
     * @return An internet address
-    * @throws EmailException
+    * @throws EmailException thrown when the address supplied or name were invalid
     */
-    private InternetAddress createInternetAddress(String email,String name) 
+    private InternetAddress createInternetAddress(String email, String name) 
         throws EmailException
     {
-
-
-        
         InternetAddress address = null;
         
         try 
@@ -403,7 +401,7 @@ public abstract class Email
             
             if (StringUtils.isNotEmpty(this.charset))
             {
-                address = new InternetAddress(email, name,this.charset);
+                address = new InternetAddress(email, name, this.charset);
             }
             else
             {
@@ -425,7 +423,7 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws AddressException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email setFrom(String email) 
         throws EmailException 
@@ -439,12 +437,12 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws AddressException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email setFrom(String email, String name) 
         throws EmailException
     {
-        this.fromAddress = createInternetAddress(email,name);
+        this.fromAddress = createInternetAddress(email, name);
 
         return this;
     }
@@ -454,7 +452,7 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws AddressException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email addTo(String email) 
         throws EmailException
@@ -468,13 +466,12 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws AddressException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email addTo(String email, String name) 
         throws EmailException
     {
-
-        this.toList.add(createInternetAddress(email,name));
+        this.toList.add(createInternetAddress(email, name));
 
         return this;
     }
@@ -484,7 +481,7 @@ public abstract class Email
      *
      * @param   aCollection collection of InternetAddress objects
      * @return An Email.
-     * @throws AddressException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email setTo(Collection aCollection) throws EmailException
     {
@@ -502,7 +499,7 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws AddressException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email addCc(String email) 
         throws EmailException
@@ -516,13 +513,12 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws AddressException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email addCc(String email, String name) 
         throws EmailException
     {
-        
-        this.ccList.add(createInternetAddress(email,name));
+        this.ccList.add(createInternetAddress(email, name));
 
         return this;
     }
@@ -531,7 +527,7 @@ public abstract class Email
      * Set a list of "CC" addresses
      *
      * @param   aCollection collection of InternetAddress objects
-     * @return An AddressException.
+     * @return An EmailException.
      * @throws EmailException Indicates an invalid email address
      */
     public Email setCc(Collection aCollection) throws EmailException
@@ -720,7 +716,8 @@ public abstract class Email
      */
     public void send() throws EmailException
     {
-        try {
+        try 
+        {
             this.getMailSession();
             this.message = new MimeMessage(this.session);
     
@@ -820,7 +817,8 @@ public abstract class Email
     
             Transport.send(this.message);
         }
-        catch (MessagingException me) {
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
         }    
     }
@@ -854,13 +852,13 @@ public abstract class Email
     }
 
     /**
-     * Utility to copy ArrayList of known InternetAddress objects into an
+     * Utility to copy List of known InternetAddress objects into an
      * array.
      *
-     * @param aList A ArrayList.
+     * @param aList A List of InternetAddress.
      * @return An InternetAddress[].
      */
-    protected InternetAddress[] toInternetAddressArray(ArrayList aList)
+    protected InternetAddress[] toInternetAddressArray(List aList)
     {
         InternetAddress[] ia =
             (InternetAddress[]) aList.toArray(new InternetAddress[0]);

@@ -17,23 +17,41 @@ package org.apache.commons.mail;
 
 import org.apache.commons.lang.exception.NestableException;
 
+/**
+ * EmailException
+ * @author jakarta-commons
+ */
 public class EmailException extends NestableException 
 {
+    /** */
     public EmailException()
     {
         super();
     }
     
+    /**
+     * 
+     * @param msg msg
+     */
     public EmailException(String msg)
     {
         super(msg);
     }
     
-    public EmailException(String msg,Throwable cause)
+    /**
+     * 
+     * @param msg msg
+     * @param cause cause
+     */
+    public EmailException(String msg, Throwable cause)
     {
-        super(msg,cause);
+        super(msg, cause);
     }
     
+    /**
+     * 
+     * @param cause cause
+     */
     public EmailException(Throwable cause)
     {
         super(cause);

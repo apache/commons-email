@@ -15,7 +15,7 @@
  */
 package org.apache.commons.mail.mocks;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.mail.internet.InternetAddress;
 
@@ -26,7 +26,7 @@ import org.apache.commons.mail.SimpleEmail;
  * (used to allow testing only)
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MockSimpleEmail.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id$
  */
 public class MockSimpleEmail extends SimpleEmail
 {
@@ -50,7 +50,7 @@ public class MockSimpleEmail extends SimpleEmail
     /**
      * @return toList
      */
-    public ArrayList getToList()
+    public List getToList()
     {
         return this.toList;
     }
@@ -58,7 +58,7 @@ public class MockSimpleEmail extends SimpleEmail
     /**
      * @return bccList
      */
-    public ArrayList getBccList()
+    public List getBccList()
     {
         return this.bccList;
     }
@@ -66,7 +66,7 @@ public class MockSimpleEmail extends SimpleEmail
     /**
      * @return ccList
      */
-    public ArrayList getCcList()
+    public List getCcList()
     {
         return this.ccList;
     }

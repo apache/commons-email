@@ -26,7 +26,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
  * JUnit test case for HtmlEmail Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: HtmlEmailTest.java,v 1.3 2004/11/29 17:33:12 epugh Exp $
+ * @version $Id$
  */
 
 public class HtmlEmailTest extends BaseEmailTestCase
@@ -176,7 +176,10 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testEmbed() throws Exception
     {
         // ====================================================================
@@ -345,7 +348,10 @@ public class HtmlEmailTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testSend2() throws Exception
     {
         // ====================================================================

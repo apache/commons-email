@@ -44,7 +44,7 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
  * @author <a href="mailto:unknown">Regis Koenig</a>
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MultiPartEmail.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
+ * @version $Id$
  */
 public class MultiPartEmail extends Email
 {
@@ -93,11 +93,13 @@ public class MultiPartEmail extends Email
         throws EmailException
     {
         MimeBodyPart bodyPart = new MimeBodyPart();
-        try {
+        try
+        {
             bodyPart.setContent(content, contentType);
             getContainer().addBodyPart(bodyPart);
         }
-        catch (MessagingException me){
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
         }
 

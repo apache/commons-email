@@ -18,9 +18,9 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.mail.Multipart;
 import javax.mail.internet.InternetAddress;
@@ -37,7 +37,7 @@ import com.dumbster.smtp.SmtpMessage;
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @author <a href="mailto:epugh@opensourceconnections.com">Eric Pugh</a>
- * @version $Id: BaseEmailTestCase.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id$
  */
 
 public class BaseEmailTestCase extends TestCase
@@ -187,9 +187,9 @@ public class BaseEmailTestCase extends TestCase
      * @param mailServer reference to the fake mail server
      * @param strSubject expected subject
      * @param fromAdd expected from address
-     * @param toAdd arraylist of expected to addresses
-     * @param ccAdd arraylist of expected cc addresses
-     * @param bccAdd arraylist of expected bcc addresses
+     * @param toAdd list of expected to addresses
+     * @param ccAdd list of expected cc addresses
+     * @param bccAdd list of expected bcc addresses
      * @param boolSaveToFile true will output to file, false doesnt
      * @return SmtpMessage email to check
      * @throws IOException Exception
@@ -198,9 +198,9 @@ public class BaseEmailTestCase extends TestCase
         SimpleSmtpServer mailServer,
         String strSubject,
         InternetAddress fromAdd,
-        ArrayList toAdd,
-        ArrayList ccAdd,
-        ArrayList bccAdd,
+        List toAdd,
+        List ccAdd,
+        List bccAdd,
         boolean boolSaveToFile)
         throws IOException
     {
@@ -248,9 +248,9 @@ public class BaseEmailTestCase extends TestCase
      * @param strSubject expected subject
      * @param content the expected message content
      * @param fromAdd expected from address
-     * @param toAdd arraylist of expected to addresses
-     * @param ccAdd arraylist of expected cc addresses
-     * @param bccAdd arraylist of expected bcc addresses
+     * @param toAdd list of expected to addresses
+     * @param ccAdd list of expected cc addresses
+     * @param bccAdd list of expected bcc addresses
      * @param boolSaveToFile true will output to file, false doesnt
      * @throws IOException Exception
      */
@@ -259,9 +259,9 @@ public class BaseEmailTestCase extends TestCase
         String strSubject,
         Multipart content,
         InternetAddress fromAdd,
-        ArrayList toAdd,
-        ArrayList ccAdd,
-        ArrayList bccAdd,
+        List toAdd,
+        List ccAdd,
+        List bccAdd,
         boolean boolSaveToFile)
         throws IOException
     {
@@ -296,9 +296,9 @@ public class BaseEmailTestCase extends TestCase
      * @param strSubject expected subject
      * @param strMessage the expected message as a string
      * @param fromAdd expected from address
-     * @param toAdd arraylist of expected to addresses
-     * @param ccAdd arraylist of expected cc addresses
-     * @param bccAdd arraylist of expected bcc addresses
+     * @param toAdd list of expected to addresses
+     * @param ccAdd list of expected cc addresses
+     * @param bccAdd list of expected bcc addresses
      * @param boolSaveToFile true will output to file, false doesnt
      * @throws IOException Exception
      */
@@ -307,9 +307,9 @@ public class BaseEmailTestCase extends TestCase
         String strSubject,
         String strMessage,
         InternetAddress fromAdd,
-        ArrayList toAdd,
-        ArrayList ccAdd,
-        ArrayList bccAdd,
+        List toAdd,
+        List ccAdd,
+        List bccAdd,
         boolean boolSaveToFile)
         throws IOException
     {

@@ -31,7 +31,7 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
  * JUnit test case for MultiPartEmail Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MultiPartEmailTest.java,v 1.3 2004/11/29 17:33:12 epugh Exp $
+ * @version $Id$
  */
 
 public class MultiPartEmailTest extends BaseEmailTestCase
@@ -433,7 +433,10 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testAddPart() throws Exception
     {
 
@@ -460,7 +463,10 @@ public class MultiPartEmailTest extends BaseEmailTestCase
    
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testAddPart2() throws Exception
     {
 

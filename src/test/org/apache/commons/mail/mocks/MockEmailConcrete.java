@@ -15,11 +15,10 @@
  */
 package org.apache.commons.mail.mocks;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.mail.Authenticator;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -34,7 +33,7 @@ import org.apache.commons.mail.EmailException;
  * getters for methods that normally only have setters.
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MockEmailConcrete.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
+ * @version $Id$
  */
 public class MockEmailConcrete extends Email
 {
@@ -43,7 +42,7 @@ public class MockEmailConcrete extends Email
      * Not Implemented, should be implemented in subclasses of Email
      * @param msg The email message
      * @return Email msg.
-     * @throws MessagingException MessagingException
+     * @throws EmailException EmailException
      */
     public Email setMsg(String msg) throws EmailException
     {
@@ -73,7 +72,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return bccList
      */
-    public ArrayList getBccList()
+    public List getBccList()
     {
         return this.bccList;
     }
@@ -81,7 +80,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return ccList
      */
-    public ArrayList getCcList()
+    public List getCcList()
     {
         return this.ccList;
     }
@@ -177,7 +176,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return replyList
      */
-    public ArrayList getReplyList()
+    public List getReplyList()
     {
         return this.replyList;
     }
@@ -201,7 +200,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return toList
      */
-    public ArrayList getToList()
+    public List getToList()
     {
         return this.toList;
     }

@@ -53,7 +53,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author <a href="mailto:unknown">Regis Koenig</a>
  * @author <a href="mailto:sean@informage.net">Sean Legassick</a>
- * @version $Id: HtmlEmail.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
+ * @version $Id$
  */
 public class HtmlEmail extends MultiPartEmail
 {
@@ -77,7 +77,7 @@ public class HtmlEmail extends MultiPartEmail
      *
      * @param aText A String.
      * @return An HtmlEmail.
-     * @throws MessagingException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
     public HtmlEmail setTextMsg(String aText) throws EmailException
@@ -96,7 +96,7 @@ public class HtmlEmail extends MultiPartEmail
      *
      * @param aHtml A String.
      * @return An HtmlEmail.
-     * @throws MessagingException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
     public HtmlEmail setHtmlMsg(String aHtml) throws EmailException
@@ -121,7 +121,7 @@ public class HtmlEmail extends MultiPartEmail
      *
      * @param msg A String.
      * @return An Email.
-     * @throws MessagingException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
     public Email setMsg(String msg) throws EmailException
@@ -164,7 +164,7 @@ public class HtmlEmail extends MultiPartEmail
      * @param name The name that will be set in the filename header
      * field.
      * @return A String with the Content-ID of the file.
-     * @throws MessagingException when URL suplpied is invalid
+     * @throws EmailException when URL suplpied is invalid
      *  also see javax.mail.internet.MimeBodyPart for defintions
      */
     public String embed(URL url, String name) throws EmailException
@@ -182,7 +182,8 @@ public class HtmlEmail extends MultiPartEmail
 
         MimeBodyPart mbp = new MimeBodyPart();
 
-        try {
+        try
+        {
             mbp.setDataHandler(new DataHandler(new URLDataSource(url)));
             mbp.setFileName(name);
             mbp.setDisposition("inline");
@@ -191,7 +192,8 @@ public class HtmlEmail extends MultiPartEmail
             this.inlineImages.add(mbp);
             return cid;            
         } 
-        catch (MessagingException me) {
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
         }
         
@@ -200,11 +202,12 @@ public class HtmlEmail extends MultiPartEmail
     /**
      * Does the work of actually sending the email.
      *
-     * @exception MessagingException if there was an error.
+     * @exception EmailException if there was an error.
      */
     public void send() throws EmailException
     {
-        try {
+        try
+        {
             // if the email has attachments then the base type is mixed, 
             // otherwise it should be related
             if (this.isBoolHasAttachments())
@@ -217,13 +220,15 @@ public class HtmlEmail extends MultiPartEmail
             }
 
         }
-        catch (MessagingException me){
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
         }
         super.send();
     }
 
     /**
+     * @throws EmailException EmailException
      * @throws MessagingException MessagingException
      */
     private void buildAttachments() throws MessagingException, EmailException
@@ -296,6 +301,7 @@ public class HtmlEmail extends MultiPartEmail
     }
 
     /**
+     * @throws EmailException EmailException
      * @throws MessagingException MessagingException
      */
     private void buildNoAttachments() throws MessagingException, EmailException

@@ -16,7 +16,7 @@
 package org.apache.commons.mail.mocks;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -28,7 +28,7 @@ import org.apache.commons.mail.MultiPartEmail;
  * (used to allow testing only)
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MockMultiPartEmailConcrete.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id$
  */
 public class MockMultiPartEmailConcrete extends MultiPartEmail
 {
@@ -72,7 +72,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
     /**
      * @return toList
      */
-    public ArrayList getToList()
+    public List getToList()
     {
         return this.toList;
     }
@@ -80,7 +80,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
     /**
      * @return bccList
      */
-    public ArrayList getBccList()
+    public List getBccList()
     {
         return this.bccList;
     }
@@ -88,7 +88,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
     /**
      * @return ccList
      */
-    public ArrayList getCcList()
+    public List getCcList()
     {
         return this.ccList;
     }

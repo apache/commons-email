@@ -35,7 +35,7 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
  * JUnit test case for Email Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: EmailTest.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
+ * @version $Id$
  */
 
 public class EmailTest extends BaseEmailTestCase
@@ -78,7 +78,10 @@ public class EmailTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testGetSetSession() throws Exception
     {
 
@@ -275,7 +278,10 @@ public class EmailTest extends BaseEmailTestCase
 
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testSetFrom() throws Exception
     {
         // ====================================================================
@@ -312,7 +318,10 @@ public class EmailTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testSetFromWithEnconding() throws Exception
     {
         // ====================================================================
@@ -332,7 +341,10 @@ public class EmailTest extends BaseEmailTestCase
 
     }
 
-    /** */
+    /**
+     * 
+     * @throws Exception Exception
+     */
     public void testSetFrom2() throws Exception
     {
         // ====================================================================
