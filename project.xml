@@ -23,8 +23,6 @@
   <shortDescription>Commons Email</shortDescription>
   <description>Commons Email provides a simple wrapper over the Java Mail API</description>
   <currentVersion>1.0-dev</currentVersion>
-  
-  <logo></logo>
   <package>org.apache.commons.mail</package>
   <gumpRepositoryId>jakarta-commons</gumpRepositoryId>
 

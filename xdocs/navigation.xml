@@ -15,10 +15,16 @@
    limitations under the License.
 -->
 
-<!DOCTYPE org.apache.commons.menus SYSTEM '../../../commons-build/menus/menus.dtd'>
+<!DOCTYPE project SYSTEM '../../commons-build/menus/menus.dtd'>
 <project name="Commons&#xA0;Email">
   <title>Commons&#xA0;Email</title>
   <body>
+    <links>
+      <item name="Jakarta"                   
+            href="http://jakarta.apache.org"/>
+      <item name="Jakarta Commons"                   
+            href="http://jakarta.apache.org/commons/"/>
+    </links>
     <menu name="Commons&#xA0;Email">
       <item name="Overview" href="/index.html"/>
       <item name="Examples" href="/examples.html"/>
