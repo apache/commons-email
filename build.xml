@@ -157,6 +157,12 @@
     <get dest="${libdir}/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/activation/jars/activation-1.0.2.jar">
     </get>
 -->
+    <echo>================================= WARNING ================================</echo>
+    <echo>Attempting to download non redistributable mail jars from sun.</echo>  	
+    <echo>Make sure you supply $${javamail-1.3.2.url} properties.</echo>
+    <echo>Make sure you supply $${activation-1.0.2.url} properties.</echo>  	
+    <echo>==========================================================================</echo>
+    	
     <get dest="${libdir}/javamail-1.3.2.jar" usetimestamp="true" ignoreerrors="true" src="${javamail-1.3.2.url}">
     </get>
     <get dest="${libdir}/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="${activation-1.0.2.url}">
