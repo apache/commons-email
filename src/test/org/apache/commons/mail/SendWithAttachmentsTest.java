@@ -29,7 +29,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
  * JUnit test case verifying bugzilla issue 30973 is fixed.
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: SendWithAttachmentsTest.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id: SendWithAttachmentsTest.java,v 1.2 2004/11/29 09:59:11 epugh Exp $
  */
 
 public class SendWithAttachmentsTest extends BaseEmailTestCase
@@ -64,6 +64,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
+            this.email.setSmtpPort(this.intTestMailServerPort);
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -153,6 +154,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 
 			this.email = new MockHtmlEmailConcrete();
 			this.email.setHostName(this.strTestMailServer);
+			this.email.setSmtpPort(this.intTestMailServerPort);
 			this.email.setFrom(this.strTestMailFrom);
 			this.email.addTo(this.strTestMailTo);
 

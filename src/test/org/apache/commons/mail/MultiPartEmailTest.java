@@ -32,7 +32,7 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
  * JUnit test case for MultiPartEmail Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MultiPartEmailTest.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id: MultiPartEmailTest.java,v 1.2 2004/11/29 09:59:11 epugh Exp $
  */
 
 public class MultiPartEmailTest extends BaseEmailTestCase
@@ -148,6 +148,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             MockMultiPartEmailConcrete testEmail =
                 new MockMultiPartEmailConcrete();
             testEmail.setHostName(this.strTestMailServer);
+            testEmail.setSmtpPort(this.intTestMailServerPort);
             testEmail.setFrom(this.strTestMailFrom);
             testEmail.addTo(this.strTestMailTo);
             testEmail.attach(attachment);

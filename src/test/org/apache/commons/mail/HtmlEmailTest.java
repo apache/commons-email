@@ -29,7 +29,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
  * JUnit test case for HtmlEmail Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: HtmlEmailTest.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id: HtmlEmailTest.java,v 1.2 2004/11/29 09:59:11 epugh Exp $
  */
 
 public class HtmlEmailTest extends BaseEmailTestCase
@@ -254,6 +254,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
+            this.email.setSmtpPort(this.intTestMailServerPort);
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -335,6 +336,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
+            this.email.setSmtpPort(this.intTestMailServerPort);
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -386,6 +388,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
+            this.email.setSmtpPort(this.intTestMailServerPort);
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -441,6 +444,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
             this.email.setFrom(this.strTestMailFrom);
+            this.email.setSmtpPort(this.intTestMailServerPort);
             this.email.addTo(this.strTestMailTo);
 
             if (this.strTestUser != null && this.strTestPasswd != null)

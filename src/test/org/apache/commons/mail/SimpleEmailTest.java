@@ -23,7 +23,7 @@ import org.apache.commons.mail.mocks.MockSimpleEmail;
 
 /**
  * JUnit test case for SimpleEmailTest
- * @version $Revision: 1.1 $ $Date: 2004/11/25 11:14:53 $
+ * @version $Revision: 1.2 $ $Date: 2004/11/29 09:59:11 $
  */
 
 public class SimpleEmailTest extends BaseEmailTestCase
@@ -104,6 +104,7 @@ public class SimpleEmailTest extends BaseEmailTestCase
 
             this.email = new MockSimpleEmail();
             this.email.setHostName(this.strTestMailServer);
+            this.email.setSmtpPort(this.intTestMailServerPort);
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 

@@ -6,10 +6,12 @@
   </properties>
 
   <body>
-    <release version="1.0" date="IN CVS">
-      <action dev="epugh" type="add">
-        Add to /lib required jars not on Ibiblio.  Tweak Ant and Maven builds to include
-        them.
+    <release version="1.0" date="IN CVS"> 
+      <action dev="epugh" type="add" due-to="Corey Scott" issue="32410">
+        Change port for dumbster from 25 to 2500 to use unreserved port.
+      </action>              
+      <action dev="epugh" type="add" due-to="Corey Scott" issue="32260">
+        Add back in ByteArrayDataSource.
       </action>
       <action dev="epugh" type="remove">
         Removed deprecated MailMessage and ByteArrayDataSource.
