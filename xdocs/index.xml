@@ -59,7 +59,7 @@ It is for use with instances of MultiPartEmail and HtmlEmail.
 <subsection name="Status">
 <p>
  <ul>
-  <li>After a very long time in the commons <i>sandbox</li>, this code is ready for the 1.0 release.</li>
+  <li>After a very long time in the commons <i>sandbox</i>, this code is ready for the 1.0 release.</li>
   <li>If you like the code and need new features, join the commons-dev mailing list!</li>
  </ul>
 </p>
