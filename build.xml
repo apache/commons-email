@@ -148,10 +148,10 @@
     </setproxy>
     <get dest="${libdir}/commons-lang-2.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-lang/jars/commons-lang-2.0.jar">
     </get>
-    <copy todir="${libdir}" file="lib/javamail-1.3.2.jar">
-    </copy>
-    <copy todir="${libdir}" file="lib/activation-1.0.2.jar">
-    </copy>
+    <get dest="${libdir}/javamail-1.3.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/java-mail/jars/javamail-1.3.2.jar">
+    </get>
+    <get dest="${libdir}/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/activation/jars/activation-1.0.2.jar">
+    </get>
     <get dest="${libdir}/dumbster-1.5.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/dumbster/jars/dumbster-1.5.jar">
     </get>
   </target>
