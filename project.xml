@@ -24,8 +24,28 @@
   <description>Commons Email provides a simple wrapper over the Java Mail API</description>
   <currentVersion>1.0-dev</currentVersion>
   <package>org.apache.commons.mail</package>
-  <gumpRepositoryId>jakarta-commons</gumpRepositoryId>
-
+  <gumpRepositoryId>jakarta</gumpRepositoryId>
+  <siteAddress>jakarta.apache.org</siteAddress>
+  <siteDirectory>/www/jakarta.apache.org/commons/${pom.artifactId.substring(8)}/</siteDirectory>
+  <distributionDirectory>/www/jakarta.apache.org/builds/jakarta-commons/${pom.artifactId.substring(8)}/</distributionDirectory>
+  <repository>
+    <connection>scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-commons/${pom.artifactId.substring(8)}</connection>
+    <url>http://cvs.apache.org/viewcvs/jakarta-commons/${pom.artifactId.substring(8)}/</url>
+  </repository>
+  <mailingLists>
+    <mailingList>
+      <name>Commons Dev List</name>
+      <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
+      <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
+      <archive>http://nagoya.apache.org/eyebrowse/SummarizeList?listName=commons-dev@jakarta.apache.org</archive>
+    </mailingList>
+    <mailingList>
+      <name>Commons User List</name>
+      <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
+      <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
+      <archive>http://nagoya.apache.org/eyebrowse/SummarizeList?listName=commons-user@jakarta.apache.org</archive>
+    </mailingList>
+  </mailingLists>
   <developers>
     <developer>
       <name>dIon Gillard</name>
