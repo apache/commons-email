@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.mail.MessagingException;
-
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 
@@ -29,7 +27,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
  * JUnit test case verifying bugzilla issue 30973 is fixed.
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: SendWithAttachmentsTest.java,v 1.2 2004/11/29 09:59:11 epugh Exp $
+ * @version $Id: SendWithAttachmentsTest.java,v 1.3 2004/11/29 17:33:12 epugh Exp $
  */
 
 public class SendWithAttachmentsTest extends BaseEmailTestCase
@@ -108,11 +106,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
                 this.email.getBccList(),
                 false);
         }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+
         catch (MalformedURLException e)
         {
             e.printStackTrace();
@@ -122,6 +116,11 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
         {
             e.printStackTrace();
             fail("Failed to save email to output file");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            fail("Unexpected exception thrown");
         }
 
     }
@@ -214,11 +213,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 				this.email.getBccList(),
 				false);
 		}
-		catch (MessagingException e)
-		{
-			e.printStackTrace();
-			fail("Unexpected exception thrown");
-		}
+
 		catch (MalformedURLException e)
 		{
 			e.printStackTrace();
@@ -228,6 +223,11 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 		{
 			e.printStackTrace();
 			fail("Failed to save email to output file");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			fail("Unexpected exception thrown");
 		}
     }
 

@@ -15,7 +15,6 @@
  */
 package org.apache.commons.mail;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -29,6 +28,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -50,8 +50,8 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:matthias@wessendorf.net">Matthias Wessendorf</a>
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Revision: 1.1 $ $Date: 2004/11/25 09:56:56 $
- * @version $Id: Email.java,v 1.1 2004/11/25 09:56:56 epugh Exp $
+ * @version $Revision: 1.2 $ $Date: 2004/11/29 17:33:12 $
+ * @version $Id: Email.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
  */
 public abstract class Email
 {
@@ -337,9 +337,9 @@ public abstract class Email
      * Initialise a mailsession object
      *
      * @return A Session.
-     * @throws MessagingException thrown when host name was not set
+     * @throws EmailException thrown when host name was not set
      */
-    protected Session getMailSession() throws MessagingException
+    protected Session getMailSession() throws EmailException
     {
         if (this.session == null)
         {
@@ -353,7 +353,7 @@ public abstract class Email
 
             if (!StringUtils.isNotEmpty(this.hostName))
             {
-                throw new MessagingException(
+                throw new EmailException(
                     "Cannot find valid hostname for mail session");
             }
 
@@ -378,15 +378,58 @@ public abstract class Email
         }
         return this.session;
     }
+    
+    /**
+    * Creates a InternetAddress
+    * @param name
+    * @param email
+    * @return An internet address
+    * @throws EmailException
+    */
+    private InternetAddress createInternetAddress(String email,String name) 
+        throws EmailException
+    {
 
+
+        
+        InternetAddress address = null;
+        
+        try 
+        {
+            // check name input
+            if (!StringUtils.isNotEmpty(name))
+            {
+                name = email;
+            }
+            
+            if (StringUtils.isNotEmpty(this.charset))
+            {
+                address = new InternetAddress(email, name,this.charset);
+            }
+            else
+            {
+                address = new InternetAddress(email, name);
+            }
+            
+            address.validate();
+        }
+        catch (Exception e)
+        {
+            throw new EmailException(e);
+        }
+        return address;
+    }
+    
+    
     /**
      * Set the FROM field of the email.
      *
      * @param email A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws AddressException Indicates an invalid email address
      */
-    public Email setFrom(String email) throws MessagingException
+    public Email setFrom(String email) 
+        throws EmailException 
     {
         return setFrom(email, null);
     }
@@ -397,41 +440,12 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws AddressException Indicates an invalid email address
      */
-    public Email setFrom(String email, String name) throws MessagingException
+    public Email setFrom(String email, String name) 
+        throws EmailException
     {
-        try
-        {
-            // check name input
-            if (!StringUtils.isNotEmpty(name))
-            {
-                name = email;
-            }
-
-            // set/update the from address
-            if (this.fromAddress == null)
-            {
-                if (StringUtils.isNotEmpty(this.charset))
-                {
-                    this.fromAddress =
-                        new InternetAddress(email, name, this.charset);
-                }
-                else
-                {
-                    this.fromAddress = new InternetAddress(email, name);
-                }
-            }
-            else
-            {
-                this.fromAddress.setAddress(email);
-                this.fromAddress.setPersonal(name);
-            }
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            throw new MessagingException("cannot set from", e);
-        }
+        this.fromAddress = createInternetAddress(email,name);
 
         return this;
     }
@@ -441,9 +455,10 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws AddressException Indicates an invalid email address
      */
-    public Email addTo(String email) throws MessagingException
+    public Email addTo(String email) 
+        throws EmailException
     {
         return addTo(email, null);
     }
@@ -454,30 +469,14 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws AddressException Indicates an invalid email address
      */
-    public Email addTo(String email, String name) throws MessagingException
+    public Email addTo(String email, String name) 
+        throws EmailException
     {
-        try
-        {
-            if (!StringUtils.isNotEmpty(name))
-            {
-                name = email;
-            }
 
-            if (StringUtils.isNotEmpty(this.charset))
-            {
-                this.toList.add(new InternetAddress(email, name, this.charset));
-            }
-            else
-            {
-                this.toList.add(new InternetAddress(email, name));
-            }
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            throw new MessagingException("cannot add to", e);
-        }
+        this.toList.add(createInternetAddress(email,name));
+
         return this;
     }
 
@@ -486,13 +485,13 @@ public abstract class Email
      *
      * @param   aCollection collection of InternetAddress objects
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws AddressException Indicates an invalid email address
      */
-    public Email setTo(Collection aCollection) throws MessagingException
+    public Email setTo(Collection aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
-            throw new MessagingException("Address List provided was invalid");
+            throw new EmailException("Address List provided was invalid");
         }
 
         this.toList = new ArrayList(aCollection);
@@ -504,9 +503,10 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws AddressException Indicates an invalid email address
      */
-    public Email addCc(String email) throws MessagingException
+    public Email addCc(String email) 
+        throws EmailException
     {
         return this.addCc(email, null);
     }
@@ -517,30 +517,13 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws AddressException Indicates an invalid email address
      */
-    public Email addCc(String email, String name) throws MessagingException
+    public Email addCc(String email, String name) 
+        throws EmailException
     {
-        try
-        {
-            if (!StringUtils.isNotEmpty(name))
-            {
-                name = email;
-            }
-
-            if (StringUtils.isNotEmpty(this.charset))
-            {
-                this.ccList.add(new InternetAddress(email, name, this.charset));
-            }
-            else
-            {
-                this.ccList.add(new InternetAddress(email, name));
-            }
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            throw new MessagingException("cannot add cc", e);
-        }
+        
+        this.ccList.add(createInternetAddress(email,name));
 
         return this;
     }
@@ -549,14 +532,14 @@ public abstract class Email
      * Set a list of "CC" addresses
      *
      * @param   aCollection collection of InternetAddress objects
-     * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @return An AddressException.
+     * @throws EmailException Indicates an invalid email address
      */
-    public Email setCc(Collection aCollection) throws MessagingException
+    public Email setCc(Collection aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
-            throw new MessagingException("Address List provided was invalid");
+            throw new EmailException("Address List provided was invalid");
         }
 
         this.ccList = new ArrayList(aCollection);
@@ -568,9 +551,10 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
-    public Email addBcc(String email) throws MessagingException
+    public Email addBcc(String email) 
+        throws EmailException
     {
         return this.addBcc(email, null);
     }
@@ -581,32 +565,13 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
-    public Email addBcc(String email, String name) throws MessagingException
+    public Email addBcc(String email, String name) 
+        throws EmailException
     {
-        try
-        {
-            if (!StringUtils.isNotEmpty(name))
-            {
-                name = email;
-            }
 
-            if (StringUtils.isNotEmpty(this.charset))
-            {
-                this.bccList.add(
-                    new InternetAddress(email, name, this.charset));
-            }
-            else
-            {
-                this.bccList.add(new InternetAddress(email, name));
-            }
-
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            throw new MessagingException("cannot add bcc", e);
-        }
+        this.bccList.add(createInternetAddress(email, name));
 
         return this;
     }
@@ -616,13 +581,13 @@ public abstract class Email
      *
      * @param   aCollection collection of InternetAddress objects
      * @return  An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
-    public Email setBcc(Collection aCollection) throws MessagingException
+    public Email setBcc(Collection aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
-            throw new MessagingException("Address List provided was invalid");
+            throw new EmailException("Address List provided was invalid");
         }
 
         this.bccList = new ArrayList(aCollection);
@@ -634,9 +599,10 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
-    public Email addReplyTo(String email) throws MessagingException
+    public Email addReplyTo(String email) 
+        throws EmailException
     {
         return this.addReplyTo(email, null);
     }
@@ -647,32 +613,14 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @return An Email.
-     * @throws MessagingException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address
      */
     public Email addReplyTo(String email, String name)
-        throws MessagingException
+        throws EmailException
     {
-        try
-        {
-            if (!StringUtils.isNotEmpty(name))
-            {
-                name = email;
-            }
+        
+        this.replyList.add(createInternetAddress(email, name));
 
-            if (StringUtils.isNotEmpty(this.charset))
-            {
-                this.replyList.add(
-                    new InternetAddress(email, name, this.charset));
-            }
-            else
-            {
-                this.replyList.add(new InternetAddress(email, name));
-            }
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            throw new MessagingException("cannot add replyTo", e);
-        }
         return this;
     }
 
@@ -762,138 +710,120 @@ public abstract class Email
      *
      * @param msg A String.
      * @return An Email.
-     * @throws MessagingException generic exception
+     * @throws EmailException generic exception
      */
-    public abstract Email setMsg(String msg) throws MessagingException;
+    public abstract Email setMsg(String msg) throws EmailException;
 
     /**
      * Does the work of actually sending the email.
      *
-     * @throws MessagingException if there was an error.
+     * @throws EmailException if there was an error.
      */
-    public void send() throws MessagingException
+    public void send() throws EmailException
     {
-        this.getMailSession();
-        this.message = new MimeMessage(this.session);
-
-        if (StringUtils.isNotEmpty(this.subject))
-        {
-            if (StringUtils.isNotEmpty(this.charset))
+        try {
+            this.getMailSession();
+            this.message = new MimeMessage(this.session);
+    
+            if (StringUtils.isNotEmpty(this.subject))
             {
-                this.message.setSubject(this.subject, this.charset);
+                if (StringUtils.isNotEmpty(this.charset))
+                {
+                    this.message.setSubject(this.subject, this.charset);
+                }
+                else
+                {
+                    this.message.setSubject(this.subject);
+                }
+            }
+    
+            // ========================================================
+            // Start of replacement code
+            if (this.content != null)
+            {
+                this.message.setContent(this.content, this.contentType);
+            }
+            // end of replacement code
+            // ========================================================
+            else if (this.emailBody != null)
+            {
+                this.message.setContent(this.emailBody);
             }
             else
             {
-                this.message.setSubject(this.subject);
+                this.message.setContent("", Email.TEXT_PLAIN);
             }
-        }
-
-        //
-        //      As far as i can tell, this logic is circular with 
-        //      the setContent( Object, String ) method.
-        //      There is no way for the content variable to be set without 
-        //      the contentType also being set.
-        //      The logic below therefore appears to be a duplication of 
-        //      the setContent( Object, String ) method
-        //      or if not should it not be moved to that method? 
-        //      (Proposed replacement code below)
-        //      if ( this.content != null )
-        //      {
-        //          String type = this.contentType;
-        //
-        //          if ( type != null && !type.trim().equals( "" ) 
-        //              && this.charset != null 
-        //              && !this.charset.trim().equals( "" ) )
-        //          {
-        //              type += "; charset=" + this.charset;
-        //          }
-        //
-        //          this.message.setContent( this.content, type );
-        //      }
-
-        // ========================================================
-        // Start of replacement code
-        if (this.content != null)
-        {
-            this.message.setContent(this.content, this.contentType);
-        }
-        // end of replacement code
-        // ========================================================
-        else if (this.emailBody != null)
-        {
-            this.message.setContent(this.emailBody);
-        }
-        else
-        {
-            this.message.setContent("", Email.TEXT_PLAIN);
-        }
-
-        if (this.fromAddress != null)
-        {
-            this.message.setFrom(this.fromAddress);
-        }
-        else
-        {
-            throw new MessagingException("Sender address required");
-        }
-
-        if (this.toList.size() + this.ccList.size() + this.bccList.size() == 0)
-        {
-            throw new MessagingException(
-                        "At least one receiver address required");
-        }
-
-        if (this.toList.size() > 0)
-        {
-            this.message.setRecipients(
-                Message.RecipientType.TO,
-                this.toInternetAddressArray(this.toList));
-        }
-
-        if (this.ccList.size() > 0)
-        {
-            this.message.setRecipients(
-                Message.RecipientType.CC,
-                this.toInternetAddressArray(this.ccList));
-        }
-
-        if (this.bccList.size() > 0)
-        {
-            this.message.setRecipients(
-                Message.RecipientType.BCC,
-                this.toInternetAddressArray(this.bccList));
-        }
-
-        if (this.replyList.size() > 0)
-        {
-            this.message.setReplyTo(
-                this.toInternetAddressArray(this.replyList));
-        }
-
-        if (this.headers.size() > 0)
-        {
-            Enumeration enum = this.headers.keys();
-
-            while (enum.hasMoreElements())
+    
+            if (this.fromAddress != null)
             {
-                String name = (String) enum.nextElement();
-                String value = (String) headers.get(name);
-                this.message.addHeader(name, value);
+                this.message.setFrom(this.fromAddress);
             }
+            else
+            {
+                throw new EmailException("Sender address required");
+            }
+    
+            if (this.toList.size() + this.ccList.size() + this.bccList.size() == 0)
+            {
+                throw new EmailException(
+                            "At least one receiver address required");
+            }
+    
+            if (this.toList.size() > 0)
+            {
+                this.message.setRecipients(
+                    Message.RecipientType.TO,
+                    this.toInternetAddressArray(this.toList));
+            }
+    
+            if (this.ccList.size() > 0)
+            {
+                this.message.setRecipients(
+                    Message.RecipientType.CC,
+                    this.toInternetAddressArray(this.ccList));
+            }
+    
+            if (this.bccList.size() > 0)
+            {
+                this.message.setRecipients(
+                    Message.RecipientType.BCC,
+                    this.toInternetAddressArray(this.bccList));
+            }
+    
+            if (this.replyList.size() > 0)
+            {
+                this.message.setReplyTo(
+                    this.toInternetAddressArray(this.replyList));
+            }
+    
+            if (this.headers.size() > 0)
+            {
+                Enumeration enum = this.headers.keys();
+    
+                while (enum.hasMoreElements())
+                {
+                    String name = (String) enum.nextElement();
+                    String value = (String) headers.get(name);
+                    this.message.addHeader(name, value);
+                }
+            }
+    
+            if (this.message.getSentDate() == null)
+            {
+                this.message.setSentDate(getSentDate());
+            }
+    
+            if (this.popBeforeSmtp)
+            {
+                Store store = session.getStore("pop3");
+                store.connect(this.popHost, this.popUsername, this.popPassword);
+            }
+    
+            Transport.send(this.message);
         }
-
-        if (this.message.getSentDate() == null)
-        {
-            this.message.setSentDate(getSentDate());
-        }
-
-        if (this.popBeforeSmtp)
-        {
-            Store store = session.getStore("pop3");
-            store.connect(this.popHost, this.popUsername, this.popPassword);
-        }
-
-        Transport.send(this.message);
+        catch (MessagingException me) {
+            throw new EmailException(me);
+        }    
     }
 
     /**

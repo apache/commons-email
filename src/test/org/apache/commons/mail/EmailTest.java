@@ -24,7 +24,6 @@ import java.util.Hashtable;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMultipart;
@@ -36,7 +35,7 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
  * JUnit test case for Email Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: EmailTest.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id: EmailTest.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
  */
 
 public class EmailTest extends BaseEmailTestCase
@@ -80,29 +79,23 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /** */
-    public void testGetSetSession()
+    public void testGetSetSession() throws Exception
     {
-        try
-        {
-            Properties properties = new Properties(System.getProperties());
-            properties.setProperty(Email.MAIL_TRANSPORT_PROTOCOL, Email.SMTP);
 
-            properties.setProperty(
-                Email.MAIL_PORT,
-                String.valueOf(this.intTestMailServerPort));
-            properties.setProperty(Email.MAIL_HOST, this.strTestMailServer);
-            properties.setProperty(Email.MAIL_DEBUG, String.valueOf(false));
+        Properties properties = new Properties(System.getProperties());
+        properties.setProperty(Email.MAIL_TRANSPORT_PROTOCOL, Email.SMTP);
 
-            Session mySession = Session.getInstance(properties, null);
+        properties.setProperty(
+            Email.MAIL_PORT,
+            String.valueOf(this.intTestMailServerPort));
+        properties.setProperty(Email.MAIL_HOST, this.strTestMailServer);
+        properties.setProperty(Email.MAIL_DEBUG, String.valueOf(false));
 
-            this.email.setMailSession(mySession);
-            assertEquals(mySession, this.email.getMailSession());
-        }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        Session mySession = Session.getInstance(properties, null);
+
+        this.email.setMailSession(mySession);
+        assertEquals(mySession, this.email.getMailSession());
+      
     }
 
     /** */
@@ -283,7 +276,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /** */
-    public void testSetFrom()
+    public void testSetFrom() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -310,32 +303,23 @@ public class EmailTest extends BaseEmailTestCase
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from 
-                this.email.setFrom(ARR_VALID_EMAILS[i]);
 
-                // retrieve and verify
-                assertEquals(arrExpected.get(i), this.email.getFromAddress());
-            }
-            catch (MessagingException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set from 
+            this.email.setFrom(ARR_VALID_EMAILS[i]);
+
+            // retrieve and verify
+            assertEquals(arrExpected.get(i), this.email.getFromAddress());
         }
     }
 
     /** */
-    public void testSetFromWithEnconding()
+    public void testSetFromWithEnconding() throws Exception
     {
         // ====================================================================
         // Test Success (with charset set)
         // ====================================================================
         String testValidEmail = "me@home.com";
 
-        try
-        {
             InternetAddress inetExpected =
                 new InternetAddress("me@home.com", "me@home.com");
 
@@ -345,21 +329,11 @@ public class EmailTest extends BaseEmailTestCase
 
             // retrieve and verify
             assertEquals(inetExpected, this.email.getFromAddress());
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+
     }
 
     /** */
-    public void testSetFrom2()
+    public void testSetFrom2() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -391,19 +365,12 @@ public class EmailTest extends BaseEmailTestCase
 
         for (int i = 0; i < testEmails.length; i++)
         {
-            try
-            {
-                // set from 
-                this.email.setFrom(testEmails[i], testEmailNames[i]);
+            // set from 
+            this.email.setFrom(testEmails[i], testEmailNames[i]);
 
-                // retrieve and verify
-                assertEquals(arrExpected.get(i), this.email.getFromAddress());
-            }
-            catch (MessagingException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // retrieve and verify
+            assertEquals(arrExpected.get(i), this.email.getFromAddress());
+
         }
 
         // ====================================================================
@@ -422,7 +389,7 @@ public class EmailTest extends BaseEmailTestCase
                 "\t.bad.personal.name.\uc5ec\n");
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -466,7 +433,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addTo(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -512,7 +479,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addTo(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -559,7 +526,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -584,7 +551,7 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addTo("me@home.com", "\t.bad.name.\uc5ec\n");
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -630,7 +597,7 @@ public class EmailTest extends BaseEmailTestCase
                 testEmailValid2.toString(),
                 this.email.getToList().toString());
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -644,7 +611,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setTo(null);
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -662,7 +629,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setTo(new ArrayList());
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -706,7 +673,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addCc(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -752,7 +719,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addCc(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -799,7 +766,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -824,7 +791,7 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addCc("me@home.com", "\t.bad.name.\uc5ec\n");
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -852,7 +819,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setCc(testEmailValid2);
             assertEquals(testEmailValid2, this.email.getCcList());
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -866,7 +833,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setCc(null);
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -884,7 +851,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setCc(new ArrayList());
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -928,7 +895,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addBcc(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -976,7 +943,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addBcc(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -1025,7 +992,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -1052,7 +1019,7 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addBcc("me@home.com", "\t.bad.name.\uc5ec\n");
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -1093,7 +1060,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setBcc(testInetEmailValid);
             assertEquals(testInetEmailValid, this.email.getBccList());
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -1107,7 +1074,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setBcc(null);
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -1125,7 +1092,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.setBcc(new ArrayList());
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -1169,7 +1136,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addReplyTo(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -1217,7 +1184,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addReplyTo(ARR_VALID_EMAILS[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -1266,7 +1233,7 @@ public class EmailTest extends BaseEmailTestCase
                 // set from 
                 this.email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 e.printStackTrace();
                 fail("Unexpected exception thrown");
@@ -1293,7 +1260,7 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addReplyTo("me@home.com", "\t.bad.name.\uc5ec\n");
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -1456,7 +1423,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.send();
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             this.fakeMailServer.stop();
             assertTrue(true);
@@ -1488,8 +1455,9 @@ public class EmailTest extends BaseEmailTestCase
             this.email.send();
             fail("Should have thrown an exception");
         }
-        catch (ParseException e)
+        catch (EmailException e)
         {
+            assertTrue(e.getCause() instanceof ParseException);
             this.fakeMailServer.stop();
             assertTrue(true);
         }
@@ -1514,7 +1482,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.send();
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             this.fakeMailServer.stop();
             assertTrue(true);
@@ -1537,7 +1505,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.send();
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             this.fakeMailServer.stop();
             assertTrue(true);
@@ -1562,7 +1530,7 @@ public class EmailTest extends BaseEmailTestCase
             this.email.send();
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             this.fakeMailServer.stop();
             assertTrue(true);
@@ -1615,7 +1583,7 @@ public class EmailTest extends BaseEmailTestCase
             e.printStackTrace();
             fail("Unexpected exception thrown");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");

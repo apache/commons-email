@@ -15,8 +15,6 @@
  */
 package org.apache.commons.mail;
 
-import javax.mail.MessagingException;
-
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -29,7 +27,7 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>
  * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
  * @author <a href="mailto:unknown">Regis Koenig</a>
- * @version $Id: SimpleEmail.java,v 1.1 2004/11/25 09:56:56 epugh Exp $
+ * @version $Id: SimpleEmail.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
 */
 public class SimpleEmail extends Email
 {
@@ -38,14 +36,14 @@ public class SimpleEmail extends Email
      *
      * @param msg A String.
      * @return An Email.
-     * @throws MessagingException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
-    public Email setMsg(String msg) throws MessagingException
+    public Email setMsg(String msg) throws EmailException
     {
         if (StringUtils.isEmpty(msg))
         {
-            throw new MessagingException("Invalid message supplied");
+            throw new EmailException("Invalid message supplied");
         }
 
         setContent(msg, TEXT_PLAIN);

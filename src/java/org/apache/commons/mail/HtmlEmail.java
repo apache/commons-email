@@ -53,7 +53,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author <a href="mailto:unknown">Regis Koenig</a>
  * @author <a href="mailto:sean@informage.net">Sean Legassick</a>
- * @version $Id: HtmlEmail.java,v 1.1 2004/11/25 09:56:56 epugh Exp $
+ * @version $Id: HtmlEmail.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
  */
 public class HtmlEmail extends MultiPartEmail
 {
@@ -80,11 +80,11 @@ public class HtmlEmail extends MultiPartEmail
      * @throws MessagingException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
-    public HtmlEmail setTextMsg(String aText) throws MessagingException
+    public HtmlEmail setTextMsg(String aText) throws EmailException
     {
         if (StringUtils.isEmpty(aText))
         {
-            throw new MessagingException("Invalid message supplied");
+            throw new EmailException("Invalid message supplied");
         }
 
        this.text = aText;
@@ -99,11 +99,11 @@ public class HtmlEmail extends MultiPartEmail
      * @throws MessagingException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
-    public HtmlEmail setHtmlMsg(String aHtml) throws MessagingException
+    public HtmlEmail setHtmlMsg(String aHtml) throws EmailException
     {
         if (StringUtils.isEmpty(aHtml))
         {
-            throw new MessagingException("Invalid message supplied");
+            throw new EmailException("Invalid message supplied");
         }
         
         this.html = aHtml;
@@ -124,11 +124,11 @@ public class HtmlEmail extends MultiPartEmail
      * @throws MessagingException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
-    public Email setMsg(String msg) throws MessagingException
+    public Email setMsg(String msg) throws EmailException
     {
         if (StringUtils.isEmpty(msg))
         {
-            throw new MessagingException("Invalid message supplied");
+            throw new EmailException("Invalid message supplied");
         }
 
         setTextMsg(msg);
@@ -167,7 +167,7 @@ public class HtmlEmail extends MultiPartEmail
      * @throws MessagingException when URL suplpied is invalid
      *  also see javax.mail.internet.MimeBodyPart for defintions
      */
-    public String embed(URL url, String name) throws MessagingException
+    public String embed(URL url, String name) throws EmailException
     {
         // verify that the URL is valid
         try
@@ -177,19 +177,24 @@ public class HtmlEmail extends MultiPartEmail
         }
         catch (IOException e)
         {
-            throw new MessagingException("Invalid URL");
+            throw new EmailException("Invalid URL");
         }
 
         MimeBodyPart mbp = new MimeBodyPart();
 
-        mbp.setDataHandler(new DataHandler(new URLDataSource(url)));
-        mbp.setFileName(name);
-        mbp.setDisposition("inline");
-        String cid = RandomStringUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
-        mbp.addHeader("Content-ID", "<" + cid + ">");
-
-        this.inlineImages.add(mbp);
-        return cid;
+        try {
+            mbp.setDataHandler(new DataHandler(new URLDataSource(url)));
+            mbp.setFileName(name);
+            mbp.setDisposition("inline");
+            String cid = RandomStringUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
+            mbp.addHeader("Content-ID", "<" + cid + ">");
+            this.inlineImages.add(mbp);
+            return cid;            
+        } 
+        catch (MessagingException me) {
+            throw new EmailException(me);
+        }
+        
     }
 
     /**
@@ -197,26 +202,31 @@ public class HtmlEmail extends MultiPartEmail
      *
      * @exception MessagingException if there was an error.
      */
-    public void send() throws MessagingException
+    public void send() throws EmailException
     {
-        // if the email has attachments then the base type is mixed, 
-        // otherwise it should be related
-        if (this.isBoolHasAttachments())
-        {
-            this.buildAttachments();
-        }
-        else
-        {
-            this.buildNoAttachments();
-        }
+        try {
+            // if the email has attachments then the base type is mixed, 
+            // otherwise it should be related
+            if (this.isBoolHasAttachments())
+            {
+                this.buildAttachments();
+            }
+            else
+            {
+                this.buildNoAttachments();
+            }
 
+        }
+        catch (MessagingException me){
+            throw new EmailException(me);
+        }
         super.send();
     }
 
     /**
      * @throws MessagingException MessagingException
      */
-    private void buildAttachments() throws MessagingException
+    private void buildAttachments() throws MessagingException, EmailException
     {
         MimeMultipart container = this.getContainer();
         MimeMultipart subContainer = null;
@@ -288,7 +298,7 @@ public class HtmlEmail extends MultiPartEmail
     /**
      * @throws MessagingException MessagingException
      */
-    private void buildNoAttachments() throws MessagingException
+    private void buildNoAttachments() throws MessagingException, EmailException
     {
         MimeMultipart container = this.getContainer();
         MimeMultipart subContainerHTML = new MimeMultipart("related");

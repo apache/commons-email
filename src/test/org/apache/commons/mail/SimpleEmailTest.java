@@ -17,13 +17,11 @@ package org.apache.commons.mail;
 
 import java.io.IOException;
 
-import javax.mail.MessagingException;
-
 import org.apache.commons.mail.mocks.MockSimpleEmail;
 
 /**
  * JUnit test case for SimpleEmailTest
- * @version $Revision: 1.2 $ $Date: 2004/11/29 09:59:11 $
+ * @version $Revision: 1.3 $ $Date: 2004/11/29 17:33:12 $
  */
 
 public class SimpleEmailTest extends BaseEmailTestCase
@@ -61,7 +59,7 @@ public class SimpleEmailTest extends BaseEmailTestCase
                 assertEquals(testCharsValid[i], this.email.getMsg());
             }
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -77,7 +75,7 @@ public class SimpleEmailTest extends BaseEmailTestCase
                 this.email.setMsg(this.testCharsNotValid[i]);
                 fail("Should have thrown an exception");
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 assertTrue(true);
             }
@@ -136,15 +134,16 @@ public class SimpleEmailTest extends BaseEmailTestCase
                 this.email.getBccList(),
                 true);
         }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+
         catch (IOException e)
         {
             e.printStackTrace();
             fail("failed to save email to output file");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            fail("Unexpected exception thrown");
         }
     }
 }

@@ -26,6 +26,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
 
 /**
  * Concrete Implementation on the Abstract Email 
@@ -33,7 +34,7 @@ import org.apache.commons.mail.Email;
  * getters for methods that normally only have setters.
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MockEmailConcrete.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id: MockEmailConcrete.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
  */
 public class MockEmailConcrete extends Email
 {
@@ -44,7 +45,7 @@ public class MockEmailConcrete extends Email
      * @return Email msg.
      * @throws MessagingException MessagingException
      */
-    public Email setMsg(String msg) throws MessagingException
+    public Email setMsg(String msg) throws EmailException
     {
         // This abstract method should be tested in the concrete 
         // implementation classes only.
@@ -223,10 +224,10 @@ public class MockEmailConcrete extends Email
 
     /**
      * @return Session
-     * @throws MessagingException MessagingException
+     * @throws EmailException EmailException
      */
     public Session getSession()
-        throws MessagingException
+        throws EmailException
     {
         return this.getMailSession();
     }

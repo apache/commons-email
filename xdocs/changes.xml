@@ -7,6 +7,9 @@
 
   <body>
     <release version="1.0" date="IN CVS"> 
+      <action dev="epugh" type="add" due-to="Mark Lowe" issue="32094">
+        Email throws EmailException wrapping underlying JavaMail exception
+      </action>         
       <action dev="epugh" type="add" due-to="Corey Scott" issue="32410">
         Change port for dumbster from 25 to 2500 to use unreserved port.
       </action>              

@@ -22,7 +22,6 @@ import java.net.URL;
 import java.util.Hashtable;
 
 import javax.activation.URLDataSource;
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang.StringUtils;
@@ -32,7 +31,7 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
  * JUnit test case for MultiPartEmail Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: MultiPartEmailTest.java,v 1.2 2004/11/29 09:59:11 epugh Exp $
+ * @version $Id: MultiPartEmailTest.java,v 1.3 2004/11/29 17:33:12 epugh Exp $
  */
 
 public class MultiPartEmailTest extends BaseEmailTestCase
@@ -81,9 +80,8 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 this.email.setMsg(testCharsValid[i]);
                 assertEquals(testCharsValid[i], this.email.getMsg());
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
-                e.printStackTrace();
                 fail("Unexpected exception thrown");
             }
         }
@@ -97,9 +95,8 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 this.email.setMsg(testCharsValid[i]);
                 assertEquals(testCharsValid[i], this.email.getMsg());
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
-                e.printStackTrace();
                 fail("Unexpected exception thrown");
             }
         }
@@ -115,7 +112,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 this.email.setMsg(testCharsNotValid[i]);
                 fail("Should have thrown an exception");
             }
-            catch (MessagingException e)
+            catch (EmailException e)
             {
                 assertTrue(true);
             }
@@ -198,17 +195,18 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 testEmail.getBccList(),
                 false);
         }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+
         catch (IOException e)
         {
             e.printStackTrace();
             fail("Failed to save email to output file");
         }
-
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            fail("Unexpected exception thrown");
+        }
+        
         // ====================================================================
         // Test Exceptions
         // ====================================================================
@@ -219,7 +217,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             this.email.send();
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             this.fakeMailServer.stop();
             assertTrue(true);
@@ -246,9 +244,8 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             attachment.setPath(testFile.getAbsolutePath());
             this.email.attach(attachment);
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
-            e.printStackTrace();
             fail("Unexpected exception thrown");
         }
 
@@ -263,7 +260,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             attachment.setURL(new URL(this.strTestURL));
             this.email.attach(attachment);
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -283,7 +280,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             this.email.attach(null);
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -301,7 +298,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             this.email.attach(attachment);
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -319,7 +316,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             this.email.attach(attachment);
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -343,7 +340,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 "Test Attachment",
                 "Test Attachment Desc");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -362,7 +359,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 null,
                 "Test Attachment Desc");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -387,7 +384,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 "Test Attachment",
                 "Test Attachment Desc");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             e.printStackTrace();
             fail("Unexpected exception thrown");
@@ -408,7 +405,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             this.email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -425,7 +422,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             this.email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
             fail("Should have thrown an exception");
         }
-        catch (MessagingException e)
+        catch (EmailException e)
         {
             assertTrue(true);
         }
@@ -437,70 +434,54 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /** */
-    public void testAddPart()
+    public void testAddPart() throws Exception
     {
-        try
-        {
-            // setup
-            this.email = new MockMultiPartEmailConcrete();
-            String strMessage = "hello";
-            String strContentType = "text/plain";
 
-            // add part
-            this.email.addPart(strMessage, strContentType);
+        // setup
+        this.email = new MockMultiPartEmailConcrete();
+        String strMessage = "hello";
+        String strContentType = "text/plain";
 
-            // validate
-            assertEquals(
-                strContentType,
-                this.email.getContainer().getBodyPart(0).getContentType());
-            assertEquals(
-                strMessage,
-                this
-                    .email
-                    .getContainer()
-                    .getBodyPart(0)
-                    .getDataHandler()
-                    .getContent());
-        }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
-        catch (IOException e1)
-        {
-            e1.printStackTrace();
-        }
+        // add part
+        this.email.addPart(strMessage, strContentType);
+
+        // validate
+        assertEquals(
+            strContentType,
+            this.email.getContainer().getBodyPart(0).getContentType());
+        assertEquals(
+            strMessage,
+            this
+                .email
+                .getContainer()
+                .getBodyPart(0)
+                .getDataHandler()
+                .getContent());
+   
     }
 
     /** */
-    public void testAddPart2()
+    public void testAddPart2() throws Exception
     {
-        try
-        {
-            // setup
-            this.email = new MockMultiPartEmailConcrete();
-            String strSubtype = "subtype/abc123";
 
-            // add part
-            this.email.addPart(new MimeMultipart(strSubtype));
+        // setup
+        this.email = new MockMultiPartEmailConcrete();
+        String strSubtype = "subtype/abc123";
 
-            // validate
-            assertTrue(
-                this
-                    .email
-                    .getContainer()
-                    .getBodyPart(0)
-                    .getDataHandler()
-                    .getContentType()
-                    .indexOf(strSubtype)
-                    != -1);
-        }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        // add part
+        this.email.addPart(new MimeMultipart(strSubtype));
+
+        // validate
+        assertTrue(
+            this
+                .email
+                .getContainer()
+                .getBodyPart(0)
+                .getDataHandler()
+                .getContentType()
+                .indexOf(strSubtype)
+                != -1);
+   
     }
 
     /** @todo implement test for GetContainer */
