@@ -21,7 +21,7 @@
   <inceptionYear>2001</inceptionYear>
   <shortDescription>Commons Email</shortDescription>
   <description>Commons Email provides a simple wrapper over the Java Mail API</description>
-  <currentVersion>1.0-dev</currentVersion>
+  <currentVersion>1.0-rc2</currentVersion>
   <package>org.apache.commons.mail</package>
   <gumpRepositoryId>jakarta</gumpRepositoryId>
   <siteAddress>jakarta.apache.org</siteAddress>
@@ -152,6 +152,13 @@
       </includes>
     </unitTest>
     <nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
+    <resources>
+      <resource>
+        <includes>
+          <include>NOTICE.txt</include>
+        </includes>
+      </resource>
+    </resources>	
   </build>
   
   <reports>
