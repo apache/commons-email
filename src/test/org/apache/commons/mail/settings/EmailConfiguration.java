@@ -17,14 +17,14 @@ package org.apache.commons.mail.settings;
 
 /**
  * @author Eric Pugh 
- * @version $Revision: 1.1 $ $Date: 2004/11/25 11:14:53 $
+ * @version $Revision: 1.2 $ $Date: 2004/11/29 09:58:33 $
  */
 public final class EmailConfiguration
 {
     /** */
     public static final String MAIL_SERVER = "localhost";
     /** */
-    public static final int MAIL_SERVER_PORT = 25;
+    public static final int MAIL_SERVER_PORT = 2500;
     /** */
     public static final String TEST_FROM = "test_from@apache.org";
     /** */
