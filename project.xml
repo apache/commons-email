@@ -15,7 +15,6 @@
    limitations under the License.
 -->
 <project>
-  <extend>../commons-build/project.xml</extend>
   <name>Commons Email</name>
   <id>commons-email</id>
   <logo>/images/email-logo-white.png</logo>
