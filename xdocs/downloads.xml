@@ -19,7 +19,7 @@
       <title>Downloads</title>
       <author email="commons-dev@jakarta.apache.org">Commons Documentation Team</author>
       <author email="quintonm@apache.org">Quinton McCombs</author>
-      <revision>$Id: downloads.xml,v 1.1 2004/11/25 09:56:56 epugh Exp $</revision>
+      <revision>$Id: downloads.xml,v 1.2 2004/11/25 14:00:53 epugh Exp $</revision>
    </properties>
 
    <body>
@@ -27,7 +27,7 @@
          <p>There has not yet been a release of commons-email.</p>
          <p>
             The CVS repository for <em>email</em> can be
-            <a href="http://cvs.apache.org/viewcvs/jakarta-commons-sandbox/email/">browsed online</a>
+            <a href="http://cvs.apache.org/viewcvs/jakarta-commons/email/">browsed online</a>
             or
             <a href="http://jakarta.apache.org/site/cvsindex.html">downloaded using a CVS client</a>.
          </p>

@@ -15,7 +15,7 @@
    limitations under the License.
 -->
 
-<!DOCTYPE org.apache.commons.menus SYSTEM '../../../jakarta-commons/commons-build/menus/menus.dtd'>
+<!DOCTYPE org.apache.commons.menus SYSTEM '../../../commons-build/menus/menus.dtd'>
 <project name="Commons&#xA0;Email">
   <title>Commons&#xA0;Email</title>
   <body>
@@ -25,7 +25,7 @@
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team" href="/team-list.html"/>
-      <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons-sandbox/email/"/>
+      <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons/email/"/>
     </menu>
     &common-menus;
   </body>
