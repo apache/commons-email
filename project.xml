@@ -3,8 +3,22 @@
     <name>Commons Email</name>
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
-    <currentVersion>1.0-rc3</currentVersion>
-    <organization/>
+    <currentVersion>1.0-rc4</currentVersion>
+  
+    <organization>
+      <name>The Apache Software Foundation</name>
+      <url>http://jakarta.apache.org</url>
+      <logo>http://jakarta.apache.org/images/original-jakarta-logo.gif</logo>
+    </organization>
+
+    <licenses>
+      <license>
+    	<name>The Apache Software License, Version 2.0</name>
+    	<url>/LICENSE.txt</url>
+    	<distribution>repo</distribution>
+      </license>
+    </licenses>
+    
     <inceptionYear>2001</inceptionYear>
     <package>org.apache.commons.mail</package>
     <logo>/images/email-logo-white.png</logo>
@@ -143,22 +157,23 @@
         </dependency>
     </dependencies>
     <build>
-        <nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
-        <sourceDirectory>src/java</sourceDirectory>
-        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-        <unitTest>
-            <includes>
-                <include>**/*Test.java</include>
-            </includes>
-        </unitTest>
-        <resources>
-            <resource>
-                <includes>
-                    <include>NOTICE.txt</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
+      <nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
+      <sourceDirectory>src/java</sourceDirectory>
+      <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+      <unitTest>
+         <includes>
+            <include>**/*Test.java</include>
+         </includes>
+      </unitTest>
+      <resources>
+        <resource>
+          <directory>${basedir}</directory>
+          <includes>
+            <include>NOTICE.txt</include>
+          </includes>
+          <targetPath>META-INF</targetPath>
+        </resource>
+      </resources>
     </build>
     <reports>
         <report>maven-changelog-plugin</report>
