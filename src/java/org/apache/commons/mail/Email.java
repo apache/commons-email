@@ -28,7 +28,6 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -50,8 +49,8 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:matthias@wessendorf.net">Matthias Wessendorf</a>
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Revision: 1.2 $ $Date: 2004/11/29 17:33:12 $
- * @version $Id: Email.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
+ * @version $Revision: 1.3 $ $Date: 2004/12/03 17:10:37 $
+ * @version $Id: Email.java,v 1.3 2004/12/03 17:10:37 epugh Exp $
  */
 public abstract class Email
 {
