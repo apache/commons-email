@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.mail;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,7 +23,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Properties;
-
+ 
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -49,8 +51,9 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:matthias@wessendorf.net">Matthias Wessendorf</a>
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Revision: 1.3 $ $Date: 2004/12/03 17:10:37 $
- * @version $Id: Email.java,v 1.3 2004/12/03 17:10:37 epugh Exp $
+ * @author <a href="mailto:travis@thirdeyemedia.net">Travis Meisenheimer</a>
+ * @version $Revision: 1.4 $ $Date: 2005/01/13 13:52:32 $
+ * @version $Id: Email.java,v 1.4 2005/01/13 13:52:32 matzew Exp $
  */
 public abstract class Email
 {
@@ -498,6 +501,39 @@ public abstract class Email
     }
 
     /**
+     * Set a list of "TO" addresses using String []
+     *
+     * @param   to a String [] of addressess {"joe@blow.com", "dick@blow.com"}
+     * @return An Email.
+     * @throws AddressException Indicates an invalid email address
+     * 
+     */
+
+    public Email setTo(String [] to) throws EmailException {
+        for (int i = 0; i < to.length; i++)
+            this.toList.add( createInternetAddress( to[i], null ) );
+
+        return this;
+    }
+
+    /**
+     * Set a list of "TO" addresses using String [][]
+     *
+     * @param   to a String [][] of addressess {{"joe@blow.com", "Joe Blow"}, { "dick@blow.com", "Dick Blow"}}
+     * @return An Email.
+     * @throws AddressException Indicates an invalid email address
+     * 
+     */
+
+    public Email setTo(String [][] to) throws EmailException {
+        for (int i = 0; i < to.length; i++)
+            this.toList.add( createInternetAddress( to[i][0], to[i][1] ) );
+
+        return this;
+    }
+
+
+    /**
      * Add a recipient CC to the email.
      *
      * @param email A String.
@@ -545,6 +581,41 @@ public abstract class Email
         return this;
     }
 
+
+
+    /**
+     * Set a list of "CC" addresses using String []
+     *
+     * @param   cc a String [] of addressess {"joe@blow.com", "dick@blow.com"}
+     * @return An Email.
+     * @throws AddressException Indicates an invalid email address
+     * 
+     */
+
+    public Email setCc(String [] cc) throws EmailException {
+        for (int i = 0; i < cc.length; i++)
+            this.ccList.add( createInternetAddress( cc[i], null ) );
+
+        return this;
+    }
+
+    /**
+     * Set a list of "CC" addresses using String [][]
+     *
+     * @param   cc a String [][] of addressess {{"joe@blow.com", "Joe Blow"}, { "dick@blow.com", "Dick Blow"}}
+     * @return An Email.
+     * @throws AddressException Indicates an invalid email address
+     * 
+     */
+
+    public Email setCc(String [][] cc) throws EmailException {
+        for (int i = 0; i < cc.length; i++)
+            this.ccList.add( createInternetAddress( cc[i][0], cc[i][1] ) );
+
+        return this;
+    }
+
+
     /**
      * Add a blind BCC recipient to the email.
      *
@@ -590,6 +661,39 @@ public abstract class Email
         }
 
         this.bccList = new ArrayList(aCollection);
+        return this;
+    }
+
+
+    /**
+     * Set a list of "BCC" addresses using String []
+     *
+     * @param   bcc a String [] of addressess {"joe@blow.com", "dick@blow.com"}
+     * @return An Email.
+     * @throws AddressException Indicates an invalid email address
+     * 
+     */
+
+    public Email setBcc(String [] bcc) throws EmailException {
+        for (int i = 0; i < bcc.length; i++)
+            this.bccList.add( createInternetAddress( bcc[i], null ) );
+
+        return this;
+    }
+
+    /**
+     * Set a list of "BCC" addresses using String [][]
+     *
+     * @param   bcc a String [][] of addressess {{"joe@blow.com", "Joe Blow"}, { "dick@blow.com", "Dick Blow"}}
+     * @return An Email.
+     * @throws AddressException Indicates an invalid email address
+     * 
+     */
+
+    public Email setBcc(String [][] bcc) throws EmailException {
+        for (int i = 0; i < bcc.length; i++)
+            this.bccList.add( createInternetAddress( bcc[i][0], bcc[i][1] ) );
+
         return this;
     }
 
