@@ -17,7 +17,7 @@ package org.apache.commons.mail.settings;
 
 /**
  * @author Eric Pugh 
- * @version $Revision: 1.2 $ $Date: 2004/11/29 09:58:33 $
+ * @version $Revision$ $Date$
  */
 public final class EmailConfiguration
 {

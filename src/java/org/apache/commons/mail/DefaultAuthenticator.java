@@ -23,7 +23,7 @@ import javax.mail.PasswordAuthentication;
  * transport needing basic userName and password type authentication.
  *
  * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
- * @version $Id: DefaultAuthenticator.java,v 1.1 2004/11/25 09:56:56 epugh Exp $
+ * @version $Id$
  */
 public class DefaultAuthenticator extends Authenticator
 {

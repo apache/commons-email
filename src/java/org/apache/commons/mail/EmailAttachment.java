@@ -21,7 +21,7 @@ import java.net.URL;
  * This class models an email attachment.  Used by MultiPartEmail.
  *
  * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>
- * @version $Id: EmailAttachment.java,v 1.1 2004/11/25 09:56:56 epugh Exp $
+ * @version $Id$
  */
 public class EmailAttachment
 {

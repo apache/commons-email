@@ -22,7 +22,7 @@ import java.net.URL;
  * JUnit test case for EmailAttachment Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: EmailAttachmentTest.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id$
  */
 
 public class EmailAttachmentTest extends BaseEmailTestCase

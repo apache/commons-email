@@ -36,7 +36,7 @@ import javax.activation.DataSource;
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
  * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
- * @version $Id: ByteArrayDataSource.java,v 1.1 2004/11/29 09:59:11 epugh Exp $
+ * @version $Id$
  */
 public class ByteArrayDataSource implements DataSource
 {

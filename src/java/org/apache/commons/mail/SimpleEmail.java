@@ -27,7 +27,7 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>
  * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
  * @author <a href="mailto:unknown">Regis Koenig</a>
- * @version $Id: SimpleEmail.java,v 1.2 2004/11/29 17:33:12 epugh Exp $
+ * @version $Id$
 */
 public class SimpleEmail extends Email
 {

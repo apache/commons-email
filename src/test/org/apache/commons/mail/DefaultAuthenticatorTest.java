@@ -8,7 +8,7 @@ import junit.framework.TestCase;
  * JUnit test case for DefaultAuthenticator Class
  *
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Id: DefaultAuthenticatorTest.java,v 1.1 2004/11/25 11:14:53 epugh Exp $
+ * @version $Id$
  */
 
 public class DefaultAuthenticatorTest extends TestCase
