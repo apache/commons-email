@@ -115,14 +115,24 @@ public class MultiPartEmail extends Email
      */
     public Email addPart(MimeMultipart multipart) throws EmailException
     {
+        try{
+            return addPart(multipart, getContainer().getCount());
+        }
+        catch( MessagingException me ){
+            throw new EmailException(me);
+        }
+    }
+
+    public Email addPart(MimeMultipart multipart, int index) throws EmailException
+    {
         MimeBodyPart bodyPart = new MimeBodyPart();
         try {
             bodyPart.setContent(multipart);
-            getContainer().addBodyPart(bodyPart);
+            getContainer().addBodyPart(bodyPart, index);
         }
         catch (MessagingException me){
             throw new EmailException(me);
-        }            
+        }
 
         return this;
     }
@@ -415,7 +425,7 @@ public class MultiPartEmail extends Email
         if (this.primaryBodyPart == null)
         {
             primaryBodyPart = new MimeBodyPart();
-            getContainer().addBodyPart(primaryBodyPart);
+            getContainer().addBodyPart(primaryBodyPart, 0);
         }
 
         return primaryBodyPart;

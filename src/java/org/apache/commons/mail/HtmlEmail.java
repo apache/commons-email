@@ -291,12 +291,12 @@ public class HtmlEmail extends MultiPartEmail
         }
 
         // add sub containers to message
-        this.addPart(subContainer);
+        this.addPart(subContainer, 0);
 
 		if (this.inlineImages.size() > 0)
 		{
 			// add sub container to message
-			this.addPart(subContainerHTML);
+			this.addPart(subContainerHTML, 1);
 		}
     }
 
@@ -347,7 +347,7 @@ public class HtmlEmail extends MultiPartEmail
                 else
                 {
                     msgHtml = new MimeBodyPart();
-                    container.addBodyPart(msgHtml);
+                    container.addBodyPart(msgHtml, 1);
                 }
             }
 
