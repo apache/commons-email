@@ -7,6 +7,9 @@
 
   <body>
     <release version="1.0" date="IN CVS"> 
+      <action dev="dion" type="fix" issue="34919" due-to="Eric Spiegelberg">
+        Refactor Hashtable usage to Map
+      </action>
       <action dev="epugh" type="add" due-to="Mark Lowe" issue="32094">
         Email throws EmailException wrapping underlying JavaMail exception
       </action>         
