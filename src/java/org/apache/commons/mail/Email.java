@@ -842,10 +842,7 @@ public abstract class Email
         {
             return new Date();
         }
-        else
-        {
-            return this.sentDate;
-        }
+        return this.sentDate;
     }
 
     /**
