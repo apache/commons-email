@@ -15,8 +15,8 @@
  */
 package org.apache.commons.mail.mocks;
 
-import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.Authenticator;
 import javax.mail.Session;
@@ -128,7 +128,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return headers
      */
-    public Hashtable getHeaders()
+    public Map getHeaders()
     {
         return this.headers;
     }

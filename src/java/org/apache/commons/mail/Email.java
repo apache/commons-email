@@ -20,7 +20,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -178,7 +180,7 @@ public abstract class Email
      * or  2( high ) 3( normal ) 4( low ) and 5( lowest )
      * Disposition-Notification-To: user@domain.net
      */
-    protected Hashtable headers = new Hashtable();
+    protected Map headers = new Hashtable();
 
     /**
      * Used to determine whether to use pop3 before smtp, and if so the settings.
@@ -626,16 +628,16 @@ public abstract class Email
      * or  2( high ) 3( normal ) 4( low ) and 5( lowest )
      * Disposition-Notification-To: user@domain.net
      *
-     * @param ht A Hashtable.
+     * @param map A Map.
      */
-    public void setHeaders(Hashtable ht)
+    public void setHeaders(Map map)
     {
-        Enumeration enumKeyBad = ht.keys();
+        Iterator iterKeyBad = map.keySet().iterator();
 
-        while (enumKeyBad.hasMoreElements())
+        while (iterKeyBad.hasNext())
         {
-            String strName = (String) enumKeyBad.nextElement();
-            String strValue = (String) ht.get(strName);
+            String strName = (String) iterKeyBad.next();
+            String strValue = (String) map.get(strName);
 
             if (!StringUtils.isNotEmpty(strName))
             {
@@ -648,11 +650,11 @@ public abstract class Email
         }
 
         // all is ok, update headers
-        this.headers = ht;
+        this.headers = map;
     }
 
     /**
-     * Adds a header ( name, value ) to the headers Hashtable.
+     * Adds a header ( name, value ) to the headers Map.
      *
      * @param name A String with the name.
      * @param value A String with the value.
@@ -791,14 +793,13 @@ public abstract class Email
                 this.message.setReplyTo(
                     this.toInternetAddressArray(this.replyList));
             }
-    
+
             if (this.headers.size() > 0)
             {
-                Enumeration enumHeaderKeys = this.headers.keys();
-    
-                while (enumHeaderKeys.hasMoreElements())
+                Iterator iterHeaderKeys = this.headers.keySet().iterator();
+                while (iterHeaderKeys.hasNext())
                 {
-                    String name = (String) enumHeaderKeys.nextElement();
+                    String name = (String) iterHeaderKeys.next();
                     String value = (String) headers.get(name);
                     this.message.addHeader(name, value);
                 }
