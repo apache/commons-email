@@ -42,9 +42,8 @@ public class MockEmailConcrete extends Email
      * Not Implemented, should be implemented in subclasses of Email
      * @param msg The email message
      * @return Email msg.
-     * @throws EmailException EmailException
      */
-    public Email setMsg(String msg) throws EmailException
+    public Email setMsg(String msg)
     {
         // This abstract method should be tested in the concrete 
         // implementation classes only.
