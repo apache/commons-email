@@ -76,6 +76,15 @@ It is for use with instances of MultiPartEmail and HtmlEmail.
 </p>
 </section>
 
+<section name="Development">
+<p>Commons-Email may be used on any JRE from 1.3 onwards.</p>
+<p>
+  Please note that the tests may fail under JDK 1.3 due to the use of 
+  <a href="http://sourceforge.net/projects/dumbster">Dumbster</a> which is compiled
+  with JDK 1.4.
+</p>
+</section>
+
 
 
 </body>
