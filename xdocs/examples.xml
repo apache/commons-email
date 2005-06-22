@@ -58,7 +58,7 @@ email.send();
         class to reference your attachments.
       </p>
       <p>
-        In the following exmaple, we will create an attachment for a picture.
+        In the following example, we will create an attachment for a picture.
         We will then attach the picture to the email and send it.
       </p>
       <source>
@@ -127,7 +127,7 @@ email.send();
         if the reciepient does not support HTML email, and add inline images.
       </p>
       <p>
-        In this exmaple, we will send an email message with formatted HTML
+        In this example, we will send an email message with formatted HTML
         content with an inline image.
       </p>
       <source>
