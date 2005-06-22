@@ -219,16 +219,14 @@ public class MultiPartEmail extends Email
                 // an IOException will be thrown during super.send().
 
                 MimeBodyPart body = this.getPrimaryBodyPart();
-                Object content = null;
                 try
                 {
-                    content = body.getContent();
+                    body.getContent();
                 }
                 catch (IOException e)
                 {
                     // do nothing here.  content will be set to an empty string
                     // as a result.
-                    content = null;
                 }
             }
 
