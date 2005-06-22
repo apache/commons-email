@@ -54,9 +54,8 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
     }
 
     /**
-     * @throws MessagingException MessagingException
      */
-    public void initTest() throws MessagingException
+    public void initTest()
     {
         this.init();
     }
