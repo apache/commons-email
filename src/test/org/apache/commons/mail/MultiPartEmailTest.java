@@ -104,7 +104,6 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
-        String badTest = null;
         for (int i = 0; i < testCharsNotValid.length; i++)
         {
             try
