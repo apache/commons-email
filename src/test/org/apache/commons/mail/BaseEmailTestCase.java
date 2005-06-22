@@ -147,11 +147,8 @@ public class BaseEmailTestCase extends TestCase
         {
             return emailMessage.toString();        
         }
-        else
-        {
-            fail("Message note found");
-            return "";
-        }
+        fail("Message note found");
+        return "";
     }
 
     /** */
