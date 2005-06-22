@@ -756,34 +756,34 @@ public abstract class Email
             {
                 throw new EmailException("Sender address required");
             }
-    
+
             if (this.toList.size() + this.ccList.size() + this.bccList.size() == 0)
             {
                 throw new EmailException(
                             "At least one receiver address required");
             }
-    
+
             if (this.toList.size() > 0)
             {
                 this.message.setRecipients(
                     Message.RecipientType.TO,
                     this.toInternetAddressArray(this.toList));
             }
-    
+
             if (this.ccList.size() > 0)
             {
                 this.message.setRecipients(
                     Message.RecipientType.CC,
                     this.toInternetAddressArray(this.ccList));
             }
-    
+
             if (this.bccList.size() > 0)
             {
                 this.message.setRecipients(
                     Message.RecipientType.BCC,
                     this.toInternetAddressArray(this.bccList));
             }
-    
+
             if (this.replyList.size() > 0)
             {
                 this.message.setReplyTo(
