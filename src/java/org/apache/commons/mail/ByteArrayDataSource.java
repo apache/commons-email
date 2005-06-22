@@ -40,14 +40,14 @@ import javax.activation.DataSource;
  */
 public class ByteArrayDataSource implements DataSource
 {
+    /** define the buffer size */
+    public static final int BUFFER_SIZE = 512;
+
     /** Stream containg the Data */
-    private ByteArrayOutputStream baos = null;
+    private ByteArrayOutputStream baos;
 
     /** Content-type. */
     private String type = "application/octet-stream";
-
-    /** define the buffer size */
-    public static final int BUFFER_SIZE = 512;
 
     /**
      * Create a datasource from a byte array.
@@ -88,6 +88,41 @@ public class ByteArrayDataSource implements DataSource
     public ByteArrayDataSource(InputStream aIs, String aType) throws IOException
     {
         this.byteArrayDataSource(aIs, aType);
+    }
+
+    /**
+     * Create a datasource from a String.
+     *
+     * @param data A String.
+     * @param aType A String.
+     * @throws IOException IOException
+     */
+    public ByteArrayDataSource(String data, String aType) throws IOException
+    {
+        this.type = aType;
+
+        try
+        {
+            baos = new ByteArrayOutputStream();
+
+            // Assumption that the string contains only ASCII
+            // characters!  Else just pass in a charset into this
+            // constructor and use it in getBytes().
+            baos.write(data.getBytes("iso-8859-1"));
+            baos.flush();
+            baos.close();
+        }
+        catch (UnsupportedEncodingException uex)
+        {
+            throw new IOException("The Character Encoding is not supported.");
+        }
+        finally
+        {
+            if (baos != null)
+            {
+                baos.close();
+            }
+        }
     }
 
     /**
@@ -144,40 +179,7 @@ public class ByteArrayDataSource implements DataSource
         }
     }
 
-    /**
-     * Create a datasource from a String.
-     *
-     * @param data A String.
-     * @param aType A String.
-     * @throws IOException IOException
-     */
-    public ByteArrayDataSource(String data, String aType) throws IOException
-    {
-        this.type = aType;
 
-        try
-        {
-            baos = new ByteArrayOutputStream();
-
-            // Assumption that the string contains only ASCII
-            // characters!  Else just pass in a charset into this
-            // constructor and use it in getBytes().
-            baos.write(data.getBytes("iso-8859-1"));
-            baos.flush();
-            baos.close();
-        }
-        catch (UnsupportedEncodingException uex)
-        {
-            throw new IOException("The Character Encoding is not supported.");
-        }
-        finally
-        {
-            if (baos != null)
-            {
-                baos.close();
-            }
-        }
-    }
 
     /**
      * Get the content type.
@@ -186,7 +188,7 @@ public class ByteArrayDataSource implements DataSource
      */
     public String getContentType()
     {
-        return (type == null ? "application/octet-stream" : type);
+        return type == null ? "application/octet-stream" : type;
     }
 
     /**

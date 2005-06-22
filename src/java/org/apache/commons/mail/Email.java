@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -127,13 +127,10 @@ public abstract class Email
     protected String contentType;
 
     /** Set session debugging on or off */
-    protected boolean debug = false;
+    protected boolean debug;
 
     /** Sent date */
     protected Date sentDate;
-
-    /** The Session to mail with */
-    private Session session;
 
     /**
      * Instance of an <code>Authenticator</code> object that will be used
@@ -148,7 +145,7 @@ public abstract class Email
     protected String hostName;
 
     /**
-     * The port number of the mail server to connect to.  
+     * The port number of the mail server to connect to.
      * Defaults to the standard port ( 25 ).
      */
     protected String smtpPort = "25";
@@ -165,13 +162,13 @@ public abstract class Email
     /** List of "replyTo" email adresses */
     protected List replyList = new ArrayList();
 
-    /** 
-     * Address to which undeliverable mail should be sent. 
+    /**
+     * Address to which undeliverable mail should be sent.
      * Because this is handled by JavaMail as a String property
      * in the mail session, this property is of type <code>String</code>
      * rather than <code>InternetAddress</code>.
      */
-    protected String bounceAddress = null;
+    protected String bounceAddress;
 
     /**
      * Used to specify the mail headers.  Example:
@@ -187,13 +184,16 @@ public abstract class Email
      */
 
     /** */
-    protected boolean popBeforeSmtp = false;
+    protected boolean popBeforeSmtp;
     /** */
-    protected String popHost = null;
+    protected String popHost;
     /** */
-    protected String popUsername = null;
+    protected String popUsername;
     /** */
-    protected String popPassword = null;
+    protected String popPassword;
+
+    /** The Session to mail with */
+    private Session session;
 
     /**
      * Setting to true will enable the display of debug information.
@@ -339,7 +339,7 @@ public abstract class Email
      * Initialise a mailsession object
      *
      * @return A Session.
-     * @throws EmailException thrown when host name was not set
+     * @throws EmailException thrown when host name was not set.
      */
     protected Session getMailSession() throws EmailException
     {
@@ -373,34 +373,35 @@ public abstract class Email
                 properties.setProperty(MAIL_SMTP_FROM, this.bounceAddress);
             }
 
-            // changed this (back) to getInstance due to security exceptions 
+            // changed this (back) to getInstance due to security exceptions
             // caused when testing using maven
             this.session =
                 Session.getInstance(properties, this.authenticator);
         }
         return this.session;
     }
-    
+
     /**
-    * Creates a InternetAddress
-    * @param email An Email
-    * @param name A Name.  
-    * @return An internet address
-    * @throws EmailException thrown when the address supplied or name were invalid
-    */
-    private InternetAddress createInternetAddress(String email, String name) 
+     * Creates a InternetAddress.
+     *
+     * @param email An email address.
+     * @param name A name.
+     * @return An internet address.
+     * @throws EmailException Thrown when the address supplied or name were invalid.
+     */
+    private InternetAddress createInternetAddress(String email, String name)
         throws EmailException
     {
         InternetAddress address = null;
-        
-        try 
+
+        try
         {
             // check name input
             if (!StringUtils.isNotEmpty(name))
             {
                 name = email;
             }
-            
+
             if (StringUtils.isNotEmpty(this.charset))
             {
                 address = new InternetAddress(email, name, this.charset);
@@ -409,7 +410,7 @@ public abstract class Email
             {
                 address = new InternetAddress(email, name);
             }
-            
+
             address.validate();
         }
         catch (Exception e)
@@ -418,17 +419,17 @@ public abstract class Email
         }
         return address;
     }
-    
-    
+
+
     /**
      * Set the FROM field of the email.
      *
      * @param email A String.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address.
      */
-    public Email setFrom(String email) 
-        throws EmailException 
+    public Email setFrom(String email)
+        throws EmailException
     {
         return setFrom(email, null);
     }
@@ -438,10 +439,10 @@ public abstract class Email
      *
      * @param email A String.
      * @param name A String.
+     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
      */
-    public Email setFrom(String email, String name) 
+    public Email setFrom(String email, String name)
         throws EmailException
     {
         this.fromAddress = createInternetAddress(email, name);
@@ -453,10 +454,10 @@ public abstract class Email
      * Add a recipient TO to the email.
      *
      * @param email A String.
+     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
      */
-    public Email addTo(String email) 
+    public Email addTo(String email)
         throws EmailException
     {
         return addTo(email, null);
@@ -467,23 +468,22 @@ public abstract class Email
      *
      * @param email A String.
      * @param name A String.
+     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
      */
-    public Email addTo(String email, String name) 
+    public Email addTo(String email, String name)
         throws EmailException
     {
         this.toList.add(createInternetAddress(email, name));
-
         return this;
     }
 
     /**
-     * Set a list of "TO" addresses
+     * Set a list of "TO" addresses.
      *
-     * @param   aCollection collection of InternetAddress objects
+     * @param  aCollection collection of InternetAddress objects.
+     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
      */
     public Email setTo(Collection aCollection) throws EmailException
     {
@@ -501,9 +501,9 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
+     * @throws EmailException Indicates an invalid email address.
      */
-    public Email addCc(String email) 
+    public Email addCc(String email)
         throws EmailException
     {
         return this.addCc(email, null);
@@ -514,23 +514,23 @@ public abstract class Email
      *
      * @param email A String.
      * @param name A String.
+     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
+
      */
-    public Email addCc(String email, String name) 
+    public Email addCc(String email, String name)
         throws EmailException
     {
         this.ccList.add(createInternetAddress(email, name));
-
         return this;
     }
 
     /**
-     * Set a list of "CC" addresses
+     * Set a list of "CC" addresses.
      *
-     * @param   aCollection collection of InternetAddress objects
-     * @return An EmailException.
-     * @throws EmailException Indicates an invalid email address
+     * @param aCollection collection of InternetAddress objects.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
      */
     public Email setCc(Collection aCollection) throws EmailException
     {
@@ -550,7 +550,7 @@ public abstract class Email
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
      */
-    public Email addBcc(String email) 
+    public Email addBcc(String email)
         throws EmailException
     {
         return this.addBcc(email, null);
@@ -564,12 +564,10 @@ public abstract class Email
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
      */
-    public Email addBcc(String email, String name) 
+    public Email addBcc(String email, String name)
         throws EmailException
     {
-
         this.bccList.add(createInternetAddress(email, name));
-
         return this;
     }
 
@@ -598,7 +596,7 @@ public abstract class Email
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
      */
-    public Email addReplyTo(String email) 
+    public Email addReplyTo(String email)
         throws EmailException
     {
         return this.addReplyTo(email, null);
@@ -615,11 +613,10 @@ public abstract class Email
     public Email addReplyTo(String email, String name)
         throws EmailException
     {
-        
         this.replyList.add(createInternetAddress(email, name));
-
         return this;
     }
+
 
     /**
      * Used to specify the mail headers.  Example:
@@ -707,7 +704,7 @@ public abstract class Email
      *
      * @param msg A String.
      * @return An Email.
-     * @throws EmailException generic exception
+     * @throws EmailException generic exception.
      */
     public abstract Email setMsg(String msg) throws EmailException;
 
@@ -718,11 +715,11 @@ public abstract class Email
      */
     public void send() throws EmailException
     {
-        try 
+        try
         {
             this.getMailSession();
             this.message = new MimeMessage(this.session);
-    
+
             if (StringUtils.isNotEmpty(this.subject))
             {
                 if (StringUtils.isNotEmpty(this.charset))
@@ -734,7 +731,7 @@ public abstract class Email
                     this.message.setSubject(this.subject);
                 }
             }
-    
+
             // ========================================================
             // Start of replacement code
             if (this.content != null)
@@ -751,7 +748,7 @@ public abstract class Email
             {
                 this.message.setContent("", Email.TEXT_PLAIN);
             }
-    
+
             if (this.fromAddress != null)
             {
                 this.message.setFrom(this.fromAddress);
@@ -804,24 +801,24 @@ public abstract class Email
                     this.message.addHeader(name, value);
                 }
             }
-    
+
             if (this.message.getSentDate() == null)
             {
                 this.message.setSentDate(getSentDate());
             }
-    
+
             if (this.popBeforeSmtp)
             {
                 Store store = session.getStore("pop3");
                 store.connect(this.popHost, this.popUsername, this.popPassword);
             }
-    
+
             Transport.send(this.message);
         }
         catch (MessagingException me)
         {
             throw new EmailException(me);
-        }    
+        }
     }
 
     /**
@@ -856,21 +853,22 @@ public abstract class Email
      * Utility to copy List of known InternetAddress objects into an
      * array.
      *
-     * @param aList A List of InternetAddress.
+     * @param list A List.
      * @return An InternetAddress[].
      */
-    protected InternetAddress[] toInternetAddressArray(List aList)
+    protected InternetAddress[] toInternetAddressArray(List list)
     {
         InternetAddress[] ia =
-            (InternetAddress[]) aList.toArray(new InternetAddress[0]);
+            (InternetAddress[]) list.toArray(new InternetAddress[0]);
 
         return ia;
     }
 
     /**
-     * Set details regarding "pop3 before smtp" authentication
-     * @param newPopBeforeSmtp Wether or not to log into pop3 
-     *      server before sending mail
+     * Set details regarding "pop3 before smtp" authentication.
+     *
+     * @param newPopBeforeSmtp Wether or not to log into pop3
+     *      server before sending mail.
      * @param newPopHost The pop3 host to use.
      * @param newPopUsername The pop3 username.
      * @param newPopPassword The pop3 password.
@@ -887,3 +885,4 @@ public abstract class Email
         this.popPassword = newPopPassword;
     }
 }
+

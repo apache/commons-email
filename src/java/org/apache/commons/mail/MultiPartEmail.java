@@ -49,22 +49,23 @@ import org.apache.commons.lang.StringUtils;
 public class MultiPartEmail extends Email
 {
     /** Body portion of the email. */
-    private MimeMultipart container = null;
+    private MimeMultipart container;
 
     /** The message container. */
-    private MimeBodyPart primaryBodyPart = null;
+    private MimeBodyPart primaryBodyPart;
 
     /** The MIME subtype. */
-    private String subType = null;
+    private String subType;
 
     /** Indicates if the message has been initialized */
-    private boolean initialized = false;
+    private boolean initialized;
 
     /** Indicates if attachments have been added to the message */
-    private boolean boolHasAttachments = false;
-    
+    private boolean boolHasAttachments;
+
     /**
      * Set the MIME subtype of the email.
+     *
      * @param aSubType MIME subtype of the email
      */
     public void setSubType(String aSubType)
@@ -74,6 +75,7 @@ public class MultiPartEmail extends Email
 
     /**
      * Get the MIME subtype of the email.
+     *
      * @return MIME subtype of the email
      */
     public String getSubType()
@@ -83,6 +85,7 @@ public class MultiPartEmail extends Email
 
     /**
      * Add a new part to the email.
+     *
      * @param content The content.
      * @param contentType The content type.
      * @return An Email.
@@ -108,6 +111,7 @@ public class MultiPartEmail extends Email
 
     /**
      * Add a new part to the email.
+     *
      * @param multipart The MimeMultipart.
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
@@ -115,22 +119,34 @@ public class MultiPartEmail extends Email
      */
     public Email addPart(MimeMultipart multipart) throws EmailException
     {
-        try{
+        try
+        {
             return addPart(multipart, getContainer().getCount());
         }
-        catch( MessagingException me ){
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
         }
     }
 
+    /**
+     * Add a new part to the email.
+     *
+     * @param multipart The part to add.
+     * @param index The index to add at.
+     * @return The email.
+     * @throws EmailException An error occured while adding the part.
+     */
     public Email addPart(MimeMultipart multipart, int index) throws EmailException
     {
         MimeBodyPart bodyPart = new MimeBodyPart();
-        try {
+        try
+        {
             bodyPart.setContent(multipart);
             getContainer().addBodyPart(bodyPart, index);
         }
-        catch (MessagingException me){
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
         }
 
@@ -139,9 +155,6 @@ public class MultiPartEmail extends Email
 
     /**
      * Initialize the multipart email.
-     *
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
      */
     protected void init()
     {
@@ -151,7 +164,7 @@ public class MultiPartEmail extends Email
         }
 
         container = new MimeMultipart();
-        super.setContent(container);       
+        super.setContent(container);
 
         initialized = true;
     }
@@ -171,7 +184,8 @@ public class MultiPartEmail extends Email
         {
             throw new EmailException("Invalid message supplied");
         }
-        try {
+        try
+        {
             if (StringUtils.isNotEmpty(charset))
             {
                 getPrimaryBodyPart().setText(msg, charset);
@@ -181,9 +195,10 @@ public class MultiPartEmail extends Email
                 getPrimaryBodyPart().setText(msg);
             }
         }
-        catch (MessagingException me){
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
-        }  
+        }
         return this;
     }
 
@@ -195,13 +210,14 @@ public class MultiPartEmail extends Email
      */
     public void send() throws EmailException
     {
-        try {
+        try
+        {
             if (primaryBodyPart != null)
             {
                 // before a multipart message can be sent, we must make sure that
                 // the content for the main body part was actually set.  If not,
                 // an IOException will be thrown during super.send().
-    
+
                 MimeBodyPart body = this.getPrimaryBodyPart();
                 Object content = null;
                 try
@@ -215,15 +231,16 @@ public class MultiPartEmail extends Email
                     content = null;
                 }
             }
-    
+
             if (subType != null)
             {
                 getContainer().setSubType(subType);
             }
-    
+
             super.send();
         }
-        catch (MessagingException me){
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
         }
     }
@@ -247,7 +264,7 @@ public class MultiPartEmail extends Email
         }
 
         URL url = attachment.getURL();
-        
+
         if (url == null)
         {
             String fileName = null;
@@ -391,7 +408,8 @@ public class MultiPartEmail extends Email
             name = ds.getName();
         }
         MimeBodyPart mbp = new MimeBodyPart();
-        try {
+        try
+        {
             getContainer().addBodyPart(mbp);
 
             mbp.setDisposition(disposition);
@@ -399,11 +417,12 @@ public class MultiPartEmail extends Email
             mbp.setDescription(description);
             mbp.setDataHandler(new DataHandler(ds));
         }
-        catch (MessagingException me){
+        catch (MessagingException me)
+        {
             throw new EmailException(me);
-        }            
+        }
         this.boolHasAttachments = true;
-        
+
         return this;
     }
 
@@ -411,8 +430,7 @@ public class MultiPartEmail extends Email
      * Gets first body part of the message.
      *
      * @return The primary body part.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     * @throws MessagingException An error occured while getting the primary body part.
      */
     protected MimeBodyPart getPrimaryBodyPart() throws MessagingException
     {
@@ -420,7 +438,7 @@ public class MultiPartEmail extends Email
         {
             init();
         }
-        
+
         // Add the first body part to the message.  The fist body part must be
         if (this.primaryBodyPart == null)
         {
@@ -435,8 +453,6 @@ public class MultiPartEmail extends Email
      * Gets the message container.
      *
      * @return The message container.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
      */
     protected MimeMultipart getContainer()
     {
@@ -446,7 +462,7 @@ public class MultiPartEmail extends Email
         }
         return container;
     }
-    
+
 
     /**
      * @return boolHasAttachments
@@ -463,5 +479,4 @@ public class MultiPartEmail extends Email
     {
         boolHasAttachments = b;
     }
-
 }
