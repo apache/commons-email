@@ -220,9 +220,8 @@ public class ByteArrayDataSource implements DataSource
      * Get the OutputStream to write to
      *
      * @return  An OutputStream
-     * @throws  IOException IOException
      */
-    public OutputStream getOutputStream() throws IOException
+    public OutputStream getOutputStream()
     {
         baos = new ByteArrayOutputStream();
         return baos;
