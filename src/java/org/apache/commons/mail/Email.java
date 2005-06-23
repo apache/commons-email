@@ -181,14 +181,12 @@ public abstract class Email
     /**
      * Used to determine whether to use pop3 before smtp, and if so the settings.
      */
-
-    /** */
     protected boolean popBeforeSmtp;
-    /** */
+    /** the host name of the pop3 server */
     protected String popHost;
-    /** */
+    /** the user name to log into the pop3 server */
     protected String popUsername;
-    /** */
+    /** the password to log into the pop3 server */
     protected String popPassword;
 
     /** The Session to mail with */
