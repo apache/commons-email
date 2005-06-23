@@ -18,7 +18,7 @@ package org.apache.commons.mail;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -176,7 +176,7 @@ public abstract class Email
      * or  2( high ) 3( normal ) 4( low ) and 5( lowest )
      * Disposition-Notification-To: user@domain.net
      */
-    protected Map headers = new Hashtable();
+    protected Map headers = new HashMap();
 
     /**
      * Used to determine whether to use pop3 before smtp, and if so the settings.
