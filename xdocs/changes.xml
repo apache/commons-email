@@ -6,7 +6,9 @@
   </properties>
 
   <body>
-    <release version="1.0" date="IN CVS"> 
+    <release version="1.0-rc5-SNAPSHOT" date="IN CVS"> 
+      <action dev="dion" type="update">Add serialVersionUID to EmailException</action>
+      <action dev="dion" type="update">Use Dumbster 1.6 compiled with jdk13 for testing</action>
       <action dev="dion" type="fix" issue="34919" due-to="Eric Spiegelberg">
         Refactor Hashtable usage to Map
       </action>
