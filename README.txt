@@ -14,8 +14,8 @@
    limitations under the License.
 -->
 
-Email Sandbox
---------------
+Email
+-----
 
 Getting started:
 
