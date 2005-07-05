@@ -87,19 +87,19 @@ public class MultiPartEmail extends Email
     /**
      * Add a new part to the email.
      *
-     * @param content The content.
-     * @param contentType The content type.
+     * @param partContent The content.
+     * @param partContentType The content type.
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
      */
-    public Email addPart(String content, String contentType)
+    public Email addPart(String partContent, String partContentType)
         throws EmailException
     {
         MimeBodyPart bodyPart = new MimeBodyPart();
         try
         {
-            bodyPart.setContent(content, contentType);
+            bodyPart.setContent(partContent, partContentType);
             getContainer().addBodyPart(bodyPart);
         }
         catch (MessagingException me)
