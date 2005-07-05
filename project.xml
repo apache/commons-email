@@ -111,8 +111,8 @@
     </developers>
     <contributors>
         <contributor>
-            <name>Matthias Wessendorf</name>
-            <email>matthias@wessendorf.net</email>
+            <name>Mark Lowe</name>
+            <email>mark.lowe@boxstuff.com</email>
             <roles/>
         </contributor>
         <contributor>
@@ -121,12 +121,13 @@
             <roles/>
         </contributor>
         <contributor>
-            <name>Mark Lowe</name>
-            <email>mark.lowe@boxstuff.com</email>
+            <name>Eric Speigs</name>
+            <email>eric@spiegs.com</email>
             <roles/>
         </contributor>
         <contributor>
-            <name>Regis Koenigt</name>
+            <name>Matthias Wessendorf</name>
+            <email>matthias@wessendorf.net</email>
             <roles/>
         </contributor>
     </contributors>
