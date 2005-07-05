@@ -23,7 +23,10 @@
     <package>org.apache.commons.mail</package>
     <logo>/images/email-logo-white.png</logo>
     <gumpRepositoryId>jakarta</gumpRepositoryId>
-    <description>Commons Email provides a simple wrapper over the Java Mail API</description>
+    <description>
+      Commons-Email aims to provide a API for sending email.
+      It is built on top of the Java Mail API, which it aims to simplify.
+    </description>
     <shortDescription>Commons Email</shortDescription>
     <issueTrackingUrl>http://issues.apache.org/bugzilla/</issueTrackingUrl>
     <siteAddress>people.apache.org</siteAddress>
