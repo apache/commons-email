@@ -27,6 +27,7 @@ import org.apache.commons.mail.MultiPartEmail;
  * Extension of MultiPartEmail Class 
  * (used to allow testing only)
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */

@@ -34,6 +34,7 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
 /**
  * JUnit test case for Email Class
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */

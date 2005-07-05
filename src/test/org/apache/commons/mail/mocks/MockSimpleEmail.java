@@ -25,6 +25,7 @@ import org.apache.commons.mail.SimpleEmail;
  * Extension of SimpleEmail Class 
  * (used to allow testing only)
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */

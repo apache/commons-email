@@ -35,6 +35,7 @@ import com.dumbster.smtp.SmtpMessage;
 /**
  * Base test case for Email test classes
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @author <a href="mailto:epugh@opensourceconnections.com">Eric Pugh</a>
  * @version $Id$

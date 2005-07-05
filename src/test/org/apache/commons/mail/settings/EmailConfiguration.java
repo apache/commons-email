@@ -16,6 +16,7 @@
 package org.apache.commons.mail.settings;
 
 /**
+ * @since 1.0
  * @author Eric Pugh 
  * @version $Revision$ $Date$
  */

@@ -25,6 +25,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
 /**
  * JUnit test case for HtmlEmail Class
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */

@@ -21,6 +21,7 @@ import org.apache.commons.mail.mocks.MockSimpleEmail;
 
 /**
  * JUnit test case for SimpleEmailTest
+ * @since 1.0
  * @version $Revision$ $Date$
  */
 

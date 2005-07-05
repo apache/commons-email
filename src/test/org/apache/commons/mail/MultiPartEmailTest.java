@@ -30,6 +30,7 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 /**
  * JUnit test case for MultiPartEmail Class
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */

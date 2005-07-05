@@ -32,6 +32,7 @@ import org.apache.commons.mail.EmailException;
  * Class (used to allow testing only).  Supplies
  * getters for methods that normally only have setters.
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
