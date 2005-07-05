@@ -23,15 +23,22 @@ import org.apache.commons.lang.exception.NestableException;
  */
 public class EmailException extends NestableException
 {
-    /** */
+    /** serialization version */
+    static final long serialVersionUID = 5550674499282474616L;
+    
+    /**
+     * Create a new EmailException with no message and no cause.
+     * Note: This constructor should only be used as a last resort. Please 
+     *      provide at least a message.
+     */
     public EmailException()
     {
         super();
     }
 
     /**
-     *
-     * @param msg msg
+     * Create a new EmailException with a message but no other cause.
+     * @param msg the reason for this exception.
      */
     public EmailException(String msg)
     {
@@ -39,9 +46,9 @@ public class EmailException extends NestableException
     }
 
     /**
-     *
-     * @param msg msg
-     * @param cause cause
+     * Create a new EmailException with a message and a cause.
+     * @param msg the reason for this exception.
+     * @param cause the contributing Throwable (e.g. some other Exception)
      */
     public EmailException(String msg, Throwable cause)
     {
@@ -49,8 +56,8 @@ public class EmailException extends NestableException
     }
 
     /**
-     *
-     * @param cause cause
+     * Create a new EmailException with a cause but no message.
+     * @param cause the contributing Throwable (e.g. some other Exception)
      */
     public EmailException(Throwable cause)
     {
