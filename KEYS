@@ -1,0 +1,52 @@
+This file contains the PGP keys of various developers.
+Please don't use them for email unless you have to. Their main
+purpose is code signing.
+
+Users: pgp < KEYS
+Developers: 
+	pgp -kxa <your name> and append it to this file.
+	(pgpk -ll <your name> && pgpk -xa <your name>) >> this file.
+        (gpg --list-sigs <your name>
+             && gpg --armor --export <your name>) >> this file.
+    Use gpg --armour --detach-sign --default-key=YOURNAME FILE
+
+
+pub   1024D/6883C846 2004-08-03
+uid                  Dion Gillard <dion@apache.org>
+sig 3        6883C846 2004-08-03  Dion Gillard <dion@apache.org>
+sig 3   P    409AC31C 2004-10-29  Matthew Wakeling (Home address) <matthew@wakeling.homeip.net>
+sig          E4136392 2004-10-29  Noel J. Bergman <noel@apache.org>
+sig          6883850D 2004-10-29  Noel J. Bergman <noel@devtech.com>
+sub   1024g/32E95995 2004-08-03
+sig          6883C846 2004-08-03  Dion Gillard <dion@apache.org>
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.0 (Cygwin)
+
+mQGiBEEPHzkRBACqqH+A9BFBQ3/NSOfj0Ds/8QXqG7D66lVxrvazWRpjh25Ov7Z0
+36t4JN2gk/vMl8UCC+vpysUwofWJLzDOWIpYuA5ogTZRny315DbnTsHsdbkkOQ9y
+ESkhcQZifAMC2lrLTMilqy53YKd+RabLoj7WEaFXj59u3+Bx8Xf9iNOPYwCgzM++
+pE3aFZMFi+SLzHFtJk55/VkD/AxIbLKouwjCuYflQSovPgmHJhP2pnVJMa1UgXv9
+PYnpjrBBfkxDVUxEu74xZN7Ap/wssYrE5K7NMGv+PT3cutobOXVPpg3/zecm48Xb
+Y7b+Cvsk1PtsmntT2VGpLXnKUhGy6Ewrzi/Wuix4Z/zalwIyvb231wXsQc67gGQo
+DQQoA/9nbqYlVBbde4/ELRuxMOVXghkw17guzSZXs+0je0oOnHTACG5x4RIwh0CV
+sy0gn6D6BSV/ECMRw7R96QrdQnqOExjBUdenoIkmTD/phWKoqangifRtRflQ86gm
+V60zORF7h40gOs1+Pygo8TmkarQ+j5fgNf/0Heo8aNsh+0REerQeRGlvbiBHaWxs
+YXJkIDxkaW9uQGFwYWNoZS5vcmc+iF4EExECAB4FAkEPHzkCGwMGCwkIBwMCAxUC
+AwMWAgECHgECF4AACgkQqAM/2WiDyEbUAgCgu5e9P9oDJEbO9r7lw5Sqa9HBw70A
+nRuIZtgEKTQ4Z1Tpb10eI6k/IXx8iIUEExECAEUFAkGCbR0+Gmh0dHA6Ly93d3cu
+d2FrZWxpbmcuaG9tZWlwLm5ldC9+bW53MjEvcGdwX3NpZ25pbmdfcG9saWN5Lmh0
+bWwACgkQ94ap8UCawxz8WQCg2TBcsCe5GFS8qfzBJOSqd7kKmU8AnRg6QAuc0PlO
+EswOqwTGHIZWu/iFiEYEEBECAAYFAkGCnAQACgkQAQVmvOQTY5Ld5wCfYdRgFLr2
+fQCJ2X9w+FZWADPNsdYAoIMpmSImeJmIb1WdMOjKOY++lHwuiEYEEBECAAYFAkGC
+oK0ACgkQpf8y7miDhQ1m7gCg96X4FLRc1MPf/fL7eiQKG439EGoAoP4UlvrPzubK
+FsgaS2lC78D+pQXTuQENBEEPHz4QBADuu3MH0oB2sGRGhXEDa3EZBdHljp4aFTSZ
+K6MAMAliy7eRTSJcORbHr2x6Q0wFNBd6r+TSntWG5NWrhwcxCmQRH3hlbZsD7SY1
+OqClht/XSv/tiRDQ+oAVTVLqThE3bkcUYeoVHzgfqT86i1NmGcnyIJj5r8yBA1sV
+Dyp42ADiYwADBQP+Nq8InUWlienKgexPDFAuXXPr9lg6iUMRpEqebpqSDhpeDTvk
+mvq1xaUT9Yt+FDX7db/1d1i3fJTIX7dydo/2Vw70f7UODNvWMtQTveaEXchXiH3y
+62w8nY3ZogMGjKH5DDXqev2SelDSvGcXEWsGZxPvuwh0cGuahyCigYpWKa6ISQQY
+EQIACQUCQQ8fPgIbDAAKCRCoAz/ZaIPIRltTAJ4hZeSWTyds0CJdEN9z66UpdcZa
++wCgyTaygSUChtQxApENteggXBYXm+4=
+=fgDj
+-----END PGP PUBLIC KEY BLOCK-----
