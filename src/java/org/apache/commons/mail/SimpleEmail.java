@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
  * This class is used to send simple internet email messages without
  * attachments.
  *
+ * @since 1.0
  * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>

@@ -33,6 +33,7 @@ import javax.activation.DataSource;
  * - a byte array<br>
  * - a String<br>
  *
+ * @since 1.0
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
  * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>

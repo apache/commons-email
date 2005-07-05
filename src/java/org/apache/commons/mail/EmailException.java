@@ -20,6 +20,7 @@ import org.apache.commons.lang.exception.NestableException;
 /**
  * EmailException
  * @author jakarta-commons
+ * @since 1.0
  */
 public class EmailException extends NestableException
 {

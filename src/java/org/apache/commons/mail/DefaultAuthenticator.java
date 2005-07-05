@@ -22,6 +22,7 @@ import javax.mail.PasswordAuthentication;
  * This is a very simple authentication object that can be used for any
  * transport needing basic userName and password type authentication.
  *
+ * @since 1.0
  * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
  * @version $Id$
  */

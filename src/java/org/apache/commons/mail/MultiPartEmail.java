@@ -38,6 +38,7 @@ import org.apache.commons.lang.StringUtils;
  * then you can call setMsg() to set the message and call the
  * different attach() methods.
  *
+ * @since 1.0
  * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
  * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>

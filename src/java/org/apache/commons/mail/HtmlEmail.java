@@ -51,6 +51,7 @@ import org.apache.commons.lang.StringUtils;
  * part of the multipart becomes whichever is supplied rather than a
  * multipart/alternative.
  *
+ * @since 1.0
  * @author <a href="mailto:unknown">Regis Koenig</a>
  * @author <a href="mailto:sean@informage.net">Sean Legassick</a>
  * @version $Id$
