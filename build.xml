@@ -167,7 +167,7 @@
     </get>
     <get dest="${libdir}/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="${activation-1.0.2.url}">
     </get>
-    <get dest="${libdir}/dumbster-1.5.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/dumbster/jars/dumbster-1.5.jar">
+    <get dest="${libdir}/dumbster-1.6.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/dumbster/jars/dumbster-1.6.jar">
     </get>
   </target>
   <target name="install-maven">
