@@ -168,6 +168,12 @@
          <includes>
             <include>**/*Test.java</include>
          </includes>
+         <resources>
+           <resource>
+             <directory>src/test</directory>
+             <excludes><exclude>**/*.java</exclude></excludes>
+           </resource>
+         </resources>
       </unitTest>
       <resources>
         <resource>
