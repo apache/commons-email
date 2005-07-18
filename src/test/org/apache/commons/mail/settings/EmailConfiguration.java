@@ -35,8 +35,9 @@ public final class EmailConfiguration
     /** */
     public static final String TEST_PASSWD = "passwd";
     /** */
-    public static final String TEST_URL =
-        "http://www.apache.org/images/asf_logo_wide.gif";
+    public static final String TEST_URL = EmailConfiguration.class
+        .getResource("/images/asf_logo_wide.gif")
+        .toExternalForm();
     /** Amount of time to wait for Dumbster to start up */
     public static final int TIME_OUT = 500;
 }
