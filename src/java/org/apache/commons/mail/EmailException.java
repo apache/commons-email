@@ -26,11 +26,11 @@ public class EmailException extends NestableException
 {
     /** serialization version */
     static final long serialVersionUID = 5550674499282474616L;
-    
+
     /**
      * Create a new EmailException with no message and no cause.
      * Note: This constructor should only be used as a last resort. Please 
-     *      provide at least a message.
+     * provide at least a message.
      */
     public EmailException()
     {
