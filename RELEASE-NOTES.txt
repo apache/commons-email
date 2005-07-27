@@ -1,0 +1,15 @@
+$Id: RELEASE-NOTES.txt 216015 2005-07-12 20:41:48Z rdonkin $
+
+                         Commons Email Package
+                              Version 1.0
+                             Release Notes
+
+INTRODUCTION:
+
+Commons-Email aims to provide a API for sending email. It builds on the JavaMail 
+API with the aim of presenting a simplified API which is easy for developers who
+are not mail experts to use. It is a compact component with a small number of
+classes.
+
+This is the first release of Commons Email. However, the codebase is mature and
+stable and so this is no reason not to recommend it for production.
