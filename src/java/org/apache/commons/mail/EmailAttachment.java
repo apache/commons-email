@@ -26,9 +26,9 @@ import java.net.URL;
  */
 public class EmailAttachment
 {
-    /** Defintion of the part being an attachment */
+    /** Definition of the part being an attachment */
     public static final String ATTACHMENT = javax.mail.Part.ATTACHMENT;
-    /** Defintion of the part being inline */
+    /** Definition of the part being inline */
     public static final String INLINE = javax.mail.Part.INLINE;
 
     /** The name of this attachment. */

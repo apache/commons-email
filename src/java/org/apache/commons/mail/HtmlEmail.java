@@ -40,11 +40,11 @@ import org.apache.commons.lang.StringUtils;
  * email clients.
  *
  * <p>This class also inherits from MultiPartEmail, so it is easy to
- * add attachents to the email.
+ * add attachments to the email.
  *
  * <p>To send an email in HTML, one should create a HtmlEmail, then
  * use the setFrom, addTo, etc. methods.  The HTML content can be set
- * with the setHtmlMsg method.  The alternate text content can be set
+ * with the setHtmlMsg method.  The alternative text content can be set
  * with setTextMsg.
  *
  * <p>Either the text or HTML can be omitted, in which case the "main"
@@ -58,7 +58,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class HtmlEmail extends MultiPartEmail
 {
-    /** Defintion of the length of generated CID's */
+    /** Definition of the length of generated CID's */
     public static final int CID_LENGTH = 10;
 
     /**
@@ -70,7 +70,7 @@ public class HtmlEmail extends MultiPartEmail
     /** Html part of the message */
     protected String html;
 
-    /** Embeded images */
+    /** Embedded images */
     protected List inlineImages = new ArrayList();
 
     /**
@@ -79,7 +79,7 @@ public class HtmlEmail extends MultiPartEmail
      * @param aText A String.
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public HtmlEmail setTextMsg(String aText) throws EmailException
@@ -99,7 +99,7 @@ public class HtmlEmail extends MultiPartEmail
      * @param aHtml A String.
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public HtmlEmail setHtmlMsg(String aHtml) throws EmailException
@@ -125,7 +125,7 @@ public class HtmlEmail extends MultiPartEmail
      * @param msg A String.
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public Email setMsg(String msg) throws EmailException
@@ -168,8 +168,8 @@ public class HtmlEmail extends MultiPartEmail
      * @param name The name that will be set in the filename header
      * field.
      * @return A String with the Content-ID of the file.
-     * @throws EmailException when URL suplpied is invalid
-     *  also see javax.mail.internet.MimeBodyPart for defintions
+     * @throws EmailException when URL supplied is invalid
+     *  also see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0
      */
     public String embed(URL url, String name) throws EmailException

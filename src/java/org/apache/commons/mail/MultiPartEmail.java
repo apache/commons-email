@@ -93,7 +93,7 @@ public class MultiPartEmail extends Email
      * @param partContentType The content type.
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public Email addPart(String partContent, String partContentType)
@@ -182,7 +182,7 @@ public class MultiPartEmail extends Email
      * @param msg A String.
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public Email setMsg(String msg) throws EmailException
@@ -214,7 +214,7 @@ public class MultiPartEmail extends Email
      * Sends the mail message
      *
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public void send() throws EmailException
@@ -253,12 +253,12 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * Attach an EmailAttachement.
+     * Attach an EmailAttachment.
      *
      * @param attachment An EmailAttachment.
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public MultiPartEmail attach(EmailAttachment attachment)
@@ -321,7 +321,7 @@ public class MultiPartEmail extends Email
      * @param description A description for the attachment.
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public MultiPartEmail attach(URL url, String name, String description)
@@ -339,7 +339,7 @@ public class MultiPartEmail extends Email
      * @param disposition Either mixed or inline.
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public MultiPartEmail attach(
@@ -371,7 +371,7 @@ public class MultiPartEmail extends Email
      * @param description A description for the attachment.
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public MultiPartEmail attach(
@@ -401,11 +401,11 @@ public class MultiPartEmail extends Email
      *
      * @param ds A DataSource interface for the file.
      * @param name The name field for the attachment.
-     * @param description A description for the attachement.
+     * @param description A description for the attachment.
      * @param disposition Either mixed or inline.
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
      * @since 1.0
      */
     public MultiPartEmail attach(
