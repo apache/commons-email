@@ -342,7 +342,7 @@ public abstract class Email
     {
         this.session = aSession;
     }
-    
+
     /**
      * Initialise a mailsession object
      *

@@ -29,7 +29,7 @@ public class EmailException extends NestableException
 
     /**
      * Create a new EmailException with no message and no cause.
-     * Note: This constructor should only be used as a last resort. Please 
+     * Note: This constructor should only be used as a last resort. Please
      * provide at least a message.
      * @since 1.0
      */
