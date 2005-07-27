@@ -3,7 +3,7 @@
     <name>Commons Email</name>
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
-    <currentVersion>1.0-rc5-SNAPSHOT</currentVersion>
+    <currentVersion>1.0-rc5</currentVersion>
   
     <organization>
       <name>The Apache Software Foundation</name>
@@ -106,6 +106,12 @@
             <name>Joe Germuska</name>
             <id>germuska</id>
             <email>Joe@Germuska.com</email>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Robert Burrell Donkin</name>
+            <id>rdonkin</id>
+            <email>rdonkin@apache.org</email>
             <roles/>
         </developer>
     </developers>
