@@ -36,6 +36,7 @@ public class DefaultAuthenticator extends Authenticator
      *
      * @param userName user name to use when authentication is requested
      * @param password password to use when authentication is requested
+     * @since 1.0
      */
     public DefaultAuthenticator(String userName, String password)
     {
@@ -48,6 +49,7 @@ public class DefaultAuthenticator extends Authenticator
      *
      * @return A <code>PasswordAuthentication</code> object containing the
      *         login information.
+     * @since 1.0
      */
     protected PasswordAuthentication getPasswordAuthentication()
     {

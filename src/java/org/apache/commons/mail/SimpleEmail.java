@@ -39,6 +39,7 @@ public class SimpleEmail extends Email
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public Email setMsg(String msg) throws EmailException
     {

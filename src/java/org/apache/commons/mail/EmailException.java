@@ -31,6 +31,7 @@ public class EmailException extends NestableException
      * Create a new EmailException with no message and no cause.
      * Note: This constructor should only be used as a last resort. Please 
      * provide at least a message.
+     * @since 1.0
      */
     public EmailException()
     {
@@ -40,6 +41,7 @@ public class EmailException extends NestableException
     /**
      * Create a new EmailException with a message but no other cause.
      * @param msg the reason for this exception.
+     * @since 1.0
      */
     public EmailException(String msg)
     {
@@ -50,6 +52,7 @@ public class EmailException extends NestableException
      * Create a new EmailException with a message and a cause.
      * @param msg the reason for this exception.
      * @param cause the contributing Throwable (e.g. some other Exception)
+     * @since 1.0
      */
     public EmailException(String msg, Throwable cause)
     {
@@ -59,6 +62,7 @@ public class EmailException extends NestableException
     /**
      * Create a new EmailException with a cause but no message.
      * @param cause the contributing Throwable (e.g. some other Exception)
+     * @since 1.0
      */
     public EmailException(Throwable cause)
     {

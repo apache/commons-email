@@ -197,6 +197,7 @@ public abstract class Email
      * Setting to true will enable the display of debug information.
      *
      * @param d A boolean.
+     * @since 1.0
      */
     public void setDebug(boolean d)
     {
@@ -214,6 +215,7 @@ public abstract class Email
      * @param password password for the SMTP server
      * @see DefaultAuthenticator
      * @see #setAuthenticator
+     * @since 1.0
      */
     public void setAuthentication(String userName, String password)
     {
@@ -230,6 +232,7 @@ public abstract class Email
      *
      * @param newAuthenticator the <code>Authenticator</code> object.
      * @see Authenticator
+     * @since 1.0
      */
     public void setAuthenticator(Authenticator newAuthenticator)
     {
@@ -240,6 +243,7 @@ public abstract class Email
      * Set the charset of the message.
      *
      * @param newCharset A String.
+     * @since 1.0
      */
     public void setCharset(String newCharset)
     {
@@ -250,6 +254,7 @@ public abstract class Email
      * Set the emailBody to a MimeMultiPart
      *
      * @param aMimeMultipart aMimeMultipart
+     * @since 1.0
      */
     public void setContent(MimeMultipart aMimeMultipart)
     {
@@ -261,6 +266,7 @@ public abstract class Email
      *
      * @param   aObject aObject
      * @param   aContentType aContentType
+     * @since 1.0
      */
     public void setContent(Object aObject, String aContentType)
     {
@@ -302,6 +308,7 @@ public abstract class Email
      * Set the hostname of the outgoing mail server
      *
      * @param   aHostName aHostName
+     * @since 1.0
      */
     public void setHostName(String aHostName)
     {
@@ -311,6 +318,7 @@ public abstract class Email
     /**
      * Set the port number of the outgoing mail server.
      * @param   aPortNumber aPortNumber
+     * @since 1.0
      */
     public void setSmtpPort(int aPortNumber)
     {
@@ -328,16 +336,19 @@ public abstract class Email
     /**
      * Supply a mail Session object to use
      * @param aSession mail session to be used
+     * @since 1.0
      */
     public void setMailSession(Session aSession)
     {
         this.session = aSession;
     }
+    
     /**
      * Initialise a mailsession object
      *
      * @return A Session.
      * @throws EmailException thrown when host name was not set.
+     * @since 1.0
      */
     protected Session getMailSession() throws EmailException
     {
@@ -425,6 +436,7 @@ public abstract class Email
      * @param email A String.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
+     * @since 1.0
      */
     public Email setFrom(String email)
         throws EmailException
@@ -439,6 +451,7 @@ public abstract class Email
      * @param name A String.
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @since 1.0
      */
     public Email setFrom(String email, String name)
         throws EmailException
@@ -454,6 +467,7 @@ public abstract class Email
      * @param email A String.
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @since 1.0
      */
     public Email addTo(String email)
         throws EmailException
@@ -468,6 +482,7 @@ public abstract class Email
      * @param name A String.
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @since 1.0
      */
     public Email addTo(String email, String name)
         throws EmailException
@@ -482,6 +497,7 @@ public abstract class Email
      * @param  aCollection collection of InternetAddress objects.
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @since 1.0
      */
     public Email setTo(Collection aCollection) throws EmailException
     {
@@ -500,6 +516,7 @@ public abstract class Email
      * @param email A String.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
+     * @since 1.0
      */
     public Email addCc(String email)
         throws EmailException
@@ -514,7 +531,7 @@ public abstract class Email
      * @param name A String.
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
-
+     * @since 1.0
      */
     public Email addCc(String email, String name)
         throws EmailException
@@ -528,7 +545,8 @@ public abstract class Email
      *
      * @param aCollection collection of InternetAddress objects.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
+     * @throws EmailException Indicates an invalid email address
+     * @since 1.0.
      */
     public Email setCc(Collection aCollection) throws EmailException
     {
@@ -547,6 +565,7 @@ public abstract class Email
      * @param email A String.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
+     * @since 1.0
      */
     public Email addBcc(String email)
         throws EmailException
@@ -561,6 +580,7 @@ public abstract class Email
      * @param name A String.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
+     * @since 1.0
      */
     public Email addBcc(String email, String name)
         throws EmailException
@@ -575,6 +595,7 @@ public abstract class Email
      * @param   aCollection collection of InternetAddress objects
      * @return  An Email.
      * @throws EmailException Indicates an invalid email address
+     * @since 1.0
      */
     public Email setBcc(Collection aCollection) throws EmailException
     {
@@ -593,6 +614,7 @@ public abstract class Email
      * @param email A String.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
+     * @since 1.0
      */
     public Email addReplyTo(String email)
         throws EmailException
@@ -607,6 +629,7 @@ public abstract class Email
      * @param name A String.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
+     * @since 1.0
      */
     public Email addReplyTo(String email, String name)
         throws EmailException
@@ -624,6 +647,7 @@ public abstract class Email
      * Disposition-Notification-To: user@domain.net
      *
      * @param map A Map.
+     * @since 1.0
      */
     public void setHeaders(Map map)
     {
@@ -653,6 +677,7 @@ public abstract class Email
      *
      * @param name A String with the name.
      * @param value A String with the value.
+     * @since 1.0
      */
     public void addHeader(String name, String value)
     {
@@ -673,6 +698,7 @@ public abstract class Email
      *
      * @param aSubject A String.
      * @return An Email.
+     * @since 1.0
      */
     public Email setSubject(String aSubject)
     {
@@ -688,6 +714,7 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
+     * @since 1.0
      */
     public Email setBounceAddress(String email)
     {
@@ -703,6 +730,7 @@ public abstract class Email
      * @param msg A String.
      * @return An Email.
      * @throws EmailException generic exception.
+     * @since 1.0
      */
     public abstract Email setMsg(String msg) throws EmailException;
 
@@ -710,6 +738,7 @@ public abstract class Email
      * Does the work of actually sending the email.
      *
      * @throws EmailException if there was an error.
+     * @since 1.0
      */
     public void send() throws EmailException
     {
@@ -824,6 +853,7 @@ public abstract class Email
      * current date if not explictly set.
      *
      * @param date Date to use as the sent date on the email
+     * @since 1.0
      */
     public void setSentDate(Date date)
     {
@@ -834,6 +864,7 @@ public abstract class Email
      * Gets the sent date for the email.
      *
      * @return date to be used as the sent date for the email
+     * @since 1.0
      */
     public Date getSentDate()
     {
@@ -850,6 +881,7 @@ public abstract class Email
      *
      * @param list A List.
      * @return An InternetAddress[].
+     * @since 1.0
      */
     protected InternetAddress[] toInternetAddressArray(List list)
     {
@@ -867,6 +899,7 @@ public abstract class Email
      * @param newPopHost The pop3 host to use.
      * @param newPopUsername The pop3 username.
      * @param newPopPassword The pop3 password.
+     * @since 1.0
      */
     public void setPopBeforeSmtp(
         boolean newPopBeforeSmtp,

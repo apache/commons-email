@@ -80,6 +80,7 @@ public class HtmlEmail extends MultiPartEmail
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public HtmlEmail setTextMsg(String aText) throws EmailException
     {
@@ -99,6 +100,7 @@ public class HtmlEmail extends MultiPartEmail
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public HtmlEmail setHtmlMsg(String aHtml) throws EmailException
     {
@@ -124,6 +126,7 @@ public class HtmlEmail extends MultiPartEmail
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public Email setMsg(String msg) throws EmailException
     {
@@ -167,6 +170,7 @@ public class HtmlEmail extends MultiPartEmail
      * @return A String with the Content-ID of the file.
      * @throws EmailException when URL suplpied is invalid
      *  also see javax.mail.internet.MimeBodyPart for defintions
+     * @since 1.0
      */
     public String embed(URL url, String name) throws EmailException
     {
@@ -203,6 +207,7 @@ public class HtmlEmail extends MultiPartEmail
      * Does the work of actually sending the email.
      *
      * @exception EmailException if there was an error.
+     * @since 1.0
      */
     public void send() throws EmailException
     {

@@ -50,6 +50,7 @@ public class EmailAttachment
      * Get the description.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getDescription()
     {
@@ -60,6 +61,7 @@ public class EmailAttachment
      * Get the name.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getName()
     {
@@ -70,6 +72,7 @@ public class EmailAttachment
      * Get the path.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getPath()
     {
@@ -80,6 +83,7 @@ public class EmailAttachment
      * Get the URL.
      *
      * @return A URL.
+     * @since 1.0
      */
     public URL getURL()
     {
@@ -90,6 +94,7 @@ public class EmailAttachment
      * Get the disposition.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getDisposition()
     {
@@ -100,6 +105,7 @@ public class EmailAttachment
      * Set the description.
      *
      * @param desc A String.
+     * @since 1.0
      */
     public void setDescription(String desc)
     {
@@ -110,6 +116,7 @@ public class EmailAttachment
      * Set the name.
      *
      * @param aName A String.
+     * @since 1.0
      */
     public void setName(String aName)
     {
@@ -124,6 +131,7 @@ public class EmailAttachment
      * Example: images/image.jpg
      *
      * @param aPath A String.
+     * @since 1.0
      */
     public void setPath(String aPath)
     {
@@ -134,6 +142,7 @@ public class EmailAttachment
      * Set the URL.
      *
      * @param aUrl A URL.
+     * @since 1.0
      */
     public void setURL(URL aUrl)
     {
@@ -144,6 +153,7 @@ public class EmailAttachment
      * Set the disposition.
      *
      * @param aDisposition A String.
+     * @since 1.0
      */
     public void setDisposition(String aDisposition)
     {

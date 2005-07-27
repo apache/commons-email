@@ -68,6 +68,7 @@ public class MultiPartEmail extends Email
      * Set the MIME subtype of the email.
      *
      * @param aSubType MIME subtype of the email
+     * @since 1.0
      */
     public void setSubType(String aSubType)
     {
@@ -78,6 +79,7 @@ public class MultiPartEmail extends Email
      * Get the MIME subtype of the email.
      *
      * @return MIME subtype of the email
+     * @since 1.0
      */
     public String getSubType()
     {
@@ -92,6 +94,7 @@ public class MultiPartEmail extends Email
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public Email addPart(String partContent, String partContentType)
         throws EmailException
@@ -116,7 +119,8 @@ public class MultiPartEmail extends Email
      * @param multipart The MimeMultipart.
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
+     *  @since 1.0
      */
     public Email addPart(MimeMultipart multipart) throws EmailException
     {
@@ -137,6 +141,7 @@ public class MultiPartEmail extends Email
      * @param index The index to add at.
      * @return The email.
      * @throws EmailException An error occured while adding the part.
+     * @since 1.0
      */
     public Email addPart(MimeMultipart multipart, int index) throws EmailException
     {
@@ -156,6 +161,7 @@ public class MultiPartEmail extends Email
 
     /**
      * Initialize the multipart email.
+     * @since 1.0
      */
     protected void init()
     {
@@ -177,6 +183,7 @@ public class MultiPartEmail extends Email
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public Email setMsg(String msg) throws EmailException
     {
@@ -208,6 +215,7 @@ public class MultiPartEmail extends Email
      *
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public void send() throws EmailException
     {
@@ -251,6 +259,7 @@ public class MultiPartEmail extends Email
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public MultiPartEmail attach(EmailAttachment attachment)
         throws EmailException
@@ -313,6 +322,7 @@ public class MultiPartEmail extends Email
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public MultiPartEmail attach(URL url, String name, String description)
         throws EmailException
@@ -330,6 +340,7 @@ public class MultiPartEmail extends Email
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public MultiPartEmail attach(
         URL url,
@@ -361,6 +372,7 @@ public class MultiPartEmail extends Email
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public MultiPartEmail attach(
         DataSource ds,
@@ -394,6 +406,7 @@ public class MultiPartEmail extends Email
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for defintions
+     * @since 1.0
      */
     public MultiPartEmail attach(
         DataSource ds,
@@ -430,6 +443,7 @@ public class MultiPartEmail extends Email
      *
      * @return The primary body part.
      * @throws MessagingException An error occured while getting the primary body part.
+     * @since 1.0
      */
     protected MimeBodyPart getPrimaryBodyPart() throws MessagingException
     {
@@ -452,6 +466,7 @@ public class MultiPartEmail extends Email
      * Gets the message container.
      *
      * @return The message container.
+     * @since 1.0
      */
     protected MimeMultipart getContainer()
     {
@@ -465,6 +480,7 @@ public class MultiPartEmail extends Email
 
     /**
      * @return boolHasAttachments
+     * @since 1.0
      */
     public boolean isBoolHasAttachments()
     {
@@ -473,6 +489,7 @@ public class MultiPartEmail extends Email
 
     /**
      * @param b boolHasAttachments
+     * @since 1.0
      */
     public void setBoolHasAttachments(boolean b)
     {

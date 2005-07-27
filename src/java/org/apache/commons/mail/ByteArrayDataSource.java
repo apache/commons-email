@@ -56,6 +56,7 @@ public class ByteArrayDataSource implements DataSource
      * @param data A byte[].
      * @param aType A String.
      * @throws IOException IOException
+     * @since 1.0
      */
     public ByteArrayDataSource(byte[] data, String aType) throws IOException
     {
@@ -85,6 +86,7 @@ public class ByteArrayDataSource implements DataSource
      * @param aIs An InputStream.
      * @param aType A String.
      * @throws IOException IOException
+     * @since 1.0
      */
     public ByteArrayDataSource(InputStream aIs, String aType) throws IOException
     {
@@ -97,6 +99,7 @@ public class ByteArrayDataSource implements DataSource
      * @param data A String.
      * @param aType A String.
      * @throws IOException IOException
+     * @since 1.0
      */
     public ByteArrayDataSource(String data, String aType) throws IOException
     {
@@ -186,6 +189,7 @@ public class ByteArrayDataSource implements DataSource
      * Get the content type.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getContentType()
     {
@@ -197,6 +201,7 @@ public class ByteArrayDataSource implements DataSource
      *
      * @return An InputStream.
      * @throws IOException IOException
+     * @since 1.0
      */
     public InputStream getInputStream() throws IOException
     {
@@ -211,6 +216,7 @@ public class ByteArrayDataSource implements DataSource
      * Get the name.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getName()
     {
@@ -221,6 +227,7 @@ public class ByteArrayDataSource implements DataSource
      * Get the OutputStream to write to
      *
      * @return  An OutputStream
+     * @since 1.0
      */
     public OutputStream getOutputStream()
     {
