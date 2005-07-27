@@ -31,7 +31,8 @@
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team" href="/team-list.html"/>
-      <item name="SVN" href="http://svn.apache.org/viewcvs.cgi/jakarta/commons/proper/email/trunk/"/>
+      <item name="SVN" href="http://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk/"/>
+      <item name="View SVN" href="http://svn.apache.org/viewcvs.cgi/jakarta/commons/proper/email/trunk/"/>
     </menu>
     &common-menus;
   </body>
