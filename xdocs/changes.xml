@@ -21,7 +21,7 @@
   </properties>
 
   <body>
-    <release version="1.0-rc5-SNAPSHOT" date="IN Subversion"> 
+    <release version="1.0-rc6-SNAPSHOT" date="IN Subversion"> 
       <action dev="sgoeschl" type="update">
         Refactoring the code to seperate creation of a MimeMessage and sending it.
       </action>

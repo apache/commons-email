@@ -66,7 +66,7 @@ It is for use with instances of MultiPartEmail and HtmlEmail.
 </subsection>
 </section>
 <section name='Releases'>
-	<subsection name='Commons Email 1.0 (Release Candidate 5)'>
+	<subsection name='Commons Email 1.0 (Release Candidate 6)'>
 		<p>
 Commons Email is (at long last) approaching it's first official release.
 This may be the first official release of commons email but the code base
@@ -74,8 +74,8 @@ is already mature and stable. There is therefore no reason why this code
 cannot be recommended for production.
 		</p>
 		<p>
-The fifth release candidate is now available for 
-<a href='http://people.apache.org/~rdonkin/commons-email/'>download</a>
+The sixth release candidate is now available for 
+<a href='http://people.apache.org/~epugh/commons-email/'>download</a>
 		</p>
 	</subsection>
 </section>
