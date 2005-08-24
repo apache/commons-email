@@ -96,6 +96,10 @@ The fifth release candidate is now available for
   <a href="http://sourceforge.net/projects/dumbster">Dumbster</a> which is compiled
   with JDK 1.4.
 </p>
+<p>
+  Also note that on OS X you may need to use Dumbster 1.5, not Dumbster 1.6 to run
+  the unit tests.  Just update the project.xml <i>dependency</i> element.
+</p>
 </section>
 
 
