@@ -211,13 +211,13 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * Sends the mail message
+     * Builds the actual MimeMessage
      *
      * @throws EmailException see javax.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */
-    public void send() throws EmailException
+    public void buildMimeMessage() throws EmailException
     {
         try
         {
@@ -244,7 +244,7 @@ public class MultiPartEmail extends Email
                 getContainer().setSubType(subType);
             }
 
-            super.send();
+            super.buildMimeMessage();
         }
         catch (MessagingException me)
         {

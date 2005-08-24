@@ -35,6 +35,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 
 /**
  * The base class for all email messages.  This class sets the
@@ -350,7 +351,7 @@ public abstract class Email
      * @throws EmailException thrown when host name was not set.
      * @since 1.0
      */
-    protected Session getMailSession() throws EmailException
+    public Session getMailSession() throws EmailException
     {
         if (this.session == null)
         {
@@ -735,12 +736,12 @@ public abstract class Email
     public abstract Email setMsg(String msg) throws EmailException;
 
     /**
-     * Does the work of actually sending the email.
+     * Build the internal MimeMessage to be sent.
      *
      * @throws EmailException if there was an error.
      * @since 1.0
      */
-    public void send() throws EmailException
+    public void buildMimeMessage() throws EmailException
     {
         try
         {
@@ -839,8 +840,6 @@ public abstract class Email
                 Store store = session.getStore("pop3");
                 store.connect(this.popHost, this.popUsername, this.popPassword);
             }
-
-            Transport.send(this.message);
         }
         catch (MessagingException me)
         {
@@ -848,6 +847,57 @@ public abstract class Email
         }
     }
 
+    /**
+     * Sends the previously created MimeMessage to the SMTP server.
+     *
+     * @return the message id of the underlying MimeMessage
+     * @throws EmailException the sending failed
+     */
+    public String sendMimeMessage()
+       throws EmailException
+    {
+        Validate.notNull(this.message,"message");
+    
+        try
+        {
+            Transport.send(this.message);
+            return this.message.getMessageID();
+        }
+        catch (Throwable t)
+        {
+            String msg = "Sending the email to the following server failed : "
+                + this.getHostName()
+                + ":"
+                + this.getSmtpPort();
+    
+            throw new EmailException(msg,t);
+        }
+    }
+    
+    /**
+     * Returns the internal MimeMessage. Please not that the
+     * MimeMessage is build by the buildMimeMessage() method.
+     *
+     * @return the MimeMessage
+     */
+    public MimeMessage getMimeMessage()
+    {
+        return this.message;
+    }
+    
+    /**
+     * Sends the email. Internally we build a MimeMessage
+     * which is afterwards sent to the SMTP server.
+     *
+     * @return the message id of the underlying MimeMessage
+     * @throws EmailException the sending failed
+     */
+    public String send() throws EmailException
+    {
+        this.buildMimeMessage();
+        return this.sendMimeMessage();
+    }
+    
     /**
      * Sets the sent date for the email.  The sent date will default to the
      * current date if not explictly set.
@@ -874,7 +924,47 @@ public abstract class Email
         }
         return this.sentDate;
     }
-
+    
+    /**
+     * Gets the subject of the email.
+     *
+     * @return email subject
+     */
+    public String getSubject()
+    {
+        return this.subject;
+    }
+    
+    /**
+     * Gets the sender of the email.
+     *
+     * @return from address
+     */
+    public InternetAddress getFromAddress()
+    {
+        return this.fromAddress;
+    }
+    
+    /**
+     * Gets the host name of the SMTP server,
+     *
+     * @return host name
+     */
+    public String getHostName()
+    {
+        return this.hostName;
+    }
+    
+    /**
+     * Gets the listening port of the SMTP server.
+     *
+     * @return smtp port
+     */
+    public String getSmtpPort()
+    {
+        return this.smtpPort;
+    }
+    
     /**
      * Utility to copy List of known InternetAddress objects into an
      * array.

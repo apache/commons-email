@@ -22,6 +22,9 @@
 
   <body>
     <release version="1.0-rc5-SNAPSHOT" date="IN Subversion"> 
+      <action dev="sgoeschl" type="update">
+        Refactoring the code to seperate creation of a MimeMessage and sending it.
+      </action>
       <action dev="dion" type="update">Add serialVersionUID to EmailException</action>
       <action dev="dion" type="update">Use Dumbster 1.6 compiled with jdk13 for testing</action>
       <action dev="dion" type="fix" issue="34919" due-to="Eric Spiegelberg">

@@ -204,12 +204,12 @@ public class HtmlEmail extends MultiPartEmail
     }
 
     /**
-     * Does the work of actually sending the email.
+     * Does the work of actually building the email.
      *
      * @exception EmailException if there was an error.
      * @since 1.0
      */
-    public void send() throws EmailException
+    public void buildMimeMessage() throws EmailException
     {
         try
         {
@@ -229,7 +229,7 @@ public class HtmlEmail extends MultiPartEmail
         {
             throw new EmailException(me);
         }
-        super.send();
+        super.buildMimeMessage();
     }
 
     /**
