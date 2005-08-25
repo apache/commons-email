@@ -977,7 +977,7 @@ public abstract class Email
     protected InternetAddress[] toInternetAddressArray(List list)
     {
         InternetAddress[] ia =
-            (InternetAddress[]) list.toArray(new InternetAddress[0]);
+            (InternetAddress[]) list.toArray(new InternetAddress[list.size()]);
 
         return ia;
     }
