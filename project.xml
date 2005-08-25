@@ -114,6 +114,16 @@
             <email>rdonkin@apache.org</email>
             <roles/>
         </developer>
+        <developer>
+          <name>Henning P. Schmiedehausen</name>
+          <id>henning</id>
+          <email>hps@intermeta.de</email>
+          <organization>INTERMETA - Gesellschaft fuer Mehrwertdienste mbH</organization>
+          <roles>
+            <role>Java Developer</role>
+          </roles>
+          <timezone>2</timezone>
+        </developer>
     </developers>
     <contributors>
         <contributor>
@@ -143,27 +153,27 @@
             <artifactId>commons-lang</artifactId>
             <version>2.0</version>
             <url>http://jakarta.apache.org/commons/lang.html</url>
-            <properties/>
+            <properties>
+              <dist.bundle>true</dist.bundle>
+            </properties>
         </dependency>
         <dependency>
             <groupId>javamail</groupId>
             <artifactId>javamail</artifactId>
             <version>1.3.2</version>
             <url>http://java.sun.com/products/javamail/</url>
-            <properties/>
         </dependency>
         <dependency>
             <groupId>activation</groupId>
             <artifactId>activation</artifactId>
             <version>1.0.2</version>
             <url>http://java.sun.com/products/javabeans/glasgow/jaf.html</url>
-            <properties/>
         </dependency>
         <dependency>
             <groupId>dumbster</groupId>
             <artifactId>dumbster</artifactId>
             <version>1.6</version>
-            <properties/>
+            <url>http://quintanasoft.com/dumbster/</url>
         </dependency>
     </dependencies>
     <build>

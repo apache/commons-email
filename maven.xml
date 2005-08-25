@@ -16,7 +16,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<project default="jar:jar">
+<project 
+  xmlns:ant="jelly:ant"
+  xmlns:j="jelly:core"
+  default="jar:jar">
 
   <!-- ================================================================== -->
   <!-- START : C O M M O N S - B U I L D                                  -->
@@ -56,8 +59,17 @@ limitations under the License.
       <fileset file="${basedir}/NOTICE.txt"/>
       <fileset file="${basedir}/RELEASE-NOTES.txt"/>
     </copy>
+    
+    <!-- include listed dependencies that we are allowed to distribute-->
+    <j:forEach var="dep" items="${pom.dependencies}">
+      <j:if test="${dep.getProperty('dist.bundle') != null &amp;&amp; dep.getProperty('dist.bundle').equalsIgnoreCase('true')}">
+        <copy todir="${maven.dist.bin.assembly.dir}/lib"
+              file="${maven.repo.local}/${dep.getArtifactDirectory()}/jars/${dep.getArtifact()}"/>
+      </j:if>
+    </j:forEach>
+    <copy todir="${maven.dist.bin.assembly.dir}/lib">
+      <fileset file="${basedir}/conf/LIBS-NOTICE.txt"/>
+    </copy>
   </preGoal>
   
 </project>
-
-
