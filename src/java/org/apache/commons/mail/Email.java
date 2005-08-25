@@ -652,12 +652,13 @@ public abstract class Email
      */
     public void setHeaders(Map map)
     {
-        Iterator iterKeyBad = map.keySet().iterator();
+        Iterator iterKeyBad = map.entrySet().iterator();
 
         while (iterKeyBad.hasNext())
         {
-            String strName = (String) iterKeyBad.next();
-            String strValue = (String) map.get(strName);
+            Map.Entry entry = (Map.Entry) iterKeyBad.next();
+            String strName = (String) entry.getKey();
+            String strValue = (String) entry.getValue();
 
             if (!StringUtils.isNotEmpty(strName))
             {
