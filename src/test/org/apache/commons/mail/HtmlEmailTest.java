@@ -178,7 +178,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testEmbed() throws Exception
@@ -350,7 +350,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSend2() throws Exception
@@ -401,7 +401,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
             this.email.getCcList(),
             this.email.getBccList(),
             false);
-   
+
         this.getMailServer();
 
         this.email = new MockHtmlEmailConcrete();
@@ -445,7 +445,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
             this.email.getCcList(),
             this.email.getBccList(),
             false);
-   
+
     }
 
 }

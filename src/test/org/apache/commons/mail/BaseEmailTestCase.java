@@ -66,25 +66,25 @@ public class BaseEmailTestCase extends TestCase
     public static final int BODY_END_PAD = 3;
     /** Padding at start of body added by dumbser/send */
     public static final int BODY_START_PAD = 2;
-    
+
     /** Where to save email output **/
     private File emailOutputDir;
 
     /** Test characters acceptable to email */
-    protected String[] testCharsValid = 
+    protected String[] testCharsValid =
     {
-            " ", 
-            "a", 
-            "A", 
-            "\uc5ec", 
-            "0123456789", 
-            "012345678901234567890", 
+            " ",
+            "a",
+            "A",
+            "\uc5ec",
+            "0123456789",
+            "012345678901234567890",
             "\n"
     };
-    
+
     /** Array of test strings */
-    protected String[] testCharsNotValid = { "", null };    
-    
+    protected String[] testCharsNotValid = { "", null };
+
     /**
      * @param name name
      */
@@ -117,7 +117,7 @@ public class BaseEmailTestCase extends TestCase
     }
 
     /**
-     * 
+     *
      * @param email email
      * @throws IOException Exception
      */
@@ -138,15 +138,15 @@ public class BaseEmailTestCase extends TestCase
     {
         assertTrue(this.fakeMailServer.getReceivedEmailSize() >= intMsgNo);
         Iterator emailIter = fakeMailServer.getReceivedEmail();
-        SmtpMessage emailMessage = null; 
+        SmtpMessage emailMessage = null;
         for (int intCurMsg = 0; intCurMsg < intMsgNo; intCurMsg++)
         {
             emailMessage = (SmtpMessage) emailIter.next();
         }
-        
+
         if (emailMessage != null)
         {
-            return emailMessage.toString();        
+            return emailMessage.toString();
         }
         fail("Message note found");
         return "";
@@ -236,7 +236,7 @@ public class BaseEmailTestCase extends TestCase
                 bccAdd.toString().indexOf(emailMessage.getHeaderValue("Bcc"))
                     != -1);
         }
-        
+
         return emailMessage;
     }
 
@@ -278,12 +278,12 @@ public class BaseEmailTestCase extends TestCase
         // get sent email content
         String strSentContent =
             content.getContentType();
-        // get received email content (chop off the auto-added \n 
+        // get received email content (chop off the auto-added \n
         // and -- (front and end)
         String strMessageBody =
             emailMessage.getBody().substring(
                 BaseEmailTestCase.BODY_START_PAD,
-                emailMessage.getBody().length() 
+                emailMessage.getBody().length()
                     - BaseEmailTestCase.BODY_END_PAD);
         assertTrue(strMessageBody.indexOf(strSentContent) != -1);
     }

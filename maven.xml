@@ -16,7 +16,7 @@
  limitations under the License.
 -->
 
-<project 
+<project
   xmlns:ant="jelly:ant"
   xmlns:j="jelly:core"
   default="jar:jar">
@@ -31,16 +31,16 @@
    <j:if test="${context.getVariable('commons.basedir.available') == null}">
     <fail>
 ------------------------------------------------------------------------------
-| if you want to build xdocs or the site, you must 
-| check out the 'commons-build' module from 
+| if you want to build xdocs or the site, you must
+| check out the 'commons-build' module from
 | http://svn.apache.org/repos/asf/jakarta/commons/proper/commons-build/trunk/
 | and put it in a directory next to commons-email
 ------------------------------------------------------------------------------
     </fail>
    </j:if>
-  </preGoal> 
+  </preGoal>
 
-  <postGoal name="xdoc:copy-resources">  
+  <postGoal name="xdoc:copy-resources">
     <copy todir="${basedir}/target/docs/style/" failonerror="false">
       <fileset dir="${basedir}/../commons-build/xdocs/style">
       	<include name='**/*'/>
@@ -51,8 +51,8 @@
   <!-- ================================================================== -->
   <!-- END: C O M M O N S - B U I L D                                     -->
   <!-- ================================================================== -->
-  
-  <!-- Ensures that the conf directory and NOTICE.txt are included in the 
+
+  <!-- Ensures that the conf directory and NOTICE.txt are included in the
        source distro.
    -->
   <postGoal name="dist:prepare-src-filesystem">
@@ -66,14 +66,14 @@
       <fileset file="${basedir}/RELEASE-NOTES.txt"/>
     </copy>
   </postGoal>
-  
+
   <!-- Ensures that NOTICE.txt is added to the binary distro -->
   <preGoal name="dist:build-bin">
     <copy todir="${maven.dist.bin.assembly.dir}">
       <fileset file="${basedir}/NOTICE.txt"/>
       <fileset file="${basedir}/RELEASE-NOTES.txt"/>
     </copy>
-    
+
     <!-- include listed dependencies that we are allowed to distribute-->
     <j:forEach var="dep" items="${pom.dependencies}">
       <j:if test="${dep.getProperty('dist.bundle') != null &amp;&amp; dep.getProperty('dist.bundle').equalsIgnoreCase('true')}">
@@ -85,5 +85,5 @@
       <fileset file="${basedir}/conf/LIBS-NOTICE.txt"/>
     </copy>
   </preGoal>
-  
+
 </project>

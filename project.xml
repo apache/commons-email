@@ -20,7 +20,7 @@
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
     <currentVersion>1.0-rc7-dev</currentVersion>
-  
+
     <organization>
       <name>The Apache Software Foundation</name>
       <url>http://jakarta.apache.org</url>
@@ -34,7 +34,7 @@
     	<distribution>repo</distribution>
       </license>
     </licenses>
-    
+
     <inceptionYear>2001</inceptionYear>
     <package>org.apache.commons.mail</package>
     <logo>/images/email-logo-white.png</logo>
@@ -191,11 +191,11 @@
             <version>1.6</version>
             <url>http://quintanasoft.com/dumbster/</url>
         </dependency>
-        <dependency> 
-            <groupId>maven-plugins</groupId> 
-            <artifactId>maven-findbugs-plugin</artifactId> 
-            <version>0.9.1</version> 
-            <url>http://maven-plugins.sourceforge.net/maven-findbugs-plugin/</url> 
+        <dependency>
+            <groupId>maven-plugins</groupId>
+            <artifactId>maven-findbugs-plugin</artifactId>
+            <version>0.9.1</version>
+            <url>http://maven-plugins.sourceforge.net/maven-findbugs-plugin/</url>
             <type>plugin</type>
         </dependency>
     </dependencies>
@@ -236,7 +236,7 @@
         <report>maven-pmd-plugin</report>
         <report>maven-license-plugin</report>
         <report>maven-jcoverage-plugin</report>
-        <report>maven-findbugs-plugin</report> 
+        <report>maven-findbugs-plugin</report>
     </reports>
     <properties/>
 </project>

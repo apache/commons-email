@@ -24,7 +24,7 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.mail.HtmlEmail;
 
 /**
- * Extension of the HtmlEmail Class 
+ * Extension of the HtmlEmail Class
  * (used to allow testing only)
  *
  * @since 1.0

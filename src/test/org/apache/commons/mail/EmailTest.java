@@ -80,7 +80,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testGetSetSession() throws Exception
@@ -99,7 +99,7 @@ public class EmailTest extends BaseEmailTestCase
 
         this.email.setMailSession(mySession);
         assertEquals(mySession, this.email.getMailSession());
-      
+
     }
 
     /** */
@@ -110,7 +110,7 @@ public class EmailTest extends BaseEmailTestCase
         String strPassword = "user.pwd";
         this.email.setAuthentication(strUsername, strPassword);
 
-        // this is cast into DefaultAuthenticator for convenience 
+        // this is cast into DefaultAuthenticator for convenience
         // and give us access to the getPasswordAuthentication fn
         DefaultAuthenticator retrievedAuth =
             (DefaultAuthenticator) this.email.getAuthenticator();
@@ -136,7 +136,7 @@ public class EmailTest extends BaseEmailTestCase
             new DefaultAuthenticator(strUsername, strPassword);
         this.email.setAuthenticator(authenicator);
 
-        // this is cast into DefaultAuthenticator for convenience 
+        // this is cast into DefaultAuthenticator for convenience
         // and give us access to the getPasswordAuthentication fn
         DefaultAuthenticator retrievedAuth =
             (DefaultAuthenticator) this.email.getAuthenticator();
@@ -280,7 +280,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSetFrom() throws Exception
@@ -311,7 +311,7 @@ public class EmailTest extends BaseEmailTestCase
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
 
-            // set from 
+            // set from
             this.email.setFrom(ARR_VALID_EMAILS[i]);
 
             // retrieve and verify
@@ -320,7 +320,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSetFromWithEnconding() throws Exception
@@ -333,7 +333,7 @@ public class EmailTest extends BaseEmailTestCase
             InternetAddress inetExpected =
                 new InternetAddress("me@home.com", "me@home.com");
 
-            // set from 
+            // set from
             this.email.setCharset(Email.ISO_8859_1);
             this.email.setFrom(testValidEmail);
 
@@ -343,7 +343,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSetFrom2() throws Exception
@@ -378,7 +378,7 @@ public class EmailTest extends BaseEmailTestCase
 
         for (int i = 0; i < testEmails.length; i++)
         {
-            // set from 
+            // set from
             this.email.setFrom(testEmails[i], testEmailNames[i]);
 
             // retrieve and verify
@@ -443,7 +443,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -489,7 +489,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -536,7 +536,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)
@@ -683,7 +683,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addCc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -729,7 +729,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addCc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -776,7 +776,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)
@@ -905,7 +905,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addBcc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -953,7 +953,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addBcc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -1002,7 +1002,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)
@@ -1146,7 +1146,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addReplyTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -1194,7 +1194,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addReplyTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -1243,7 +1243,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)

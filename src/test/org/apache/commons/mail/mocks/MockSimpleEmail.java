@@ -22,7 +22,7 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.mail.SimpleEmail;
 
 /**
- * Extension of SimpleEmail Class 
+ * Extension of SimpleEmail Class
  * (used to allow testing only)
  *
  * @since 1.0

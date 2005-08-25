@@ -857,7 +857,7 @@ public abstract class Email
        throws EmailException
     {
         Validate.notNull(this.message,"message");
-    
+
         try
         {
             Transport.send(this.message);
@@ -869,11 +869,11 @@ public abstract class Email
                 + this.getHostName()
                 + ":"
                 + this.getSmtpPort();
-    
+
             throw new EmailException(msg,t);
         }
     }
-    
+
     /**
      * Returns the internal MimeMessage. Please not that the
      * MimeMessage is build by the buildMimeMessage() method.
@@ -884,7 +884,7 @@ public abstract class Email
     {
         return this.message;
     }
-    
+
     /**
      * Sends the email. Internally we build a MimeMessage
      * which is afterwards sent to the SMTP server.
@@ -897,7 +897,7 @@ public abstract class Email
         this.buildMimeMessage();
         return this.sendMimeMessage();
     }
-    
+
     /**
      * Sets the sent date for the email.  The sent date will default to the
      * current date if not explictly set.
@@ -924,7 +924,7 @@ public abstract class Email
         }
         return this.sentDate;
     }
-    
+
     /**
      * Gets the subject of the email.
      *
@@ -934,7 +934,7 @@ public abstract class Email
     {
         return this.subject;
     }
-    
+
     /**
      * Gets the sender of the email.
      *
@@ -944,7 +944,7 @@ public abstract class Email
     {
         return this.fromAddress;
     }
-    
+
     /**
      * Gets the host name of the SMTP server,
      *
@@ -954,7 +954,7 @@ public abstract class Email
     {
         return this.hostName;
     }
-    
+
     /**
      * Gets the listening port of the SMTP server.
      *
@@ -964,7 +964,7 @@ public abstract class Email
     {
         return this.smtpPort;
     }
-    
+
     /**
      * Utility to copy List of known InternetAddress objects into an
      * array.

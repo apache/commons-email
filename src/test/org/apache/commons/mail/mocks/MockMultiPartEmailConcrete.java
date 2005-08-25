@@ -24,7 +24,7 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.mail.MultiPartEmail;
 
 /**
- * Extension of MultiPartEmail Class 
+ * Extension of MultiPartEmail Class
  * (used to allow testing only)
  *
  * @since 1.0

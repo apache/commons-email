@@ -205,20 +205,20 @@ email.send();
         Technical notes: When SMTP servers cannot deliver mail, they do not pay any attention
         to the contents of the message to determine where the error notification should be
         sent.  Rather, they refer to the SMTP "envelope sender" value.  JavaMail sets this
-        value according to the value of the <code>mail.smtp.from</code> property on the 
-        JavaMail <code>Session</code>.  (Commons Email initializes the JavaMail 
+        value according to the value of the <code>mail.smtp.from</code> property on the
+        JavaMail <code>Session</code>.  (Commons Email initializes the JavaMail
         <code>Session</code> using <code>System.getProperties()</code>)
         If this property has not been set, then JavaMail
         uses the "from" address.  If your email bean has the <code>bounceAddress</code>
         property set, then Commons Email uses it to set the value of <code>mail.smtp.from</code>
-        when the <code>Session</code> is initialized, overriding any other value 
+        when the <code>Session</code> is initialized, overriding any other value
         which might have been set.
       </p>
       <p>
-        <em>Note: </em> This is the only way to control the handling of bounced email.  
+        <em>Note: </em> This is the only way to control the handling of bounced email.
         Specifically, the "Errors-to:" SMTP header is deprecated and cannot be trusted
-        to control how a bounced message will be handled.  Also note that it is considered bad 
-        practice to send email with an untrusted "from" address unless you also set the 
+        to control how a bounced message will be handled.  Also note that it is considered bad
+        practice to send email with an untrusted "from" address unless you also set the
         bounce address.  If your application allows users to enter an address which is used
         as the "from" address on an email, you should be sure to set the bounce address
         to a known good address.

@@ -21,7 +21,7 @@
   </properties>
 
   <body>
-    <release version="1.0-rc6-SNAPSHOT" date="IN Subversion"> 
+    <release version="1.0-rc6-SNAPSHOT" date="IN Subversion">
       <action dev="sgoeschl" type="update">
         Refactoring the code to seperate creation of a MimeMessage and sending it.
       </action>
@@ -32,48 +32,48 @@
       </action>
       <action dev="epugh" type="add" due-to="Mark Lowe" issue="32094">
         Email throws EmailException wrapping underlying JavaMail exception
-      </action>         
+      </action>
       <action dev="epugh" type="add" due-to="Corey Scott" issue="32410">
         Change port for dumbster from 25 to 2500 to use unreserved port.
-      </action>              
+      </action>
       <action dev="epugh" type="add" due-to="Corey Scott" issue="32260">
         Add back in ByteArrayDataSource.
       </action>
       <action dev="epugh" type="remove">
         Removed deprecated MailMessage and ByteArrayDataSource.
-      </action>         
+      </action>
       <action dev="epugh" type="add">
         Output test emails to /target/test-emails as .txt files for manual
         review.
-      </action>          
+      </action>
       <action dev="epugh" type="add" due-to="Mark Lowe" issue="31904">
         Inline attatchment encoding was incorrect.
-      </action>          
+      </action>
       <action dev="epugh" type="add">
         Integrate our own checkstyle config instead of using Turbine style only.
-      </action>         
+      </action>
       <action dev="epugh" type="add" due-to="Joe Germuska" issue="18968">
         Clone the System.getProperties() call instead of putting random properties
         into it.
-      </action>         
+      </action>
       <action dev="epugh" type="add" issue="16859">
         Can't supply a javax.mail.Session to Commons Email component
-      </action>           
+      </action>
       <action dev="epugh" type="add" issue="30973" due-to="Corey Scott">
         HTML email with plain text alternative and attachments
-      </action>         
+      </action>
       <action dev="epugh" type="add" issue="31762" due-to="Corey Scott">
         Integrate use of Dumbster to supply a fake SMTP server.
-      </action>           
+      </action>
       <action dev="epugh" type="add" due-to="Corey Scott">
         Lots of new unit tests and cleanup of code.
-      </action>    
+      </action>
       <action dev="epugh" type="update">
         Update dependencies to latest available.
       </action>
       <action dev="germuska" type="add" issue="18968">
         Support the delivery of bounced messages to an address other than "from".
-      </action>           
+      </action>
     </release>
   </body>
 </document>

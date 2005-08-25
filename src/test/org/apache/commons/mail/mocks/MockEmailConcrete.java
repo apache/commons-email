@@ -28,7 +28,7 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 
 /**
- * Concrete Implementation on the Abstract Email 
+ * Concrete Implementation on the Abstract Email
  * Class (used to allow testing only).  Supplies
  * getters for methods that normally only have setters.
  *
@@ -46,7 +46,7 @@ public class MockEmailConcrete extends Email
      */
     public Email setMsg(String msg)
     {
-        // This abstract method should be tested in the concrete 
+        // This abstract method should be tested in the concrete
         // implementation classes only.
         return null;
     }

@@ -206,7 +206,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             e.printStackTrace();
             fail("Unexpected exception thrown");
         }
-        
+
         // ====================================================================
         // Test Exceptions
         // ====================================================================
@@ -434,7 +434,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testAddPart() throws Exception
@@ -460,11 +460,11 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 .getBodyPart(0)
                 .getDataHandler()
                 .getContent());
-   
+
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testAddPart2() throws Exception
@@ -487,7 +487,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 .getContentType()
                 .indexOf(strSubtype)
                 != -1);
-   
+
     }
 
     /** @todo implement test for GetContainer */
