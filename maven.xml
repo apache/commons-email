@@ -26,6 +26,20 @@ limitations under the License.
   <!-- ================================================================== -->
   <!-- Required: Look and Feel for documentation within distributions     -->
   <!-- ================================================================== -->
+  <preGoal name="xdoc:init">
+   <ant:available type="dir" property="commons.basedir.available" file="${basedir}/../commons-build" />
+   <j:if test="${context.getVariable('commons.basedir.available') == null}">
+    <fail>
+------------------------------------------------------------------------------
+| if you want to build xdocs or the site, you must 
+| check out the 'commons-build' module from 
+| http://svn.apache.org/repos/asf/jakarta/commons/proper/commons-build/trunk/
+| and put it in a directory next to commons-email
+------------------------------------------------------------------------------
+    </fail>
+   </j:if>
+  </preGoal> 
+
   <postGoal name="xdoc:copy-resources">  
     <copy todir="${basedir}/target/docs/style/" failonerror="false">
       <fileset dir="${basedir}/../commons-build/xdocs/style">
