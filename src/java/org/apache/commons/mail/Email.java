@@ -856,7 +856,7 @@ public abstract class Email
     public String sendMimeMessage()
        throws EmailException
     {
-        Validate.notNull(this.message,"message");
+        Validate.notNull(this.message, "message");
 
         try
         {
@@ -870,7 +870,7 @@ public abstract class Email
                 + ":"
                 + this.getSmtpPort();
 
-            throw new EmailException(msg,t);
+            throw new EmailException(msg, t);
         }
     }
 
