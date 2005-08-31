@@ -103,7 +103,7 @@ public class MultiPartEmail extends Email
     public Email addPart(String partContent, String partContentType)
         throws EmailException
     {
-    	    BodyPart bodyPart = createBodyPart();
+            BodyPart bodyPart = createBodyPart();
         try
         {
             bodyPart.setContent(partContent, partContentType);
@@ -149,7 +149,7 @@ public class MultiPartEmail extends Email
      */
     public Email addPart(MimeMultipart multipart, int index) throws EmailException
     {
-    	    BodyPart bodyPart = createBodyPart();
+            BodyPart bodyPart = createBodyPart();
         try
         {
             bodyPart.setContent(multipart);
@@ -233,7 +233,7 @@ public class MultiPartEmail extends Email
                 // the content for the main body part was actually set.  If not,
                 // an IOException will be thrown during super.send().
 
-            	   BodyPart body = this.getPrimaryBodyPart();
+                   BodyPart body = this.getPrimaryBodyPart();
                 try
                 {
                     body.getContent();
