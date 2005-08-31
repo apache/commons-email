@@ -22,6 +22,9 @@
 
   <body>
     <release version="1.0-rc6-SNAPSHOT" date="IN Subversion">
+      <action dev="epugh" type="update" due-to="Troy Poppe" issue="34056">
+        Improve MultiPartEmail to ease extending it.
+      </action>
       <action dev="sgoeschl" type="update">
         Refactoring the code to seperate creation of a MimeMessage and sending it.
       </action>
