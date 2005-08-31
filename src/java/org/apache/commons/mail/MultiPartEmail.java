@@ -198,20 +198,15 @@ public class MultiPartEmail extends Email
         }
         try
         {
-            if (StringUtils.isNotEmpty(charset))
-            {
-                BodyPart primary = getPrimaryBodyPart();
+            BodyPart primary = getPrimaryBodyPart();
 
-                if ((primary instanceof MimePart) && StringUtils.isNotEmpty(charset)) {
-                    ((MimePart) primary).setText(msg, charset);
-                } else {
-                    primary.setText(msg);
-                }
+            if ((primary instanceof MimePart) && StringUtils.isNotEmpty(charset))
+            {
+                ((MimePart) primary).setText(msg, charset);
             }
             else
             {
-                getPrimaryBodyPart().setText(msg);
-            }
+                primary.setText(msg);
         }
         catch (MessagingException me)
         {
