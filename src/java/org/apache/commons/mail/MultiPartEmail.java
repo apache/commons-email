@@ -207,6 +207,7 @@ public class MultiPartEmail extends Email
             else
             {
                 primary.setText(msg);
+            }
         }
         catch (MessagingException me)
         {
@@ -493,15 +494,15 @@ public class MultiPartEmail extends Email
         return bodyPart;
     }
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     protected MimeMultipart createMimeMultipart()
     {
         MimeMultipart mmp = new MimeMultipart();
         return mmp;
     }
-    
+
     /**
      * @return boolHasAttachments
      * @since 1.0
@@ -519,18 +520,18 @@ public class MultiPartEmail extends Email
     {
         boolHasAttachments = b;
     }
-    
+
     /**
-     * 
+     *
      * @return
      */
     protected boolean isInitialized()
     {
         return initialized;
     }
-    
+
     /**
-     * 
+     *
      * @param b
      */
     protected void setInitialized(boolean b)
