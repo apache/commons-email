@@ -30,8 +30,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * A multipart email.
  *
@@ -192,7 +190,7 @@ public class MultiPartEmail extends Email
     public Email setMsg(String msg) throws EmailException
     {
         // throw exception on null message
-        if (StringUtils.isEmpty(msg))
+        if (EmailUtils.isEmpty(msg))
         {
             throw new EmailException("Invalid message supplied");
         }
@@ -200,7 +198,7 @@ public class MultiPartEmail extends Email
         {
             BodyPart primary = getPrimaryBodyPart();
 
-            if ((primary instanceof MimePart) && StringUtils.isNotEmpty(charset))
+            if ((primary instanceof MimePart) && EmailUtils.isNotEmpty(charset))
             {
                 ((MimePart) primary).setText(msg, charset);
             }
@@ -421,7 +419,7 @@ public class MultiPartEmail extends Email
         String disposition)
         throws EmailException
     {
-        if (StringUtils.isEmpty(name))
+        if (EmailUtils.isEmpty(name))
         {
             name = ds.getName();
         }

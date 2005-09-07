@@ -15,8 +15,6 @@
  */
 package org.apache.commons.mail;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * This class is used to send simple internet email messages without
  * attachments.
@@ -43,7 +41,7 @@ public class SimpleEmail extends Email
      */
     public Email setMsg(String msg) throws EmailException
     {
-        if (StringUtils.isEmpty(msg))
+        if (EmailUtils.isEmpty(msg))
         {
             throw new EmailException("Invalid message supplied");
         }

@@ -29,9 +29,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
-
 /**
  * An HTML multipart email.
  *
@@ -84,7 +81,7 @@ public class HtmlEmail extends MultiPartEmail
      */
     public HtmlEmail setTextMsg(String aText) throws EmailException
     {
-        if (StringUtils.isEmpty(aText))
+        if (EmailUtils.isEmpty(aText))
         {
             throw new EmailException("Invalid message supplied");
         }
@@ -104,7 +101,7 @@ public class HtmlEmail extends MultiPartEmail
      */
     public HtmlEmail setHtmlMsg(String aHtml) throws EmailException
     {
-        if (StringUtils.isEmpty(aHtml))
+        if (EmailUtils.isEmpty(aHtml))
         {
             throw new EmailException("Invalid message supplied");
         }
@@ -130,7 +127,7 @@ public class HtmlEmail extends MultiPartEmail
      */
     public Email setMsg(String msg) throws EmailException
     {
-        if (StringUtils.isEmpty(msg))
+        if (EmailUtils.isEmpty(msg))
         {
             throw new EmailException("Invalid message supplied");
         }
@@ -192,7 +189,7 @@ public class HtmlEmail extends MultiPartEmail
             mbp.setDataHandler(new DataHandler(new URLDataSource(url)));
             mbp.setFileName(name);
             mbp.setDisposition("inline");
-            String cid = RandomStringUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
+            String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
             mbp.addHeader("Content-ID", "<" + cid + ">");
             this.inlineImages.add(mbp);
             return cid;
@@ -247,12 +244,12 @@ public class HtmlEmail extends MultiPartEmail
         container.setSubType("mixed");
         subContainer = new MimeMultipart("alternative");
 
-        if (StringUtils.isNotEmpty(this.text))
+        if (EmailUtils.isNotEmpty(this.text))
         {
             msgText = new MimeBodyPart();
             subContainer.addBodyPart(msgText);
 
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgText.setContent(
                     this.text,
@@ -264,7 +261,7 @@ public class HtmlEmail extends MultiPartEmail
             }
         }
 
-        if (StringUtils.isNotEmpty(this.html))
+        if (EmailUtils.isNotEmpty(this.html))
         {
             if (this.inlineImages.size() > 0)
             {
@@ -277,7 +274,7 @@ public class HtmlEmail extends MultiPartEmail
                 subContainer.addBodyPart(msgHtml);
             }
 
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgHtml.setContent(
                     this.html,
@@ -319,10 +316,10 @@ public class HtmlEmail extends MultiPartEmail
         BodyPart msgText = null;
         BodyPart msgHtml = null;
 
-        if (StringUtils.isNotEmpty(this.text))
+        if (EmailUtils.isNotEmpty(this.text))
         {
             msgText = this.getPrimaryBodyPart();
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgText.setContent(
                     this.text,
@@ -334,7 +331,7 @@ public class HtmlEmail extends MultiPartEmail
             }
         }
 
-        if (StringUtils.isNotEmpty(this.html))
+        if (EmailUtils.isNotEmpty(this.html))
         {
             // if the txt part of the message was null, then the html part
             // will become the primary body part
@@ -356,7 +353,7 @@ public class HtmlEmail extends MultiPartEmail
                 }
             }
 
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgHtml.setContent(
                     this.html,

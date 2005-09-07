@@ -21,7 +21,13 @@
   </properties>
 
   <body>
-    <release version="1.0-rc6-SNAPSHOT" date="IN Subversion">
+    <release version="1.0-rc8-SNAPSHOT" date="in Subversion">
+      <action dev="henning" type="update" due-to="Stephen Colebourne" issue="36486">
+        Remove dependencies to commons-lang, allowing commons-email to exist without
+        any external dependencies in an J2EE 1.4+ environment.
+      </action>
+    </release>
+    <release version="1.0-rc6-SNAPSHOT" date="in Subversion">
       <action dev="epugh" type="update" due-to="Troy Poppe" issue="34056">
         Improve MultiPartEmail to ease extending it.
       </action>

@@ -24,7 +24,6 @@ import java.util.Hashtable;
 import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 
 /**
@@ -151,8 +150,8 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             testEmail.attach(attachment);
             testEmail.setSubType("subType");
 
-            if (StringUtils.isNotEmpty(this.strTestUser)
-                && StringUtils.isNotEmpty(this.strTestPasswd))
+            if (EmailUtils.isNotEmpty(this.strTestUser)
+                && EmailUtils.isNotEmpty(this.strTestPasswd))
             {
                 testEmail.setAuthentication(
                     this.strTestUser,

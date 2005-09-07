@@ -34,9 +34,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
-
 /**
  * The base class for all email messages.  This class sets the
  * sender's email & name, receiver's email & name, subject, and the
@@ -272,7 +269,7 @@ public abstract class Email
     public void setContent(Object aObject, String aContentType)
     {
         this.content = aObject;
-        if (!StringUtils.isNotEmpty(aContentType))
+        if (EmailUtils.isEmpty(aContentType))
         {
             this.contentType = null;
         }
@@ -358,12 +355,12 @@ public abstract class Email
             Properties properties = new Properties(System.getProperties());
             properties.setProperty(MAIL_TRANSPORT_PROTOCOL, SMTP);
 
-            if (!StringUtils.isNotEmpty(this.hostName))
+            if (EmailUtils.isEmpty(this.hostName))
             {
                 this.hostName = properties.getProperty(MAIL_HOST);
             }
 
-            if (!StringUtils.isNotEmpty(this.hostName))
+            if (EmailUtils.isEmpty(this.hostName))
             {
                 throw new EmailException(
                     "Cannot find valid hostname for mail session");
@@ -407,12 +404,12 @@ public abstract class Email
         try
         {
             // check name input
-            if (!StringUtils.isNotEmpty(name))
+            if (EmailUtils.isEmpty(name))
             {
                 name = email;
             }
 
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 address = new InternetAddress(email, name, this.charset);
             }
@@ -660,11 +657,11 @@ public abstract class Email
             String strName = (String) entry.getKey();
             String strValue = (String) entry.getValue();
 
-            if (!StringUtils.isNotEmpty(strName))
+            if (EmailUtils.isEmpty(strName))
             {
                 throw new IllegalArgumentException("name can not be null");
             }
-            if (!StringUtils.isNotEmpty(strValue))
+            if (EmailUtils.isEmpty(strValue))
             {
                 throw new IllegalArgumentException("value can not be null");
             }
@@ -683,11 +680,11 @@ public abstract class Email
      */
     public void addHeader(String name, String value)
     {
-        if (!StringUtils.isNotEmpty(name))
+        if (EmailUtils.isEmpty(name))
         {
             throw new IllegalArgumentException("name can not be null");
         }
-        if (!StringUtils.isNotEmpty(value))
+        if (EmailUtils.isEmpty(value))
         {
             throw new IllegalArgumentException("value can not be null");
         }
@@ -749,9 +746,9 @@ public abstract class Email
             this.getMailSession();
             this.message = new MimeMessage(this.session);
 
-            if (StringUtils.isNotEmpty(this.subject))
+            if (EmailUtils.isNotEmpty(this.subject))
             {
-                if (StringUtils.isNotEmpty(this.charset))
+                if (EmailUtils.isNotEmpty(this.charset))
                 {
                     this.message.setSubject(this.subject, this.charset);
                 }
@@ -857,7 +854,7 @@ public abstract class Email
     public String sendMimeMessage()
        throws EmailException
     {
-        Validate.notNull(this.message, "message");
+        EmailUtils.notNull(this.message, "message");
 
         try
         {
