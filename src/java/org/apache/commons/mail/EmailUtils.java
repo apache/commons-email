@@ -30,7 +30,7 @@ import java.util.Random;
  * </p>
  *
  * @author jakarta-commons
- * @version $Version: $
+ * @version $Id$
  *
  * @since 1.0
  */

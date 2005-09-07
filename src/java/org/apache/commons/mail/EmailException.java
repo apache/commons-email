@@ -28,7 +28,7 @@ import java.io.PrintWriter;
  *
  * @author jakarta-commons
  * @since 1.0
- * @version $Version: $
+ * @version $Id$
  */
 public class EmailException
         extends Exception
