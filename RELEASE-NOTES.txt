@@ -13,3 +13,25 @@ classes.
 
 This is the first release of Commons Email. However, the codebase is mature and
 stable and so this is no reason not to recommend it for production.
+
+
+REQUIREMENTS:
+
+J2SE environments
+-----------------
+
+Commons-Email requires at least javamail version 1.2 and should run
+with all versions above. Get it http://java.sun.com/products/javamail/
+
+Commons-Email also requires the Java activation framework. Get it from
+http://java.sun.com/products/javabeans/glasgow/jaf.html
+
+Commons-Email has been tested with JDK 1.3.1_16, JDK 1.4.2_09 and JDK 1.5.0_04.
+
+J2EE environments
+-----------------
+
+Commons-Email should be compatible with J2EE 1.3 and 1.4 compliant
+environments and run without additional requirements.
+
+
