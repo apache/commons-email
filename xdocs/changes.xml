@@ -22,6 +22,9 @@
 
   <body>
     <release version="1.0-rc8-SNAPSHOT" date="in Subversion">
+      <action dev="henning" type="update" due-to="Niall Pemberton" issue="36535">
+        Add an unit test to check for invalid addresses.
+      </action>
       <action dev="henning" type="update" due-to="Stephen Colebourne" issue="36486">
         Remove dependencies to commons-lang, allowing commons-email to exist without
         any external dependencies in an J2EE 1.4+ environment.
