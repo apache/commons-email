@@ -43,14 +43,13 @@ import com.dumbster.smtp.SmtpMessage;
 
 public class BaseEmailTestCase extends TestCase
 {
+    private static int mailServerPort = EmailConfiguration.MAIL_SERVER_PORT;
 
     /** The fake Dumbster email server */
     protected SimpleSmtpServer fakeMailServer = null;
 
     /** Mail server used for testing */
     protected String strTestMailServer = EmailConfiguration.MAIL_SERVER;
-    /** Mail server port used for testing */
-    protected int intTestMailServerPort = EmailConfiguration.MAIL_SERVER_PORT;
     /** From address for the test email */
     protected String strTestMailFrom = EmailConfiguration.TEST_FROM;
     /** Destination address for the test email */
@@ -69,6 +68,11 @@ public class BaseEmailTestCase extends TestCase
 
     /** Where to save email output **/
     private File emailOutputDir;
+
+    protected int getMailServerPort()
+    {
+        return mailServerPort;
+    }
 
     /** Test characters acceptable to email */
     protected String[] testCharsValid =
@@ -111,6 +115,7 @@ public class BaseEmailTestCase extends TestCase
         if (this.fakeMailServer != null && !this.fakeMailServer.isStopped())
         {
             this.fakeMailServer.stop();
+            assertTrue(this.fakeMailServer.isStopped());
         }
 
         this.fakeMailServer = null;
@@ -157,8 +162,12 @@ public class BaseEmailTestCase extends TestCase
     {
         if (this.fakeMailServer == null || this.fakeMailServer.isStopped())
         {
+            mailServerPort++;
+
             this.fakeMailServer =
-                SimpleSmtpServer.start(EmailConfiguration.MAIL_SERVER_PORT);
+                    SimpleSmtpServer.start(getMailServerPort());
+
+            assertFalse(this.fakeMailServer.isStopped());
 
             Date dtStartWait = new Date();
             while (this.fakeMailServer.isStopped())

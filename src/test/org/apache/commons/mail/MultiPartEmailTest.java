@@ -144,7 +144,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             MockMultiPartEmailConcrete testEmail =
                 new MockMultiPartEmailConcrete();
             testEmail.setHostName(this.strTestMailServer);
-            testEmail.setSmtpPort(this.intTestMailServerPort);
+            testEmail.setSmtpPort(this.getMailServerPort());
             testEmail.setFrom(this.strTestMailFrom);
             testEmail.addTo(this.strTestMailTo);
             testEmail.attach(attachment);

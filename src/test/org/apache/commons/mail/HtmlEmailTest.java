@@ -219,7 +219,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
         try
         {
-            /** File to used to test file attachmetns (Must be valid) */
+            /** File to used to test file attachments (Must be valid) */
             testFile = File.createTempFile("commons-email-testfile", ".txt");
         }
         catch (IOException e)
@@ -238,7 +238,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -309,7 +309,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -363,7 +363,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
         this.email = new MockHtmlEmailConcrete();
         this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.intTestMailServerPort);
+        this.email.setSmtpPort(this.getMailServerPort());
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
@@ -407,7 +407,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         this.email = new MockHtmlEmailConcrete();
         this.email.setHostName(this.strTestMailServer);
         this.email.setFrom(this.strTestMailFrom);
-        this.email.setSmtpPort(this.intTestMailServerPort);
+        this.email.setSmtpPort(this.getMailServerPort());
         this.email.addTo(this.strTestMailTo);
 
         if (this.strTestUser != null && this.strTestPasswd != null)

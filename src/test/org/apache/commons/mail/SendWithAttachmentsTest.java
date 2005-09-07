@@ -63,7 +63,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -154,7 +154,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 
 			this.email = new MockHtmlEmailConcrete();
 			this.email.setHostName(this.strTestMailServer);
-			this.email.setSmtpPort(this.intTestMailServerPort);
+			this.email.setSmtpPort(this.getMailServerPort());
 			this.email.setFrom(this.strTestMailFrom);
 			this.email.addTo(this.strTestMailTo);
 

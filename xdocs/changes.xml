@@ -22,6 +22,10 @@
 
   <body>
     <release version="1.0-rc8-SNAPSHOT" date="in Subversion">
+      <action dev="henning" type="fix">
+        Make sure that the unit tests don't fail under JDK 1.3.x with 
+        java.net.BindException: Address already in use
+      </action>
       <action dev="henning" type="update" due-to="Niall Pemberton" issue="36536">
         Replace our usage of address.validate() with simpler code that allows
         commons-email to work with javamail 1.2 / J2EE 1.3 environment. Added an

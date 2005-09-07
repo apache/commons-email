@@ -91,7 +91,7 @@ public class EmailTest extends BaseEmailTestCase
 
         properties.setProperty(
             Email.MAIL_PORT,
-            String.valueOf(this.intTestMailServerPort));
+            String.valueOf(this.getMailServerPort()));
         properties.setProperty(Email.MAIL_HOST, this.strTestMailServer);
         properties.setProperty(Email.MAIL_DEBUG, String.valueOf(false));
 
@@ -1490,7 +1490,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email = new MockEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
 
             this.email.send();
             fail("Should have thrown an exception");
@@ -1513,7 +1513,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email = new MockEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom("me@home.com");
             this.email.send();
             fail("Should have thrown an exception");
@@ -1536,7 +1536,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email = new MockEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
             this.email.setAuthentication(null, null);
