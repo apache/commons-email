@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.mail;
 
 import java.io.PrintStream;
@@ -29,8 +30,9 @@ import java.io.PrintWriter;
  * @since 1.0
  * @version $Version: $
  */
-public class EmailException extends Exception {
-
+public class EmailException
+        extends Exception
+{
     /** Serializable version identifier */
     static final long serialVersionUID = 5550674499282474616L;
 
@@ -39,14 +41,20 @@ public class EmailException extends Exception {
      */
     private static final boolean JDK_SUPPORTS_NESTED;
 
-    static {
+    static
+    {
         boolean flag = false;
-        try {
+
+        try
+        {
             Throwable.class.getDeclaredMethod("getCause", new Class[0]);
             flag = true;
-        } catch (NoSuchMethodException ex) {
+        }
+        catch (NoSuchMethodException ex)
+        {
             flag = false;
         }
+
         JDK_SUPPORTS_NESTED = flag;
     }
 
@@ -59,7 +67,8 @@ public class EmailException extends Exception {
      * Constructs a new <code>EmailException</code> with no
      * detail message.
      */
-    public EmailException() {
+    public EmailException()
+    {
         super();
         this.rootCause = null;
     }
@@ -70,7 +79,8 @@ public class EmailException extends Exception {
      *
      * @param msg  the error message.
      */
-    public EmailException(String msg) {
+    public EmailException(String msg)
+    {
         super(msg);
         this.rootCause = null;
     }
@@ -82,8 +92,9 @@ public class EmailException extends Exception {
      * @param rootCause  the exception or error that caused this exception
      *                   to be thrown.
      */
-    public EmailException(Throwable rootCause) {
-        super((rootCause == null ? null : rootCause.getMessage()));
+    public EmailException(Throwable rootCause)
+    {
+        super(((rootCause == null) ? null : rootCause.getMessage()));
         this.rootCause = rootCause;
     }
 
@@ -95,7 +106,8 @@ public class EmailException extends Exception {
      * @param rootCause  the exception or error that caused this exception
      *                   to be thrown.
      */
-    public EmailException(String msg, Throwable rootCause) {
+    public EmailException(String msg, Throwable rootCause)
+    {
         super(msg);
         this.rootCause = rootCause;
     }
@@ -105,14 +117,16 @@ public class EmailException extends Exception {
      *
      * @return  the cause of this throwable, or <code>null</code>
      */
-    public Throwable getCause() {
+    public Throwable getCause()
+    {
         return rootCause;
     }
 
     /**
      * Prints the stack trace of this exception to the standard error stream.
      */
-    public void printStackTrace() {
+    public void printStackTrace()
+    {
         printStackTrace(System.err);
     }
 
@@ -121,10 +135,13 @@ public class EmailException extends Exception {
      *
      * @param out  the <code>PrintStream</code> to use for output
      */
-    public void printStackTrace(PrintStream out) {
-        synchronized (out) {
+    public void printStackTrace(PrintStream out)
+    {
+        synchronized (out)
+        {
             PrintWriter pw = new PrintWriter(out, false);
             printStackTrace(pw);
+
             // Flush the PrintWriter before it's GC'ed.
             pw.flush();
         }
@@ -135,14 +152,17 @@ public class EmailException extends Exception {
      *
      * @param out  the <code>PrintWriter</code> to use for output
      */
-    public void printStackTrace(PrintWriter out) {
-        synchronized (out) {
+    public void printStackTrace(PrintWriter out)
+    {
+        synchronized (out)
+        {
             super.printStackTrace(out);
-            if (rootCause != null && JDK_SUPPORTS_NESTED == false) {
+
+            if ((rootCause != null) && (JDK_SUPPORTS_NESTED == false))
+            {
                 out.print("Caused by: ");
                 rootCause.printStackTrace(out);
             }
         }
     }
-
 }
