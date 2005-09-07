@@ -19,7 +19,7 @@
     <name>Commons Email</name>
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
-    <currentVersion>1.0-rc8-dev</currentVersion>
+    <currentVersion>1.0-rc8</currentVersion>
 
     <organization>
       <name>The Apache Software Foundation</name>
