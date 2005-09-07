@@ -409,16 +409,18 @@ public abstract class Email
                 name = email;
             }
 
+            // Using this instead of new InternetAddress(email, name, [charset]) makes
+            // commons-email usable with javamail 1.2 / J2EE 1.3
+            address = new InternetAddress(email);
+
             if (EmailUtils.isNotEmpty(this.charset))
             {
-                address = new InternetAddress(email, name, this.charset);
+                address.setPersonal(name, this.charset);
             }
             else
             {
-                address = new InternetAddress(email, name);
+                address.setPersonal(name);
             }
-
-            address.validate();
         }
         catch (Exception e)
         {
