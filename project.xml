@@ -19,7 +19,7 @@
     <name>Commons Email</name>
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
-    <currentVersion>1.0-rc9-dev</currentVersion>
+    <currentVersion>1.0</currentVersion>
 
     <organization>
       <name>The Apache Software Foundation</name>
@@ -46,26 +46,33 @@
     <shortDescription>Commons Email</shortDescription>
     <issueTrackingUrl>http://issues.apache.org/bugzilla/</issueTrackingUrl>
     <siteAddress>people.apache.org</siteAddress>
-    <siteDirectory>/www/jakarta.apache.org/commons/${pom.artifactId.substring(8)}/</siteDirectory>
-    <distributionDirectory>/www/jakarta.apache.org/builds/jakarta-commons/${pom.artifactId.substring(8)}/</distributionDirectory>
+    <siteDirectory>/www/jakarta.apache.org/commons/email/</siteDirectory>
+    <distributionSite>cvs.apache.org</distributionSite>
+    <distributionDirectory>/www/www.apache.org/dist/jakarta/commons/email/</distributionDirectory>
     <repository>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/commons/proper/${pom.artifactId.substring(8)}/trunk</connection>
-        <url>http://svn.apache.org/repos/asf/jakarta/commons/proper/${pom.artifactId.substring(8)}/trunk</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk</connection>
+        <url>http://svn.apache.org/viewcvs/jakarta/commons/proper/email/trunk</url>
     </repository>
-    <versions/>
+    <versions>
+      <version>
+        <name>1.0</name>
+        <id>1.0</id>
+        <tag>EMAIL_1_0</tag>
+      </version>
+    </versions>
     <branches/>
     <mailingLists>
         <mailingList>
             <name>Commons Dev List</name>
             <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
             <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/eyebrowse/SummarizeList?listName=commons-dev@jakarta.apache.org</archive>
+            <archive>http://mail-archives.apache.org/mod_mbox/jakarta-commons-dev/</archive>
         </mailingList>
         <mailingList>
             <name>Commons User List</name>
             <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
             <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/eyebrowse/SummarizeList?listName=commons-user@jakarta.apache.org</archive>
+            <archive>http://mail-archives.apache.org/mod_mbox/jakarta-commons-user/</archive>
         </mailingList>
     </mailingLists>
     <developers>
@@ -193,7 +200,7 @@
         <dependency>
             <groupId>maven-plugins</groupId>
             <artifactId>maven-findbugs-plugin</artifactId>
-            <version>0.9.1</version>
+            <version>0.9.2</version>
             <url>http://maven-plugins.sourceforge.net/maven-findbugs-plugin/</url>
             <type>plugin</type>
         </dependency>
