@@ -1,7 +1,7 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -24,9 +24,10 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.mail.HtmlEmail;
 
 /**
- * Extension of the HtmlEmail Class 
+ * Extension of the HtmlEmail Class
  * (used to allow testing only)
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */

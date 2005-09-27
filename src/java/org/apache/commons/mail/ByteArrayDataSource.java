@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import javax.activation.DataSource;
  * - a byte array<br>
  * - a String<br>
  *
+ * @since 1.0
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
  * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
@@ -40,14 +41,14 @@ import javax.activation.DataSource;
  */
 public class ByteArrayDataSource implements DataSource
 {
+    /** define the buffer size */
+    public static final int BUFFER_SIZE = 512;
+
     /** Stream containg the Data */
-    private ByteArrayOutputStream baos = null;
+    private ByteArrayOutputStream baos;
 
     /** Content-type. */
     private String type = "application/octet-stream";
-
-    /** define the buffer size */
-    public static final int BUFFER_SIZE = 512;
 
     /**
      * Create a datasource from a byte array.
@@ -55,6 +56,7 @@ public class ByteArrayDataSource implements DataSource
      * @param data A byte[].
      * @param aType A String.
      * @throws IOException IOException
+     * @since 1.0
      */
     public ByteArrayDataSource(byte[] data, String aType) throws IOException
     {
@@ -84,10 +86,47 @@ public class ByteArrayDataSource implements DataSource
      * @param aIs An InputStream.
      * @param aType A String.
      * @throws IOException IOException
+     * @since 1.0
      */
     public ByteArrayDataSource(InputStream aIs, String aType) throws IOException
     {
         this.byteArrayDataSource(aIs, aType);
+    }
+
+    /**
+     * Create a datasource from a String.
+     *
+     * @param data A String.
+     * @param aType A String.
+     * @throws IOException IOException
+     * @since 1.0
+     */
+    public ByteArrayDataSource(String data, String aType) throws IOException
+    {
+        this.type = aType;
+
+        try
+        {
+            baos = new ByteArrayOutputStream();
+
+            // Assumption that the string contains only ASCII
+            // characters!  Else just pass in a charset into this
+            // constructor and use it in getBytes().
+            baos.write(data.getBytes("iso-8859-1"));
+            baos.flush();
+            baos.close();
+        }
+        catch (UnsupportedEncodingException uex)
+        {
+            throw new IOException("The Character Encoding is not supported.");
+        }
+        finally
+        {
+            if (baos != null)
+            {
+                baos.close();
+            }
+        }
     }
 
     /**
@@ -144,49 +183,17 @@ public class ByteArrayDataSource implements DataSource
         }
     }
 
-    /**
-     * Create a datasource from a String.
-     *
-     * @param data A String.
-     * @param aType A String.
-     * @throws IOException IOException
-     */
-    public ByteArrayDataSource(String data, String aType) throws IOException
-    {
-        this.type = aType;
 
-        try
-        {
-            baos = new ByteArrayOutputStream();
-
-            // Assumption that the string contains only ASCII
-            // characters!  Else just pass in a charset into this
-            // constructor and use it in getBytes().
-            baos.write(data.getBytes("iso-8859-1"));
-            baos.flush();
-            baos.close();
-        }
-        catch (UnsupportedEncodingException uex)
-        {
-            throw new IOException("The Character Encoding is not supported.");
-        }
-        finally
-        {
-            if (baos != null)
-            {
-                baos.close();
-            }
-        }
-    }
 
     /**
      * Get the content type.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getContentType()
     {
-        return (type == null ? "application/octet-stream" : type);
+        return type == null ? "application/octet-stream" : type;
     }
 
     /**
@@ -194,6 +201,7 @@ public class ByteArrayDataSource implements DataSource
      *
      * @return An InputStream.
      * @throws IOException IOException
+     * @since 1.0
      */
     public InputStream getInputStream() throws IOException
     {
@@ -208,6 +216,7 @@ public class ByteArrayDataSource implements DataSource
      * Get the name.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getName()
     {
@@ -218,9 +227,9 @@ public class ByteArrayDataSource implements DataSource
      * Get the OutputStream to write to
      *
      * @return  An OutputStream
-     * @throws  IOException IOException
+     * @since 1.0
      */
-    public OutputStream getOutputStream() throws IOException
+    public OutputStream getOutputStream()
     {
         baos = new ByteArrayOutputStream();
         return baos;

@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!--
-   Copyright 2003-2004 The Apache Software Foundation
+ Copyright 2001-2005 The Apache Software Foundation
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
 -->
 <document>
   <properties>
@@ -58,7 +58,7 @@ email.send();
         class to reference your attachments.
       </p>
       <p>
-        In the following exmaple, we will create an attachment for a picture.
+        In the following example, we will create an attachment for a picture.
         We will then attach the picture to the email and send it.
       </p>
       <source>
@@ -127,7 +127,7 @@ email.send();
         if the reciepient does not support HTML email, and add inline images.
       </p>
       <p>
-        In this exmaple, we will send an email message with formatted HTML
+        In this example, we will send an email message with formatted HTML
         content with an inline image.
       </p>
       <source>
@@ -205,20 +205,20 @@ email.send();
         Technical notes: When SMTP servers cannot deliver mail, they do not pay any attention
         to the contents of the message to determine where the error notification should be
         sent.  Rather, they refer to the SMTP "envelope sender" value.  JavaMail sets this
-        value according to the value of the <code>mail.smtp.from</code> property on the 
-        JavaMail <code>Session</code>.  (Commons Email initializes the JavaMail 
+        value according to the value of the <code>mail.smtp.from</code> property on the
+        JavaMail <code>Session</code>.  (Commons Email initializes the JavaMail
         <code>Session</code> using <code>System.getProperties()</code>)
         If this property has not been set, then JavaMail
         uses the "from" address.  If your email bean has the <code>bounceAddress</code>
         property set, then Commons Email uses it to set the value of <code>mail.smtp.from</code>
-        when the <code>Session</code> is initialized, overriding any other value 
+        when the <code>Session</code> is initialized, overriding any other value
         which might have been set.
       </p>
       <p>
-        <em>Note: </em> This is the only way to control the handling of bounced email.  
+        <em>Note: </em> This is the only way to control the handling of bounced email.
         Specifically, the "Errors-to:" SMTP header is deprecated and cannot be trusted
-        to control how a bounced message will be handled.  Also note that it is considered bad 
-        practice to send email with an untrusted "from" address unless you also set the 
+        to control how a bounced message will be handled.  Also note that it is considered bad
+        practice to send email with an untrusted "from" address unless you also set the
         bounce address.  If your application allows users to enter an address which is used
         as the "from" address on an email, you should be sure to set the bounce address
         to a known good address.

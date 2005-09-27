@@ -1,7 +1,7 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -24,12 +24,12 @@ import java.util.Hashtable;
 import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 
 /**
  * JUnit test case for MultiPartEmail Class
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
@@ -104,7 +104,6 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
-        String badTest = null;
         for (int i = 0; i < testCharsNotValid.length; i++)
         {
             try
@@ -145,14 +144,14 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             MockMultiPartEmailConcrete testEmail =
                 new MockMultiPartEmailConcrete();
             testEmail.setHostName(this.strTestMailServer);
-            testEmail.setSmtpPort(this.intTestMailServerPort);
+            testEmail.setSmtpPort(this.getMailServerPort());
             testEmail.setFrom(this.strTestMailFrom);
             testEmail.addTo(this.strTestMailTo);
             testEmail.attach(attachment);
             testEmail.setSubType("subType");
 
-            if (StringUtils.isNotEmpty(this.strTestUser)
-                && StringUtils.isNotEmpty(this.strTestPasswd))
+            if (EmailUtils.isNotEmpty(this.strTestUser)
+                && EmailUtils.isNotEmpty(this.strTestPasswd))
             {
                 testEmail.setAuthentication(
                     this.strTestUser,
@@ -206,7 +205,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             e.printStackTrace();
             fail("Unexpected exception thrown");
         }
-        
+
         // ====================================================================
         // Test Exceptions
         // ====================================================================
@@ -434,7 +433,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testAddPart() throws Exception
@@ -460,11 +459,11 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 .getBodyPart(0)
                 .getDataHandler()
                 .getContent());
-   
+
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testAddPart2() throws Exception
@@ -487,7 +486,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
                 .getContentType()
                 .indexOf(strSubtype)
                 != -1);
-   
+
     }
 
     /** @todo implement test for GetContainer */

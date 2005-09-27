@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import javax.mail.PasswordAuthentication;
  * This is a very simple authentication object that can be used for any
  * transport needing basic userName and password type authentication.
  *
+ * @since 1.0
  * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
  * @version $Id$
  */
@@ -35,6 +36,7 @@ public class DefaultAuthenticator extends Authenticator
      *
      * @param userName user name to use when authentication is requested
      * @param password password to use when authentication is requested
+     * @since 1.0
      */
     public DefaultAuthenticator(String userName, String password)
     {
@@ -47,6 +49,7 @@ public class DefaultAuthenticator extends Authenticator
      *
      * @return A <code>PasswordAuthentication</code> object containing the
      *         login information.
+     * @since 1.0
      */
     protected PasswordAuthentication getPasswordAuthentication()
     {

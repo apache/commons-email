@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-   Copyright 2003-2004 The Apache Software Foundation
+ Copyright 2001-2005 The Apache Software Foundation
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
 -->
 
 <!DOCTYPE project SYSTEM '../../commons-build/menus/menus.dtd'>
@@ -20,9 +20,9 @@
   <title>Commons&#xA0;Email</title>
   <body>
     <links>
-      <item name="Jakarta"                   
+      <item name="Jakarta"
             href="http://jakarta.apache.org"/>
-      <item name="Jakarta Commons"                   
+      <item name="Jakarta Commons"
             href="http://jakarta.apache.org/commons/"/>
     </links>
     <menu name="Commons&#xA0;Email">
@@ -31,7 +31,8 @@
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team" href="/team-list.html"/>
-      <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons/email/"/>
+      <item name="SVN" href="http://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk/"/>
+      <item name="View SVN" href="http://svn.apache.org/viewcvs.cgi/jakarta/commons/proper/email/trunk/"/>
     </menu>
     &common-menus;
   </body>

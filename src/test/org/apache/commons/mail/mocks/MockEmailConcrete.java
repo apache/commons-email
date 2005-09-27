@@ -1,7 +1,7 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -15,8 +15,8 @@
  */
 package org.apache.commons.mail.mocks;
 
-import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.Authenticator;
 import javax.mail.Session;
@@ -28,10 +28,11 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 
 /**
- * Concrete Implementation on the Abstract Email 
+ * Concrete Implementation on the Abstract Email
  * Class (used to allow testing only).  Supplies
  * getters for methods that normally only have setters.
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
@@ -42,11 +43,10 @@ public class MockEmailConcrete extends Email
      * Not Implemented, should be implemented in subclasses of Email
      * @param msg The email message
      * @return Email msg.
-     * @throws EmailException EmailException
      */
-    public Email setMsg(String msg) throws EmailException
+    public Email setMsg(String msg)
     {
-        // This abstract method should be tested in the concrete 
+        // This abstract method should be tested in the concrete
         // implementation classes only.
         return null;
     }
@@ -128,7 +128,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return headers
      */
-    public Hashtable getHeaders()
+    public Map getHeaders()
     {
         return this.headers;
     }

@@ -1,29 +1,46 @@
 <?xml version="1.0"?>
 
 <!--
-Copyright 2002-2005 The Apache Software Foundation.
- 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+ Copyright 2001-2005 The Apache Software Foundation
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
      http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
 -->
 
-<project default="jar:jar">
+<project
+  xmlns:ant="jelly:ant"
+  xmlns:j="jelly:core"
+  default="jar:jar">
 
   <!-- ================================================================== -->
   <!-- START : C O M M O N S - B U I L D                                  -->
   <!-- ================================================================== -->
   <!-- Required: Look and Feel for documentation within distributions     -->
   <!-- ================================================================== -->
-  <postGoal name="xdoc:copy-resources">  
+  <preGoal name="xdoc:init">
+   <ant:available type="dir" property="commons.basedir.available" file="${basedir}/../commons-build" />
+   <j:if test="${context.getVariable('commons.basedir.available') == null}">
+    <fail>
+------------------------------------------------------------------------------
+| if you want to build xdocs or the site, you must
+| check out the 'commons-build' module from
+| http://svn.apache.org/repos/asf/jakarta/commons/proper/commons-build/trunk/
+| and put it in a directory next to commons-email
+------------------------------------------------------------------------------
+    </fail>
+   </j:if>
+  </preGoal>
+
+  <postGoal name="xdoc:copy-resources">
     <copy todir="${basedir}/target/docs/style/" failonerror="false">
       <fileset dir="${basedir}/../commons-build/xdocs/style">
       	<include name='**/*'/>
@@ -34,8 +51,8 @@ limitations under the License.
   <!-- ================================================================== -->
   <!-- END: C O M M O N S - B U I L D                                     -->
   <!-- ================================================================== -->
-  
-  <!-- Ensures that the conf directory and NOTICE.txt are included in the 
+
+  <!-- Ensures that the conf directory and NOTICE.txt are included in the
        source distro.
    -->
   <postGoal name="dist:prepare-src-filesystem">
@@ -46,16 +63,27 @@ limitations under the License.
     </copy>
     <copy todir="${maven.dist.src.assembly.dir}">
       <fileset file="${basedir}/NOTICE.txt"/>
+      <fileset file="${basedir}/RELEASE-NOTES.txt"/>
     </copy>
   </postGoal>
-  
+
   <!-- Ensures that NOTICE.txt is added to the binary distro -->
   <preGoal name="dist:build-bin">
     <copy todir="${maven.dist.bin.assembly.dir}">
       <fileset file="${basedir}/NOTICE.txt"/>
+      <fileset file="${basedir}/RELEASE-NOTES.txt"/>
+    </copy>
+
+    <!-- include listed dependencies that we are allowed to distribute-->
+    <j:forEach var="dep" items="${pom.dependencies}">
+      <j:if test="${dep.getProperty('dist.bundle') != null &amp;&amp; dep.getProperty('dist.bundle').equalsIgnoreCase('true')}">
+        <copy todir="${maven.dist.bin.assembly.dir}/lib"
+              file="${maven.repo.local}/${dep.getArtifactDirectory()}/jars/${dep.getArtifact()}"/>
+      </j:if>
+    </j:forEach>
+    <copy todir="${maven.dist.bin.assembly.dir}/lib">
+      <fileset file="${basedir}/conf/LIBS-NOTICE.txt"/>
     </copy>
   </preGoal>
-  
+
 </project>
-
-

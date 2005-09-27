@@ -1,4 +1,19 @@
 <?xml version="1.0"?>
+<!--
+ Copyright 2001-2005 The Apache Software Foundation
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
 <document>
   <properties>
     <title>Changes</title>
@@ -6,51 +21,81 @@
   </properties>
 
   <body>
-    <release version="1.0" date="2005-3-18"> 
+    <release version="1.0" date="2005-09-27"/>
+    <release version="1.0-rc8" date="2005-09-07">
+      <action dev="henning" type="fix">
+        Make sure that the unit tests don't fail under JDK 1.3.x with 
+        java.net.BindException: Address already in use
+      </action>
+      <action dev="henning" type="update" due-to="Niall Pemberton" issue="36536">
+        Replace our usage of address.validate() with simpler code that allows
+        commons-email to work with javamail 1.2 / J2EE 1.3 environment. Added an
+        unit test which verifies the behaviour.
+      </action>
+      <action dev="henning" type="update" due-to="Niall Pemberton" issue="36535">
+        Add an unit test to check for invalid addresses.
+      </action>
+      <action dev="henning" type="update" due-to="Stephen Colebourne" issue="36486">
+        Remove dependencies to commons-lang, allowing commons-email to exist without
+        any external dependencies in an J2EE 1.4+ environment.
+      </action>
+    </release>
+    <release version="1.0-rc6-SNAPSHOT" date="in Subversion">
+      <action dev="epugh" type="update" due-to="Troy Poppe" issue="34056">
+        Improve MultiPartEmail to ease extending it.
+      </action>
+      <action dev="sgoeschl" type="update">
+        Refactoring the code to seperate creation of a MimeMessage and sending it.
+      </action>
+      <action dev="dion" type="update">Add serialVersionUID to EmailException</action>
+      <action dev="dion" type="update">Use Dumbster 1.6 compiled with jdk13 for testing</action>
+      <action dev="dion" type="fix" issue="34919" due-to="Eric Spiegelberg">
+        Refactor Hashtable usage to Map
+      </action>
       <action dev="epugh" type="add" due-to="Mark Lowe" issue="32094">
         Email throws EmailException wrapping underlying JavaMail exception
-      </action>         
+      </action>
       <action dev="epugh" type="add" due-to="Corey Scott" issue="32410">
         Change port for dumbster from 25 to 2500 to use unreserved port.
-      </action>              
+      </action>
       <action dev="epugh" type="add" due-to="Corey Scott" issue="32260">
         Add back in ByteArrayDataSource.
       </action>
       <action dev="epugh" type="remove">
         Removed deprecated MailMessage and ByteArrayDataSource.
-      </action>         
+      </action>
       <action dev="epugh" type="add">
         Output test emails to /target/test-emails as .txt files for manual
         review.
-      </action>          
+      </action>
       <action dev="epugh" type="add" due-to="Mark Lowe" issue="31904">
         Inline attatchment encoding was incorrect.
-      </action>          
+      </action>
       <action dev="epugh" type="add">
         Integrate our own checkstyle config instead of using Turbine style only.
-      </action>         
+      </action>
       <action dev="epugh" type="add" due-to="Joe Germuska" issue="18968">
         Clone the System.getProperties() call instead of putting random properties
         into it.
-      </action>         
+      </action>
       <action dev="epugh" type="add" issue="16859">
         Can't supply a javax.mail.Session to Commons Email component
-      </action>           
+      </action>
       <action dev="epugh" type="add" issue="30973" due-to="Corey Scott">
         HTML email with plain text alternative and attachments
-      </action>         
+      </action>
       <action dev="epugh" type="add" issue="31762" due-to="Corey Scott">
         Integrate use of Dumbster to supply a fake SMTP server.
-      </action>           
+      </action>
       <action dev="epugh" type="add" due-to="Corey Scott">
         Lots of new unit tests and cleanup of code.
-      </action>    
+      </action>
       <action dev="epugh" type="update">
         Update dependencies to latest available.
       </action>
       <action dev="germuska" type="add" issue="18968">
         Support the delivery of bounced messages to an address other than "from".
-      </action>           
+      </action>
     </release>
   </body>
 </document>

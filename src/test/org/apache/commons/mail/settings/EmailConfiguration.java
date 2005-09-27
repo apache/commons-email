@@ -1,7 +1,7 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,7 +16,8 @@
 package org.apache.commons.mail.settings;
 
 /**
- * @author Eric Pugh 
+ * @since 1.0
+ * @author Eric Pugh
  * @version $Revision$ $Date$
  */
 public final class EmailConfiguration
@@ -34,8 +35,9 @@ public final class EmailConfiguration
     /** */
     public static final String TEST_PASSWD = "passwd";
     /** */
-    public static final String TEST_URL =
-        "http://www.apache.org/images/asf_logo_wide.gif";
+    public static final String TEST_URL = EmailConfiguration.class
+        .getResource("/images/asf_logo_wide.gif")
+        .toExternalForm();
     /** Amount of time to wait for Dumbster to start up */
     public static final int TIME_OUT = 500;
 }

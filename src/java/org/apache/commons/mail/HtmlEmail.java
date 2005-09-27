@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
-
 /**
  * An HTML multipart email.
  *
@@ -40,23 +37,27 @@ import org.apache.commons.lang.StringUtils;
  * email clients.
  *
  * <p>This class also inherits from MultiPartEmail, so it is easy to
- * add attachents to the email.
+ * add attachments to the email.
  *
  * <p>To send an email in HTML, one should create a HtmlEmail, then
  * use the setFrom, addTo, etc. methods.  The HTML content can be set
- * with the setHtmlMsg method.  The alternate text content can be set
+ * with the setHtmlMsg method.  The alternative text content can be set
  * with setTextMsg.
  *
  * <p>Either the text or HTML can be omitted, in which case the "main"
  * part of the multipart becomes whichever is supplied rather than a
  * multipart/alternative.
  *
+ * @since 1.0
  * @author <a href="mailto:unknown">Regis Koenig</a>
  * @author <a href="mailto:sean@informage.net">Sean Legassick</a>
  * @version $Id$
  */
 public class HtmlEmail extends MultiPartEmail
 {
+    /** Definition of the length of generated CID's */
+    public static final int CID_LENGTH = 10;
+
     /**
      * Text part of the message.  This will be used as alternative text if
      * the email client does not support HTML messages.
@@ -66,11 +67,8 @@ public class HtmlEmail extends MultiPartEmail
     /** Html part of the message */
     protected String html;
 
-    /** Embeded images */
+    /** Embedded images */
     protected List inlineImages = new ArrayList();
-
-    /** Defintion of the length of generated CID's */
-    public static final int CID_LENGTH = 10;
 
     /**
      * Set the text content.
@@ -78,11 +76,12 @@ public class HtmlEmail extends MultiPartEmail
      * @param aText A String.
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
+     * @since 1.0
      */
     public HtmlEmail setTextMsg(String aText) throws EmailException
     {
-        if (StringUtils.isEmpty(aText))
+        if (EmailUtils.isEmpty(aText))
         {
             throw new EmailException("Invalid message supplied");
         }
@@ -97,15 +96,16 @@ public class HtmlEmail extends MultiPartEmail
      * @param aHtml A String.
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
+     * @since 1.0
      */
     public HtmlEmail setHtmlMsg(String aHtml) throws EmailException
     {
-        if (StringUtils.isEmpty(aHtml))
+        if (EmailUtils.isEmpty(aHtml))
         {
             throw new EmailException("Invalid message supplied");
         }
-        
+
         this.html = aHtml;
         return this;
     }
@@ -122,11 +122,12 @@ public class HtmlEmail extends MultiPartEmail
      * @param msg A String.
      * @return An Email.
      * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for defintions
+     *  for definitions
+     * @since 1.0
      */
     public Email setMsg(String msg) throws EmailException
     {
-        if (StringUtils.isEmpty(msg))
+        if (EmailUtils.isEmpty(msg))
         {
             throw new EmailException("Invalid message supplied");
         }
@@ -164,8 +165,9 @@ public class HtmlEmail extends MultiPartEmail
      * @param name The name that will be set in the filename header
      * field.
      * @return A String with the Content-ID of the file.
-     * @throws EmailException when URL suplpied is invalid
-     *  also see javax.mail.internet.MimeBodyPart for defintions
+     * @throws EmailException when URL supplied is invalid
+     *  also see javax.mail.internet.MimeBodyPart for definitions
+     * @since 1.0
      */
     public String embed(URL url, String name) throws EmailException
     {
@@ -187,28 +189,28 @@ public class HtmlEmail extends MultiPartEmail
             mbp.setDataHandler(new DataHandler(new URLDataSource(url)));
             mbp.setFileName(name);
             mbp.setDisposition("inline");
-            String cid = RandomStringUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
+            String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
             mbp.addHeader("Content-ID", "<" + cid + ">");
             this.inlineImages.add(mbp);
-            return cid;            
-        } 
+            return cid;
+        }
         catch (MessagingException me)
         {
             throw new EmailException(me);
         }
-        
     }
 
     /**
-     * Does the work of actually sending the email.
+     * Does the work of actually building the email.
      *
      * @exception EmailException if there was an error.
+     * @since 1.0
      */
-    public void send() throws EmailException
+    public void buildMimeMessage() throws EmailException
     {
         try
         {
-            // if the email has attachments then the base type is mixed, 
+            // if the email has attachments then the base type is mixed,
             // otherwise it should be related
             if (this.isBoolHasAttachments())
             {
@@ -224,7 +226,7 @@ public class HtmlEmail extends MultiPartEmail
         {
             throw new EmailException(me);
         }
-        super.send();
+        super.buildMimeMessage();
     }
 
     /**
@@ -235,19 +237,19 @@ public class HtmlEmail extends MultiPartEmail
     {
         MimeMultipart container = this.getContainer();
         MimeMultipart subContainer = null;
-		MimeMultipart subContainerHTML = new MimeMultipart("related");
+        MimeMultipart subContainerHTML = new MimeMultipart("related");
         BodyPart msgHtml = null;
         BodyPart msgText = null;
 
         container.setSubType("mixed");
         subContainer = new MimeMultipart("alternative");
 
-        if (StringUtils.isNotEmpty(this.text))
+        if (EmailUtils.isNotEmpty(this.text))
         {
             msgText = new MimeBodyPart();
             subContainer.addBodyPart(msgText);
 
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgText.setContent(
                     this.text,
@@ -259,20 +261,20 @@ public class HtmlEmail extends MultiPartEmail
             }
         }
 
-        if (StringUtils.isNotEmpty(this.html))
+        if (EmailUtils.isNotEmpty(this.html))
         {
-			if (this.inlineImages.size() > 0)
-			{
-				msgHtml = new MimeBodyPart();
-				subContainerHTML.addBodyPart(msgHtml);
-			}
-			else
-			{
-				msgHtml = new MimeBodyPart();
-				subContainer.addBodyPart(msgHtml);
-			}
+            if (this.inlineImages.size() > 0)
+            {
+                msgHtml = new MimeBodyPart();
+                subContainerHTML.addBodyPart(msgHtml);
+            }
+            else
+            {
+                msgHtml = new MimeBodyPart();
+                subContainer.addBodyPart(msgHtml);
+            }
 
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgHtml.setContent(
                     this.html,
@@ -284,20 +286,20 @@ public class HtmlEmail extends MultiPartEmail
             }
 
             Iterator iter = this.inlineImages.iterator();
-			while (iter.hasNext())
-			{
-				subContainerHTML.addBodyPart((BodyPart) iter.next());
-			}
+            while (iter.hasNext())
+            {
+                subContainerHTML.addBodyPart((BodyPart) iter.next());
+            }
         }
 
         // add sub containers to message
-        this.addPart(subContainer);
+        this.addPart(subContainer, 0);
 
-		if (this.inlineImages.size() > 0)
-		{
-			// add sub container to message
-			this.addPart(subContainerHTML);
-		}
+        if (this.inlineImages.size() > 0)
+        {
+            // add sub container to message
+            this.addPart(subContainerHTML, 1);
+        }
     }
 
     /**
@@ -314,10 +316,10 @@ public class HtmlEmail extends MultiPartEmail
         BodyPart msgText = null;
         BodyPart msgHtml = null;
 
-        if (StringUtils.isNotEmpty(this.text))
+        if (EmailUtils.isNotEmpty(this.text))
         {
             msgText = this.getPrimaryBodyPart();
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgText.setContent(
                     this.text,
@@ -329,7 +331,7 @@ public class HtmlEmail extends MultiPartEmail
             }
         }
 
-        if (StringUtils.isNotEmpty(this.html))
+        if (EmailUtils.isNotEmpty(this.html))
         {
             // if the txt part of the message was null, then the html part
             // will become the primary body part
@@ -347,11 +349,11 @@ public class HtmlEmail extends MultiPartEmail
                 else
                 {
                     msgHtml = new MimeBodyPart();
-                    container.addBodyPart(msgHtml);
+                    container.addBodyPart(msgHtml, 1);
                 }
             }
 
-            if (StringUtils.isNotEmpty(this.charset))
+            if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgHtml.setContent(
                     this.html,

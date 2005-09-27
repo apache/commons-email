@@ -1,7 +1,7 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -35,6 +35,7 @@ import com.dumbster.smtp.SmtpMessage;
 /**
  * Base test case for Email test classes
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @author <a href="mailto:epugh@opensourceconnections.com">Eric Pugh</a>
  * @version $Id$
@@ -42,14 +43,13 @@ import com.dumbster.smtp.SmtpMessage;
 
 public class BaseEmailTestCase extends TestCase
 {
+    private static int mailServerPort = EmailConfiguration.MAIL_SERVER_PORT;
 
     /** The fake Dumbster email server */
     protected SimpleSmtpServer fakeMailServer = null;
 
     /** Mail server used for testing */
     protected String strTestMailServer = EmailConfiguration.MAIL_SERVER;
-    /** Mail server port used for testing */
-    protected int intTestMailServerPort = EmailConfiguration.MAIL_SERVER_PORT;
     /** From address for the test email */
     protected String strTestMailFrom = EmailConfiguration.TEST_FROM;
     /** Destination address for the test email */
@@ -65,25 +65,30 @@ public class BaseEmailTestCase extends TestCase
     public static final int BODY_END_PAD = 3;
     /** Padding at start of body added by dumbser/send */
     public static final int BODY_START_PAD = 2;
-    
+
     /** Where to save email output **/
     private File emailOutputDir;
 
-    /** Test characters acceptable to email */
-    protected String[] testCharsValid = 
+    protected int getMailServerPort()
     {
-            " ", 
-            "a", 
-            "A", 
-            "\uc5ec", 
-            "0123456789", 
-            "012345678901234567890", 
+        return mailServerPort;
+    }
+
+    /** Test characters acceptable to email */
+    protected String[] testCharsValid =
+    {
+            " ",
+            "a",
+            "A",
+            "\uc5ec",
+            "0123456789",
+            "012345678901234567890",
             "\n"
     };
-    
+
     /** Array of test strings */
-    protected String[] testCharsNotValid = { "", null };    
-    
+    protected String[] testCharsNotValid = { "", null };
+
     /**
      * @param name name
      */
@@ -110,13 +115,14 @@ public class BaseEmailTestCase extends TestCase
         if (this.fakeMailServer != null && !this.fakeMailServer.isStopped())
         {
             this.fakeMailServer.stop();
+            assertTrue(this.fakeMailServer.isStopped());
         }
 
         this.fakeMailServer = null;
     }
 
     /**
-     * 
+     *
      * @param email email
      * @throws IOException Exception
      */
@@ -137,21 +143,18 @@ public class BaseEmailTestCase extends TestCase
     {
         assertTrue(this.fakeMailServer.getReceivedEmailSize() >= intMsgNo);
         Iterator emailIter = fakeMailServer.getReceivedEmail();
-        SmtpMessage emailMessage = null; 
+        SmtpMessage emailMessage = null;
         for (int intCurMsg = 0; intCurMsg < intMsgNo; intCurMsg++)
         {
             emailMessage = (SmtpMessage) emailIter.next();
         }
-        
+
         if (emailMessage != null)
         {
-            return emailMessage.toString();        
+            return emailMessage.toString();
         }
-        else
-        {
-            fail("Message note found");
-            return "";
-        }
+        fail("Message note found");
+        return "";
     }
 
     /** */
@@ -159,8 +162,12 @@ public class BaseEmailTestCase extends TestCase
     {
         if (this.fakeMailServer == null || this.fakeMailServer.isStopped())
         {
+            mailServerPort++;
+
             this.fakeMailServer =
-                SimpleSmtpServer.start(EmailConfiguration.MAIL_SERVER_PORT);
+                    SimpleSmtpServer.start(getMailServerPort());
+
+            assertFalse(this.fakeMailServer.isStopped());
 
             Date dtStartWait = new Date();
             while (this.fakeMailServer.isStopped())
@@ -238,7 +245,7 @@ public class BaseEmailTestCase extends TestCase
                 bccAdd.toString().indexOf(emailMessage.getHeaderValue("Bcc"))
                     != -1);
         }
-        
+
         return emailMessage;
     }
 
@@ -280,12 +287,12 @@ public class BaseEmailTestCase extends TestCase
         // get sent email content
         String strSentContent =
             content.getContentType();
-        // get received email content (chop off the auto-added \n 
+        // get received email content (chop off the auto-added \n
         // and -- (front and end)
         String strMessageBody =
             emailMessage.getBody().substring(
                 BaseEmailTestCase.BODY_START_PAD,
-                emailMessage.getBody().length() 
+                emailMessage.getBody().length()
                     - BaseEmailTestCase.BODY_END_PAD);
         assertTrue(strMessageBody.indexOf(strSentContent) != -1);
     }

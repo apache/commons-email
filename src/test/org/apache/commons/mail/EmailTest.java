@@ -1,7 +1,7 @@
-	/*
- * Copyright 2001-2004 The Apache Software Foundation
+/*
+ * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -34,6 +34,7 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
 /**
  * JUnit test case for Email Class
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
@@ -79,7 +80,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testGetSetSession() throws Exception
@@ -90,7 +91,7 @@ public class EmailTest extends BaseEmailTestCase
 
         properties.setProperty(
             Email.MAIL_PORT,
-            String.valueOf(this.intTestMailServerPort));
+            String.valueOf(this.getMailServerPort()));
         properties.setProperty(Email.MAIL_HOST, this.strTestMailServer);
         properties.setProperty(Email.MAIL_DEBUG, String.valueOf(false));
 
@@ -98,7 +99,7 @@ public class EmailTest extends BaseEmailTestCase
 
         this.email.setMailSession(mySession);
         assertEquals(mySession, this.email.getMailSession());
-      
+
     }
 
     /** */
@@ -109,7 +110,7 @@ public class EmailTest extends BaseEmailTestCase
         String strPassword = "user.pwd";
         this.email.setAuthentication(strUsername, strPassword);
 
-        // this is cast into DefaultAuthenticator for convenience 
+        // this is cast into DefaultAuthenticator for convenience
         // and give us access to the getPasswordAuthentication fn
         DefaultAuthenticator retrievedAuth =
             (DefaultAuthenticator) this.email.getAuthenticator();
@@ -135,7 +136,7 @@ public class EmailTest extends BaseEmailTestCase
             new DefaultAuthenticator(strUsername, strPassword);
         this.email.setAuthenticator(authenicator);
 
-        // this is cast into DefaultAuthenticator for convenience 
+        // this is cast into DefaultAuthenticator for convenience
         // and give us access to the getPasswordAuthentication fn
         DefaultAuthenticator retrievedAuth =
             (DefaultAuthenticator) this.email.getAuthenticator();
@@ -279,7 +280,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSetFrom() throws Exception
@@ -310,7 +311,7 @@ public class EmailTest extends BaseEmailTestCase
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
 
-            // set from 
+            // set from
             this.email.setFrom(ARR_VALID_EMAILS[i]);
 
             // retrieve and verify
@@ -319,7 +320,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSetFromWithEnconding() throws Exception
@@ -332,7 +333,7 @@ public class EmailTest extends BaseEmailTestCase
             InternetAddress inetExpected =
                 new InternetAddress("me@home.com", "me@home.com");
 
-            // set from 
+            // set from
             this.email.setCharset(Email.ISO_8859_1);
             this.email.setFrom(testValidEmail);
 
@@ -342,7 +343,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSetFrom2() throws Exception
@@ -377,7 +378,7 @@ public class EmailTest extends BaseEmailTestCase
 
         for (int i = 0; i < testEmails.length; i++)
         {
-            // set from 
+            // set from
             this.email.setFrom(testEmails[i], testEmailNames[i]);
 
             // retrieve and verify
@@ -442,7 +443,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -488,7 +489,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -535,7 +536,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)
@@ -682,7 +683,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addCc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -728,7 +729,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addCc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -775,7 +776,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)
@@ -904,7 +905,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addBcc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -952,7 +953,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addBcc(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -1001,7 +1002,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)
@@ -1145,7 +1146,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addReplyTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -1193,7 +1194,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addReplyTo(ARR_VALID_EMAILS[i]);
             }
             catch (EmailException e)
@@ -1242,7 +1243,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             try
             {
-                // set from 
+                // set from
                 this.email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
             }
             catch (EmailException e)
@@ -1489,7 +1490,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email = new MockEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
 
             this.email.send();
             fail("Should have thrown an exception");
@@ -1512,7 +1513,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email = new MockEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom("me@home.com");
             this.email.send();
             fail("Should have thrown an exception");
@@ -1535,7 +1536,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email = new MockEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
             this.email.setAuthentication(null, null);
@@ -1558,13 +1559,21 @@ public class EmailTest extends BaseEmailTestCase
     public void testGetSetSentDate()
     {
         // with input date
+
         Date dtTest = Calendar.getInstance().getTime();
         this.email.setSentDate(dtTest);
         assertEquals(dtTest, this.email.getSentDate());
 
         // with null input (this is a fudge :D)
         this.email.setSentDate(null);
-        assertEquals(dtTest, this.email.getSentDate());
+
+        Date sentDate = this.email.getSentDate();
+
+        // Date objects are millisecond specific. If you have a slow processor,
+        // time passes between the generation of dtTest and the new Date() in
+        // getSentDate() and this test fails. Make sure that the difference
+        // is less than a second...
+        assertTrue(Math.abs(sentDate.getTime() - dtTest.getTime()) < 1000);
     }
 
     /** */

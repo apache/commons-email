@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,15 @@ import java.net.URL;
 /**
  * This class models an email attachment.  Used by MultiPartEmail.
  *
+ * @since 1.0
  * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>
  * @version $Id$
  */
 public class EmailAttachment
 {
-    /** Defintion of the part being an attachment */
+    /** Definition of the part being an attachment */
     public static final String ATTACHMENT = javax.mail.Part.ATTACHMENT;
-    /** Defintion of the part being inline */
+    /** Definition of the part being inline */
     public static final String INLINE = javax.mail.Part.INLINE;
 
     /** The name of this attachment. */
@@ -49,6 +50,7 @@ public class EmailAttachment
      * Get the description.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getDescription()
     {
@@ -59,6 +61,7 @@ public class EmailAttachment
      * Get the name.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getName()
     {
@@ -69,6 +72,7 @@ public class EmailAttachment
      * Get the path.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getPath()
     {
@@ -79,6 +83,7 @@ public class EmailAttachment
      * Get the URL.
      *
      * @return A URL.
+     * @since 1.0
      */
     public URL getURL()
     {
@@ -89,6 +94,7 @@ public class EmailAttachment
      * Get the disposition.
      *
      * @return A String.
+     * @since 1.0
      */
     public String getDisposition()
     {
@@ -99,6 +105,7 @@ public class EmailAttachment
      * Set the description.
      *
      * @param desc A String.
+     * @since 1.0
      */
     public void setDescription(String desc)
     {
@@ -109,6 +116,7 @@ public class EmailAttachment
      * Set the name.
      *
      * @param aName A String.
+     * @since 1.0
      */
     public void setName(String aName)
     {
@@ -123,6 +131,7 @@ public class EmailAttachment
      * Example: images/image.jpg
      *
      * @param aPath A String.
+     * @since 1.0
      */
     public void setPath(String aPath)
     {
@@ -133,6 +142,7 @@ public class EmailAttachment
      * Set the URL.
      *
      * @param aUrl A URL.
+     * @since 1.0
      */
     public void setURL(URL aUrl)
     {
@@ -143,6 +153,7 @@ public class EmailAttachment
      * Set the disposition.
      *
      * @param aDisposition A String.
+     * @since 1.0
      */
     public void setDisposition(String aDisposition)
     {

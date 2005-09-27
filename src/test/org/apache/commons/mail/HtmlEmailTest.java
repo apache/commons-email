@@ -1,7 +1,7 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation
+ * Copyright 2001-2005 The Apache Software Foundation
  *
- * Licensed under the Apache License, Version 2.0 ( the "License" );
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,6 +25,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
 /**
  * JUnit test case for HtmlEmail Class
  *
+ * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
@@ -177,7 +178,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testEmbed() throws Exception
@@ -218,7 +219,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
         try
         {
-            /** File to used to test file attachmetns (Must be valid) */
+            /** File to used to test file attachments (Must be valid) */
             testFile = File.createTempFile("commons-email-testfile", ".txt");
         }
         catch (IOException e)
@@ -237,7 +238,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -308,7 +309,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
             this.email = new MockHtmlEmailConcrete();
             this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.intTestMailServerPort);
+            this.email.setSmtpPort(this.getMailServerPort());
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
 
@@ -349,7 +350,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * 
+     *
      * @throws Exception Exception
      */
     public void testSend2() throws Exception
@@ -362,7 +363,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
         this.email = new MockHtmlEmailConcrete();
         this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.intTestMailServerPort);
+        this.email.setSmtpPort(this.getMailServerPort());
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
@@ -400,13 +401,13 @@ public class HtmlEmailTest extends BaseEmailTestCase
             this.email.getCcList(),
             this.email.getBccList(),
             false);
-   
+
         this.getMailServer();
 
         this.email = new MockHtmlEmailConcrete();
         this.email.setHostName(this.strTestMailServer);
         this.email.setFrom(this.strTestMailFrom);
-        this.email.setSmtpPort(this.intTestMailServerPort);
+        this.email.setSmtpPort(this.getMailServerPort());
         this.email.addTo(this.strTestMailTo);
 
         if (this.strTestUser != null && this.strTestPasswd != null)
@@ -444,7 +445,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
             this.email.getCcList(),
             this.email.getBccList(),
             false);
-   
+
     }
 
 }
