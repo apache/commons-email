@@ -19,7 +19,7 @@
     <name>Commons Email</name>
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
-    <currentVersion>1.0</currentVersion>
+    <currentVersion>1.1-dev</currentVersion>
 
     <organization>
       <name>The Apache Software Foundation</name>
@@ -48,7 +48,7 @@
     <siteAddress>people.apache.org</siteAddress>
     <siteDirectory>/www/jakarta.apache.org/commons/email/</siteDirectory>
     <distributionSite>cvs.apache.org</distributionSite>
-    <distributionDirectory>/www/www.apache.org/dist/jakarta/commons/email/</distributionDirectory>
+    <distributionDirectory>/www/cvs.apache.org/dist/jakarta/commons/email/</distributionDirectory>
     <repository>
         <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk</connection>
         <url>http://svn.apache.org/viewcvs/jakarta/commons/proper/email/trunk</url>
