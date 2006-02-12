@@ -22,6 +22,10 @@
 
   <body>
     <release version="1.1-SNAPSHOT" date="unreleased">
+      <action dev="dion" type="add" issue="37782">
+        Added TLS helper methods on Email
+        and Added setMailSessionFromJNDI(String) helper method
+      </action>
       <action dev="dion" type="fix" issue="37902" due-to="Nuno Ponte">
         Added HtmlEmail.embed(String,String) as a wrapper to embed(URL,String)
       </action>
