@@ -783,7 +783,10 @@ public abstract class Email
             }
             else
             {
-                throw new EmailException("Sender address required");
+                if (session.getProperty(MAIL_SMTP_FROM) == null)
+                {
+                    throw new EmailException("From address required");
+                }
             }
 
             if (this.toList.size() + this.ccList.size() + this.bccList.size() == 0)
