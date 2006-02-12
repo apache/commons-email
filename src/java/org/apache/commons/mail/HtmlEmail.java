@@ -17,6 +17,7 @@ package org.apache.commons.mail;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -146,6 +147,23 @@ public class HtmlEmail extends MultiPartEmail
 
     /**
      * Embeds an URL in the HTML.
+     * @see #embed(URL, String)
+     * @since 1.1
+     */
+    public String embed(String url, String name) throws EmailException
+    {
+    	try
+    	{
+    		return embed(new URL(url), name);
+    	}
+    	catch (MalformedURLException e)
+    	{
+    		throw new EmailException("Invalid URL", e);
+    	}
+    }
+    
+    /**
+     * Embeds an URL in the HTML.
      *
      * <p>This method allows to embed a file located by an URL into
      * the mail body.  It allows, for instance, to add inline images
@@ -156,7 +174,7 @@ public class HtmlEmail extends MultiPartEmail
      * <p>Example of use:<br><code><pre>
      * HtmlEmail he = new HtmlEmail();
      * he.setHtmlMsg("&lt;html&gt;&lt;img src=cid:" +
-     *  embed("file:/my/image.gif","image.gif") +
+     *  embed(new URL("file:/my/image.gif"),"image.gif") +
      *  "&gt;&lt;/html&gt;");
      * // code to set the others email fields (not shown)
      * </pre></code>
@@ -179,7 +197,7 @@ public class HtmlEmail extends MultiPartEmail
         }
         catch (IOException e)
         {
-            throw new EmailException("Invalid URL");
+            throw new EmailException("Invalid URL", e);
         }
 
         MimeBodyPart mbp = new MimeBodyPart();
