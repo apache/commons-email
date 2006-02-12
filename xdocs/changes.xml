@@ -21,7 +21,11 @@
   </properties>
 
   <body>
-    <release version="1.1-dev" date="in Subversion"/>
+    <release version="1.1-SNAPSHOT" date="unreleased">
+      <action dev="dion" type="fix" issue="37902" due-to="Nuno Ponte">
+        Added HtmlEmail.embed(String,String) as a wrapper to embed(URL,String)
+      </action>
+    </release>
     <release version="1.0" date="2005-09-27"/>
     <release version="1.0-rc8" date="2005-09-07">
       <action dev="henning" type="fix">
