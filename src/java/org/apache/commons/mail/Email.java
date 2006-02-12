@@ -24,6 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -83,6 +87,10 @@ public abstract class Email
     /** */
     public static final String MAIL_TRANSPORT_PROTOCOL =
         "mail.transport.protocol";
+    /**
+     * @since 1.1
+     */
+    public static final String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
     /** */
     public static final String SMTP = "smtp";
     /** */
@@ -191,6 +199,9 @@ public abstract class Email
     /** The Session to mail with */
     private Session session;
 
+    /** does server require TLS encryption for authentication */
+    protected boolean tls = false;
+    
     /**
      * Setting to true will enable the display of debug information.
      *
@@ -314,6 +325,17 @@ public abstract class Email
     }
 
     /**
+     * Set or disable the TLS encryption 
+     *
+     * @param withTLS true if TLS needed, false otherwise
+     * @since 1.1
+     */
+    public void setTLS(boolean withTLS)
+    {
+        this.tls = withTLS;
+    }
+
+    /**
      * Set the port number of the outgoing mail server.
      * @param   aPortNumber aPortNumber
      * @since 1.0
@@ -339,6 +361,33 @@ public abstract class Email
     public void setMailSession(Session aSession)
     {
         this.session = aSession;
+    }
+
+    /**
+     * Supply a mail Session object from a JNDI directory
+     * @param jndiName name of JNDI ressource (javax.mail.Session type), ressource
+     * if searched in java:comp/env if name dont start with "java:"
+     * @throws IllegalArgumentException JNDI name null or empty
+     * @throws NamingException ressource can be retrieved from JNDI directory
+     * @since 1.1
+     */
+    public void setMailSessionFromJNDI(String jndiName) throws NamingException
+    {
+        if (EmailUtils.isEmpty(jndiName))
+        {
+            throw new IllegalArgumentException("JNDI name missing");
+        }
+        Context ctx = null;
+        if (jndiName.startsWith("java:"))
+        {
+            ctx = new InitialContext();
+        }
+        else
+        {
+            ctx = (Context) new InitialContext().lookup("java:comp/env");
+
+        }
+        this.session = ((Session) ctx.lookup(jndiName));
     }
 
     /**
@@ -372,6 +421,7 @@ public abstract class Email
 
             if (this.authenticator != null)
             {
+                properties.setProperty(MAIL_TRANSPORT_TLS, Boolean.toString(tls));
                 properties.setProperty(MAIL_SMTP_AUTH, "true");
             }
 
@@ -966,6 +1016,17 @@ public abstract class Email
     public String getSmtpPort()
     {
         return this.smtpPort;
+    }
+
+    /**
+     * Gets encryption mode for authentication
+     *
+     * @return true if using TLS for authentication, false otherwise
+     * @since 1.1
+     */
+    public boolean isTLS()
+    {
+        return this.tls;
     }
 
     /**
