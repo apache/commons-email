@@ -22,6 +22,11 @@
 
   <body>
     <release version="1.1-SNAPSHOT" date="unreleased">
+      <action dev="dion" type="fix" issue="38656" due-to="Piero Ottuzzi">
+        If you provide a mailSession in tomcat you cannot send email using
+        commons-email: the problem is mainly caused by typos or missing constant
+        declaration.
+      </action>
       <action dev="dion" type="add" issue="37782">
         Added TLS helper methods on Email
         and Added setMailSessionFromJNDI(String) helper method
