@@ -77,13 +77,17 @@ public abstract class Email
     public static final String CONTENT_TYPE = "content.type";
 
     /** */
-    public static final String MAIL_HOST = "mail.host";
+    public static final String MAIL_HOST = "mail.smtp.host";
     /** */
     public static final String MAIL_PORT = "mail.smtp.port";
     /** */
     public static final String MAIL_SMTP_FROM = "mail.smtp.from";
     /** */
     public static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
+    /** */
+    public static final String MAIL_SMTP_USER = "mail.smtp.user";
+    /** */
+    public static final String MAIL_SMTP_PASSWORD = "mail.smtp.password";
     /** */
     public static final String MAIL_TRANSPORT_PROTOCOL =
         "mail.transport.protocol";
@@ -360,7 +364,19 @@ public abstract class Email
      */
     public void setMailSession(Session aSession)
     {
-        this.session = aSession;
+        Properties sessionProperties = aSession.getProperties();
+        String auth = sessionProperties.getProperty(MAIL_SMTP_AUTH);
+        if ("true".equalsIgnoreCase(auth))
+        {
+            String userName = sessionProperties.getProperty(MAIL_SMTP_USER);
+            String password = sessionProperties.getProperty(MAIL_SMTP_PASSWORD);
+            this.authenticator = new DefaultAuthenticator(userName, password);
+            this.session = Session.getInstance(sessionProperties, this.authenticator);
+        }
+        else
+        {
+            this.session = aSession;
+        }
     }
 
     /**
@@ -387,7 +403,7 @@ public abstract class Email
             ctx = (Context) new InitialContext().lookup("java:comp/env");
 
         }
-        this.session = ((Session) ctx.lookup(jndiName));
+        this.setMailSession((Session) ctx.lookup(jndiName));
     }
 
     /**
@@ -1005,7 +1021,14 @@ public abstract class Email
      */
     public String getHostName()
     {
-        return this.hostName;
+        if (EmailUtils.isNotEmpty(this.hostName))
+        {
+            return this.hostName;
+        }
+        else
+        {
+            return this.session.getProperty(MAIL_HOST);
+        }
     }
 
     /**
@@ -1015,7 +1038,14 @@ public abstract class Email
      */
     public String getSmtpPort()
     {
-        return this.smtpPort;
+        if (EmailUtils.isNotEmpty(this.smtpPort))
+        {
+            return this.smtpPort;
+        }
+        else
+        {
+            return this.session.getProperty(MAIL_PORT);
+        }
     }
 
     /**
