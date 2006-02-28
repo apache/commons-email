@@ -437,7 +437,7 @@ public abstract class Email
 
             if (this.authenticator != null)
             {
-                properties.setProperty(MAIL_TRANSPORT_TLS, Boolean.toString(tls));
+                properties.setProperty(MAIL_TRANSPORT_TLS, tls ? "true" : "false");
                 properties.setProperty(MAIL_SMTP_AUTH, "true");
             }
 
