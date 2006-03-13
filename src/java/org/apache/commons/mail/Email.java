@@ -704,6 +704,24 @@ public abstract class Email
         return this;
     }
 
+    /**
+     * Set a list of reply addresses
+     *
+     * @param   aCollection collection of InternetAddress objects
+     * @return  An Email.
+     * @throws EmailException Indicates an invalid email address
+     * @since 1.1
+     */
+    public Email setReplyTo(Collection aCollection) throws EmailException
+    {
+        if (aCollection == null || aCollection.isEmpty())
+        {
+            throw new EmailException("Address List provided was invalid");
+        }
+
+        this.replyList = new ArrayList(aCollection);
+        return this;
+    }
 
     /**
      * Used to specify the mail headers.  Example:
