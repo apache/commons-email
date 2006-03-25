@@ -482,9 +482,10 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * Method that can be overridden if you don't
-     * want to create a MimeBodyPart.
-     * @return
+     * Creates a body part object.
+     * Can be overridden if you don't want to create a BodyPart.
+     *
+     * @return the created body part
      */
     protected BodyPart createBodyPart()
     {
@@ -492,8 +493,9 @@ public class MultiPartEmail extends Email
         return bodyPart;
     }
     /**
+     * Creates a mime multipart object.
      *
-     * @return
+     * @return the created mime part
      */
     protected MimeMultipart createMimeMultipart()
     {
@@ -502,7 +504,9 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * @return boolHasAttachments
+     * Checks whether there are attachments.
+     *
+     * @return true if there are attachments
      * @since 1.0
      */
     public boolean isBoolHasAttachments()
@@ -511,7 +515,9 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * @param b boolHasAttachments
+     * Sets whether there are attachments.
+     *
+     * @param b  the attachments flag
      * @since 1.0
      */
     public void setBoolHasAttachments(boolean b)
@@ -520,8 +526,9 @@ public class MultiPartEmail extends Email
     }
 
     /**
+     * Checks if this object is initialized.
      *
-     * @return
+     * @return true if initialized
      */
     protected boolean isInitialized()
     {
@@ -529,8 +536,9 @@ public class MultiPartEmail extends Email
     }
 
     /**
+     * Sets the initialized status of this object.
      *
-     * @param b
+     * @param b  the initialized status flag
      */
     protected void setInitialized(boolean b)
     {
