@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+Copyright 2006 The Apache Software Foundation.
+ 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<document>
+ <properties>
+  <title>Release notes for 1.0</title>
+  <author email="commons-dev@jakarta.apache.org">Commons Documentation Team</author>
+ </properties>
+<body>
+
+<section name="Release notes">
+<p>
+These are the release notes for Commons-Email version 1.0.
+<source>
+INTRODUCTION:
+
+Commons-Email aims to provide a API for sending email. It builds on the JavaMail 
+API with the aim of presenting a simplified API which is easy for developers who
+are not mail experts to use. It is a compact component with a small number of
+classes.
+
+This is the first release of Commons Email. However, the codebase is mature and
+stable and so this is no reason not to recommend it for production.
+
+
+REQUIREMENTS:
+
+J2SE environments
+-----------------
+
+Commons-Email requires at least javamail version 1.2 and should run
+with all versions above. Get it http://java.sun.com/products/javamail/
+
+Commons-Email also requires the Java activation framework. Get it from
+http://java.sun.com/products/javabeans/glasgow/jaf.html
+
+Commons-Email has been tested with JDK 1.3.1_16, JDK 1.4.2_09 and JDK 1.5.0_04.
+
+J2EE environments
+-----------------
+
+Commons-Email should be compatible with J2EE 1.3 and 1.4 compliant
+environments and run without additional requirements.
+</source>
+</p>
+</section>
+
+</body>
+</document>

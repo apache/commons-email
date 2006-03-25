@@ -37,8 +37,7 @@ email.setFrom("me@apache.org", "Me");
 email.setSubject("Test message");
 email.setMsg("This is a simple test of commons-email");
 email.send();
-]]>
-      </source>
+]]></source>
       <p>
         The call to setHostName("mail.myserver.com") sets the address of the
         outgoing SMTP server that will be used to send the message.  If this is
@@ -83,8 +82,7 @@ email.attach(attachment);
 
 // send the email
 email.send();
-]]>
-      </source>
+]]></source>
       <p>
         You can also use EmailAttachment to reference any valid URL for files
         that you do not have locally.  When the message is sent, the file will
@@ -116,8 +114,7 @@ email.attach(attachment);
 
 // send the email
 email.send();
-]]>
-      </source>
+]]></source>
     </section>
     <section name="Sending HTML formatted email">
       <p>
@@ -151,8 +148,7 @@ email.setTextMsg("Your email client does not support HTML messages");
 
 // send the email
 email.send();
-]]>
-      </source>
+]]></source>
       <p>
         First, notice that the call to embed() returns a String.  This String
         is a randomly generated identifier that must be used to reference
