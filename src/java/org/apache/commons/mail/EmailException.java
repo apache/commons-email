@@ -24,7 +24,7 @@ import java.io.PrintWriter;
  * <p>
  * Supports nesting, emulating JDK 1.4 behavior if necessary.
  * <p>
- * Adapted from {@link org.apache.commons.collections.FunctorException}.
+ * Adapted from FunctorException in Commons Collections.
  *
  * @author jakarta-commons
  * @since 1.0
