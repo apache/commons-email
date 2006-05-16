@@ -44,7 +44,7 @@
       It is built on top of the Java Mail API, which it aims to simplify.
     </description>
     <shortDescription>Commons Email</shortDescription>
-    <issueTrackingUrl>http://issues.apache.org/bugzilla/</issueTrackingUrl>
+    <issueTrackingUrl>http://issues.apache.org/jira/</issueTrackingUrl>
     <siteAddress>people.apache.org</siteAddress>
     <siteDirectory>/www/jakarta.apache.org/commons/email/</siteDirectory>
     <distributionSite>cvs.apache.org</distributionSite>
