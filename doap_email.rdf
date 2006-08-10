@@ -16,7 +16,7 @@
     </description>
     <repository>
       <SVNRepository>
-        <browse rdf:resource="http://svn.apache.org/viewcvs/jakarta/commons/proper/email/trunk"/>
+        <browse rdf:resource="http://svn.apache.org/viewvc/jakarta/commons/proper/email/trunk"/>
         <location rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/email"/>
       </SVNRepository>
     </repository>
