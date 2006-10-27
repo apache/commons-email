@@ -186,15 +186,15 @@
     </contributors>
     <dependencies>
         <dependency>
-            <groupId>javamail</groupId>
-            <artifactId>javamail</artifactId>
-            <version>1.3.3</version>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
             <url>http://java.sun.com/products/javamail/</url>
         </dependency>
         <dependency>
-            <groupId>activation</groupId>
+            <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
-            <version>1.0.2</version>
+            <version>1.1</version>
             <url>http://java.sun.com/products/javabeans/glasgow/jaf.html</url>
         </dependency>
         <dependency>
