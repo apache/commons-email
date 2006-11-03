@@ -209,7 +209,7 @@
         <dependency>
             <groupId>dumbster</groupId>
             <artifactId>dumbster</artifactId>
-            <version>1.6</version>
+            <version>SNAPSHOT</version>
             <url>http://quintanasoft.com/dumbster/</url>
             <properties>
               <scope>test</scope>
