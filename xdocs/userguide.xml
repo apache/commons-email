@@ -31,13 +31,16 @@
       </p>
       <source>
 <![CDATA[
-SimpleEmail email = new SimpleEmail();
-email.setHostName("mail.myserver.com");
-email.addTo("jdoe@somewhere.org", "John Doe");
-email.setFrom("me@apache.org", "Me");
-email.setSubject("Test message");
-email.setMsg("This is a simple test of commons-email");
-email.send();
+import org.apache.commons.mail.SimpleEmail;
+...
+
+  SimpleEmail email = new SimpleEmail();
+  email.setHostName("mail.myserver.com");
+  email.addTo("jdoe@somewhere.org", "John Doe");
+  email.setFrom("me@apache.org", "Me");
+  email.setSubject("Test message");
+  email.setMsg("This is a simple test of commons-email");
+  email.send();
 ]]></source>
       <p>
         The call to setHostName("mail.myserver.com") sets the address of the
@@ -63,26 +66,29 @@ email.send();
       </p>
       <source>
 <![CDATA[
-// Create the attachment
-EmailAttachment attachment = new EmailAttachment();
-attachment.setPath("mypictures/john.jpg");
-attachment.setDisposition(EmailAttachment.ATTACHMENT);
-attachment.setDescription("Picture of John");
-attachment.setName("John");
+import org.apache.commons.mail.*;
+...
 
-// Create the email message
-MultiPartEmail email = new MultiPartEmail();
-email.setHostName("mail.myserver.com");
-email.addTo("jdoe@somewhere.org", "John Doe");
-email.setFrom("me@apache.org", "Me");
-email.setSubject("The picture");
-email.setMsg("Here is the picture you wanted");
+  // Create the attachment
+  EmailAttachment attachment = new EmailAttachment();
+  attachment.setPath("mypictures/john.jpg");
+  attachment.setDisposition(EmailAttachment.ATTACHMENT);
+  attachment.setDescription("Picture of John");
+  attachment.setName("John");
 
-// add the attachment
-email.attach(attachment);
+  // Create the email message
+  MultiPartEmail email = new MultiPartEmail();
+  email.setHostName("mail.myserver.com");
+  email.addTo("jdoe@somewhere.org", "John Doe");
+  email.setFrom("me@apache.org", "Me");
+  email.setSubject("The picture");
+  email.setMsg("Here is the picture you wanted");
 
-// send the email
-email.send();
+  // add the attachment
+  email.attach(attachment);
+
+  // send the email
+  email.send();
 ]]></source>
       <p>
         You can also use EmailAttachment to reference any valid URL for files
@@ -95,26 +101,29 @@ email.send();
       </p>
       <source>
 <![CDATA[
-// Create the attachment
-EmailAttachment attachment = new EmailAttachment();
-attachment.setURL(new URL("http://www.apache.org/images/asf_logo_wide.gif"));
-attachment.setDisposition(EmailAttachment.ATTACHMENT);
-attachment.setDescription("Apache logo");
-attachment.setName("Apache logo");
+import org.apache.commons.mail.*;
+...
 
-// Create the email message
-MultiPartEmail email = new MultiPartEmail();
-email.setHostName("mail.myserver.com");
-email.addTo("jdoe@somewhere.org", "John Doe");
-email.setFrom("me@apache.org", "Me");
-email.setSubject("The logo");
-email.setMsg("Here is Apache's logo");
+  // Create the attachment
+  EmailAttachment attachment = new EmailAttachment();
+  attachment.setURL(new URL("http://www.apache.org/images/asf_logo_wide.gif"));
+  attachment.setDisposition(EmailAttachment.ATTACHMENT);
+  attachment.setDescription("Apache logo");
+  attachment.setName("Apache logo");
 
-// add the attachment
-email.attach(attachment);
+  // Create the email message
+  MultiPartEmail email = new MultiPartEmail();
+  email.setHostName("mail.myserver.com");
+  email.addTo("jdoe@somewhere.org", "John Doe");
+  email.setFrom("me@apache.org", "Me");
+  email.setSubject("The logo");
+  email.setMsg("Here is Apache's logo");
+  
+  // add the attachment
+  email.attach(attachment);
 
-// send the email
-email.send();
+  // send the email
+  email.send();
 ]]></source>
     </section>
     <section name="Sending HTML formatted email">
@@ -130,25 +139,28 @@ email.send();
       </p>
       <source>
 <![CDATA[
-// Create the email message
-HtmlEmail email = new HtmlEmail();
-email.setHostName("mail.myserver.com");
-email.addTo("jdoe@somewhere.org", "John Doe");
-email.setFrom("me@apache.org", "Me");
-email.setSubject("Test email with inline image");
+import org.apache.commons.mail.HtmlEmail;
+...
 
-// embed the image and get the content id
-URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-String cid = email.embed(url, "Apache logo");
+  // Create the email message
+  HtmlEmail email = new HtmlEmail();
+  email.setHostName("mail.myserver.com");
+  email.addTo("jdoe@somewhere.org", "John Doe");
+  email.setFrom("me@apache.org", "Me");
+  email.setSubject("Test email with inline image");
+  
+  // embed the image and get the content id
+  URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+  String cid = email.embed(url, "Apache logo");
+  
+  // set the html message
+  email.setHtmlMsg("<html>The apache logo - <img src=\"cid:"+cid+"\"></html>");
 
-// set the html message
-email.setHtmlMsg("<html>The apache logo - <img src=\"cid:"+cid+"\"></html>");
+  // set the alternative message
+  email.setTextMsg("Your email client does not support HTML messages");
 
-// set the alternative message
-email.setTextMsg("Your email client does not support HTML messages");
-
-// send the email
-email.send();
+  // send the email
+  email.send();
 ]]></source>
       <p>
         First, notice that the call to embed() returns a String.  This String
