@@ -43,7 +43,7 @@
   </property>
   <property name="javadocdir" value="${basedir}/dist/docs/api">
   </property>
-  <property name="final.name" value="commons-email-1.0">
+  <property name="final.name" value="commons-email-1.1-SNAPSHOT">
   </property>
   <property name="proxy.host" value="">
   </property>
@@ -54,11 +54,11 @@
   <property name="proxy.password" value="">
   </property>
   <path id="build.classpath">
-    <pathelement location="${libdir}/javamail/jars/javamail-1.3.3.jar">
+    <pathelement location="${libdir}/javax.mail/jars/mail-1.4.jar">
     </pathelement>
-    <pathelement location="${libdir}/activation/jars/activation-1.0.2.jar">
+    <pathelement location="${libdir}/javax.activation/jars/activation-1.1.jar">
     </pathelement>
-    <pathelement location="${libdir}/dumbster/jars/dumbster-1.6.jar">
+    <pathelement location="${libdir}/dumbster/jars/dumbster-SNAPSHOT.jar">
     </pathelement>
   </path>
   <target name="init" description="o Initializes some properties">
@@ -88,7 +88,7 @@
   <target name="compile" description="o Compile the code" depends="get-deps">
     <mkdir dir="${classesdir}">
     </mkdir>
-    <javac destdir="${classesdir}" deprecation="true" debug="true" optimize="false" excludes="**/package.html">
+    <javac destdir="${classesdir}" deprecation="true" debug="true" optimize="false" excludes="**/package.html" source="1.3" target="1.3">
       <src>
         <pathelement location="${basedir}/src/java">
         </pathelement>
@@ -201,39 +201,39 @@
     </javadoc>
   </target>
   <target name="get-dep-javamail.jar" description="o Download the dependency : javamail.jar" unless="javamail.jar" depends="init,setProxy,noProxy,get-custom-dep-javamail.jar">
-    <mkdir dir="${libdir}/javamail/jars/">
+    <mkdir dir="${libdir}/javax.mail/jars/">
     </mkdir>
-    <get dest="${libdir}/javamail/jars/javamail-1.3.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/javamail/jars/javamail-1.3.3.jar">
+    <get dest="${libdir}/javax.mail/jars/mail-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/javax.mail/jars/mail-1.4.jar">
     </get>
   </target>
   <target name="get-custom-dep-javamail.jar" if="javamail.jar" depends="init,setProxy,noProxy">
-    <mkdir dir="${libdir}/javamail/jars/">
+    <mkdir dir="${libdir}/javax.mail/jars/">
     </mkdir>
-    <get dest="${libdir}/javamail/jars/javamail-1.3.3.jar" usetimestamp="true" ignoreerrors="true" src="${javamail.jar}">
+    <get dest="${libdir}/javax.mail/jars/mail-1.4.jar" usetimestamp="true" ignoreerrors="true" src="${javamail.jar}">
     </get>
   </target>
   <target name="get-dep-activation.jar" description="o Download the dependency : activation.jar" unless="activation.jar" depends="init,setProxy,noProxy,get-custom-dep-activation.jar">
-    <mkdir dir="${libdir}/activation/jars/">
+    <mkdir dir="${libdir}/javax.activation/jars/">
     </mkdir>
-    <get dest="${libdir}/activation/jars/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/activation/jars/activation-1.0.2.jar">
+    <get dest="${libdir}/javax.activation/jars/activation-1.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/javax.activation/jars/activation-1.1.jar">
     </get>
   </target>
   <target name="get-custom-dep-activation.jar" if="activation.jar" depends="init,setProxy,noProxy">
-    <mkdir dir="${libdir}/activation/jars/">
+    <mkdir dir="${libdir}/javax.activation/jars/">
     </mkdir>
-    <get dest="${libdir}/activation/jars/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="${activation.jar}">
+    <get dest="${libdir}/javax.activation/jars/activation-1.1.jar" usetimestamp="true" ignoreerrors="true" src="${activation.jar}">
     </get>
   </target>
   <target name="get-dep-dumbster.jar" description="o Download the dependency : dumbster.jar" unless="dumbster.jar" depends="init,setProxy,noProxy,get-custom-dep-dumbster.jar">
     <mkdir dir="${libdir}/dumbster/jars/">
     </mkdir>
-    <get dest="${libdir}/dumbster/jars/dumbster-1.6.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/dumbster/jars/dumbster-1.6.jar">
+    <get dest="${libdir}/dumbster/jars/dumbster-SNAPSHOT.jar" usetimestamp="true" ignoreerrors="true" src="http://people.apache.org/repo/m1-snapshot-repository/dumbster/jars/dumbster-SNAPSHOT.jar">
     </get>
   </target>
   <target name="get-custom-dep-dumbster.jar" if="dumbster.jar" depends="init,setProxy,noProxy">
     <mkdir dir="${libdir}/dumbster/jars/">
     </mkdir>
-    <get dest="${libdir}/dumbster/jars/dumbster-1.6.jar" usetimestamp="true" ignoreerrors="true" src="${dumbster.jar}">
+    <get dest="${libdir}/dumbster/jars/dumbster-SNAPSHOT.jar" usetimestamp="true" ignoreerrors="true" src="${dumbster.jar}">
     </get>
   </target>
   <target name="get-deps" unless="noget" depends="get-dep-javamail.jar,get-dep-activation.jar,get-dep-dumbster.jar">
