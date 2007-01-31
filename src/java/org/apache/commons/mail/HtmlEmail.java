@@ -72,6 +72,10 @@ public class HtmlEmail extends MultiPartEmail
     /** Embedded images */
     protected List inlineImages = new ArrayList();
 
+    /** HTML prefix and suffix for default HTML mail */
+    private static final String HTML_MESSAGE_START = "<html><body><pre>";
+    private static final String HTML_MESSAGE_END = "</pre></body></html>";
+
     /**
      * Set the text content.
      *
@@ -136,12 +140,17 @@ public class HtmlEmail extends MultiPartEmail
 
         setTextMsg(msg);
 
-        setHtmlMsg(
-            new StringBuffer()
-                .append("<html><body><pre>")
-                .append(msg)
-                .append("</pre></body></html>")
-                .toString());
+        StringBuffer htmlMsgBuf = new StringBuffer(
+            msg.length()
+            + HTML_MESSAGE_START.length()
+            + HTML_MESSAGE_END.length()
+        );
+
+        htmlMsgBuf.append(HTML_MESSAGE_START)
+            .append(msg)
+            .append(HTML_MESSAGE_END);
+
+        setHtmlMsg(htmlMsgBuf.toString());
 
         return this;
     }
@@ -162,7 +171,7 @@ public class HtmlEmail extends MultiPartEmail
     		throw new EmailException("Invalid URL", e);
     	}
     }
-    
+
     /**
      * Embeds an URL in the HTML.
      *
