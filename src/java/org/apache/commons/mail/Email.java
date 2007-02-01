@@ -97,6 +97,12 @@ public abstract class Email
      */
     public static final String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
     /** */
+    public static final String MAIL_SMTP_SOCKET_FACTORY_FALLBACK = "mail.smtp.socketFactory.fallback";
+    /** */
+    public static final String MAIL_SMTP_SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
+    /** */
+    public static final String MAIL_SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
+    /** */
     public static final String SMTP = "smtp";
     /** */
     public static final String TEXT_HTML = "text/html";
@@ -160,6 +166,12 @@ public abstract class Email
      * Defaults to the standard port ( 25 ).
      */
     protected String smtpPort = "25";
+    
+    /**
+     * The port number of the SSL enabled SMTP server;
+     * defaults to the standard port, 465. 
+     */
+    protected String sslSmtpPort = "465";
 
     /** List of "to" email adresses */
     protected List toList = new ArrayList();
@@ -206,6 +218,8 @@ public abstract class Email
 
     /** does server require TLS encryption for authentication */
     protected boolean tls = false;
+    /** does the current transport use SSL encryption? */
+    protected boolean ssl = false;
     
     /**
      * Setting to true will enable the display of debug information.
@@ -440,6 +454,14 @@ public abstract class Email
             {
                 properties.setProperty(MAIL_TRANSPORT_TLS, tls ? "true" : "false");
                 properties.setProperty(MAIL_SMTP_AUTH, "true");
+            }
+
+            if (this.ssl)
+            {
+                properties.setProperty(MAIL_PORT, sslSmtpPort);
+                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, sslSmtpPort);
+                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
+                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");           	
             }
 
             if (this.bounceAddress != null)
@@ -1114,6 +1136,46 @@ public abstract class Email
         this.popHost = newPopHost;
         this.popUsername = newPopUsername;
         this.popPassword = newPopPassword;
+    }
+
+    /**
+     * Returns whether SSL encryption for the transport is currently enabled.
+     * @return true if SSL enabled for the transport
+     */
+    public boolean isSSL() {
+        return ssl;
+    }
+
+    /**
+     * Sets whether SSL encryption should be enabled for the SMTP transport.
+     * @param ssl whether to enable the SSL transport
+     */
+    public void setSSL(boolean ssl) {
+        this.ssl = ssl;
+    }
+
+    /**
+     * Returns the current SSL port used by the SMTP transport.
+     * @return the current SSL port used by the SMTP transport
+     */
+    public String getSslSmtpPort() {
+        if (EmailUtils.isNotEmpty(this.sslSmtpPort))
+        {
+            return this.sslSmtpPort;
+        }
+        else
+        {
+            return this.session.getProperty(MAIL_SMTP_SOCKET_FACTORY_PORT);
+        }
+    }
+
+    /**
+     * Sets the SSL port to use for the SMTP transport. Defaults to the standard
+     * port, 465.
+     * @param sslSmtpPort the SSL port to use for the SMTP transport
+     */
+    public void setSslSmtpPort(String sslSmtpPort) {
+        this.sslSmtpPort = sslSmtpPort;
     }
 }
 

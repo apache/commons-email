@@ -52,23 +52,17 @@ public class HtmlEmailTest extends BaseEmailTestCase
         this.email = new MockHtmlEmailConcrete();
     }
 
-    /** */
-    public void testGetSetTextMsg()
+    /**
+     * @throws EmailException  */
+    public void testGetSetTextMsg() throws EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        try
+        for (int i = 0; i < testCharsValid.length; i++)
         {
-            for (int i = 0; i < testCharsValid.length; i++)
-            {
-                this.email.setTextMsg(testCharsValid[i]);
-                assertEquals(testCharsValid[i], this.email.getTextMsg());
-            }
-        }
-        catch (EmailException e)
-        {
-            fail("Shoudn't have thrown exception");
+            this.email.setTextMsg(testCharsValid[i]);
+            assertEquals(testCharsValid[i], this.email.getTextMsg());
         }
 
         // ====================================================================
@@ -85,31 +79,22 @@ public class HtmlEmailTest extends BaseEmailTestCase
             {
                 assertTrue(true);
             }
-            catch (Exception e)
-            {
-                fail("Unexpected exception thrown");
-            }
         }
 
     }
 
-    /** */
-    public void testGetSetHtmlMsg()
+    /**
+     * @throws EmailException  
+     */
+    public void testGetSetHtmlMsg() throws EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        try
+        for (int i = 0; i < testCharsValid.length; i++)
         {
-            for (int i = 0; i < testCharsValid.length; i++)
-            {
-                this.email.setHtmlMsg(testCharsValid[i]);
-                assertEquals(testCharsValid[i], this.email.getHtmlMsg());
-            }
-        }
-        catch (EmailException e)
-        {
-            fail("Shoudn't have thrown exception");
+            this.email.setHtmlMsg(testCharsValid[i]);
+            assertEquals(testCharsValid[i], this.email.getHtmlMsg());
         }
 
         // ====================================================================
@@ -126,34 +111,24 @@ public class HtmlEmailTest extends BaseEmailTestCase
             {
                 assertTrue(true);
             }
-            catch (Exception e)
-            {
-                fail("Unexpected exception thrown");
-            }
         }
 
     }
 
-    /** */
-    public void testGetSetMsg()
+    /**
+     * @throws EmailException  */
+    public void testGetSetMsg() throws EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        try
+        for (int i = 0; i < testCharsValid.length; i++)
         {
-            for (int i = 0; i < testCharsValid.length; i++)
-            {
-                this.email.setMsg(testCharsValid[i]);
-                assertEquals(testCharsValid[i], this.email.getTextMsg());
+            this.email.setMsg(testCharsValid[i]);
+            assertEquals(testCharsValid[i], this.email.getTextMsg());
 
-                assertTrue(
-                    this.email.getHtmlMsg().indexOf(testCharsValid[i]) != -1);
-            }
-        }
-        catch (EmailException e)
-        {
-            fail("Shoudn't have thrown exception");
+            assertTrue(
+                this.email.getHtmlMsg().indexOf(testCharsValid[i]) != -1);
         }
 
         // ====================================================================
@@ -169,10 +144,6 @@ public class HtmlEmailTest extends BaseEmailTestCase
             catch (EmailException e)
             {
                 assertTrue(true);
-            }
-            catch (Exception e)
-            {
-                fail("Unexpected exception thrown");
             }
         }
 
@@ -206,148 +177,119 @@ public class HtmlEmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testSend()
+    /**
+     * @throws EmailException  
+     * @throws IOException */
+    public void testSend() throws EmailException, IOException
     {
         EmailAttachment attachment = new EmailAttachment();
         File testFile = null;
 
-        try
-        {
-            /** File to used to test file attachments (Must be valid) */
-            testFile = File.createTempFile("commons-email-testfile", ".txt");
-        }
-        catch (IOException e)
-        {
-            fail("Test file cannot be found");
-        }
+        /** File to used to test file attachments (Must be valid) */
+        testFile = File.createTempFile("commons-email-testfile", ".txt");
 
         // ====================================================================
         // Test Success
         // ====================================================================
-        try
+        this.getMailServer();
+
+        String strSubject = "Test HTML Send #1 Subject (w charset)";
+
+        this.email = new MockHtmlEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+
+        /** File to used to test file attachmetns (Must be valid) */
+        attachment.setName("Test Attachment");
+        attachment.setDescription("Test Attachment Desc");
+        attachment.setPath(testFile.getAbsolutePath());
+        this.email.attach(attachment);
+
+        this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+
+        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setSubject(strSubject);
+
+        URL url = new URL(EmailConfiguration.TEST_URL);
+        String cid = this.email.embed(url, "Apache Logo");
+
+        String strHtmlMsg =
+            "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
+
+        this.email.setHtmlMsg(strHtmlMsg);
+        this.email.setTextMsg(
+            "Your email client does not support HTML emails");
+
+        this.email.send();
+        this.fakeMailServer.stop();
+        // validate txt message
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            this.email.getTextMsg(),
+            this.email.getFromAddress(),
+            this.email.getToList(),
+            this.email.getCcList(),
+            this.email.getBccList(),
+            true);
+
+        // validate html message
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            this.email.getHtmlMsg(),
+            this.email.getFromAddress(),
+            this.email.getToList(),
+            this.email.getCcList(),
+            this.email.getBccList(),
+            false);
+
+        // validate attachment
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            attachment.getName(),
+            this.email.getFromAddress(),
+            this.email.getToList(),
+            this.email.getCcList(),
+            this.email.getBccList(),
+            false);
+
+        this.getMailServer();
+
+        this.email = new MockHtmlEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+
+        if (this.strTestUser != null && this.strTestPasswd != null)
         {
-            this.getMailServer();
-
-            String strSubject = "Test HTML Send #1 Subject (w charset)";
-
-            this.email = new MockHtmlEmailConcrete();
-            this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.getMailServerPort());
-            this.email.setFrom(this.strTestMailFrom);
-            this.email.addTo(this.strTestMailTo);
-
-            /** File to used to test file attachmetns (Must be valid) */
-            attachment.setName("Test Attachment");
-            attachment.setDescription("Test Attachment Desc");
-            attachment.setPath(testFile.getAbsolutePath());
-            this.email.attach(attachment);
-
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
-
-            this.email.setCharset(Email.ISO_8859_1);
-            this.email.setSubject(strSubject);
-
-            URL url = new URL(EmailConfiguration.TEST_URL);
-            String cid = this.email.embed(url, "Apache Logo");
-
-            String strHtmlMsg =
-                "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
-
-            this.email.setHtmlMsg(strHtmlMsg);
-            this.email.setTextMsg(
-                "Your email client does not support HTML emails");
-
-            this.email.send();
-            this.fakeMailServer.stop();
-            // validate txt message
-            validateSend(
-                this.fakeMailServer,
-                strSubject,
-                this.email.getTextMsg(),
-                this.email.getFromAddress(),
-                this.email.getToList(),
-                this.email.getCcList(),
-                this.email.getBccList(),
-                true);
-
-            // validate html message
-            validateSend(
-                this.fakeMailServer,
-                strSubject,
-                this.email.getHtmlMsg(),
-                this.email.getFromAddress(),
-                this.email.getToList(),
-                this.email.getCcList(),
-                this.email.getBccList(),
-                false);
-
-            // validate attachment
-            validateSend(
-                this.fakeMailServer,
-                strSubject,
-                attachment.getName(),
-                this.email.getFromAddress(),
-                this.email.getToList(),
-                this.email.getCcList(),
-                this.email.getBccList(),
-                false);
-        }
-        catch (Exception e)
-        {
-            fail("Unexpected exception thrown");
-        }
-
-        try
-        {
-            this.getMailServer();
-
-            this.email = new MockHtmlEmailConcrete();
-            this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.getMailServerPort());
-            this.email.setFrom(this.strTestMailFrom);
-            this.email.addTo(this.strTestMailTo);
-
-            if (this.strTestUser != null && this.strTestPasswd != null)
-            {
-                this.email.setAuthentication(
-                    this.strTestUser,
-                    this.strTestPasswd);
-            }
-
-            String strSubject = "Test HTML Send #1 Subject (wo charset)";
-            this.email.setSubject(strSubject);
-            this.email.setTextMsg("Test message");
-
-            this.email.send();
-            this.fakeMailServer.stop();
-            // validate txt message
-            validateSend(
-                this.fakeMailServer,
-                strSubject,
-                this.email.getTextMsg(),
-                this.email.getFromAddress(),
-                this.email.getToList(),
-                this.email.getCcList(),
-                this.email.getBccList(),
-                true);
+            this.email.setAuthentication(
+                this.strTestUser,
+                this.strTestPasswd);
         }
 
-        catch (IOException e)
-        {
-            fail("Failed to save email to output file");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        strSubject = "Test HTML Send #1 Subject (wo charset)";
+        this.email.setSubject(strSubject);
+        this.email.setTextMsg("Test message");
+
+        this.email.send();
+        this.fakeMailServer.stop();
+        // validate txt message
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            this.email.getTextMsg(),
+            this.email.getFromAddress(),
+            this.email.getToList(),
+            this.email.getCcList(),
+            this.email.getBccList(),
+            true);
     }
 
     /**
