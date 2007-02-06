@@ -92,6 +92,7 @@ public class EmailAttachmentTest extends BaseEmailTestCase
 
         for (int i = 0; i < tests.length; i++)
         {
+            // TODO: Document why malformed url is ok, or remove the catch
             try
             {
                 URL testURL = new URL(tests[i]);
