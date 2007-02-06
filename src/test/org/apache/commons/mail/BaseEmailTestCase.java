@@ -116,7 +116,7 @@ public class BaseEmailTestCase extends TestCase
         if (this.fakeMailServer != null && !this.fakeMailServer.isStopped())
         {
             this.fakeMailServer.stop();
-            assertTrue(this.fakeMailServer.isStopped());
+            assertTrue("Mail server didn't stop", this.fakeMailServer.isStopped());
         }
 
         this.fakeMailServer = null;
@@ -168,7 +168,7 @@ public class BaseEmailTestCase extends TestCase
             this.fakeMailServer =
                     SimpleSmtpServer.start(getMailServerPort());
 
-            assertFalse(this.fakeMailServer.isStopped());
+            assertFalse("fake mail server didn't start", this.fakeMailServer.isStopped());
 
             Date dtStartWait = new Date();
             while (this.fakeMailServer.isStopped())
