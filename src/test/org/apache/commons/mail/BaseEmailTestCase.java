@@ -104,7 +104,7 @@ public class BaseEmailTestCase extends TestCase
     }
 
     /** */
-    protected void setUp()
+    protected void setUp() throws Exception
     {
 
     }

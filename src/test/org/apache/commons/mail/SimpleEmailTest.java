@@ -39,32 +39,26 @@ public class SimpleEmailTest extends BaseEmailTestCase
         super(name);
     }
 
-    /** */
-    protected void setUp()
+    /**
+     * @throws Exception  */
+    protected void setUp() throws Exception
     {
         super.setUp();
         // reusable objects to be used across multiple tests
         this.email = new MockSimpleEmail();
     }
 
-    /** */
-    public void testGetSetMsg()
+    /**
+     * @throws EmailException  */
+    public void testGetSetMsg() throws EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        try
+        for (int i = 0; i < testCharsValid.length; i++)
         {
-            for (int i = 0; i < testCharsValid.length; i++)
-            {
-                this.email.setMsg(testCharsValid[i]);
-                assertEquals(testCharsValid[i], this.email.getMsg());
-            }
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
+            this.email.setMsg(testCharsValid[i]);
+            assertEquals(testCharsValid[i], this.email.getMsg());
         }
 
         // ====================================================================
@@ -81,71 +75,54 @@ public class SimpleEmailTest extends BaseEmailTestCase
             {
                 assertTrue(true);
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
         }
 
     }
 
     /**
+     * @throws EmailException when a bad address is set.
+     * @throws IOException when sending fails 
      * @todo Add code to test the popBeforeSmtp() settings
      */
-    public void testSend()
+    public void testSend() throws EmailException, IOException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        try
+        this.getMailServer();
+
+        this.email = new MockSimpleEmail();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+
+        if (this.strTestUser != null && this.strTestPasswd != null)
         {
-            this.getMailServer();
-
-            this.email = new MockSimpleEmail();
-            this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.getMailServerPort());
-            this.email.setFrom(this.strTestMailFrom);
-            this.email.addTo(this.strTestMailTo);
-
-            if (this.strTestUser != null && this.strTestPasswd != null)
-            {
-                this.email.setAuthentication(
-                    this.strTestUser,
-                    this.strTestPasswd);
-            }
-
-            String strSubject = "Test Msg Subject";
-            String strMessage = "Test Msg Body";
-
-            this.email.setCharset(Email.ISO_8859_1);
-            this.email.setSubject(strSubject);
-
-            this.email.setMsg(strMessage);
-
-            this.email.send();
-
-            this.fakeMailServer.stop();
-            validateSend(
-                this.fakeMailServer,
-                strSubject,
-                this.email.getMsg(),
-                this.email.getFromAddress(),
-                this.email.getToList(),
-                this.email.getCcList(),
-                this.email.getBccList(),
-                true);
+            this.email.setAuthentication(
+                this.strTestUser,
+                this.strTestPasswd);
         }
 
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            fail("failed to save email to output file");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        String strSubject = "Test Msg Subject";
+        String strMessage = "Test Msg Body";
+
+        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setSubject(strSubject);
+
+        this.email.setMsg(strMessage);
+
+        this.email.send();
+
+        this.fakeMailServer.stop();
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            this.email.getMsg(),
+            this.email.getFromAddress(),
+            this.email.getToList(),
+            this.email.getCcList(),
+            this.email.getBccList(),
+            true);
     }
 }

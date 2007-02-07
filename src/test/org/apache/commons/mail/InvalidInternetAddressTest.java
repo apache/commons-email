@@ -79,7 +79,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         super(name);
     }
 
-    protected void setUp()
+    protected void setUp() throws Exception
     {
         super.setUp();
 

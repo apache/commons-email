@@ -20,7 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
@@ -50,24 +51,19 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         super(name);
     }
 
-    /** */
-    protected void setUp()
+    /**
+     * @throws Exception  */
+    protected void setUp() throws Exception
     {
         super.setUp();
         // reusable objects to be used across multiple tests
         this.email = new MockMultiPartEmailConcrete();
-        try
-        {
-            testFile = File.createTempFile("testfile", ".txt");
-        }
-        catch (IOException ioe)
-        {
-            fail(ioe.getMessage());
-        }
+        testFile = File.createTempFile("testfile", ".txt");
     }
 
-    /** */
-    public void testSetMsg()
+    /**
+     * @throws EmailException  */
+    public void testSetMsg() throws EmailException
     {
         // ====================================================================
         // Test Success
@@ -76,30 +72,16 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         // without charset set
         for (int i = 0; i < testCharsValid.length; i++)
         {
-            try
-            {
-                this.email.setMsg(testCharsValid[i]);
-                assertEquals(testCharsValid[i], this.email.getMsg());
-            }
-            catch (EmailException e)
-            {
-                fail("Unexpected exception thrown");
-            }
+            this.email.setMsg(testCharsValid[i]);
+            assertEquals(testCharsValid[i], this.email.getMsg());
         }
 
         // with charset set
         this.email.setCharset(Email.US_ASCII);
         for (int i = 0; i < testCharsValid.length; i++)
         {
-            try
-            {
-                this.email.setMsg(testCharsValid[i]);
-                assertEquals(testCharsValid[i], this.email.getMsg());
-            }
-            catch (EmailException e)
-            {
-                fail("Unexpected exception thrown");
-            }
+            this.email.setMsg(testCharsValid[i]);
+            assertEquals(testCharsValid[i], this.email.getMsg());
         }
 
         // ====================================================================
@@ -116,96 +98,79 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             {
                 assertTrue(true);
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
         }
     }
 
-    /** */
-    public void testSend()
+    /**
+     * @throws EmailException  
+     * @throws IOException */
+    public void testSend() throws EmailException, IOException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        try
+        this.getMailServer();
+
+        String strSubject = "Test Multipart Send Subject";
+
+        EmailAttachment attachment = new EmailAttachment();
+        attachment.setPath(testFile.getAbsolutePath());
+        attachment.setDisposition(EmailAttachment.ATTACHMENT);
+        attachment.setName("Test_Attachment");
+        attachment.setDescription("Test Attachment Desc");
+
+        MockMultiPartEmailConcrete testEmail =
+            new MockMultiPartEmailConcrete();
+        testEmail.setHostName(this.strTestMailServer);
+        testEmail.setSmtpPort(this.getMailServerPort());
+        testEmail.setFrom(this.strTestMailFrom);
+        testEmail.addTo(this.strTestMailTo);
+        testEmail.attach(attachment);
+        testEmail.setSubType("subType");
+
+        if (EmailUtils.isNotEmpty(this.strTestUser)
+            && EmailUtils.isNotEmpty(this.strTestPasswd))
         {
-            this.getMailServer();
-
-            String strSubject = "Test Multipart Send Subject";
-
-            EmailAttachment attachment = new EmailAttachment();
-            attachment.setPath(testFile.getAbsolutePath());
-            attachment.setDisposition(EmailAttachment.ATTACHMENT);
-            attachment.setName("Test_Attachment");
-            attachment.setDescription("Test Attachment Desc");
-
-            MockMultiPartEmailConcrete testEmail =
-                new MockMultiPartEmailConcrete();
-            testEmail.setHostName(this.strTestMailServer);
-            testEmail.setSmtpPort(this.getMailServerPort());
-            testEmail.setFrom(this.strTestMailFrom);
-            testEmail.addTo(this.strTestMailTo);
-            testEmail.attach(attachment);
-            testEmail.setSubType("subType");
-
-            if (EmailUtils.isNotEmpty(this.strTestUser)
-                && EmailUtils.isNotEmpty(this.strTestPasswd))
-            {
-                testEmail.setAuthentication(
-                    this.strTestUser,
-                    this.strTestPasswd);
-            }
-
-            testEmail.setSubject(strSubject);
-
-            testEmail.setMsg("Test Message");
-
-            Hashtable ht = new Hashtable();
-            ht.put("X-Priority", "2");
-            ht.put("Disposition-Notification-To", this.strTestMailFrom);
-            ht.put("X-Mailer", "Sendmail");
-
-            testEmail.setHeaders(ht);
-
-            testEmail.send();
-
-            this.fakeMailServer.stop();
-            // validate message
-            validateSend(
-                this.fakeMailServer,
-                strSubject,
-                testEmail.getMsg(),
-                testEmail.getFromAddress(),
-                testEmail.getToList(),
-                testEmail.getCcList(),
-                testEmail.getBccList(),
-                true);
-
-            // validate attachment
-            validateSend(
-                this.fakeMailServer,
-                strSubject,
-                attachment.getName(),
-                testEmail.getFromAddress(),
-                testEmail.getToList(),
-                testEmail.getCcList(),
-                testEmail.getBccList(),
-                false);
+            testEmail.setAuthentication(
+                this.strTestUser,
+                this.strTestPasswd);
         }
 
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            fail("Failed to save email to output file");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        testEmail.setSubject(strSubject);
+
+        testEmail.setMsg("Test Message");
+
+        Map ht = new HashMap();
+        ht.put("X-Priority", "2");
+        ht.put("Disposition-Notification-To", this.strTestMailFrom);
+        ht.put("X-Mailer", "Sendmail");
+
+        testEmail.setHeaders(ht);
+
+        testEmail.send();
+
+        this.fakeMailServer.stop();
+        // validate message
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            testEmail.getMsg(),
+            testEmail.getFromAddress(),
+            testEmail.getToList(),
+            testEmail.getCcList(),
+            testEmail.getBccList(),
+            true);
+
+        // validate attachment
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            attachment.getName(),
+            testEmail.getFromAddress(),
+            testEmail.getToList(),
+            testEmail.getCcList(),
+            testEmail.getBccList(),
+            false);
 
         // ====================================================================
         // Test Exceptions
@@ -220,56 +185,32 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             this.fakeMailServer.stop();
-            assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
     }
 
-    /** */
-    public void testAttach()
+    /**
+     * @throws MalformedURLException  
+     * @throws EmailException */
+    public void testAttach() throws MalformedURLException, EmailException
     {
         EmailAttachment attachment;
         // ====================================================================
         // Test Success - File
         // ====================================================================
         attachment = new EmailAttachment();
-        try
-        {
-            attachment.setName("Test Attachment");
-            attachment.setDescription("Test Attachment Desc");
-            attachment.setPath(testFile.getAbsolutePath());
-            this.email.attach(attachment);
-        }
-        catch (EmailException e)
-        {
-            fail("Unexpected exception thrown");
-        }
+        attachment.setName("Test Attachment");
+        attachment.setDescription("Test Attachment Desc");
+        attachment.setPath(testFile.getAbsolutePath());
+        this.email.attach(attachment);
 
         // ====================================================================
         // Test Success - URL
         // ====================================================================
         attachment = new EmailAttachment();
-        try
-        {
-            attachment.setName("Test Attachment");
-            attachment.setDescription("Test Attachment Desc");
-            attachment.setURL(new URL(this.strTestURL));
-            this.email.attach(attachment);
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        attachment.setName("Test Attachment");
+        attachment.setDescription("Test Attachment Desc");
+        attachment.setURL(new URL(this.strTestURL));
+        this.email.attach(attachment);
 
         // ====================================================================
         // Test Exceptions
@@ -284,11 +225,6 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
 
         // bad url
         attachment = new EmailAttachment();
@@ -301,11 +237,6 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
 
         // bad file
@@ -320,80 +251,40 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testAttach2()
+    /**
+     * @throws EmailException 
+     * @throws MalformedURLException  */
+    public void testAttach2() throws MalformedURLException, EmailException
     {
         // ====================================================================
         // Test Success - URL
         // ====================================================================
-        try
-        {
-            this.email.attach(
-                new URL(this.strTestURL),
-                "Test Attachment",
-                "Test Attachment Desc");
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        this.email.attach(
+            new URL(this.strTestURL), 
+            "Test Attachment",
+            "Test Attachment Desc");
 
         // bad name
-        try
-        {
-            this.email.attach(
-                new URL(this.strTestURL),
-                null,
-                "Test Attachment Desc");
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        this.email.attach(
+            new URL(this.strTestURL),
+            null,
+            "Test Attachment Desc");
     }
 
-    /** */
-    public void testAttach3()
+    /**
+     * @throws EmailException 
+     * @throws MalformedURLException  */
+    public void testAttach3() throws MalformedURLException, EmailException
     {
         // ====================================================================
         // Test Success - URL
         // ====================================================================
-        try
-        {
-            this.email.attach(
-                new URLDataSource(new URL(this.strTestURL)),
-                "Test Attachment",
-                "Test Attachment Desc");
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        this.email.attach(
+            new URLDataSource(new URL(this.strTestURL)),
+            "Test Attachment",
+            "Test Attachment Desc");
 
         // ====================================================================
         // Test Exceptions
@@ -409,11 +300,6 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
 
         // invalid datasource
         try
@@ -425,11 +311,6 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
     }
 
@@ -454,11 +335,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             this.email.getContainer().getBodyPart(0).getContentType());
         assertEquals(
             strMessage,
-            this
-                .email
-                .getContainer()
-                .getBodyPart(0)
-                .getDataHandler()
+            this.email.getContainer().getBodyPart(0).getDataHandler()
                 .getContent());
 
     }
@@ -509,11 +386,6 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         catch (IllegalStateException e)
         {
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
     }
 

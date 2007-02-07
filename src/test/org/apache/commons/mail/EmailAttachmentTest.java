@@ -40,8 +40,9 @@ public class EmailAttachmentTest extends BaseEmailTestCase
         super(name);
     }
 
-    /** */
-    protected void setUp()
+    /**
+     * @throws Exception  */
+    protected void setUp() throws Exception
     {
         super.setUp();
         // reusable objects to be used across multiple tests

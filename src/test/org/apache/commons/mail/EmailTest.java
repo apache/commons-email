@@ -59,8 +59,9 @@ public class EmailTest extends BaseEmailTestCase
         super(name);
     }
 
-    /** */
-    protected void setUp()
+    /**
+     * @throws Exception  */
+    protected void setUp() throws Exception
     {
         super.setUp();
         // reusable objects to be used across multiple tests
@@ -241,18 +242,10 @@ public class EmailTest extends BaseEmailTestCase
 
         for (int i = 0; i < tests.length; i++)
         {
-            try
-            {
-                this.email.setSmtpPort(tests[i]);
-                assertEquals(
-                    tests[i],
-                    Integer.valueOf(this.email.getSmtpPort()).intValue());
-            }
-            catch (IllegalArgumentException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            this.email.setSmtpPort(tests[i]);
+            assertEquals(
+                tests[i],
+                Integer.valueOf(this.email.getSmtpPort()).intValue());
         }
 
         // ====================================================================
@@ -271,11 +264,6 @@ public class EmailTest extends BaseEmailTestCase
             {
                 assertTrue(true);
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
         }
 
     }
@@ -291,23 +279,15 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -331,15 +311,15 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         String testValidEmail = "me@home.com";
 
-            InternetAddress inetExpected =
-                new InternetAddress("me@home.com", "me@home.com");
+        InternetAddress inetExpected =
+            new InternetAddress("me@home.com", "me@home.com");
 
-            // set from
-            this.email.setCharset(Email.ISO_8859_1);
-            this.email.setFrom(testValidEmail);
+        // set from
+        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setFrom(testValidEmail);
 
-            // retrieve and verify
-            assertEquals(inetExpected, this.email.getFromAddress());
+        // retrieve and verify
+        assertEquals(inetExpected, this.email.getFromAddress());
 
     }
 
@@ -353,29 +333,22 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
         String[] testEmails =
-            {
-                "me@home.com",
-                "joe.doe@apache.org",
-                "someone_here@work-address.com.au" };
+        {
+            "me@home.com",
+            "joe.doe@apache.org",
+            "someone_here@work-address.com.au" 
+        };
         String[] testEmailNames = { "Name1", "", null };
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "Name1"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < testEmails.length; i++)
         {
@@ -407,51 +380,32 @@ public class EmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testAddTo()
+    /**
+     * @throws EmailException  
+     * @throws UnsupportedEncodingException */
+    public void testAddTo() throws EmailException, UnsupportedEncodingException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addTo(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set from
+            this.email.addTo(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -459,8 +413,10 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals(arrExpected.toString(), this.email.getToList().toString());
     }
 
-    /** */
-    public void testAddToWithEncoding()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddToWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -468,36 +424,20 @@ public class EmailTest extends BaseEmailTestCase
         this.email.charset = Email.US_ASCII;
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addTo(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set from
+            this.email.addTo(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -505,8 +445,10 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals(arrExpected.toString(), this.email.getToList().toString());
     }
 
-    /** */
-    public void testAddTo2()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddTo2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -515,36 +457,20 @@ public class EmailTest extends BaseEmailTestCase
         String[] testEmailNames = { "Name1", "", null };
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "Name1"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set from
+            this.email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
@@ -569,53 +495,35 @@ public class EmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testSetTo()
+    /**
+     * @throws UnsupportedEncodingException   
+     * @throws EmailException 
+     */
+    public void testSetTo() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
         ArrayList testEmailValid2 = new ArrayList();
-        try
-        {
-            testEmailValid2.add(new InternetAddress("me@home.com", "Name1"));
-            testEmailValid2.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            testEmailValid2.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        testEmailValid2.add(new InternetAddress("me@home.com", "Name1"));
+        testEmailValid2.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        testEmailValid2.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
-        try
-        {
-            this.email.setTo(testEmailValid2);
+        this.email.setTo(testEmailValid2);
 
-            // retrieve and verify
-            assertEquals(testEmailValid2.size(), this.email.getToList().size());
-            assertEquals(
-                testEmailValid2.toString(),
-                this.email.getToList().toString());
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        // retrieve and verify
+        assertEquals(testEmailValid2.size(), this.email.getToList().size());
+        assertEquals(
+            testEmailValid2.toString(),
+            this.email.getToList().toString());
 
         // ====================================================================
         // Exception (Null Input)
@@ -628,11 +536,6 @@ public class EmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
 
         // ====================================================================
@@ -647,51 +550,32 @@ public class EmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testAddCc()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddCc() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addCc(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set from
+            this.email.addCc(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -699,8 +583,10 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals(arrExpected.toString(), this.email.getCcList().toString());
     }
 
-    /** */
-    public void testAddCcWithEncoding()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddCcWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -708,36 +594,20 @@ public class EmailTest extends BaseEmailTestCase
         this.email.charset = Email.US_ASCII;
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
+        // add valid ccs
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addCc(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            this.email.addCc(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -745,8 +615,10 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals(arrExpected.toString(), this.email.getCcList().toString());
     }
 
-    /** */
-    public void testAddCc2()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddCc2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -755,36 +627,20 @@ public class EmailTest extends BaseEmailTestCase
         String[] testEmailNames = { "Name1", "", null };
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "Name1"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set from
+            this.email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
@@ -809,15 +665,11 @@ public class EmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testSetCc()
+    /**
+     * @throws EmailException  */
+    public void testSetCc() throws EmailException
     {
         // ====================================================================
         // Test Success
@@ -828,16 +680,8 @@ public class EmailTest extends BaseEmailTestCase
         testEmailValid2.add(
             "\"someone_here@work.com.au\" <someone_here@work.com.au>");
 
-        try
-        {
-            this.email.setCc(testEmailValid2);
-            assertEquals(testEmailValid2, this.email.getCcList());
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        this.email.setCc(testEmailValid2);
+        assertEquals(testEmailValid2, this.email.getCcList());
 
         // ====================================================================
         // Exception (Null Input)
@@ -850,11 +694,6 @@ public class EmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
 
         // ====================================================================
@@ -869,51 +708,32 @@ public class EmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testAddBcc()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddBcc() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addBcc(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // add a valid bcc
+            this.email.addBcc(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -923,8 +743,10 @@ public class EmailTest extends BaseEmailTestCase
             this.email.getBccList().toString());
     }
 
-    /** */
-    public void testAddBccWithEncoding()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddBccWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -932,36 +754,20 @@ public class EmailTest extends BaseEmailTestCase
         this.email.charset = Email.US_ASCII;
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addBcc(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set bccs
+            this.email.addBcc(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -971,8 +777,10 @@ public class EmailTest extends BaseEmailTestCase
             this.email.getBccList().toString());
     }
 
-    /** */
-    public void testAddBcc2()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddBcc2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -981,36 +789,20 @@ public class EmailTest extends BaseEmailTestCase
         String[] testEmailNames = { "Name1", "", null };
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "Name1"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set from
+            this.email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
@@ -1037,48 +829,29 @@ public class EmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testSetBcc()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testSetBcc() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
         ArrayList testInetEmailValid = new ArrayList();
-        try
-        {
-            testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
-            testInetEmailValid.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            testInetEmailValid.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
+        testInetEmailValid.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        testInetEmailValid.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
-        try
-        {
-            this.email.setBcc(testInetEmailValid);
-            assertEquals(testInetEmailValid, this.email.getBccList());
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        this.email.setBcc(testInetEmailValid);
+        assertEquals(testInetEmailValid, this.email.getBccList());
 
         // ====================================================================
         // Exception (Null Input)
@@ -1091,11 +864,6 @@ public class EmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
 
         // ====================================================================
@@ -1110,51 +878,32 @@ public class EmailTest extends BaseEmailTestCase
         {
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
     }
 
-    /** */
-    public void testAddReplyTo()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddReplyTo() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addReplyTo(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set replyTo
+            this.email.addReplyTo(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -1164,8 +913,10 @@ public class EmailTest extends BaseEmailTestCase
             this.email.getReplyList().toString());
     }
 
-    /** */
-    public void testAddReplyToWithEncoding()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddReplyToWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -1173,36 +924,20 @@ public class EmailTest extends BaseEmailTestCase
         this.email.charset = Email.US_ASCII;
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addReplyTo(ARR_VALID_EMAILS[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set replyTo
+            this.email.addReplyTo(ARR_VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -1212,8 +947,10 @@ public class EmailTest extends BaseEmailTestCase
             this.email.getReplyList().toString());
     }
 
-    /** */
-    public void testAddReplyTo2()
+    /**
+     * @throws UnsupportedEncodingException  
+     * @throws EmailException */
+    public void testAddReplyTo2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -1222,36 +959,20 @@ public class EmailTest extends BaseEmailTestCase
         String[] testEmailNames = { "Name1", "", null };
 
         ArrayList arrExpected = new ArrayList();
-        try
-        {
-            arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-            arrExpected.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            arrExpected.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        arrExpected.add(new InternetAddress("me@home.com", "Name1"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            try
-            {
-                // set from
-                this.email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
-            }
-            catch (EmailException e)
-            {
-                e.printStackTrace();
-                fail("Unexpected exception thrown");
-            }
+            // set replyTo
+            this.email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
@@ -1277,11 +998,6 @@ public class EmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
     }
 
@@ -1442,11 +1158,6 @@ public class EmailTest extends BaseEmailTestCase
             this.fakeMailServer.stop();
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
 
         // bad hostname
         try
@@ -1475,11 +1186,6 @@ public class EmailTest extends BaseEmailTestCase
             this.fakeMailServer.stop();
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
 
         // ====================================================================
         // Test Exceptions (in send)
@@ -1501,11 +1207,6 @@ public class EmailTest extends BaseEmailTestCase
             this.fakeMailServer.stop();
             assertTrue(true);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
 
         // destination (to/cc/bcc) dd not set
         try
@@ -1523,11 +1224,6 @@ public class EmailTest extends BaseEmailTestCase
         {
             this.fakeMailServer.stop();
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
 
         // bad auth set
@@ -1548,11 +1244,6 @@ public class EmailTest extends BaseEmailTestCase
         {
             this.fakeMailServer.stop();
             assertTrue(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
         }
     }
 
@@ -1577,39 +1268,28 @@ public class EmailTest extends BaseEmailTestCase
         assertTrue(Math.abs(sentDate.getTime() - dtTest.getTime()) < 1000);
     }
 
-    /** */
-    public void testToInternetAddressArray()
+    /**
+     * @throws EmailException  
+     * @throws UnsupportedEncodingException */
+    public void testToInternetAddressArray() throws EmailException, UnsupportedEncodingException
     {
         ArrayList testInetEmailValid = new ArrayList();
 
-        try
-        {
-            testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
-            testInetEmailValid.add(
-                new InternetAddress(
-                    "joe.doe@apache.org",
-                    "joe.doe@apache.org"));
-            testInetEmailValid.add(
-                new InternetAddress(
-                    "someone_here@work-address.com.au",
-                    "someone_here@work-address.com.au"));
+        testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
+        testInetEmailValid.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        testInetEmailValid.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
 
-            this.email.setBcc(testInetEmailValid);
-            assertEquals(
-                testInetEmailValid.size(),
-                this.email.toInternetAddressArray(
-                    this.email.getBccList()).length);
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
-        catch (EmailException e)
-        {
-            e.printStackTrace();
-            fail("Unexpected exception thrown");
-        }
+        this.email.setBcc(testInetEmailValid);
+        assertEquals(
+            testInetEmailValid.size(),
+            this.email.toInternetAddressArray(
+                this.email.getBccList()).length);
     }
 
     /** */

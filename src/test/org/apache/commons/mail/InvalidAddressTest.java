@@ -76,8 +76,9 @@ public class InvalidAddressTest
         super(name);
     }
 
-    /** */
-    protected void setUp()
+    /**
+     * @throws Exception  */
+    protected void setUp() throws Exception
     {
         super.setUp();
 
