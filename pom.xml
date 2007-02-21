@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-parent</artifactId>
+        <version>1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>commons-email</groupId>
+    <artifactId>commons-email</artifactId>
+    <version>1.1-SNAPSHOT</version>
+    <name>Commons-Email</name>
+
+    <inceptionYear>2001</inceptionYear>
+    <description>
+        Commons-Email aims to provide a API for sending email. It is built on top of
+        the JavaMail API, which it aims to simplify.
+    </description>
+
+    <url>http://jakarta.apache.org/commons/email/</url>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>http://issues.apache.org/jira/browse/EMAIL</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk</developerConnection>
+        <url>http://svn.apache.org/viewvc/jakarta/commons/proper/email/trunk</url>
+    </scm>
+
+	<repositories>
+        <!-- Used for getting dumbster test dependency only. -->
+        <repository>
+            <id>apache.m1.snapshots</id>
+            <name>Apache M1 Snapshot repository</name>
+            <layout>legacy</layout>
+            <url>http://people.apache.org/repo/m1-snapshot-repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+	</repositories>
+
+    <developers>
+        <developer>
+            <name>dIon Gillard</name>
+            <id>dion</id>
+            <email>dion@apache.org</email>
+            <organization>Apache Software Foundation</organization>
+            <roles/>
+        </developer>
+        <developer>
+            <name>John McNally</name>
+            <id>jmcnally</id>
+            <email>jmcnally@collab.net</email>
+            <organization>CollabNet, Inc.</organization>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Quinton McCombs</name>
+            <id>quintonm</id>
+            <email>quintonm@bellsouth.net</email>
+            <organization>NequalsOne, LLC.</organization>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Eric Pugh</name>
+            <id>epugh</id>
+            <email>epugh@opensourceconnections.com</email>
+            <organization>OpenSource Connections</organization>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Daniel Rall</name>
+            <id>dlr</id>
+            <email>dlr@finemaltcoding.com</email>
+            <organization>CollabNet, Inc.</organization>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Jon Scott Stevens</name>
+            <id>jon</id>
+            <email>jon@latchkey.com</email>
+            <organization>CollabNet, Inc.</organization>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Jason van Zyl</name>
+            <id>jvanzyl</id>
+            <email>jason@zenplex.com</email>
+            <organization>Zenplex</organization>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Joe Germuska</name>
+            <id>germuska</id>
+            <email>Joe@Germuska.com</email>
+            <roles/>
+        </developer>
+        <developer>
+            <name>Robert Burrell Donkin</name>
+            <id>rdonkin</id>
+            <email>rdonkin@apache.org</email>
+            <roles/>
+        </developer>
+        <developer>
+          <name>Henning P. Schmiedehausen</name>
+          <id>henning</id>
+          <email>hps@intermeta.de</email>
+          <organization>INTERMETA - Gesellschaft fuer Mehrwertdienste mbH</organization>
+          <roles>
+            <role>Java Developer</role>
+          </roles>
+          <timezone>2</timezone>
+        </developer>
+        <developer>
+          <name>Stephen Colebourne</name>
+          <id>scolebourne</id>
+          <roles/>
+          <timezone>0</timezone>
+        </developer>
+    </developers>
+    <contributors>
+        <contributor>
+            <name>Mark Lowe</name>
+            <email>mark.lowe@boxstuff.com</email>
+            <roles/>
+        </contributor>
+        <contributor>
+            <name>Niall Pemberton</name>
+            <roles/>
+        </contributor>
+        <contributor>
+            <name>Corey Scott</name>
+            <email>corey.scott@gmail.com</email>
+            <roles/>
+        </contributor>
+        <contributor>
+            <name>Eric Spiegelberg</name>
+            <email>eric@spiegs.com</email>
+            <roles/>
+        </contributor>
+        <contributor>
+            <name>Matthias Wessendorf</name>
+            <email>matthias@wessendorf.net</email>
+            <roles/>
+        </contributor>
+    </contributors>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+            <!--<url>http://java.sun.com/products/javamail/</url>-->
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1</version>
+            <!--<url>http://java.sun.com/products/javabeans/glasgow/jaf.html</url>-->
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>dumbster</groupId>
+            <artifactId>dumbster</artifactId>
+            <version>SNAPSHOT</version>
+            <!--<url>http://quintanasoft.com/dumbster/</url>-->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>maven-plugins</groupId>
+            <artifactId>maven-findbugs-plugin</artifactId>
+            <version>0.9.2</version>
+            <!--<url>http://maven-plugins.sourceforge.net/maven-findbugs-plugin/</url>-->
+            <type>plugin</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <testSourceDirectory>src/test</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>.</directory>
+                <targetPath>META-INF</targetPath>
+                <includes>
+                    <include>NOTICE.txt</include>
+                    <include>LICENSE.txt</include>
+                </includes>
+            </resource>
+        </resources>
+        <testResources>
+        	<testResource>
+        		<directory>src/test</directory>
+        		<excludes>
+        			<exclude>**/*.java</exclude>
+        		</excludes>
+        	</testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.4</source>
+                    <target>1.4</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- exclude test case support classes -->
+                    <excludes>
+                        <exclude>org/apache/commons/mail/BaseEmailTestCase.java</exclude>
+                        <exclude>org/apache/commons/mail/mocks/*</exclude>
+                        <exclude>org/apache/commons/mail/settings/*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
