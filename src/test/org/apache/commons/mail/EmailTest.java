@@ -17,6 +17,8 @@
 package org.apache.commons.mail;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -157,11 +159,15 @@ public class EmailTest extends BaseEmailTestCase
     /** */
     public void testGetSetCharset()
     {
-        for (int i = 0; i < testCharsValid.length; i++)
-        {
-            this.email.setCharset(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getCharset());
-        }
+        // test ASCII and UTF-8 charsets; since every JVM is required
+        // to support these, testing them should always succeed.
+        Charset set = Charset.forName("US-ASCII");
+        this.email.setCharset(set.name());
+        assertEquals(set.name(), this.email.getCharset());
+
+        set = Charset.forName("UTF-8");
+        this.email.setCharset(set.name());
+        assertEquals(set.name(), this.email.getCharset());
     }
 
     /** */
@@ -304,7 +310,7 @@ public class EmailTest extends BaseEmailTestCase
      *
      * @throws Exception Exception
      */
-    public void testSetFromWithEnconding() throws Exception
+    public void testSetFromWithEncoding() throws Exception
     {
         // ====================================================================
         // Test Success (with charset set)
@@ -312,11 +318,10 @@ public class EmailTest extends BaseEmailTestCase
         String testValidEmail = "me@home.com";
 
         InternetAddress inetExpected =
-            new InternetAddress("me@home.com", "me@home.com");
+            new InternetAddress("me@home.com", "me@home.com", Email.ISO_8859_1);
 
         // set from
-        this.email.setCharset(Email.ISO_8859_1);
-        this.email.setFrom(testValidEmail);
+        this.email.setFrom(testValidEmail, testValidEmail, Email.ISO_8859_1);
 
         // retrieve and verify
         assertEquals(inetExpected, this.email.getFromAddress());
@@ -336,7 +341,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             "me@home.com",
             "joe.doe@apache.org",
-            "someone_here@work-address.com.au" 
+            "someone_here@work-address.com.au"
         };
         String[] testEmailNames = { "Name1", "", null };
         ArrayList arrExpected = new ArrayList();
@@ -363,27 +368,25 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
+        // reset the mail class
+        MockEmailConcrete anotherEmail = new MockEmailConcrete();
+
         // bad encoding
         try
         {
-            // reset the mail class
-            MockEmailConcrete anotherEmail = new MockEmailConcrete();
             // set a dodgy encoding scheme
-            anotherEmail.setCharset("bad.encoding\uc5ec\n");
-            // set a valid address but bad personal name
-            anotherEmail.setFrom(
-                "me@home.com",
-                "\t.bad.personal.name.\uc5ec\n");
-            fail("Should have thrown an exception");
+            anotherEmail.setFrom("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
+            fail("setting invalid charset should have failed!");
         }
         catch (EmailException e)
         {
-            assertTrue(true);
+            // expected runtime exception.
+            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
     /**
-     * @throws EmailException  
+     * @throws EmailException
      * @throws UnsupportedEncodingException */
     public void testAddTo() throws EmailException, UnsupportedEncodingException
     {
@@ -414,25 +417,31 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddToWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        this.email.charset = Email.US_ASCII;
+        String testCharset = Email.ISO_8859_1;
 
         ArrayList arrExpected = new ArrayList();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "me@home.com",
+                "me@home.com",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "joe.doe@apache.org",
-                "joe.doe@apache.org"));
+                "joe.doe@apache.org",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+                "someone_here@work-address.com.au",
+                testCharset));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -446,7 +455,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddTo2() throws UnsupportedEncodingException, EmailException
     {
@@ -480,26 +489,26 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
+        // reset the mail class
+        MockEmailConcrete anotherEmail = new MockEmailConcrete();
+
         // bad encoding
         try
         {
-            // reset the mail class
-            MockEmailConcrete anotherEmail = new MockEmailConcrete();
             // set a dodgy encoding scheme
-            anotherEmail.setCharset("bad.encoding\uc5ec\n");
-            // set a valid address but bad personal name
-            anotherEmail.addTo("me@home.com", "\t.bad.name.\uc5ec\n");
-            fail("Should have thrown an exception");
+            anotherEmail.addTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
+            fail("setting invalid charset should have failed!");
         }
         catch (EmailException e)
         {
-            assertTrue(true);
+            // expected runtime exception.
+            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
     /**
-     * @throws UnsupportedEncodingException   
-     * @throws EmailException 
+     * @throws UnsupportedEncodingException
+     * @throws EmailException
      */
     public void testSetTo() throws UnsupportedEncodingException, EmailException
     {
@@ -553,7 +562,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddCc() throws UnsupportedEncodingException, EmailException
     {
@@ -584,25 +593,31 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddCcWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        this.email.charset = Email.US_ASCII;
+        String testCharset = Email.ISO_8859_1;
 
         ArrayList arrExpected = new ArrayList();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "me@home.com",
+                "me@home.com",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "joe.doe@apache.org",
-                "joe.doe@apache.org"));
+                "joe.doe@apache.org",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+                "someone_here@work-address.com.au",
+                testCharset));
 
         // add valid ccs
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
@@ -616,7 +631,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddCc2() throws UnsupportedEncodingException, EmailException
     {
@@ -650,20 +665,20 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
+        // reset the mail class
+        MockEmailConcrete anotherEmail = new MockEmailConcrete();
+
         // bad encoding
         try
         {
-            // reset the mail class
-            MockEmailConcrete anotherEmail = new MockEmailConcrete();
             // set a dodgy encoding scheme
-            anotherEmail.setCharset("bad.encoding\uc5ec\n");
-            // set a valid address but bad personal name
-            anotherEmail.addCc("me@home.com", "\t.bad.name.\uc5ec\n");
-            fail("Should have thrown an exception");
+            anotherEmail.addCc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
+            fail("setting invalid charset should have failed!");
         }
         catch (EmailException e)
         {
-            assertTrue(true);
+            // expected runtime exception.
+            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
@@ -711,7 +726,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddBcc() throws UnsupportedEncodingException, EmailException
     {
@@ -744,25 +759,31 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddBccWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        this.email.charset = Email.US_ASCII;
+        String testCharset = Email.ISO_8859_1;
 
         ArrayList arrExpected = new ArrayList();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "me@home.com",
+                "me@home.com",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "joe.doe@apache.org",
-                "joe.doe@apache.org"));
+                "joe.doe@apache.org",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+                "someone_here@work-address.com.au",
+                testCharset));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -778,7 +799,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddBcc2() throws UnsupportedEncodingException, EmailException
     {
@@ -814,25 +835,25 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
+        // reset the mail class
+        MockEmailConcrete anotherEmail = new MockEmailConcrete();
+
         // bad encoding
         try
         {
-            // reset the mail class
-            MockEmailConcrete anotherEmail = new MockEmailConcrete();
             // set a dodgy encoding scheme
-            anotherEmail.setCharset("bad.encoding\uc5ec\n");
-            // set a valid address but bad personal name
-            anotherEmail.addBcc("me@home.com", "\t.bad.name.\uc5ec\n");
-            fail("Should have thrown an exception");
+            anotherEmail.addBcc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
+            fail("setting invalid charset should have failed!");
         }
         catch (EmailException e)
         {
-            assertTrue(true);
+            // expected runtime exception.
+            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testSetBcc() throws UnsupportedEncodingException, EmailException
     {
@@ -881,7 +902,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddReplyTo() throws UnsupportedEncodingException, EmailException
     {
@@ -914,25 +935,31 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddReplyToWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        this.email.charset = Email.US_ASCII;
+        String testCharset = Email.ISO_8859_1;
 
         ArrayList arrExpected = new ArrayList();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "me@home.com",
+                "me@home.com",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "joe.doe@apache.org",
-                "joe.doe@apache.org"));
+                "joe.doe@apache.org",
+                testCharset));
         arrExpected.add(
             new InternetAddress(
                 "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+                "someone_here@work-address.com.au",
+                testCharset));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -948,7 +975,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException  
+     * @throws UnsupportedEncodingException
      * @throws EmailException */
     public void testAddReplyTo2() throws UnsupportedEncodingException, EmailException
     {
@@ -984,20 +1011,20 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
+        // reset the mail class
+        MockEmailConcrete anotherEmail = new MockEmailConcrete();
+
         // bad encoding
         try
         {
-            // reset the mail class
-            MockEmailConcrete anotherEmail = new MockEmailConcrete();
             // set a dodgy encoding scheme
-            anotherEmail.setCharset("bad.encoding\uc5ec\n");
-            // set a valid address but bad personal name
-            anotherEmail.addReplyTo("me@home.com", "\t.bad.name.\uc5ec\n");
-            fail("Should have thrown an exception");
+            anotherEmail.addReplyTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
+            fail("setting invalid charset should have failed!");
         }
         catch (EmailException e)
         {
-            assertTrue(true);
+            // expected runtime exception.
+            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
@@ -1269,7 +1296,7 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException  
+     * @throws EmailException
      * @throws UnsupportedEncodingException */
     public void testToInternetAddressArray() throws EmailException, UnsupportedEncodingException
     {

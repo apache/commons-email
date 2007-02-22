@@ -16,6 +16,10 @@
  */
 package org.apache.commons.mail;
 
+import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.UnsupportedCharsetException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -166,10 +170,10 @@ public abstract class Email
      * Defaults to the standard port ( 25 ).
      */
     protected String smtpPort = "25";
-    
+
     /**
      * The port number of the SSL enabled SMTP server;
-     * defaults to the standard port, 465. 
+     * defaults to the standard port, 465.
      */
     protected String sslSmtpPort = "465";
 
@@ -220,7 +224,7 @@ public abstract class Email
     protected boolean tls = false;
     /** does the current transport use SSL encryption? */
     protected boolean ssl = false;
-    
+
     /**
      * Setting to true will enable the display of debug information.
      *
@@ -271,11 +275,15 @@ public abstract class Email
      * Set the charset of the message.
      *
      * @param newCharset A String.
+     * @throws IllegalCharsetNameException if the charset name is invalid
+     * @throws UnsupportedCharsetException if no support for the named charset
+     * exists in the current JVM
      * @since 1.0
      */
     public void setCharset(String newCharset)
     {
-        this.charset = newCharset;
+        Charset set = Charset.forName(newCharset);
+        this.charset = set.name();
     }
 
     /**
@@ -344,7 +352,7 @@ public abstract class Email
     }
 
     /**
-     * Set or disable the TLS encryption 
+     * Set or disable the TLS encryption
      *
      * @param withTLS true if TLS needed, false otherwise
      * @since 1.1
@@ -461,7 +469,7 @@ public abstract class Email
                 properties.setProperty(MAIL_PORT, sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
-                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");           	
+                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
             }
 
             if (this.bounceAddress != null)
@@ -482,34 +490,41 @@ public abstract class Email
      *
      * @param email An email address.
      * @param name A name.
+     * @param charsetName The name of the charset to encode the name with.
      * @return An internet address.
-     * @throws EmailException Thrown when the address supplied or name were invalid.
+     * @throws EmailException Thrown when the supplied address, name or charset were invalid.
      */
-    private InternetAddress createInternetAddress(String email, String name)
+    private InternetAddress createInternetAddress(String email, String name, String charsetName)
         throws EmailException
     {
         InternetAddress address = null;
 
         try
         {
+            address = new InternetAddress(email);
+
             // check name input
             if (EmailUtils.isEmpty(name))
             {
                 name = email;
             }
 
-            // Using this instead of new InternetAddress(email, name, [charset]) makes
-            // commons-email usable with javamail 1.2 / J2EE 1.3
-            address = new InternetAddress(email);
-
-            if (EmailUtils.isNotEmpty(this.charset))
-            {
-                address.setPersonal(name, this.charset);
-            }
-            else
+            // check charset input.
+            if (EmailUtils.isEmpty(charsetName))
             {
                 address.setPersonal(name);
             }
+            else
+            {
+                // canonicalize the charset name and make sure
+                // the current platform supports it.
+                Charset set = Charset.forName(charsetName);
+                address.setPersonal(name, set.name());
+            }
+
+            // run sanity check on new InternetAddress object; if this fails
+            // it will throw AddressException.
+            address.validate();
         }
         catch (Exception e)
         {
@@ -520,7 +535,10 @@ public abstract class Email
 
 
     /**
-     * Set the FROM field of the email.
+     * Set the FROM field of the email to use the specified address. The email
+     * address will also be used as the personal name. The name will be encoded
+     * using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -534,7 +552,10 @@ public abstract class Email
     }
 
     /**
-     * Set the FROM field of the email.
+     * Set the FROM field of the email to use the specified address and the
+     * specified personal name. The name will be encoded using the Java
+     * platform's default charset (UTF-16) if it contains non-ASCII
+     * characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -545,13 +566,32 @@ public abstract class Email
     public Email setFrom(String email, String name)
         throws EmailException
     {
-        this.fromAddress = createInternetAddress(email, name);
+        return setFrom(email, name, null);
+    }
 
+    /**
+     * Set the FROM field of the email to use the specified address, personal
+     * name, and charset encoding for the name.
+     *
+     * @param email A String.
+     * @param name A String.
+     * @param charset The charset to encode the name with.
+     * @throws EmailException Indicates an invalid email address or charset.
+     * @return An Email.
+     * @since 1.1
+     */
+    public Email setFrom(String email, String name, String charset)
+        throws EmailException
+    {
+        this.fromAddress = createInternetAddress(email, name, charset);
         return this;
     }
 
     /**
-     * Add a recipient TO to the email.
+     * Add a recipient TO to the email. The email
+     * address will also be used as the personal name. The name will be encoded
+     * using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @throws EmailException Indicates an invalid email address.
@@ -565,7 +605,10 @@ public abstract class Email
     }
 
     /**
-     * Add a recipient TO to the email.
+     * Add a recipient TO to the email using the specified address and the
+     * specified personal name. The name will be encoded using the Java
+     * platform's default charset (UTF-16) if it contains non-ASCII
+     * characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -576,16 +619,36 @@ public abstract class Email
     public Email addTo(String email, String name)
         throws EmailException
     {
-        this.toList.add(createInternetAddress(email, name));
+        return addTo(email, name, null);
+    }
+
+    /**
+     * Add a recipient TO to the email using the specified address, personal
+     * name, and charset encoding for the name.
+     *
+     * @param email A String.
+     * @param name A String.
+     * @param charset The charset to encode the name with.
+     * @throws EmailException Indicates an invalid email address or charset.
+     * @return An Email.
+     * @since 1.1
+     */
+    public Email addTo(String email, String name, String charset)
+        throws EmailException
+    {
+        this.toList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
     /**
-     * Set a list of "TO" addresses.
+     * Set a list of "TO" addresses. All elements in the specified
+     * <code>Collection</code> are expected to be of type
+     * <code>java.mail.internet.InternetAddress</code>.
      *
-     * @param  aCollection collection of InternetAddress objects.
+     * @param  aCollection collection of <code>InternetAddress</code> objects.
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
     public Email setTo(Collection aCollection) throws EmailException
@@ -600,7 +663,10 @@ public abstract class Email
     }
 
     /**
-     * Add a recipient CC to the email.
+     * Add a recipient CC to the email. The email
+     * address will also be used as the personal name. The name will be encoded
+     * using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -614,7 +680,10 @@ public abstract class Email
     }
 
     /**
-     * Add a recipient CC to the email.
+     * Add a recipient CC to the email using the specified address and the
+     * specified personal name. The name will be encoded using the Java
+     * platform's default charset (UTF-16) if it contains non-ASCII
+     * characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -625,17 +694,37 @@ public abstract class Email
     public Email addCc(String email, String name)
         throws EmailException
     {
-        this.ccList.add(createInternetAddress(email, name));
+        return addCc(email, name, null);
+    }
+
+    /**
+     * Add a recipient CC to the email using the specified address, personal
+     * name, and charset encoding for the name.
+     *
+     * @param email A String.
+     * @param name A String.
+     * @param charset The charset to encode the name with.
+     * @throws EmailException Indicates an invalid email address or charset.
+     * @return An Email.
+     * @since 1.1
+     */
+    public Email addCc(String email, String name, String charset)
+        throws EmailException
+    {
+        this.ccList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
     /**
-     * Set a list of "CC" addresses.
+     * Set a list of "CC" addresses. All elements in the specified
+     * <code>Collection</code> are expected to be of type
+     * <code>java.mail.internet.InternetAddress</code>.
      *
-     * @param aCollection collection of InternetAddress objects.
+     * @param aCollection collection of <code>InternetAddress</code> objects.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address
-     * @since 1.0.
+     * @throws EmailException Indicates an invalid email address.
+     * @see javax.mail.internet.InternetAddress
+     * @since 1.0
      */
     public Email setCc(Collection aCollection) throws EmailException
     {
@@ -649,7 +738,10 @@ public abstract class Email
     }
 
     /**
-     * Add a blind BCC recipient to the email.
+     * Add a blind BCC recipient to the email. The email
+     * address will also be used as the personal name. The name will be encoded
+     * using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -663,7 +755,10 @@ public abstract class Email
     }
 
     /**
-     * Add a blind BCC recipient to the email.
+     * Add a blind BCC recipient to the email using the specified address and
+     * the specified personal name. The name will be encoded using the Java
+     * platform's default charset (UTF-16) if it contains non-ASCII
+     * characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -674,16 +769,36 @@ public abstract class Email
     public Email addBcc(String email, String name)
         throws EmailException
     {
-        this.bccList.add(createInternetAddress(email, name));
+        return addBcc(email, name, null);
+    }
+
+    /**
+     * Add a blind BCC recipient to the email using the specified address,
+     * personal name, and charset encoding for the name.
+     *
+     * @param email A String.
+     * @param name A String.
+     * @param charset The charset to encode the name with.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address
+     * @since 1.1
+     */
+    public Email addBcc(String email, String name, String charset)
+        throws EmailException
+    {
+        this.bccList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
     /**
-     * Set a list of "BCC" addresses
+     * Set a list of "BCC" addresses. All elements in the specified
+     * <code>Collection</code> are expected to be of type
+     * <code>java.mail.internet.InternetAddress</code>.
      *
-     * @param   aCollection collection of InternetAddress objects
+     * @param   aCollection collection of <code>InternetAddress</code> objects
      * @return  An Email.
      * @throws EmailException Indicates an invalid email address
+     * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
     public Email setBcc(Collection aCollection) throws EmailException
@@ -698,7 +813,10 @@ public abstract class Email
     }
 
     /**
-     * Add a reply to address to the email.
+     * Add a reply to address to the email. The email
+     * address will also be used as the personal name. The name will be encoded
+     * using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -712,7 +830,10 @@ public abstract class Email
     }
 
     /**
-     * Add a reply to address to the email.
+     * Add a reply to address to the email using the specified address and
+     * the specified personal name. The name will be encoded using the Java
+     * platform's default charset (UTF-16) if it contains non-ASCII
+     * characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -723,16 +844,36 @@ public abstract class Email
     public Email addReplyTo(String email, String name)
         throws EmailException
     {
-        this.replyList.add(createInternetAddress(email, name));
+        return addReplyTo(email, name, null);
+    }
+
+    /**
+     * Add a reply to address to the email using the specified address,
+     * personal name, and charset encoding for the name.
+     *
+     * @param email A String.
+     * @param name A String.
+     * @param charset The charset to encode the name with.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address or charset.
+     * @since 1.1
+     */
+    public Email addReplyTo(String email, String name, String charset)
+        throws EmailException
+    {
+        this.replyList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
     /**
-     * Set a list of reply addresses
+     * Set a list of reply to addresses. All elements in the specified
+     * <code>Collection</code> are expected to be of type
+     * <code>java.mail.internet.InternetAddress</code>.
      *
-     * @param   aCollection collection of InternetAddress objects
+     * @param   aCollection collection of <code>InternetAddress</code> objects
      * @return  An Email.
      * @throws EmailException Indicates an invalid email address
+     * @see javax.mail.internet.InternetAddress
      * @since 1.1
      */
     public Email setReplyTo(Collection aCollection) throws EmailException
