@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataHandler;
 import javax.activation.URLDataSource;
@@ -69,8 +69,11 @@ public class HtmlEmail extends MultiPartEmail
     /** Html part of the message */
     protected String html;
 
-    /** Embedded images */
-    protected List inlineImages = new ArrayList();
+    /**
+     * Embedded images Map<String,InlineImages> where the key is the
+     * user-defined image name
+     */
+    protected Map inlineImages = new HashMap();
 
     /** HTML prefix and suffix for default HTML mail */
     private static final String HTML_MESSAGE_START = "<html><body><pre>";
@@ -162,14 +165,14 @@ public class HtmlEmail extends MultiPartEmail
      */
     public String embed(String url, String name) throws EmailException
     {
-    	try
-    	{
-    		return embed(new URL(url), name);
-    	}
-    	catch (MalformedURLException e)
-    	{
-    		throw new EmailException("Invalid URL", e);
-    	}
+        try
+        {
+            return embed(new URL(url), name);
+        }
+        catch (MalformedURLException e)
+        {
+            throw new EmailException("Invalid URL", e);
+        }
     }
 
     /**
@@ -179,7 +182,8 @@ public class HtmlEmail extends MultiPartEmail
      * the mail body.  It allows, for instance, to add inline images
      * to the email.  Inline files may be referenced with a
      * <code>cid:xxxxxx</code> URL, where xxxxxx is the Content-ID
-     * returned by the embed function.
+     * returned by the embed function. It is an error to bind the same name
+     * to more than one URL.
      *
      * <p>Example of use:<br><code><pre>
      * HtmlEmail he = new HtmlEmail();
@@ -189,6 +193,13 @@ public class HtmlEmail extends MultiPartEmail
      * // code to set the others email fields (not shown)
      * </pre></code>
      *
+     * <p>
+     * NOTE: Clients should take care to ensure that different URLs are bound to
+     * different names. This implementation tries to detect this and throw
+     * <code>EmailException</code>. However, it is not guaranteed to catch
+     * all cases, especially when the URL refers to a remote HTTP host that
+     * may be part of a virtual host cluster.
+     * 
      * @param url The URL of the file.
      * @param name The name that will be set in the filename header
      * field.
@@ -199,6 +210,31 @@ public class HtmlEmail extends MultiPartEmail
      */
     public String embed(URL url, String name) throws EmailException
     {
+        InlineImage ii = null;        
+        
+        // check if the URL contents have already been attached;
+        // if so, return the cached CID value.
+        if (inlineImages.containsKey(name))
+        {
+            ii = (InlineImage) inlineImages.get(name);
+            // make sure the supplied URL points to the same thing
+            // as the one already associated with this name.
+            if (url.equals(ii.getURL()))
+            {
+                return ii.getCid();                
+            }
+            else
+            {
+                throw new EmailException("embedded file name '" + name
+                    + " is already bound to URL " + ii.getURL().toString()
+                    + "; existing names cannot be rebound");
+            }
+            // NOTE: Comparing URLs with URL.equals() is known to be
+            // inconsistent when dealing with virtual hosting over HTTP,
+            // but since these are almost always files on the local machine,
+            // using equals() should be sufficient.            
+        }
+
         // verify that the URL is valid
         try
         {
@@ -218,8 +254,11 @@ public class HtmlEmail extends MultiPartEmail
             mbp.setFileName(name);
             mbp.setDisposition("inline");
             String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
-            mbp.addHeader("Content-ID", "<" + cid + ">");
-            this.inlineImages.add(mbp);
+            mbp.setContentID("<" + cid + ">");
+
+            ii = new InlineImage(cid, url, mbp);
+            this.inlineImages.put(name, ii);
+
             return cid;
         }
         catch (MessagingException me)
@@ -238,17 +277,7 @@ public class HtmlEmail extends MultiPartEmail
     {
         try
         {
-            // if the email has attachments then the base type is mixed,
-            // otherwise it should be related
-            if (this.isBoolHasAttachments())
-            {
-                this.buildAttachments();
-            }
-            else
-            {
-                this.buildNoAttachments();
-            }
-
+            build();
         }
         catch (MessagingException me)
         {
@@ -261,22 +290,29 @@ public class HtmlEmail extends MultiPartEmail
      * @throws EmailException EmailException
      * @throws MessagingException MessagingException
      */
-    private void buildAttachments() throws MessagingException, EmailException
+    private void build() throws MessagingException, EmailException
     {
         MimeMultipart container = this.getContainer();
         MimeMultipart subContainer = null;
-        MimeMultipart subContainerHTML = new MimeMultipart("related");
         BodyPart msgHtml = null;
         BodyPart msgText = null;
 
-        container.setSubType("mixed");
+        container.setSubType("related");
         subContainer = new MimeMultipart("alternative");
 
         if (EmailUtils.isNotEmpty(this.text))
         {
             msgText = new MimeBodyPart();
-            subContainer.addBodyPart(msgText);
+            if (this.inlineImages.size() > 0)
+            {
+                subContainer.addBodyPart(msgText);
+            }
+            else
+            {
+                container.addBodyPart(msgText);
+            }
 
+            // apply default charset if one has been set
             if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgText.setContent(
@@ -291,17 +327,17 @@ public class HtmlEmail extends MultiPartEmail
 
         if (EmailUtils.isNotEmpty(this.html))
         {
+            msgHtml = new MimeBodyPart();
             if (this.inlineImages.size() > 0)
             {
-                msgHtml = new MimeBodyPart();
-                subContainerHTML.addBodyPart(msgHtml);
+                subContainer.addBodyPart(msgHtml);
             }
             else
             {
-                msgHtml = new MimeBodyPart();
-                subContainer.addBodyPart(msgHtml);
+                container.addBodyPart(msgHtml);
             }
 
+            // apply default charset if one has been set
             if (EmailUtils.isNotEmpty(this.charset))
             {
                 msgHtml.setContent(
@@ -313,96 +349,91 @@ public class HtmlEmail extends MultiPartEmail
                 msgHtml.setContent(this.html, Email.TEXT_HTML);
             }
 
-            Iterator iter = this.inlineImages.iterator();
+            Iterator iter = this.inlineImages.values().iterator();
             while (iter.hasNext())
             {
-                subContainerHTML.addBodyPart((BodyPart) iter.next());
+                InlineImage ii = (InlineImage) iter.next();
+                container.addBodyPart(ii.getMbp());
             }
         }
-
-        // add sub containers to message
-        this.addPart(subContainer, 0);
 
         if (this.inlineImages.size() > 0)
         {
             // add sub container to message
-            this.addPart(subContainerHTML, 1);
+            this.addPart(subContainer, 0);
         }
     }
 
     /**
-     * @throws EmailException EmailException
-     * @throws MessagingException MessagingException
+     * Private bean class that encapsulates data about URL contents
+     * that are embedded in the final email.
+     * @since 1.1
      */
-    private void buildNoAttachments() throws MessagingException, EmailException
+    private static class InlineImage
     {
-        MimeMultipart container = this.getContainer();
-        MimeMultipart subContainerHTML = new MimeMultipart("related");
+        private String cid;
+        private URL url;
+        private MimeBodyPart mbp;
 
-        container.setSubType("alternative");
-
-        BodyPart msgText = null;
-        BodyPart msgHtml = null;
-
-        if (EmailUtils.isNotEmpty(this.text))
+        /**
+         * Creates an InlineImage object to represent the
+         * specified content ID and <code>MimeBodyPart</code>.
+         * @param cid the generated content ID
+         * @param url the URL that points to the content
+         * @param mbp the <code>MimeBodyPart</code> that contains the encoded
+         * data
+         */
+        public InlineImage(String cid, URL url, MimeBodyPart mbp)
         {
-            msgText = this.getPrimaryBodyPart();
-            if (EmailUtils.isNotEmpty(this.charset))
-            {
-                msgText.setContent(
-                    this.text,
-                    Email.TEXT_PLAIN + "; charset=" + this.charset);
-            }
-            else
-            {
-                msgText.setContent(this.text, Email.TEXT_PLAIN);
-            }
+            this.cid = cid;
+            this.url = url;
+            this.mbp = mbp;
         }
 
-        if (EmailUtils.isNotEmpty(this.html))
+        /**
+         * Returns the unique content ID of this InlineImage.
+         * @return the unique content ID of this InlineImage
+         */
+        public String getCid()
         {
-            // if the txt part of the message was null, then the html part
-            // will become the primary body part
-            if (msgText == null)
-            {
-                msgHtml = getPrimaryBodyPart();
-            }
-            else
-            {
-                if (this.inlineImages.size() > 0)
-                {
-                    msgHtml = new MimeBodyPart();
-                    subContainerHTML.addBodyPart(msgHtml);
-                }
-                else
-                {
-                    msgHtml = new MimeBodyPart();
-                    container.addBodyPart(msgHtml, 1);
-                }
-            }
+            return cid;
+        }
 
-            if (EmailUtils.isNotEmpty(this.charset))
-            {
-                msgHtml.setContent(
-                    this.html,
-                    Email.TEXT_HTML + "; charset=" + this.charset);
-            }
-            else
-            {
-                msgHtml.setContent(this.html, Email.TEXT_HTML);
-            }
-
-            Iterator iter = this.inlineImages.iterator();
-            while (iter.hasNext())
-            {
-                subContainerHTML.addBodyPart((BodyPart) iter.next());
-            }
-
-            if (this.inlineImages.size() > 0)
-            {
-                // add sub container to message
-                this.addPart(subContainerHTML);
-            }
+        /**
+         * Returns the URL that points to the encoded content.
+         * @return the URL pointing to the encoded content
+         */
+        public URL getURL() {
+            return url;
+        }
+        
+        /**
+         * Returns the <code>MimeBodyPart</code> that contains the
+         * encoded InlineImage data.
+         * @return the <code>MimeBodyPart</code> containing the encoded
+         * InlineImage data
+         */
+        public MimeBodyPart getMbp()
+        {
+            return mbp;
+        }
+        
+        // equals()/hashCode() implementations, since this class
+        // is stored as a entry in a Map.
+        
+        public boolean equals(Object obj)
+        {
+            if (this == obj) return true;
+            if (!(obj instanceof InlineImage)) return false;
+            
+            InlineImage that = (InlineImage) obj;
+            
+            return this.cid.equals(that.cid);
+        }
+        
+        public int hashCode()
+        {
+            return cid.hashCode();
         }
     }
 }

@@ -165,19 +165,44 @@ public class HtmlEmailTest extends BaseEmailTestCase
         assertNotNull(strEmbed);
         assertEquals(HtmlEmail.CID_LENGTH, strEmbed.length());
 
+        // if we embed the same name again, do we get the same content ID
+        // back?
+        String testCid =
+            this.email.embed(new URL(this.strTestURL), "Test name");       
+        assertEquals(strEmbed, testCid);
+        
+        // if we embed the same URL under a different name, is the content ID
+        // unique?
+        String newCid =
+            this.email.embed(new URL(this.strTestURL), "Test name 2");
+        assertFalse(strEmbed.equals(newCid));
+        
         // ====================================================================
         // Test Exceptions
         // ====================================================================
-        // bad URL
+        
+        // Does an invalid URL throw an exception?
         try
         {
-            this.email.embed(new URL("http://bad.url"), "Test name");
+            this.email.embed(new URL("http://bad.url"), "Bad URL");
             fail("Should have thrown an exception");
         }
         catch (EmailException e)
         {
-            assertTrue(true);
+            // expected
         }
+        
+        // if we try to embed a different URL under a previously used name,
+        // does it complain?
+        try
+        {
+            this.email.embed(new URL("http://www.google.com"), "Test name");
+            fail("shouldn't be able to use an existing name with a different URL!");
+        }
+        catch (EmailException e)
+        {
+            // expected
+        }        
     }
 
     /**
