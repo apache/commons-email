@@ -88,7 +88,7 @@
   <target name="compile" description="o Compile the code" depends="get-deps">
     <mkdir dir="${classesdir}">
     </mkdir>
-    <javac destdir="${classesdir}" deprecation="true" debug="true" optimize="false" excludes="**/package.html" source="1.3" target="1.3">
+    <javac destdir="${classesdir}" deprecation="true" debug="true" optimize="false" excludes="**/package.html" source="1.4" target="1.4">
       <src>
         <pathelement location="${basedir}/src/java">
         </pathelement>
@@ -163,7 +163,7 @@
   <target name="compile-tests" if="Junit.present" depends="junit-present,compile">
     <mkdir dir="${testclassesdir}">
     </mkdir>
-    <javac destdir="${testclassesdir}" deprecation="true" debug="true" optimize="false" excludes="**/package.html">
+    <javac destdir="${testclassesdir}" deprecation="true" debug="true" optimize="false" excludes="**/package.html" source="1.4" target="1.4">
       <src>
         <pathelement location="${basedir}/src/test">
         </pathelement>
