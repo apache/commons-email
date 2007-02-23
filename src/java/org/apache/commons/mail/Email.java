@@ -217,13 +217,13 @@ public abstract class Email
     /** the password to log into the pop3 server */
     protected String popPassword;
 
+    /** does server require TLS encryption for authentication */
+    protected boolean tls;
+    /** does the current transport use SSL encryption? */
+    protected boolean ssl;
+
     /** The Session to mail with */
     private Session session;
-
-    /** does server require TLS encryption for authentication */
-    protected boolean tls = false;
-    /** does the current transport use SSL encryption? */
-    protected boolean ssl = false;
 
     /**
      * Setting to true will enable the display of debug information.
@@ -348,7 +348,7 @@ public abstract class Email
                     contentTypeBuf.append(this.charset);
                     this.contentType = contentTypeBuf.toString();
                 }
-            }            
+            }
         }
     }
 
