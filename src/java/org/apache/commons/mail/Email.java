@@ -337,6 +337,18 @@ public abstract class Email
                     this.charset = aContentType.substring(charsetPos);
                 }
             }
+            else
+            {
+                // use the default charset, if one exists, for messages
+                // whose content-type is some form of text.
+                if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset))
+                {
+                    StringBuffer contentTypeBuf = new StringBuffer(this.contentType);
+                    contentTypeBuf.append(strMarker);
+                    contentTypeBuf.append(this.charset);
+                    this.contentType = contentTypeBuf.toString();
+                }
+            }            
         }
     }
 

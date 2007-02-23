@@ -29,6 +29,7 @@ import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.ParseException;
 
@@ -1341,4 +1342,70 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals(strPassword, this.email.getPopPassword());
     }
 
+    //
+    // Test: When Email.setCharset() is called, a subsequent setContent()
+    // should use that charset for text content types unless overridden
+    // by the contentType parameter.
+    // See https://issues.apache.org/jira/browse/EMAIL-1.
+    //
+
+    // Case 1:
+    // Setting a default charset results in adding that charset info to
+    // to the content type of a text/based content object.
+    public void testDefaultCharsetAppliesToTextContent()
+        throws Exception
+    {
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom("a@b.com");
+        this.email.addTo("c@d.com");
+        this.email.setSubject("test mail");
+
+        this.email.setCharset("ISO-8859-1");
+        this.email.setContent("test content", "text/plain");
+        this.email.buildMimeMessage();
+        MimeMessage msg = this.email.getMimeMessage();
+        msg.saveChanges();
+        assertEquals("text/plain; charset=ISO-8859-1", msg.getContentType());
+    }
+
+    // Case 2:
+    // A default charset is overridden by an explicitly specified
+    // charset in setContent().
+    public void testDefaultCharsetCanBeOverriddenByContentType()
+        throws Exception
+    {
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom("a@b.com");
+        this.email.addTo("c@d.com");
+        this.email.setSubject("test mail");
+
+        this.email.setCharset("ISO-8859-1");
+        this.email.setContent("test content", "text/plain; charset=US-ASCII");
+        this.email.buildMimeMessage();
+        MimeMessage msg = this.email.getMimeMessage();
+        msg.saveChanges();
+        assertEquals("text/plain; charset=US-ASCII", msg.getContentType());
+    }
+
+    // Case 3:
+    // A non-text content object ignores a default charset entirely.
+    public void testDefaultCharsetIgnoredByNonTextContent()
+        throws Exception
+    {
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom("a@b.com");
+        this.email.addTo("c@d.com");
+        this.email.setSubject("test mail");
+
+        this.email.setCharset("ISO-8859-1");
+        this.email.setContent("test content", "application/octet-stream");
+        this.email.buildMimeMessage();
+        MimeMessage msg = this.email.getMimeMessage();
+        msg.saveChanges();
+        assertEquals("application/octet-stream", msg.getContentType());
+    }    
+    
 }
