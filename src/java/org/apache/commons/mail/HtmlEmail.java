@@ -60,6 +60,12 @@ public class HtmlEmail extends MultiPartEmail
     /** Definition of the length of generated CID's */
     public static final int CID_LENGTH = 10;
 
+    /** prefix for default HTML mail */
+    private static final String HTML_MESSAGE_START = "<html><body><pre>";
+    /** suffix for default HTML mail */
+    private static final String HTML_MESSAGE_END = "</pre></body></html>";
+
+
     /**
      * Text part of the message.  This will be used as alternative text if
      * the email client does not support HTML messages.
@@ -74,10 +80,6 @@ public class HtmlEmail extends MultiPartEmail
      * user-defined image name
      */
     protected Map inlineImages = new HashMap();
-
-    /** HTML prefix and suffix for default HTML mail */
-    private static final String HTML_MESSAGE_START = "<html><body><pre>";
-    private static final String HTML_MESSAGE_END = "</pre></body></html>";
 
     /**
      * Set the text content.
@@ -199,7 +201,7 @@ public class HtmlEmail extends MultiPartEmail
      * <code>EmailException</code>. However, it is not guaranteed to catch
      * all cases, especially when the URL refers to a remote HTTP host that
      * may be part of a virtual host cluster.
-     * 
+     *
      * @param url The URL of the file.
      * @param name The name that will be set in the filename header
      * field.
@@ -210,8 +212,8 @@ public class HtmlEmail extends MultiPartEmail
      */
     public String embed(URL url, String name) throws EmailException
     {
-        InlineImage ii = null;        
-        
+        InlineImage ii = null;
+
         // check if the URL contents have already been attached;
         // if so, return the cached CID value.
         if (inlineImages.containsKey(name))
@@ -221,7 +223,7 @@ public class HtmlEmail extends MultiPartEmail
             // as the one already associated with this name.
             if (url.equals(ii.getURL()))
             {
-                return ii.getCid();                
+                return ii.getCid();
             }
             else
             {
@@ -232,7 +234,7 @@ public class HtmlEmail extends MultiPartEmail
             // NOTE: Comparing URLs with URL.equals() is known to be
             // inconsistent when dealing with virtual hosting over HTTP,
             // but since these are almost always files on the local machine,
-            // using equals() should be sufficient.            
+            // using equals() should be sufficient.
         }
 
         // verify that the URL is valid
@@ -406,7 +408,7 @@ public class HtmlEmail extends MultiPartEmail
         public URL getURL() {
             return url;
         }
-        
+
         /**
          * Returns the <code>MimeBodyPart</code> that contains the
          * encoded InlineImage data.
@@ -417,20 +419,20 @@ public class HtmlEmail extends MultiPartEmail
         {
             return mbp;
         }
-        
+
         // equals()/hashCode() implementations, since this class
         // is stored as a entry in a Map.
-        
+
         public boolean equals(Object obj)
         {
             if (this == obj) return true;
             if (!(obj instanceof InlineImage)) return false;
-            
+
             InlineImage that = (InlineImage) obj;
-            
+
             return this.cid.equals(that.cid);
         }
-        
+
         public int hashCode()
         {
             return cid.hashCode();
