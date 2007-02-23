@@ -23,9 +23,32 @@
 
   <body>
     <release version="1.1-SNAPSHOT" date="unreleased">
+      <action dev="dion" type="fix" issue="EMAIL-62" due-to="Ben Speakmon">
+        Build patches to enforce source 1.4 and target 1.4 when compiling.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-52" due-to="Andrew Liles">
+        Identical Inline images should share same BodyPart.
+        Fixed by EMAIL-50.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-28" due-to="Phil Bretherton">
+        Problems with HTML emails with attachments and embedded images.
+        Fixed by EMAIL-50.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-50" due-to="Andrew Liles">
+        HTML Emails with images don't display in Outlook 2000.
+        Fix from Ben Speakmon.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-54" due-to="Piero Ottuzzi">
+        Use JDK1.4 and java.nio.Charset instead of keeping our own.
+        Fix from Ben Speakmon.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-14" due-to="locka">
+        not support content charset gb2312.
+        Fixed by EMAIL-54.
+      </action>
       <action dev="dion" type="fix" issue="EMAIL-25" due-to="James Huang">
         Address char-set can not be individually set.
-        Fix provided by Ben Speakmon.
+        Fixed by EMAIL-54.
       </action>
       <action dev="dion" type="fix" issue="EMAIL-1" due-to="James Mc Millan">
         setCharset() in Email does not set the charset for the message content.
