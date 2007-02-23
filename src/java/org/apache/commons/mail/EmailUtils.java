@@ -23,7 +23,8 @@ import java.util.Random;
  * Utility methods used by commons-email.
  *
  * <p>
- * These methods are copied from other commons components (commons-lang) to avoid creating a dependency for such a small component.
+ * These methods are copied from other commons components (commons-lang) to avoid creating
+ * a dependency for such a small component.
  * </p>
  *
  * <p>
@@ -39,8 +40,8 @@ final class EmailUtils
 {
     /**
      * <p>
-     * Random object used by random method. This has to be not local to the random method so as to not return the same value in the
-     * same millisecond.
+     * Random object used by random method. This has to be not local to the random method
+     * so as to not return the same value in the same millisecond.
      * </p>
      */
     private static final Random RANDOM = new Random();
@@ -131,9 +132,9 @@ final class EmailUtils
      * </p>
      *
      * <p>
-     * If start and end are both <code>0</code>, start and end are set to <code>' '</code> and <code>'z'</code>, the ASCII
-     * printable characters, will be used, unless letters and numbers are both <code>false</code>, in which case, start and end
-     * are set to <code>0</code> and <code>Integer.MAX_VALUE</code>.
+     * If start and end are both <code>0</code>, start and end are set to <code>' '</code> and <code>'z'</code>,
+     * the ASCII printable characters, will be used, unless letters and numbers are both <code>false</code>,
+     * in which case, start and end are set to <code>0</code> and <code>Integer.MAX_VALUE</code>.
      * </p>
      *
      * <p>
@@ -141,9 +142,9 @@ final class EmailUtils
      * </p>
      *
      * <p>
-     * This method accepts a user-supplied {@link Random} instance to use as a source of randomness. By seeding a single {@link
-     * Random} instance with a fixed seed and using it for each call, the same random sequence of strings can be generated
-     * repeatedly and predictably.
+     * This method accepts a user-supplied {@link Random} instance to use as a source of randomness. By seeding a
+     * single {@link Random} instance with a fixed seed and using it for each call, the same random sequence of strings
+     * can be generated repeatedly and predictably.
      * </p>
      *
      * @param count the length of random string to create
@@ -151,7 +152,8 @@ final class EmailUtils
      * @param end the position in set of chars to end before
      * @param letters only allow letters?
      * @param numbers only allow numbers?
-     * @param chars the set of chars to choose randoms from. If <code>null</code>, then it will use the set of all chars.
+     * @param chars the set of chars to choose randoms from. If <code>null</code>,
+     *              then it will use the set of all chars.
      * @param random a source of randomness.
      *
      * @return the random string
@@ -160,7 +162,14 @@ final class EmailUtils
      *
      * @since Commons Lang v2.1, svn 201930
      */
-    private static String random(int count, int start, int end, boolean letters, boolean numbers, char [] chars, Random random)
+    private static String random(
+        int count,
+        int start,
+        int end,
+        boolean letters,
+        boolean numbers,
+        char [] chars,
+        Random random)
     {
         if (count == 0)
         {
