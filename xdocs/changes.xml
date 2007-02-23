@@ -57,10 +57,10 @@
       <action dev="scolebourne" type="fix" >
         Enhance website
       </action>
-      <!--  TODO change bugzilla issues to corresponding jira ones -->
-      <action dev="dion" type="add" issue="38944" due-to="Dave Cherkassky">
+      <action dev="dion" type="add" issue="EMAIL-45" due-to="Dave Cherkassky">
         Added Email.setReplyTo(Collection)
       </action>
+      <!--  TODO change bugzilla issues to corresponding jira ones -->
       <action dev="dion" type="fix" issue="38656" due-to="Piero Ottuzzi">
         If you provide a mailSession in tomcat you cannot send email using
         commons-email: the problem is mainly caused by typos or missing constant
