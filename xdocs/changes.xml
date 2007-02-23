@@ -23,9 +23,18 @@
 
   <body>
     <release version="1.1-SNAPSHOT" date="unreleased">
+      <action dev="dion" type="fix" issue="EMAIL-25" due-to="James Huang">
+        Address char-set can not be individually set.
+        Fix provided by Ben Speakmon.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-1" due-to="James Mc Millan">
+        setCharset() in Email does not set the charset for the message content.
+        Fix provided by Ben Speakmon.
+      </action>
       <action dev="scolebourne" type="fix" >
         Enhance website
       </action>
+      <!--  TODO change bugzilla issues to corresponding jira ones -->
       <action dev="dion" type="add" issue="38944" due-to="Dave Cherkassky">
         Added Email.setReplyTo(Collection)
       </action>
