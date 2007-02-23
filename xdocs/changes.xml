@@ -60,17 +60,16 @@
       <action dev="dion" type="add" issue="EMAIL-45" due-to="Dave Cherkassky">
         Added Email.setReplyTo(Collection)
       </action>
-      <!--  TODO change bugzilla issues to corresponding jira ones -->
-      <action dev="dion" type="fix" issue="38656" due-to="Piero Ottuzzi">
+      <action dev="dion" type="fix" issue="EMAIL-37" due-to="Piero Ottuzzi">
         If you provide a mailSession in tomcat you cannot send email using
         commons-email: the problem is mainly caused by typos or missing constant
         declaration.
       </action>
-      <action dev="dion" type="add" issue="37782">
+      <action dev="dion" type="add" issue="EMAIL-48">
         Added TLS helper methods on Email
         and Added setMailSessionFromJNDI(String) helper method
       </action>
-      <action dev="dion" type="fix" issue="37902" due-to="Nuno Ponte">
+      <action dev="dion" type="fix" issue="EMAIL-7" due-to="Nuno Ponte">
         Added HtmlEmail.embed(String,String) as a wrapper to embed(URL,String)
       </action>
     </release>
@@ -80,6 +79,7 @@
         Make sure that the unit tests don't fail under JDK 1.3.x with 
         java.net.BindException: Address already in use
       </action>
+      <!--  TODO change bugzilla issues to corresponding jira ones -->
       <action dev="henning" type="update" due-to="Niall Pemberton" issue="36536">
         Replace our usage of address.validate() with simpler code that allows
         commons-email to work with javamail 1.2 / J2EE 1.3 environment. Added an
