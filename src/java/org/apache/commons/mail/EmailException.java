@@ -95,7 +95,7 @@ public class EmailException
      */
     public EmailException(Throwable rootCause)
     {
-        super(((rootCause == null) ? null : rootCause.getMessage()));
+        super((rootCause == null) ? null : rootCause.getMessage());
         this.rootCause = rootCause;
     }
 
@@ -159,7 +159,7 @@ public class EmailException
         {
             super.printStackTrace(out);
 
-            if ((rootCause != null) && (JDK_SUPPORTS_NESTED == false))
+            if (!JDK_SUPPORTS_NESTED && (rootCause != null))
             {
                 out.print("Caused by: ");
                 rootCause.printStackTrace(out);
