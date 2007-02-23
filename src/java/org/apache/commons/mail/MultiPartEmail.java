@@ -56,7 +56,7 @@ public class MultiPartEmail extends Email
     private MimeMultipart container;
 
     /** The message container. */
-    private BodyPart primaryBodyPart = null;
+    private BodyPart primaryBodyPart;
 
     /** The MIME subtype. */
     private String subType;
