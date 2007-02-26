@@ -44,10 +44,16 @@ import com.dumbster.smtp.SmtpMessage;
 
 public class BaseEmailTestCase extends TestCase
 {
+    /** Padding at end of body added by dumbser/send */
+    public static final int BODY_END_PAD = 3;
+    /** Padding at start of body added by dumbser/send */
+    public static final int BODY_START_PAD = 2;
+
+    /** default port */
     private static int mailServerPort = EmailConfiguration.MAIL_SERVER_PORT;
 
     /** The fake Dumbster email server */
-    protected SimpleSmtpServer fakeMailServer = null;
+    protected SimpleSmtpServer fakeMailServer;
 
     /** Mail server used for testing */
     protected String strTestMailServer = EmailConfiguration.MAIL_SERVER;
@@ -61,14 +67,6 @@ public class BaseEmailTestCase extends TestCase
     protected String strTestPasswd = EmailConfiguration.TEST_PASSWD;
     /** URL to used to test URL attachmetns (Must be valid) */
     protected String strTestURL = EmailConfiguration.TEST_URL;
-
-    /** Padding at end of body added by dumbser/send */
-    public static final int BODY_END_PAD = 3;
-    /** Padding at start of body added by dumbser/send */
-    public static final int BODY_START_PAD = 2;
-
-    /** Where to save email output **/
-    private File emailOutputDir;
 
     protected int getMailServerPort()
     {
@@ -89,6 +87,9 @@ public class BaseEmailTestCase extends TestCase
 
     /** Array of test strings */
     protected String[] testCharsNotValid = { "", null };
+
+    /** Where to save email output **/
+    private File emailOutputDir;
 
     /**
      * @param name name
