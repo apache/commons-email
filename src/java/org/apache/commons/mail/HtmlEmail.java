@@ -162,6 +162,13 @@ public class HtmlEmail extends MultiPartEmail
 
     /**
      * Embeds an URL in the HTML.
+     *
+     * @param url The URL of the file.
+     * @param name The name that will be set in the filename header field.
+     * @return A String with the Content-ID of the file.
+     * @throws EmailException when URL supplied is invalid
+     *  also see javax.mail.internet.MimeBodyPart for definitions
+     *
      * @see #embed(URL, String)
      * @since 1.1
      */
@@ -373,8 +380,11 @@ public class HtmlEmail extends MultiPartEmail
      */
     private static class InlineImage
     {
+        /** content id */
         private String cid;
+        /** URL that points to the content */
         private URL url;
+        /** the <code>MimeBodyPart</code> that contains the encoded data */
         private MimeBodyPart mbp;
 
         /**
@@ -405,7 +415,8 @@ public class HtmlEmail extends MultiPartEmail
          * Returns the URL that points to the encoded content.
          * @return the URL pointing to the encoded content
          */
-        public URL getURL() {
+        public URL getURL()
+        {
             return url;
         }
 
@@ -422,17 +433,30 @@ public class HtmlEmail extends MultiPartEmail
 
         // equals()/hashCode() implementations, since this class
         // is stored as a entry in a Map.
-
+        /**
+         * {@inheritDoc}
+         * @return true if the other object is also an InlineImage with the same cid.
+         */
         public boolean equals(Object obj)
         {
-            if (this == obj) return true;
-            if (!(obj instanceof InlineImage)) return false;
+            if (this == obj)
+            {
+                return true;
+            }
+            if (!(obj instanceof InlineImage))
+            {
+                return false;
+            }
 
             InlineImage that = (InlineImage) obj;
 
             return this.cid.equals(that.cid);
         }
 
+        /**
+         * {@inheritDoc}
+         * @return the cid hashCode.
+         */
         public int hashCode()
         {
             return cid.hashCode();
