@@ -17,8 +17,6 @@
 package org.apache.commons.mail;
 
 import java.nio.charset.Charset;
-import java.nio.charset.IllegalCharsetNameException;
-import java.nio.charset.UnsupportedCharsetException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -275,8 +273,8 @@ public abstract class Email
      * Set the charset of the message.
      *
      * @param newCharset A String.
-     * @throws IllegalCharsetNameException if the charset name is invalid
-     * @throws UnsupportedCharsetException if no support for the named charset
+     * @throws java.nio.charset.IllegalCharsetNameException if the charset name is invalid
+     * @throws java.nio.charset.UnsupportedCharsetException if no support for the named charset
      * exists in the current JVM
      * @since 1.0
      */
@@ -1295,7 +1293,8 @@ public abstract class Email
      * Returns whether SSL encryption for the transport is currently enabled.
      * @return true if SSL enabled for the transport
      */
-    public boolean isSSL() {
+    public boolean isSSL()
+    {
         return ssl;
     }
 
@@ -1303,7 +1302,8 @@ public abstract class Email
      * Sets whether SSL encryption should be enabled for the SMTP transport.
      * @param ssl whether to enable the SSL transport
      */
-    public void setSSL(boolean ssl) {
+    public void setSSL(boolean ssl)
+    {
         this.ssl = ssl;
     }
 
@@ -1311,7 +1311,8 @@ public abstract class Email
      * Returns the current SSL port used by the SMTP transport.
      * @return the current SSL port used by the SMTP transport
      */
-    public String getSslSmtpPort() {
+    public String getSslSmtpPort()
+    {
         if (EmailUtils.isNotEmpty(this.sslSmtpPort))
         {
             return this.sslSmtpPort;
@@ -1327,8 +1328,8 @@ public abstract class Email
      * port, 465.
      * @param sslSmtpPort the SSL port to use for the SMTP transport
      */
-    public void setSslSmtpPort(String sslSmtpPort) {
+    public void setSslSmtpPort(String sslSmtpPort)
+    {
         this.sslSmtpPort = sslSmtpPort;
     }
 }
-
