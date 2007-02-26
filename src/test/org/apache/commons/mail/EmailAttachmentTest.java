@@ -30,7 +30,7 @@ import java.net.URL;
 public class EmailAttachmentTest extends BaseEmailTestCase
 {
     /** */
-    private EmailAttachment attachment = null;
+    private EmailAttachment attachment;
 
     /**
      * @param name name

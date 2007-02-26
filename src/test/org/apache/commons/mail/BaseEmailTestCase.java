@@ -68,11 +68,6 @@ public class BaseEmailTestCase extends TestCase
     /** URL to used to test URL attachmetns (Must be valid) */
     protected String strTestURL = EmailConfiguration.TEST_URL;
 
-    protected int getMailServerPort()
-    {
-        return mailServerPort;
-    }
-
     /** Test characters acceptable to email */
     protected String[] testCharsValid =
     {
@@ -86,7 +81,7 @@ public class BaseEmailTestCase extends TestCase
     };
 
     /** Array of test strings */
-    protected String[] testCharsNotValid = { "", null };
+    protected String[] testCharsNotValid = {"", null};
 
     /** Where to save email output **/
     private File emailOutputDir;
@@ -105,12 +100,6 @@ public class BaseEmailTestCase extends TestCase
     }
 
     /** */
-    protected void setUp() throws Exception
-    {
-
-    }
-
-    /** */
     protected void tearDown()
     {
         //stop the fake email server (if started)
@@ -121,6 +110,15 @@ public class BaseEmailTestCase extends TestCase
         }
 
         this.fakeMailServer = null;
+    }
+
+    /**
+     * Gets the mail server port.
+     * @return the port the server is running on.
+     */
+    protected int getMailServerPort()
+    {
+        return mailServerPort;
     }
 
     /**
