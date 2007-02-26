@@ -232,7 +232,7 @@ public class MultiPartEmail extends Email
                 // the content for the main body part was actually set.  If not,
                 // an IOException will be thrown during super.send().
 
-                   BodyPart body = this.getPrimaryBodyPart();
+                BodyPart body = this.getPrimaryBodyPart();
                 try
                 {
                     body.getContent();
@@ -241,6 +241,8 @@ public class MultiPartEmail extends Email
                 {
                     // do nothing here.  content will be set to an empty string
                     // as a result.
+                    // TODO: Should this reallyt be rethrown as an email exception:
+                    // throw new EmailException(e);
                 }
             }
 
