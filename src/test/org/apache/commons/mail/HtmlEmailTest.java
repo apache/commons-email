@@ -85,7 +85,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException  
+     * @throws EmailException
      */
     public void testGetSetHtmlMsg() throws EmailException
     {
@@ -168,19 +168,19 @@ public class HtmlEmailTest extends BaseEmailTestCase
         // if we embed the same name again, do we get the same content ID
         // back?
         String testCid =
-            this.email.embed(new URL(this.strTestURL), "Test name");       
+            this.email.embed(new URL(this.strTestURL), "Test name");
         assertEquals(strEmbed, testCid);
-        
+
         // if we embed the same URL under a different name, is the content ID
         // unique?
         String newCid =
             this.email.embed(new URL(this.strTestURL), "Test name 2");
         assertFalse(strEmbed.equals(newCid));
-        
+
         // ====================================================================
         // Test Exceptions
         // ====================================================================
-        
+
         // Does an invalid URL throw an exception?
         try
         {
@@ -191,7 +191,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         {
             // expected
         }
-        
+
         // if we try to embed a different URL under a previously used name,
         // does it complain?
         try
@@ -202,11 +202,11 @@ public class HtmlEmailTest extends BaseEmailTestCase
         catch (EmailException e)
         {
             // expected
-        }        
+        }
     }
 
     /**
-     * @throws EmailException  
+     * @throws EmailException
      * @throws IOException */
     public void testSend() throws EmailException, IOException
     {
