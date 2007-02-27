@@ -22,9 +22,10 @@ import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -513,8 +514,8 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
      */
     public void testSetTo() throws UnsupportedEncodingException, EmailException
     {
@@ -568,8 +569,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddCc() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -599,8 +601,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddCcWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -637,8 +640,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddCc2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -689,7 +693,8 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException  */
+     * @throws EmailException when there are problems adding an address
+     */
     public void testSetCc() throws EmailException
     {
         // ====================================================================
@@ -732,8 +737,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddBcc() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -765,8 +771,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddBccWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -805,8 +812,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddBcc2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -814,6 +822,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
 
         String[] testEmailNames = {"Name1", "", null};
+
 
         List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
@@ -859,8 +868,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testSetBcc() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -908,8 +918,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddReplyTo() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -941,8 +952,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddReplyToWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -981,8 +993,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddReplyTo2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -1040,18 +1053,16 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        Hashtable ht = new Hashtable();
+        Map ht = new Hashtable();
         ht.put("X-Priority", "1");
         ht.put("Disposition-Notification-To", "me@home.com");
         ht.put("X-Mailer", "Sendmail");
 
-        Enumeration enumKey = ht.keys();
-
-        while (enumKey.hasMoreElements())
+        for (Iterator items = ht.entrySet().iterator(); items.hasNext();)
         {
-            String strName = (String) enumKey.nextElement();
-            String strValue = (String) ht.get(strName);
-
+            Map.Entry entry = (Map.Entry) items.next();
+            String strName = (String) entry.getKey();
+            String strValue = (String) entry.getValue();
             this.email.addHeader(strName, strValue);
         }
 
@@ -1065,20 +1076,19 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
-        Hashtable htBad = new Hashtable();
+        Map htBad = new Hashtable();
         htBad.put("X-Mailer", "");
         htBad.put("X-Priority", "");
         htBad.put("", "me@home.com");
 
-        Hashtable arrExpected = new Hashtable();
-        Enumeration enumKeyBad = htBad.keys();
-
-        while (enumKeyBad.hasMoreElements())
+        Map arrExpected = new Hashtable();
+        for (Iterator items = htBad.entrySet().iterator(); items.hasNext();)
         {
+            Map.Entry element = (Map.Entry) items.next();
             try
             {
-                String strName = (String) enumKeyBad.nextElement();
-                String strValue = (String) htBad.get(strName);
+                String strName = (String) element.getKey();
+                String strValue = (String) element.getValue();
 
                 this.email.addHeader(strName, strValue);
                 fail("Should have thrown an exception");
@@ -1101,7 +1111,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        Hashtable ht = new Hashtable();
+        Map ht = new Hashtable();
         ht.put("X-Priority", "1");
         ht.put("Disposition-Notification-To", "me@home.com");
         ht.put("X-Mailer", "Sendmail");
@@ -1119,10 +1129,10 @@ public class EmailTest extends BaseEmailTestCase
         // Test Exceptions
         // ====================================================================
         // first test
-        Hashtable htBad = new Hashtable();
+        Map htBad = new Hashtable();
         htBad.put("X-Mailer", "");
 
-        Hashtable arrExpected = new Hashtable();
+        Map arrExpected = new Hashtable();
 
         try
         {
@@ -1302,8 +1312,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException
-     * @throws UnsupportedEncodingException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testToInternetAddressArray() throws EmailException, UnsupportedEncodingException
     {
         List testInetEmailValid = new ArrayList();
@@ -1347,18 +1358,19 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals(strPassword, this.email.getPopPassword());
     }
 
-    //
-    // Test: When Email.setCharset() is called, a subsequent setContent()
-    // should use that charset for text content types unless overridden
-    // by the contentType parameter.
-    // See https://issues.apache.org/jira/browse/EMAIL-1.
-    //
-
-    // Case 1:
-    // Setting a default charset results in adding that charset info to
-    // to the content type of a text/based content object.
-    public void testDefaultCharsetAppliesToTextContent()
-        throws Exception
+    /**
+     * Test: When Email.setCharset() is called, a subsequent setContent()
+     * should use that charset for text content types unless overridden
+     * by the contentType parameter.
+     * See https://issues.apache.org/jira/browse/EMAIL-1.
+     *
+     *
+     * Case 1:
+     * Setting a default charset results in adding that charset info to
+     * to the content type of a text/based content object.
+     * @throws Exception on any error
+     */
+    public void testDefaultCharsetAppliesToTextContent() throws Exception
     {
         this.email.setHostName(this.strTestMailServer);
         this.email.setSmtpPort(this.getMailServerPort());
@@ -1374,9 +1386,12 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals("text/plain; charset=ISO-8859-1", msg.getContentType());
     }
 
-    // Case 2:
-    // A default charset is overridden by an explicitly specified
-    // charset in setContent().
+    /**
+     * Case 2:
+     * A default charset is overridden by an explicitly specified
+     * charset in setContent().
+     * @throws Exception on any error
+     */
     public void testDefaultCharsetCanBeOverriddenByContentType()
         throws Exception
     {
@@ -1394,8 +1409,11 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals("text/plain; charset=US-ASCII", msg.getContentType());
     }
 
-    // Case 3:
-    // A non-text content object ignores a default charset entirely.
+    /**
+     * Case 3:
+     * A non-text content object ignores a default charset entirely.
+     * @throws Exception on any error
+     */
     public void testDefaultCharsetIgnoredByNonTextContent()
         throws Exception
     {
@@ -1411,6 +1429,5 @@ public class EmailTest extends BaseEmailTestCase
         MimeMessage msg = this.email.getMimeMessage();
         msg.saveChanges();
         assertEquals("application/octet-stream", msg.getContentType());
-    }    
-    
+    }
 }
