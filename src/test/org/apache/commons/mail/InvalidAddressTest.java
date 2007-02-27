@@ -29,9 +29,6 @@ public class InvalidAddressTest
         extends BaseEmailTestCase
 {
     /** */
-    private MockEmailConcrete email = null;
-
-    /** */
     private static final String [] ARR_INVALID_EMAILS = {
         "local name@domain.com",
         "local(name@domain.com",
@@ -67,6 +64,9 @@ public class InvalidAddressTest
         "local.name@",
         "@domain.com"
     };
+
+    /** */
+    private MockEmailConcrete email;
 
     /**
      * @param name name
