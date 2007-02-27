@@ -34,7 +34,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
 public class HtmlEmailTest extends BaseEmailTestCase
 {
     /** */
-    private MockHtmlEmailConcrete email = null;
+    private MockHtmlEmailConcrete email;
 
     /**
      * @param name name
@@ -85,7 +85,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException
+     * @throws EmailException if setting the message fails
      */
     public void testGetSetHtmlMsg() throws EmailException
     {
@@ -206,8 +206,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException
-     * @throws IOException */
+     * @throws EmailException when bad addresses and attachments are used
+     * @throws IOException if creating a temp file, URL or sending fails
+     */
     public void testSend() throws EmailException, IOException
     {
         EmailAttachment attachment = new EmailAttachment();
