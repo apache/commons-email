@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -53,7 +54,7 @@ public class EmailTest extends BaseEmailTestCase
         {
             "me@home.com",
             "joe.doe@apache.org",
-            "someone_here@work-address.com.au" };
+            "someone_here@work-address.com.au"};
     /**
      * @param name name
      */
@@ -75,7 +76,7 @@ public class EmailTest extends BaseEmailTestCase
     public void testGetSetDebug()
     {
         // JUnitDoclet begin method setBoolTest isBoolTest
-        boolean[] tests = { true, false };
+        boolean[] tests = {true, false};
 
         for (int i = 0; i < tests.length; i++)
         {
@@ -175,7 +176,7 @@ public class EmailTest extends BaseEmailTestCase
     public void testSetContentMimeMultipart()
     {
         MimeMultipart[] tests =
-            { new MimeMultipart(), new MimeMultipart("abc123"), null };
+            {new MimeMultipart(), new MimeMultipart("abc123"), null};
 
         for (int i = 0; i < tests.length; i++)
         {
@@ -245,7 +246,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        int[] tests = { 1, Integer.MAX_VALUE };
+        int[] tests = {1, Integer.MAX_VALUE};
 
         for (int i = 0; i < tests.length; i++)
         {
@@ -258,7 +259,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Exceptions
         // ====================================================================
-        int[] testExs = { Integer.MIN_VALUE, -1, 0 };
+        int[] testExs = {Integer.MIN_VALUE, -1, 0};
 
         for (int i = 0; i < testExs.length; i++)
         {
@@ -285,7 +286,7 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
         arrExpected.add(
             new InternetAddress(
@@ -344,8 +345,8 @@ public class EmailTest extends BaseEmailTestCase
             "joe.doe@apache.org",
             "someone_here@work-address.com.au"
         };
-        String[] testEmailNames = { "Name1", "", null };
-        ArrayList arrExpected = new ArrayList();
+        String[] testEmailNames = {"Name1", "", null};
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
         arrExpected.add(
             new InternetAddress(
@@ -395,7 +396,7 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
         arrExpected.add(
             new InternetAddress(
@@ -427,7 +428,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(
             new InternetAddress(
                 "me@home.com",
@@ -464,9 +465,9 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        String[] testEmailNames = { "Name1", "", null };
+        String[] testEmailNames = {"Name1", "", null};
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
         arrExpected.add(
             new InternetAddress(
@@ -516,7 +517,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        ArrayList testEmailValid2 = new ArrayList();
+        List testEmailValid2 = new ArrayList();
         testEmailValid2.add(new InternetAddress("me@home.com", "Name1"));
         testEmailValid2.add(
             new InternetAddress(
@@ -571,7 +572,7 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
         arrExpected.add(
             new InternetAddress(
@@ -603,7 +604,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(
             new InternetAddress(
                 "me@home.com",
@@ -640,9 +641,9 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        String[] testEmailNames = { "Name1", "", null };
+        String[] testEmailNames = {"Name1", "", null};
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
         arrExpected.add(
             new InternetAddress(
@@ -690,7 +691,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        ArrayList testEmailValid2 = new ArrayList();
+        List testEmailValid2 = new ArrayList();
         testEmailValid2.add("Name1 <me@home.com>");
         testEmailValid2.add("\"joe.doe@apache.org\" <joe.doe@apache.org>");
         testEmailValid2.add(
@@ -735,7 +736,7 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
         arrExpected.add(
             new InternetAddress(
@@ -769,7 +770,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(
             new InternetAddress(
                 "me@home.com",
@@ -808,9 +809,9 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        String[] testEmailNames = { "Name1", "", null };
+        String[] testEmailNames = {"Name1", "", null};
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
         arrExpected.add(
             new InternetAddress(
@@ -861,7 +862,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        ArrayList testInetEmailValid = new ArrayList();
+        List testInetEmailValid = new ArrayList();
         testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
         testInetEmailValid.add(
             new InternetAddress(
@@ -911,7 +912,7 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
         arrExpected.add(
             new InternetAddress(
@@ -945,7 +946,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(
             new InternetAddress(
                 "me@home.com",
@@ -984,9 +985,9 @@ public class EmailTest extends BaseEmailTestCase
         // Test Success
         // ====================================================================
 
-        String[] testEmailNames = { "Name1", "", null };
+        String[] testEmailNames = {"Name1", "", null};
 
-        ArrayList arrExpected = new ArrayList();
+        List arrExpected = new ArrayList();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
         arrExpected.add(
             new InternetAddress(
@@ -1301,7 +1302,7 @@ public class EmailTest extends BaseEmailTestCase
      * @throws UnsupportedEncodingException */
     public void testToInternetAddressArray() throws EmailException, UnsupportedEncodingException
     {
-        ArrayList testInetEmailValid = new ArrayList();
+        List testInetEmailValid = new ArrayList();
 
         testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
         testInetEmailValid.add(
