@@ -35,7 +35,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
     private static final String VALID_QUOTED_EMAIL = "\"John O'Groats\"@domain.com";
 
     /** JavaMail 1.2. does not know about this */
-    private static Method validateMethod = null;
+    private static Method validateMethod;
 
     /** */
     private static final String[] ARR_INVALID_EMAILS =
@@ -79,6 +79,10 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         super(name);
     }
 
+    /**
+     * Setup for a test
+     * @throws Exception on any error
+     */
     protected void setUp() throws Exception
     {
         super.setUp();
@@ -108,29 +112,33 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
         {
 
-            try {
-
+            try
+            {
                 // Create Internet Address using "strict" constructor
                 new InternetAddress(ARR_INVALID_EMAILS[i]);
 
                 // Expected an exception to be thrown
                 fail("Strict " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 // Expected Result
             }
 
         }
 
         // test valid 'quoted' Email addresses
-        try {
+        try
+        {
 
             // Create Internet Address using "strict" constructor
             new InternetAddress(VALID_QUOTED_EMAIL);
 
-        } catch (Exception ex) {
-            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL +
-                 " - " + ex.getMessage());
+        }
+        catch (Exception ex)
+        {
+            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
+                + " - " + ex.getMessage());
         }
     }
 
@@ -156,39 +164,39 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
             InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe");
 
             // N.B. validate() doesn't check addresses containing quotes or '['
-            boolean quoted = (ARR_INVALID_EMAILS[i].indexOf("\"") >= 0);
+            boolean quoted = ARR_INVALID_EMAILS[i].indexOf("\"") >= 0;
             int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
-            boolean domainBracket  = (atIndex >= 0) &&
-                                     (ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0);
-            try {
-
+            boolean domainBracket  = (atIndex >= 0)
+                && (ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0);
+            try
+            {
                 validateMethod.invoke(address, null);
 
-                if (!(quoted || domainBracket)) {
+                if (!(quoted || domainBracket))
+                {
                     fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
                 }
-
-            } catch (Exception ex) {
-
-                if (quoted || domainBracket) {
-                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i] +
-                         " - " + ex.getMessage());
-                }
-
             }
-
+            catch (Exception ex)
+            {
+                if (quoted || domainBracket)
+                {
+                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i]
+                        + " - " + ex.getMessage());
+                }
+            }
         }
 
         // test valid 'quoted' Email addresses
-        try {
-
+        try
+        {
             validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe"), null);
-
-        } catch (Exception ex) {
-            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL +
-                 " - " + ex.getMessage());
         }
-
+        catch (Exception ex)
+        {
+            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
+                + " - " + ex.getMessage());
+        }
     }
 
     /**
@@ -213,24 +221,27 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
             InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", "UTF-8");
 
             // N.B. validate() doesn't check addresses containing quotes or '['
-            boolean quoted = (ARR_INVALID_EMAILS[i].indexOf("\"") >= 0);
+            boolean quoted = ARR_INVALID_EMAILS[i].indexOf("\"") >= 0;
             int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
-            boolean domainBracket  = (atIndex >= 0) &&
-                                     (ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0);
+            boolean domainBracket  = (atIndex >= 0)
+                && (ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0);
 
-            try {
-
+            try
+            {
                 validateMethod.invoke(address, null);
-
-                if (!(quoted || domainBracket)) {
+                if (!(quoted || domainBracket))
+                {
                     fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
                 }
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
 
-                if (quoted || domainBracket) {
-                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i] +
-                         " - " + ex.getMessage());
+                if (quoted || domainBracket)
+                {
+                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i]
+                        + " - " + ex.getMessage());
                 }
 
             }
@@ -238,13 +249,14 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         }
 
         // test valid 'quoted' Email addresses
-        try {
-
+        try
+        {
             validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe", "UTF-8"), null);
-
-        } catch (Exception ex) {
-            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL +
-                 " - " + ex.getMessage());
+        }
+        catch (Exception ex)
+        {
+            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
+                + " - " + ex.getMessage());
         }
     }
 
