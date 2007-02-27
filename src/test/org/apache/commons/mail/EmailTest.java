@@ -46,17 +46,18 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
 
 public class EmailTest extends BaseEmailTestCase
 {
-    /** */
-    private MockEmailConcrete email = null;
-
-    /** */
+    /** valid email addresses */
     public static final String[] ARR_VALID_EMAILS =
         {
             "me@home.com",
             "joe.doe@apache.org",
             "someone_here@work-address.com.au"};
+
+    /** mock for testing */
+    private MockEmailConcrete email;
+
     /**
-     * @param name name
+     * @param name test name
      */
     public EmailTest(String name)
     {
@@ -388,8 +389,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException
-     * @throws UnsupportedEncodingException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddTo() throws EmailException, UnsupportedEncodingException
     {
         // ====================================================================
@@ -419,8 +421,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddToWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -457,8 +460,9 @@ public class EmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws UnsupportedEncodingException
-     * @throws EmailException */
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddTo2() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
