@@ -39,7 +39,7 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 public class MultiPartEmailTest extends BaseEmailTestCase
 {
     /** */
-    private MockMultiPartEmailConcrete email = null;
+    private MockMultiPartEmailConcrete email;
     /** File to used to test file attachmetns (Must be valid) */
     private File testFile;
 
@@ -102,8 +102,9 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException  
-     * @throws IOException */
+     * @throws EmailException when a bad address or attachment is used
+     * @throws IOException when sending fails
+     */
     public void testSend() throws EmailException, IOException
     {
         // ====================================================================
@@ -189,8 +190,9 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws MalformedURLException  
-     * @throws EmailException */
+     * @throws MalformedURLException when a bad attachment URL is used
+     * @throws EmailException when a bad address or attachment is used
+     */
     public void testAttach() throws MalformedURLException, EmailException
     {
         EmailAttachment attachment;
@@ -254,15 +256,16 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException 
-     * @throws MalformedURLException  */
+     * @throws MalformedURLException when a bad attachment URL is used
+     * @throws EmailException when a bad address or attachment is used
+     */
     public void testAttach2() throws MalformedURLException, EmailException
     {
         // ====================================================================
         // Test Success - URL
         // ====================================================================
         this.email.attach(
-            new URL(this.strTestURL), 
+            new URL(this.strTestURL),
             "Test Attachment",
             "Test Attachment Desc");
 
@@ -274,8 +277,9 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException 
-     * @throws MalformedURLException  */
+     * @throws MalformedURLException when a bad attachment URL is used
+     * @throws EmailException when a bad address or attachment is used
+     */
     public void testAttach3() throws MalformedURLException, EmailException
     {
         // ====================================================================
@@ -373,7 +377,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         assertTrue(true);
     }
 
-    /** */
+    /** init called twice should fail */
     public void testInit()
     {
         // call the init function twice to trigger the IllegalStateException
@@ -389,7 +393,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    /** test get/set sub type */
     public void testGetSetSubType()
     {
         for (int i = 0; i < testCharsValid.length; i++)
