@@ -29,7 +29,7 @@ import org.apache.commons.mail.mocks.MockSimpleEmail;
 public class SimpleEmailTest extends BaseEmailTestCase
 {
     /** */
-    private MockSimpleEmail email = null;
+    private MockSimpleEmail email;
 
     /**
      * @param name name
@@ -81,7 +81,7 @@ public class SimpleEmailTest extends BaseEmailTestCase
 
     /**
      * @throws EmailException when a bad address is set.
-     * @throws IOException when sending fails 
+     * @throws IOException when sending fails
      * @todo Add code to test the popBeforeSmtp() settings
      */
     public void testSend() throws EmailException, IOException
