@@ -25,8 +25,7 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
  * @author Niall Pemberton
  * @version $Id$
  */
-public class InvalidAddressTest
-        extends BaseEmailTestCase
+public class InvalidAddressTest extends BaseEmailTestCase
 {
     /** */
     private static final String [] ARR_INVALID_EMAILS = {
