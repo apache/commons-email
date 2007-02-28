@@ -34,7 +34,7 @@ import org.apache.commons.mail.settings.EmailConfiguration;
 public class SendWithAttachmentsTest extends BaseEmailTestCase
 {
     /** */
-    private MockHtmlEmailConcrete email = null;
+    private MockHtmlEmailConcrete email;
 
     /**
      * @param name name
@@ -54,8 +54,9 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException  
-     * @throws IOException */
+     * @throws EmailException on an email error
+     * @throws IOException when sending fails, or a bad URL is used
+     */
     public void testSendNoAttachments() throws EmailException, IOException
     {
         this.getMailServer();
@@ -110,8 +111,9 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
     }
 
     /**
-     * @throws EmailException  
-     * @throws IOException */
+     * @throws EmailException on an email error
+     * @throws IOException when sending fails, or a bad URL is used
+     */
     public void testSendWAttachments() throws EmailException, IOException
     {
         EmailAttachment attachment = new EmailAttachment();
