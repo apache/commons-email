@@ -299,7 +299,7 @@ public class MultiPartEmail extends Email
                         attachment.getDescription(),
                         attachment.getDisposition());
             }
-            catch (Exception e)
+            catch (IOException e)
             {
                 throw new EmailException(
                     "Cannot attach file \"" + fileName + "\"",
