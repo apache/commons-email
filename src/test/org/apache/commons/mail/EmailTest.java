@@ -382,10 +382,9 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.setFrom("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
             fail("setting invalid charset should have failed!");
         }
-        catch (EmailException e)
+        catch (IllegalCharsetNameException e)
         {
             // expected runtime exception.
-            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
@@ -506,10 +505,9 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
             fail("setting invalid charset should have failed!");
         }
-        catch (EmailException e)
+        catch (IllegalCharsetNameException  e)
         {
             // expected runtime exception.
-            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
@@ -685,10 +683,9 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addCc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
             fail("setting invalid charset should have failed!");
         }
-        catch (EmailException e)
+        catch (IllegalCharsetNameException e)
         {
             // expected runtime exception.
-            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
@@ -860,10 +857,9 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addBcc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
             fail("setting invalid charset should have failed!");
         }
-        catch (EmailException e)
+        catch (IllegalCharsetNameException e)
         {
             // expected runtime exception.
-            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
@@ -1040,10 +1036,9 @@ public class EmailTest extends BaseEmailTestCase
             anotherEmail.addReplyTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
             fail("setting invalid charset should have failed!");
         }
-        catch (EmailException e)
+        catch (IllegalCharsetNameException e)
         {
             // expected runtime exception.
-            assertTrue(e.getCause() instanceof IllegalCharsetNameException);
         }
     }
 
