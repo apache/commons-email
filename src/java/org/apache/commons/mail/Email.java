@@ -16,6 +16,7 @@
  */
 package org.apache.commons.mail;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -536,7 +538,11 @@ public abstract class Email
             // it will throw AddressException.
             address.validate();
         }
-        catch (Exception e)
+        catch (AddressException e)
+        {
+            throw new EmailException(e);
+        } 
+        catch (UnsupportedEncodingException e)
         {
             throw new EmailException(e);
         }
