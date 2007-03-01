@@ -18,7 +18,6 @@ package org.apache.commons.mail;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -27,10 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -42,6 +37,9 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  * The base class for all email messages.  This class sets the
