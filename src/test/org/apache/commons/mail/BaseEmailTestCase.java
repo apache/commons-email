@@ -16,22 +16,29 @@
  */
 package org.apache.commons.mail;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.activation.DataHandler;
+import javax.mail.Header;
+import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.mail.settings.EmailConfiguration;
+import org.subethamail.wiser.Wiser;
+import org.subethamail.wiser.WiserMessage;
 
-import com.dumbster.smtp.SimpleSmtpServer;
-import com.dumbster.smtp.SmtpMessage;
+
 
 /**
  * Base test case for Email test classes
@@ -44,16 +51,19 @@ import com.dumbster.smtp.SmtpMessage;
 
 public class BaseEmailTestCase extends TestCase
 {
-    /** Padding at end of body added by dumbser/send */
+    /** Padding at end of body added by wiser/send */
     public static final int BODY_END_PAD = 3;
-    /** Padding at start of body added by dumbser/send */
+    /** Padding at start of body added by wiser/send */
     public static final int BODY_START_PAD = 2;
+
+    /** Line separator in email messages */
+    private static final String LINE_SEPARATOR = "\r\n";
 
     /** default port */
     private static int mailServerPort = EmailConfiguration.MAIL_SERVER_PORT;
 
-    /** The fake Dumbster email server */
-    protected SimpleSmtpServer fakeMailServer;
+    /** The fake Wiser email server */
+    protected Wiser fakeMailServer;
 
     /** Mail server used for testing */
     protected String strTestMailServer = EmailConfiguration.MAIL_SERVER;
@@ -103,10 +113,10 @@ public class BaseEmailTestCase extends TestCase
     protected void tearDown()
     {
         //stop the fake email server (if started)
-        if (this.fakeMailServer != null && !this.fakeMailServer.isStopped())
+        if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer))
         {
             this.fakeMailServer.stop();
-            assertTrue("Mail server didn't stop", this.fakeMailServer.isStopped());
+            assertTrue("Mail server didn't stop", isMailServerStopped(fakeMailServer));
         }
 
         this.fakeMailServer = null;
@@ -126,7 +136,7 @@ public class BaseEmailTestCase extends TestCase
      * @param email email
      * @throws IOException Exception
      */
-    protected void saveEmailToFile(SmtpMessage email) throws IOException
+    protected void saveEmailToFile(WiserMessage email) throws IOException
     {
         File emailFile =
             new File(emailOutputDir, "email" + new Date().getTime() + ".txt");
@@ -141,40 +151,49 @@ public class BaseEmailTestCase extends TestCase
      */
     public String getMessageAsString(int intMsgNo)
     {
-        assertTrue(this.fakeMailServer.getReceivedEmailSize() >= intMsgNo);
-        Iterator emailIter = fakeMailServer.getReceivedEmail();
-        SmtpMessage emailMessage = null;
-        for (int intCurMsg = 0; intCurMsg < intMsgNo; intCurMsg++)
-        {
-            emailMessage = (SmtpMessage) emailIter.next();
-        }
+        List receivedMessages = fakeMailServer.getMessages();
+        assertTrue("mail server didn't get enough messages", receivedMessages.size() >= intMsgNo);
+
+        WiserMessage emailMessage = (WiserMessage) receivedMessages.get(intMsgNo);
 
         if (emailMessage != null)
         {
-            return emailMessage.toString();
+            try
+            {
+                return serializeEmailMessage(emailMessage);
+            }
+            catch (Exception e)
+            {
+                // ignore, since the test will fail on an empty string return
+            }
         }
-        fail("Message note found");
+        fail("Message not found");
         return "";
     }
 
-    /** */
+    /**
+     * Initializes the stub mail server. Fails if the server cannot be proven
+     * to have started. If the server is already started, this method returns
+     * without changing the state of the server.
+     */
     public void getMailServer()
     {
-        if (this.fakeMailServer == null || this.fakeMailServer.isStopped())
+        if (this.fakeMailServer == null || isMailServerStopped(fakeMailServer))
         {
             mailServerPort++;
 
-            this.fakeMailServer =
-                    SimpleSmtpServer.start(getMailServerPort());
+            this.fakeMailServer = new Wiser();
+            this.fakeMailServer.setPort(getMailServerPort());
+            this.fakeMailServer.start();
 
-            assertFalse("fake mail server didn't start", this.fakeMailServer.isStopped());
+            assertFalse("fake mail server didn't start", isMailServerStopped(fakeMailServer));
 
             Date dtStartWait = new Date();
-            while (this.fakeMailServer.isStopped())
+            while (isMailServerStopped(fakeMailServer))
             {
                 // test for connected
                 if (this.fakeMailServer != null
-                    && !this.fakeMailServer.isStopped())
+                    && !isMailServerStopped(fakeMailServer))
                 {
                     break;
                 }
@@ -198,11 +217,11 @@ public class BaseEmailTestCase extends TestCase
      * @param ccAdd list of expected cc addresses
      * @param bccAdd list of expected bcc addresses
      * @param boolSaveToFile true will output to file, false doesnt
-     * @return SmtpMessage email to check
+     * @return WiserMessage email to check
      * @throws IOException Exception
      */
-    protected SmtpMessage validateSend(
-        SimpleSmtpServer mailServer,
+    protected WiserMessage validateSend(
+        Wiser mailServer,
         String strSubject,
         InternetAddress fromAdd,
         List toAdd,
@@ -211,39 +230,54 @@ public class BaseEmailTestCase extends TestCase
         boolean boolSaveToFile)
         throws IOException
     {
-        assertTrue(mailServer.getReceivedEmailSize() == 1);
-        Iterator emailIter = fakeMailServer.getReceivedEmail();
-        SmtpMessage emailMessage = (SmtpMessage) emailIter.next();
+        assertTrue("mail server doesn't contain expected message",
+                mailServer.getMessages().size() == 1);
+        WiserMessage emailMessage = (WiserMessage) mailServer.getMessages().get(0);
 
         if (boolSaveToFile)
         {
             this.saveEmailToFile(emailMessage);
         }
 
-        // test subject
-        assertEquals(strSubject, emailMessage.getHeaderValue("Subject"));
-
-        //test from address
-        assertEquals(fromAdd.toString(), emailMessage.getHeaderValue("From"));
-
-        //test to address
-        assertTrue(
-            toAdd.toString().indexOf(emailMessage.getHeaderValue("To")) != -1);
-
-        //test cc address
-        if (ccAdd.size() > 0)
+        try
         {
-            assertTrue(
-                ccAdd.toString().indexOf(emailMessage.getHeaderValue("Cc"))
-                    != -1);
+            // get the MimeMessage
+            MimeMessage mimeMessage = emailMessage.getMimeMessage();
+
+            // test subject
+            assertEquals("got wrong subject from mail",
+                    strSubject, mimeMessage.getHeader("Subject", null));
+
+            //test from address
+            assertEquals("got wrong From: address from mail",
+                    fromAdd.toString(), mimeMessage.getHeader("From", null));
+
+            //test to address
+            assertTrue("got wrong To: address from mail",
+                toAdd.toString().indexOf(mimeMessage.getHeader("To", null)) != -1);
+
+            //test cc address
+            if (ccAdd.size() > 0)
+            {
+                assertTrue("got wrong Cc: address from mail",
+                    ccAdd.toString().indexOf(mimeMessage.getHeader("Cc", null))
+                        != -1);
+            }
+
+            //test bcc address
+            if (bccAdd.size() > 0)
+            {
+                assertTrue("got wrong Bcc: address from mail",
+                    bccAdd.toString().indexOf(mimeMessage.getHeader("Bcc", null))
+                        != -1);
+            }
         }
-
-        //test bcc address
-        if (bccAdd.size() > 0)
+        catch (MessagingException me)
         {
-            assertTrue(
-                bccAdd.toString().indexOf(emailMessage.getHeaderValue("Bcc"))
-                    != -1);
+            IllegalStateException ise =
+                new IllegalStateException("caught MessagingException in validateSend()");
+            ise.initCause(me);
+            throw ise;
         }
 
         return emailMessage;
@@ -262,7 +296,7 @@ public class BaseEmailTestCase extends TestCase
      * @throws IOException Exception
      */
     protected void validateSend(
-        SimpleSmtpServer mailServer,
+        Wiser mailServer,
         String strSubject,
         Multipart content,
         InternetAddress fromAdd,
@@ -273,7 +307,7 @@ public class BaseEmailTestCase extends TestCase
         throws IOException
     {
         // test other properties
-        SmtpMessage emailMessage = this.validateSend(
+        WiserMessage emailMessage = this.validateSend(
             mailServer,
             strSubject,
             fromAdd,
@@ -289,12 +323,13 @@ public class BaseEmailTestCase extends TestCase
             content.getContentType();
         // get received email content (chop off the auto-added \n
         // and -- (front and end)
+        String emailMessageBody = getMessageBody(emailMessage);
         String strMessageBody =
-            emailMessage.getBody().substring(
-                BaseEmailTestCase.BODY_START_PAD,
-                emailMessage.getBody().length()
-                    - BaseEmailTestCase.BODY_END_PAD);
-        assertTrue(strMessageBody.indexOf(strSentContent) != -1);
+            emailMessageBody.substring(BaseEmailTestCase.BODY_START_PAD,
+                                       emailMessageBody.length()
+                                       - BaseEmailTestCase.BODY_END_PAD);
+        assertTrue("didn't find expected content type in message body",
+                strMessageBody.indexOf(strSentContent) != -1);
     }
 
     /**
@@ -310,7 +345,7 @@ public class BaseEmailTestCase extends TestCase
      * @throws IOException Exception
      */
     protected void validateSend(
-        SimpleSmtpServer mailServer,
+        Wiser mailServer,
         String strSubject,
         String strMessage,
         InternetAddress fromAdd,
@@ -321,7 +356,7 @@ public class BaseEmailTestCase extends TestCase
         throws IOException
     {
         // test other properties
-        SmtpMessage emailMessage = this.validateSend(
+        WiserMessage emailMessage = this.validateSend(
             mailServer,
             strSubject,
             fromAdd,
@@ -331,6 +366,134 @@ public class BaseEmailTestCase extends TestCase
             true);
 
         // test message content
-        assertTrue(emailMessage.getBody().indexOf(strMessage) != -1);
+        assertTrue("didn't find expected message content in message body",
+                getMessageBody(emailMessage).indexOf(strMessage) != -1);
+    }
+
+    /**
+     * Serializes the {@link MimeMessage} from the <code>WiserMessage</code>
+     * passed in. The headers are serialized first followed by the message
+     * body.
+     *
+     * @param email The <code>WiserMessage</code> to serialize.
+     * @return The string format of the message.
+     * @throws MessagingException
+     * @throws IOException
+     *             Thrown while serializing the body from
+     *             {@link DataHandler#writeTo(java.io.OutputStream)}.
+     * @throws MessagingException
+     *             Thrown while getting the body content from
+     *             {@link MimeMessage#getDataHandler()}
+     * @since 1.1
+     */
+    private String serializeEmailMessage(WiserMessage wiserMessage)
+            throws MessagingException, IOException
+    {
+        if (wiserMessage == null)
+        {
+            return "";
+        }
+
+        StringBuffer serializedEmail = new StringBuffer();
+        MimeMessage message = wiserMessage.getMimeMessage();
+
+        // Serialize the headers
+        for (Enumeration headers = message.getAllHeaders(); headers
+                .hasMoreElements();)
+        {
+            Header header = (Header) headers.nextElement();
+            serializedEmail.append(header.getName());
+            serializedEmail.append(": ");
+            serializedEmail.append(header.getValue());
+            serializedEmail.append(LINE_SEPARATOR);
+        }
+
+        // Serialize the body
+        byte[] messageBody = getMessageBodyBytes(message);
+
+        serializedEmail.append(LINE_SEPARATOR);
+        serializedEmail.append(messageBody);
+        serializedEmail.append(LINE_SEPARATOR);
+
+        return serializedEmail.toString();
+    }
+
+    /**
+     * Returns a string representation of the message body. If the message body
+     * cannot be read, an empty string is returned.
+     *
+     * @param wiserMessage The wiser message from which to extract the message body
+     * @return The string representation of the message body
+     * @throws IOException
+     *             Thrown while serializing the body from
+     *             {@link DataHandler#writeTo(java.io.OutputStream)}.
+     * @since 1.1
+     */
+    private String getMessageBody(WiserMessage wiserMessage)
+            throws IOException
+    {
+        if (wiserMessage == null)
+        {
+            return "";
+        }
+
+        byte[] messageBody = null;
+
+        try
+        {
+            MimeMessage message = wiserMessage.getMimeMessage();
+            messageBody = getMessageBodyBytes(message);
+        }
+        catch (MessagingException me)
+        {
+            // Thrown while getting the body content from
+            // {@link MimeMessage#getDataHandler()}
+            IllegalStateException ise =
+                new IllegalStateException("couldn't process MimeMessage from WiserMessage in getMessageBody()");
+            ise.initCause(me);
+            throw ise;
+        }
+
+        return (messageBody != null) ? (new String(messageBody).intern()) : "";
+    }
+
+    /**
+     * Gets the byte making up the body of the message.
+     *
+     * @param mimeMessage
+     *            The mime message from which to extract the body.
+     * @return A byte array representing the message body
+     * @throws IOException
+     *             Thrown while serializing the body from
+     *             {@link DataHandler#writeTo(java.io.OutputStream)}.
+     * @throws MessagingException
+     *             Thrown while getting the body content from
+     *             {@link MimeMessage#getDataHandler()}
+     * @since 1.1
+     */
+    private byte[] getMessageBodyBytes(MimeMessage mimeMessage)
+            throws IOException, MessagingException
+    {
+        DataHandler dataHandler = mimeMessage.getDataHandler();
+        ByteArrayOutputStream byteArrayOutStream = new ByteArrayOutputStream();
+        BufferedOutputStream buffOs = new BufferedOutputStream(
+                byteArrayOutStream);
+        dataHandler.writeTo(buffOs);
+        buffOs.flush();
+
+        return byteArrayOutStream.toByteArray();
+    }
+
+    /**
+     * Checks if an email server is running at the address stored in the
+     * <code>fakeMailServer</code>.
+     *
+     * @param fakeMailServer
+     *            The server from which the address is picked up.
+     * @return <code>true</code> if the server claims to be running
+     * @since 1.1
+     */
+    protected boolean isMailServerStopped(Wiser fakeMailServer) {
+        return !fakeMailServer.getServer().isRunning();
     }
 }

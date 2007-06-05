@@ -45,39 +45,44 @@ limitations under the License.
   <p>
     To build the full website, run "maven site".
     The result will be in "target/docs".
-	You must be online and using JDK 1.4 or higher to successfully complete this target.
+    You must be online and using JDK 1.4 or higher to successfully complete this target.
   </p>
   <p>
-	Commons Email requires two jar files to compile and run - activation-1.0.2.jar and javamail-1.3.3.jar.
-	These are not present in the main maven ibiblio repository due to Sun licensing restrictions.
-	You must manually download these jars and install them in your own local repository.
+    Commons Email requires two jar files to compile and run - activation-1.1.jar and javamail-1.4.jar.
+    These are not present in the main maven ibiblio repository due to Sun licensing restrictions.
+    You must manually download these jars and install them in your own local repository.
   </p>
   <p>
-	Sun Javamail, available from
-	<a href="http://java.sun.com/products/javamail/">http://java.sun.com/products/javamail/</a><br />
-	Sun Activation Framework, available from
-	<a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">http://java.sun.com/products/javabeans/glasgow/jaf.html</a><br />
+    Sun Javamail, available from
+    <a href="http://java.sun.com/products/javamail/">http://java.sun.com/products/javamail/</a><br />
+    Sun Activation Framework, available from
+    <a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">http://java.sun.com/products/javabeans/glasgow/jaf.html</a><br />
   </p>
 </section>
 <!-- ================================================== -->
 <section name="Ant Goals">
   <p>
-	A maven generated ant file is provided for ant users.
+    A maven generated ant file is provided for ant users.
   </p>
 </section>
 <!-- ================================================== -->
 <section name="Development">
   <p>
-    Commons Email may be used on any JRE from 1.3 onwards.
+    Commons Email may be used on any JRE from 1.4 onwards.
   </p>
   <p>
-    Please note that the tests may fail under JDK 1.3 due to the use of
-    <a href="http://sourceforge.net/projects/dumbster">Dumbster</a>
-    which is compiled with JDK 1.4.
-  </p>
-  <p>
-    Also note that on OS X you may need to use Dumbster 1.5, not Dumbster 1.6 to run
-    the unit tests.  Just update the project.xml <i>dependency</i> element.
+    Commons Email requires <a href="http://subethasmtp.tigris.org/wiser.html">Wiser</a>
+    for its unit tests. The base distribution requires JDK 1.5, but 1.4-compatible
+    jars are also provided in the binary distribution
+    <a href="http://subethasmtp.tigris.org/files/documents/4046/36703/subethasmtp-1.2.zip">here</a>.<br />
+
+    Finally, you will also need to install the Retroweaver runtime support
+    library on behalf of Wiser. That download is available
+    <a href="http://downloads.sourceforge.net/retroweaver/retroweaver-2.0.zip">here</a>.
+
+    These jars are not yet available in the public maven repository, so you need to
+    install them to your local maven repository. Use the install commands suggested
+    by maven.
   </p>
 </section>
 <!-- ================================================== -->

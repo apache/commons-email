@@ -49,23 +49,6 @@
         <url>http://svn.apache.org/viewvc/jakarta/commons/proper/email/trunk</url>
     </scm>
 
-	<repositories>
-        <!-- Used for getting dumbster test dependency only. -->
-        <repository>
-            <id>apache.m1.snapshots</id>
-            <name>Apache M1 Snapshot repository</name>
-            <layout>legacy</layout>
-            <url>http://people.apache.org/repo/m1-snapshot-repository</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <checksumPolicy>ignore</checksumPolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-	</repositories>
-
     <developers>
         <developer>
             <name>dIon Gillard</name>
@@ -146,6 +129,16 @@
             <roles/>
             <timezone>0</timezone>
         </developer>
+        <developer>
+            <name>Ben Speakmon</name>
+            <id>bspeakmon</id>
+            <email>bspeakmon@apache.org</email>
+            <organization>Apache Software Foundation</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+            <timezone>-8</timezone>
+        </developer>
     </developers>
     <contributors>
         <contributor>
@@ -194,10 +187,30 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>dumbster</groupId>
-            <artifactId>dumbster</artifactId>
-            <version>SNAPSHOT</version>
-            <!--<url>http://quintanasoft.com/dumbster/</url>-->
+            <groupId>org.subethamail</groupId>
+            <artifactId>subethasmtp-wiser-jdk14</artifactId>
+            <version>1.2</version>
+            <!--<url>http://subethasmtp.tigris.org/wiser.html</url>-->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.subethamail</groupId>
+            <artifactId>subethasmtp-smtp-jdk14</artifactId>
+            <version>1.2</version>
+            <!--<url>http://subethasmtp.tigris.org/</url>-->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.retroweaver</groupId>
+            <artifactId>retroweaver-rt</artifactId>
+            <version>2.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1</version>
+            <!--<url>http://jakarta.apache.org/commons/logging/</url>-->
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -224,12 +237,12 @@
             </resource>
         </resources>
         <testResources>
-        	<testResource>
-        		<directory>src/test</directory>
-        		<excludes>
-        			<exclude>**/*.java</exclude>
-        		</excludes>
-        	</testResource>
+            <testResource>
+                <directory>src/test</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </testResource>
         </testResources>
         <plugins>
             <plugin>
