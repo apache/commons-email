@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<document>
+ <properties>
+  <title>Release notes for 1.1</title>
+  <author email="commons-dev@jakarta.apache.org">Commons Documentation Team</author>
+ </properties>
+<body>
+
+<section name="Release notes">
+<p>
+These are the release notes for Commons-Email version 1.1.
+<source>
+INTRODUCTION:
+
+Commons-Email aims to provide a API for sending email. It builds on the JavaMail
+API with the aim of presenting a simplified API which is easy for developers who
+are not mail experts to use. It is a compact component with a small number of
+classes.
+
+This release includes several important fixes and enhancements, including
+corrected MIME message construction, robust character set handling, and
+MultiPartEmail message optimization. All users of Commons-Email 1.0 are
+encouraged to upgrade.
+
+REQUIREMENTS:
+
+J2SE environments
+-----------------
+
+Commons-Email requires at least JDK 1.4.
+
+Commons-Email requires at least JavaMail version 1.4. Get it
+<a href="http://java.sun.com/products/javamail/">here</a>.
+
+Commons-Email also requires the Java Activation Framework through JavaMail.
+Get it from <a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">here</a>.
+
+Commons-Email has been tested with JDK 1.4.2_14, Java 1.5.0_11, and Java 1.6.0_01.
+
+J2EE environments
+-----------------
+
+Commons-Email should be compatible with J2EE 5+ compliant
+environments and run without additional requirements. Previous versions of
+J2EE do not support the required versions of JavaMail and JAF, so they must be
+specifically used in deployment.
+</source>
+</p>
+</section>
+
+</body>
+</document>
