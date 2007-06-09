@@ -188,16 +188,10 @@
         </dependency>
         <dependency>
             <groupId>org.subethamail</groupId>
-            <artifactId>subethasmtp-wiser-jdk14</artifactId>
+            <artifactId>subethasmtp-wiser</artifactId>
             <version>1.2</version>
+            <classifier>java14</classifier>
             <!--<url>http://subethasmtp.tigris.org/wiser.html</url>-->
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.subethamail</groupId>
-            <artifactId>subethasmtp-smtp-jdk14</artifactId>
-            <version>1.2</version>
-            <!--<url>http://subethasmtp.tigris.org/</url>-->
             <scope>test</scope>
         </dependency>
         <dependency>
