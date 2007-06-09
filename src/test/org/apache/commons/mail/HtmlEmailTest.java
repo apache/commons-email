@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.activation.FileDataSource;
+
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 
@@ -154,7 +156,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
      *
      * @throws Exception Exception
      */
-    public void testEmbed() throws Exception
+    public void testEmbedUrl() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -205,6 +207,87 @@ public class HtmlEmailTest extends BaseEmailTestCase
         }
     }
 
+    public void testEmbedFile() throws Exception
+    {
+        // ====================================================================
+        // Test Success
+        // ====================================================================
+
+        File file = File.createTempFile("testEmbedFile", "txt");
+        file.deleteOnExit();
+        String strEmbed = this.email.embed(file);
+        assertNotNull(strEmbed);
+        assertEquals("generated CID has wrong length",
+                HtmlEmail.CID_LENGTH, strEmbed.length());
+
+        // if we embed the same file again, do we get the same content ID
+        // back?
+        String testCid =
+            this.email.embed(file);
+        assertEquals("didn't get same CID after embedding same file twice",
+                strEmbed, testCid);
+
+        // if we embed a new file, is the content ID unique?
+        File otherFile = File.createTempFile("testEmbedFile2", "txt");
+        otherFile.deleteOnExit();
+        String newCid = this.email.embed(otherFile);
+        assertFalse("didn't get unique CID from embedding new file",
+                strEmbed.equals(newCid));
+    }
+
+    public void testEmbedUrlAndFile() throws Exception
+    {
+        File tmpFile = File.createTempFile("testfile", "txt");
+        tmpFile.deleteOnExit();
+        String fileCid = this.email.embed(tmpFile);
+
+        URL fileUrl = tmpFile.toURL();
+        String urlCid = this.email.embed(fileUrl, "urlName");
+
+        assertFalse("file and URL cids should be different even for same resource",
+                fileCid.equals(urlCid));
+    }
+
+    public void testEmbedDataSource() throws Exception
+    {
+        File tmpFile = File.createTempFile("testEmbedDataSource", "txt");
+        tmpFile.deleteOnExit();
+        FileDataSource dataSource = new FileDataSource(tmpFile);
+
+        // does embedding a datasource without a name fail?
+        try
+        {
+            this.email.embed(dataSource, "");
+            fail("embedding with an empty string for a name should fail");
+        }
+        catch (EmailException e)
+        {
+            // expected
+        }
+
+        // properly embed the datasource
+        String cid = this.email.embed(dataSource, "testname");
+
+        // does embedding the same datasource under the same name return
+        // the original cid?
+        String sameCid = this.email.embed(dataSource, "testname");
+        assertEquals("didn't get same CID for embedding same datasource twice",
+                cid, sameCid);
+
+        // does embedding another datasource under the same name fail?
+        File anotherFile = File.createTempFile("testEmbedDataSource2", "txt");
+        anotherFile.deleteOnExit();
+        FileDataSource anotherDS = new FileDataSource(anotherFile);
+        try
+        {
+            this.email.embed(anotherDS, "testname");
+        }
+        catch (EmailException e)
+        {
+            // expected
+        }
+    }
+
     /**
      * @throws EmailException when bad addresses and attachments are used
      * @throws IOException if creating a temp file, URL or sending fails
@@ -216,6 +299,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
         /** File to used to test file attachments (Must be valid) */
         testFile = File.createTempFile("commons-email-testfile", ".txt");
+        testFile.deleteOnExit();
 
         // ====================================================================
         // Test Success
