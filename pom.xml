@@ -187,6 +187,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>net.sf.retrotranslator</groupId>
+            <artifactId>retrotranslator-runtime</artifactId>
+            <version>1.2.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.subethamail</groupId>
             <artifactId>subethasmtp-smtp</artifactId>
             <version>1.2</version>
@@ -201,6 +207,12 @@
             <classifier>java14</classifier>
             <!--<url>http://subethasmtp.tigris.org/wiser.html</url>-->
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.subethamail</groupId>
+                    <artifactId>subethasmtp-smtp</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
