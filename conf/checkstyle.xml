@@ -67,7 +67,7 @@
         <!-- Checks for Headers                              -->
         <!-- See http://checkstyle.sf.net/config_header.html -->
         <module name="Header">
-            <property name="headerFile" value="${basedir}/conf/HEADER.txt"/>
+            <property name="headerFile" value="conf/HEADER.txt"/>
             <property name="ignoreLines" value="2"/>
         </module>
 
@@ -115,9 +115,9 @@
         <!-- See http://checkstyle.sf.net/config_blocks.html -->
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock">
-    		<property name="option" value="text"/>
-    		<property name="tokens" value="LITERAL_CATCH"/>
-    	</module>
+            <property name="option" value="text"/>
+            <property name="tokens" value="LITERAL_CATCH"/>
+        </module>
         <module name="LeftCurly">
             <property name="option" value="nl"/>
         </module>
