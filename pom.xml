@@ -25,7 +25,7 @@
         <version>3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>commons-email</groupId>
+    <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
     <version>1.1-SNAPSHOT</version>
     <name>Commons-Email</name>
@@ -275,5 +275,17 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <configLocation>conf/checkstyle.xml</configLocation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
