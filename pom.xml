@@ -36,7 +36,7 @@
         the JavaMail API, which it aims to simplify.
     </description>
 
-    <url>http://jakarta.apache.org/commons/email/</url>
+    <url>http://commons.apache.org/email/</url>
 
     <issueManagement>
         <system>jira</system>
@@ -44,9 +44,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk</developerConnection>
-        <url>http://svn.apache.org/viewvc/jakarta/commons/proper/email/trunk</url>
+        <connection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/trunk</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/trunk</developerConnection>
+        <url>http://svn.apache.org/viewvc/commons/proper/email/trunk</url>
     </scm>
 
     <developers>
@@ -218,7 +218,7 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.1</version>
-            <!--<url>http://jakarta.apache.org/commons/logging/</url>-->
+            <!--<url>http://commons.apache.org/logging/</url>-->
             <scope>test</scope>
         </dependency>
         <dependency>

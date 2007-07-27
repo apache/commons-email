@@ -24,8 +24,8 @@
 
     <organization>
       <name>The Apache Software Foundation</name>
-      <url>http://jakarta.apache.org</url>
-      <logo>http://jakarta.apache.org/images/original-jakarta-logo.gif</logo>
+      <url>http://commons.apache.org/</url>
+    <logo>http://commons.apache.org/images/logo.png</logo>
     </organization>
 
     <licenses>
@@ -39,7 +39,7 @@
     <inceptionYear>2001</inceptionYear>
     <package>org.apache.commons.mail</package>
     <logo>/images/email-logo-white.png</logo>
-    <gumpRepositoryId>jakarta</gumpRepositoryId>
+    <gumpRepositoryId>commons</gumpRepositoryId>
     <description>
       Commons-Email aims to provide a API for sending email.
       It is built on top of the Java Mail API, which it aims to simplify.
@@ -47,12 +47,12 @@
     <shortDescription>Commons Email</shortDescription>
     <issueTrackingUrl>http://issues.apache.org/jira/</issueTrackingUrl>
     <siteAddress>people.apache.org</siteAddress>
-    <siteDirectory>/www/jakarta.apache.org/commons/email/</siteDirectory>
+    <siteDirectory>/www/commons.apache.org/email/</siteDirectory>
     <distributionSite>cvs.apache.org</distributionSite>
-    <distributionDirectory>/www/cvs.apache.org/dist/jakarta/commons/email/</distributionDirectory>
+    <distributionDirectory>/www/people.apache.org/builds/commons/email/</distributionDirectory>
     <repository>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/commons/proper/email/trunk</connection>
-        <url>http://svn.apache.org/viewvc/jakarta/commons/proper/email/trunk</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/trunk</connection>
+        <url>http://svn.apache.org/viewvc/commons/proper/email/trunk</url>
     </repository>
     <versions>
       <version>
@@ -69,15 +69,15 @@
     <mailingLists>
         <mailingList>
             <name>Commons Dev List</name>
-            <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
-            <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/jakarta-commons-dev/</archive>
+            <subscribe>dev-subscribe@commons.apache.org</subscribe>
+            <unsubscribe>dev-unsubscribe@commons.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/commons-dev/</archive>
         </mailingList>
         <mailingList>
             <name>Commons User List</name>
-            <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
-            <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/jakarta-commons-user/</archive>
+            <subscribe>user-subscribe@commons.apache.org</subscribe>
+            <unsubscribe>user-unsubscribe@commons.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/commons-user/</archive>
         </mailingList>
     </mailingLists>
     <developers>
@@ -239,7 +239,7 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.1</version>
-            <url>http://jakarta.apache.org/commons/logging/</url>
+            <url>http://commons.apache.org/logging/</url>
             <properties>
               <scope>test</scope>
             </properties>
@@ -268,7 +268,7 @@
         </dependency>
     </dependencies>
     <build>
-      <nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
+      <nagEmailAddress>dev@commons.apache.org</nagEmailAddress>
       <sourceDirectory>src/java</sourceDirectory>
       <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
       <unitTest>
