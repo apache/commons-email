@@ -18,7 +18,7 @@
 <document>
  <properties>
   <title>Home</title>
-  <author email="commons-dev@jakarta.apache.org">Commons Documentation Team</author>
+  <author email="dev@commons.apache.org">Commons Documentation Team</author>
  </properties>
 <body>
 <!-- ================================================== -->
@@ -69,7 +69,7 @@ The JavaDoc API documents are available online:
 </ul>
 <p>
 The <a href="cvs-usage.html">subversion repository</a> can be
-<a href="http://svn.apache.org/viewcvs.cgi/jakarta/commons/proper/email/trunk/">browsed</a>.
+<a href="http://svn.apache.org/viewvc/commons/proper/email/trunk/">browsed</a>.
 </p>
 </section>
 <!-- ================================================== -->
