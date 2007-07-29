@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://usefulinc.com/ns/doap#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:asfext="http://projects.apache.org/ns/asfext#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:doap="http://usefulinc.com/ns/doap#" xml:lang="en">
   <Project rdf:about="">
-    <name>Apache Apache Commons Email</name>
+    <name>Apache Commons Email</name>
     <homepage rdf:resource=""/>
     <programming-language>Java</programming-language>
     <category rdf:resource="http://projects.apache.org/category/library"/>
@@ -16,8 +16,8 @@
     </description>
     <repository>
       <SVNRepository>
-        <browse rdf:resource="http://svn.apache.org/viewvc/jakarta/commons/proper/email/trunk"/>
-        <location rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/email"/>
+        <browse rdf:resource="http://svn.apache.org/viewvc/commons/proper/email/trunk"/>
+        <location rdf:resource="http://svn.apache.org/repos/asf/commons/proper/email"/>
       </SVNRepository>
     </repository>
     <release>
