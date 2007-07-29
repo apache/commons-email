@@ -23,16 +23,16 @@ Getting started:
 1) Build the jar file
 
   If you have the source distribution you will need to build the jar file
-  using Maven.  For instructions on downloading and installing Maven see
+  using Maven 2.  For instructions on downloading and installing Maven see
   http://maven.apache.org/.
 
-  To build execute the command 'maven'.  The jar file will be built in the
+  To build execute the command 'mvn package'.  The jar file will be built in the
   target directory.
 
 2) Generate the documentation
 
-  Run the 'maven site:generate' command.  The documentation will be written
-  to the target/docs directory.  The documentation has some examples of
+  Run the 'mvn site' command.  The documentation will be written
+  to the target/site directory.  The documentation has some examples of
   how to use this package as well as a FAQ.
 
 3) Use
