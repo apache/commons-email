@@ -11,7 +11,7 @@
 
     <menu name="Commons Email">
       <item name="Overview" href="/index.html"/>
-      <item name="Download" href="http://jakarta.apache.org/site/downloads/downloads_commons-email.cgi"/>
+      <item name="Download" href="http://commons.apache.org/downloads/download_email.cgi"/>
       <item name="User guide" href="/userguide.html"/>
       <item name="Javadoc (1.0 release)" href="api-release/index.html"/>
     </menu>
