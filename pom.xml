@@ -28,7 +28,7 @@
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
     <version>1.1-SNAPSHOT</version>
-    <name>Email</name>
+    <name>Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
     <description>
