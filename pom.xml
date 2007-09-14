@@ -292,6 +292,10 @@
                     <configLocation>conf/checkstyle.xml</configLocation>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </reporting>
 
