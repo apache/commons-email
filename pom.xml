@@ -165,6 +165,21 @@
             <email>matthias@wessendorf.net</email>
             <roles/>
         </contributor>
+	<contributor>
+	    <name>Bindul Bhowmik</name>
+	</contributor>
+	<contributor>
+	    <name>Brandon Wolfe</name>
+	</contributor>
+        <contributor>
+            <name>Piero Ottuzzi</name>
+        </contributor>
+        <contributor>
+            <name>Andrew Liles</name>
+        </contributor>
+        <contributor>
+            <name>Cédrik Lime</name>
+        </contributor>
     </contributors>
 
     <dependencies>
