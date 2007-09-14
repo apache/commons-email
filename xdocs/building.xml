@@ -24,7 +24,7 @@ limitations under the License.
 <!-- ================================================== -->
 <section name="Overview">
 <p>
-  Commons Email uses <a href="http://maven.apache.org">Maven</a> or
+  Commons Email uses <a href="http://maven.apache.org">Maven 2.0</a> or
   <a href="http://ant.apache.org">Ant</a> as a build system.
 </p>
 <p>
@@ -35,34 +35,34 @@ limitations under the License.
 <!-- ================================================== -->
 <section name="Maven Goals">
   <p>
-    To build a jar file, change into Email's root directory and run "maven jar".
+    To build a jar file, change into Email's root directory and run "mvn package".
     The result will be in the "target" subdirectory.
   </p>
   <p>
-    To build the Javadocs, run "maven javadoc".
+    To build the Javadocs, run "mvn javadoc:javadoc".
     The result will be in "target/docs/apidocs".
   </p>
   <p>
-    To build the full website, run "maven site".
-    The result will be in "target/docs".
+    To build the full website, run "mvn site".
+    The result will be in "target/site".
     You must be online and using JDK 1.4 or higher to successfully complete this target.
   </p>
   <p>
     Commons Email requires two jar files to compile and run - activation-1.1.jar and javamail-1.4.jar.
-    These are not present in the main maven ibiblio repository due to Sun licensing restrictions.
-    You must manually download these jars and install them in your own local repository.
+    These are not present in the main maven repository due to Sun licensing restrictions.
+    You must manually download these jars and install them in your local repository:
   </p>
-  <p>
-    Sun Javamail, available from
-    <a href="http://java.sun.com/products/javamail/">http://java.sun.com/products/javamail/</a><br />
-    Sun Activation Framework, available from
-    <a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">http://java.sun.com/products/javabeans/glasgow/jaf.html</a><br />
-  </p>
+  <ul>
+    <li>Sun JavaMail, available from
+    <a href="http://java.sun.com/products/javamail/">http://java.sun.com/products/javamail/</a></li>
+    <li>Sun JavaBeans Activation Framework, available from
+    <a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">http://java.sun.com/products/javabeans/glasgow/jaf.html</a></li>
+  </ul>
 </section>
 <!-- ================================================== -->
 <section name="Ant Goals">
   <p>
-    A maven generated ant file is provided for ant users.
+    A maven-generated Ant file is provided for Ant users.
   </p>
 </section>
 <!-- ================================================== -->
@@ -80,9 +80,8 @@ limitations under the License.
     library on behalf of Wiser. That download is available
     <a href="http://downloads.sourceforge.net/retroweaver/retroweaver-2.0.zip">here</a>.
 
-    These jars are not yet available in the public maven repository, so you need to
-    install them to your local maven repository. Use the install commands suggested
-    by maven.
+    These jars will be automatically installed to your local Maven 2 repository
+    if you build using Maven.
   </p>
 </section>
 <!-- ================================================== -->
