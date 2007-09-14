@@ -25,7 +25,7 @@
         <version>4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>commons-email</groupId>
+    <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
     <version>1.1-SNAPSHOT</version>
     <name>Commons Email</name>
