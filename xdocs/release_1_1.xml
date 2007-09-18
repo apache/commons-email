@@ -1,68 +1,162 @@
 <?xml version="1.0"?>
 <!--
-Licensed to the Apache Software Foundation (ASF) under one or more
-contributor license agreements.  See the NOTICE file distributed with
-this work for additional information regarding copyright ownership.
-The ASF licenses this file to You under the Apache License, Version 2.0
-(the "License"); you may not use this file except in compliance with
-the License.  You may obtain a copy of the License at
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+  -->
 <document>
- <properties>
-  <title>Release notes for 1.1</title>
-  <author email="dev@commons.apache.org">Commons Documentation Team</author>
- </properties>
-<body>
+  <properties>
+    <title>Release notes for 1.1</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+  <body>
 
-<section name="Release notes">
-<p>
-These are the release notes for Commons-Email version 1.1.
-<source>
-INTRODUCTION:
+    These are the release notes for Commons Email version 1.1.
 
-Commons-Email aims to provide a API for sending email. It builds on the JavaMail
-API with the aim of presenting a simplified API which is easy for developers who
-are not mail experts to use. It is a compact component with a small number of
-classes.
+    <section name="Introduction">
+      <p>
+	Commons Email aims to provide a API for sending email. It builds on the JavaMail
+	API with the aim of presenting a simplified API which is easy for developers who
+	are not mail experts to use. It is a compact component with a small number of
+	classes.
+      </p>
+      <p>
+	The Commons Email website is the source for the most recent information,
+	downloads, reports, and bug status:
+      </p>
+      <p>
+	<a href="http://commons.apache.org/email/">http://commons.apache.org/email/</a>
+      </p>
+      <p>
+	This is a maintenance release which fixes several bugs present in the 1.0
+	release and adds a number of small enhancements requested by
+	users. All current users are encouraged to upgrade.
+      </p>
+    </section>
 
-This release includes several important fixes and enhancements, including
-corrected MIME message construction, robust character set handling, and
-MultiPartEmail message optimization. All users of Commons-Email 1.0 are
-encouraged to upgrade.
+    <section name="Changes from 1.0">
 
-REQUIREMENTS:
+      <subsection name="Compatibility">
+	<ul>
+	  <li>
+	    Java 1.4 or later is now required. Earlier versions are no longer
+	    supported by Sun.
+	  </li>	  
+	  <li>
+	    JavaMail 1.4 or later and JavaBeans Activation Framework 1.1 or later are now
+	    required.
+	  </li>
+	  <li>
+	    The protected field <code>org.apache.commons.mail.HtmlEmail.inlineImages</code>
+	    has been changed from a <code>List</code> to a <code>Map</code> as
+	    part of <a href="http://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>. Since the
+	    field is not intended for direct client use, the great majority of
+	    existing clients should not be affected.
+	  </li>
+	</ul>
+      </subsection>
+      
+      <subsection name="Notable bugfixes">
+	<ul>
+	  <li>
+	    <a href="http://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>:
+	    HtmlEmails were not being constructed correctly; several
+	    email clients were not displaying attachments or embedded images
+	    properly. As part of the same problem, duplicate embeds were not
+	    being handled correctly.
+	  </li>
+	  <li>
+	    <a href="http://issues.apache.org/jira/browse/EMAIL-1">EMAIL-1</a>: 
+	    Email.setContent() was not taking a specified charset into
+	    account. Additional setContent() overloadings were also added to
+	    address common use cases.
+	  </li>
+	</ul>
+      </subsection>
+      
+      <subsection name="Notable enhancements">
+	<ul>
+	  <li>
+	    <a href="http://issues.apache.org/jira/browse/EMAIL-35">EMAIL-35</a>: 
+	    HtmlEmail now supports the embedding of any DataSource
+	    implementation. Specific methods were added for File and URL
+	    objects, removing the need for clumsy circumlocution.
+	  </li>
+	  <li>
+	    Character set handling and encoding has been overhauled to use the
+	    JDK 1.4 character set support. All charsets supported by the Java VM
+	    are now recognized and handled appropriately in Email.setCharset()
+	    and Email.setContent() calls.
+	  </li>
+	  <li>
+	    HtmlEmail performance has been slightly improved.
+	  </li>
+	  <li>
+	    The MIME structure of MultiPartEmail and HtmlEmail has
+	    been improved.
+	  </li>
+	</ul>
+      </subsection>
+      
+    </section>
 
-J2SE environments
------------------
+    <section name="Requirements">
+      
+      <subsection name="J2SE environments">
+	<p>
+	  Commons Email requires JavaMail 1.4 or later. The proprietary Sun implementation
+	  is available at:
+	</p>
+	<p>
+	  <a href="http://java.sun.com/products/javamail/">http://java.sun.com/products/javamail/</a>
+	</p>
+	<p>
+	  However, the Apache Geronimo project (http://geronimo.apache.org)
+	  provides a J2EE-certified implementation of the JavaMail 1.4
+	  specification licensed under the Apache Software License.  
+	</p>
+	<p>
+	  Commons Email also requires the JavaBeans Activation Framework. The
+	  proprietary Sun implementation is available at:
+	</p>
+	<p>
+	  <a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">http://java.sun.com/products/javabeans/glasgow/jaf.html</a>
+	</p>
+	<p>
+	  Apache Geronimo likewise provides an implementation under the Apache
+	  Software License.
+	</p>
+	<p>
+	  Commons Email has been tested with JDK 1.4.2_15 and JDK 1.5.0_12.
+	</p>
+      </subsection>
+      
+      <subsection name="J2EE environments">
+	<p>
+	  Commons Email is compatible with all certified Java Enterprise Edition
+	  5 implementations; no further dependencies are required. 
+	</p>
+	<p>
+	  Java 2 Enterprise Edition 1.4 users must ensure that the versions of
+	  JavaMail and JAF indicated above are available to their applications;
+	  the J2EE 1.4 specification only requires earlier versions.
+	</p>
+	<p>
+	  Earlier versions of J2EE are not supported.
+	</p>
+      </subsection>
+    </section>
 
-Commons-Email requires at least JDK 1.4.
-
-Commons-Email requires at least JavaMail version 1.4. Get it
-<a href="http://java.sun.com/products/javamail/">here</a>.
-
-Commons-Email also requires the Java Activation Framework through JavaMail.
-Get it from <a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">here</a>.
-
-Commons-Email has been tested with JDK 1.4.2_14, Java 1.5.0_11, and Java 1.6.0_01.
-
-J2EE environments
------------------
-
-Commons-Email should be compatible with J2EE 5+ compliant
-environments and run without additional requirements. Previous versions of
-J2EE do not support the required versions of JavaMail and JAF, so they must be
-specifically used in deployment.
-</source>
-</p>
-</section>
-
-</body>
+  </body>
 </document>
