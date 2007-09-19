@@ -241,7 +241,7 @@ public class MultiPartEmail extends Email
                 {
                     // do nothing here.  content will be set to an empty string
                     // as a result.
-                    // TODO: Should this reallyt be rethrown as an email exception:
+                    // (Should this reallyt be rethrown as an email exception?)
                     // throw new EmailException(e);
                 }
             }

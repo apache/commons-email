@@ -539,7 +539,7 @@ public abstract class Email
         catch (AddressException e)
         {
             throw new EmailException(e);
-        } 
+        }
         catch (UnsupportedEncodingException e)
         {
             throw new EmailException(e);

@@ -294,7 +294,8 @@ public class HtmlEmail extends MultiPartEmail
                     is.close();
                 }
             }
-            catch (IOException ioe) { /* sigh */ }
+            catch (IOException ioe)
+            { /* sigh */ }
         }
 
         return embed(new URLDataSource(url), name);
