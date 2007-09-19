@@ -28,7 +28,7 @@
             <item name="Download"                href="http://commons.apache.org/downloads/download_email.cgi"/>
             <item name="Dependencies"            href="/dependencies.html"/>
             <item name="User guide"              href="/userguide.html"/>
-            <item name="Javadoc (1.0 release)"   href="/api-release/index.html"/>
+            <item name="Javadoc (1.1 release)"   href="/api-release/index.html"/>
             <item name="License"                 href="/license.html"/>
         </menu>
     
