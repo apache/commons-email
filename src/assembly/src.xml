@@ -20,9 +20,11 @@
         <format>tar.gz</format>
         <format>zip</format>
     </formats>
-<!--
-    <baseDirectory>${project.build.finalName}-src</baseDirectory>
- -->
+    <!--
+      ${project.build.finalName} doesn't work correctly here; see
+      http://jira.codehaus.org/browse/MASSEMBLY-189
+     -->
+    <baseDirectory>${project.artifactId}-${project.version}-src</baseDirectory>
     <fileSets>
         <fileSet>
             <includes>
