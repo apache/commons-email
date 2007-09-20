@@ -29,7 +29,7 @@ limitations under the License.
 </p>
 <p>
   You may also be interested in the release notes:<br />
-  <a href="release_1_0.html">Release 1.0</a><br />
+  <a href="release_1_1.html">Release 1.1</a><br />
 </p>
 </section>
 <!-- ================================================== -->
@@ -49,8 +49,8 @@ limitations under the License.
   </p>
   <p>
     Commons Email requires two jar files to compile and run - activation-1.1.jar and javamail-1.4.jar.
-    These are not present in the main maven repository due to Sun licensing restrictions.
-    You must manually download these jars and install them in your local repository:
+    Sun's versions are not present in the main maven repository due to licensing restrictions.
+    You can manually download these jars and install them in your local repository:
   </p>
   <ul>
     <li>Sun JavaMail, available from
@@ -58,6 +58,9 @@ limitations under the License.
     <li>Sun JavaBeans Activation Framework, available from
     <a href="http://java.sun.com/products/javabeans/glasgow/jaf.html">http://java.sun.com/products/javabeans/glasgow/jaf.html</a></li>
   </ul>
+  <p>
+    See the release notes for more information on alternative implementations of these APIs.
+  </p>
 </section>
 <!-- ================================================== -->
 <section name="Ant Goals">
@@ -75,11 +78,13 @@ limitations under the License.
     for its unit tests. The base distribution requires JDK 1.5, but 1.4-compatible
     jars are also provided in the binary distribution
     <a href="http://subethasmtp.tigris.org/files/documents/4046/36703/subethasmtp-1.2.zip">here</a>.<br />
-
+  </p>
+  <p>
     Finally, you will also need to install the Retroweaver runtime support
     library on behalf of Wiser. That download is available
     <a href="http://downloads.sourceforge.net/retroweaver/retroweaver-2.0.zip">here</a>.
-
+  </p>
+  <p>
     These jars will be automatically installed to your local Maven 2 repository
     if you build using Maven.
   </p>
