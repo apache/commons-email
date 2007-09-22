@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.activation.DataHandler;
@@ -103,10 +104,16 @@ public class HtmlEmail extends MultiPartEmail
     protected String html;
 
     /**
+     * @deprecated As of commons-email 1.1, no longer used. Inline embedded
+     * objects are now stored in {@link #inlineEmbeds}.
+     */
+    protected List inlineImages;
+
+    /**
      * Embedded images Map<String, InlineImage> where the key is the
      * user-defined image name.
      */
-    protected Map inlineImages = new HashMap();
+    protected Map inlineEmbeds = new HashMap();
 
     /**
      * Set the text content.
@@ -253,9 +260,9 @@ public class HtmlEmail extends MultiPartEmail
 
         // check if a URLDataSource for this name has already been attached;
         // if so, return the cached CID value.
-        if (inlineImages.containsKey(name))
+        if (inlineEmbeds.containsKey(name))
         {
-            InlineImage ii = (InlineImage) inlineImages.get(name);
+            InlineImage ii = (InlineImage) inlineEmbeds.get(name);
             URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
@@ -365,9 +372,9 @@ public class HtmlEmail extends MultiPartEmail
 
         // check if a FileDataSource for this name has already been attached;
         // if so, return the cached CID value.
-        if (inlineImages.containsKey(file.getName()))
+        if (inlineEmbeds.containsKey(file.getName()))
         {
-            InlineImage ii = (InlineImage) inlineImages.get(file.getName());
+            InlineImage ii = (InlineImage) inlineEmbeds.get(file.getName());
             FileDataSource fileDataSource = (FileDataSource) ii.getDataSource();
             // make sure the supplied file has the same canonical path
             // as the one already associated with this name.
@@ -427,9 +434,9 @@ public class HtmlEmail extends MultiPartEmail
     {
         // check if the DataSource has already been attached;
         // if so, return the cached CID value.
-        if (inlineImages.containsKey(name))
+        if (inlineEmbeds.containsKey(name))
         {
-            InlineImage ii = (InlineImage) inlineImages.get(name);
+            InlineImage ii = (InlineImage) inlineEmbeds.get(name);
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
             if (dataSource.equals(ii.getDataSource()))
@@ -478,7 +485,7 @@ public class HtmlEmail extends MultiPartEmail
             mbp.setContentID("<" + cid + ">");
 
             InlineImage ii = new InlineImage(cid, dataSource, mbp);
-            this.inlineImages.put(name, ii);
+            this.inlineEmbeds.put(name, ii);
 
             return cid;
         }
@@ -524,7 +531,7 @@ public class HtmlEmail extends MultiPartEmail
         if (EmailUtils.isNotEmpty(this.text))
         {
             msgText = new MimeBodyPart();
-            if (this.inlineImages.size() > 0)
+            if (this.inlineEmbeds.size() > 0)
             {
                 subContainer.addBodyPart(msgText);
             }
@@ -549,7 +556,7 @@ public class HtmlEmail extends MultiPartEmail
         if (EmailUtils.isNotEmpty(this.html))
         {
             msgHtml = new MimeBodyPart();
-            if (this.inlineImages.size() > 0)
+            if (this.inlineEmbeds.size() > 0)
             {
                 subContainer.addBodyPart(msgHtml);
             }
@@ -570,7 +577,7 @@ public class HtmlEmail extends MultiPartEmail
                 msgHtml.setContent(this.html, Email.TEXT_HTML);
             }
 
-            Iterator iter = this.inlineImages.values().iterator();
+            Iterator iter = this.inlineEmbeds.values().iterator();
             while (iter.hasNext())
             {
                 InlineImage ii = (InlineImage) iter.next();
@@ -578,7 +585,7 @@ public class HtmlEmail extends MultiPartEmail
             }
         }
 
-        if (this.inlineImages.size() > 0)
+        if (this.inlineEmbeds.size() > 0)
         {
             // add sub container to message
             this.addPart(subContainer, 0);

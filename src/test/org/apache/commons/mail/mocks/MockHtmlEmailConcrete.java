@@ -74,11 +74,19 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     }
 
     /**
-     * @return inlineImages
+     * @deprecated as of commons-email 1.1, replaced by {@link #getInlineEmbeds}.
      */
-    public Map getInlineImages()
+    public List getInlineImages()
     {
         return inlineImages;
+    }
+
+    /**
+     * @return inlineEmbeds
+     */
+    public Map getInlineEmbeds()
+    {
+        return inlineEmbeds;
     }
 
     /**
