@@ -59,11 +59,13 @@
 	  </li>
 	  <li>
 	    The protected field <code>org.apache.commons.mail.HtmlEmail.inlineImages</code>
-	    has been changed from a <code>List</code> to a <code>Map</code> as
-	    part of <a href="http://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>. Since the
-	    field is not intended for direct client use, the great majority of
-	    existing clients should not be affected.
-	  </li>
+            is now deprecated. Its function is now performed by the
+            <code>org.apache.commons.mail.HtmlEmail.inlineEmbeds</code> field; the new field
+            is a <code>Map</code> instead of a <code>List</code>. The change was made
+            as a part of <a href="http://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>.
+            Clients that have subclassed <code>HtmlEmail</code> should change their implementations
+            accordingly.
+          </li>
 	</ul>
       </subsection>
       

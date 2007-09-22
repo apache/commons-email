@@ -33,9 +33,11 @@ CHANGES FROM 1.0:
   required.
 
 * The protected field org.apache.commons.mail.HtmlEmail.inlineImages
-  has been changed from a List to a Map as part of EMAIL-50. Since the
-  field is not intended for direct client use, the great majority of
-  existing clients should not be affected.
+  is now deprecated. Its function is now performed by the
+  org.apache.commons.mail.HtmlEmail.inlineEmbeds field; the new field
+  is a Map instead of a List. The change was made as part of EMAIL-50.
+  Clients that have subclassed HtmlEmail should change their
+  implementations accordingly.
 
 == Notable bugfixes ==
 
