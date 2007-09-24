@@ -65,7 +65,13 @@ limitations under the License.
 <!-- ================================================== -->
 <section name="Ant Goals">
   <p>
-    A maven-generated Ant file is provided for Ant users.
+    A maven-generated Ant file is provided for Ant users. The
+    maven-build.xml and maven-build.properties should not be changed.
+    If you need to customize the build for any reason, your changes
+    should go only in the build.xml.
+  </p>
+  <p>
+    <code>ant -p</code> will list the available targets.
   </p>
 </section>
 <!-- ================================================== -->
