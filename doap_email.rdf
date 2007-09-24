@@ -23,8 +23,8 @@
     <release>
       <revision>
         <name>commons-email</name>
-        <created>2005-09-27</created>
-        <version>1.0</version>
+        <created>2007-09-24</created>
+        <version>1.1-RC2</version>
       </revision>
     </release>
     <mailing-list rdf:resource="http://commons.apache.org/mail-lists.html"/>
