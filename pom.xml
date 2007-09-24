@@ -330,11 +330,4 @@
         </plugins>
     </reporting>
 
-    <distributionManagement>
-      <site>
-	<id>stagingSite</id>
-	<url>scp://people.apache.org/home/bspeakmon/public_html/commons-email-1.1-RC1/</url>
-      </site>
-    </distributionManagement>
-
 </project>
