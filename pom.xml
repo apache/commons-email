@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
-    <version>1.1-RC2</version>
+    <version>1.1</version>
     <name>Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
