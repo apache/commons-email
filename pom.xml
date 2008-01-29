@@ -254,16 +254,6 @@
     <build>
         <sourceDirectory>src/java</sourceDirectory>
         <testSourceDirectory>src/test</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>.</directory>
-                <targetPath>META-INF</targetPath>
-                <includes>
-                    <include>NOTICE.txt</include>
-                    <include>LICENSE.txt</include>
-                </includes>
-            </resource>
-        </resources>
         <testResources>
             <testResource>
                 <directory>src/test</directory>
@@ -330,49 +320,4 @@
         </plugins>
     </reporting>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <configuration>
-                                    <tasks>
-                                        <copy todir="${project.build.directory}/site/api-release">
-                                            <fileset dir="${project.build.directory}/site/apidocs"/>
-                                        </copy>
-                                        <zip destfile="${project.build.directory}/${artifactId}-${version}-javadoc.jar.new">
-                                            <zipfileset src="${project.build.directory}/${artifactId}-${version}-javadoc.jar"/>
-                                            <zipfileset dir="." prefix="META-INF">
-                                                <include name="LICENSE.txt"/>
-                                                <include name="NOTICE.txt"/>
-                                            </zipfileset>
-                                        </zip>
-                                        <move file="${project.build.directory}/${artifactId}-${version}-javadoc.jar.new"
-                                            tofile="${project.build.directory}/${artifactId}-${version}-javadoc.jar"/>
-                                        <zip destfile="${project.build.directory}/${artifactId}-${version}-sources.jar.new">
-                                            <zipfileset src="${project.build.directory}/${artifactId}-${version}-sources.jar"/>
-                                            <zipfileset dir="." prefix="META-INF">
-                                                <include name="LICENSE.txt"/>
-                                                <include name="NOTICE.txt"/>
-                                            </zipfileset>
-                                        </zip>
-                                        <move file="${project.build.directory}/${artifactId}-${version}-sources.jar.new"
-                                            tofile="${project.build.directory}/${artifactId}-${version}-sources.jar"/>
-                                    </tasks>
-				</configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>  
-            </build>
-        </profile>
-    </profiles>
 </project>
