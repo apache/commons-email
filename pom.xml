@@ -165,12 +165,12 @@
             <email>matthias@wessendorf.net</email>
             <roles/>
         </contributor>
-	<contributor>
-	    <name>Bindul Bhowmik</name>
-	</contributor>
-	<contributor>
-	    <name>Brandon Wolfe</name>
-	</contributor>
+        <contributor>
+            <name>Bindul Bhowmik</name>
+        </contributor>
+        <contributor>
+            <name>Brandon Wolfe</name>
+        </contributor>
         <contributor>
             <name>Piero Ottuzzi</name>
         </contributor>
@@ -300,15 +300,15 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
-		<configuration>
-		  <comparisonArtifacts>
-		    <comparisonArtifact>
-		      <groupId>commons-email</groupId>
-		      <artifactId>commons-email</artifactId>
-		      <version>1.0</version>
-		    </comparisonArtifact>
-		  </comparisonArtifacts>
-		</configuration>
+                <configuration>
+                    <comparisonArtifacts>
+                        <comparisonArtifact>
+                            <groupId>commons-email</groupId>
+                            <artifactId>commons-email</artifactId>
+                            <version>1.0</version>
+                        </comparisonArtifact>
+                    </comparisonArtifacts>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
