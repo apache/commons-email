@@ -298,13 +298,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.1</version>
                 <configuration>
-                    <configLocation>conf/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/conf/checkstyle.xml</configLocation>
+                    <enableRulesSummary>false</enableRulesSummary>
+                    <headerFile>${basedir}/conf/HEADER.txt</headerFile>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
+                <version>2.2</version>
                 <configuration>
                     <comparisonArtifacts>
                         <comparisonArtifact>
@@ -318,6 +322,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
+                <version>2.0</version>
                 <configuration>
                     <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
                 </configuration>
