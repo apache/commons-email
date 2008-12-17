@@ -17,7 +17,12 @@
 
 package org.apache.commons.mail;
 
+import javax.mail.internet.MimeMessage;
+import javax.mail.MessagingException;
 import java.util.Random;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Utility methods used by commons-email.
@@ -220,5 +225,52 @@ final class EmailUtils
         }
 
         return buffer.toString();
+    }
+
+    /**
+     * Convinience method to write a MimeMessage into a file.
+     *
+     * @param resultFile the file containing the MimeMessgae
+     * @param mimeMessage the MimeMessage to write
+     * @throws IOException writing the MimeMessage failed
+     * @throws MessagingException writing the MimeMessage failed
+     */
+    static void writeMimeMessage( File resultFile, MimeMessage mimeMessage) throws IOException, MessagingException
+    {
+        FileOutputStream fos = null;
+
+        if(mimeMessage == null)
+        {
+            throw new IllegalArgumentException( "mimeMessage is null");
+        }
+
+        if(resultFile == null)
+        {
+            throw new IllegalArgumentException( "resulFile is null");
+        }
+
+        try
+        {
+            fos = new FileOutputStream(resultFile);
+            mimeMessage.writeTo(fos);
+            fos.flush();
+            fos.close();
+            fos = null;
+        }
+        finally
+        {
+            if(fos != null)
+            {
+                try
+                {
+                    fos.close();
+                    fos = null;
+                }
+                catch( Exception e )
+                {
+                    // ignore
+                }
+            }
+        }
     }
 }

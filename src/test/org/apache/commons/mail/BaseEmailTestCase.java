@@ -96,6 +96,9 @@ public class BaseEmailTestCase extends TestCase
     /** Where to save email output **/
     private File emailOutputDir;
 
+    /** counter for creating a file name */
+    private static int fileNameCounter;
+
     /**
      * @param name name
      */
@@ -132,17 +135,17 @@ public class BaseEmailTestCase extends TestCase
     }
 
     /**
+     * Safe a mail to a file using a more or less unique file name.
      *
      * @param email email
      * @throws IOException Exception
      */
-    protected void saveEmailToFile(WiserMessage email) throws IOException
+    protected void saveEmailToFile(WiserMessage email) throws IOException, MessagingException
     {
-        File emailFile =
-            new File(emailOutputDir, "email" + new Date().getTime() + ".txt");
-        FileWriter fw = new FileWriter(emailFile);
-        fw.write(email.toString());
-        fw.close();
+        int currCounter = fileNameCounter++ % 10;
+        String emailFileName = "email" + new Date().getTime() + "-" + currCounter + ".eml";
+        File emailFile = new File(emailOutputDir, emailFileName);
+        EmailUtils.writeMimeMessage(emailFile, email.getMimeMessage() );
     }
 
     /**
@@ -236,7 +239,17 @@ public class BaseEmailTestCase extends TestCase
 
         if (boolSaveToFile)
         {
-            this.saveEmailToFile(emailMessage);
+            try
+            {
+                this.saveEmailToFile(emailMessage);
+            }
+            catch(MessagingException me)
+            {
+                IllegalStateException ise =
+                    new IllegalStateException("caught MessagingException during saving the email");
+                ise.initCause(me);
+                throw ise;
+            }
         }
 
         try
@@ -375,7 +388,7 @@ public class BaseEmailTestCase extends TestCase
      * passed in. The headers are serialized first followed by the message
      * body.
      *
-     * @param email The <code>WiserMessage</code> to serialize.
+     * @param wiserMessage The <code>WiserMessage</code> to serialize.
      * @return The string format of the message.
      * @throws MessagingException
      * @throws IOException
