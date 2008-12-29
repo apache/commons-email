@@ -520,50 +520,50 @@ public class HtmlEmail extends MultiPartEmail
      */
     private void build() throws MessagingException, EmailException
     {
-        MimeMultipart container = this.getContainer();
-        MimeMultipart subContainer = null;
+        MimeMultipart rootContainer = this.getContainer();
+        MimeMultipart bodyEmbedsContainer = rootContainer;
+        MimeMultipart bodyContainer = rootContainer;
         BodyPart msgHtml = null;
         BodyPart msgText = null;
 
-        container.setSubType("related");
-        subContainer = new MimeMultipart("alternative");
-
-        if (EmailUtils.isNotEmpty(this.text))
+        rootContainer.setSubType("mixed");
+        
+        // determine how to form multiparts of email
+        
+        if (EmailUtils.isNotEmpty(this.html) && this.inlineEmbeds.size()>0)
         {
-            msgText = new MimeBodyPart();
-            if (this.inlineEmbeds.size() > 0)
+            //If HTML body and embeds are used, create a related container and add it to the root container
+            bodyEmbedsContainer = new MimeMultipart("related");
+            bodyContainer = bodyEmbedsContainer;
+            this.addPart(bodyEmbedsContainer, 0);
+            
+            //If TEXT body was specified, create a alternative container and add it to the embeds container
+            if (EmailUtils.isNotEmpty(this.text))
             {
-                subContainer.addBodyPart(msgText);
+                bodyContainer = new MimeMultipart("alternative");
+                BodyPart bodyPart = createBodyPart();
+                try
+                {
+                    bodyPart.setContent(bodyContainer);
+                    bodyEmbedsContainer.addBodyPart(bodyPart, 0);
+                }
+                catch (MessagingException me)
+                {
+                    throw new EmailException(me);
+                }
             }
-            else
-            {
-                container.addBodyPart(msgText);
-            }
-
-            // apply default charset if one has been set
-            if (EmailUtils.isNotEmpty(this.charset))
-            {
-                msgText.setContent(
-                    this.text,
-                    Email.TEXT_PLAIN + "; charset=" + this.charset);
-            }
-            else
-            {
-                msgText.setContent(this.text, Email.TEXT_PLAIN);
-            }
+        }
+        else if (EmailUtils.isNotEmpty(this.text) && EmailUtils.isNotEmpty(this.html))
+        {
+            //If both HTML and TEXT bodies are provided, create a alternative container and add it to the root container
+            bodyContainer = new MimeMultipart("alternative");
+            this.addPart(bodyContainer, 0);
         }
 
         if (EmailUtils.isNotEmpty(this.html))
         {
             msgHtml = new MimeBodyPart();
-            if (this.inlineEmbeds.size() > 0)
-            {
-                subContainer.addBodyPart(msgHtml);
-            }
-            else
-            {
-                container.addBodyPart(msgHtml);
-            }
+            bodyContainer.addBodyPart(msgHtml, 0);
 
             // apply default charset if one has been set
             if (EmailUtils.isNotEmpty(this.charset))
@@ -581,14 +581,26 @@ public class HtmlEmail extends MultiPartEmail
             while (iter.hasNext())
             {
                 InlineImage ii = (InlineImage) iter.next();
-                container.addBodyPart(ii.getMbp());
+                bodyEmbedsContainer.addBodyPart(ii.getMbp());
             }
         }
 
-        if (this.inlineEmbeds.size() > 0)
+        if (EmailUtils.isNotEmpty(this.text))
         {
-            // add sub container to message
-            this.addPart(subContainer, 0);
+            msgText = new MimeBodyPart();
+            bodyContainer.addBodyPart(msgText, 0);
+
+            // apply default charset if one has been set
+            if (EmailUtils.isNotEmpty(this.charset))
+            {
+                msgText.setContent(
+                    this.text,
+                    Email.TEXT_PLAIN + "; charset=" + this.charset);
+            }
+            else
+            {
+                msgText.setContent(this.text, Email.TEXT_PLAIN);
+            }
         }
     }
 
