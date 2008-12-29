@@ -22,14 +22,30 @@
   </properties>
 
   <body>
+
+    <release version="1.2-SNAPSHOT" date="as in SVN">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-70" due-to="F. Andy Seidl">
+        When mail authentication is required and no username/password is supplied
+        than the provided mail session is used. If a username/password is found
+        the implementation creates a new mail session and a DefaultAuthenticator
+        as convinence implementation.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-65" due-to="Kenneth Gendron">
+        Using Kenneth's implementation of HtmlEmail.buildMimeMessage() to fix a
+        couple of HtmlEmail layout issues. Also thanks to Martin Lau and Morten
+        Hattesen for providing in-depth analysis of the problem
+      </action>
+      <action dev="sgoeschl" type="fix">
+        During regression tests write out the generated MimeMessage instead of
+        WiserEmail.toString().
+      </action>
+    </release>
     <release version="1.1" date="2007-09-27">
-      <action dev="bspeakmon" type="add" issue="EMAIL-35"
-	      due-to="Brandon Wolfe">
-	Support embedding of raw DataSource attachments in HtmlEmail.
+      <action dev="bspeakmon" type="add" issue="EMAIL-35" due-to="Brandon Wolfe">
+	    Support embedding of raw DataSource attachments in HtmlEmail.
       </action>
       <action dev="bspeakmon" type="update" issue="EMAIL-64" due-to="Ben Speakmon">
-	Use wiser instead of dumbster for test cases. Original patch
-	supplied by Bindul Bhowmik.
+	    Use wiser instead of dumbster for test cases. Original patch supplied by Bindul Bhowmik.
       </action>
       <action dev="dion" type="fix" issue="EMAIL-62" due-to="Ben Speakmon">
         Build patches to enforce source 1.4 and target 1.4 when compiling.
