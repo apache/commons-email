@@ -391,20 +391,38 @@ public abstract class Email
     }
 
     /**
-     * Supply a mail Session object to use
+     * Supply a mail Session object to use. Please note that passing
+     * a username and password (in the case of mail authentication) will
+     * create a new mail session with a DefaultAuthenticator. This is a
+     * convience but might come unexpected.
+     *
      * @param aSession mail session to be used
      * @since 1.0
      */
     public void setMailSession(Session aSession)
     {
+        EmailUtils.notNull(aSession, "no mail session supplied");
+        
         Properties sessionProperties = aSession.getProperties();
         String auth = sessionProperties.getProperty(MAIL_SMTP_AUTH);
+
         if ("true".equalsIgnoreCase(auth))
         {
             String userName = sessionProperties.getProperty(MAIL_SMTP_USER);
             String password = sessionProperties.getProperty(MAIL_SMTP_PASSWORD);
-            this.authenticator = new DefaultAuthenticator(userName, password);
-            this.session = Session.getInstance(sessionProperties, this.authenticator);
+
+            if(EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password))
+            {
+                // only create a new mail session with an authenticator if
+                // authentication is required and no user name is given
+                this.authenticator = new DefaultAuthenticator(userName, password);
+                this.session = Session.getInstance(sessionProperties, this.authenticator);
+            }
+            else
+            {
+                // assume that the given mail session contains a working authenticator
+                this.session = aSession;                
+            }
         }
         else
         {
