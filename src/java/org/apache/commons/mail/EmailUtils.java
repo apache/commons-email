@@ -249,6 +249,11 @@ final class EmailUtils
             throw new IllegalArgumentException( "resulFile is null");
         }
 
+        if(resultFile.getParentFile() != null)
+        {
+            resultFile.getParentFile().mkdirs();
+        }
+        
         try
         {
             fos = new FileOutputStream(resultFile);
