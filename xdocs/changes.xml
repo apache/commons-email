@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.2-SNAPSHOT" date="as in SVN">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-78" due-to="Aaron Digulla, Corey Scott">
+        Provide better diagnostics when attaching  documents fail.
+      </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-70" due-to="F. Andy Seidl">
         When mail authentication is required and no username/password is supplied
         than the provided mail session is used. If a username/password is found

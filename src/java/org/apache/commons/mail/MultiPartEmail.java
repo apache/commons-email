@@ -364,7 +364,7 @@ public class MultiPartEmail extends Email
        }
        catch (IOException e)
        {
-           throw new EmailException("Invalid URL set");
+           throw new EmailException("Invalid URL set:" + url, e);
        }
 
        return attach(new URLDataSource(url), name, description, disposition);
@@ -397,7 +397,7 @@ public class MultiPartEmail extends Email
         }
         catch (IOException e)
         {
-            throw new EmailException("Invalid Datasource");
+            throw new EmailException("Invalid Datasource", e);
         }
 
         return attach(ds, name, description, EmailAttachment.ATTACHMENT);
