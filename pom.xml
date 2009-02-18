@@ -25,7 +25,7 @@
         <version>11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.apache.commons</groupId>
+    <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
     <version>1.2-SNAPSHOT</version>
     <name>Commons Email</name>
@@ -178,7 +178,7 @@
             <name>Andrew Liles</name>
         </contributor>
         <contributor>
-            <name>Cédrik Lime</name>
+            <name>Cedrik Lime</name>
         </contributor>
     </contributors>
 
@@ -250,10 +250,11 @@
         <maven.compile.source>1.4</maven.compile.source>
         <maven.compile.target>1.4</maven.compile.target>
         <commons.componentid>email</commons.componentid>
-        <commons.release.version>1.1</commons.release.version>
-        <commons.binary.suffix>-bin</commons.binary.suffix>
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
+        <commons.release.version>1.2</commons.release.version>
+        <commons.rc.version>RC1</commons.rc.version>
+        <commons.binary.suffix>-bin</commons.binary.suffix>
     </properties> 
 
     <build>
@@ -293,6 +294,14 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+      <site>
+        <id>website</id>
+        <name>Apache Website</name>
+        <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/email/</url>
+      </site>    
+    </distributionManagement>
+    
     <reporting>
         <plugins>
             <plugin>
