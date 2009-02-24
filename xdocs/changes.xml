@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.2-SNAPSHOT" date="as in SVN">
+      <action dev="sgoeschl" type="add" issue="EMAIL-84" date="2009-02-22" due-to="Claudio Miranda">
+        Created additional methods to support timeouts.
+      </action>
       <action dev="sgoeschl" type="add" issue="EMAIL-74" date="2009-02-22" due-to="Jim McCabe, Corey Scott">
         Create an overridable method in Email.java to create the MimeMessage instance.
       </action>

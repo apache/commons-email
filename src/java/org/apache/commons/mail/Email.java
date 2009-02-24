@@ -104,6 +104,21 @@ public abstract class Email
     public static final String MAIL_SMTP_SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
     /** */
     public static final String MAIL_SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
+
+       
+    /**
+     * Socket connection timeout value in milliseconds. Default is infinite timeout.
+     * @since 1.2
+     */
+    public static final String MAIL_SMTP_CONNECTIONTIMEOUT = "mail.smtp.connectiontimeout";
+
+    /**
+     * Socket I/O timeout value in milliseconds. Default is infinite timeout.
+     * @since 1.2  
+     */
+    public static final String MAIL_SMTP_TIMEOUT = "mail.smtp.timeout";
+
+
     /** */
     public static final String SMTP = "smtp";
     /** */
@@ -219,6 +234,11 @@ public abstract class Email
     protected boolean tls;
     /** does the current transport use SSL encryption? */
     protected boolean ssl;
+
+    /** socket I/O timeout value in milliseconds */
+    protected int socketTimeout;
+    /** socket connection timeout value in milliseconds */
+    protected int socketConnectionTimeout;
 
     /** The Session to mail with */
     private Session session;
@@ -503,6 +523,16 @@ public abstract class Email
             if (this.bounceAddress != null)
             {
                 properties.setProperty(MAIL_SMTP_FROM, this.bounceAddress);
+            }
+
+            if (this.socketTimeout > 0)
+            {
+                properties.setProperty(MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));                
+            }
+
+            if (this.socketConnectionTimeout > 0)
+            {
+                properties.setProperty(MAIL_SMTP_CONNECTIONTIMEOUT, Integer.toString(this.socketConnectionTimeout));
             }
 
             // changed this (back) to getInstance due to security exceptions
@@ -1410,5 +1440,49 @@ public abstract class Email
         return this.replyList;
     }
 
+    /**
+     * Get the socket connection timeout value in milliseconds.
+     *
+     * @return the timeout in milliseconds.
+     * @since 1.2
+     */
+    public int getSocketConnectionTimeout()
+    {
+        return this.socketConnectionTimeout;
+    }
 
+    /**
+     * Set the socket connection timeout value in milliseconds.
+     * Default is infinite timeout.
+     *
+     * @param socketConnectionTimeout the connection timeout
+     * @since 1.2
+     */
+    public void setSocketConnectionTimeout( int socketConnectionTimeout )
+    {
+        this.socketConnectionTimeout = socketConnectionTimeout;
+    }
+
+    /**
+     * Get the socket I/O timeout value in milliseconds.
+     *
+     * @return the socket I/O timeout
+     * @since 1.2
+     */
+    public int getSocketTimeout()
+    {
+        return this.socketTimeout;
+    }
+
+    /**
+     * Set the socket I/O timeout value in milliseconds.
+     * Default is infinite timeout.
+     *
+     * @param socketTimeout the socket I/O timeout
+     * @since 1.2
+     */
+    public void setSocketTimeout( int socketTimeout )
+    {
+        this.socketTimeout = socketTimeout;
+    }
 }
