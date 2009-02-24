@@ -1026,7 +1026,7 @@ public abstract class Email
         try
         {
             this.getMailSession();
-            this.message = new MimeMessage(this.session);
+            this.message = this.createMimeMessage(this.session);
 
             if (EmailUtils.isNotEmpty(this.subject))
             {
@@ -1130,6 +1130,18 @@ public abstract class Email
         }
     }
 
+    /**
+     * Factory method to create a customized MimeMessage which can be
+     * implemented by a derived class, e.g. to set the message id.
+     *
+     * @param aSession mail session to be used
+     * @return the newly created message
+     */
+    protected MimeMessage createMimeMessage(Session aSession)
+    {
+        return new MimeMessage(aSession);
+    }
+    
     /**
      * Sends the previously created MimeMessage to the SMTP server.
      *

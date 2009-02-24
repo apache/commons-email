@@ -24,11 +24,14 @@
   <body>
 
     <release version="1.2-SNAPSHOT" date="as in SVN">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-74" date="2009-02-22" due-to="Jim McCabe, Corey Scott">
+        Create an overridable method in Email.java to create the MimeMessage instance.
+      </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-71" date="2009-02-22" due-to="Teemu Lang, Corey Scott">
         If setHostName() has not been called, getHostName() tries to return
         this.session.getProperty(MAIL_HOST). If mail session has not been
-          created yet, this will throw a NullPointerException. Now getHostName()
-          checks that this.session is not null before trying to access it.      
+        created yet, this will throw a NullPointerException. Now getHostName()
+        checks that this.session is not null before trying to access it.
       </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-81" date="2009-02-22" due-to="Travis Reader, Corey Scott">
         Add getTo and getReplyTo to Email class.
