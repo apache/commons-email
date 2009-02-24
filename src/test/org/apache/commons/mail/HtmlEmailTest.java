@@ -343,9 +343,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getTextMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             true);
 
         // validate html message
@@ -354,9 +354,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getHtmlMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             false);
 
         // validate attachment
@@ -365,9 +365,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             attachment.getName(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             false);
 
         this.getMailServer();
@@ -397,9 +397,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getTextMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             true);
     }
 
@@ -440,9 +440,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getTextMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             true);
 
         // validate html message
@@ -451,9 +451,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getHtmlMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             false);
 
         this.getMailServer();
@@ -484,9 +484,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getTextMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             true);
 
         // validate html message
@@ -495,9 +495,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getHtmlMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             false);
 
     }

@@ -157,9 +157,9 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             strSubject,
             testEmail.getMsg(),
             testEmail.getFromAddress(),
-            testEmail.getToList(),
-            testEmail.getCcList(),
-            testEmail.getBccList(),
+            testEmail.getToAddresses(),
+            testEmail.getCcAddresses(),
+            testEmail.getBccAddresses(),
             true);
 
         // validate attachment
@@ -168,9 +168,9 @@ public class MultiPartEmailTest extends BaseEmailTestCase
             strSubject,
             attachment.getName(),
             testEmail.getFromAddress(),
-            testEmail.getToList(),
-            testEmail.getCcList(),
-            testEmail.getBccList(),
+            testEmail.getToAddresses(),
+            testEmail.getCcAddresses(),
+            testEmail.getBccAddresses(),
             false);
 
         // ====================================================================

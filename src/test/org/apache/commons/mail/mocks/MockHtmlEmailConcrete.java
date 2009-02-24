@@ -97,28 +97,4 @@ public class MockHtmlEmailConcrete extends HtmlEmail
         return this.fromAddress;
     }
 
-    /**
-     * @return toList
-     */
-    public List getToList()
-    {
-        return this.toList;
-    }
-
-    /**
-     * @return bccList
-     */
-    public List getBccList()
-    {
-        return this.bccList;
-    }
-
-    /**
-     * @return ccList
-     */
-    public List getCcList()
-    {
-        return this.ccList;
-    }
-
 }

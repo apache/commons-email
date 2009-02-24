@@ -16,8 +16,6 @@
  */
 package org.apache.commons.mail.mocks;
 
-import java.util.List;
-
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.mail.SimpleEmail;
@@ -47,30 +45,6 @@ public class MockSimpleEmail extends SimpleEmail
     public InternetAddress getFromAddress()
     {
         return this.fromAddress;
-    }
-
-    /**
-     * @return toList
-     */
-    public List getToList()
-    {
-        return this.toList;
-    }
-
-    /**
-     * @return bccList
-     */
-    public List getBccList()
-    {
-        return this.bccList;
-    }
-
-    /**
-     * @return ccList
-     */
-    public List getCcList()
-    {
-        return this.ccList;
     }
 
 }

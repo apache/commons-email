@@ -416,8 +416,8 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getToList().size());
-        assertEquals(arrExpected.toString(), this.email.getToList().toString());
+        assertEquals(arrExpected.size(), this.email.getToAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
     }
 
     /**
@@ -455,8 +455,8 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getToList().size());
-        assertEquals(arrExpected.toString(), this.email.getToList().toString());
+        assertEquals(arrExpected.size(), this.email.getToAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
     }
 
     /**
@@ -489,8 +489,8 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getToList().size());
-        assertEquals(arrExpected.toString(), this.email.getToList().toString());
+        assertEquals(arrExpected.size(), this.email.getToAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
 
         // ====================================================================
         // Test Exceptions
@@ -534,10 +534,10 @@ public class EmailTest extends BaseEmailTestCase
         this.email.setTo(testEmailValid2);
 
         // retrieve and verify
-        assertEquals(testEmailValid2.size(), this.email.getToList().size());
+        assertEquals(testEmailValid2.size(), this.email.getToAddresses().size());
         assertEquals(
             testEmailValid2.toString(),
-            this.email.getToList().toString());
+            this.email.getToAddresses().toString());
 
         // ====================================================================
         // Exception (Null Input)
@@ -594,8 +594,8 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getCcList().size());
-        assertEquals(arrExpected.toString(), this.email.getCcList().toString());
+        assertEquals(arrExpected.size(), this.email.getCcAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
     }
 
     /**
@@ -633,8 +633,8 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getCcList().size());
-        assertEquals(arrExpected.toString(), this.email.getCcList().toString());
+        assertEquals(arrExpected.size(), this.email.getCcAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
     }
 
     /**
@@ -667,8 +667,8 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getCcList().size());
-        assertEquals(arrExpected.toString(), this.email.getCcList().toString());
+        assertEquals(arrExpected.size(), this.email.getCcAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
 
         // ====================================================================
         // Test Exceptions
@@ -704,7 +704,7 @@ public class EmailTest extends BaseEmailTestCase
             "\"someone_here@work.com.au\" <someone_here@work.com.au>");
 
         this.email.setCc(testEmailValid2);
-        assertEquals(testEmailValid2, this.email.getCcList());
+        assertEquals(testEmailValid2, this.email.getCcAddresses());
 
         // ====================================================================
         // Exception (Null Input)
@@ -761,10 +761,10 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getBccList().size());
+        assertEquals(arrExpected.size(), this.email.getBccAddresses().size());
         assertEquals(
             arrExpected.toString(),
-            this.email.getBccList().toString());
+            this.email.getBccAddresses().toString());
     }
 
     /**
@@ -802,10 +802,10 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getBccList().size());
+        assertEquals(arrExpected.size(), this.email.getBccAddresses().size());
         assertEquals(
             arrExpected.toString(),
-            this.email.getBccList().toString());
+            this.email.getBccAddresses().toString());
     }
 
     /**
@@ -839,10 +839,10 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getBccList().size());
+        assertEquals(arrExpected.size(), this.email.getBccAddresses().size());
         assertEquals(
             arrExpected.toString(),
-            this.email.getBccList().toString());
+            this.email.getBccAddresses().toString());
 
         // ====================================================================
         // Test Exceptions
@@ -884,7 +884,7 @@ public class EmailTest extends BaseEmailTestCase
                 "someone_here@work-address.com.au"));
 
         this.email.setBcc(testInetEmailValid);
-        assertEquals(testInetEmailValid, this.email.getBccList());
+        assertEquals(testInetEmailValid, this.email.getBccAddresses());
 
         // ====================================================================
         // Exception (Null Input)
@@ -941,10 +941,10 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getReplyList().size());
+        assertEquals(arrExpected.size(), this.email.getReplyToAddresses().size());
         assertEquals(
             arrExpected.toString(),
-            this.email.getReplyList().toString());
+            this.email.getReplyToAddresses().toString());
     }
 
     /**
@@ -982,10 +982,10 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getReplyList().size());
+        assertEquals(arrExpected.size(), this.email.getReplyToAddresses().size());
         assertEquals(
             arrExpected.toString(),
-            this.email.getReplyList().toString());
+            this.email.getReplyToAddresses().toString());
     }
 
     /**
@@ -1018,10 +1018,10 @@ public class EmailTest extends BaseEmailTestCase
         }
 
         // retrieve and verify
-        assertEquals(arrExpected.size(), this.email.getReplyList().size());
+        assertEquals(arrExpected.size(), this.email.getReplyToAddresses().size());
         assertEquals(
             arrExpected.toString(),
-            this.email.getReplyList().toString());
+            this.email.getReplyToAddresses().toString());
 
         // ====================================================================
         // Test Exceptions
@@ -1327,8 +1327,7 @@ public class EmailTest extends BaseEmailTestCase
         this.email.setBcc(testInetEmailValid);
         assertEquals(
             testInetEmailValid.size(),
-            this.email.toInternetAddressArray(
-                this.email.getBccList()).length);
+            this.email.getBccAddresses().size());
     }
 
     /** */

@@ -93,9 +93,9 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
             strSubject,
             this.email.getTextMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             true);
 
         // validate html message
@@ -104,9 +104,9 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
             strSubject,
             this.email.getHtmlMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             false);
     }
 
@@ -164,9 +164,9 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
             strSubject,
             this.email.getTextMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             true);
 
         // validate html message
@@ -175,9 +175,9 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
             strSubject,
             this.email.getHtmlMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             false);
 
         // validate attachment
@@ -186,9 +186,9 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
             strSubject,
             attachment.getName(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             false);
     }
 

@@ -24,16 +24,19 @@
   <body>
 
     <release version="1.2-SNAPSHOT" date="as in SVN">
-      <action dev="sgoeschl" type="fix" issue="EMAIL-78" due-to="Aaron Digulla, Corey Scott">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-81" date="2009-02-22" due-to="Travis Reader, Corey Scott">
+        Add getTo and getReplyTo to Email class.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-78" date="2009-02-08" due-to="Aaron Digulla, Corey Scott">
         Provide better diagnostics when attaching  documents fail.
       </action>
-      <action dev="sgoeschl" type="fix" issue="EMAIL-70" due-to="F. Andy Seidl">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-70" date="2008-12-29" due-to="F. Andy Seidl">
         When mail authentication is required and no username/password is supplied
         than the provided mail session is used. If a username/password is found
         the implementation creates a new mail session and a DefaultAuthenticator
         as convinence implementation.
       </action>
-      <action dev="sgoeschl" type="fix" issue="EMAIL-65" due-to="Kenneth Gendron">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-65" date="2008-12-29" due-to="Kenneth Gendron">
         Using Kenneth's implementation of HtmlEmail.buildMimeMessage() to fix a
         couple of HtmlEmail layout issues. Also thanks to Martin Lau and Morten
         Hattesen for providing in-depth analysis of the problem

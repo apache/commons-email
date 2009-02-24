@@ -120,9 +120,9 @@ public class SimpleEmailTest extends BaseEmailTestCase
             strSubject,
             this.email.getMsg(),
             this.email.getFromAddress(),
-            this.email.getToList(),
-            this.email.getCcList(),
-            this.email.getBccList(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
             true);
     }
 }

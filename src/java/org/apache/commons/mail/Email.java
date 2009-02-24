@@ -1354,4 +1354,46 @@ public abstract class Email
     {
         this.sslSmtpPort = sslSmtpPort;
     }
+    
+    /**
+     * Get the list of "To" addresses.
+     *
+     * @return List addresses
+     */
+    public List getToAddresses()
+    {
+        return this.toList;
+    }
+
+    /**
+     * Get the list of "CC" addresses.
+     *
+     * @return List addresses
+     */
+    public List getCcAddresses()
+    {
+        return this.ccList;
+    }
+
+    /**
+     * Get the list of "Bcc" addresses.
+     *
+     * @return List addresses
+     */
+    public List getBccAddresses()
+    {
+        return this.bccList;
+    }
+
+    /**
+     * Get the list of "Reply-To" addresses.
+     *
+     * @return List addresses
+     */
+    public List getReplyToAddresses()
+    {
+        return this.replyList;
+    }
+
+
 }

@@ -17,7 +17,6 @@
 package org.apache.commons.mail.mocks;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -68,30 +67,6 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
     public InternetAddress getFromAddress()
     {
         return this.fromAddress;
-    }
-
-    /**
-     * @return toList
-     */
-    public List getToList()
-    {
-        return this.toList;
-    }
-
-    /**
-     * @return bccList
-     */
-    public List getBccList()
-    {
-        return this.bccList;
-    }
-
-    /**
-     * @return ccList
-     */
-    public List getCcList()
-    {
-        return this.ccList;
     }
 
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.commons.mail.mocks;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.Authenticator;
@@ -68,22 +67,6 @@ public class MockEmailConcrete extends Email
     public Authenticator getAuthenticator()
     {
         return this.authenticator;
-    }
-
-    /**
-     * @return bccList
-     */
-    public List getBccList()
-    {
-        return this.bccList;
-    }
-
-    /**
-     * @return ccList
-     */
-    public List getCcList()
-    {
-        return this.ccList;
     }
 
     /**
@@ -175,14 +158,6 @@ public class MockEmailConcrete extends Email
     }
 
     /**
-     * @return replyList
-     */
-    public List getReplyList()
-    {
-        return this.replyList;
-    }
-
-    /**
      * @return smtpPort
      */
     public String getSmtpPort()
@@ -196,14 +171,6 @@ public class MockEmailConcrete extends Email
     public String getSubject()
     {
         return this.subject;
-    }
-
-    /**
-     * @return toList
-     */
-    public List getToList()
-    {
-        return this.toList;
     }
 
     /**
