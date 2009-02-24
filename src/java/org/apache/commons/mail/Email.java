@@ -1239,10 +1239,11 @@ public abstract class Email
         {
             return this.hostName;
         }
-        else
+        else if (this.session != null)
         {
             return this.session.getProperty(MAIL_HOST);
         }
+        return null;
     }
 
     /**
@@ -1256,10 +1257,11 @@ public abstract class Email
         {
             return this.smtpPort;
         }
-        else
+        else if (this.session != null)
         {
             return this.session.getProperty(MAIL_PORT);
         }
+        return null;
     }
 
     /**
@@ -1339,10 +1341,11 @@ public abstract class Email
         {
             return this.sslSmtpPort;
         }
-        else
+        else if (this.session != null)
         {
             return this.session.getProperty(MAIL_SMTP_SOCKET_FACTORY_PORT);
         }
+        return null;
     }
 
     /**
