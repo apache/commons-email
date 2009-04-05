@@ -428,6 +428,10 @@ public abstract class Email
      * create a new mail session with a DefaultAuthenticator. This is a
      * convience but might come unexpected.
      *
+     * If mail authentication is used but NO username and password
+     * is supplied the implementation assumes that you have set a
+     * authenticator and will use the existing mail session (as expected).
+     *
      * @param aSession mail session to be used
      * @since 1.0
      */
