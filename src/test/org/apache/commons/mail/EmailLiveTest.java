@@ -26,12 +26,6 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.mail.settings.EmailConfiguration;
-import org.apache.commons.mail.BaseEmailTestCase;
-import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.mail.EmailAttachment;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailUtils;
 
 /**
  * This are regression test sending REAL email to REAL mail
@@ -148,7 +142,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         textMsg = "Your email client does not support HTML messages";
         cid = htmlEmail3.embed(imageUrl, "Apache Logo");
         htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:"
-            + cid + "\"> ...</b><html>";
+            + cid + "\"> and NO attachment</b><html>";
 
         htmlEmail3.setSubject( "[email] 3.Test: text + html content + inline image");
         htmlEmail3.setFrom(EmailConfiguration.TEST_FROM);
@@ -193,7 +187,7 @@ public class EmailLiveTest extends BaseEmailTestCase
 
     /**
      * This test checks the correct character encoding when sending
-     * non-ASCII content.
+     * non-ASCII content using SimpleEmail.
      *
      * https://issues.apache.org/jira/browse/EMAIL-79
      *
@@ -205,8 +199,8 @@ public class EmailLiveTest extends BaseEmailTestCase
         // U+03B2 : GREEK SMALL LETTER BETA
         // U+03B3 : GREEK SMALL LETTER GAMMA
 
-        final String subject = "My test subject with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
-        final String content = "My body with with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
+        final String subject = "[email] 5.Test: Subject with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
+        final String textMsg = "My test body with with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
 
         SimpleEmail email = new SimpleEmail();
         email.setDebug(true);
@@ -216,7 +210,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         email.addTo(EmailConfiguration.TEST_TO);
         email.setFrom(EmailConfiguration.TEST_FROM);
         email.setSubject(subject);
-        email.setMsg(content);
+        email.setMsg(textMsg);
         email.setCharset("utf-8");
 
         if( EmailConfiguration.MAIL_FORCE_SEND ) {
@@ -229,13 +223,12 @@ public class EmailLiveTest extends BaseEmailTestCase
         EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), email.getMimeMessage());
 
         System.out.println("Encoding: " + email.getMimeMessage().getEncoding());
-        System.out.println("Type: " + email.getMimeMessage().getContentType());    
-        
+        System.out.println("Type: " + email.getMimeMessage().getContentType());
+
         if( EmailConfiguration.MAIL_FORCE_SEND ) {
           // the encoding is only set when sending the email
-          // the patch is currently broken ....
-          // assertEquals(email.getMimeMessage().getEncoding(), "quoted-printable");
-          // assertEquals(email.getMimeMessage().getContentType(), "text/plain; charset=UTF-8");
+          assertEquals(email.getMimeMessage().getEncoding(), "quoted-printable");
+          assertEquals(email.getMimeMessage().getContentType(), "text/plain; charset=UTF-8");
         }
-    }    
+    }
 }

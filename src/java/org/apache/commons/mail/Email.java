@@ -325,6 +325,18 @@ public abstract class Email
     public void setContent(Object aObject, String aContentType)
     {
         this.content = aObject;
+        this.updateContentType(aContentType);
+    }
+
+
+    /**
+     * Update the contentType.
+     *
+     * @param   aContentType aContentType
+     * @since 1.2
+     */
+    public void updateContentType(final String aContentType)
+    {
         if (EmailUtils.isEmpty(aContentType))
         {
             this.contentType = null;
@@ -1070,17 +1082,23 @@ public abstract class Email
                 }
             }
 
-            // ========================================================
-            // Start of replacement code
+            // update content type (and encoding)
+            this.updateContentType(this.contentType);
+            
             if (this.content != null)
             {
                 this.message.setContent(this.content, this.contentType);
             }
-            // end of replacement code
-            // ========================================================
             else if (this.emailBody != null)
             {
-                this.message.setContent(this.emailBody);
+                if (this.contentType == null)
+                {
+                    this.message.setContent(this.emailBody);
+                }
+                else
+                {
+                    this.message.setContent(this.emailBody, this.contentType);
+                }
             }
             else
             {
