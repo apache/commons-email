@@ -24,9 +24,12 @@
   <body>
 
     <release version="1.2-SNAPSHOT" date="as in SVN">
+      <action dev="sgoeschl" type="add" issue="EMAIL-75" date="2009-04-05" due-to="Yu Kobayashi">
+        Email.setFrom and Email.addTo are using Email.charset to properly encode the name.
+      </action>
       <action dev="sgoeschl" type="add" issue="EMAIL-79" date="2009-04-05" due-to="Edvin Syse, Corey Scott">
-          SimpleEmail#setMsg() with UTF-8 content honors correct charset in header and
-          does encode the content correctly now.
+        SimpleEmail#setMsg() with UTF-8 content honors correct charset in header and
+        does encode the content correctly now.
       </action>
       <action dev="sgoeschl" type="add" issue="EMAIL-84" date="2009-02-22" due-to="Claudio Miranda">
         Created additional methods to support timeouts.

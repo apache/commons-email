@@ -614,8 +614,10 @@ public abstract class Email
 
     /**
      * Set the FROM field of the email to use the specified address. The email
-     * address will also be used as the personal name. The name will be encoded
-     * using the Java platform's default charset (UTF-16) if it contains
+     * address will also be used as the personal name.
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
@@ -631,9 +633,11 @@ public abstract class Email
 
     /**
      * Set the FROM field of the email to use the specified address and the
-     * specified personal name. The name will be encoded using the Java
-     * platform's default charset (UTF-16) if it contains non-ASCII
-     * characters; otherwise, it is used as is.
+     * specified personal name. 
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -644,7 +648,7 @@ public abstract class Email
     public Email setFrom(String email, String name)
         throws EmailException
     {
-        return setFrom(email, name, null);
+        return setFrom(email, name, this.charset);
     }
 
     /**
@@ -667,8 +671,11 @@ public abstract class Email
 
     /**
      * Add a recipient TO to the email. The email
-     * address will also be used as the personal name. The name will be encoded
-     * using the Java platform's default charset (UTF-16) if it contains
+     * address will also be used as the personal name.
+     * The name will be encoded by the charset of
+     * {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
@@ -684,9 +691,12 @@ public abstract class Email
 
     /**
      * Add a recipient TO to the email using the specified address and the
-     * specified personal name. The name will be encoded using the Java
-     * platform's default charset (UTF-16) if it contains non-ASCII
-     * characters; otherwise, it is used as is.
+     * specified personal name.
+     * The name will be encoded by the charset of
+     * {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -697,7 +707,7 @@ public abstract class Email
     public Email addTo(String email, String name)
         throws EmailException
     {
-        return addTo(email, name, null);
+        return addTo(email, name, this.charset);
     }
 
     /**
@@ -742,8 +752,10 @@ public abstract class Email
 
     /**
      * Add a recipient CC to the email. The email
-     * address will also be used as the personal name. The name will be encoded
-     * using the Java platform's default charset (UTF-16) if it contains
+     * address will also be used as the personal name.
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
@@ -759,9 +771,11 @@ public abstract class Email
 
     /**
      * Add a recipient CC to the email using the specified address and the
-     * specified personal name. The name will be encoded using the Java
-     * platform's default charset (UTF-16) if it contains non-ASCII
-     * characters; otherwise, it is used as is.
+     * specified personal name.
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -772,7 +786,7 @@ public abstract class Email
     public Email addCc(String email, String name)
         throws EmailException
     {
-        return addCc(email, name, null);
+        return addCc(email, name, this.charset);
     }
 
     /**
@@ -817,8 +831,10 @@ public abstract class Email
 
     /**
      * Add a blind BCC recipient to the email. The email
-     * address will also be used as the personal name. The name will be encoded
-     * using the Java platform's default charset (UTF-16) if it contains
+     * address will also be used as the personal name.
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
@@ -834,9 +850,11 @@ public abstract class Email
 
     /**
      * Add a blind BCC recipient to the email using the specified address and
-     * the specified personal name. The name will be encoded using the Java
-     * platform's default charset (UTF-16) if it contains non-ASCII
-     * characters; otherwise, it is used as is.
+     * the specified personal name.
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -847,7 +865,7 @@ public abstract class Email
     public Email addBcc(String email, String name)
         throws EmailException
     {
-        return addBcc(email, name, null);
+        return addBcc(email, name, this.charset);
     }
 
     /**
@@ -892,8 +910,10 @@ public abstract class Email
 
     /**
      * Add a reply to address to the email. The email
-     * address will also be used as the personal name. The name will be encoded
-     * using the Java platform's default charset (UTF-16) if it contains
+     * address will also be used as the personal name.
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
@@ -909,9 +929,11 @@ public abstract class Email
 
     /**
      * Add a reply to address to the email using the specified address and
-     * the specified personal name. The name will be encoded using the Java
-     * platform's default charset (UTF-16) if it contains non-ASCII
-     * characters; otherwise, it is used as is.
+     * the specified personal name.
+     * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using 
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name A String.
@@ -922,7 +944,7 @@ public abstract class Email
     public Email addReplyTo(String email, String name)
         throws EmailException
     {
-        return addReplyTo(email, name, null);
+        return addReplyTo(email, name, this.charset);
     }
 
     /**
