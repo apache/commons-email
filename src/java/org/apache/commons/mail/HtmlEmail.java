@@ -527,16 +527,16 @@ public class HtmlEmail extends MultiPartEmail
         BodyPart msgText = null;
 
         rootContainer.setSubType("mixed");
-        
+
         // determine how to form multiparts of email
-        
-        if (EmailUtils.isNotEmpty(this.html) && this.inlineEmbeds.size()>0)
+
+        if (EmailUtils.isNotEmpty(this.html) && this.inlineEmbeds.size() > 0)
         {
             //If HTML body and embeds are used, create a related container and add it to the root container
             bodyEmbedsContainer = new MimeMultipart("related");
             bodyContainer = bodyEmbedsContainer;
             this.addPart(bodyEmbedsContainer, 0);
-            
+
             //If TEXT body was specified, create a alternative container and add it to the embeds container
             if (EmailUtils.isNotEmpty(this.text))
             {

@@ -68,10 +68,6 @@ public class ByteArrayDataSource implements DataSource
             bis = new ByteArrayInputStream(data);
             this.byteArrayDataSource(bis, aType);
         }
-        catch (IOException ioex)
-        {
-            throw ioex;
-        }
         finally
         {
             if (bis != null)
@@ -162,10 +158,6 @@ public class ByteArrayDataSource implements DataSource
             osWriter.flush();
             osWriter.close();
 
-        }
-        catch (IOException ioex)
-        {
-            throw ioex;
         }
         finally
         {

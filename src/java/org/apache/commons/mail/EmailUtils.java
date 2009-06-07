@@ -235,25 +235,25 @@ final class EmailUtils
      * @throws IOException writing the MimeMessage failed
      * @throws MessagingException writing the MimeMessage failed
      */
-    static void writeMimeMessage( File resultFile, MimeMessage mimeMessage) throws IOException, MessagingException
+    static void writeMimeMessage(File resultFile, MimeMessage mimeMessage) throws IOException, MessagingException
     {
         FileOutputStream fos = null;
 
-        if(mimeMessage == null)
+        if (mimeMessage == null)
         {
-            throw new IllegalArgumentException( "mimeMessage is null");
+            throw new IllegalArgumentException("mimeMessage is null");
         }
 
-        if(resultFile == null)
+        if (resultFile == null)
         {
-            throw new IllegalArgumentException( "resulFile is null");
+            throw new IllegalArgumentException("resulFile is null");
         }
 
-        if(resultFile.getParentFile() != null)
+        if (resultFile.getParentFile() != null)
         {
             resultFile.getParentFile().mkdirs();
         }
-        
+
         try
         {
             fos = new FileOutputStream(resultFile);
@@ -264,14 +264,14 @@ final class EmailUtils
         }
         finally
         {
-            if(fos != null)
+            if (fos != null)
             {
                 try
                 {
                     fos.close();
                     fos = null;
                 }
-                catch( Exception e )
+                catch (Exception e)
                 {
                     // ignore
                 }

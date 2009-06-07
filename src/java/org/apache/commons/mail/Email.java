@@ -105,7 +105,7 @@ public abstract class Email
     /** */
     public static final String MAIL_SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
 
-       
+
     /**
      * Socket connection timeout value in milliseconds. Default is infinite timeout.
      * @since 1.2
@@ -114,7 +114,7 @@ public abstract class Email
 
     /**
      * Socket I/O timeout value in milliseconds. Default is infinite timeout.
-     * @since 1.2  
+     * @since 1.2
      */
     public static final String MAIL_SMTP_TIMEOUT = "mail.smtp.timeout";
 
@@ -438,7 +438,7 @@ public abstract class Email
     public void setMailSession(Session aSession)
     {
         EmailUtils.notNull(aSession, "no mail session supplied");
-        
+
         Properties sessionProperties = aSession.getProperties();
         String auth = sessionProperties.getProperty(MAIL_SMTP_AUTH);
 
@@ -447,7 +447,7 @@ public abstract class Email
             String userName = sessionProperties.getProperty(MAIL_SMTP_USER);
             String password = sessionProperties.getProperty(MAIL_SMTP_PASSWORD);
 
-            if(EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password))
+            if (EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password))
             {
                 // only create a new mail session with an authenticator if
                 // authentication is required and no user name is given
@@ -457,7 +457,7 @@ public abstract class Email
             else
             {
                 // assume that the given mail session contains a working authenticator
-                this.session = aSession;                
+                this.session = aSession;
             }
         }
         else
@@ -543,7 +543,7 @@ public abstract class Email
 
             if (this.socketTimeout > 0)
             {
-                properties.setProperty(MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));                
+                properties.setProperty(MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));
             }
 
             if (this.socketConnectionTimeout > 0)
@@ -616,7 +616,7 @@ public abstract class Email
      * Set the FROM field of the email to use the specified address. The email
      * address will also be used as the personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -633,9 +633,9 @@ public abstract class Email
 
     /**
      * Set the FROM field of the email to use the specified address and the
-     * specified personal name. 
+     * specified personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -674,7 +674,7 @@ public abstract class Email
      * address will also be used as the personal name.
      * The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -694,7 +694,7 @@ public abstract class Email
      * specified personal name.
      * The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -754,7 +754,7 @@ public abstract class Email
      * Add a recipient CC to the email. The email
      * address will also be used as the personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -773,7 +773,7 @@ public abstract class Email
      * Add a recipient CC to the email using the specified address and the
      * specified personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -833,7 +833,7 @@ public abstract class Email
      * Add a blind BCC recipient to the email. The email
      * address will also be used as the personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -852,7 +852,7 @@ public abstract class Email
      * Add a blind BCC recipient to the email using the specified address and
      * the specified personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -912,7 +912,7 @@ public abstract class Email
      * Add a reply to address to the email. The email
      * address will also be used as the personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -931,7 +931,7 @@ public abstract class Email
      * Add a reply to address to the email using the specified address and
      * the specified personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
-     * If it is not set, it will be encoded using 
+     * If it is not set, it will be encoded using
      * the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -1110,7 +1110,7 @@ public abstract class Email
 
             // update content type (and encoding)
             this.updateContentType(this.contentType);
-            
+
             if (this.content != null)
             {
                 this.message.setContent(this.content, this.contentType);
@@ -1215,7 +1215,7 @@ public abstract class Email
     {
         return new MimeMessage(aSession);
     }
-    
+
     /**
      * Sends the previously created MimeMessage to the SMTP server.
      *
@@ -1443,7 +1443,7 @@ public abstract class Email
     {
         this.sslSmtpPort = sslSmtpPort;
     }
-    
+
     /**
      * Get the list of "To" addresses.
      *
@@ -1502,7 +1502,7 @@ public abstract class Email
      * @param socketConnectionTimeout the connection timeout
      * @since 1.2
      */
-    public void setSocketConnectionTimeout( int socketConnectionTimeout )
+    public void setSocketConnectionTimeout(int socketConnectionTimeout)
     {
         this.socketConnectionTimeout = socketConnectionTimeout;
     }
@@ -1525,7 +1525,7 @@ public abstract class Email
      * @param socketTimeout the socket I/O timeout
      * @since 1.2
      */
-    public void setSocketTimeout( int socketTimeout )
+    public void setSocketTimeout(int socketTimeout)
     {
         this.socketTimeout = socketTimeout;
     }
