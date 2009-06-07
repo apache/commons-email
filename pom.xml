@@ -139,6 +139,14 @@
             </roles>
             <timezone>-8</timezone>
         </developer>
+        <developer>
+            <name>Siegfried Goeschl</name>
+            <id>sgoeschl</id>
+            <roles>
+              <role>Java Developer</role>
+            </roles>
+            <timezone>2</timezone>
+        </developer>        
     </developers>
     <contributors>
         <contributor>
