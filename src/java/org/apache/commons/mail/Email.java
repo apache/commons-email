@@ -1276,7 +1276,11 @@ public abstract class Email
      */
     public void setSentDate(Date date)
     {
-        this.sentDate = date;
+        if (date != null)
+        {
+            // create a seperate instance to keep findbugs happy
+            this.sentDate = new Date(date.getTime());
+        }
     }
 
     /**
@@ -1291,7 +1295,7 @@ public abstract class Email
         {
             return new Date();
         }
-        return this.sentDate;
+        return new Date(this.sentDate.getTime());
     }
 
     /**
