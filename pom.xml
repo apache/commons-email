@@ -1,24 +1,4 @@
-<?xml version="1.0"?>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-parent</artifactId>
@@ -27,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <name>Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -44,9 +24,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/trunk</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/trunk</developerConnection>
-        <url>http://svn.apache.org/viewvc/commons/proper/email/trunk</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_2</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_2</developerConnection>
+        <url>http://svn.apache.org/viewvc/commons/proper/email/tags/EMAIL_1_2</url>
     </scm>
 
     <developers>
@@ -64,54 +44,54 @@
             <id>jmcnally</id>
             <email>jmcnally@collab.net</email>
             <organization>CollabNet, Inc.</organization>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Quinton McCombs</name>
             <id>quintonm</id>
             <email>quintonm@bellsouth.net</email>
             <organization>NequalsOne, LLC.</organization>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Eric Pugh</name>
             <id>epugh</id>
             <email>epugh@opensourceconnections.com</email>
             <organization>OpenSource Connections</organization>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Daniel Rall</name>
             <id>dlr</id>
             <email>dlr@finemaltcoding.com</email>
             <organization>CollabNet, Inc.</organization>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Jon Scott Stevens</name>
             <id>jon</id>
             <email>jon@latchkey.com</email>
             <organization>CollabNet, Inc.</organization>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Jason van Zyl</name>
             <id>jvanzyl</id>
             <email>jason@zenplex.com</email>
             <organization>Zenplex</organization>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Joe Germuska</name>
             <id>germuska</id>
             <email>Joe@Germuska.com</email>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Robert Burrell Donkin</name>
             <id>rdonkin</id>
             <email>rdonkin@apache.org</email>
-            <roles/>
+            <roles />
         </developer>
         <developer>
             <name>Henning P. Schmiedehausen</name>
@@ -126,7 +106,7 @@
         <developer>
             <name>Stephen Colebourne</name>
             <id>scolebourne</id>
-            <roles/>
+            <roles />
             <timezone>0</timezone>
         </developer>
         <developer>
@@ -152,26 +132,26 @@
         <contributor>
             <name>Mark Lowe</name>
             <email>mark.lowe@boxstuff.com</email>
-            <roles/>
+            <roles />
         </contributor>
         <contributor>
             <name>Niall Pemberton</name>
-            <roles/>
+            <roles />
         </contributor>
         <contributor>
             <name>Corey Scott</name>
             <email>corey.scott@gmail.com</email>
-            <roles/>
+            <roles />
         </contributor>
         <contributor>
             <name>Eric Spiegelberg</name>
             <email>eric@spiegs.com</email>
-            <roles/>
+            <roles />
         </contributor>
         <contributor>
             <name>Matthias Wessendorf</name>
             <email>matthias@wessendorf.net</email>
-            <roles/>
+            <roles />
         </contributor>
         <contributor>
             <name>Bindul Bhowmik</name>
