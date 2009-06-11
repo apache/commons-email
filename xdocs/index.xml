@@ -63,7 +63,8 @@ typical cases and provides several useful examples.
 The JavaDoc API documents are available online:
 </p>
 <ul>
-<li>The <a href="api-release/index.html">current release 1.1</a></li>
+<li>The <a href="api-release/index.html">current release 1.2</a></li>
+<li>The <a href="api-1.1/index.html">previous version 1.1</a></li>
 <li>The <a href="api-1.0/index.html">previous version 1.0</a></li>
 <li>The <a href="apidocs/index.html">latest SVN</a></li>
 </ul>
@@ -75,10 +76,10 @@ The <a href="cvs-usage.html">subversion repository</a> can be
 <!-- ================================================== -->
 <section name="Releases">
 <p>
-The latest version is v1.1. 
+The latest version is v1.2. 
 <a href="http://commons.apache.org/downloads/download_email.cgi">Download now!</a><br />
 The full <a href="changes-report.html">change log</a> is available,
-as are the <a href="release_1_1.html">v1.1 release notes</a>.
+as are the <a href="release_1_2.html">v1.2 release notes</a>.
 </p>
 <p>
 For previous releases, see the <a href="http://archive.apache.org/dist/commons/email/">Apache Archive</a>.
