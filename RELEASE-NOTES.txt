@@ -1,7 +1,5 @@
-$Id: RELEASE-NOTES.txt 216015 2005-07-12 20:41:48Z rdonkin $
-
                          Commons Email Package
-                              Version 1.1
+                              Version 1.2
                              Release Notes
 
 INTRODUCTION:
@@ -17,11 +15,11 @@ downloads, reports, and bug status:
 
 http://commons.apache.org/email/
 
-This is a maintenance release which fixes several bugs present in the 1.0
+This is a maintenance release which fixes several bugs present in the 1.1
 release and adds a number of small enhancements requested by
 users. All current users are encouraged to upgrade.
 
-CHANGES FROM 1.0:
+CHANGES FROM 1.1:
 -----------------
 
 == Compatibility ==
@@ -32,38 +30,51 @@ CHANGES FROM 1.0:
 * JavaMail 1.4 or later and JavaBeans Activation Framework 1.1 or later are now
   required.
 
-* The protected field org.apache.commons.mail.HtmlEmail.inlineImages
-  is now deprecated. Its function is now performed by the
-  org.apache.commons.mail.HtmlEmail.inlineEmbeds field; the new field
-  is a Map instead of a List. The change was made as part of EMAIL-50.
-  Clients that have subclassed HtmlEmail should change their
-  implementations accordingly.
+== New Features ==
 
-== Notable bugfixes ==
+* Email.setFrom and Email.addTo are using Email.charset to properly encode 
+  the name.
+  
+* SimpleEmail#setMsg() with UTF-8 content honors correct charset in header 
+  and
+does encode the content correctly now.
+  
+* Created additional methods to support timeouts.
 
-* EMAIL-50: HtmlEmails were not being constructed correctly; several
-  email clients were not displaying attachments or embedded images
-  properly. As part of the same problem, duplicate embeds were not
-  being handled correctly.
+* Create an overridable method in Email.java to create the MimeMessage instance.
 
-* EMAIL-1: Email.setContent() was not taking a specified charset into
-  account. Additional setContent() overloadings were also added to
-  address common use cases.
+* Add getTo and getReplyTo to Email class. 
 
-== Notable enhancements ==
+== Fixed Bugs ==
 
-* EMAIL-35: HtmlEmail now supports the embedding of any DataSource
-  implementation. Specific methods were added for File and URL
-  objects, removing the need for clumsy circumlocution.
+* If setHostName() has not been called, getHostName() tries to return
 
-* Character set handling and encoding has been overhauled to use the
-  JDK 1.4 character set support. All charsets supported by the Java VM
-  are now recognized and handled appropriately in Email.setCharset()
-  and Email.setContent() calls.
+  this.session.getProperty(MAIL_HOST). If mail session has not been
 
-* HtmlEmail performance has been slightly improved.
+  created yet, this will throw a NullPointerException. Now getHostName()
 
-* The MIME structure of MultiPartEmail and HtmlEmail has been improved.
+  checks that this.session is not null before trying to access it. 
+
+* Provide better diagnostics when attaching  documents fail. 
+
+* When mail authentication is required and no username/password is supplied
+
+  than the provided mail session is used. If a username/password is found
+the 
+  implementation creates a new mail session and a DefaultAuthenticator
+as 
+  convinence implementation. 
+
+* Using Kenneth's implementation of HtmlEmail.buildMimeMessage() to fix a
+
+  couple of HtmlEmail layout issues. Also thanks to Martin Lau and Morten
+
+  Hattesen for providing in-depth analysis of the problem. 
+
+* During regression tests write out the generated MimeMessage instead of
+
+  WiserEmail.toString(). 
+
 
 REQUIREMENTS:
 

@@ -23,7 +23,7 @@
 
   <body>
 
-    <release version="1.2-SNAPSHOT" date="as in SVN">
+    <release version="1.2" date="2009-06-12">
       <action dev="sgoeschl" type="add" issue="EMAIL-75" date="2009-04-05" due-to="Yu Kobayashi">
         Email.setFrom and Email.addTo are using Email.charset to properly encode the name.
       </action>
