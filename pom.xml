@@ -244,14 +244,6 @@
             <!--<url>http://commons.apache.org/logging/</url>-->
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>maven-plugins</groupId>
-            <artifactId>maven-findbugs-plugin</artifactId>
-            <version>0.9.2</version>
-            <!--<url>http://maven-plugins.sourceforge.net/maven-findbugs-plugin/</url>-->
-            <type>plugin</type>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <properties>
@@ -364,20 +356,36 @@
                     </comparisonArtifacts>
                 </configuration>
             </plugin>
-        </plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>1.2</version>
+                <configuration>
+                    <threshold>Normal</threshold>
+                    <effort>Default</effort>
+               </configuration>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+            -->
+          </plugins>
     </reporting>
 
-  <profiles>
-    <profile>
-      <id>rc</id>
-      <distributionManagement>
-        <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
-        <site>
-          <id>apache.website</id>
-          <name>Apache Commons Release Candidate Staging Site</name>
-          <url>${commons.deployment.protocol}://people.apache.org/www/people.apache.org/builds/commons/${commons.componentid}/${commons.release.version}/${commons.rc.version}/site</url>
-        </site>
-      </distributionManagement>
-    </profile>
-  </profiles>
+    <profiles>
+        <profile>
+            <id>rc</id>
+            <distributionManagement>
+                <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
+                <site>
+                    <id>apache.website</id>
+                    <name>Apache Commons Release Candidate Staging Site</name>
+                    <url>${commons.deployment.protocol}://people.apache.org/www/people.apache.org/builds/commons/${commons.componentid}/${commons.release.version}/${commons.rc.version}/site</url>
+                </site>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>
