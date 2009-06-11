@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>commons-email</groupId>
     <artifactId>commons-email</artifactId>
-    <version>1.2</version>
+    <version>1.2-SNAPSHOT</version>
     <name>Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -194,7 +194,7 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4</version>
+            <version>1.4.1</version>
             <!--<url>http://java.sun.com/products/javamail/</url>-->
         </dependency>
         <dependency>
@@ -206,7 +206,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>3.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -240,7 +240,7 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.1</version>
+            <version>1.1.1</version>
             <!--<url>http://commons.apache.org/logging/</url>-->
             <scope>test</scope>
         </dependency>
@@ -299,12 +299,24 @@
                     <tarLongFileMode>gnu</tarLongFileMode>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>            
         </plugins>
     </build>
 
     <distributionManagement>
       <site>
-        <id>website</id>
+        <id>apache.website</id>
         <name>Apache Website</name>
         <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/email/</url>
       </site>    
@@ -312,6 +324,22 @@
     
     <reporting>
         <plugins>
+            <!-- generate the changes report from changes.xml -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>changes-report</report>
+                        </reports>
+                    </reportSet>
+              </reportSets>
+            </plugin>        
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -336,15 +364,20 @@
                     </comparisonArtifacts>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>2.0</version>
-                <configuration>
-                    <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
-                </configuration>
-            </plugin>
         </plugins>
     </reporting>
 
+  <profiles>
+    <profile>
+      <id>rc</id>
+      <distributionManagement>
+        <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
+        <site>
+          <id>apache.website</id>
+          <name>Apache Commons Release Candidate Staging Site</name>
+          <url>${commons.deployment.protocol}://people.apache.org/www/people.apache.org/builds/commons/${commons.componentid}/${commons.release.version}/${commons.rc.version}/site</url>
+        </site>
+      </distributionManagement>
+    </profile>
+  </profiles>
 </project>
