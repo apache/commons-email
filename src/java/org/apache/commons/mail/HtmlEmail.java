@@ -266,7 +266,7 @@ public class HtmlEmail extends MultiPartEmail
             URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
-            if (url.equals(urlDataSource.getURL()))
+            if (url.toExternalForm().equals(urlDataSource.getURL().toExternalForm()))
             {
                 return ii.getCid();
             }
