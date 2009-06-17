@@ -252,10 +252,8 @@
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.2</commons.release.version>
-        <commons.rc.version>RC1</commons.rc.version>
+        <commons.rc.version>RC2</commons.rc.version>
         <commons.binary.suffix>-bin</commons.binary.suffix>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties> 
 
     <build>
