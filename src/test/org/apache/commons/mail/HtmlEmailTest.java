@@ -186,7 +186,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         // Does an invalid URL throw an exception?
         try
         {
-            this.email.embed(new URL("http://bad.url"), "Bad URL");
+            this.email.embed(new URL("http://example.invalid"), "Bad URL");
             fail("Should have thrown an exception");
         }
         catch (EmailException e)

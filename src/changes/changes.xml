@@ -23,7 +23,19 @@
 
   <body>
 
-    <release version="1.2" date="2009-06-12">
+    <release version="1.2" date="as in SVN">
+      <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
+        Using "http://example.invalid" for a bad url - ".invalid" is reserved
+        and not intended to be installed as a top-level domain in the global 
+        Domain Name System (DNS) of the Internet.
+      </action>    
+      <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
+        Made BaseEmailTestCase abstract and fixed a few coding issues.
+      </action>    
+      <action dev="sgoeschl" type="fix" issue="EMAIL-87" date="2009-06-16" due-to="sebb">
+        HtmlEmail invokes java.net.URL.equals(Object), which blocks to do domain name resolution. This
+        is avoided by using "url.toExternalForm().equals()" instead of "url.equals()".
+      </action>
       <action dev="sgoeschl" type="add" issue="EMAIL-75" date="2009-04-05" due-to="Yu Kobayashi">
         Email.setFrom and Email.addTo are using Email.charset to properly encode the name.
       </action>
