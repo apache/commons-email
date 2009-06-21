@@ -1,8 +1,25 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-parent</artifactId>
-        <version>11</version>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-parent</artifactId>
+      <version>11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>commons-email</groupId>
@@ -12,7 +29,7 @@
 
     <inceptionYear>2001</inceptionYear>
     <description>
-        Commons-Email aims to provide a API for sending email. It is built on top of
+        Commons-Email aims to provide an API for sending email. It is built on top of
         the JavaMail API, which it aims to simplify.
     </description>
 
@@ -227,13 +244,15 @@
     </dependencies>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compile.source>1.4</maven.compile.source>
         <maven.compile.target>1.4</maven.compile.target>
         <commons.componentid>email</commons.componentid>
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.2</commons.release.version>
-        <commons.rc.version>RC1</commons.rc.version>
+        <commons.rc.version>RC2</commons.rc.version>
         <commons.binary.suffix>-bin</commons.binary.suffix>
     </properties> 
 

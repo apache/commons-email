@@ -19,7 +19,6 @@ package org.apache.commons.mail;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Enumeration;
@@ -49,7 +48,7 @@ import org.subethamail.wiser.WiserMessage;
  * @version $Id$
  */
 
-public class BaseEmailTestCase extends TestCase
+public abstract class BaseEmailTestCase extends TestCase
 {
     /** Padding at end of body added by wiser/send */
     public static final int BODY_END_PAD = 3;
@@ -138,7 +137,8 @@ public class BaseEmailTestCase extends TestCase
      * Safe a mail to a file using a more or less unique file name.
      *
      * @param email email
-     * @throws IOException Exception
+     * @throws IOException writing the email failed
+     * @throws MessagingException writing the email failed
      */
     protected void saveEmailToFile(WiserMessage email) throws IOException, MessagingException
     {

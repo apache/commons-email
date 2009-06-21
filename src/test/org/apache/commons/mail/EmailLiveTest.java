@@ -73,7 +73,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         String cid;
 
         URL url = new URL(EmailConfiguration.TEST_URL);
-        URL imageUrl = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+        File imageFile = new File("./src/test/images/asf_logo_wide.gif");
 
         EmailAttachment attachment = new EmailAttachment();
         File attachmentFile = new File("./src/test/attachments/logo.pdf");
@@ -140,7 +140,8 @@ public class EmailLiveTest extends BaseEmailTestCase
 
         HtmlEmail htmlEmail3 = new HtmlEmail();
         textMsg = "Your email client does not support HTML messages";
-        cid = htmlEmail3.embed(imageUrl, "Apache Logo");
+        cid = htmlEmail3.embed(imageFile, "Apache Logo");
+
         htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:"
             + cid + "\"> and NO attachment</b><html>";
 
@@ -164,7 +165,7 @@ public class EmailLiveTest extends BaseEmailTestCase
 
         HtmlEmail htmlEmail4 = new HtmlEmail();
         textMsg = "Your email client does not support HTML messages";
-        cid = htmlEmail4.embed(imageUrl, "Apache Logo");
+        cid = htmlEmail4.embed(imageFile, "Apache Logo");
         htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:" + cid + "\"> and attachment</b><html>";
 
         htmlEmail4.setSubject( "[email] 4.Test: text + html content + inline image + attachment");

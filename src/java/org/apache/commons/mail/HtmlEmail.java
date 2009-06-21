@@ -266,7 +266,10 @@ public class HtmlEmail extends MultiPartEmail
             URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
-            if (url.equals(urlDataSource.getURL()))
+            // NOTE: Comparing URLs with URL.equals() is a blocking operation
+            // in the case of a network failure therefore we use
+            // url.toExternalForm().equals() here.
+            if (url.toExternalForm().equals(urlDataSource.getURL().toExternalForm()))
             {
                 return ii.getCid();
             }
@@ -276,10 +279,6 @@ public class HtmlEmail extends MultiPartEmail
                     + "' is already bound to URL " + urlDataSource.getURL()
                     + "; existing names cannot be rebound");
             }
-            // NOTE: Comparing URLs with URL.equals() is known to be
-            // inconsistent when dealing with virtual hosting over HTTP,
-            // but since these are almost always files on the local machine,
-            // using equals() should be sufficient.
         }
 
         // verify that the URL is valid

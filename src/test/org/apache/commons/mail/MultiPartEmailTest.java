@@ -232,7 +232,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         attachment = new EmailAttachment();
         try
         {
-            attachment.setURL(new URL("http://bad.url"));
+            attachment.setURL(new URL("http://example.invalid"));
             this.email.attach(attachment);
             fail("Should have thrown an exception");
         }
@@ -308,7 +308,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         // invalid datasource
         try
         {
-            URLDataSource urlDs = new URLDataSource(new URL("http://bad.url/"));
+            URLDataSource urlDs = new URLDataSource(new URL("http://example.invalid/"));
             this.email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
             fail("Should have thrown an exception");
         }
