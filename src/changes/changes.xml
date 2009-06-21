@@ -23,7 +23,7 @@
 
   <body>
 
-    <release version="1.2" date="as in SVN">
+    <release version="1.2" date="2009-06-22">
       <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
         Using "http://example.invalid" for a bad url - ".invalid" is reserved
         and not intended to be installed as a top-level domain in the global 
