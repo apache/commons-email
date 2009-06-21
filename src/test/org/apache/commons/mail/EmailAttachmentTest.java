@@ -89,7 +89,7 @@ public class EmailAttachmentTest extends BaseEmailTestCase
             {
                 "http://localhost/",
                 "http://www.apache.org/",
-                "http://bad.url.com" };
+                "http://example.invalid" };
 
         for (int i = 0; i < tests.length; i++)
         {
