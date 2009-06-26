@@ -23,7 +23,11 @@
 
   <body>
 
-    <release version="1.2" date="2009-06-22">
+    <release version="1.2" date="2009-06-26">
+      <action dev="sgoeschl" type="update" date="2009-06-26">
+        Changing groupId from "commons-email" to "org.apache.commons" 
+        because the 1.1 release was already using "org.apache.commons"
+      </action>    
       <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
         Using "http://example.invalid" for a bad url - ".invalid" is reserved
         and not intended to be installed as a top-level domain in the global 
