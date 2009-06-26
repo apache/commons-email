@@ -234,13 +234,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-            <!--<url>http://commons.apache.org/logging/</url>-->
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <properties>
@@ -252,7 +245,7 @@
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.2</commons.release.version>
-        <commons.rc.version>RC2</commons.rc.version>
+        <commons.rc.version>RC3</commons.rc.version>
         <commons.binary.suffix>-bin</commons.binary.suffix>
     </properties> 
 
@@ -350,7 +343,7 @@
                         <comparisonArtifact>
                             <groupId>commons-email</groupId>
                             <artifactId>commons-email</artifactId>
-                            <version>1.0</version>
+                            <version>1.1</version>
                         </comparisonArtifact>
                     </comparisonArtifacts>
                 </configuration>
