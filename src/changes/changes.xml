@@ -22,8 +22,7 @@
   </properties>
 
   <body>
-
-    <release version="1.2" date="2009-06-26">
+    <release version="1.2" date="2009-10-26">
       <action dev="sgoeschl" type="update" date="2009-06-26">
         Changing groupId from "commons-email" to "org.apache.commons" 
         because the 1.1 release was already using "org.apache.commons"
