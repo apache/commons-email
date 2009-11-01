@@ -36,8 +36,7 @@ CHANGES FROM 1.1:
   the name.
   
 * SimpleEmail#setMsg() with UTF-8 content honors correct charset in header 
-  and
-does encode the content correctly now.
+  and does encode the content correctly now.
   
 * Created additional methods to support timeouts.
 
@@ -48,31 +47,22 @@ does encode the content correctly now.
 == Fixed Bugs ==
 
 * If setHostName() has not been called, getHostName() tries to return
-
   this.session.getProperty(MAIL_HOST). If mail session has not been
-
   created yet, this will throw a NullPointerException. Now getHostName()
-
   checks that this.session is not null before trying to access it. 
 
 * Provide better diagnostics when attaching  documents fail. 
 
 * When mail authentication is required and no username/password is supplied
-
   than the provided mail session is used. If a username/password is found
-the 
-  implementation creates a new mail session and a DefaultAuthenticator
-as 
-  convinence implementation. 
+  the implementation creates a new mail session and a DefaultAuthenticator
+  as convinence implementation. 
 
 * Using Kenneth's implementation of HtmlEmail.buildMimeMessage() to fix a
-
   couple of HtmlEmail layout issues. Also thanks to Martin Lau and Morten
-
   Hattesen for providing in-depth analysis of the problem. 
 
 * During regression tests write out the generated MimeMessage instead of
-
   WiserEmail.toString(). 
 
 
@@ -81,24 +71,25 @@ REQUIREMENTS:
 J2SE environments
 -----------------
 
-Commons Email requires JavaMail 1.4 or later. The proprietary Sun implementation
+Commons Email requires JavaMail 1.4 or later. The Sun implementation
 is available at:
 
-http://java.sun.com/products/javamail/  
+http://java.sun.com/products/javamail/
 
 However, the Apache Geronimo project (http://geronimo.apache.org)
 provides a J2EE-certified implementation of the JavaMail 1.4
 specification licensed under the Apache Software License.  
 
-Commons Email also requires the JavaBeans Activation Framework. The
-proprietary Sun implementation is available at:
+Commons Email also requires the JavaBeans Activation Framework unless
+you are runnning on Java SE 6 or later. The Sun implementation is available
+at:
 
-http://java.sun.com/products/javabeans/glasgow/jaf.html
+http://java.sun.com/javase/technologies/desktop/javabeans/jaf/
 
 Apache Geronimo likewise provides an implementation under the Apache
 Software License.
 
-Commons Email has been tested with JDK 1.4.2_15 and JDK 1.5.0_12.
+Commons Email has been tested with JDK 1.4, 1.5 and 1.6
 
 J2EE environments
 -----------------

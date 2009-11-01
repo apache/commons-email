@@ -22,7 +22,7 @@
       <version>11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>commons-email</groupId>
+    <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
     <version>1.2</version>
     <name>Commons Email</name>
@@ -41,9 +41,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_2</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_2</developerConnection>
-        <url>http://svn.apache.org/viewvc/commons/proper/email/tags/EMAIL_1_2</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_2_RC3</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_2_RC3</developerConnection>
+        <url>http://svn.apache.org/viewvc/commons/proper/email/tags/EMAIL_1_2_RC3</url>
     </scm>
 
     <developers>
@@ -234,13 +234,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-            <!--<url>http://commons.apache.org/logging/</url>-->
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <properties>
@@ -252,7 +245,7 @@
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.2</commons.release.version>
-        <commons.rc.version>RC2</commons.rc.version>
+        <commons.rc.version>RC3</commons.rc.version>
         <commons.binary.suffix>-bin</commons.binary.suffix>
     </properties> 
 
@@ -348,9 +341,9 @@
                 <configuration>
                     <comparisonArtifacts>
                         <comparisonArtifact>
-                            <groupId>commons-email</groupId>
+                            <groupId>org.apache.commons</groupId>
                             <artifactId>commons-email</artifactId>
-                            <version>1.0</version>
+                            <version>1.1</version>
                         </comparisonArtifact>
                     </comparisonArtifacts>
                 </configuration>
