@@ -26,7 +26,7 @@ import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 
 /**
- * JUnit test case for HtmlEmail Class
+ * JUnit test case for HtmlEmail Class.
  *
  * @since 1.0
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
@@ -502,4 +502,56 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
+    /**
+     * Create a HTML email containing an URL pointing to a ZIP file
+     * to be downloaded. According to EMAIL-93 the resulting URL
+     * "http://paradisedelivery.homeip.net/delivery/?file=TZC268X93337..zip"
+     * contains TWO dots instead of one dot which breaks the link.
+     */
+    public void testAddZipUrl() throws Exception
+    {
+        String htmlMsg =
+                "Please click on the following link: <br><br>" +
+                "<a href=\"http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip\">" +
+                "http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip" +
+                "</a><br><br>Customer satisfaction is very important for us.";
+
+        this.getMailServer();
+
+        this.email = new MockHtmlEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+        this.email.setCharset(Email.ISO_8859_1);
+
+        if (this.strTestUser != null && this.strTestPasswd != null)
+        {
+            this.email.setAuthentication(
+                this.strTestUser,
+                this.strTestPasswd);
+        }
+
+        String strSubject = "A dot (\".\") is appended to some ULRs of a HTML mail.";
+        this.email.setSubject(strSubject);
+        this.email.setHtmlMsg(htmlMsg);
+
+        this.email.send();
+        this.fakeMailServer.stop();
+
+        // validate html message
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            this.email.getHtmlMsg(),
+            this.email.getFromAddress(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
+            false);
+        
+        // make sure that no double dots show up
+        assertTrue(this.email.getHtmlMsg().contains("3DTZC268X93337.zip"));
+        assertFalse(this.email.getHtmlMsg().contains("3DTZC268X93337..zip"));
+    }
 }
