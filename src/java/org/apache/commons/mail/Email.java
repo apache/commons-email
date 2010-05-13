@@ -1325,13 +1325,13 @@ public abstract class Email
      */
     public String getHostName()
     {
-        if (EmailUtils.isNotEmpty(this.hostName))
+        if (this.session != null && EmailUtils.isNotEmpty(this.session.getProperty(MAIL_HOST)))
+        {
+            return this.session.getProperty(MAIL_HOST);   
+        } 
+        else if (EmailUtils.isNotEmpty(this.hostName))
         {
             return this.hostName;
-        }
-        else if (this.session != null)
-        {
-            return this.session.getProperty(MAIL_HOST);
         }
         return null;
     }
@@ -1343,13 +1343,13 @@ public abstract class Email
      */
     public String getSmtpPort()
     {
-        if (EmailUtils.isNotEmpty(this.smtpPort))
-        {
-            return this.smtpPort;
-        }
-        else if (this.session != null)
+        if (this.session != null && EmailUtils.isNotEmpty(this.session.getProperty(MAIL_PORT)))
         {
             return this.session.getProperty(MAIL_PORT);
+        } 
+        else if (EmailUtils.isNotEmpty(this.smtpPort))
+        {
+            return this.smtpPort;
         }
         return null;
     }
@@ -1427,13 +1427,13 @@ public abstract class Email
      */
     public String getSslSmtpPort()
     {
+        if (this.session != null && EmailUtils.isNotEmpty(this.session.getProperty(MAIL_SMTP_SOCKET_FACTORY_PORT)))
+        {
+            return this.session.getProperty(MAIL_SMTP_SOCKET_FACTORY_PORT);
+        }
         if (EmailUtils.isNotEmpty(this.sslSmtpPort))
         {
             return this.sslSmtpPort;
-        }
-        else if (this.session != null)
-        {
-            return this.session.getProperty(MAIL_SMTP_SOCKET_FACTORY_PORT);
         }
         return null;
     }
