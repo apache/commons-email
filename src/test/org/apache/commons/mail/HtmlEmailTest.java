@@ -46,8 +46,6 @@ public class HtmlEmailTest extends BaseEmailTestCase
         super(name);
     }
 
-    /**
-     * @throws Exception  */
     protected void setUp() throws Exception
     {
         super.setUp();
@@ -55,8 +53,6 @@ public class HtmlEmailTest extends BaseEmailTestCase
         this.email = new MockHtmlEmailConcrete();
     }
 
-    /**
-     * @throws EmailException  */
     public void testGetSetTextMsg() throws EmailException
     {
         // ====================================================================
@@ -86,9 +82,6 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
-    /**
-     * @throws EmailException if setting the message fails
-     */
     public void testGetSetHtmlMsg() throws EmailException
     {
         // ====================================================================
@@ -118,8 +111,6 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
-    /**
-     * @throws EmailException  */
     public void testGetSetMsg() throws EmailException
     {
         // ====================================================================
@@ -152,10 +143,6 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
     public void testEmbedUrl() throws Exception
     {
         // ====================================================================
@@ -403,10 +390,6 @@ public class HtmlEmailTest extends BaseEmailTestCase
             true);
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
     public void testSend2() throws Exception
     {
         // ====================================================================
@@ -596,5 +579,41 @@ public class HtmlEmailTest extends BaseEmailTestCase
         }
 
         fail("Expecting an exception when calling buildMimeMessage() before send() ...");
+    }
+
+    /**
+     * EMAIL-73 - check that providing a plain text content using setMsg()
+     * creates a plain content and HTML content using <pre> tags.
+     */
+    public void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException
+    {
+        this.getMailServer();
+
+        String strSubject = "testSendWithPlainTextButNoHtmlContent";
+
+        this.email = new MockHtmlEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+        this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setSubject(strSubject);
+        this.email.setMsg("This is a plain text content : <b><&npsb;></html></b>");
+
+        this.email.send();
+
+        this.fakeMailServer.stop();
+
+        // validate txt message
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            this.email.getTextMsg(),
+            this.email.getFromAddress(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
+            true);
     }
 }
