@@ -495,11 +495,14 @@ public class HtmlEmail extends MultiPartEmail
     }
 
     /**
-     * Does the work of actually building the email.
+     * Does the work of actually building the MimeMessage. Please note that
+     * a user rarely calls this method directly and only if he/she is
+     * interested in the sending the underlying MimeMessage without
+     * commons-email.
      *
      * @exception EmailException if there was an error.
      * @since 1.0
-     */
+     */    
     public void buildMimeMessage() throws EmailException
     {
         try

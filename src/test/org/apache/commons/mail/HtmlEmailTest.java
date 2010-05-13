@@ -554,4 +554,47 @@ public class HtmlEmailTest extends BaseEmailTestCase
         assertTrue(this.email.getHtmlMsg().contains("3DTZC268X93337.zip"));
         assertFalse(this.email.getHtmlMsg().contains("3DTZC268X93337..zip"));
     }
+
+    /**
+     * According to EMAIL-95 calling buildMimeMessage() before calling send()
+     * causes duplicate mime parts - now we throw an exception
+     *
+     * @throws Exception
+     */
+    public void testCallingBuildMimeMessageBeforeSent() throws Exception {
+
+        String htmlMsg = "<b>Hello World</b>";
+
+        this.email = new MockHtmlEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+        this.email.setCharset(Email.ISO_8859_1);
+
+        if (this.strTestUser != null && this.strTestPasswd != null)
+        {
+            this.email.setAuthentication(
+                this.strTestUser,
+                this.strTestPasswd);
+        }
+
+        String strSubject = "testCallingBuildMimeMessageBeforeSent";
+        this.email.setSubject(strSubject);
+        this.email.setHtmlMsg(htmlMsg);
+
+        // this should NOT be called when sending a message
+        this.email.buildMimeMessage();
+
+        try
+        {
+            this.email.send();
+        }
+        catch(IllegalStateException e)
+        {
+            return;
+        }
+
+        fail("Expecting an exception when calling buildMimeMessage() before send() ...");
+    }
 }
