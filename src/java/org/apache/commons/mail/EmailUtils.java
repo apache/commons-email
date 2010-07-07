@@ -246,7 +246,7 @@ final class EmailUtils
 
         if (resultFile == null)
         {
-            throw new IllegalArgumentException("resulFile is null");
+            throw new IllegalArgumentException("resultFile is null");
         }
 
         if (resultFile.getParentFile() != null)

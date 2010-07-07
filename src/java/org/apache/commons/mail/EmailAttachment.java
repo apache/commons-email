@@ -19,7 +19,7 @@ package org.apache.commons.mail;
 import java.net.URL;
 
 /**
- * This class models an email attachment.  Used by MultiPartEmail.
+ * This class models an email attachment. Used by MultiPartEmail.
  *
  * @since 1.0
  * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>
@@ -29,6 +29,7 @@ public class EmailAttachment
 {
     /** Definition of the part being an attachment */
     public static final String ATTACHMENT = javax.mail.Part.ATTACHMENT;
+
     /** Definition of the part being inline */
     public static final String INLINE = javax.mail.Part.INLINE;
 

@@ -1,0 +1,194 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.mail;
+
+import org.apache.commons.mail.impl.URLFactory;
+
+import javax.activation.DataSource;
+import javax.activation.URLDataSource;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Small wrapper class on top of HtmlEmail which encapsulates the required logic
+ * to retrieve images that are contained in "<img src=../>" elements in the HTML
+ * code. This is done by replacing all img-src-elements with "cid:"-entries and
+ * embedding images in the email.
+ *
+ * For local files the class tries to either load them via an absolute path or -
+ * if available - use a relative path starting from a base directory.For files
+ * that are not found locally, the implementation tries to download
+ * the element and link it in.
+ *
+ * This code was submitted to commons-email under the Apache 2.0 license, see
+ * https://issues.apache.org/jira/browse/EMAIL-92
+ *
+ */
+public class ImageHtmlEmail extends HtmlEmail
+{
+    /**
+     * Regular Expression to find all <IMG SRC="..."> entries in an HTML
+     * document.
+     *
+     * It needs to cater for various things, like more whitespaces including
+     * newlines on any place, HTML is not case sensitive and there can be
+     * arbitrary text between "IMG" and "SRC" like IDs and other things.
+     */
+    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+
+    public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+
+    // this pattern looks for the HTML-img tag which indicates embedded images,
+    // the grouping is necessary to allow to replace the element with the CID
+    protected static final Pattern pattern = Pattern.compile(REGEX_IMG_SRC);
+
+    protected static final Pattern scriptPattern = Pattern.compile(REGEX_SCRIPT_SRC);
+
+    /**
+     * Set the HTML message and try to add any image that is linked in the HTML
+     * source.
+     *
+     * @param htmlMessage the HTML message
+     * @return An HtmlEmail.
+     * @throws EmailException assembling the email failed
+     */
+    public HtmlEmail setHtmlMsg(final String htmlMessage)
+            throws EmailException
+    {
+        URL currentWorkingDirectoryUrl;
+
+        try
+        {
+            currentWorkingDirectoryUrl = new File("").toURI().toURL();
+        }
+        catch (MalformedURLException e)
+        {
+            throw new EmailException("Unable to create URL for current working directory", e);
+        }
+
+        return setHtmlMsg(htmlMessage, currentWorkingDirectoryUrl);
+    }
+
+    /**
+     * Set the HTML content and try to add any image that is linked in the HTML
+     * source.  The 'baseUrl' is either a "http://..." or a "file://" in order
+     * to resolve relative image resources.
+     *
+     * @param htmlMessage the HTML message.
+     * @param baseUrl An base URL that is used as starting point for resolving images that are embedded in the HTML
+     * @return An HtmlEmail
+     * @throws EmailException creating the email failed
+     */
+    public HtmlEmail setHtmlMsg(final String htmlMessage, final URL baseUrl)
+            throws EmailException
+    {
+        // if there is no useful HTML then simply route it through to the super class
+        if (htmlMessage == null || htmlMessage.isEmpty())
+        {
+            return super.setHtmlMsg(htmlMessage);
+        }
+
+        // replace images
+        String temp = replacePattern(htmlMessage, pattern, baseUrl);
+
+        // replace scripts
+        temp = replacePattern(temp, scriptPattern, baseUrl);
+
+        // finally set the resulting HTML with all images replaced if possible
+        return super.setHtmlMsg(temp);
+    }
+
+    /**
+     * Replace the regexp matching resource locations with "cid:..." references.
+     *
+     * @param htmlMessage the HTML message to analyze
+     * @param pattern the repexp to find resources
+     * @param baseUrl the starting point for resolving relative resource paths
+     * @return the HTML message containing "cid" references
+     * @throws EmailException creating the email failed
+     */
+    private String replacePattern(final String htmlMessage, final Pattern pattern, final URL baseUrl)
+            throws EmailException
+    {
+        StringBuffer myStringBuffer = new StringBuffer();
+
+        // in the String, replace all "img src" with a CID and embed the related
+        // image file if we find it.
+        Matcher matcher = pattern.matcher(htmlMessage);
+
+        // the matcher returns all instances one by one
+        while (matcher.find())
+        {
+            // in the RegEx we have the src-element as second "group"
+            String image = matcher.group(2);
+
+            DataSource imageDataSource = resolve(baseUrl, image);
+
+            if (imageDataSource != null)
+            {
+                if(!this.inlineEmbeds.containsKey(imageDataSource.getName()))
+                {
+                    String cid = embed(imageDataSource, imageDataSource.getName());
+
+                    // if we embedded something, then we need to replace the URL with
+                    // the CID, otherwise the Matcher takes care of adding the
+                    // non-replaced text afterwards, so no else is necessary here!
+                    matcher.appendReplacement(myStringBuffer, matcher.group(1) + "cid:" + cid + matcher.group(3));
+                }
+            }
+        }
+
+        // append the remaining items...
+        matcher.appendTail(myStringBuffer);
+
+        return myStringBuffer.toString();
+    }
+
+
+    /**
+     * Resolve a resource location to be embedded into the email.
+     *
+     * @param baseUrl the base url of the resourceLocation
+     * @param resourceLocation the location of the resource
+     * @return the data source containing the resource.
+     * @throws EmailException resolving the resource failed
+     */
+    protected DataSource resolve(final URL baseUrl, final String resourceLocation)
+            throws EmailException 
+    {
+        DataSource result = null;
+
+        try
+        {
+            if (!resourceLocation.startsWith("cid:"))
+            {
+                URL url = URLFactory.createUrl(baseUrl, resourceLocation);
+                result = new URLDataSource(url);
+            }
+
+            return result;
+        }
+        catch (IOException e)
+        {
+            throw new EmailException("Resolving the resourceLocation failed", e);
+        }
+    }
+}

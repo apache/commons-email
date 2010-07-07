@@ -185,6 +185,9 @@
         <contributor>
             <name>Cedrik Lime</name>
         </contributor>
+        <contributor>
+            <name>Dominik Stadler</name>
+        </contributor>
     </contributors>
 
     <dependencies>
@@ -192,18 +195,22 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.1</version>
-            <!--<url>http://java.sun.com/products/javamail/</url>-->
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
             <version>1.1</version>
-            <!--<url>http://java.sun.com/products/javabeans/glasgow/jaf.html</url>-->
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
