@@ -228,7 +228,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         tmpFile.deleteOnExit();
         String fileCid = this.email.embed(tmpFile);
 
-        URL fileUrl = tmpFile.toURL();
+        URL fileUrl = tmpFile.toURI().toURL();
         String urlCid = this.email.embed(fileUrl, "urlName");
 
         assertFalse("file and URL cids should be different even for same resource",
@@ -605,7 +605,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
         this.fakeMailServer.stop();
 
-        // validate txt message
+        // validate text message
         validateSend(
             this.fakeMailServer,
             strSubject,
