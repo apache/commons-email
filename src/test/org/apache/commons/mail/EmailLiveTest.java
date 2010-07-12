@@ -241,8 +241,8 @@ public class EmailLiveTest extends BaseEmailTestCase
 
         if( EmailConfiguration.MAIL_FORCE_SEND ) {
           // the encoding is only set when sending the email!!
-          assertEquals(email.getMimeMessage().getEncoding(), "quoted-printable");
-          assertEquals(email.getMimeMessage().getContentType(), "text/plain; charset=UTF-8");
+          assertEquals("quoted-printable", email.getMimeMessage().getEncoding());
+          assertEquals("text/plain; charset=UTF-8", email.getMimeMessage().getContentType());
         }
     }
 
