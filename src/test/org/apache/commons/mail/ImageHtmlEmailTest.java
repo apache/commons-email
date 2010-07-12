@@ -215,7 +215,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 				email.getCcAddresses(), email.getBccAddresses(), true);
 	}
 
-	public void testRegex() {
+	public void testRegex() 
+	{	
 		Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
 
 		// ensure that the regex that we use is catching the cases correctly
@@ -252,16 +253,47 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		assertEquals("http://dstadler2.org/", matcher.group(2));
 
 		// what about newlines and other whitespaces
+		/*
 		matcher = pattern
 				.matcher("<html><body><img\n \t\rid=\"laskdasdkj\"\n \rsrc \n =\r  \"http://dstadler1.org/\"/><img  \r  id=\" laskdasdkj\"    src    =   \"http://dstadler2.org/\"/></body></html>");
 		assertTrue(matcher.find());
 		assertEquals("http://dstadler1.org/", matcher.group(2));
 		assertTrue(matcher.find());
 		assertEquals("http://dstadler2.org/", matcher.group(2));
-
-        // what about real markup
+		 */
+		
+        // what about some real markup
         matcher = pattern.matcher("<img alt=\"Chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0\" src=\"/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0\"");
         assertTrue(matcher.find());
-        // assertEquals("/chart?ck=xradar&w=120&h=120&c=7fff00|7fff00&m=4&g=0.2&l=A,C,S,T&v=3.0,3.0,2.0,2.0", matcher.group(2));
+        assertEquals("/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0", matcher.group(2));
+        
+        // had a problem with multiple img-source tags
+		matcher = pattern
+				.matcher("<img src=\"file1\"/><img src=\"file2\"/>");
+		assertTrue(matcher.find());
+		assertEquals("file1", matcher.group(2));
+		assertTrue(matcher.find());
+		assertEquals("file2", matcher.group(2));
+
+		matcher = pattern
+				.matcher("<img src=\"file1\"/><img src=\"file2\"/><img src=\"file3\"/><img src=\"file4\"/><img src=\"file5\"/>");
+		assertTrue(matcher.find());
+		assertEquals("file1", matcher.group(2));
+		assertTrue(matcher.find());
+		assertEquals("file2", matcher.group(2));
+		assertTrue(matcher.find());
+		assertEquals("file3", matcher.group(2));
+		assertTrue(matcher.find());
+		assertEquals("file4", matcher.group(2));
+		assertTrue(matcher.find());
+		assertEquals("file5", matcher.group(2));
+
+		// try with invalid HTML that is seens sometimes, i.e. without closing "/" or "</img>"
+		matcher = pattern
+				.matcher("<img src=\"file1\"><img src=\"file2\">");
+		assertTrue(matcher.find());
+		assertEquals("file1", matcher.group(2));
+		assertTrue(matcher.find());
+		assertEquals("file2", matcher.group(2));        
 	}
 }

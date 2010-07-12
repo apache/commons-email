@@ -24,6 +24,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,11 +54,11 @@ public class ImageHtmlEmail extends HtmlEmail
      * newlines on any place, HTML is not case sensitive and there can be
      * arbitrary text between "IMG" and "SRC" like IDs and other things.
      */
-    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=s*[\"'])([^\"']+?)([\"'])";
 
     public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
-    // this pattern looks for the HTML-img tag which indicates embedded images,
+    // this pattern looks for the HTML imgage tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
     protected static final Pattern pattern = Pattern.compile(REGEX_IMG_SRC);
 
@@ -128,38 +130,61 @@ public class ImageHtmlEmail extends HtmlEmail
     private String replacePattern(final String htmlMessage, final Pattern pattern, final URL baseUrl)
             throws EmailException
     {
-        StringBuffer myStringBuffer = new StringBuffer();
-
+        DataSource imageDataSource;
+        StringBuffer stringBuffer = new StringBuffer();
+        
+        // maps "cid" --> name
+        Map cidCache = new HashMap();
+        
+        // maps "name" --> dataSource 
+        Map dataSourceCache = new HashMap();
+                
         // in the String, replace all "img src" with a CID and embed the related
         // image file if we find it.
         Matcher matcher = pattern.matcher(htmlMessage);
 
         // the matcher returns all instances one by one
         while (matcher.find())
-        {
-            // in the RegEx we have the src-element as second "group"
+        {            
+            // in the RegEx we have the <src> element as second "group"
             String image = matcher.group(2);
 
-            DataSource imageDataSource = resolve(baseUrl, image);
+            // avoid loading the same data source more than once
+            if(dataSourceCache.get(image) == null) 
+            {
+                imageDataSource = resolve(baseUrl, image);  
+                dataSourceCache.put(image, imageDataSource);
+            }
+            else
+            {
+                imageDataSource = (DataSource) dataSourceCache.get(image);
+            }                        
 
             if (imageDataSource != null)
             {
-                if(!this.inlineEmbeds.containsKey(imageDataSource.getName()))
+                String name = imageDataSource.getName();
+                String cid = (String) cidCache.get(name);
+                
+                if(cid == null)
                 {
-                    String cid = embed(imageDataSource, imageDataSource.getName());
-
-                    // if we embedded something, then we need to replace the URL with
-                    // the CID, otherwise the Matcher takes care of adding the
-                    // non-replaced text afterwards, so no else is necessary here!
-                    matcher.appendReplacement(myStringBuffer, matcher.group(1) + "cid:" + cid + matcher.group(3));
+                    cid = embed(imageDataSource, imageDataSource.getName());    
+                    cidCache.put(name, cid);
                 }
+                
+                // if we embedded something, then we need to replace the URL with
+                // the CID, otherwise the Matcher takes care of adding the
+                // non-replaced text afterwards, so no else is necessary here!                
+                matcher.appendReplacement(stringBuffer, matcher.group(1) + "cid:" + cid + matcher.group(3));
             }
         }
 
         // append the remaining items...
-        matcher.appendTail(myStringBuffer);
+        matcher.appendTail(stringBuffer);
+        
+        cidCache.clear();
+        dataSourceCache.clear();
 
-        return myStringBuffer.toString();
+        return stringBuffer.toString();
     }
 
 
