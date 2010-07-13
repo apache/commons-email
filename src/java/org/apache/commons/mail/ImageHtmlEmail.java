@@ -54,11 +54,11 @@ public class ImageHtmlEmail extends HtmlEmail
      * newlines on any place, HTML is not case sensitive and there can be
      * arbitrary text between "IMG" and "SRC" like IDs and other things.
      */
-    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
-    // this pattern looks for the HTML imgage tag which indicates embedded images,
+    // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
     protected static final Pattern pattern = Pattern.compile(REGEX_IMG_SRC);
 
@@ -164,7 +164,7 @@ public class ImageHtmlEmail extends HtmlEmail
             {
                 String name = imageDataSource.getName();
                 String cid = (String) cidCache.get(name);
-                
+
                 if(cid == null)
                 {
                     cid = embed(imageDataSource, imageDataSource.getName());    

@@ -253,14 +253,12 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		assertEquals("http://dstadler2.org/", matcher.group(2));
 
 		// what about newlines and other whitespaces
-		/*
 		matcher = pattern
 				.matcher("<html><body><img\n \t\rid=\"laskdasdkj\"\n \rsrc \n =\r  \"http://dstadler1.org/\"/><img  \r  id=\" laskdasdkj\"    src    =   \"http://dstadler2.org/\"/></body></html>");
 		assertTrue(matcher.find());
 		assertEquals("http://dstadler1.org/", matcher.group(2));
 		assertTrue(matcher.find());
 		assertEquals("http://dstadler2.org/", matcher.group(2));
-		 */
 		
         // what about some real markup
         matcher = pattern.matcher("<img alt=\"Chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0\" src=\"/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0\"");
