@@ -89,7 +89,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		String html = str.toString();
 
 		// set the html message
-		email.setHtmlMsg(html, TEST_IMAGE_DIR.toURI().toURL());
+		email.setHtmlMsg(html, TEST_IMAGE_DIR.toURI().toURL(), false);
 
 		// set the alternative message
 		//email.setTextMsg("Your email client does not support HTML messages");
@@ -128,7 +128,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		try {
-			email.setHtmlMsg(null, new File("/tmp").toURI().toURL());
+			email.setHtmlMsg(null, new File("/tmp").toURI().toURL(), false);
 			fail("Should fail here!");
 		} catch (EmailException e) {
 			assertTrue(e.getMessage(), e.getMessage().contains(
@@ -144,7 +144,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		try {
-			email.setHtmlMsg("", new File("/tmp").toURI().toURL());
+			email.setHtmlMsg("", new File("/tmp").toURI().toURL(), false);
 			fail("Should fail here!");
 		} catch (EmailException e) {
 			assertTrue(e.getMessage(), e.getMessage().contains(
@@ -203,7 +203,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		email.setHtmlMsg("<html><body><img src=\"" + file.getAbsolutePath()
-				+ "\"/></body></html>", new File("").toURI().toURL());
+				+ "\"/></body></html>", new File("").toURI().toURL(), false);
 
 		// send the email
 		email.send();

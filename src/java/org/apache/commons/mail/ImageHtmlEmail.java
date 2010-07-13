@@ -86,7 +86,7 @@ public class ImageHtmlEmail extends HtmlEmail
             throw new EmailException("Unable to create URL for current working directory", e);
         }
 
-        return setHtmlMsg(htmlMessage, currentWorkingDirectoryUrl);
+        return setHtmlMsg(htmlMessage, currentWorkingDirectoryUrl, false);
     }
 
     /**
@@ -95,11 +95,12 @@ public class ImageHtmlEmail extends HtmlEmail
      * to resolve relative image resources.
      *
      * @param htmlMessage the HTML message.
-     * @param baseUrl An base URL that is used as starting point for resolving images that are embedded in the HTML
-     * @return An HtmlEmail
+     * @param baseUrl an base URL that is used as starting point for resolving images that are embedded in the HTML
+     * @param isLenient shall we ignore resources not found or throw an exception?
+     * @return a HTML email
      * @throws EmailException creating the email failed
      */
-    public HtmlEmail setHtmlMsg(final String htmlMessage, final URL baseUrl)
+    public HtmlEmail setHtmlMsg(final String htmlMessage, final URL baseUrl, boolean isLenient)
             throws EmailException
     {
         // if there is no useful HTML then simply route it through to the super class
@@ -109,10 +110,10 @@ public class ImageHtmlEmail extends HtmlEmail
         }
 
         // replace images
-        String temp = replacePattern(htmlMessage, pattern, baseUrl);
+        String temp = replacePattern(htmlMessage, pattern, baseUrl, isLenient);
 
         // replace scripts
-        temp = replacePattern(temp, scriptPattern, baseUrl);
+        temp = replacePattern(temp, scriptPattern, baseUrl, isLenient);
 
         // finally set the resulting HTML with all images replaced if possible
         return super.setHtmlMsg(temp);
@@ -122,12 +123,13 @@ public class ImageHtmlEmail extends HtmlEmail
      * Replace the regexp matching resource locations with "cid:..." references.
      *
      * @param htmlMessage the HTML message to analyze
-     * @param pattern the repexp to find resources
+     * @param pattern the regular expression to find resources
      * @param baseUrl the starting point for resolving relative resource paths
+     * @param isLenient shall we ignore resources not found or throw an exception?
      * @return the HTML message containing "cid" references
      * @throws EmailException creating the email failed
      */
-    private String replacePattern(final String htmlMessage, final Pattern pattern, final URL baseUrl)
+    private String replacePattern(final String htmlMessage, final Pattern pattern, final URL baseUrl, final boolean isLenient)
             throws EmailException
     {
         DataSource imageDataSource;
@@ -152,8 +154,13 @@ public class ImageHtmlEmail extends HtmlEmail
             // avoid loading the same data source more than once
             if(dataSourceCache.get(image) == null) 
             {
-                imageDataSource = resolve(baseUrl, image);  
-                dataSourceCache.put(image, imageDataSource);
+                // in lenient mode we might get a 'null' data source if the resource was not found
+                imageDataSource = resolve(baseUrl, image, isLenient);
+                
+                if(imageDataSource != null)
+                {
+                    dataSourceCache.put(image, imageDataSource);
+                }
             }
             else
             {
@@ -167,7 +174,7 @@ public class ImageHtmlEmail extends HtmlEmail
 
                 if(cid == null)
                 {
-                    cid = embed(imageDataSource, imageDataSource.getName());    
+                    cid = embed(imageDataSource, imageDataSource.getName());
                     cidCache.put(name, cid);
                 }
                 
@@ -189,14 +196,17 @@ public class ImageHtmlEmail extends HtmlEmail
 
 
     /**
-     * Resolve a resource location to be embedded into the email.
+     * Resolve a resource location to be embedded into the email. When using
+     * the lenient mode a resource which can't be resolved returns "null".
+     * When using the non-lenient mode an exception would be thrown.
      *
      * @param baseUrl the base url of the resourceLocation
      * @param resourceLocation the location of the resource
-     * @return the data source containing the resource.
+     * @param isLenient shall we ignore resources not found?
+     * @return the data source containing the resource
      * @throws EmailException resolving the resource failed
      */
-    protected DataSource resolve(final URL baseUrl, final String resourceLocation)
+    protected DataSource resolve(final URL baseUrl, final String resourceLocation, final boolean isLenient)
             throws EmailException 
     {
         DataSource result = null;
@@ -207,13 +217,21 @@ public class ImageHtmlEmail extends HtmlEmail
             {
                 URL url = URLFactory.createUrl(baseUrl, resourceLocation);
                 result = new URLDataSource(url);
+                result.getInputStream();
             }
 
             return result;
         }
         catch (IOException e)
         {
-            throw new EmailException("Resolving the resourceLocation failed", e);
+            if(!isLenient)
+            {
+                throw new EmailException("Resolving the resource failed : " + resourceLocation, e);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

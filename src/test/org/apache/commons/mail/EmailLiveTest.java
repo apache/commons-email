@@ -256,13 +256,14 @@ public class EmailLiveTest extends BaseEmailTestCase
         // use a simple HTML page with one image - please note that the Apache logo
         // is defined in CSS and not in HTML.
 
-        String htmlMsg1 = FileUtils.readFileToString(new File("./src/test/html/www.apache.org.html"));
+        File htmlFile = new File("./src/test/html/www.apache.org.html");
+        String htmlMsg1 = FileUtils.readFileToString(htmlFile);
 
         ImageHtmlEmail email = new ImageHtmlEmail();
         email.setSubject( "[testImageHtmlEmail] 1.Test: simple html content");
         email.setFrom(EmailConfiguration.TEST_FROM);
         email.setTo(getToList());
-        email.setHtmlMsg(htmlMsg1);
+        email.setHtmlMsg(htmlMsg1, htmlFile.toURI().toURL(), false);
         email.setMailSession(getSession());
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailLocal.eml"), send(email).getMimeMessage());
@@ -282,7 +283,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         email.setSubject( "[testImageHtmlEmail] 2.Test: complex html content");
         email.setFrom(EmailConfiguration.TEST_FROM);
         email.setTo(getToList());
-        email.setHtmlMsg(htmlMsg, url);
+        email.setHtmlMsg(htmlMsg, url, true);
         email.setMailSession(getSession());
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
