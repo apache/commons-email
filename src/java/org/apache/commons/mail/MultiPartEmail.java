@@ -223,7 +223,7 @@ public class MultiPartEmail extends Email
      *
      * @exception EmailException if there was an error.
      * @since 1.0
-     */    
+     */
     public void buildMimeMessage() throws EmailException
     {
         try

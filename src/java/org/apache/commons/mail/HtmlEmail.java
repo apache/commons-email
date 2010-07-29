@@ -502,7 +502,7 @@ public class HtmlEmail extends MultiPartEmail
      *
      * @exception EmailException if there was an error.
      * @since 1.0
-     */    
+     */
     public void buildMimeMessage() throws EmailException
     {
         try

@@ -45,40 +45,52 @@ public final class URLFactory
     {
         // if we get an non-existing base url than the resource can
         // be directly used to create an URL
-        if(baseUrl == null)
+        if (baseUrl == null)
         {
             return new URL(resource);
         }
 
         // if we get an non-existing location than use the base url alone
-        if(resource == null)
+        if (resource == null)
         {
             return baseUrl;
         }
 
         // if we get a stand-alone resource than ignore the base url
-        if(isFileUrl(resource) || isHttpUrl(resource))
+        if (isFileUrl(resource) || isHttpUrl(resource))
         {
             return new URL(resource);
         }
 
         // crate a file URL
-        String baseUrlString = baseUrl.toExternalForm();               
-        if(isFileUrl(baseUrlString))
+        String baseUrlString = baseUrl.toExternalForm();
+        if (isFileUrl(baseUrlString))
         {
             return new File(toFile(baseUrl), resource).toURI().toURL();
         }
         else
         {
-            return new URL(baseUrl, resource.replaceAll("&amp;", "&")) ;
-        }        
+            return new URL(baseUrl, resource.replaceAll("&amp;", "&"));
+        }
     }
 
+    /**
+     * Is this a file URL?
+     *
+     * @param urlString the URL string
+     * @return true if it is a file URL
+     */
     private static boolean isFileUrl(String urlString)
     {
         return urlString.startsWith("file://");
     }
 
+    /**
+     * Is this a HTTP/HTTPS URL?
+     *
+     * @param urlString the URL string
+     * @return true if it is a HTTP/HTTPS URL
+     */
     private static boolean isHttpUrl(String urlString)
     {
         return urlString.startsWith("http://") || urlString.startsWith("https://");
@@ -86,10 +98,6 @@ public final class URLFactory
 
     /**
      * Convert from a <code>URL</code> to a <code>File</code>.
-     * <p>
-     * From version 1.1 this method will decode the URL.
-     * Syntax such as <code>file:///my%20docs/file.txt</code> will be
-     * correctly decoded to <code>/my docs/file.txt</code>.
      *
      * @param url  the file URL to convert, <code>null</code> returns <code>null</code>
      * @return the equivalent <code>File</code> object, or <code>null</code>
@@ -105,7 +113,7 @@ public final class URLFactory
         else
         {
             String filename = url.getFile().replace('/', File.separatorChar);
-            int pos =0;
+            int pos = 0;
             while ((pos = filename.indexOf('%', pos)) >= 0)
             {
                 if (pos + 2 < filename.length())

@@ -46,23 +46,25 @@ import java.util.regex.Pattern;
  */
 public class ImageHtmlEmail extends HtmlEmail
 {
-    /**
-     * Regular Expression to find all <IMG SRC="..."> entries in an HTML
-     * document.
-     *
-     * It needs to cater for various things, like more whitespaces including
-     * newlines on any place, HTML is not case sensitive and there can be
-     * arbitrary text between "IMG" and "SRC" like IDs and other things.
-     */
+    // Regular Expression to find all <IMG SRC="..."> entries in an HTML
+    // document.It needs to cater for various things, like more whitespaces
+    // including newlines on any place, HTML is not case sensitive and there
+    // can be arbitrary text between "IMG" and "SRC" like IDs and other things.
+
+    /** regexp for extracting <img> tags */
     public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
+    /** regexp for extracting <script> tags */
     public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
-    protected static final Pattern pattern = Pattern.compile(REGEX_IMG_SRC);
 
-    protected static final Pattern scriptPattern = Pattern.compile(REGEX_SCRIPT_SRC);
+    /** pattern for extracting <img> tags */
+    private static final Pattern IMG_PATTERN = Pattern.compile(REGEX_IMG_SRC);
+
+    /** pattern for extracting <script> tags */
+    private static final Pattern SCRIPT_PATTERN = Pattern.compile(REGEX_SCRIPT_SRC);
 
     /**
      * Set the HTML message and try to add any image that is linked in the HTML
@@ -110,10 +112,10 @@ public class ImageHtmlEmail extends HtmlEmail
         }
 
         // replace images
-        String temp = replacePattern(htmlMessage, pattern, baseUrl, isLenient);
+        String temp = replacePattern(htmlMessage, IMG_PATTERN, baseUrl, isLenient);
 
         // replace scripts
-        temp = replacePattern(temp, scriptPattern, baseUrl, isLenient);
+        temp = replacePattern(temp, SCRIPT_PATTERN, baseUrl, isLenient);
 
         // finally set the resulting HTML with all images replaced if possible
         return super.setHtmlMsg(temp);
@@ -134,30 +136,30 @@ public class ImageHtmlEmail extends HtmlEmail
     {
         DataSource imageDataSource;
         StringBuffer stringBuffer = new StringBuffer();
-        
+
         // maps "cid" --> name
         Map cidCache = new HashMap();
-        
-        // maps "name" --> dataSource 
+
+        // maps "name" --> dataSource
         Map dataSourceCache = new HashMap();
-                
+
         // in the String, replace all "img src" with a CID and embed the related
         // image file if we find it.
         Matcher matcher = pattern.matcher(htmlMessage);
 
         // the matcher returns all instances one by one
         while (matcher.find())
-        {            
+        {
             // in the RegEx we have the <src> element as second "group"
             String image = matcher.group(2);
 
             // avoid loading the same data source more than once
-            if(dataSourceCache.get(image) == null) 
+            if (dataSourceCache.get(image) == null)
             {
                 // in lenient mode we might get a 'null' data source if the resource was not found
                 imageDataSource = resolve(baseUrl, image, isLenient);
-                
-                if(imageDataSource != null)
+
+                if (imageDataSource != null)
                 {
                     dataSourceCache.put(image, imageDataSource);
                 }
@@ -165,29 +167,29 @@ public class ImageHtmlEmail extends HtmlEmail
             else
             {
                 imageDataSource = (DataSource) dataSourceCache.get(image);
-            }                        
+            }
 
             if (imageDataSource != null)
             {
                 String name = imageDataSource.getName();
                 String cid = (String) cidCache.get(name);
 
-                if(cid == null)
+                if (cid == null)
                 {
                     cid = embed(imageDataSource, imageDataSource.getName());
                     cidCache.put(name, cid);
                 }
-                
+
                 // if we embedded something, then we need to replace the URL with
                 // the CID, otherwise the Matcher takes care of adding the
-                // non-replaced text afterwards, so no else is necessary here!                
+                // non-replaced text afterwards, so no else is necessary here!
                 matcher.appendReplacement(stringBuffer, matcher.group(1) + "cid:" + cid + matcher.group(3));
             }
         }
 
         // append the remaining items...
         matcher.appendTail(stringBuffer);
-        
+
         cidCache.clear();
         dataSourceCache.clear();
 
@@ -207,7 +209,7 @@ public class ImageHtmlEmail extends HtmlEmail
      * @throws EmailException resolving the resource failed
      */
     protected DataSource resolve(final URL baseUrl, final String resourceLocation, final boolean isLenient)
-            throws EmailException 
+            throws EmailException
     {
         DataSource result = null;
 
@@ -224,7 +226,7 @@ public class ImageHtmlEmail extends HtmlEmail
         }
         catch (IOException e)
         {
-            if(!isLenient)
+            if (!isLenient)
             {
                 throw new EmailException("Resolving the resource failed : " + resourceLocation, e);
             }

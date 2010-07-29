@@ -253,39 +253,4 @@ public class EmailLiveTest extends BaseEmailTestCase
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
     }
-
-    /**
-    public void testGmail() throws Exception {
-
-        Email email = new SimpleEmail();
-        email.setSmtpPort(587);
-        email.setAuthenticator(new DefaultAuthenticator(EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD));
-        email.setDebug(true);
-        email.setHostName("smtp.gmail.com");
-        email.setFrom("siegfried.goeschl@gmail.com", "SenderName");
-        email.setSubject("TestMail");
-        email.setMsg("This is a test mail?");
-        email.addTo("siegfried.goeschl@gmail.com", "ToName");
-        email.setTLS(true);
-        email.send();
-    }
-    */
-
-    /**
-    public void testGmx() throws Exception {
-
-         Email email = new SimpleEmail();
-         email.setSmtpPort(465);
-         email.setAuthenticator(new DefaultAuthenticator("sgoeschl@gmx.at", "pratsch"));
-         email.setDebug(true);
-         email.setHostName("mail.gmx.net");
-         email.setFrom("sgoeschl@gmx.at");
-         email.setSubject("TestMail");
-         email.setMsg("This is a test mail?");
-         email.addTo("siegfried.goeschl@gmail.com", "ToName");
-         // email.setTLS(true);
-         email.setSSL(true);
-         email.send();
-     }
-    */
 }

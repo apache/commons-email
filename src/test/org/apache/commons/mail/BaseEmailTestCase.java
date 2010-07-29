@@ -59,7 +59,7 @@ public abstract class BaseEmailTestCase extends TestCase
     private static final String LINE_SEPARATOR = "\r\n";
 
     /** default port */
-    private static int mailServerPort = EmailConfiguration.MAIL_SERVER_PORT;
+    private static int mailServerPort = 2500;
 
     /** The fake Wiser email server */
     protected Wiser fakeMailServer;
