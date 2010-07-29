@@ -540,9 +540,8 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     /**
      * According to EMAIL-95 calling buildMimeMessage() before calling send()
-     * causes duplicate mime parts - now we throw an exception
-     *
-     * @throws Exception
+     * causes duplicate mime parts - now we throw an exception to catch the
+     * problem
      */
     public void testCallingBuildMimeMessageBeforeSent() throws Exception {
 

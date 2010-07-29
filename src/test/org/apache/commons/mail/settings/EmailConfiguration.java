@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail.settings;
 
+import org.apache.commons.mail.Email;
+
 /**
  * This class contains hard-coded configuration settings
  * for the JUnit tests.
@@ -29,13 +31,15 @@ public final class EmailConfiguration
 
     public static final boolean MAIL_FORCE_SEND     = false;
 	public static final boolean MAIL_DEBUG          = false;
+	public static final String  MAIL_CHARSET        = Email.UTF_8;
     public static final String  MAIL_SERVER         = "localhost";
-    public static final int     MAIL_SERVER_PORT    = 2500;
+    public static final int     MAIL_SERVER_PORT    = 25;
     public static final String  TEST_FROM           = "test_from@apache.org";
     public static final String  TEST_TO             = "test_to@apache.org";
     public static final String  TEST_USER           = "user";
-    public static final String  TEST_PASSWD         = "passwd";
-
+    public static final String  TEST_PASSWD         = "password";
+    public static final boolean MAIL_USE_SSL        = false;
+    public static final boolean MAIL_USE_TLS        = false;
 
     public static final String TEST_URL = EmailConfiguration.class
         .getResource("/images/asf_logo_wide.gif")

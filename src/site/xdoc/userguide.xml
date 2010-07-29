@@ -27,20 +27,21 @@
     <section name="A simple text email">
       <p>
         Our first example will create a basic email message to "John Doe" and
-        send it through your local mail server.
+        send it through your Google Mail (GMail)  account.
       </p>
       <source>
 <![CDATA[
-import org.apache.commons.mail.SimpleEmail;
-...
-
-  SimpleEmail email = new SimpleEmail();
-  email.setHostName("mail.myserver.com");
-  email.addTo("jdoe@somewhere.org", "John Doe");
-  email.setFrom("me@apache.org", "Me");
-  email.setSubject("Test message");
-  email.setMsg("This is a simple test of commons-email");
-  email.send();
+Email email = new SimpleEmail();
+email.setSmtpPort(587);
+email.setAuthenticator(new DefaultAuthenticator("username", "password"));
+email.setDebug(false);
+email.setHostName("smtp.gmail.com");
+email.setFrom("user@gmail.com");
+email.setSubject("TestMail");
+email.setMsg("This is a test mail ... :-)");
+email.addTo("foo@bar.com");
+email.setTLS(true);
+email.send();
 ]]></source>
       <p>
         The call to setHostName("mail.myserver.com") sets the address of the

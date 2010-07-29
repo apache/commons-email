@@ -138,6 +138,8 @@ public abstract class Email
     public static final String ISO_8859_1 = "iso-8859-1";
     /** */
     public static final String US_ASCII = "us-ascii";
+    /** */
+    public static final String UTF_8 = "utf-8";
 
     /** The email message to send. */
     protected MimeMessage message;
@@ -290,7 +292,8 @@ public abstract class Email
     }
 
     /**
-     * Set the charset of the message.
+     * Set the charset of the message. Please note that you should set the charset before
+     * adding the message content.
      *
      * @param newCharset A String.
      * @throws java.nio.charset.IllegalCharsetNameException if the charset name is invalid

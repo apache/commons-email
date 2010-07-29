@@ -16,20 +16,15 @@
  */
 package org.apache.commons.mail;
 
-import java.io.*;
-import java.net.URL;
-import java.util.Properties;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.activation.DataSource;
-import javax.activation.URLDataSource;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.settings.EmailConfiguration;
+
+import javax.activation.DataSource;
+import javax.activation.URLDataSource;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.net.URL;
 
 /**
  * This are regression test sending REAL email to REAL mail
@@ -39,12 +34,6 @@ import org.apache.commons.mail.settings.EmailConfiguration;
 
 public class EmailLiveTest extends BaseEmailTestCase
 {
-    /** the mail session */
-    private Session session;
-
-    /** the recipients of the test emails */
-    private Collection toList;
-
     /**
      * @param name name
      */
@@ -59,29 +48,12 @@ public class EmailLiveTest extends BaseEmailTestCase
     {
         super.setUp();
 
-        // prepare a mail session
+        // enforce a default charset UTF-8
+        System.setProperty("mail.mime.charset", "utf-8");
 
-        Properties properties = new Properties();
-        properties.setProperty(Email.MAIL_DEBUG, "" + EmailConfiguration.MAIL_DEBUG);
-        properties.setProperty(Email.MAIL_PORT,  "" + EmailConfiguration.MAIL_SERVER_PORT);
-        properties.setProperty(Email.MAIL_HOST, EmailConfiguration.MAIL_SERVER);
-        properties.setProperty(Email.MAIL_SMTP_AUTH, "true");
-        DefaultAuthenticator authenticator = new DefaultAuthenticator( EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD);
-        this.session = Session.getInstance(properties, authenticator);
-
-        // prepare recipient list
-
-        this.toList = new ArrayList();
-        this.toList.add( new InternetAddress( EmailConfiguration.TEST_TO) );
-
-    }
-
-    protected Session getSession() {
-        return session;
-    }
-
-    public Collection getToList() {
-        return toList;
+        // enforce encoding of non-ASCII characters (violating the MIME specification - see
+        // http://java.sun.com/products/javamail/javadocs/javax/mail/internet/package-summary.html
+        System.setProperty("mail.mime.encodefilename", "true");
     }
 
     protected Email send(Email email) throws EmailException {
@@ -104,6 +76,32 @@ public class EmailLiveTest extends BaseEmailTestCase
         return new String(baos.toByteArray(), "UTF-8");
     }
 
+    /**
+     * Factory method to create a pre-configured email instance.
+     *
+     * @param clazz the requested implementation class
+     * @return the new instance
+     * @throws Exception creating the Email instance failed
+     */
+    private Email create(Class clazz) throws Exception {
+
+        Email email = (Email) clazz.newInstance();
+
+        email.setTLS(EmailConfiguration.MAIL_USE_TLS);
+        email.setSSL(EmailConfiguration.MAIL_USE_SSL);
+        email.setHostName(EmailConfiguration.MAIL_SERVER);
+        email.setSmtpPort(EmailConfiguration.MAIL_SERVER_PORT);
+        email.setDebug(EmailConfiguration.MAIL_DEBUG);
+        email.setCharset(EmailConfiguration.MAIL_CHARSET);        
+        email.setFrom(EmailConfiguration.TEST_FROM);
+        email.addTo(EmailConfiguration.TEST_TO);
+
+        if(EmailConfiguration.TEST_USER != null) {
+            email.setAuthenticator(new DefaultAuthenticator(EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD));
+        }
+
+        return email;
+    }
 
     // ======================================================================
     // Start of Tests
@@ -136,38 +134,32 @@ public class EmailLiveTest extends BaseEmailTestCase
 
         // 1) text + html content
 
-        HtmlEmail htmlEmail1 = new HtmlEmail();
+        HtmlEmail htmlEmail1 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         htmlMsg = "<html><b>This is a HTML message without any image</b><html>";
 
         htmlEmail1.setSubject( "[email] 1.Test: text + html content");
-        htmlEmail1.setFrom(EmailConfiguration.TEST_FROM);
-        htmlEmail1.setTo(getToList());
         htmlEmail1.setTextMsg(textMsg);
         htmlEmail1.setHtmlMsg(htmlMsg);
-        htmlEmail1.setMailSession(getSession());
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemai12.eml"), send(htmlEmail1).getMimeMessage());
 
         // 2) text + html content + image as attachment
 
-        HtmlEmail htmlEmail2 = new HtmlEmail();
+        HtmlEmail htmlEmail2 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         htmlMsg = "<html><b>This is a HTML message with an image attachment</b><html>";
 
         htmlEmail2.setSubject( "[email] 2.Test: text + html content + image as attachment");
-        htmlEmail2.setFrom(EmailConfiguration.TEST_FROM);
-        htmlEmail2.setTo(getToList());
         htmlEmail2.setTextMsg(textMsg);
         htmlEmail2.setHtmlMsg(htmlMsg);
         htmlEmail2.attach(url, "Apache Logo", "The official Apache logo" );
-        htmlEmail2.setMailSession( getSession() );
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail2.eml"), send(htmlEmail2).getMimeMessage());
 
         // 3) text + html content + inline image
 
-        HtmlEmail htmlEmail3 = new HtmlEmail();
+        HtmlEmail htmlEmail3 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         cid = htmlEmail3.embed(imageFile, "Apache Logo");
 
@@ -175,28 +167,22 @@ public class EmailLiveTest extends BaseEmailTestCase
             + cid + "\"> and NO attachment</b><html>";
 
         htmlEmail3.setSubject( "[email] 3.Test: text + html content + inline image");
-        htmlEmail3.setFrom(EmailConfiguration.TEST_FROM);
-        htmlEmail3.setTo(getToList());
         htmlEmail3.setTextMsg(textMsg);
         htmlEmail3.setHtmlMsg(htmlMsg);
-        htmlEmail3.setMailSession(getSession());
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail3.eml"), send(htmlEmail3).getMimeMessage());
 
         // 4) text + html content + inline image + attachment
 
-        HtmlEmail htmlEmail4 = new HtmlEmail();
+        HtmlEmail htmlEmail4 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         cid = htmlEmail4.embed(imageFile, "Apache Logo");
         htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:" + cid + "\"> and attachment</b><html>";
 
         htmlEmail4.setSubject( "[email] 4.Test: text + html content + inline image + attachment");
-        htmlEmail4.setFrom(EmailConfiguration.TEST_FROM);
-        htmlEmail4.setTo(getToList());
         htmlEmail4.setTextMsg(textMsg);
         htmlEmail4.setHtmlMsg(htmlMsg);
         htmlEmail4.attach(attachment);
-        htmlEmail4.setMailSession(getSession());
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail4.eml"), send(htmlEmail4).getMimeMessage());        
     }
@@ -216,34 +202,19 @@ public class EmailLiveTest extends BaseEmailTestCase
         // U+03B3 : GREEK SMALL LETTER GAMMA
 
         final String subject = "[email] 5.Test: Subject with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
-        final String textMsg = "My test body with with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
+        final String textMsg = "My test body with with three greek UTF-8 characters : \u03B1\u03B2\u03B3\n";
         final String attachmentName = "\u03B1\u03B2\u03B3.txt";
 
-        MultiPartEmail email = new MultiPartEmail();
-        email.setDebug(true);
-        email.setAuthenticator(new DefaultAuthenticator(EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD));
-        email.setHostName(EmailConfiguration.MAIL_SERVER);
-        email.setSmtpPort(EmailConfiguration.MAIL_SERVER_PORT);
-        email.addTo(EmailConfiguration.TEST_TO);
-        email.setFrom(EmailConfiguration.TEST_FROM);
+        // make sure to set the charset before adding the message content
+        MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject(subject);
         email.setMsg(textMsg);
-        email.setCharset("utf-8");
 
-        // attachment in Greek
-        DataSource attachment = new ByteArrayDataSource(textMsg, "text/plain");
+        // create a proper UTF-8 sequence for the text attachment (matching our default charset)
+        DataSource attachment = new ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
         
         EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
-
-        System.out.println("Encoding: " + email.getMimeMessage().getEncoding());
-        System.out.println("Type: " + email.getMimeMessage().getContentType());
-
-        if( EmailConfiguration.MAIL_FORCE_SEND ) {
-          // the encoding is only set when sending the email!!
-          assertEquals("quoted-printable", email.getMimeMessage().getEncoding());
-          assertEquals("text/plain; charset=UTF-8", email.getMimeMessage().getContentType());
-        }
     }
 
     /**
@@ -259,12 +230,9 @@ public class EmailLiveTest extends BaseEmailTestCase
         File htmlFile = new File("./src/test/html/www.apache.org.html");
         String htmlMsg1 = FileUtils.readFileToString(htmlFile);
 
-        ImageHtmlEmail email = new ImageHtmlEmail();
-        email.setSubject( "[testImageHtmlEmail] 1.Test: simple html content");
-        email.setFrom(EmailConfiguration.TEST_FROM);
-        email.setTo(getToList());
+        ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
+        email.setSubject("[testImageHtmlEmail] 1.Test: simple html content");
         email.setHtmlMsg(htmlMsg1, htmlFile.toURI().toURL(), false);
-        email.setMailSession(getSession());
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailLocal.eml"), send(email).getMimeMessage());
     }
@@ -279,13 +247,45 @@ public class EmailLiveTest extends BaseEmailTestCase
         URL url = new URL("http://www.theserverside.com");
         String htmlMsg = getFromUrl(url);
 
-        ImageHtmlEmail email = new ImageHtmlEmail();
-        email.setSubject( "[testImageHtmlEmail] 2.Test: complex html content");
-        email.setFrom(EmailConfiguration.TEST_FROM);
-        email.setTo(getToList());
+        ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
+        email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
         email.setHtmlMsg(htmlMsg, url, true);
-        email.setMailSession(getSession());
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
     }
+
+    /**
+    public void testGmail() throws Exception {
+
+        Email email = new SimpleEmail();
+        email.setSmtpPort(587);
+        email.setAuthenticator(new DefaultAuthenticator(EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD));
+        email.setDebug(true);
+        email.setHostName("smtp.gmail.com");
+        email.setFrom("siegfried.goeschl@gmail.com", "SenderName");
+        email.setSubject("TestMail");
+        email.setMsg("This is a test mail?");
+        email.addTo("siegfried.goeschl@gmail.com", "ToName");
+        email.setTLS(true);
+        email.send();
+    }
+    */
+
+    /**
+    public void testGmx() throws Exception {
+
+         Email email = new SimpleEmail();
+         email.setSmtpPort(465);
+         email.setAuthenticator(new DefaultAuthenticator("sgoeschl@gmx.at", "pratsch"));
+         email.setDebug(true);
+         email.setHostName("mail.gmx.net");
+         email.setFrom("sgoeschl@gmx.at");
+         email.setSubject("TestMail");
+         email.setMsg("This is a test mail?");
+         email.addTo("siegfried.goeschl@gmail.com", "ToName");
+         // email.setTLS(true);
+         email.setSSL(true);
+         email.send();
+     }
+    */
 }
