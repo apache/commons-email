@@ -106,7 +106,7 @@ public class ImageHtmlEmail extends HtmlEmail
             throws EmailException
     {
         // if there is no useful HTML then simply route it through to the super class
-        if (htmlMessage == null || htmlMessage.isEmpty())
+        if (htmlMessage == null || htmlMessage.length() == 0)
         {
             return super.setHtmlMsg(htmlMessage);
         }
