@@ -249,11 +249,13 @@ public abstract class Email
      * Setting to true will enable the display of debug information.
      *
      * @param d A boolean.
+     * @return An Email.
      * @since 1.0
      */
-    public void setDebug(boolean d)
+    public Email setDebug(boolean d)
     {
         this.debug = d;
+        return this;
     }
 
     /**
@@ -265,6 +267,7 @@ public abstract class Email
      *
      * @param userName User name for the SMTP server
      * @param password password for the SMTP server
+     * @return An Email.
      * @see DefaultAuthenticator
      * @see #setAuthenticator
      * @since 1.0
@@ -283,6 +286,7 @@ public abstract class Email
      * authentication.  Your mail server must also support RFC2554.
      *
      * @param newAuthenticator the <code>Authenticator</code> object.
+     * @return An Email.
      * @see Authenticator
      * @since 1.0
      */
@@ -299,36 +303,42 @@ public abstract class Email
      * @throws java.nio.charset.IllegalCharsetNameException if the charset name is invalid
      * @throws java.nio.charset.UnsupportedCharsetException if no support for the named charset
      * exists in the current JVM
+     * @return An Email.
      * @since 1.0
      */
-    public void setCharset(String newCharset)
+    public Email setCharset(String newCharset)
     {
         Charset set = Charset.forName(newCharset);
         this.charset = set.name();
+        return this;
     }
 
     /**
      * Set the emailBody to a MimeMultiPart
      *
      * @param aMimeMultipart aMimeMultipart
+     * @return An Email.
      * @since 1.0
      */
-    public void setContent(MimeMultipart aMimeMultipart)
+    public Email setContent(MimeMultipart aMimeMultipart)
     {
         this.emailBody = aMimeMultipart;
+        return this;
     }
 
     /**
      * Set the content & contentType
      *
-     * @param   aObject aObject
-     * @param   aContentType aContentType
+     * @param  aObject aObject
+     * @param  aContentType aContentType
+     * @return An Email.
      * @since 1.0
      */
-    public void setContent(Object aObject, String aContentType)
+    public Email setContent(Object aObject, String aContentType)
     {
         this.content = aObject;
         this.updateContentType(aContentType);
+        return this;
     }
 
 
@@ -389,30 +399,36 @@ public abstract class Email
      * Set the hostname of the outgoing mail server
      *
      * @param   aHostName aHostName
+     * @return An Email.
      * @since 1.0
      */
-    public void setHostName(String aHostName)
+    public Email setHostName(String aHostName)
     {
         this.hostName = aHostName;
+        return this;
     }
 
     /**
      * Set or disable the TLS encryption
      *
      * @param withTLS true if TLS needed, false otherwise
+     * @return An Email.
      * @since 1.1
      */
-    public void setTLS(boolean withTLS)
+    public Email setTLS(boolean withTLS)
     {
         this.tls = withTLS;
+        return this;
     }
 
     /**
      * Set the port number of the outgoing mail server.
-     * @param   aPortNumber aPortNumber
+     * 
+     * @param  aPortNumber aPortNumber
+     * @return An Email.
      * @since 1.0
      */
-    public void setSmtpPort(int aPortNumber)
+    public Email setSmtpPort(int aPortNumber)
     {
         if (aPortNumber < 1)
         {
@@ -423,22 +439,24 @@ public abstract class Email
         }
 
         this.smtpPort = Integer.toString(aPortNumber);
+        return this;
     }
 
     /**
      * Supply a mail Session object to use. Please note that passing
      * a username and password (in the case of mail authentication) will
      * create a new mail session with a DefaultAuthenticator. This is a
-     * convience but might come unexpected.
+     * convenience but might come unexpected.
      *
      * If mail authentication is used but NO username and password
      * is supplied the implementation assumes that you have set a
      * authenticator and will use the existing mail session (as expected).
      *
      * @param aSession mail session to be used
+     * @return An Email.
      * @since 1.0
      */
-    public void setMailSession(Session aSession)
+    public Email setMailSession(Session aSession)
     {
         EmailUtils.notNull(aSession, "no mail session supplied");
 
@@ -467,17 +485,21 @@ public abstract class Email
         {
             this.session = aSession;
         }
+
+        return this;
     }
 
     /**
-     * Supply a mail Session object from a JNDI directory
+     * Supply a mail Session object from a JNDI directory.
+     * 
      * @param jndiName name of JNDI ressource (javax.mail.Session type), ressource
      * if searched in java:comp/env if name dont start with "java:"
+     * @return An Email.
      * @throws IllegalArgumentException JNDI name null or empty
      * @throws NamingException ressource can be retrieved from JNDI directory
      * @since 1.1
      */
-    public void setMailSessionFromJNDI(String jndiName) throws NamingException
+    public Email setMailSessionFromJNDI(String jndiName) throws NamingException
     {
         if (EmailUtils.isEmpty(jndiName))
         {
@@ -494,10 +516,11 @@ public abstract class Email
 
         }
         this.setMailSession((Session) ctx.lookup(jndiName));
+        return this;
     }
 
     /**
-     * Initialise a mailsession object
+     * Initialise a mail session object.
      *
      * @return A Session.
      * @throws EmailException thrown when host name was not set.
@@ -894,8 +917,8 @@ public abstract class Email
      * <code>Collection</code> are expected to be of type
      * <code>java.mail.internet.InternetAddress</code>.
      *
-     * @param   aCollection collection of <code>InternetAddress</code> objects
-     * @return  An Email.
+     * @param  aCollection collection of <code>InternetAddress</code> objects
+     * @return An Email.
      * @throws EmailException Indicates an invalid email address
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
@@ -998,9 +1021,10 @@ public abstract class Email
      * Disposition-Notification-To: user@domain.net
      *
      * @param map A Map.
+     * @return An Email.
      * @since 1.0
      */
-    public void setHeaders(Map map)
+    public Email setHeaders(Map map)
     {
         Iterator iterKeyBad = map.entrySet().iterator();
 
@@ -1022,6 +1046,8 @@ public abstract class Email
 
         // all is ok, update headers
         this.headers = map;
+
+        return this;
     }
 
     /**
@@ -1076,7 +1102,7 @@ public abstract class Email
 
 
     /**
-     * Define the content of the mail.  It should be overidden by the
+     * Define the content of the mail. It should be overidden by the
      * subclasses.
      *
      * @param msg A String.
@@ -1282,18 +1308,20 @@ public abstract class Email
 
     /**
      * Sets the sent date for the email.  The sent date will default to the
-     * current date if not explictly set.
+     * current date if not explicitly set.
      *
      * @param date Date to use as the sent date on the email
+     * @return An Email.
      * @since 1.0
      */
-    public void setSentDate(Date date)
+    public Email setSentDate(Date date)
     {
         if (date != null)
         {
-            // create a seperate instance to keep findbugs happy
+            // create a separate instance to keep findbugs happy
             this.sentDate = new Date(date.getTime());
         }
+        return this;
     }
 
     /**
@@ -1368,7 +1396,7 @@ public abstract class Email
     }
 
     /**
-     * Gets encryption mode for authentication
+     * Gets encryption mode for authentication.
      *
      * @return true if using TLS for authentication, false otherwise
      * @since 1.1
@@ -1397,14 +1425,14 @@ public abstract class Email
     /**
      * Set details regarding "pop3 before smtp" authentication.
      *
-     * @param newPopBeforeSmtp Wether or not to log into pop3
-     *      server before sending mail.
+     * @param newPopBeforeSmtp Wether or not to log into pop3 server before sending mail.
      * @param newPopHost The pop3 host to use.
      * @param newPopUsername The pop3 username.
      * @param newPopPassword The pop3 password.
+     * @return An Email.
      * @since 1.0
      */
-    public void setPopBeforeSmtp(
+    public Email setPopBeforeSmtp(
         boolean newPopBeforeSmtp,
         String newPopHost,
         String newPopUsername,
@@ -1414,10 +1442,12 @@ public abstract class Email
         this.popHost = newPopHost;
         this.popUsername = newPopUsername;
         this.popPassword = newPopPassword;
+        return this;
     }
 
     /**
      * Returns whether SSL encryption for the transport is currently enabled.
+     *
      * @return true if SSL enabled for the transport
      */
     public boolean isSSL()
@@ -1427,15 +1457,19 @@ public abstract class Email
 
     /**
      * Sets whether SSL encryption should be enabled for the SMTP transport.
+     *
      * @param ssl whether to enable the SSL transport
+     * @return An Email.
      */
-    public void setSSL(boolean ssl)
+    public Email setSSL(boolean ssl)
     {
         this.ssl = ssl;
+        return this;
     }
 
     /**
      * Returns the current SSL port used by the SMTP transport.
+     *
      * @return the current SSL port used by the SMTP transport
      */
     public String getSslSmtpPort()
@@ -1454,11 +1488,14 @@ public abstract class Email
     /**
      * Sets the SSL port to use for the SMTP transport. Defaults to the standard
      * port, 465.
+     *
      * @param sslSmtpPort the SSL port to use for the SMTP transport
+     * @return An Email.
      */
-    public void setSslSmtpPort(String sslSmtpPort)
+    public Email setSslSmtpPort(String sslSmtpPort)
     {
         this.sslSmtpPort = sslSmtpPort;
+        return this;
     }
 
     /**
@@ -1517,17 +1554,20 @@ public abstract class Email
      * Default is infinite timeout.
      *
      * @param socketConnectionTimeout the connection timeout
+     * @return An Email.
      * @since 1.2
      */
-    public void setSocketConnectionTimeout(int socketConnectionTimeout)
+    public Email setSocketConnectionTimeout(int socketConnectionTimeout)
     {
         this.socketConnectionTimeout = socketConnectionTimeout;
+        return this;
     }
 
     /**
      * Get the socket I/O timeout value in milliseconds.
      *
      * @return the socket I/O timeout
+     * @return An Email.
      * @since 1.2
      */
     public int getSocketTimeout()
@@ -1542,8 +1582,9 @@ public abstract class Email
      * @param socketTimeout the socket I/O timeout
      * @since 1.2
      */
-    public void setSocketTimeout(int socketTimeout)
+    public Email setSocketTimeout(int socketTimeout)
     {
         this.socketTimeout = socketTimeout;
+        return this;
     }
 }
