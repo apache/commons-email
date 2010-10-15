@@ -60,87 +60,8 @@ import javax.naming.NamingException;
  * @version $Revision$ $Date$
  * @version $Id$
  */
-public abstract class Email
+public abstract class Email implements EmailConstants
 {
-    /** Constants used by Email classes. */
-
-    /** */
-    public static final String SENDER_EMAIL = "sender.email";
-    /** */
-    public static final String SENDER_NAME = "sender.name";
-    /** */
-    public static final String RECEIVER_EMAIL = "receiver.email";
-    /** */
-    public static final String RECEIVER_NAME = "receiver.name";
-    /** */
-    public static final String EMAIL_SUBJECT = "email.subject";
-    /** */
-    public static final String EMAIL_BODY = "email.body";
-    /** */
-    public static final String CONTENT_TYPE = "content.type";
-
-    /** */
-    public static final String MAIL_HOST = "mail.smtp.host";
-    /** */
-    public static final String MAIL_PORT = "mail.smtp.port";
-    /** */
-    public static final String MAIL_SMTP_FROM = "mail.smtp.from";
-    /** */
-    public static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
-    /** */
-    public static final String MAIL_SMTP_USER = "mail.smtp.user";
-    /** */
-    public static final String MAIL_SMTP_PASSWORD = "mail.smtp.password";
-    /** */
-    public static final String MAIL_TRANSPORT_PROTOCOL =
-        "mail.transport.protocol";
-    /**
-     * @since 1.1
-     */
-    public static final String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
-    /** */
-    public static final String MAIL_SMTP_SOCKET_FACTORY_FALLBACK = "mail.smtp.socketFactory.fallback";
-    /** */
-    public static final String MAIL_SMTP_SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
-    /** */
-    public static final String MAIL_SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
-
-
-    /**
-     * Socket connection timeout value in milliseconds. Default is infinite timeout.
-     * @since 1.2
-     */
-    public static final String MAIL_SMTP_CONNECTIONTIMEOUT = "mail.smtp.connectiontimeout";
-
-    /**
-     * Socket I/O timeout value in milliseconds. Default is infinite timeout.
-     * @since 1.2
-     */
-    public static final String MAIL_SMTP_TIMEOUT = "mail.smtp.timeout";
-
-
-    /** */
-    public static final String SMTP = "smtp";
-    /** */
-    public static final String TEXT_HTML = "text/html";
-    /** */
-    public static final String TEXT_PLAIN = "text/plain";
-    /** */
-    public static final String ATTACHMENTS = "attachments";
-    /** */
-    public static final String FILE_SERVER = "file.server";
-    /** */
-    public static final String MAIL_DEBUG = "mail.debug";
-
-    /** */
-    public static final String KOI8_R = "koi8-r";
-    /** */
-    public static final String ISO_8859_1 = "iso-8859-1";
-    /** */
-    public static final String US_ASCII = "us-ascii";
-    /** */
-    public static final String UTF_8 = "utf-8";
-
     /** The email message to send. */
     protected MimeMessage message;
 
