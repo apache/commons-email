@@ -22,12 +22,6 @@ package org.apache.commons.mail;
 public interface EmailConstants
 {
     // Constants used by Email classes
-
-    /** the default socket timeout in milliseconds */
-    long DEFAULT_SOCKET_TIMEOUT  = 60000;
-
-    /** the default socket connection timeout value in milliseconds */
-    long DEFAULT_SOCKET_CONNECTION_TIMEOUT = 60000;
    
     String SENDER_EMAIL = "sender.email";
     String SENDER_NAME = "sender.name";
@@ -37,13 +31,18 @@ public interface EmailConstants
     String EMAIL_BODY = "email.body";
     String CONTENT_TYPE = "content.type";
 
+    // Charset constants
+    String KOI8_R = "koi8-r";
+    String ISO_8859_1 = "iso-8859-1";
+    String US_ASCII = "us-ascii";
+    String UTF_8 = "utf-8";
+
     String SMTP = "smtp";
     String TEXT_HTML = "text/html";
     String TEXT_PLAIN = "text/plain";
     String ATTACHMENTS = "attachments";
     String FILE_SERVER = "file.server";
     String MAIL_DEBUG = "mail.debug";
-
 
     String MAIL_HOST = "mail.smtp.host";
     String MAIL_PORT = "mail.smtp.port";
@@ -72,13 +71,4 @@ public interface EmailConstants
      * @since 1.2
      */
      String MAIL_SMTP_TIMEOUT = "mail.smtp.timeout";
-
-
-    // Charset constants
-    
-    String KOI8_R = "koi8-r";
-    String ISO_8859_1 = "iso-8859-1";
-    String US_ASCII = "us-ascii";
-    String UTF_8 = "utf-8";
-    
 }
