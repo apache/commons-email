@@ -159,9 +159,10 @@ public abstract class Email implements EmailConstants
     protected boolean ssl;
 
     /** socket I/O timeout value in milliseconds */
-    protected int socketTimeout;
+    protected int socketTimeout = 60000;
+    
     /** socket connection timeout value in milliseconds */
-    protected int socketConnectionTimeout;
+    protected int socketConnectionTimeout = 60000;
 
     /** The Session to mail with */
     private Session session;
@@ -207,7 +208,7 @@ public abstract class Email implements EmailConstants
      * authentication.  Your mail server must also support RFC2554.
      *
      * @param newAuthenticator the <code>Authenticator</code> object.
-     * @return An Email.
+     * @return Email.
      * @see Authenticator
      * @since 1.0
      */
