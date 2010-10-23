@@ -37,6 +37,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -948,26 +949,16 @@ public abstract class Email implements EmailConstants
      */
     public Email setHeaders(Map map)
     {
+        this.headers.clear();
+
         Iterator iterKeyBad = map.entrySet().iterator();
 
         while (iterKeyBad.hasNext())
         {
             Map.Entry entry = (Map.Entry) iterKeyBad.next();
-            String strName = (String) entry.getKey();
-            String strValue = (String) entry.getValue();
-
-            if (EmailUtils.isEmpty(strName))
-            {
-                throw new IllegalArgumentException("name can not be null");
-            }
-            if (EmailUtils.isEmpty(strValue))
-            {
-                throw new IllegalArgumentException("value can not be null");
-            }
+            String name = (String) entry.getKey();
+            this.headers.put(name, createFoldedHeaderValue(name, entry.getValue()));
         }
-
-        // all is ok, update headers
-        this.headers = map;
 
         return this;
     }
@@ -990,7 +981,7 @@ public abstract class Email implements EmailConstants
             throw new IllegalArgumentException("value can not be null");
         }
 
-        this.headers.put(name, value);
+        this.headers.put(name, createFoldedHeaderValue(name, value));
     }
 
     /**
@@ -1137,6 +1128,7 @@ public abstract class Email implements EmailConstants
                     this.toInternetAddressArray(this.replyList));
             }
 
+
             if (this.headers.size() > 0)
             {
                 Iterator iterHeaderKeys = this.headers.keySet().iterator();
@@ -1144,7 +1136,8 @@ public abstract class Email implements EmailConstants
                 {
                     String name = (String) iterHeaderKeys.next();
                     String value = (String) headers.get(name);
-                    this.message.addHeader(name, value);
+                    String foldedValue = createFoldedHeaderValue(name, value); 
+                    this.message.addHeader(name, foldedValue);
                 }
             }
 
@@ -1473,7 +1466,7 @@ public abstract class Email implements EmailConstants
 
     /**
      * Set the socket connection timeout value in milliseconds.
-     * Default is infinite timeout.
+     * Default is a 60 second timeout.
      *
      * @param socketConnectionTimeout the connection timeout
      * @return An Email.
@@ -1499,7 +1492,7 @@ public abstract class Email implements EmailConstants
 
     /**
      * Set the socket I/O timeout value in milliseconds.
-     * Default is infinite timeout.
+     * Default is 60 second timeout.
      *
      * @param socketTimeout the socket I/O timeout
      * @since 1.2
@@ -1508,5 +1501,38 @@ public abstract class Email implements EmailConstants
     {
         this.socketTimeout = socketTimeout;
         return this;
+    }
+
+
+    /**
+     * Create a folded header value containing 76 character chunks.
+     *
+     * @param name the name of the header
+     * @param value the value of the header
+     * @return the folded header value
+     */
+    private String createFoldedHeaderValue(String name, Object value)
+    {
+        String result;
+
+        if (EmailUtils.isEmpty(name))
+        {
+            throw new IllegalArgumentException("name can not be null");
+        }
+        if (value == null || EmailUtils.isEmpty(value.toString()))
+        {
+            throw new IllegalArgumentException("value can not be null");
+        }
+
+        try
+        {
+            result = MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value.toString(), this.charset, null));
+        }
+        catch(UnsupportedEncodingException e)
+        {
+            result = value.toString();
+        }
+
+        return result;
     }
 }

@@ -56,7 +56,7 @@ public class EmailTest extends BaseEmailTestCase
 
     /** mock for testing */
     private MockEmailConcrete email;
-
+                       
     /**
      * @param name test name
      */
@@ -1103,9 +1103,6 @@ public class EmailTest extends BaseEmailTestCase
     /** */
     public void testSetHeaders()
     {
-        // ====================================================================
-        // Test Success
-        // ====================================================================
         Map ht = new Hashtable();
         ht.put("X-Priority", "1");
         ht.put("Disposition-Notification-To", "me@home.com");
@@ -1115,6 +1112,13 @@ public class EmailTest extends BaseEmailTestCase
 
         assertEquals(ht.size(), this.email.getHeaders().size());
         assertEquals(ht, this.email.getHeaders());
+    }
+
+    public void testFoldingHeaders()
+    {
+        this.email.addHeader("X-LongHeader", "1234567890 1234567890 123456789 01234567890 123456789 0123456789 01234567890 01234567890");
+        assertTrue(this.email.getHeaders().size() == 1);
+        assertTrue(this.email.getHeaders().get("X-LongHeader").toString().contains("\r\n"));
     }
 
     /** */
