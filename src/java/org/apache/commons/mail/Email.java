@@ -195,10 +195,10 @@ public abstract class Email implements EmailConstants
      * @see #setAuthenticator
      * @since 1.0
      */
-    public void setAuthentication(String userName, String password)
+    public Email setAuthentication(String userName, String password)
     {
         this.authenticator = new DefaultAuthenticator(userName, password);
-        this.setAuthenticator(this.authenticator);
+        return this.setAuthenticator(this.authenticator);
     }
 
     /**
@@ -213,9 +213,10 @@ public abstract class Email implements EmailConstants
      * @see Authenticator
      * @since 1.0
      */
-    public void setAuthenticator(Authenticator newAuthenticator)
+    public Email setAuthenticator(Authenticator newAuthenticator)
     {
         this.authenticator = newAuthenticator;
+        return this;
     }
 
     /**
@@ -1482,7 +1483,6 @@ public abstract class Email implements EmailConstants
      * Get the socket I/O timeout value in milliseconds.
      *
      * @return the socket I/O timeout
-     * @return An Email.
      * @since 1.2
      */
     public int getSocketTimeout()
