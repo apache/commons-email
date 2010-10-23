@@ -16,7 +16,7 @@
  */
 package org.apache.commons.mail.settings;
 
-import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailConstants;
 
 /**
  * This class contains hard-coded configuration settings
@@ -31,7 +31,7 @@ public final class EmailConfiguration
 
     public static final boolean MAIL_FORCE_SEND     = false;
 	public static final boolean MAIL_DEBUG          = false;
-	public static final String  MAIL_CHARSET        = Email.UTF_8;
+	public static final String  MAIL_CHARSET        = EmailConstants.UTF_8;
     public static final String  MAIL_SERVER         = "localhost";
     public static final int     MAIL_SERVER_PORT    = 25;
     public static final String  TEST_FROM           = "test_from@apache.org";
