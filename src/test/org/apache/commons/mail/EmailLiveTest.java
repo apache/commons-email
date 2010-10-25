@@ -222,8 +222,8 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed                               
      */
-    public void testImageHtmlEmailLocal() throws Exception {
-
+    public void testImageHtmlEmailLocal() throws Exception
+    {
         // use a simple HTML page with one image - please note that the Apache logo
         // is defined in CSS and not in HTML.
 
@@ -242,15 +242,18 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed
      */
-    public void testImageHtmlEmailRemote() throws Exception {
+    public void testImageHtmlEmailRemote() throws Exception
+    {
+        if(EmailConfiguration.MAIL_FORCE_SEND)
+        {
+            URL url = new URL("http://www.theserverside.com");
+            String htmlMsg = getFromUrl(url);
 
-        URL url = new URL("http://www.theserverside.com");
-        String htmlMsg = getFromUrl(url);
+            ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
+            email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
+            email.setHtmlMsg(htmlMsg, url, true);
 
-        ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
-        email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
-        email.setHtmlMsg(htmlMsg, url, true);
-
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
+            EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
+        }
     }
 }
