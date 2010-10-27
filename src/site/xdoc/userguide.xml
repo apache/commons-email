@@ -32,15 +32,14 @@
       <source>
 <![CDATA[
 Email email = new SimpleEmail();
+email.setHostName("smtp.gmail.com");
 email.setSmtpPort(587);
 email.setAuthenticator(new DefaultAuthenticator("username", "password"));
-email.setDebug(false);
-email.setHostName("smtp.gmail.com");
+email.setTLS(true);
 email.setFrom("user@gmail.com");
 email.setSubject("TestMail");
 email.setMsg("This is a test mail ... :-)");
 email.addTo("foo@bar.com");
-email.setTLS(true);
 email.send();
 ]]></source>
       <p>
