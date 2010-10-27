@@ -197,8 +197,7 @@ public abstract class Email implements EmailConstants
      */
     public Email setAuthentication(String userName, String password)
     {
-        this.authenticator = new DefaultAuthenticator(userName, password);
-        return this.setAuthenticator(this.authenticator);
+        return this.setAuthenticator(new DefaultAuthenticator(userName, password));
     }
 
     /**
@@ -265,7 +264,6 @@ public abstract class Email implements EmailConstants
         return this;
     }
 
-
     /**
      * Update the contentType.
      *
@@ -328,6 +326,7 @@ public abstract class Email implements EmailConstants
      */
     public Email setHostName(String aHostName)
     {
+        checkSessionAlreadyInitialized();
         this.hostName = aHostName;
         return this;
     }
@@ -341,6 +340,7 @@ public abstract class Email implements EmailConstants
      */
     public Email setTLS(boolean withTLS)
     {
+        checkSessionAlreadyInitialized();
         this.tls = withTLS;
         return this;
     }
@@ -354,6 +354,8 @@ public abstract class Email implements EmailConstants
      */
     public Email setSmtpPort(int aPortNumber)
     {
+        checkSessionAlreadyInitialized();
+
         if (aPortNumber < 1)
         {
             throw new IllegalArgumentException(
@@ -368,7 +370,7 @@ public abstract class Email implements EmailConstants
 
     /**
      * Supply a mail Session object to use. Please note that passing
-     * a username and password (in the case of mail authentication) will
+     * a user name and password (in the case of mail authentication) will
      * create a new mail session with a DefaultAuthenticator. This is a
      * convenience but might come unexpected.
      *
@@ -444,7 +446,10 @@ public abstract class Email implements EmailConstants
     }
 
     /**
-     * Initialise a mail session object.
+     * Determines the mail session used when sending this Email, creating
+     * the Session if necessary. When a mail session is already
+     * initialized setting the session related properties will cause
+     * an IllegalStateException.
      *
      * @return A Session.
      * @throws EmailException thrown when host name was not set.
@@ -468,8 +473,8 @@ public abstract class Email implements EmailConstants
                     "Cannot find valid hostname for mail session");
             }
 
-            properties.setProperty(MAIL_PORT, smtpPort);
-            properties.setProperty(MAIL_HOST, hostName);
+            properties.setProperty(MAIL_PORT, this.smtpPort);
+            properties.setProperty(MAIL_HOST, this.hostName);
             properties.setProperty(MAIL_DEBUG, String.valueOf(this.debug));
 
             if (this.authenticator != null)
@@ -480,8 +485,8 @@ public abstract class Email implements EmailConstants
 
             if (this.ssl)
             {
-                properties.setProperty(MAIL_PORT, sslSmtpPort);
-                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, sslSmtpPort);
+                properties.setProperty(MAIL_PORT, this.sslSmtpPort);
+                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
             }
@@ -503,64 +508,10 @@ public abstract class Email implements EmailConstants
 
             // changed this (back) to getInstance due to security exceptions
             // caused when testing using maven
-            this.session =
-                Session.getInstance(properties, this.authenticator);
+            this.session = Session.getInstance(properties, this.authenticator);
         }
         return this.session;
     }
-
-    /**
-     * Creates a InternetAddress.
-     *
-     * @param email An email address.
-     * @param name A name.
-     * @param charsetName The name of the charset to encode the name with.
-     * @return An internet address.
-     * @throws EmailException Thrown when the supplied address, name or charset were invalid.
-     */
-    private InternetAddress createInternetAddress(String email, String name, String charsetName)
-        throws EmailException
-    {
-        InternetAddress address = null;
-
-        try
-        {
-            address = new InternetAddress(email);
-
-            // check name input
-            if (EmailUtils.isEmpty(name))
-            {
-                name = email;
-            }
-
-            // check charset input.
-            if (EmailUtils.isEmpty(charsetName))
-            {
-                address.setPersonal(name);
-            }
-            else
-            {
-                // canonicalize the charset name and make sure
-                // the current platform supports it.
-                Charset set = Charset.forName(charsetName);
-                address.setPersonal(name, set.name());
-            }
-
-            // run sanity check on new InternetAddress object; if this fails
-            // it will throw AddressException.
-            address.validate();
-        }
-        catch (AddressException e)
-        {
-            throw new EmailException(e);
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            throw new EmailException(e);
-        }
-        return address;
-    }
-
 
     /**
      * Set the FROM field of the email to use the specified address. The email
@@ -1010,6 +961,7 @@ public abstract class Email implements EmailConstants
      */
     public Email setBounceAddress(String email)
     {
+        checkSessionAlreadyInitialized();
         this.bounceAddress = email;
         return this;
     }
@@ -1039,15 +991,14 @@ public abstract class Email implements EmailConstants
     {
         if (this.message != null)
         {
-            // EMAIL-95 we assume that an email is not reused therefore invoking
+            // [EMAIL-95] we assume that an email is not reused therefore invoking
             // buildMimeMessage() more than once is illegal.
             throw new IllegalStateException("The MimeMessage is already built.");
         }
 
         try
         {
-            this.getMailSession();
-            this.message = this.createMimeMessage(this.session);
+            this.message = this.createMimeMessage(this.getMailSession());
 
             if (EmailUtils.isNotEmpty(this.subject))
             {
@@ -1157,18 +1108,6 @@ public abstract class Email implements EmailConstants
         {
             throw new EmailException(me);
         }
-    }
-
-    /**
-     * Factory method to create a customized MimeMessage which can be
-     * implemented by a derived class, e.g. to set the message id.
-     *
-     * @param aSession mail session to be used
-     * @return the newly created message
-     */
-    protected MimeMessage createMimeMessage(Session aSession)
-    {
-        return new MimeMessage(aSession);
     }
 
     /**
@@ -1282,13 +1221,13 @@ public abstract class Email implements EmailConstants
      */
     public String getHostName()
     {
-        if (EmailUtils.isNotEmpty(this.hostName))
-        {
-            return this.hostName;
-        }
-        else if (this.session != null)
+        if (this.session != null)
         {
             return this.session.getProperty(MAIL_HOST);
+        }
+        else if (EmailUtils.isNotEmpty(this.hostName))
+        {
+            return this.hostName;
         }
         return null;
     }
@@ -1300,13 +1239,13 @@ public abstract class Email implements EmailConstants
      */
     public String getSmtpPort()
     {
-        if (EmailUtils.isNotEmpty(this.smtpPort))
-        {
-            return this.smtpPort;
-        }
-        else if (this.session != null)
+        if (this.session != null)
         {
             return this.session.getProperty(MAIL_PORT);
+        }
+        else if (EmailUtils.isNotEmpty(this.smtpPort))
+        {
+            return this.smtpPort;
         }
         return null;
     }
@@ -1379,6 +1318,7 @@ public abstract class Email implements EmailConstants
      */
     public Email setSSL(boolean ssl)
     {
+        checkSessionAlreadyInitialized();
         this.ssl = ssl;
         return this;
     }
@@ -1390,13 +1330,13 @@ public abstract class Email implements EmailConstants
      */
     public String getSslSmtpPort()
     {
-        if (EmailUtils.isNotEmpty(this.sslSmtpPort))
-        {
-            return this.sslSmtpPort;
-        }
-        else if (this.session != null)
+        if (this.session != null)
         {
             return this.session.getProperty(MAIL_SMTP_SOCKET_FACTORY_PORT);
+        }
+        else if (EmailUtils.isNotEmpty(this.sslSmtpPort))
+        {
+            return this.sslSmtpPort;
         }
         return null;
     }
@@ -1410,6 +1350,7 @@ public abstract class Email implements EmailConstants
      */
     public Email setSslSmtpPort(String sslSmtpPort)
     {
+        checkSessionAlreadyInitialized();
         this.sslSmtpPort = sslSmtpPort;
         return this;
     }
@@ -1475,6 +1416,7 @@ public abstract class Email implements EmailConstants
      */
     public Email setSocketConnectionTimeout(int socketConnectionTimeout)
     {
+        checkSessionAlreadyInitialized();
         this.socketConnectionTimeout = socketConnectionTimeout;
         return this;
     }
@@ -1499,10 +1441,22 @@ public abstract class Email implements EmailConstants
      */
     public Email setSocketTimeout(int socketTimeout)
     {
+        checkSessionAlreadyInitialized();
         this.socketTimeout = socketTimeout;
         return this;
     }
 
+    /**
+     * Factory method to create a customized MimeMessage which can be
+     * implemented by a derived class, e.g. to set the message id.
+     *
+     * @param aSession mail session to be used
+     * @return the newly created message
+     */
+    protected MimeMessage createMimeMessage(Session aSession)
+    {
+        return new MimeMessage(aSession);
+    }
 
     /**
      * Create a folded header value containing 76 character chunks.
@@ -1534,5 +1488,73 @@ public abstract class Email implements EmailConstants
         }
 
         return result;
+    }
+
+    /**
+     * Creates a InternetAddress.
+     *
+     * @param email An email address.
+     * @param name A name.
+     * @param charsetName The name of the charset to encode the name with.
+     * @return An internet address.
+     * @throws EmailException Thrown when the supplied address, name or charset were invalid.
+     */
+    private InternetAddress createInternetAddress(String email, String name, String charsetName)
+        throws EmailException
+    {
+        InternetAddress address = null;
+
+        try
+        {
+            address = new InternetAddress(email);
+
+            // check name input
+            if (EmailUtils.isEmpty(name))
+            {
+                name = email;
+            }
+
+            // check charset input.
+            if (EmailUtils.isEmpty(charsetName))
+            {
+                address.setPersonal(name);
+            }
+            else
+            {
+                // canonicalize the charset name and make sure
+                // the current platform supports it.
+                Charset set = Charset.forName(charsetName);
+                address.setPersonal(name, set.name());
+            }
+
+            // run sanity check on new InternetAddress object; if this fails
+            // it will throw AddressException.
+            address.validate();
+        }
+        catch (AddressException e)
+        {
+            throw new EmailException(e);
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            throw new EmailException(e);
+        }
+        return address;
+    }
+
+    /**
+     * When a mail session is already initialized setting the
+     * session properties has no effect. In order to flag the
+     * problem throw an IllegalStateException.  
+     *
+     * @throws IllegalStateException when the mail session is
+     *      already initialized
+     */
+    private void checkSessionAlreadyInitialized() throws IllegalStateException
+    {
+        if (this.session != null)
+        {
+            throw new IllegalStateException("The mail session is already initialized");
+        }
     }
 }

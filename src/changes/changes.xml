@@ -23,6 +23,11 @@
 
   <body>
     <release version="1.3-SNAPSHOT" date="as in SVN">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-96" date="2010-10-27">
+        Throwing an IllegalStateException when setting mail session properties for an already
+        created mail session because the settings would be ignored. Please note that this
+        change could potentially break existing (but invalid) code.
+      </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-98" date="2010-10-23" due-to="Mario Daepp">
         Encoding and folding of headers is now done by commons-email.
       </action>
