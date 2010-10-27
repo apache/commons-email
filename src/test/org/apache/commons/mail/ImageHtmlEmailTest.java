@@ -38,6 +38,7 @@ import org.subethamail.wiser.WiserMessage;
 
 public class ImageHtmlEmailTest extends HtmlEmailTest {
 
+    private static final boolean TEST_IS_LENIENT = true;
     private static final URL TEST_IMAGE_URL = ImageHtmlEmailTest.class.getResource("/images/asf_logo_wide.gif");    
     private static final File TEST_IMAGE_DIR = new File(TEST_IMAGE_URL.getPath()).getParentFile();
     private static final URL TEST_HTML_URL = ImageHtmlEmailTest.class.getResource("/attachments/download_email.cgi.html");
@@ -58,7 +59,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		email = new MockImageHtmlEmailConcrete();
 	}
 
-	public void testSendHTML() throws Exception {
+	public void testSendHtml() throws Exception {
 
 		Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -89,7 +90,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		String html = str.toString();
 
 		// set the html message
-		email.setHtmlMsg(html, TEST_IMAGE_DIR.toURI().toURL(), false);
+		email.setHtmlMsg(html, TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT);
 
 		// set the alternative message
 		//email.setTextMsg("Your email client does not support HTML messages");
@@ -128,7 +129,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		try {
-			email.setHtmlMsg(null, new File("/tmp").toURI().toURL(), false);
+			email.setHtmlMsg(null, new File("/tmp").toURI().toURL(), TEST_IS_LENIENT);
 			fail("Should fail here!");
 		} catch (EmailException e) {
 			assertTrue(e.getMessage(), e.getMessage().contains(
@@ -144,7 +145,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		try {
-			email.setHtmlMsg("", new File("/tmp").toURI().toURL(), false);
+			email.setHtmlMsg("", new File("/tmp").toURI().toURL(), TEST_IS_LENIENT);
 			fail("Should fail here!");
 		} catch (EmailException e) {
 			assertTrue(e.getMessage(), e.getMessage().contains(
@@ -153,7 +154,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 	}
 
-	public void testSendHTMLURL() throws Exception {
+	public void testSendHtmlUrl() throws Exception {
 		Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
 		getMailServer();
@@ -169,7 +170,10 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		email.setSubject(strSubject);
 
 		// set the html message
-		email.setHtmlMsg("<html><body><img src=\"http://dstadler.org/mambo2/templates/jo_beetle_adjusted/images/beetle2.jpg\"/></body></html>");
+		email.setHtmlMsg(
+            "<html><body><img src=\"http://www.apache.org/images/feather.gif\"/></body></html>",
+            TEST_IS_LENIENT
+            );
 
 		// send the email
 		email.send();
@@ -203,7 +207,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		email.setHtmlMsg("<html><body><img src=\"" + file.getAbsolutePath()
-				+ "\"/></body></html>", new File("").toURI().toURL(), false);
+				+ "\"/></body></html>", new File("").toURI().toURL(), TEST_IS_LENIENT);
 
 		// send the email
 		email.send();

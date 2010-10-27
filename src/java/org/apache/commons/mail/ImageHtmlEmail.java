@@ -77,6 +77,20 @@ public class ImageHtmlEmail extends HtmlEmail
     public HtmlEmail setHtmlMsg(final String htmlMessage)
             throws EmailException
     {
+        return setHtmlMsg(htmlMessage, false);
+    }
+
+    /**
+     * Set the HTML message and try to add any image that is linked in the HTML
+     * source.
+     *
+     * @param htmlMessage the HTML message
+     * @return An HtmlEmail.
+     * @throws EmailException assembling the email failed
+     */
+    public HtmlEmail setHtmlMsg(final String htmlMessage, boolean isLenient)
+            throws EmailException
+    {
         URL currentWorkingDirectoryUrl;
 
         try
@@ -88,7 +102,7 @@ public class ImageHtmlEmail extends HtmlEmail
             throw new EmailException("Unable to create URL for current working directory", e);
         }
 
-        return setHtmlMsg(htmlMessage, currentWorkingDirectoryUrl, false);
+        return setHtmlMsg(htmlMessage, currentWorkingDirectoryUrl, isLenient);
     }
 
     /**
