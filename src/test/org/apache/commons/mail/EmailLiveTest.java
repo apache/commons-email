@@ -106,7 +106,21 @@ public class EmailLiveTest extends BaseEmailTestCase
     // ======================================================================
     // Start of Tests
     // ======================================================================
-        
+
+    /**
+     * A sanity check that a simple email also works in reality.
+     *
+     * @throws Exception the test failed
+     */
+    public void testSimpleEmail() throws Exception
+    {
+        SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
+        email.setSubject("TestMail");
+        email.setMsg("This is a test mail ... :-)");
+
+        EmailUtils.writeMimeMessage( new File("./target/test-emails/simplemail.eml"), send(email).getMimeMessage());
+    }
+    
     /**
      * This test checks the various options of building a HTML email.
      *
