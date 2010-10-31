@@ -480,7 +480,7 @@ public class HtmlEmail extends MultiPartEmail
         {
             mbp.setDataHandler(new DataHandler(dataSource));
             mbp.setFileName(name);
-            mbp.setDisposition("inline");
+            mbp.setDisposition(EmailAttachment.INLINE);
             mbp.setContentID("<" + cid + ">");
 
             InlineImage ii = new InlineImage(cid, dataSource, mbp);
