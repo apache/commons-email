@@ -48,7 +48,7 @@ public class EmailLiveTest extends BaseEmailTestCase
     {
         super.setUp();
 
-        // enforce a default charset UTF-8
+        // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work 
         System.setProperty("mail.mime.charset", "utf-8");
 
         // enforce encoding of non-ASCII characters (violating the MIME specification - see
