@@ -36,13 +36,14 @@ import java.util.regex.Pattern;
  * embedding images in the email.
  *
  * For local files the class tries to either load them via an absolute path or -
- * if available - use a relative path starting from a base directory.For files
+ * if available - use a relative path starting from a base directory. For files
  * that are not found locally, the implementation tries to download
  * the element and link it in.
  *
  * This code was submitted to commons-email under the Apache 2.0 license, see
  * https://issues.apache.org/jira/browse/EMAIL-92
  *
+ * @since 1.3
  */
 public class ImageHtmlEmail extends HtmlEmail
 {
