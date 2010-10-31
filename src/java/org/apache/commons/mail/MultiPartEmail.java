@@ -499,6 +499,7 @@ public class MultiPartEmail extends Email
         BodyPart bodyPart = new MimeBodyPart();
         return bodyPart;
     }
+
     /**
      * Creates a mime multipart object.
      *
@@ -509,7 +510,7 @@ public class MultiPartEmail extends Email
         MimeMultipart mmp = new MimeMultipart();
         return mmp;
     }
-
+    
     /**
      * Checks whether there are attachments.
      *

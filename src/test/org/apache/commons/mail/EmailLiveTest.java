@@ -98,6 +98,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         email.setSSL(EmailConfiguration.MAIL_USE_SSL);
         email.setHostName(EmailConfiguration.MAIL_SERVER);
         email.setSmtpPort(EmailConfiguration.MAIL_SERVER_PORT);
+        email.setBounceAddress(EmailConfiguration.TEST_FROM);
         email.setDebug(EmailConfiguration.MAIL_DEBUG);
         email.setCharset(EmailConfiguration.MAIL_CHARSET);        
         email.setFrom(EmailConfiguration.TEST_FROM);
@@ -245,8 +246,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      */
     public void testImageHtmlEmailLocal() throws Exception
     {
-        // use a simple HTML page with one image - please note that the Apache logo
-        // is defined in CSS and not in HTML.
+        // use a simple HTML page with one image 
 
         File htmlFile = new File("./src/test/html/www.apache.org.html");
         String htmlMsg1 = FileUtils.readFileToString(htmlFile);

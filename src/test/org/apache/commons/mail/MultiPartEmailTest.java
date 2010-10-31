@@ -196,6 +196,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     public void testAttach() throws MalformedURLException, EmailException
     {
         EmailAttachment attachment;
+
         // ====================================================================
         // Test Success - File
         // ====================================================================
@@ -204,6 +205,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());
         this.email.attach(attachment);
+        assertTrue(this.email.isBoolHasAttachments());
 
         // ====================================================================
         // Test Success - URL
