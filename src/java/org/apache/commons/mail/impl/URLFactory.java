@@ -22,6 +22,8 @@ import java.net.URL;
 
 /**
  * Create an URL for embedding a resource.
+ *
+ * @since 1.3
  */
 public final class URLFactory
 {
@@ -34,7 +36,8 @@ public final class URLFactory
     }
 
     /**
-     * Create an file-based  URL.
+     * Create an URL based on a base URL and a resource location suitable for loading
+     * the resource.
      *
      * @param baseUrl an optional base URL
      * @param resource a resource location
