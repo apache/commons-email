@@ -22,16 +22,23 @@ import org.apache.commons.mail.settings.EmailConfiguration;
 
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.MimeMessage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This are regression test sending REAL email to REAL mail
- * servers. The intention is to field-test certain aspects
- * of email using a variety of mail clients.
+ * servers using REAL recipients.
+ *
+ * The intention is to field-test certain aspects
+ * of email using a variety of mail clients since I'm not
+ * a mockist (see http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
-
 public class EmailLiveTest extends BaseEmailTestCase
 {
     /**
@@ -252,7 +259,10 @@ public class EmailLiveTest extends BaseEmailTestCase
     }
 
     /**
-     * Test sending a image HTML mail based on a complex real world website.
+     * Test sending a image HTML mail based on a real world website. We
+     * would expect to see the ApacheCon logo at the bottom of the email.
+     * Please note that not all major email clients can display the email
+     * properly.
      *
      * @throws Exception the test failed
      */
@@ -260,7 +270,7 @@ public class EmailLiveTest extends BaseEmailTestCase
     {
         if(EmailConfiguration.MAIL_FORCE_SEND)
         {
-            URL url = new URL("http://www.theserverside.com");
+            URL url = new URL("http://www.apache.org");
             String htmlMsg = getFromUrl(url);
 
             ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
@@ -269,5 +279,51 @@ public class EmailLiveTest extends BaseEmailTestCase
 
             EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
         }
+    }
+
+    /**
+     * Testing if we are able to send a few emails in a batch, i.e.
+     * using a single authenticated <code>Transport</code> instance.
+     * Use a single instance speeds up processing since the
+     * authorization is only done once.
+     *
+     * https://issues.apache.org/jira/browse/EMAIL-72
+     *
+     * @throws Exception the test failed.
+     */
+    public void testSendingEmailsInBatch() throws Exception
+    {
+        List emails = new ArrayList();
+
+        // we need to instantiate an email to provide the mail session - a bit ugly
+        Session session = create(SimpleEmail.class).getMailSession();
+        Transport transport = session.getTransport();
+
+        // simulate creating a bunch of emails using an existing mail session
+        for(int i=0; i<3; i++)
+        {
+            SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
+            personalizedEmail.setMailSession(session);
+            personalizedEmail.setSubject("Personalized Test Mail Nr. " + i);
+            personalizedEmail.setMsg("This is a personalized test mail ... :-)");
+            personalizedEmail.buildMimeMessage();
+            emails.add(personalizedEmail);
+        }
+
+        // send the list of emails using a single 'Transport' instance.
+        if( EmailConfiguration.MAIL_FORCE_SEND )
+        {
+            transport.connect();
+
+            for(int i=0; i<emails.size(); i++)
+            {
+                Email personalizedEmail = (Email) emails.get(i);
+                MimeMessage mimeMessage =  personalizedEmail.getMimeMessage();
+                transport.send(mimeMessage);
+                System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());
+            }
+
+            transport.close();
+         }
     }
 }
