@@ -131,7 +131,7 @@ import org.apache.commons.mail.*;
         Sending HTML formatted email is accomplished by using the HtmlEmail
         class.  This class works exactly like the MultiPartEmail class with
         additional methods to set the html content, alternative text content
-        if the reciepient does not support HTML email, and add inline images.
+        if the recipient does not support HTML email, and add inline images.
       </p>
       <p>
         In this example, we will send an email message with formatted HTML
@@ -174,6 +174,48 @@ import org.apache.commons.mail.HtmlEmail;
         methods were used.
       </p>
     </section>
+    <section name="Sending HTML formatted email with embedded images">
+      <p>
+        The previous example showed how to create a HTML email with embedded
+        images but you need to know all images upfront which is inconvinent
+        when using a HTML email template. The ImageHtmlEmail helps you
+        solving this problem by converting all external images to inline
+        images.
+      </p>        
+      <source>
+        <![CDATA[
+import org.apache.commons.mail.HtmlEmail;
+...
+
+  // load your HTML email template
+  String htmlEmailTemplate = ....
+  
+  // Create the email message
+  HtmlEmail email = new ImageHtmlEmail();
+  email.setHostName("mail.myserver.com");
+  email.addTo("jdoe@somewhere.org", "John Doe");
+  email.setFrom("me@apache.org", "Me");
+  email.setSubject("Test email with inline image");
+  
+  // embed the image and get the content id
+  URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+  String cid = email.embed(url, "Apache logo");
+  
+  // set the html message
+  email.setHtmlMsg(htmlEmailTemplate, new File("").toURI().toURL(), false);
+
+  // set the alternative message
+  email.setTextMsg("Your email client does not support HTML messages");
+
+  // send the email
+  email.send();
+  ]]></source>        
+      <p>
+        First we create a HTML email template referencing some images. The 
+        referenced images are automatically transformed to inline images
+        starting from the current working directory.  
+      </p>
+    </section>  
     <section name="Debugging">
       <p>
         The JavaMail API supports a debugging option that will can be very
@@ -199,7 +241,6 @@ import org.apache.commons.mail.HtmlEmail;
         you will handle collecting the user's information.  To make use of
         your new <code>Authenticator</code> class, use the
         <code>Email.setAuthenticator</code> method.
-
       </p>
     </section>
     <section name="Handling Bounced Messages">
