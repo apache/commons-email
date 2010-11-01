@@ -177,7 +177,7 @@ import org.apache.commons.mail.HtmlEmail;
     <section name="Sending HTML formatted email with embedded images">
       <p>
         The previous example showed how to create a HTML email with embedded
-        images but you need to know all images upfront which is inconvinent
+        images but you need to know all images upfront which is inconvenient
         when using a HTML email template. The ImageHtmlEmail helps you
         solving this problem by converting all external images to inline
         images.
