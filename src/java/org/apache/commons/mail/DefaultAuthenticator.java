@@ -30,7 +30,7 @@ import javax.mail.PasswordAuthentication;
 public class DefaultAuthenticator extends Authenticator
 {
     /** Stores the login information for authentication */
-    private PasswordAuthentication authentication;
+    private final PasswordAuthentication authentication;
 
     /**
      * Default constructor
