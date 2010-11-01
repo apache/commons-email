@@ -57,7 +57,7 @@ email.send();
         attached.  The attachments will be MIME encoded.
       </p>
       <p>
-        The simpliest way to add the attachments is by using the EmailAttachment
+        The simplest way to add the attachments is by using the EmailAttachment
         class to reference your attachments.
       </p>
       <p>
@@ -211,7 +211,7 @@ import org.apache.commons.mail.HtmlEmail;
   email.send();
   ]]></source>        
       <p>
-        First we create a HTML email template referencing some images. The 
+        First we create a HTML email template referencing some images. All  
         referenced images are automatically transformed to inline images
         starting from the current working directory.  
       </p>
