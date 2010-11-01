@@ -319,7 +319,7 @@ public class EmailLiveTest extends BaseEmailTestCase
             {
                 Email personalizedEmail = (Email) emails.get(i);
                 MimeMessage mimeMessage =  personalizedEmail.getMimeMessage();
-                transport.send(mimeMessage);
+                Transport.send(mimeMessage);
                 System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());
             }
 
