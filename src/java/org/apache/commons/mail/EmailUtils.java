@@ -17,10 +17,11 @@
 
 package org.apache.commons.mail;
 
+import org.apache.commons.mail.util.MimeMessageUtils;
+
 import javax.mail.internet.MimeMessage;
 import javax.mail.MessagingException;
 import java.util.Random;
-import java.io.FileOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -237,45 +238,6 @@ final class EmailUtils
      */
     static void writeMimeMessage(File resultFile, MimeMessage mimeMessage) throws IOException, MessagingException
     {
-        FileOutputStream fos = null;
-
-        if (mimeMessage == null)
-        {
-            throw new IllegalArgumentException("mimeMessage is null");
-        }
-
-        if (resultFile == null)
-        {
-            throw new IllegalArgumentException("resultFile is null");
-        }
-
-        if (resultFile.getParentFile() != null)
-        {
-            resultFile.getParentFile().mkdirs();
-        }
-
-        try
-        {
-            fos = new FileOutputStream(resultFile);
-            mimeMessage.writeTo(fos);
-            fos.flush();
-            fos.close();
-            fos = null;
-        }
-        finally
-        {
-            if (fos != null)
-            {
-                try
-                {
-                    fos.close();
-                    fos = null;
-                }
-                catch (Exception e)
-                {
-                    // ignore
-                }
-            }
-        }
+        MimeMessageUtils.writeMimeMessage(mimeMessage, resultFile);
     }
 }

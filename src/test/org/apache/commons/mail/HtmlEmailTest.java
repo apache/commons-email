@@ -32,7 +32,6 @@ import org.apache.commons.mail.settings.EmailConfiguration;
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
-
 public class HtmlEmailTest extends BaseEmailTestCase
 {
     /** */

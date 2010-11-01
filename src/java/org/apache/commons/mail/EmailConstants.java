@@ -52,13 +52,18 @@ public interface EmailConstants
     String MAIL_SMTP_PASSWORD = "mail.smtp.password";
     String MAIL_TRANSPORT_PROTOCOL = "mail.transport.protocol";
 
+    /////////////////////////////////////////////////////////////////////////
     // since 1.1
+    /////////////////////////////////////////////////////////////////////////
+
     String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
     String MAIL_SMTP_SOCKET_FACTORY_FALLBACK = "mail.smtp.socketFactory.fallback";
     String MAIL_SMTP_SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
     String MAIL_SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
 
+    /////////////////////////////////////////////////////////////////////////
     // since 1.2
+    /////////////////////////////////////////////////////////////////////////
 
     /**
      * Socket connection timeout value in milliseconds. Default is infinite timeout.

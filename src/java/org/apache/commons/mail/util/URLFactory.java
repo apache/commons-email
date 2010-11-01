@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.mail.impl;
+package org.apache.commons.mail.util;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -53,10 +53,10 @@ public final class URLFactory
             return new URL(resource);
         }
 
-        // if we get an non-existing location than use the base url alone
+        // if we get an non-existing location what we shall do?
         if (resource == null)
         {
-            return baseUrl;
+            throw new IllegalArgumentException("No resource defined");
         }
 
         // if we get a stand-alone resource than ignore the base url
@@ -85,7 +85,7 @@ public final class URLFactory
      */
     private static boolean isFileUrl(String urlString)
     {
-        return urlString.startsWith("file://");
+        return urlString.startsWith("file:/");
     }
 
     /**

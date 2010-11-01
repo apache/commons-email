@@ -147,15 +147,19 @@ public abstract class Email implements EmailConstants
      * Used to determine whether to use pop3 before smtp, and if so the settings.
      */
     protected boolean popBeforeSmtp;
+
     /** the host name of the pop3 server */
     protected String popHost;
+
     /** the user name to log into the pop3 server */
     protected String popUsername;
+
     /** the password to log into the pop3 server */
     protected String popPassword;
 
     /** does server require TLS encryption for authentication */
     protected boolean tls;
+
     /** does the current transport use SSL encryption? */
     protected boolean ssl;
 
@@ -347,7 +351,7 @@ public abstract class Email implements EmailConstants
 
     /**
      * Set the port number of the outgoing mail server.
-     * 
+     *
      * @param  aPortNumber aPortNumber
      * @return An Email.
      * @since 1.0
@@ -417,7 +421,7 @@ public abstract class Email implements EmailConstants
 
     /**
      * Supply a mail Session object from a JNDI directory.
-     * 
+     *
      * @param jndiName name of JNDI ressource (javax.mail.Session type), ressource
      * if searched in java:comp/env if name dont start with "java:"
      * @return An Email.
@@ -1437,6 +1441,7 @@ public abstract class Email implements EmailConstants
      * Default is 60 second timeout.
      *
      * @param socketTimeout the socket I/O timeout
+     * @return An Email.
      * @since 1.2
      */
     public Email setSocketTimeout(int socketTimeout)
@@ -1482,7 +1487,7 @@ public abstract class Email implements EmailConstants
         {
             result = MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value.toString(), this.charset, null));
         }
-        catch(UnsupportedEncodingException e)
+        catch (UnsupportedEncodingException e)
         {
             result = value.toString();
         }
@@ -1550,7 +1555,7 @@ public abstract class Email implements EmailConstants
      * @throws IllegalStateException when the mail session is
      *      already initialized
      */
-    private void checkSessionAlreadyInitialized() throws IllegalStateException
+    private void checkSessionAlreadyInitialized()
     {
         if (this.session != null)
         {

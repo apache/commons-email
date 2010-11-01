@@ -510,7 +510,7 @@ public class MultiPartEmail extends Email
         MimeMultipart mmp = new MimeMultipart();
         return mmp;
     }
-    
+
     /**
      * Checks whether there are attachments.
      *

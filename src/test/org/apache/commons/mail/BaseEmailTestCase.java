@@ -37,8 +37,6 @@ import org.apache.commons.mail.settings.EmailConfiguration;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
-
-
 /**
  * Base test case for Email test classes
  *
@@ -52,6 +50,7 @@ public abstract class BaseEmailTestCase extends TestCase
 {
     /** Padding at end of body added by wiser/send */
     public static final int BODY_END_PAD = 3;
+
     /** Padding at start of body added by wiser/send */
     public static final int BODY_START_PAD = 2;
 
@@ -65,15 +64,20 @@ public abstract class BaseEmailTestCase extends TestCase
     protected Wiser fakeMailServer;
 
     /** Mail server used for testing */
-    protected String strTestMailServer = EmailConfiguration.MAIL_SERVER;
+    protected String strTestMailServer = "localhost";
+
     /** From address for the test email */
-    protected String strTestMailFrom = EmailConfiguration.TEST_FROM;
+    protected String strTestMailFrom = "test_from@apache.org";
+
     /** Destination address for the test email */
-    protected String strTestMailTo = EmailConfiguration.TEST_TO;
+    protected String strTestMailTo = "test_to@apache.org";
+
     /** Mailserver username (set if needed) */
-    protected String strTestUser = EmailConfiguration.TEST_USER;
+    protected String strTestUser = "user";
+
     /** Mailserver strTestPasswd (set if needed) */
-    protected String strTestPasswd = EmailConfiguration.TEST_PASSWD;
+    protected String strTestPasswd = "password";
+
     /** URL to used to test URL attachmetns (Must be valid) */
     protected String strTestURL = EmailConfiguration.TEST_URL;
 

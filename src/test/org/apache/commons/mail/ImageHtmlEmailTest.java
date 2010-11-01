@@ -16,8 +16,6 @@
  */
 package org.apache.commons.mail;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,12 +26,13 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.activation.DataHandler;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.mail.impl.DataSourceResolverImpl;
 import org.apache.commons.mail.mocks.MockImageHtmlEmailConcrete;
+import org.apache.commons.mail.util.MimeMessageParser;
 import org.subethamail.wiser.WiserMessage;
 
 public class ImageHtmlEmailTest extends HtmlEmailTest {
@@ -43,21 +42,21 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     private static final File TEST_IMAGE_DIR = new File(TEST_IMAGE_URL.getPath()).getParentFile();
     private static final URL TEST_HTML_URL = ImageHtmlEmailTest.class.getResource("/attachments/download_email.cgi.html");
 
+    private MockImageHtmlEmailConcrete email;
+
     public ImageHtmlEmailTest(String name) throws IOException {
 		super(name);
 	}
 
-	/** */
-	private MockImageHtmlEmailConcrete email;
-
-	/**
-	 * @throws Exception
-	 */
 	protected void setUp() throws Exception {
 		super.setUp();
 		// reusable objects to be used across multiple tests
 		email = new MockImageHtmlEmailConcrete();
 	}
+
+    // ======================================================================
+    // Start of Tests
+    // ======================================================================
 
 	public void testSendHtml() throws Exception {
 
@@ -69,6 +68,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		String strSubject = "Test HTML Send default";
 
 		email = new MockImageHtmlEmailConcrete();
+        email.setDataSourceResolver(new DataSourceResolverImpl(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
 		email.setHostName(strTestMailServer);
 		email.setSmtpPort(getMailServerPort());
 		email.setFrom(strTestMailFrom);
@@ -90,35 +90,21 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		String html = str.toString();
 
 		// set the html message
-		email.setHtmlMsg(html, TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT);
+		email.setHtmlMsg(html);
 
 		// set the alternative message
-		//email.setTextMsg("Your email client does not support HTML messages");
+		email.setTextMsg("Your email client does not support HTML messages");
 
 		// send the email
 		email.send();
 
 		fakeMailServer.stop();
 
-		// Cannot validate as the HTML is changed during inclusion
-		// validate html message
-		//validateSend(fakeMailServer, strSubject, email.getHtmlMsg(),
-		//		email.getFromAddress(), email.getToAddresses(),
-		//		email.getCcAddresses(), email.getBccAddresses(), false);
 		assertEquals(1, fakeMailServer.getMessages().size());
 		MimeMessage mimeMessage = ((WiserMessage) fakeMailServer.getMessages().get(0)).getMimeMessage();
-
-		DataHandler dataHandler = mimeMessage.getDataHandler();
-		ByteArrayOutputStream byteArrayOutStream = new ByteArrayOutputStream();
-		BufferedOutputStream buffOs = new BufferedOutputStream(byteArrayOutStream);
-		dataHandler.writeTo(buffOs);
-		buffOs.flush();
-
-		String msg = new String(byteArrayOutStream.toByteArray());
-		// the mail should contain Content-ID-Entries
-		assertTrue(msg, msg.contains("\"cid:"));
-		// at least the logo that we store locally should be replaced by an included cid now
-		assertFalse(msg, msg.contains("\"asf_logo_wide.gif\""));
+        MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
+        assertTrue(mimeMessageParser.getAttachmentList().size() == 2);
 	}
 
 	public void testSendEmptyHTML() throws Exception {
@@ -129,7 +115,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		try {
-			email.setHtmlMsg(null, new File("/tmp").toURI().toURL(), TEST_IS_LENIENT);
+			email.setHtmlMsg(null);
 			fail("Should fail here!");
 		} catch (EmailException e) {
 			assertTrue(e.getMessage(), e.getMessage().contains(
@@ -145,7 +131,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		try {
-			email.setHtmlMsg("", new File("/tmp").toURI().toURL(), TEST_IS_LENIENT);
+			email.setHtmlMsg("");
 			fail("Should fail here!");
 		} catch (EmailException e) {
 			assertTrue(e.getMessage(), e.getMessage().contains(
@@ -168,11 +154,11 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		email.setFrom(strTestMailFrom);
 		email.addTo(strTestMailTo);
 		email.setSubject(strSubject);
+        email.setDataSourceResolver(new DataSourceResolverImpl(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
 
 		// set the html message
 		email.setHtmlMsg(
-            "<html><body><img src=\"http://www.apache.org/images/feather.gif\"/></body></html>",
-            TEST_IS_LENIENT
+            "<html><body><img src=\"http://www.apache.org/images/feather.gif\"/></body></html>"
             );
 
 		// send the email
@@ -200,6 +186,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		email.setFrom(strTestMailFrom);
 		email.addTo(strTestMailTo);
 		email.setSubject(strSubject);
+        email.setDataSourceResolver(new DataSourceResolverImpl(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
 
 		File file = File.createTempFile("emailtest", ".tst");
 		FileUtils.writeStringToFile(file,
@@ -207,7 +194,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		// set the html message
 		email.setHtmlMsg("<html><body><img src=\"" + file.getAbsolutePath()
-				+ "\"/></body></html>", new File("").toURI().toURL(), TEST_IS_LENIENT);
+				+ "\"/></body></html>"
+            );
 
 		// send the email
 		email.send();

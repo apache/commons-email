@@ -18,6 +18,7 @@ package org.apache.commons.mail;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.mail.impl.DataSourceResolverImpl;
 import org.apache.commons.mail.settings.EmailConfiguration;
 
 import javax.activation.DataSource;
@@ -252,8 +253,9 @@ public class EmailLiveTest extends BaseEmailTestCase
         String htmlMsg1 = FileUtils.readFileToString(htmlFile);
 
         ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
+        email.setDataSourceResolver(new DataSourceResolverImpl(htmlFile.toURI().toURL(), true));
         email.setSubject("[testImageHtmlEmail] 1.Test: simple html content");
-        email.setHtmlMsg(htmlMsg1, htmlFile.toURI().toURL(), false);
+        email.setHtmlMsg(htmlMsg1);
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailLocal.eml"), send(email).getMimeMessage());
     }
@@ -270,12 +272,14 @@ public class EmailLiveTest extends BaseEmailTestCase
     {
         if(EmailConfiguration.MAIL_FORCE_SEND)
         {
-            URL url = new URL("http://www.apache.org");
+            // URL url = new URL("http://commons.apache.org/email/");
+            URL url = new URL("http://nemo.sonarsource.org/project/index/221295?page_id=2");
             String htmlMsg = getFromUrl(url);
 
             ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
+            email.setDataSourceResolver(new DataSourceResolverImpl(url, true));
             email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
-            email.setHtmlMsg(htmlMsg, url, true);
+            email.setHtmlMsg(htmlMsg);
 
             EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
         }
