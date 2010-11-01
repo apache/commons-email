@@ -35,7 +35,7 @@ public class EmailException
         extends Exception
 {
     /** Serializable version identifier */
-    static final long serialVersionUID = 5550674499282474616L;
+    private static final long serialVersionUID = 5550674499282474616L;
 
     /**
      * Does JDK support nested exceptions?
