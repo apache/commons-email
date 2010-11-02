@@ -272,8 +272,8 @@ public class EmailLiveTest extends BaseEmailTestCase
     {
         if(EmailConfiguration.MAIL_FORCE_SEND)
         {
-            // URL url = new URL("http://commons.apache.org/email/");
-            URL url = new URL("http://nemo.sonarsource.org/project/index/221295?page_id=2");
+            URL url = new URL("http://commons.apache.org/email/");
+            // URL url = new URL("http://nemo.sonarsource.org/project/index/221295?page_id=2");
             String htmlMsg = getFromUrl(url);
 
             ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
