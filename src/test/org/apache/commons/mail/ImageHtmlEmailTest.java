@@ -104,7 +104,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		MimeMessage mimeMessage = ((WiserMessage) fakeMailServer.getMessages().get(0)).getMimeMessage();
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
-        assertTrue(mimeMessageParser.getAttachmentList().size() == 2);
+        assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
 	}
 
 	public void testSendEmptyHTML() throws Exception {
