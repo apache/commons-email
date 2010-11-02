@@ -189,20 +189,20 @@ import org.apache.commons.mail.HtmlEmail;
 
   // load your HTML email template
   String htmlEmailTemplate = ....
-  
-  // Create the email message
+
+  // define you base URL to resolve relative resource locations
+  URL url = new URL("http://www.apache.org");
+
+  // create the email message
   HtmlEmail email = new ImageHtmlEmail();
+  email.setDataSourceResolver(new DataSourceResolverImpl(url));
   email.setHostName("mail.myserver.com");
   email.addTo("jdoe@somewhere.org", "John Doe");
   email.setFrom("me@apache.org", "Me");
   email.setSubject("Test email with inline image");
   
-  // embed the image and get the content id
-  URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-  String cid = email.embed(url, "Apache logo");
-  
   // set the html message
-  email.setHtmlMsg(htmlEmailTemplate, new File("").toURI().toURL(), false);
+  email.setHtmlMsg(htmlEmailTemplate);
 
   // set the alternative message
   email.setTextMsg("Your email client does not support HTML messages");
