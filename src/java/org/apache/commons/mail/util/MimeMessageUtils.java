@@ -29,7 +29,7 @@ import java.io.InputStream;
 /**
  * Static helper methods.
  *
- * @author <a href="mailto:siegfried.goeschl@it20one.at">Siegfried Goeschl</a>
+ * @since 1.3
  */
 public final class MimeMessageUtils
 {

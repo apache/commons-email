@@ -17,7 +17,9 @@
 package org.apache.commons.mail;
 
 /**
- * Constants used by Email classes
+ * Constants used by Email classes.
+ *
+ * @since 1.3
  */
 public interface EmailConstants
 {
