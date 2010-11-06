@@ -39,6 +39,11 @@
     <release>
       <Version>
         <name>commons-email</name>
+        <created>2009-11-06</created>
+        <revision>1.3</revision>
+      </Version>
+      <Version>
+        <name>commons-email</name>
         <created>2009-06-12</created>
         <revision>1.2</revision>
       </Version>

@@ -24,7 +24,15 @@ CHANGES FROM 1.2:
 
 == New Features ==
 
+o Adding ImageHtmlEmail to create HTML emails with embedded images either
+  downloaded from HTTP or from the local file system.  
+  Issue: EMAIL-92. Thanks to Dominik Stadler.
+
 o Added MimeMessageParser and MimeMessageUtils.
+
+== Misc ==
+
+o Moving the various constants from 'EMail' to 'EmailConstants'
 
 == Fixed Bugs ==
 
@@ -39,14 +47,8 @@ o Encoding and folding of headers is now done by commons-email.
 o The default connection timeout is set to a reasonable default value of 
   60 seconds.  Issue: EMAIL-100. Thanks to David Parks.
 
-o Moving the various constants from 'EMail' to 'EmailConstants'
-
 o All setters are returning "this" to simplify building an email.  
   Issue: EMAIL-76. Thanks to Yu Kobayashi.
-
-o Adding ImageHtmlEmail to create HTML emails with embedded images either
-  downloaded from HTTP or from the local file system.  
-  Issue: EMAIL-92. Thanks to Dominik Stadler.
 
 o Calling buildMimeMessage() before invoking send() caused duplicated 
   mime parts for HtmlEmail. The implementation now enforces that an email 
