@@ -241,7 +241,7 @@ public class EmailLiveTest extends BaseEmailTestCase
     }
 
     /**
-     * Test sending a image HTML mail bases on a local HTML page.
+     * Test sending a image HTML mail bases on a local HTML page and local image.
      *
      * @throws Exception the test failed                               
      */
@@ -253,7 +253,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         String htmlMsg1 = FileUtils.readFileToString(htmlFile);
 
         ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
-        email.setDataSourceResolver(new DataSourceResolverImpl(htmlFile.toURI().toURL(), true));
+        email.setDataSourceResolver(new DataSourceResolverImpl(htmlFile.getParentFile().toURI().toURL(), false));
         email.setSubject("[testImageHtmlEmail] 1.Test: simple html content");
         email.setHtmlMsg(htmlMsg1);
 
@@ -277,7 +277,7 @@ public class EmailLiveTest extends BaseEmailTestCase
             String htmlMsg = getFromUrl(url);
 
             ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
-            email.setDataSourceResolver(new DataSourceResolverImpl(url, true));
+            email.setDataSourceResolver(new DataSourceResolverImpl(url, false));
             email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
             email.setHtmlMsg(htmlMsg);
 
