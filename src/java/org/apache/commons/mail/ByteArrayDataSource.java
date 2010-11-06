@@ -93,7 +93,7 @@ public class ByteArrayDataSource implements DataSource
     /**
      * Create a datasource from a String.
      * N.B. assumes the data string can be converted using the charset iso-8859-1
-     * 
+     *
      * @param data A String.
      * @param aType A String.
      * @throws IOException IOException
@@ -176,8 +176,6 @@ public class ByteArrayDataSource implements DataSource
             }
         }
     }
-
-
 
     /**
      * Get the content type.

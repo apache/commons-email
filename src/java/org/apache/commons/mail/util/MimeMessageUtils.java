@@ -137,7 +137,7 @@ public final class MimeMessageUtils
             {
                 is.close();
             }
-        }    
+        }
     }
 
     /**

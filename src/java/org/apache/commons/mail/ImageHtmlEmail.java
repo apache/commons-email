@@ -25,18 +25,19 @@ import java.util.regex.Pattern;
 
 /**
  * Small wrapper class on top of HtmlEmail which encapsulates the required logic
- * to retrieve images that are contained in "<img src=../>" elements in the HTML
+ * to retrieve images that are contained in "&lt;img src=../&gt;" elements in the HTML
  * code. This is done by replacing all img-src-elements with "cid:"-entries and
  * embedding images in the email.
- *
+ * </br>
  * For local files the class tries to either load them via an absolute path or -
  * if available - use a relative path starting from a base directory. For files
  * that are not found locally, the implementation tries to download
  * the element and link it in.
- *
- * This code was submitted to commons-email under the Apache 2.0 license, see
- * https://issues.apache.org/jira/browse/EMAIL-92
- *
+ * </br>
+ * The image loading is done by an instance of <code>DataSourceResolver</code>
+ * which has to be provided by the caller.
+ * </br>
+ * 
  * @since 1.3
  */
 public class ImageHtmlEmail extends HtmlEmail
@@ -64,24 +65,38 @@ public class ImageHtmlEmail extends HtmlEmail
     /** resolve the images and script resources to a DataSource */
     private DataSourceResolver dataSourceResolver;
 
+    /**
+     * Get the data source resolver.
+     *
+     * @return the resolver
+     */
     public DataSourceResolver getDataSourceResolver()
     {
         return dataSourceResolver;
     }
 
+    /**
+     * Set the data source resolver.
+     *
+     * @param dataSourceResolver the resolver
+     */
     public void setDataSourceResolver(DataSourceResolver dataSourceResolver)
     {
         this.dataSourceResolver = dataSourceResolver;
     }
 
+     /**
+      * Does the work of actually building the MimeMessage.
+      *
+      * @see org.apache.commons.mail.HtmlEmail#buildMimeMessage()
+      * @throws EmailException building the MimeMessage failed
+      */
     public void buildMimeMessage() throws EmailException
     {
-        String temp;
-
         try
         {
             // embed all the matching image and script resources within the email
-            temp = replacePattern(super.html, IMG_PATTERN);
+            String temp = replacePattern(super.html, IMG_PATTERN);
             temp = replacePattern(temp, SCRIPT_PATTERN);
             setHtmlMsg(temp);
             super.buildMimeMessage();

@@ -19,6 +19,45 @@ This is a maintenance release which fixes several bugs present in the 1.1
 release and adds a number of small enhancements requested by
 users. All current users are encouraged to upgrade.
 
+CHANGES FROM 1.2:
+-----------------
+
+== New Features ==
+
+o Added MimeMessageParser and MimeMessageUtils.
+
+== Fixed Bugs ==
+
+o Throwing an IllegalStateException when setting mail session properties 
+  for an already created mail session because the settings would be 
+  ignored. Please note that this change could potentially break existing
+  (but invalid) code.  Issue: EMAIL-96.
+
+o Encoding and folding of headers is now done by commons-email.  
+  Issue: EMAIL-98. Thanks to Mario Daepp.
+
+o The default connection timeout is set to a reasonable default value of 
+  60 seconds.  Issue: EMAIL-100. Thanks to David Parks.
+
+o Moving the various constants from 'EMail' to 'EmailConstants'
+
+o All setters are returning "this" to simplify building an email.  
+  Issue: EMAIL-76. Thanks to Yu Kobayashi.
+
+o Adding ImageHtmlEmail to create HTML emails with embedded images either
+  downloaded from HTTP or from the local file system.  
+  Issue: EMAIL-92. Thanks to Dominik Stadler.
+
+o Calling buildMimeMessage() before invoking send() caused duplicated 
+  mime parts for HtmlEmail. The implementation now enforces that an email 
+  can be only used once and throw an exception when multiple invocations of 
+  buildMimeMessage() are detected.  Issue: EMAIL-95.
+
+o Incorrect SMTP Port number shown in error message when an email fails
+  to send due to a blocked port and SSL is used.  
+  Issue: EMAIL-91. Thanks to Kevin Lester.
+
+
 CHANGES FROM 1.1:
 -----------------
 
@@ -71,7 +110,7 @@ REQUIREMENTS:
 J2SE environments
 -----------------
 
-Commons Email requires JavaMail 1.4 or later. The Sun implementation
+Commons Email requires JavaMail 1.4.1 or later. The Sun implementation
 is available at:
 
 http://java.sun.com/products/javamail/

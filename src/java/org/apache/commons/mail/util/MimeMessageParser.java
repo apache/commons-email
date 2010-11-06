@@ -91,7 +91,7 @@ public class MimeMessageParser
     public Collection getTo() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
-        return (recipients != null ? Arrays.asList(recipients) : new ArrayList());
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList();
     }
 
     /**
@@ -101,7 +101,7 @@ public class MimeMessageParser
     public Collection getCc() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
-        return (recipients != null ? Arrays.asList(recipients) : new ArrayList());
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList();
     }
 
     /**
@@ -111,7 +111,7 @@ public class MimeMessageParser
     public Collection getBcc() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
-        return (recipients != null ? Arrays.asList(recipients) : new ArrayList());
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList();
     }
 
     /**
@@ -257,19 +257,19 @@ public class MimeMessageParser
     /** @return true if a plain content is available */
     public boolean hasPlainContent()
     {
-        return (this.plainContent != null);
+        return this.plainContent != null;
     }
 
     /** @return true if HTML content is available */
     public boolean hasHtmlContent()
     {
-        return (this.htmlContent != null);
+        return this.htmlContent != null;
     }
 
     /** @return true if attachments are available */
     public boolean hasAttachments()
     {
-        return (this.attachmentList.size() > 0);
+        return this.attachmentList.size() > 0;
     }
 
     /**
@@ -280,7 +280,7 @@ public class MimeMessageParser
      */
     public DataSource findAttachmentByName(String name)
     {
-        DataSource dataSource = null;
+        DataSource dataSource;
 
         for (int i = 0; i < getAttachmentList().size(); i++)
         {

@@ -19,12 +19,17 @@ package org.apache.commons.mail;
 /**
  * Constants used by Email classes.
  *
+ * A description of the mail session parameter you find at
+ * <a href="http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html">
+ * http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+ * </a>.
+ *
  * @since 1.3
  */
 public interface EmailConstants
 {
     // Constants used by Email classes
-   
+
     String SENDER_EMAIL = "sender.email";
     String SENDER_NAME = "sender.name";
     String RECEIVER_EMAIL = "receiver.email";
@@ -32,6 +37,8 @@ public interface EmailConstants
     String EMAIL_SUBJECT = "email.subject";
     String EMAIL_BODY = "email.body";
     String CONTENT_TYPE = "content.type";
+    String ATTACHMENTS = "attachments";
+    String FILE_SERVER = "file.server";
 
     // Charset constants
     String KOI8_R = "koi8-r";
@@ -39,13 +46,7 @@ public interface EmailConstants
     String US_ASCII = "us-ascii";
     String UTF_8 = "utf-8";
 
-    String SMTP = "smtp";
-    String TEXT_HTML = "text/html";
-    String TEXT_PLAIN = "text/plain";
-    String ATTACHMENTS = "attachments";
-    String FILE_SERVER = "file.server";
     String MAIL_DEBUG = "mail.debug";
-
     String MAIL_HOST = "mail.smtp.host";
     String MAIL_PORT = "mail.smtp.port";
     String MAIL_SMTP_FROM = "mail.smtp.from";
@@ -53,6 +54,10 @@ public interface EmailConstants
     String MAIL_SMTP_USER = "mail.smtp.user";
     String MAIL_SMTP_PASSWORD = "mail.smtp.password";
     String MAIL_TRANSPORT_PROTOCOL = "mail.transport.protocol";
+    String SMTP = "smtp";
+    String TEXT_HTML = "text/html";
+    String TEXT_PLAIN = "text/plain";
+
 
     /////////////////////////////////////////////////////////////////////////
     // since 1.1
@@ -78,4 +83,10 @@ public interface EmailConstants
      * @since 1.2
      */
      String MAIL_SMTP_TIMEOUT = "mail.smtp.timeout";
+
+    /////////////////////////////////////////////////////////////////////////
+    // since 1.3
+    /////////////////////////////////////////////////////////////////////////
+
+    int SOCKET_TIMEOUT_MS = 60000;
 }

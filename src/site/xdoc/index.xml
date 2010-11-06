@@ -16,87 +16,116 @@
  limitations under the License.
 -->
 <document>
- <properties>
-  <title>Home</title>
-  <author email="dev@commons.apache.org">Commons Documentation Team</author>
- </properties>
-<body>
-<!-- ================================================== -->
-<section name="Commons Email">
-<p>
-Commons Email aims to provide a API for sending email.
-It is built on top of the Java Mail API, which it aims to simplify.
-</p>
-<p>
-Some of the mail classes that are provided are as follows:
-<ul>
-<li>
-<b>SimpleEmail</b> -
-This class is used to send basic text based emails.
-</li>
-<li>
-<b>MultiPartEmail</b> -
-This class is used to send multipart messages.
-This allows a text message with attachments either inline or attached.
-</li>
-<li>
-<b>HtmlEmail</b> -
-This class is used to send HTML formatted emails.
-It has all of the capabilities as MultiPartEmail allowing attachments to be easily added.
-It also supports embedded images.
-</li>
-<li>
-<b>EmailAttachment</b> -
-This is a simple container class to allow for easy handling of attachments.
-It is for use with instances of MultiPartEmail and HtmlEmail.
-</li>
-</ul>
-</p>
-</section>
-<!-- ================================================== -->
-<section name="Documentation">
-<p>
-The <a href="userguide.html">Commons Email User Guide</a> covers many
-typical cases and provides several useful examples.
-</p>
-<p>
-The JavaDoc API documents are available online:
-</p>
-<ul>
-<li>The <a href="api-release/index.html">current release 1.2</a></li>
-<li>The <a href="api-1.1/index.html">previous version 1.1</a></li>
-<li>The <a href="api-1.0/index.html">previous version 1.0</a></li>
-<li>The <a href="apidocs/index.html">latest SVN</a></li>
-</ul>
-<p>
-The <a href="source-repository.html">subversion repository</a> can be
-<a href="http://svn.apache.org/viewvc/commons/proper/email/trunk/">browsed</a>.
-</p>
-</section>
-<!-- ================================================== -->
-<section name="Releases">
-<p>
-The latest version v1.2, is JDK 1.4 compatible -  
-<a href="http://commons.apache.org/email/download_email.cgi">Download now!</a><br />
-The full <a href="changes-report.html">change log</a> is available
-</p>
-<p>
-For previous releases, see the <a href="http://archive.apache.org/dist/commons/email/">Apache Archive</a>.
-</p>
-</section>
-<!-- ================================================== -->
-<section name="Support">
-<p>
-The <a href="mail-lists.html">commons mailing lists</a> act as the main support forum.
-The user list is suitable for most library usage queries.
-The dev list is intended for the development discussion.
-Please remember that the lists are shared between all commons components,
-so prefix your email by [email].
-</p>
-<p>
-Issues may be reported via <a href="issue-tracking.html">ASF JIRA</a>.
-</p>
-</section>
-<!-- ================================================== -->
-</body>
+    <properties>
+        <title>Home</title>
+        <author email="dev@commons.apache.org">Commons Documentation Team</author>
+    </properties>
+    <body>
+        <!-- ================================================== -->
+        <section name="Commons Email">
+            <p>
+                Commons Email aims to provide a API for sending email.
+                It is built on top of the Java Mail API, which it aims to simplify.
+            </p>
+            <p>
+                Some of the mail classes that are provided are as follows:
+                <ul>
+                    <li>
+                        <b>SimpleEmail</b>
+                        -
+                        This class is used to send basic text based emails.
+                    </li>
+                    <li>
+                        <b>MultiPartEmail</b>
+                        -
+                        This class is used to send multipart messages.
+                        This allows a text message with attachments either inline or attached.
+                    </li>
+                    <li>
+                        <b>HtmlEmail</b>
+                        -
+                        This class is used to send HTML formatted emails.
+                        It has all of the capabilities as MultiPartEmail allowing attachments to be easily added.
+                        It also supports embedded images.
+                    </li>
+                    <li>
+                        <b>ImageHtmlEmail</b>
+                        -
+                        This class is used to send HTML formatted emails with inline images.
+                        It has all of the capabilities as HtmlEmail but transform all image
+                        references to inline images.
+                    </li>
+                    <li>
+                        <b>EmailAttachment</b>
+                        -
+                        This is a simple container class to allow for easy handling of attachments.
+                        It is for use with instances of MultiPartEmail and HtmlEmail.
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <!-- ================================================== -->
+        <section name="Documentation">
+            <p>
+                The
+                <a href="userguide.html">Commons Email User Guide</a>
+                covers many
+                typical cases and provides several useful examples.
+            </p>
+            <p>
+                The JavaDoc API documents are available online:
+            </p>
+            <ul>
+                <li>The
+                    <a href="api-release/index.html">current release 1.2</a>
+                </li>
+                <li>The
+                    <a href="api-1.1/index.html">previous version 1.1</a>
+                </li>
+                <li>The
+                    <a href="api-1.0/index.html">previous version 1.0</a>
+                </li>
+                <li>The
+                    <a href="apidocs/index.html">latest SVN</a>
+                </li>
+            </ul>
+            <p>
+                The
+                <a href="source-repository.html">subversion repository</a>
+                can be
+                <a href="http://svn.apache.org/viewvc/commons/proper/email/trunk/">browsed</a>.
+            </p>
+        </section>
+        <!-- ================================================== -->
+        <section name="Releases">
+            <p>
+                The latest version v1.2, is JDK 1.4 compatible -
+                <a href="http://commons.apache.org/email/download_email.cgi">Download now!</a>
+                <br/>
+                The full
+                <a href="changes-report.html">change log</a>
+                is available
+            </p>
+            <p>
+                For previous releases, see the<a href="http://archive.apache.org/dist/commons/email/">Apache Archive</a>
+                .
+            </p>
+        </section>
+        <!-- ================================================== -->
+        <section name="Support">
+            <p>
+                The
+                <a href="mail-lists.html">commons mailing lists</a>
+                act as the main support forum.
+                The user list is suitable for most library usage queries.
+                The dev list is intended for the development discussion.
+                Please remember that the lists are shared between all commons components,
+                so prefix your email by [email].
+            </p>
+            <p>
+                Issues may be reported via<a href="issue-tracking.html">ASF JIRA</a>.
+            </p>
+        </section>
+        <!-- ================================================== -->
+    </body>
 </document>

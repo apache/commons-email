@@ -164,10 +164,10 @@ public abstract class Email implements EmailConstants
     protected boolean ssl;
 
     /** socket I/O timeout value in milliseconds */
-    protected int socketTimeout = 60000;
-    
+    protected int socketTimeout = SOCKET_TIMEOUT_MS;
+
     /** socket connection timeout value in milliseconds */
-    protected int socketConnectionTimeout = 60000;
+    protected int socketConnectionTimeout = SOCKET_TIMEOUT_MS;
 
     /** The Session to mail with */
     private Session session;
@@ -1092,7 +1092,7 @@ public abstract class Email implements EmailConstants
                 {
                     String name = (String) iterHeaderKeys.next();
                     String value = (String) headers.get(name);
-                    String foldedValue = createFoldedHeaderValue(name, value); 
+                    String foldedValue = createFoldedHeaderValue(name, value);
                     this.message.addHeader(name, foldedValue);
                 }
             }
@@ -1550,7 +1550,7 @@ public abstract class Email implements EmailConstants
     /**
      * When a mail session is already initialized setting the
      * session properties has no effect. In order to flag the
-     * problem throw an IllegalStateException.  
+     * problem throw an IllegalStateException.
      *
      * @throws IllegalStateException when the mail session is
      *      already initialized

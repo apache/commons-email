@@ -51,7 +51,7 @@ public class DataSourceResolverImpl implements DataSourceResolver
      * Constructor.
      *
      * @param baseUrl the base URL used for resolving relative resource locations
-     * @param lenient shall we ignore resources not found or complain with an exception 
+     * @param lenient shall we ignore resources not found or complain with an exception
      */
     public DataSourceResolverImpl(URL baseUrl, boolean lenient)
     {
@@ -59,11 +59,21 @@ public class DataSourceResolverImpl implements DataSourceResolver
         this.isLenient = lenient;
     }
 
+    /**
+     * Get the base URL used for resolving relative resource locations.
+     *
+     * @return the baseUrl
+     */
     public URL getBaseUrl()
     {
         return baseUrl;
     }
 
+    /**
+     * Shall we ignore resources not found or throw an exception?
+     *
+     * @return the lenient flag
+     */
     public boolean isLenient()
     {
         return isLenient;
