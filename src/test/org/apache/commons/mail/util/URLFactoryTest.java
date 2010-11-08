@@ -17,9 +17,7 @@
 package org.apache.commons.mail.util;
 
 import junit.framework.TestCase;
-import org.apache.commons.mail.DefaultAuthenticator;
 
-import javax.mail.PasswordAuthentication;
 import java.io.File;
 import java.net.URL;
 
