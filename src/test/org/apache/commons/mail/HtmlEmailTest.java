@@ -533,8 +533,8 @@ public class HtmlEmailTest extends BaseEmailTestCase
             false);
         
         // make sure that no double dots show up
-        assertTrue(this.email.getHtmlMsg().contains("3DTZC268X93337.zip"));
-        assertFalse(this.email.getHtmlMsg().contains("3DTZC268X93337..zip"));
+        assertTrue(this.email.getHtmlMsg().indexOf("3DTZC268X93337.zip") >= 0);
+        assertFalse(this.email.getHtmlMsg().indexOf("3DTZC268X93337..zip") >= 0);
     }
 
     /**

@@ -77,7 +77,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
 		URL url = TEST_HTML_URL;
 		InputStream stream = url.openStream();
-		StringBuilder str = new StringBuilder();
+		StringBuffer str = new StringBuffer();
 		try {
 			List lines = IOUtils.readLines(stream);
 			for(int i=0;i<lines.size();i++) {
@@ -103,7 +103,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 		assertEquals(1, fakeMailServer.getMessages().size());
 		MimeMessage mimeMessage = ((WiserMessage) fakeMailServer.getMessages().get(0)).getMimeMessage();
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
-        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
+        assertTrue(mimeMessageParser.getHtmlContent().indexOf("\"cid:") >= 0);
         assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
 	}
 
@@ -118,8 +118,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 			email.setHtmlMsg(null);
 			fail("Should fail here!");
 		} catch (EmailException e) {
-			assertTrue(e.getMessage(), e.getMessage().contains(
-					"Invalid message supplied"));
+			assertTrue(e.getMessage(), e.getMessage().indexOf(
+					"Invalid message supplied") >= 0);
 		}
 	}
 
@@ -134,8 +134,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 			email.setHtmlMsg("");
 			fail("Should fail here!");
 		} catch (EmailException e) {
-			assertTrue(e.getMessage(), e.getMessage().contains(
-					"Invalid message supplied"));
+			assertTrue(e.getMessage(), e.getMessage().indexOf(
+					"Invalid message supplied") >= 0);
 		}
 
 	}

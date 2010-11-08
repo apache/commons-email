@@ -1118,7 +1118,7 @@ public class EmailTest extends BaseEmailTestCase
     {
         this.email.addHeader("X-LongHeader", "1234567890 1234567890 123456789 01234567890 123456789 0123456789 01234567890 01234567890");
         assertTrue(this.email.getHeaders().size() == 1);
-        assertTrue(this.email.getHeaders().get("X-LongHeader").toString().contains("\r\n"));
+        assertTrue(this.email.getHeaders().get("X-LongHeader").toString().indexOf("\r\n") >= 0);
     }
 
     /** */
