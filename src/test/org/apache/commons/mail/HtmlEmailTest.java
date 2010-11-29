@@ -614,4 +614,32 @@ public class HtmlEmailTest extends BaseEmailTestCase
             this.email.getBccAddresses(),
             true);
     }
+
+    /**
+     * Test that the specified Content-ID is used when embedding a File
+     * object in an HtmlEmail.
+     *
+     * see https://issues.apache.org/jira/browse/EMAIL-101
+     */
+ 	public void testEmbedFileWithCID() throws Exception
+     {
+         // ====================================================================
+         // Test Success
+         // ====================================================================
+
+         File file = File.createTempFile("testEmbedFile", "txt");
+         file.deleteOnExit();
+
+         String testCid = "Test CID";
+
+         // if we embed a new file, do we get the content ID we specified back?
+         String strEmbed = this.email.embed(file, testCid);
+         assertNotNull(strEmbed);
+         assertEquals("didn't get same CID when embedding with a specified CID", testCid, strEmbed);
+
+         // if we embed the same file again, do we get the same content ID
+         // back?
+         String returnedCid = this.email.embed(file);
+         assertEquals("didn't get same CID after embedding same file twice", testCid, returnedCid);
+     }	    
 }
