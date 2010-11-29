@@ -44,7 +44,7 @@
         <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_3_RC2</connection>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_3_RC2</developerConnection>
         <url>http://svn.apache.org/viewvc/commons/proper/email/tags/EMAIL_1_3_RC2</url>
-    </scm>
+    </scm> 
 
     <developers>
         <developer>
