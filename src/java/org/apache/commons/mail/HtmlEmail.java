@@ -415,7 +415,7 @@ public class HtmlEmail extends MultiPartEmail
             throw new EmailException("file " + filePath + " isn't readable");
         }
 
-        return embed(new FileDataSource(file), file.getName(), cid);
+        return embed(new FileDataSource(file), file.getName());
     }
 
     /**
