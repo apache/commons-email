@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.activation.DataHandler;
@@ -321,7 +322,7 @@ public class HtmlEmail extends MultiPartEmail
      */
     public String embed(File file) throws EmailException
     {
-        String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
+        String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase(Locale.ENGLISH);
         return embed(file, cid);
     }
 
