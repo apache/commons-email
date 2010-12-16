@@ -124,10 +124,25 @@ public class EmailLiveTest extends BaseEmailTestCase
     public void testSimpleEmail() throws Exception
     {
         SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
-        email.setSubject("TestMail");
+        email.setSubject("TestSimpleMail");
         email.setMsg("This is a test mail ... :-)");
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/simplemail.eml"), send(email).getMimeMessage());
+    }
+
+    /**
+     * A sanity check that a simple email also works in reality.
+     *
+     * @throws Exception the test failed
+     */
+    public void testMultiPartEmail() throws Exception
+    {
+        MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
+        email.setSubject("TestMultiPartMail");
+        email.setMsg("This is a test mail ... :-)");
+        email.attach(new File("./src/test/attachments/logo.pdf"));
+
+        EmailUtils.writeMimeMessage( new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
     }
     
     /**

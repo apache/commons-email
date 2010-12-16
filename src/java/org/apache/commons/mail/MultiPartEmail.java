@@ -264,6 +264,39 @@ public class MultiPartEmail extends Email
     }
 
     /**
+     * Attach a file
+     *
+     * @param file A file attachment
+     * @return A MultiPartEmail.
+     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     *  for definitions
+     * @since 1.3
+     */
+    public MultiPartEmail attach(File file)
+        throws EmailException
+    {
+        String fileName = file.getAbsolutePath();
+
+        try
+        {
+            if (!file.exists())
+            {
+                throw new IOException("\"" + fileName + "\" does not exist");
+            }
+
+            FileDataSource fds = new FileDataSource(file);
+
+            return attach(fds, file.getName(), null, EmailAttachment.ATTACHMENT);
+        }
+        catch (IOException e)
+        {
+            throw new EmailException(
+                "Cannot attach file \"" + fileName + "\"",
+                e);
+        }
+    }
+
+    /**
      * Attach an EmailAttachment.
      *
      * @param attachment An EmailAttachment.

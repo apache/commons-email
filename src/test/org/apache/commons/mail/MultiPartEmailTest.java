@@ -198,7 +198,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         EmailAttachment attachment;
 
         // ====================================================================
-        // Test Success - File
+        // Test Success - EmailAttachment
         // ====================================================================
         attachment = new EmailAttachment();
         attachment.setName("Test Attachment");
@@ -217,12 +217,18 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         this.email.attach(attachment);
 
         // ====================================================================
+        // Test Success - File
+        // ====================================================================
+        this.email.attach(testFile);
+        assertTrue(this.email.isBoolHasAttachments());
+
+        // ====================================================================
         // Test Exceptions
         // ====================================================================
         // null attachment
         try
         {
-            this.email.attach(null);
+            this.email.attach((EmailAttachment) null);
             fail("Should have thrown an exception");
         }
         catch (EmailException e)
