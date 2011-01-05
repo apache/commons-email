@@ -619,9 +619,12 @@ public class HtmlEmailTest extends BaseEmailTestCase
      * Test that the specified Content-ID is used when embedding a File
      * object in an HtmlEmail.
      *
+     * Rolled back the changes since they broke real emails therefore
+     * the test is currently disabled.
+     *
      * see https://issues.apache.org/jira/browse/EMAIL-101
      */
- 	public void testEmbedFileWithCID() throws Exception
+ 	public void _testEmbedFileWithCID() throws Exception
      {
          // ====================================================================
          // Test Success
