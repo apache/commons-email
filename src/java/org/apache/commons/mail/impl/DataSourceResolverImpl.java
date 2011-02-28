@@ -32,10 +32,10 @@ import java.net.URL;
 public class DataSourceResolverImpl implements DataSourceResolver
 {
     /**  the base url of the resource when resolving relative paths */
-    private URL baseUrl;
+    private final URL baseUrl;
 
     /** shall we ignore resources not found or complain with an exception */
-    private boolean isLenient;
+    private final boolean isLenient;
 
     /**
      * Constructor.
