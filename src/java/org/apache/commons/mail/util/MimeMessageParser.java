@@ -46,7 +46,7 @@ import java.util.List;
 public class MimeMessageParser
 {
     /** The MimeMessage to convert */
-    private MimeMessage mimeMessage;
+    private final MimeMessage mimeMessage;
 
     /** Plain mail content from MimeMessage */
     private String plainContent;
@@ -55,7 +55,7 @@ public class MimeMessageParser
     private String htmlContent;
 
     /** List of attachments of MimeMessage */
-    private List attachmentList;
+    private final List attachmentList;
 
     /** Is this a Multipart email */
     private boolean isMultiPart;
