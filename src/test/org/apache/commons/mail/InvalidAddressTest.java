@@ -22,7 +22,6 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
  * JUnit test case for invalid Addresses in Email Class
  *
  * @since 1.0
- * @author Niall Pemberton
  * @version $Id$
  */
 public class InvalidAddressTest extends BaseEmailTestCase

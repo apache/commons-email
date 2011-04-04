@@ -24,7 +24,6 @@ import javax.mail.internet.InternetAddress;
  * JUnit test case demonstrating InternetAddress validation.
  *
  * @since 1.0
- * @author Niall Pemberton
  * @version $Id$
  */
 
