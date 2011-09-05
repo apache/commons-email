@@ -68,6 +68,29 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasAttachments());
     }
 
+    public void testParseSimpleReplyEmail() throws Exception
+    {
+        Session session = Session.getDefaultInstance(new Properties());
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/simple-reply.eml"));
+        MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Re: java.lang.NoClassDefFoundError: org/bouncycastle/asn1/pkcs/PrivateKeyInfo", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertFalse(mimeMessageParser.isMultipart());
+        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasPlainContent());
+        assertNotNull(mimeMessageParser.getPlainContent());
+        assertNull(mimeMessageParser.getHtmlContent());
+        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertTrue(mimeMessageParser.getCc().size() == 0);
+        assertTrue(mimeMessageParser.getBcc().size() == 0);
+        assertEquals("coheigea@apache.org", mimeMessageParser.getFrom());
+        assertEquals("dev@ws.apache.org", mimeMessageParser.getReplyTo());
+        assertFalse(mimeMessageParser.hasAttachments());
+    }
+
     public void testParseHtmlEmailWithAttachments() throws Exception
     {
         DataSource dataSource;
@@ -101,4 +124,78 @@ public class MimeMessageParserTest
         assertNotNull(dataSource);
         assertEquals("application/pdf", dataSource.getContentType());
     }
+
+    /**
+     * This test parses an "email read notification" where the resulting data source has no name. Originally
+     * the missing name caused a NPE in MimeUtility.decodeText().
+     *
+     * @throws Exception the test failed
+     */
+    public void testParseMultipartReport() throws Exception
+    {
+        DataSource dataSource;
+        Session session = Session.getDefaultInstance(new Properties());
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/multipart-report.eml"));
+        MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Gelesen: ", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertTrue(mimeMessageParser.hasHtmlContent());
+        assertFalse(mimeMessageParser.hasPlainContent());
+        assertNull(mimeMessageParser.getPlainContent());
+        assertNotNull(mimeMessageParser.getHtmlContent());
+        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertTrue(mimeMessageParser.getCc().size() == 0);
+        assertTrue(mimeMessageParser.getBcc().size() == 0);
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+        List attachmentList = mimeMessageParser.getAttachmentList();
+        assertTrue(attachmentList.size() == 1);
+
+        dataSource = (DataSource) attachmentList.get(0);
+        assertNotNull(dataSource);
+        assertNull(dataSource.getName());
+        assertEquals("message/disposition-notification", dataSource.getContentType());
+    }
+
+    /**
+     * This test parses a SAP generated email which only contains a PDF but no email
+     * text.
+     *
+     * @throws Exception the test failed
+     */
+    public void testAttachmentOnly() throws Exception
+    {
+        DataSource dataSource;
+        Session session = Session.getDefaultInstance(new Properties());
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/attachment-only.eml"));
+        MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Kunde 100029   Auftrag   3600", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertFalse(mimeMessageParser.isMultipart());
+        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertFalse(mimeMessageParser.hasPlainContent());
+        assertNull(mimeMessageParser.getPlainContent());
+        assertNull(mimeMessageParser.getHtmlContent());
+        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertTrue(mimeMessageParser.getCc().size() == 0);
+        assertTrue(mimeMessageParser.getBcc().size() == 0);
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+        List attachmentList = mimeMessageParser.getAttachmentList();
+        assertTrue(attachmentList.size() == 1);
+
+        dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
+        assertNotNull(dataSource);
+        assertEquals("application/pdf", dataSource.getContentType());
+    }
+
 }

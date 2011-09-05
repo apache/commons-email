@@ -21,6 +21,7 @@ import javax.activation.DataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -32,9 +33,9 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -88,7 +89,7 @@ public class MimeMessageParser
      * @return the 'to' recipents of the message
      * @throws Exception determining the recipients failed
      */
-    public Collection getTo() throws Exception
+    public List getTo() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList();
@@ -98,7 +99,7 @@ public class MimeMessageParser
      * @return the 'cc' recipents of the message
      * @throws Exception determining the recipients failed
      */
-    public Collection getCc() throws Exception
+    public List getCc() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList();
@@ -108,7 +109,7 @@ public class MimeMessageParser
      * @return the 'bcc' recipents of the message
      * @throws Exception determining the recipients failed
      */
-    public Collection getBcc() throws Exception
+    public List getBcc() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList();
@@ -204,8 +205,8 @@ public class MimeMessageParser
     /**
      * Parses the MimePart to create a DataSource.
      *
-     * @param parent the parent MultiPart
-     * @param part   the part to be processed
+     * @param parent the parent multi-part
+     * @param part   the current part to be processed
      * @return the DataSource
      * @throws MessagingException creating the DataSource failed
      * @throws IOException        creating the DataSource failed
@@ -218,7 +219,7 @@ public class MimeMessageParser
         String contentType = getBaseMimeType(dataSource.getContentType());
         byte[] content = this.getContent(dataSource.getInputStream());
         ByteArrayDataSource result = new ByteArrayDataSource(content, contentType);
-        String dataSourceName = MimeUtility.decodeText(dataSource.getName());
+        String dataSourceName = getDataSourceName(part, dataSource);
 
         result.setName(dataSourceName);
         return result;
@@ -295,6 +296,37 @@ public class MimeMessageParser
     }
 
     /**
+     * Determines the name of the data source if it is not already set.
+     *
+     * @param part the mail part
+     * @param dataSource the data source
+     * @return the name of the data source or <b>null</b> if no name can be determined
+     * @throws MessagingException accessing the part failed
+     * @throws UnsupportedEncodingException decoding the text failed
+     */
+    protected String getDataSourceName(Part part, DataSource dataSource)
+        throws MessagingException, UnsupportedEncodingException
+    {
+        String result = dataSource.getName();
+
+        if(result == null || result.length() == 0)
+        {
+            result = part.getFileName();
+        }
+
+        if(result != null && result.length() > 0)
+        {
+            result = MimeUtility.decodeText( result );
+        }
+        else
+        {
+            result = null;
+        }
+
+        return result;
+    }
+
+    /**
      * Read the content of the input stream.
      *
      * @param is the input stream to process
@@ -322,6 +354,7 @@ public class MimeMessageParser
 
         return result;
     }
+
 
     /**
      * Parses the mimeType.
