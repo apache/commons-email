@@ -40,7 +40,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
 {
     /** */
     private MockMultiPartEmailConcrete email;
-    /** File to used to test file attachmetns (Must be valid) */
+    /** File to used to test file attachments (Must be valid) */
     private File testFile;
 
     /**
