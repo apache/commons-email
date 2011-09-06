@@ -157,11 +157,14 @@ public abstract class Email implements EmailConstants
     /** the password to log into the pop3 server */
     protected String popPassword;
 
-    /** does server require TLS encryption for authentication */
-    protected boolean tls;
+    /** does client want STARTTLS encryption */
+    protected boolean startTlsEnabled;
+    
+    /** does client require STARTTLS encryption */
+    protected boolean startTlsRequired;
 
-    /** does the current transport use SSL encryption? */
-    protected boolean ssl;
+    /** does the current transport use SSL/TLS encryption upon connection? */
+    protected boolean sslOnConnect;
 
     /** socket I/O timeout value in milliseconds */
     protected int socketTimeout = SOCKET_TIMEOUT_MS;
@@ -196,7 +199,7 @@ public abstract class Email implements EmailConstants
      * @param password password for the SMTP server
      * @return An Email.
      * @see DefaultAuthenticator
-     * @see #setAuthenticator
+     * @see #setAuthenticator(Authenticator)
      * @since 1.0
      */
     public Email setAuthentication(String userName, String password)
@@ -336,16 +339,42 @@ public abstract class Email implements EmailConstants
     }
 
     /**
-     * Set or disable the TLS encryption
+     * Set or disable the STARTTLS encryption. Please see EMAIL-105
+     * for the reasons of deprecation.
      *
-     * @param withTLS true if TLS needed, false otherwise
+     * @deprecated since 1.3
+     * @param startTlsEnabled true if STARTTLS requested, false otherwise
      * @return An Email.
      * @since 1.1
      */
-    public Email setTLS(boolean withTLS)
+    public Email setTLS(boolean startTlsEnabled)
+    {
+        return setStartTLSEnabled(startTlsEnabled);
+    }
+    
+    /**
+     * Set or disable the STARTTLS encryption.
+     *
+     * @param startTlsEnabled true if STARTTLS requested, false otherwise
+     * @return An Email.
+     */
+    public Email setStartTLSEnabled(boolean startTlsEnabled)
     {
         checkSessionAlreadyInitialized();
-        this.tls = withTLS;
+        this.startTlsEnabled = startTlsEnabled;
+        return this;
+    }
+    
+    /**
+     * Set or disable the STARTTLS encryption.
+     *
+     * @param startTlsRequired true if STARTTLS requested, false otherwise
+     * @return An Email.
+     */
+    public Email setStartTLSRequired(boolean startTlsRequired)
+    {
+        checkSessionAlreadyInitialized();
+        this.startTlsRequired = startTlsRequired;
         return this;
     }
 
@@ -481,14 +510,25 @@ public abstract class Email implements EmailConstants
             properties.setProperty(MAIL_HOST, this.hostName);
             properties.setProperty(MAIL_DEBUG, String.valueOf(this.debug));
 
+            properties.setProperty(MAIL_TRANSPORT_STARTTLS_ENABLE, startTlsEnabled ? "true" : "false");
+            properties.setProperty(MAIL_TRANSPORT_STARTTLS_REQUIRED, startTlsRequired ? "true" : "false");
+            
             if (this.authenticator != null)
             {
-                properties.setProperty(MAIL_TRANSPORT_TLS, tls ? "true" : "false");
                 properties.setProperty(MAIL_SMTP_AUTH, "true");
             }
-
-            if (this.ssl)
+            
+            if (this.sslOnConnect || this.startTlsEnabled || this.startTlsRequired)
             {
+                properties.setProperty(MAIL_SMTP_SSL_SOCKET_FACTORY_PORT, this.sslSmtpPort);
+                properties.setProperty(MAIL_SMTP_SSL_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
+                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
+        	    properties.put(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, Boolean.TRUE);
+            }
+
+            if (this.sslOnConnect)
+            {
+        	    properties.put(MAIL_SMTP_SSL_ENABLE, Boolean.TRUE);
                 properties.setProperty(MAIL_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
@@ -1253,16 +1293,38 @@ public abstract class Email implements EmailConstants
         }
         return null;
     }
+    
+    /**
+     * Gets whether the client is configured to require STARTTLS.
+     *
+     * @return true if using STARTTLS for authentication, false otherwise
+     */
+    public boolean isStartTLSRequired()
+    {
+        return this.startTlsRequired;
+    }
+    
+    /**
+     * Gets whether the client is configured to try to enable STARTTLS.
+     *
+     * @return true if using STARTTLS for authentication, false otherwise
+     */
+    public boolean isStartTLSEnabled()
+    {
+        return this.startTlsEnabled;
+    }
 
     /**
-     * Gets encryption mode for authentication.
+     * Gets whether the client is configured to try to enable STARTTLS.
+     * See EMAIL-105 for reason of deprecation.
      *
-     * @return true if using TLS for authentication, false otherwise
+     * @deprecated since 1.3
+     * @return true if using STARTTLS for authentication, false otherwise
      * @since 1.1
      */
     public boolean isTLS()
     {
-        return this.tls;
+        return isStartTLSEnabled();
     }
 
     /**
@@ -1305,25 +1367,50 @@ public abstract class Email implements EmailConstants
     }
 
     /**
-     * Returns whether SSL encryption for the transport is currently enabled.
-     *
+     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
+     * See EMAIL-105 for reason of deprecation.
+     * 
+     * @deprecated since 1.3
      * @return true if SSL enabled for the transport
      */
     public boolean isSSL()
     {
-        return ssl;
+        return isSSLOnConnect();
     }
-
+    
     /**
-     * Sets whether SSL encryption should be enabled for the SMTP transport.
+     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
+     * 
+     * @return true if SSL enabled for the transport
+     */
+    public boolean isSSLOnConnect()
+    {
+        return sslOnConnect;
+    }
+    
+    /**
+     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS).
+     * See EMAIL-105 for reason of deprecation.
      *
+     * @deprecated since 1.3
      * @param ssl whether to enable the SSL transport
      * @return An Email.
      */
     public Email setSSL(boolean ssl)
     {
+        return setSSLOnConnect(ssl);
+    }
+
+    /**
+     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS).
+     *
+     * @param ssl whether to enable the SSL transport
+     * @return An Email.
+     */
+    public Email setSSLOnConnect(boolean ssl)
+    {
         checkSessionAlreadyInitialized();
-        this.ssl = ssl;
+        this.sslOnConnect = ssl;
         return this;
     }
 

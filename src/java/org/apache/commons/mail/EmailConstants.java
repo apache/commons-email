@@ -63,7 +63,10 @@ public interface EmailConstants
     // since 1.1
     /////////////////////////////////////////////////////////////////////////
 
+    /** @deprecated since 1.3 */
     String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
+
+    String MAIL_TRANSPORT_STARTTLS_ENABLE = "mail.smtp.starttls.enable";
     String MAIL_SMTP_SOCKET_FACTORY_FALLBACK = "mail.smtp.socketFactory.fallback";
     String MAIL_SMTP_SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
     String MAIL_SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
@@ -89,4 +92,10 @@ public interface EmailConstants
     /////////////////////////////////////////////////////////////////////////
 
     int SOCKET_TIMEOUT_MS = 60000;
+
+    String MAIL_TRANSPORT_STARTTLS_REQUIRED = "mail.smtp.starttls.required";
+    String MAIL_SMTP_SSL_ENABLE = "mail.smtp.ssl.enable";
+    String MAIL_SMTP_SSL_CHECKSERVERIDENTITY = "mail.smtp.ssl.checkserveridentity";
+    String MAIL_SMTP_SSL_SOCKET_FACTORY_CLASS = "mail.smtp.ssl.socketFactory.class";
+    String MAIL_SMTP_SSL_SOCKET_FACTORY_PORT = "mail.smtp.ssl.socketFactory.port";
 }

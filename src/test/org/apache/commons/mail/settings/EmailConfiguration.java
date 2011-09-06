@@ -28,6 +28,12 @@ import org.apache.commons.mail.EmailConstants;
  */
 public final class EmailConfiguration
 {
+    // when using GMail for testing the following combination work
+    //
+    // port 25      - StartTLS
+    // port 25      - StartTLS & UseSSL
+    // port 465     - UseSSL
+    // port 465     - StartTLS & UseSSL
 
     public static final boolean MAIL_FORCE_SEND     = false;
 	public static final boolean MAIL_DEBUG          = false;
@@ -39,7 +45,7 @@ public final class EmailConfiguration
     public static final String  TEST_USER           = "user";
     public static final String  TEST_PASSWD         = "password";
     public static final boolean MAIL_USE_SSL        = false;
-    public static final boolean MAIL_USE_TLS        = false;
+    public static final boolean MAIL_USE_STARTTLS   = false;
 
     public static final String TEST_URL = EmailConfiguration.class
         .getResource("/images/asf_logo_wide.gif")

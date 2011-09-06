@@ -95,8 +95,8 @@ public class EmailLiveTest extends BaseEmailTestCase
 
         Email email = (Email) clazz.newInstance();
 
-        email.setTLS(EmailConfiguration.MAIL_USE_TLS);
-        email.setSSL(EmailConfiguration.MAIL_USE_SSL);
+        email.setStartTLSEnabled(EmailConfiguration.MAIL_USE_STARTTLS);
+        email.setSSLOnConnect(EmailConfiguration.MAIL_USE_SSL);
         email.setHostName(EmailConfiguration.MAIL_SERVER);
         email.setSmtpPort(EmailConfiguration.MAIL_SERVER_PORT);
         email.setBounceAddress(EmailConfiguration.TEST_FROM);
