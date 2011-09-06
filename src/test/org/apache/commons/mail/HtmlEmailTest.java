@@ -19,11 +19,15 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
+import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
+import org.apache.commons.mail.util.MimeMessageParser;
 
 /**
  * JUnit test case for HtmlEmail Class.
@@ -644,5 +648,40 @@ public class HtmlEmailTest extends BaseEmailTestCase
          // back?
          String returnedCid = this.email.embed(file);
          assertEquals("didn't get same CID after embedding same file twice", testCid, returnedCid);
-     }	    
+     }
+    
+    public void testHtmlMailMimeLayout() throws Exception
+    {
+        assertCorrectContentType("contentTypeTest.gif", "image/gif");
+        assertCorrectContentType("contentTypeTest.jpg", "image/jpeg");
+        assertCorrectContentType("contentTypeTest.png", "image/png");
+    }
+
+    private void assertCorrectContentType(String picture, String contentType) throws Exception {
+        HtmlEmail htmlEmail = createDefaultHtmlEmail();
+        String cid = htmlEmail.embed(new File("./src/test/images/" + picture), "Apache Logo");
+        String htmlMsg = "<html><img src=\"cid:" + cid + "\"><html>";
+        htmlEmail.setHtmlMsg(htmlMsg);
+        htmlEmail.buildMimeMessage();
+
+        MimeMessage mm = htmlEmail.getMimeMessage();
+        mm.saveChanges();
+        MimeMessageParser mmp = new MimeMessageParser(mm);
+        mmp.parse();
+
+        List attachments = mmp.getAttachmentList();
+        assertEquals("Attachment size", 1, attachments.size());
+
+        DataSource ds = (DataSource) attachments.get(0);
+        assertEquals("Content type", contentType, ds.getContentType());
+    }
+
+    private HtmlEmail createDefaultHtmlEmail() throws EmailException {
+        HtmlEmail htmlEmail = new HtmlEmail();
+        htmlEmail.setHostName(this.strTestMailServer);
+        htmlEmail.setSmtpPort(this.getMailServerPort());
+        htmlEmail.setFrom("a@b.com");
+        htmlEmail.addTo("c@d.com");
+        return htmlEmail;
+    }
 }

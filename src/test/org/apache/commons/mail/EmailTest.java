@@ -16,6 +16,7 @@
  */
 package org.apache.commons.mail;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
@@ -27,14 +28,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.ParseException;
-
 import org.apache.commons.mail.mocks.MockEmailConcrete;
 
 /**
@@ -355,9 +354,9 @@ public class EmailTest extends BaseEmailTestCase
                 "joe.doe@apache.org",
                 "joe.doe@apache.org"));
         arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+                new InternetAddress(
+                        "someone_here@work-address.com.au",
+                        "someone_here@work-address.com.au"));
 
         for (int i = 0; i < testEmails.length; i++)
         {
@@ -1320,18 +1319,18 @@ public class EmailTest extends BaseEmailTestCase
 
         testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
         testInetEmailValid.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
+                new InternetAddress(
+                        "joe.doe@apache.org",
+                        "joe.doe@apache.org"));
         testInetEmailValid.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+                new InternetAddress(
+                        "someone_here@work-address.com.au",
+                        "someone_here@work-address.com.au"));
 
         this.email.setBcc(testInetEmailValid);
         assertEquals(
-            testInetEmailValid.size(),
-            this.email.getBccAddresses().size());
+                testInetEmailValid.size(),
+                this.email.getBccAddresses().size());
     }
 
     /** */
@@ -1427,5 +1426,22 @@ public class EmailTest extends BaseEmailTestCase
         MimeMessage msg = this.email.getMimeMessage();
         msg.saveChanges();
         assertEquals("application/octet-stream", msg.getContentType());
+    }
+
+    public void testCorrectContentTypeForPNG() throws Exception
+    {
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom("a@b.com");
+        this.email.addTo("c@d.com");
+        this.email.setSubject("test mail");
+
+        this.email.setCharset("ISO-8859-1");
+        File png = new File("./target/test-classes/images/logos/maven-feather.png");
+        this.email.setContent(png, "image/png");
+        this.email.buildMimeMessage();
+        MimeMessage msg = this.email.getMimeMessage();
+        msg.saveChanges();
+        assertEquals("image/png", msg.getContentType());
     }
 }
