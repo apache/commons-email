@@ -39,29 +39,4 @@ public class URLFactoryTest extends TestCase
     // ======================================================================
     // Start of Tests
     // ======================================================================
-    
-    public void testCreateUrl() throws Exception
-    {
-        URL url;
-        URL baseUrl;
-        String location;
-
-        // base URL + relative file name
-        location = "pom.xml";
-        baseUrl = new File("").toURI().toURL();
-        url = URLFactory.createUrl(baseUrl, location);
-        assertEquals(new File("pom.xml").toURI().toURL().toExternalForm(), url.toExternalForm());
-
-        // base URL  + file URL
-        location = new File("pom.xml").toURI().toURL().toExternalForm();
-        baseUrl = new File("").toURI().toURL();
-        url = URLFactory.createUrl(baseUrl, location);
-        assertEquals(new File("pom.xml").toURI().toURL().toExternalForm(), url.toExternalForm());
-
-        // file URL only
-        location = new File("pom.xml").toURI().toURL().toExternalForm();
-        baseUrl = null;
-        url = URLFactory.createUrl(baseUrl, location);
-        assertEquals(new File("pom.xml").toURI().toURL().toExternalForm(), url.toExternalForm());
-    }
 }

@@ -23,6 +23,9 @@
 
   <body>
     <release version="1.3" date="as in SVN">
+       <action dev="sgoeschl" type="add" issue="EMAIL-108" date="2011-11-10" due-to="Elisabeth Kasimir, Alexander Kasimir">
+          HtmlmageEmail should support class path resources
+       </action>
        <action dev="sgoeschl" type="fix" issue="EMAIL-107" date="2011-09-06" due-to="Claus Polanka, Michael Jakl">
           Added mime.types to META-INF - the definition is actually found in activation.jar
           but did not work.

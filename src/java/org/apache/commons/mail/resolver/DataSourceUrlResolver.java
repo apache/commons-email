@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.mail.impl;
-
-import org.apache.commons.mail.DataSourceResolver;
-import org.apache.commons.mail.util.URLFactory;
+package org.apache.commons.mail.resolver;
 
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -29,22 +27,20 @@ import java.net.URL;
  *
  * @since 1.3
  */
-public class DataSourceResolverImpl implements DataSourceResolver
+public class DataSourceUrlResolver extends DataSourceBaseResolver
 {
-    /**  the base url of the resource when resolving relative paths */
+    /** the base url of the resource when resolving relative paths */
     private final URL baseUrl;
-
-    /** shall we ignore resources not found or complain with an exception */
-    private final boolean isLenient;
 
     /**
      * Constructor.
      *
      * @param baseUrl the base URL used for resolving relative resource locations
      */
-    public DataSourceResolverImpl(URL baseUrl)
+    public DataSourceUrlResolver(final URL baseUrl)
     {
-        this(baseUrl, false);
+        super();
+        this.baseUrl = baseUrl;
     }
 
     /**
@@ -53,10 +49,10 @@ public class DataSourceResolverImpl implements DataSourceResolver
      * @param baseUrl the base URL used for resolving relative resource locations
      * @param lenient shall we ignore resources not found or complain with an exception
      */
-    public DataSourceResolverImpl(URL baseUrl, boolean lenient)
+    public DataSourceUrlResolver(final URL baseUrl, final boolean lenient)
     {
+        super(lenient);
         this.baseUrl = baseUrl;
-        this.isLenient = lenient;
     }
 
     /**
@@ -69,34 +65,20 @@ public class DataSourceResolverImpl implements DataSourceResolver
         return baseUrl;
     }
 
-    /**
-     * Shall we ignore resources not found or throw an exception?
-     *
-     * @return the lenient flag
-     */
-    public boolean isLenient()
+    public DataSource resolve(String resourceLocation) throws IOException
     {
-        return isLenient;
+        return resolve(resourceLocation, isLenient());
     }
 
-    /**
-     * Resolve a resource location to be embedded into the email. When using
-     * the lenient mode a resource which can't be resolved returns "null".
-     * When using the non-lenient mode an exception would be thrown.
-     *
-     * @param resourceLocation the location of the resource
-     * @return the data source containing the resource
-     * @throws IOException resolving the resource failed
-     */
-    public DataSource resolve(String resourceLocation) throws IOException
+    public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
     {
         DataSource result = null;
 
         try
         {
-            if (!resourceLocation.startsWith("cid:"))
+            if (!isCid(resourceLocation))
             {
-                URL url = URLFactory.createUrl(getBaseUrl(), resourceLocation);
+                URL url = createUrl(resourceLocation);
                 result = new URLDataSource(url);
                 result.getInputStream();
             }
@@ -105,7 +87,7 @@ public class DataSourceResolverImpl implements DataSourceResolver
         }
         catch (IOException e)
         {
-            if (isLenient())
+            if (isLenient)
             {
                 return null;
             }
@@ -114,5 +96,37 @@ public class DataSourceResolverImpl implements DataSourceResolver
                 throw e;
             }
         }
+    }
+
+    /**
+     * Create an URL based on a base URL and a resource location suitable for loading
+     * the resource.
+     *
+     * @param resourceLocation a resource location
+     * @return the corresponding URL
+     * @throws java.net.MalformedURLException creating the URL failed
+     */
+    private URL createUrl(final String resourceLocation) throws MalformedURLException
+    {
+        // if we get an non-existing base url than the resource can
+        // be directly used to create an URL
+        if (baseUrl == null)
+        {
+            return new URL(resourceLocation);
+        }
+
+        // if we get an non-existing location what we shall do?
+        if (resourceLocation == null || resourceLocation.length() == 0)
+        {
+            throw new IllegalArgumentException("No resource defined");
+        }
+
+        // if we get a stand-alone resource than ignore the base url
+        if (isFileUrl(resourceLocation) || isHttpUrl(resourceLocation))
+        {
+            return new URL(resourceLocation);
+        }
+
+        return new URL(getBaseUrl(), resourceLocation.replaceAll("&amp;", "&"));
     }
 }

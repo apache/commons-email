@@ -34,4 +34,15 @@ public interface DataSourceResolver
      * @throws IOException the resource was not found
      */
     DataSource resolve(final String resourceLocation) throws IOException;
+
+    /**
+     * Resolves the given resource location to a <code>DataSource</code>.
+     *
+     * @param resourceLocation the location of the resource
+     * @param isLenient shall we ignore resources not found or complain with an exception?
+     * @return the data source containing the resource or null if the resource was not found in lenient mode
+     * @throws IOException resolving the resource failed
+     */
+    DataSource resolve(final String resourceLocation, final boolean isLenient)
+        throws IOException;
 }

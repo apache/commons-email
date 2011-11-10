@@ -66,7 +66,7 @@ public class MimeMessageParser
      *
      * @param message the message to parse
      */
-    public MimeMessageParser(MimeMessage message)
+    public MimeMessageParser(final MimeMessage message)
     {
         attachmentList = new ArrayList();
         this.mimeMessage = message;
@@ -309,12 +309,12 @@ public class MimeMessageParser
     {
         String result = dataSource.getName();
 
-        if(result == null || result.length() == 0)
+        if (result == null || result.length() == 0)
         {
             result = part.getFileName();
         }
 
-        if(result != null && result.length() > 0)
+        if (result != null && result.length() > 0)
         {
             result = MimeUtility.decodeText( result );
         }
