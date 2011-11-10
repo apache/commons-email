@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * JUnit test case for DateSourceResolver.
+ * JUnit test case for DataSourceUrlResolver.
  *
  * @since 1.3
  */
@@ -41,15 +41,26 @@ public class DataSourceUrlResolverTest extends TestCase
         super(name);
     }
 
+    /**
+     * Shows how the DataSourceUrlResolver can resolve files as well but this should
+     * be done using a DataSourceFileResolver.
+     *
+     * @throws Exception the test failed
+     */
     public void testResolvingFilesLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test").toURI().toURL(), true);
         assertTrue(toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length == IMG_SIZE);
-        assertTrue(toByteArray(dataSourceResolver.resolve("/images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
+        assertNull(dataSourceResolver.resolve("/images/asf_logo_wide.gif"));
     }
 
+    /**
+     * Tests resolving resources over HTTP.
+     *
+     * @throws Exception the test failed
+     */
     public void testResolvingHttpLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), true);
@@ -60,24 +71,11 @@ public class DataSourceUrlResolverTest extends TestCase
         assertNull(toByteArray(dataSourceResolver.resolve("/images/does-not-exist.gif")));
     }
 
-
-    public void testResolvingClassPathNonLenient() throws Exception
-    {
-        DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test").toURI().toURL());
-        assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
-
-        try
-        {
-            dataSourceResolver.resolve("asf_logo_wide.gif");
-            fail("Expecting an IOException");
-        }
-        catch(IOException e)
-        {
-            // expected
-            return;
-        }
-    }
-
+    /**
+     * Tests resolving resources over HTTP.
+     *
+     * @throws Exception the test failed
+     */
     public void testResolvingHttpNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
