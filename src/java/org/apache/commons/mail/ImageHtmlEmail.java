@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
  * The image loading is done by an instance of <code>DataSourceResolver</code>
  * which has to be provided by the caller.
  * </br>
- * 
+ *
  * @since 1.3
  */
 public class ImageHtmlEmail extends HtmlEmail

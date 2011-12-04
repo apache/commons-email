@@ -74,7 +74,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
                 String resourceName = getResourceName(resourceLocation);
                 InputStream is = DataSourceClassPathResolver.class.getResourceAsStream(resourceName);
 
-                if(is != null)
+                if (is != null)
                 {
                     result = new ByteArrayDataSource(is, mimeType);
                 }

@@ -316,7 +316,7 @@ public class MimeMessageParser
 
         if (result != null && result.length() > 0)
         {
-            result = MimeUtility.decodeText( result );
+            result = MimeUtility.decodeText(result);
         }
         else
         {
@@ -354,7 +354,6 @@ public class MimeMessageParser
 
         return result;
     }
-
 
     /**
      * Parses the mimeType.

@@ -85,7 +85,7 @@ public class DataSourceFileResolver extends DataSourceBaseResolver
 
             if (!file.isAbsolute())
             {
-                file = (getBaseDir() != null ? new File(getBaseDir(), resourceLocation) : new File(resourceLocation));
+                file = getBaseDir() != null ? new File(getBaseDir(), resourceLocation) : new File(resourceLocation);
             }
 
             if (file.exists())
