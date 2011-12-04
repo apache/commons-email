@@ -1,5 +1,5 @@
                          Commons Email Package
-                              Version 1.2
+                              Version 1.3
                              Release Notes
 
 INTRODUCTION:
@@ -24,40 +24,53 @@ CHANGES FROM 1.2:
 
 == New Features ==
 
-o Adding ImageHtmlEmail to create HTML emails with embedded images either
-  downloaded from HTTP or from the local file system.  
-  Issue: EMAIL-92. Thanks to Dominik Stadler.
+* HtmlmageEmail should support class path resources  
+  Issue: EMAIL-108. Thanks to Elisabeth Kasimir, Alexander Kasimir. 
 
-o Added MimeMessageParser and MimeMessageUtils.
+* Added a MultiPartEmail.attach(File) method since attaching a file is a simple and common. 
 
-== Misc ==
-
-o Moving the various constants from 'EMail' to 'EmailConstants'
+* Added MimeMessageParser and MimeMessageUtils. 
 
 == Fixed Bugs ==
 
-o Throwing an IllegalStateException when setting mail session properties 
-  for an already created mail session because the settings would be 
-  ignored. Please note that this change could potentially break existing
-  (but invalid) code.  Issue: EMAIL-96.
+* Added mime.types to META-INF - the definition is actually found in activation.jar
+  but did not work.  Issue: EMAIL-107. Thanks to Claus Polanka, Michael Jakl. 
 
-o Encoding and folding of headers is now done by commons-email.  
-  Issue: EMAIL-98. Thanks to Mario Daepp.
+* STARTTLS can be used even without authenticator.  Issue: EMAIL-106. Thanks to Bruno Harbulot. 
 
-o The default connection timeout is set to a reasonable default value of 
-  60 seconds.  Issue: EMAIL-100. Thanks to David Parks.
+* Clarified the meaning of setTLS() which actually sends a "STARTTLS" command from the
+  client to the SMTP server. Please note that some "protected" variables were renamed
+  which could break existing code.  Issue: EMAIL-105. Thanks to Bruno Harbulot. 
 
-o All setters are returning "this" to simplify building an email.  
-  Issue: EMAIL-76. Thanks to Yu Kobayashi.
+* Fixed HtmlEmail embed toLowerCase bug with Turkish locale.  Issue: EMAIL-102. Thanks to Okan Özeren. 
 
-o Calling buildMimeMessage() before invoking send() caused duplicated 
-  mime parts for HtmlEmail. The implementation now enforces that an email 
-  can be only used once and throw an exception when multiple invocations of 
-  buildMimeMessage() are detected.  Issue: EMAIL-95.
+* Specified Content-ID is now used when embedding a File object in an HtmlEmail.  
+  Issue: EMAIL-101. Thanks to Andrew Starodub. 
 
-o Incorrect SMTP Port number shown in error message when an email fails
-  to send due to a blocked port and SSL is used.  
-  Issue: EMAIL-91. Thanks to Kevin Lester.
+* Restore Java 1.4 compatibility. 
+
+* Throwing an IllegalStateException when setting mail session properties for an already
+  created mail session because the settings would be ignored. Please note that this
+  change could potentially break existing (but invalid) code.  Issue: EMAIL-96. 
+
+* Encoding and folding of headers is now done by commons-email.  Issue: EMAIL-98. Thanks to Mario Daepp. 
+
+* The default connection timeout is set to a reasonable default value of 60 seconds.  Issue: EMAIL-100. Thanks to David Parks. 
+
+* Moving the various constants from 'EMail' to 'EmailConstants' 
+
+* All setters are returning "this" to simplify building an email.  Issue: EMAIL-76. Thanks to Yu Kobayashi. 
+
+* Adding ImageHtmlEmail to create HTML emails with embedded images either
+  downloaded from HTTP or from the local file system.  Issue: EMAIL-92. Thanks to Dominik Stadler. 
+
+* Calling buildMimeMessage() before invoking send() caused
+  duplicated mime parts for HtmlEmail. The implementation now enforces
+  that an email can be only used once and throw an exception when
+  multiple invocations of buildMimeMessage() are detected.  Issue: EMAIL-95. 
+
+* Incorrect SMTP Port number shown in error message when an email fails
+  to send due to a blocked port and SSL is used.  Issue: EMAIL-91. Thanks to Kevin Lester. 
 
 
 CHANGES FROM 1.1:
@@ -143,6 +156,3 @@ JavaMail and JAF indicated above are available to their applications;
 the J2EE 1.4 specification only requires earlier versions.
 
 Earlier versions of J2EE are not supported.
-
-
-
