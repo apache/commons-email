@@ -32,6 +32,9 @@ public class DataSourceFileResolver extends DataSourceBaseResolver
     /** the base directory of the resource when resolving relative paths */
     private final File baseDir;
 
+    /**
+     * Constructor.
+     */
     public DataSourceFileResolver()
     {
         baseDir = new File(".");

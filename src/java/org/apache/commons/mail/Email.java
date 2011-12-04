@@ -159,7 +159,7 @@ public abstract class Email implements EmailConstants
 
     /** does client want STARTTLS encryption */
     protected boolean startTlsEnabled;
-    
+
     /** does client require STARTTLS encryption */
     protected boolean startTlsRequired;
 
@@ -351,7 +351,7 @@ public abstract class Email implements EmailConstants
     {
         return setStartTLSEnabled(startTlsEnabled);
     }
-    
+
     /**
      * Set or disable the STARTTLS encryption.
      *
@@ -364,7 +364,7 @@ public abstract class Email implements EmailConstants
         this.startTlsEnabled = startTlsEnabled;
         return this;
     }
-    
+
     /**
      * Set or disable the STARTTLS encryption.
      *
@@ -512,23 +512,23 @@ public abstract class Email implements EmailConstants
 
             properties.setProperty(MAIL_TRANSPORT_STARTTLS_ENABLE, startTlsEnabled ? "true" : "false");
             properties.setProperty(MAIL_TRANSPORT_STARTTLS_REQUIRED, startTlsRequired ? "true" : "false");
-            
+
             if (this.authenticator != null)
             {
                 properties.setProperty(MAIL_SMTP_AUTH, "true");
             }
-            
+
             if (this.sslOnConnect || this.startTlsEnabled || this.startTlsRequired)
             {
                 properties.setProperty(MAIL_SMTP_SSL_SOCKET_FACTORY_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SSL_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
-        	    properties.put(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, Boolean.TRUE);
+                properties.put(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, Boolean.TRUE);
             }
 
             if (this.sslOnConnect)
             {
-        	    properties.put(MAIL_SMTP_SSL_ENABLE, Boolean.TRUE);
+                properties.put(MAIL_SMTP_SSL_ENABLE, Boolean.TRUE);
                 properties.setProperty(MAIL_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
@@ -1293,7 +1293,7 @@ public abstract class Email implements EmailConstants
         }
         return null;
     }
-    
+
     /**
      * Gets whether the client is configured to require STARTTLS.
      *
@@ -1303,7 +1303,7 @@ public abstract class Email implements EmailConstants
     {
         return this.startTlsRequired;
     }
-    
+
     /**
      * Gets whether the client is configured to try to enable STARTTLS.
      *
@@ -1369,7 +1369,7 @@ public abstract class Email implements EmailConstants
     /**
      * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
      * See EMAIL-105 for reason of deprecation.
-     * 
+     *
      * @deprecated since 1.3
      * @return true if SSL enabled for the transport
      */
@@ -1377,17 +1377,17 @@ public abstract class Email implements EmailConstants
     {
         return isSSLOnConnect();
     }
-    
+
     /**
      * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
-     * 
+     *
      * @return true if SSL enabled for the transport
      */
     public boolean isSSLOnConnect()
     {
         return sslOnConnect;
     }
-    
+
     /**
      * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS).
      * See EMAIL-105 for reason of deprecation.
