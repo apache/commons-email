@@ -38,9 +38,8 @@ public class InvalidAddressTest extends BaseEmailTestCase
         "local:name@domain.com",
         "local[name@domain.com",
         "local]name@domain.com",
-        "local\\name@domain.com",
-
-        //      "local\"name@domain.com",
+        // "local\\name@domain.com", is considered valid for mail-1.4.1
+        "local\"name@domain.com",
         "local\tname@domain.com",
         "local\nname@domain.com",
         "local\rname@domain.com",

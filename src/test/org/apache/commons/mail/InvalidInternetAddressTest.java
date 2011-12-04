@@ -49,8 +49,8 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
             "local:name@domain.com",
             "local[name@domain.com",
             "local]name@domain.com",
-            "local\\name@domain.com",
-            "local\"name@domain.com",
+            // "local\\name@domain.com", -- works for javamail-1.4.4
+            // "local\"name@domain.com", -- works for javamail-1.4.4
             "local\tname@domain.com",
             "local\nname@domain.com",
             "local\rname@domain.com",
