@@ -197,5 +197,31 @@ public class MimeMessageParserTest
         assertNotNull(dataSource);
         assertEquals("application/pdf", dataSource.getContentType());
     }
+    
+    /**
+     * This test parses an eml file published with issue EMAIL-110.
+     * This eml file has a corrupted attachment but should not create
+     * an OutOfMemoryException.
+     * 
+     * @throws Exception the test failed
+     */
+    public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception
+    {
+        Session session = Session.getDefaultInstance(new Properties());
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/outofmemory-no-header-seperation.eml"));
+        MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
+        mimeMessageParser.parse();
+
+        assertEquals("A corrupt Attachment", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertFalse(mimeMessageParser.hasPlainContent());
+        assertNull(mimeMessageParser.getPlainContent());
+        assertNull(mimeMessageParser.getHtmlContent());
+        assertEquals(mimeMessageParser.getTo().size(), 1);
+        assertEquals(mimeMessageParser.getCc().size(), 0);
+        assertEquals(mimeMessageParser.getBcc().size(), 0);
+    }
 }
