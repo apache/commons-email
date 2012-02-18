@@ -71,13 +71,11 @@ public class MultiPartEmail extends Email
      * Set the MIME subtype of the email.
      *
      * @param aSubType MIME subtype of the email
-     * @return An Email.
      * @since 1.0
      */
-    public MultiPartEmail setSubType(String aSubType)
+    public void setSubType(String aSubType)
     {
         this.subType = aSubType;
-        return this;
     }
 
     /**
@@ -101,7 +99,7 @@ public class MultiPartEmail extends Email
      *  for definitions
      * @since 1.0
      */
-    public MultiPartEmail addPart(String partContent, String partContentType)
+    public Email addPart(String partContent, String partContentType)
         throws EmailException
     {
             BodyPart bodyPart = createBodyPart();

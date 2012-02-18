@@ -194,10 +194,9 @@ public abstract class Email implements EmailConstants
      * @return An Email.
      * @since 1.0
      */
-    public Email setDebug(boolean d)
+    public void setDebug(boolean d)
     {
         this.debug = d;
-        return this;
     }
 
     /**
@@ -211,12 +210,12 @@ public abstract class Email implements EmailConstants
      * @param password password for the SMTP server
      * @return An Email.
      * @see DefaultAuthenticator
-     * @see #setAuthenticator(Authenticator)
+     * @see #setAuthenticator
      * @since 1.0
      */
-    public Email setAuthentication(String userName, String password)
+    public void setAuthentication(String userName, String password)
     {
-        return this.setAuthenticator(new DefaultAuthenticator(userName, password));
+        this.setAuthenticator(new DefaultAuthenticator(userName, password));
     }
 
     /**
@@ -231,10 +230,9 @@ public abstract class Email implements EmailConstants
      * @see Authenticator
      * @since 1.0
      */
-    public Email setAuthenticator(Authenticator newAuthenticator)
+    public void setAuthenticator(Authenticator newAuthenticator)
     {
         this.authenticator = newAuthenticator;
-        return this;
     }
 
     /**
@@ -245,42 +243,36 @@ public abstract class Email implements EmailConstants
      * @throws java.nio.charset.IllegalCharsetNameException if the charset name is invalid
      * @throws java.nio.charset.UnsupportedCharsetException if no support for the named charset
      * exists in the current JVM
-     * @return An Email.
      * @since 1.0
      */
-    public Email setCharset(String newCharset)
+    public void setCharset(String newCharset)
     {
         Charset set = Charset.forName(newCharset);
         this.charset = set.name();
-        return this;
     }
 
     /**
      * Set the emailBody to a MimeMultiPart
      *
      * @param aMimeMultipart aMimeMultipart
-     * @return An Email.
      * @since 1.0
      */
-    public Email setContent(MimeMultipart aMimeMultipart)
+    public void setContent(MimeMultipart aMimeMultipart)
     {
         this.emailBody = aMimeMultipart;
-        return this;
     }
 
     /**
      * Set the content & contentType
      *
-     * @param  aObject aObject
-     * @param  aContentType aContentType
-     * @return An Email.
+     * @param   aObject aObject
+     * @param   aContentType aContentType
      * @since 1.0
      */
-    public Email setContent(Object aObject, String aContentType)
+    public void setContent(Object aObject, String aContentType)
     {
         this.content = aObject;
         this.updateContentType(aContentType);
-        return this;
     }
 
     /**
@@ -340,28 +332,25 @@ public abstract class Email implements EmailConstants
      * Set the hostname of the outgoing mail server.
      *
      * @param   aHostName aHostName
-     * @return An Email.
      * @since 1.0
      */
-    public Email setHostName(String aHostName)
+    public void setHostName(String aHostName)
     {
         checkSessionAlreadyInitialized();
         this.hostName = aHostName;
-        return this;
     }
 
     /**
      * Set or disable the STARTTLS encryption. Please see EMAIL-105
-     * for the reasons of deprecation
+     * for the reasons of deprecation.
      *
      * @deprecated since 1.3, use setStartTLSEnabled() instead
      * @param startTlsEnabled true if STARTTLS requested, false otherwise
-     * @return An Email.
      * @since 1.1
      */
-    public Email setTLS(boolean startTlsEnabled)
+    public void setTLS(boolean withTLS)
     {
-        return setStartTLSEnabled(startTlsEnabled);
+        setStartTLSEnabled(startTlsEnabled);
     }
 
     /**
@@ -395,10 +384,9 @@ public abstract class Email implements EmailConstants
      * Set the port number of the outgoing mail server.
      *
      * @param  aPortNumber aPortNumber
-     * @return An Email.
      * @since 1.0
      */
-    public Email setSmtpPort(int aPortNumber)
+    public void setSmtpPort(int aPortNumber)
     {
         checkSessionAlreadyInitialized();
 
@@ -411,7 +399,6 @@ public abstract class Email implements EmailConstants
         }
 
         this.smtpPort = Integer.toString(aPortNumber);
-        return this;
     }
 
     /**
@@ -425,10 +412,9 @@ public abstract class Email implements EmailConstants
      * authenticator and will use the existing mail session (as expected).
      *
      * @param aSession mail session to be used
-     * @return An Email.
      * @since 1.0
      */
-    public Email setMailSession(Session aSession)
+    public void setMailSession(Session aSession)
     {
         EmailUtils.notNull(aSession, "no mail session supplied");
 
@@ -457,8 +443,6 @@ public abstract class Email implements EmailConstants
         {
             this.session = aSession;
         }
-
-        return this;
     }
 
     /**
@@ -466,12 +450,11 @@ public abstract class Email implements EmailConstants
      *
      * @param jndiName name of JNDI ressource (javax.mail.Session type), ressource
      * if searched in java:comp/env if name dont start with "java:"
-     * @return An Email.
      * @throws IllegalArgumentException JNDI name null or empty
      * @throws NamingException ressource can be retrieved from JNDI directory
      * @since 1.1
      */
-    public Email setMailSessionFromJNDI(String jndiName) throws NamingException
+    public void setMailSessionFromJNDI(String jndiName) throws NamingException
     {
         if (EmailUtils.isEmpty(jndiName))
         {
@@ -488,7 +471,6 @@ public abstract class Email implements EmailConstants
 
         }
         this.setMailSession((Session) ctx.lookup(jndiName));
-        return this;
     }
 
     /**
@@ -953,10 +935,9 @@ public abstract class Email implements EmailConstants
      * Disposition-Notification-To: user@domain.net
      *
      * @param map A Map.
-     * @return An Email.
      * @since 1.0
      */
-    public Email setHeaders(Map map)
+    public void setHeaders(Map map)
     {
         this.headers.clear();
 
@@ -969,7 +950,6 @@ public abstract class Email implements EmailConstants
             this.headers.put(name, createFoldedHeaderValue(name, entry.getValue()));
         }
 
-        return this;
     }
 
     /**
@@ -1223,17 +1203,15 @@ public abstract class Email implements EmailConstants
      * current date if not explicitly set.
      *
      * @param date Date to use as the sent date on the email
-     * @return An Email.
      * @since 1.0
      */
-    public Email setSentDate(Date date)
+    public void setSentDate(Date date)
     {
         if (date != null)
         {
             // create a separate instance to keep findbugs happy
             this.sentDate = new Date(date.getTime());
         }
-        return this;
     }
 
     /**
@@ -1363,10 +1341,9 @@ public abstract class Email implements EmailConstants
      * @param newPopHost The pop3 host to use.
      * @param newPopUsername The pop3 username.
      * @param newPopPassword The pop3 password.
-     * @return An Email.
      * @since 1.0
      */
-    public Email setPopBeforeSmtp(
+    public void setPopBeforeSmtp(
         boolean newPopBeforeSmtp,
         String newPopHost,
         String newPopUsername,
@@ -1376,7 +1353,6 @@ public abstract class Email implements EmailConstants
         this.popHost = newPopHost;
         this.popUsername = newPopUsername;
         this.popPassword = newPopPassword;
-        return this;
     }
 
     /**
@@ -1407,11 +1383,10 @@ public abstract class Email implements EmailConstants
      *
      * @deprecated since 1.3, use setSSLOnConnect() instead
      * @param ssl whether to enable the SSL transport
-     * @return An Email.
      */
-    public Email setSSL(boolean ssl)
+    public void setSSL(boolean ssl)
     {
-        return setSSLOnConnect(ssl);
+        setSSLOnConnect(ssl);
     }
 
     /**
@@ -1451,13 +1426,11 @@ public abstract class Email implements EmailConstants
      * port, 465.
      *
      * @param sslSmtpPort the SSL port to use for the SMTP transport
-     * @return An Email.
      */
-    public Email setSslSmtpPort(String sslSmtpPort)
+    public void setSslSmtpPort(String sslSmtpPort)
     {
         checkSessionAlreadyInitialized();
         this.sslSmtpPort = sslSmtpPort;
-        return this;
     }
 
     /**
@@ -1516,14 +1489,12 @@ public abstract class Email implements EmailConstants
      * Default is a 60 second timeout.
      *
      * @param socketConnectionTimeout the connection timeout
-     * @return An Email.
      * @since 1.2
      */
-    public Email setSocketConnectionTimeout(int socketConnectionTimeout)
+    public void setSocketConnectionTimeout(int socketConnectionTimeout)
     {
         checkSessionAlreadyInitialized();
         this.socketConnectionTimeout = socketConnectionTimeout;
-        return this;
     }
 
     /**
@@ -1542,14 +1513,12 @@ public abstract class Email implements EmailConstants
      * Default is 60 second timeout.
      *
      * @param socketTimeout the socket I/O timeout
-     * @return An Email.
      * @since 1.2
      */
-    public Email setSocketTimeout(int socketTimeout)
+    public void setSocketTimeout(int socketTimeout)
     {
         checkSessionAlreadyInitialized();
         this.socketTimeout = socketTimeout;
-        return this;
     }
 
     /**
