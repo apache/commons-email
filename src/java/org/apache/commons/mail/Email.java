@@ -191,7 +191,6 @@ public abstract class Email implements EmailConstants
      * Setting to true will enable the display of debug information.
      *
      * @param d A boolean.
-     * @return An Email.
      * @since 1.0
      */
     public void setDebug(boolean d)
@@ -208,7 +207,6 @@ public abstract class Email implements EmailConstants
      *
      * @param userName User name for the SMTP server
      * @param password password for the SMTP server
-     * @return An Email.
      * @see DefaultAuthenticator
      * @see #setAuthenticator
      * @since 1.0
@@ -226,7 +224,6 @@ public abstract class Email implements EmailConstants
      * authentication.  Your mail server must also support RFC2554.
      *
      * @param newAuthenticator the <code>Authenticator</code> object.
-     * @return Email.
      * @see Authenticator
      * @since 1.0
      */
@@ -345,12 +342,12 @@ public abstract class Email implements EmailConstants
      * for the reasons of deprecation.
      *
      * @deprecated since 1.3, use setStartTLSEnabled() instead
-     * @param startTlsEnabled true if STARTTLS requested, false otherwise
+     * @param withTLS true if STARTTLS requested, false otherwise
      * @since 1.1
      */
     public void setTLS(boolean withTLS)
     {
-        setStartTLSEnabled(startTlsEnabled);
+        setStartTLSEnabled(withTLS);
     }
 
     /**
