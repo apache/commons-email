@@ -16,15 +16,16 @@
  */
 package org.apache.commons.mail.resolver;
 
-import junit.framework.TestCase;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail.DataSourceResolver;
-
-import javax.activation.DataSource;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+
+import javax.activation.DataSource;
+
+import junit.framework.TestCase;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.mail.DataSourceResolver;
 
 /**
  * JUnit test case for DateSourceResolver.
@@ -47,7 +48,7 @@ public class DataSourceFileResolverTest extends TestCase
         assertTrue(toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertTrue(toByteArray(dataSourceResolver.resolve("../test/images/asf_logo_wide.gif")).length == IMG_SIZE);
-        assertNull(toByteArray(dataSourceResolver.resolve("/images/asf_logo_wide.gif")));
+        assertNull(toByteArray(dataSourceResolver.resolve("/images/does-not-exist.gif")));
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
     }
 
