@@ -32,7 +32,7 @@
       <source>
 <![CDATA[
 Email email = new SimpleEmail();
-email.setHostName("smtp.gmail.com");
+email.setHostName("smtp.googlemail.com");
 email.setSmtpPort(465);
 email.setAuthenticator(new DefaultAuthenticator("username", "password"));
 email.setSSLOnConnect(true);
@@ -223,6 +223,12 @@ import org.apache.commons.mail.HtmlEmail;
         of the mail classes by calling setDebug(true).  The debugging output
         will be written to <code>System.out</code>.
       </p>
+      <p>
+        Sometimes you want to experiment with various security setting or
+        features of commons-email. A good starting point is the test class
+        <code>EmailLiveTest</code> and <code>EmailConfiguration</code> which
+        are used for testing commons-email with real SMTP servers.
+      </p>      
     </section>
     <section name="Authentication">
       <p>
@@ -241,6 +247,46 @@ import org.apache.commons.mail.HtmlEmail;
         you will handle collecting the user's information.  To make use of
         your new <code>Authenticator</code> class, use the
         <code>Email.setAuthenticator</code> method.
+      </p>
+    </section>
+    <section name="Security">
+      <p>
+        Nowadays you should not use plain SMTP protocol when using public SMTP servers 
+        but there is a some confusion regarding the available options.
+      </p>
+      <p>  
+        Two commons options are using 
+        <ul>
+          <li>STARTTLS on port 25</li>
+          <li>SSL on port 465</li>
+        </ul>
+        The following definitions were taken from Wikipedia
+        <ul>
+          <li>
+            STARTTLS is an extension to plain text communication protocols, which offers a 
+            way to upgrade a plain text connection to an encrypted (TLS or SSL) connection 
+            instead of using a separate port for encrypted communication.
+          </li>
+          <li>
+            Transport Layer Security (TLS) and its predecessor, Secure Sockets Layer (SSL), 
+            are cryptographic protocols that provide communication security over the 
+            Internet.TLS and SSL encrypt the segments of network connections above the 
+            Transport Layer, using asymmetric cryptography for key exchange, symmetric 
+            encryption for privacy, and message authentication codes for message integrity.
+          </li>
+        </ul>
+        In addition you can force the following security checks (which are disabled by default)
+        <ul>
+          <li>
+            When using a secured transport (STARTTLS or SSL) you can force validating the server's 
+            certificate by calling <code>Email.setSSLCheckServerIdentity(true). Having said that
+            this does not seem to work on any of my test servers (GMAIL, GMX).
+          </code>
+          </li>
+          <li>
+            Enforce using STARTTLS by calling <code>Email.setStartTLSRequired(true)</code>
+          </li>
+        </ul>
       </p>
     </section>
     <section name="Handling Bounced Messages">

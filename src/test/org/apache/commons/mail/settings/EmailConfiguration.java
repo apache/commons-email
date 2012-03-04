@@ -30,22 +30,32 @@ public final class EmailConfiguration
 {
     // when using GMail for testing the following combination work
     //
-    // port 25      - StartTLS
-    // port 25      - StartTLS & UseSSL
-    // port 465     - UseSSL
-    // port 465     - StartTLS & UseSSL
+    // port 25      - MAIL_USE_STARTTLS, MAIL_STARTTLS_REQUIRED
+    // port 465     - MAIL_USE_SSL
 
-    public static final boolean MAIL_FORCE_SEND     = false;
-	public static final boolean MAIL_DEBUG          = false;
-	public static final String  MAIL_CHARSET        = EmailConstants.UTF_8;
-    public static final String  MAIL_SERVER         = "localhost";
-    public static final int     MAIL_SERVER_PORT    = 25;
-    public static final String  TEST_FROM           = "test_from@apache.org";
-    public static final String  TEST_TO             = "test_to@apache.org";
-    public static final String  TEST_USER           = "user";
-    public static final String  TEST_PASSWD         = "password";
-    public static final boolean MAIL_USE_SSL        = false;
-    public static final boolean MAIL_USE_STARTTLS   = false;
+    // when using GMX for testing the following combination work
+    //
+    // port 465     - MAIL_USE_SSL, -Dsun.security.ssl.allowUnsafeRenegotiation=true
+
+    // when using Office 365 for testing the following combination work
+    //
+    // port 25      - MAIL_USE_STARTTLS, MAIL_STARTTLS_REQUIRED
+    // port 587     - MAIL_USE_STARTTLS, MAIL_STARTTLS_REQUIRED
+
+    public static final boolean MAIL_FORCE_SEND                 = false;
+	public static final boolean MAIL_DEBUG                      = false;
+	public static final String  MAIL_CHARSET                    = EmailConstants.UTF_8;
+    public static final String  MAIL_SERVER                     = "localhost";
+    public static final int     MAIL_SERVER_PORT                = 25;
+    public static final String  TEST_FROM                       = "test_from@apache.org";
+    public static final String  TEST_TO                         = "test_to@apache.org";
+    public static final String  TEST_USER                       = "user";
+    public static final String  TEST_PASSWD                     = "password";
+
+    public static final boolean MAIL_USE_SSL                    = false;
+    public static final boolean MAIL_SSL_CHECKSERVERIDENTITY    = false;
+    public static final boolean MAIL_USE_STARTTLS               = true;
+    public static final boolean MAIL_STARTTLS_REQUIRED          = true;
 
     public static final String TEST_URL = EmailConfiguration.class
         .getResource("/images/asf_logo_wide.gif")

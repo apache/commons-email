@@ -159,9 +159,27 @@ public abstract class Email implements EmailConstants
 
     /**
      * Does server require TLS encryption for authentication?
-     * @deprecated  since 1.3, use setStartTLSRequired() instead
+     * @deprecated  since 1.3, use setStartTLSEnabled() instead
      */
     protected boolean tls;
+
+    /**
+     * If true, enables the use of the STARTTLS command (if supported by
+     * the server) to switch the connection to a TLS-protected connection
+     * before issuing any login commands. Note that an appropriate trust
+     * store must configured so that the client will trust the server's
+     * certificate.
+     * Defaults to false.
+     */
+    private boolean startTlsEnabled;
+
+    /**
+     * If true, requires the use of the STARTTLS command. If the server doesn't
+     * support the STARTTLS command, or the command fails, the connect method
+     * will fail.
+     * Defaults to false.
+     */
+    private boolean startTlsRequired;
 
     /**
      * Does the current transport use SSL/TLS encryption upon connection?
@@ -169,14 +187,16 @@ public abstract class Email implements EmailConstants
      */
     protected boolean ssl;
 
-    /** does client want STARTTLS encryption */
-    private boolean startTlsEnabled;
-
-    /** does client require STARTTLS encryption */
-    private boolean startTlsRequired;
-
     /** does the current transport use SSL/TLS encryption upon connection? */
     private boolean sslOnConnect;
+
+    /**
+     * If set to true, check the server identity as specified by RFC 2595. These
+     * additional checks based on the content of the server's certificate are
+     * intended to prevent man-in-the-middle attacks.
+     * Defaults to false.
+     */
+    private boolean sslCheckServerIdentity;
 
     /** socket I/O timeout value in milliseconds */
     protected int socketTimeout = SOCKET_TIMEOUT_MS;
@@ -510,21 +530,20 @@ public abstract class Email implements EmailConstants
                 properties.setProperty(MAIL_SMTP_AUTH, "true");
             }
 
-            if (isSSLOnConnect() || isStartTLSEnabled() || isStartTLSRequired())
-            {
-                properties.setProperty(MAIL_SMTP_SSL_SOCKET_FACTORY_PORT, this.sslSmtpPort);
-                properties.setProperty(MAIL_SMTP_SSL_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
-                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
-                properties.put(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, Boolean.TRUE);
-            }
-
             if (isSSLOnConnect())
             {
-                properties.put(MAIL_SMTP_SSL_ENABLE, Boolean.TRUE);
                 properties.setProperty(MAIL_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
+            }
+
+            if (isSSLOnConnect() || isStartTLSEnabled())
+            {
+                if(isSSLCheckServerIdentity())
+                {
+                    properties.setProperty(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
+                }
             }
 
             if (this.bounceAddress != null)
@@ -1398,6 +1417,16 @@ public abstract class Email implements EmailConstants
         this.sslOnConnect = ssl;
         this.ssl = ssl;
         return this;
+    }
+
+    public boolean isSSLCheckServerIdentity()
+    {
+        return sslCheckServerIdentity;
+    }
+
+    public void setSSLCheckServerIdentity(boolean sslCheckServerIdentity)
+    {
+        this.sslCheckServerIdentity = sslCheckServerIdentity;
     }
 
     /**
