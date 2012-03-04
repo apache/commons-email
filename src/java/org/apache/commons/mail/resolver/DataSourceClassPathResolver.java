@@ -33,16 +33,30 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
     /** the base string of the resource relative to the classpath when resolving relative paths */
     private final String classPathBase;
 
+    /**
+     * Constructor
+     */
     public DataSourceClassPathResolver()
     {
         this.classPathBase = "/";
     }
 
+    /**
+     * Constructor.
+     *
+     * @param classPathBase a base class path
+     */
     public DataSourceClassPathResolver(final String classPathBase)
     {
         this.classPathBase = classPathBase.endsWith("/") ? classPathBase : classPathBase + "/";
     }
 
+    /**
+     * Constructor.
+     *
+     * @param classPathBase a base class path
+     * @param lenient shall we ignore resources not found or throw an exception?
+     */
     public DataSourceClassPathResolver(final String classPathBase, final boolean lenient)
     {
         super(lenient);

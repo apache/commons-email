@@ -156,7 +156,14 @@ public final class MimeMessageUtils
 
         try
         {
-            resultFile.getParentFile().mkdirs();
+            if(!resultFile.getParentFile().exists())
+            {
+                if(!resultFile.getParentFile().mkdirs())
+                {
+                    throw new IOException("Failed to created the following parent directories : " + resultFile.getParentFile());
+                }
+            }
+
             fos = new FileOutputStream(resultFile);
             mimeMessage.writeTo(fos);
             fos.flush();
@@ -170,7 +177,6 @@ public final class MimeMessageUtils
                 try
                 {
                     fos.close();
-                    fos = null;
                 }
                 catch (Exception e)
                 {

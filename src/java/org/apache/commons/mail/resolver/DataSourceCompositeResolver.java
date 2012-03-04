@@ -32,12 +32,23 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     /** the list of resolvers */
     private DataSourceResolver[] dataSourceResolvers;
 
+    /**
+     * Constructor.
+     *
+     * @param dataSourceResolvers a list of of resolvers being used
+     */
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers)
     {
         this.dataSourceResolvers = new DataSourceResolver[dataSourceResolvers.length];
         System.arraycopy(dataSourceResolvers, 0, this.dataSourceResolvers, 0, dataSourceResolvers.length);
     }
 
+    /**
+     * Constructor.
+     *
+     * @param dataSourceResolvers a list of of resolvers being used
+     * @param isLenient shall we ignore resources not found or throw an exception?
+     */
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers, final boolean isLenient)
     {
         super(isLenient);
@@ -45,6 +56,11 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
         System.arraycopy(dataSourceResolvers, 0, this.dataSourceResolvers, 0, dataSourceResolvers.length);
     }
 
+    /**
+     * Get the underlying data source resolvers.
+     *
+     * @return underlying data source resolvers
+     */
     public DataSourceResolver[] getDataSourceResolvers()
     {
         return dataSourceResolvers;

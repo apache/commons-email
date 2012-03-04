@@ -28,11 +28,19 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
     /** shall we ignore resources not found or complain with an exception */
     private final boolean lenient;
 
+    /**
+     * Constructor.
+     */
     public DataSourceBaseResolver()
     {
         this.lenient = false;
     }
 
+    /**
+     * Constructor.
+     *
+     * @param lenient shall we ignore resources not found or throw an exception?
+     */
     public DataSourceBaseResolver(final boolean lenient)
     {
         this.lenient = lenient;

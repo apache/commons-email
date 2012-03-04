@@ -540,7 +540,7 @@ public abstract class Email implements EmailConstants
 
             if (isSSLOnConnect() || isStartTLSEnabled())
             {
-                if(isSSLCheckServerIdentity())
+                if (isSSLCheckServerIdentity())
                 {
                     properties.setProperty(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
                 }
@@ -1419,14 +1419,26 @@ public abstract class Email implements EmailConstants
         return this;
     }
 
+    /**
+    * Is the server identity checked as specified by RFC 2595
+    *
+    * @return true if the server identity is checked
+    */
     public boolean isSSLCheckServerIdentity()
     {
         return sslCheckServerIdentity;
     }
 
-    public void setSSLCheckServerIdentity(boolean sslCheckServerIdentity)
+    /**
+     * Sets whether the server identity is checked as specified by RFC 2595
+     *
+     * @param sslCheckServerIdentity whether to enable server identity check
+     * @return An Email.
+     */
+    public Email setSSLCheckServerIdentity(boolean sslCheckServerIdentity)
     {
         this.sslCheckServerIdentity = sslCheckServerIdentity;
+        return this;
     }
 
     /**
