@@ -110,8 +110,7 @@
                 is available
             </p>
             <p>
-                For previous releases, see the<a href="http://archive.apache.org/dist/commons/email/">Apache Archive</a>
-                .
+                For previous releases, see the <a href="http://archive.apache.org/dist/commons/email/">Apache Archive</a>.
             </p>
         </section>
         <!-- ================================================== -->
@@ -126,7 +125,7 @@
                 so prefix your email by [email].
             </p>
             <p>
-                Issues may be reported via<a href="issue-tracking.html">ASF JIRA</a>.
+                Issues may be reported via <a href="issue-tracking.html">ASF JIRA</a>.
             </p>
         </section>
         <!-- ================================================== -->
