@@ -43,8 +43,8 @@ public final class EmailConfiguration
     // port 587     - MAIL_USE_STARTTLS, MAIL_STARTTLS_REQUIRED
 
     public static final boolean MAIL_FORCE_SEND                 = false;
-	public static final boolean MAIL_DEBUG                      = false;
-	public static final String  MAIL_CHARSET                    = EmailConstants.UTF_8;
+    public static final boolean MAIL_DEBUG                      = false;
+    public static final String  MAIL_CHARSET                    = EmailConstants.UTF_8;
     public static final String  MAIL_SERVER                     = "localhost";
     public static final int     MAIL_SERVER_PORT                = 25;
     public static final String  TEST_FROM                       = "test_from@apache.org";

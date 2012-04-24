@@ -71,7 +71,7 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail
     /**
      * @return inlineEmbeds
      */
-	public Map getInlineEmbeds()
+    public Map getInlineEmbeds()
     {
         return inlineEmbeds;
     }

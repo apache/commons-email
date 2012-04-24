@@ -628,8 +628,8 @@ public class HtmlEmailTest extends BaseEmailTestCase
      *
      * see https://issues.apache.org/jira/browse/EMAIL-101
      */
- 	public void _testEmbedFileWithCID() throws Exception
-     {
+    public void _testEmbedFileWithCID() throws Exception
+    {
          // ====================================================================
          // Test Success
          // ====================================================================
