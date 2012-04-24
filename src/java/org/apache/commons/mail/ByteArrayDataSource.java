@@ -49,7 +49,7 @@ public class ByteArrayDataSource implements DataSource
     private ByteArrayOutputStream baos;
 
     /** Content-type. */
-    private String type = "application/octet-stream";
+    private final String type;// = "application/octet-stream";
 
     /**
      * Create a datasource from a byte array.
@@ -61,12 +61,13 @@ public class ByteArrayDataSource implements DataSource
      */
     public ByteArrayDataSource(byte[] data, String aType) throws IOException
     {
+        this.type = aType;
         ByteArrayInputStream bis = null;
 
         try
         {
             bis = new ByteArrayInputStream(data);
-            this.byteArrayDataSource(bis, aType);
+            this.byteArrayDataSource(bis);
         }
         finally
         {
@@ -87,7 +88,8 @@ public class ByteArrayDataSource implements DataSource
      */
     public ByteArrayDataSource(InputStream aIs, String aType) throws IOException
     {
-        this.byteArrayDataSource(aIs, aType);
+        this.type = aType;
+        this.byteArrayDataSource(aIs);
     }
 
     /**
@@ -131,14 +133,11 @@ public class ByteArrayDataSource implements DataSource
       * Create a datasource from an input stream.
       *
       * @param aIs An InputStream.
-      * @param aType A String.
       * @throws IOException IOException
       */
-    private void byteArrayDataSource(InputStream aIs, String aType)
+    private void byteArrayDataSource(InputStream aIs)
         throws IOException
     {
-        this.type = aType;
-
         BufferedInputStream bis = null;
         BufferedOutputStream osWriter = null;
 
