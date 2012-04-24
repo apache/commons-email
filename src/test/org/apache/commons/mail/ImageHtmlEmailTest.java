@@ -47,7 +47,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
     private MockImageHtmlEmailConcrete email;
 
-    public ImageHtmlEmailTest(String name) throws IOException {
+    public ImageHtmlEmailTest(String name) {
         super(name);
     }
 
