@@ -30,7 +30,7 @@ import java.io.IOException;
 public class DataSourceCompositeResolver extends DataSourceBaseResolver
 {
     /** the list of resolvers */
-    private DataSourceResolver[] dataSourceResolvers;
+    private final DataSourceResolver[] dataSourceResolvers;
 
     /**
      * Constructor.
