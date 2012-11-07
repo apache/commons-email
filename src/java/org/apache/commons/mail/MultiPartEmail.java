@@ -425,7 +425,14 @@ public class MultiPartEmail extends Email
         // verify that the DataSource is valid
         try
         {
-            if (ds == null || ds.getInputStream() == null)
+            final InputStream is = (ds != null) ? ds.getInputStream() : null;
+            if (is != null)
+            {
+                // close the input stream to prevent file locking on windows
+                is.close();
+            }
+            
+            if (is == null)
             {
                 throw new EmailException("Invalid Datasource");
             }

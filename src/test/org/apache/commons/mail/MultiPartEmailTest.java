@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.activation.FileDataSource;
 import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
 
@@ -326,6 +327,23 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         }
     }
 
+    public void testAttachFileLocking() throws Exception {
+
+        // ====================================================================
+        // EMAIL-120: attaching a FileDataSource may result in a locked file
+        //            resource on windows systems
+        // ====================================================================
+
+        File tmpFile = File.createTempFile("attachment", ".eml");
+        
+        this.email.attach(
+                new FileDataSource(tmpFile),
+                "Test Attachment",
+                "Test Attachment Desc");
+
+        assertTrue(tmpFile.delete());
+    }
+    
     /**
      *
      * @throws Exception Exception
