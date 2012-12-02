@@ -646,6 +646,35 @@ public abstract class Email implements EmailConstants
     }
 
     /**
+     * Add a list of TO recipients to the email. The email
+     * addresses will also be used as the personal names.
+     * The names will be encoded by the charset of
+     * {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
+     *
+     * @param emails A String array.
+     * @throws EmailException Indicates an invalid email address.
+     * @return An Email.
+     */
+    public Email addTo(String[] emails)
+        throws EmailException
+    {
+        if(emails == null || emails.length == 0)
+        {
+            throw new EmailException("Address List provided was invalid");
+        }
+        
+        for(int i = 0; i < emails.length; i++)
+        {
+            addTo(emails[i], null);
+        }
+        
+        return this;
+    }
+
+    /**
      * Add a recipient TO to the email using the specified address and the
      * specified personal name.
      * The name will be encoded by the charset of
@@ -726,6 +755,35 @@ public abstract class Email implements EmailConstants
     }
 
     /**
+     * Add an array of CC recipients to the email. The email
+     * addresses will also be used as the personal name.
+     * The names will be encoded by the charset of
+     * {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
+     *
+     * @param emails A String array.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
+     */
+    public Email addCc(String[] emails)
+        throws EmailException
+    {
+        if(emails == null || emails.length == 0)
+        {
+            throw new EmailException("Address List provided was invalid");
+        }
+        
+        for(int i = 0; i < emails.length; i++)
+        {
+            addCc(emails[i], null);
+        }
+        
+        return this;
+    }
+
+    /**
      * Add a recipient CC to the email using the specified address and the
      * specified personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
@@ -802,6 +860,35 @@ public abstract class Email implements EmailConstants
         throws EmailException
     {
         return this.addBcc(email, null);
+    }
+
+    /**
+     * Add an array of blind BCC recipients to the email. The email
+     * addresses will also be used as the personal name.
+     * The names will be encoded by the charset of
+     * {@link #setCharset(java.lang.String) setCharset()}.
+     * If it is not set, it will be encoded using
+     * the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
+     *
+     * @param emails A String array.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address
+     */
+    public Email addBcc(String[] emails)
+        throws EmailException
+    {
+        if(emails == null || emails.length == 0)
+        {
+            throw new EmailException("Address List provided was invalid");
+        }
+        
+        for(int i = 0; i < emails.length; i++)
+        {
+            addBcc(emails[i], null);
+        }
+        
+        return this;
     }
 
     /**

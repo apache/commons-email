@@ -423,6 +423,35 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
+    public void testAddToArray() throws EmailException, UnsupportedEncodingException
+    {
+        // ====================================================================
+        // Test Success
+        // ====================================================================
+
+        List arrExpected = new ArrayList();
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
+
+        //set To
+        this.email.addTo(ARR_VALID_EMAILS);
+
+        // retrieve and verify
+        assertEquals(arrExpected.size(), this.email.getToAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
+    }
+
+    /**
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddToWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -601,6 +630,35 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
+    public void testAddCcArray() throws UnsupportedEncodingException, EmailException
+    {
+        // ====================================================================
+        // Test Success
+        // ====================================================================
+
+        List arrExpected = new ArrayList();
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress(
+                "joe.doe@apache.org",
+                "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress(
+                "someone_here@work-address.com.au",
+                "someone_here@work-address.com.au"));
+
+        //set Cc array
+        this.email.addCc(ARR_VALID_EMAILS);
+
+        // retrieve and verify
+        assertEquals(arrExpected.size(), this.email.getCcAddresses().size());
+        assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
+    }
+
+    /**
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
     public void testAddCcWithEncoding() throws UnsupportedEncodingException, EmailException
     {
         // ====================================================================
@@ -758,6 +816,34 @@ public class EmailTest extends BaseEmailTestCase
             // add a valid bcc
             this.email.addBcc(ARR_VALID_EMAILS[i]);
         }
+
+        // retrieve and verify
+        assertEquals(arrExpected.size(), this.email.getBccAddresses().size());
+        assertEquals(
+            arrExpected.toString(),
+            this.email.getBccAddresses().toString());
+    }
+
+    /**
+     * @throws EmailException when there are problems adding an address
+     * @throws UnsupportedEncodingException on bad email addresses
+     */
+    public void testAddBccArray() throws UnsupportedEncodingException, EmailException
+    {
+        // ====================================================================
+        // Test Success
+        // ====================================================================
+
+        List arrExpected = new ArrayList();
+        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
+        arrExpected.add(
+            new InternetAddress("joe.doe@apache.org", "joe.doe@apache.org"));
+        arrExpected.add(
+            new InternetAddress("someone_here@work-address.com.au",
+                                "someone_here@work-address.com.au"));
+
+        // add a valid bcc
+        this.email.addBcc(ARR_VALID_EMAILS);
 
         // retrieve and verify
         assertEquals(arrExpected.size(), this.email.getBccAddresses().size());
