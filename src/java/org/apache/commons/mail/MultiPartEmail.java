@@ -491,7 +491,7 @@ public class MultiPartEmail extends Email
      * Gets first body part of the message.
      *
      * @return The primary body part.
-     * @throws MessagingException An error occured while getting the primary body part.
+     * @throws MessagingException An error occurred while getting the primary body part.
      * @since 1.0
      */
     protected BodyPart getPrimaryBodyPart() throws MessagingException

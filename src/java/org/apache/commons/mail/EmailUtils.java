@@ -229,7 +229,7 @@ final class EmailUtils
     }
 
     /**
-     * Convinience method to write a MimeMessage into a file.
+     * Convenience method to write a MimeMessage into a file.
      *
      * @param resultFile the file containing the MimeMessgae
      * @param mimeMessage the MimeMessage to write
