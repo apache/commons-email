@@ -48,7 +48,7 @@ public class MimeMessageParserTest
     public void testParseSimpleEmail() throws Exception
     {
         Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/simple.eml"));
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple.eml"));
         MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();
@@ -71,7 +71,7 @@ public class MimeMessageParserTest
     public void testParseSimpleReplyEmail() throws Exception
     {
         Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/simple-reply.eml"));
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple-reply.eml"));
         MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();
@@ -95,7 +95,7 @@ public class MimeMessageParserTest
     {
         DataSource dataSource;
         Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/html-attachment.eml"));
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
         MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();
@@ -135,7 +135,7 @@ public class MimeMessageParserTest
     {
         DataSource dataSource;
         Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/multipart-report.eml"));
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-report.eml"));
         MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();
@@ -172,7 +172,7 @@ public class MimeMessageParserTest
     {
         DataSource dataSource;
         Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/attachment-only.eml"));
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/attachment-only.eml"));
         MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();
@@ -208,7 +208,7 @@ public class MimeMessageParserTest
     public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception
     {
         Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/eml/outofmemory-no-header-seperation.eml"));
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/outofmemory-no-header-seperation.eml"));
         MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();

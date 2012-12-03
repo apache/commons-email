@@ -659,7 +659,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     private void assertCorrectContentType(String picture, String contentType) throws Exception {
         HtmlEmail htmlEmail = createDefaultHtmlEmail();
-        String cid = htmlEmail.embed(new File("./src/test/images/" + picture), "Apache Logo");
+        String cid = htmlEmail.embed(new File("./src/test/resources/images/" + picture), "Apache Logo");
         String htmlMsg = "<html><img src=\"cid:" + cid + "\"><html>";
         htmlEmail.setHtmlMsg(htmlMsg);
         htmlEmail.buildMimeMessage();

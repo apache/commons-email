@@ -49,7 +49,7 @@ public class DataSourceUrlResolverTest extends TestCase
      */
     public void testResolvingFilesLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test").toURI().toURL(), true);
+        DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test/resources").toURI().toURL(), true);
         assertTrue(toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));

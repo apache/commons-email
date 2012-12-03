@@ -142,7 +142,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject("TestMultiPartMail");
         email.setMsg("This is a test mail ... :-)");
-        email.attach(new File("./src/test/attachments/logo.pdf"));
+        email.attach(new File("./src/test/resources/attachments/logo.pdf"));
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
     }
@@ -164,10 +164,10 @@ public class EmailLiveTest extends BaseEmailTestCase
         String cid;
 
         URL url = new URL(EmailConfiguration.TEST_URL);
-        File imageFile = new File("./src/test/images/asf_logo_wide.gif");
+        File imageFile = new File("./src/test/resources/images/asf_logo_wide.gif");
 
         EmailAttachment attachment = new EmailAttachment();
-        File attachmentFile = new File("./src/test/attachments/logo.pdf");
+        File attachmentFile = new File("./src/test/resources/attachments/logo.pdf");
         attachment.setName("logo.pdf");
         attachment.setDescription("The official Apache logo");
         attachment.setPath(attachmentFile.getAbsolutePath());
@@ -266,7 +266,7 @@ public class EmailLiveTest extends BaseEmailTestCase
     {
         // use a simple HTML page with one image 
 
-        File htmlFile = new File("./src/test/html/www.apache.org.html");
+        File htmlFile = new File("./src/test/resources/html/www.apache.org.html");
         String htmlMsg1 = FileUtils.readFileToString(htmlFile);
 
         ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);

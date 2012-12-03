@@ -44,10 +44,10 @@ public class DataSourceFileResolverTest extends TestCase
 
     public void testResolvingFileLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("./src/test"), true);
+        DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("./src/test/resources"), true);
         assertTrue(toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length == IMG_SIZE);
-        assertTrue(toByteArray(dataSourceResolver.resolve("../test/images/asf_logo_wide.gif")).length == IMG_SIZE);
+        assertTrue(toByteArray(dataSourceResolver.resolve("../resources/images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertNull(toByteArray(dataSourceResolver.resolve("/images/does-not-exist.gif")));
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
     }
@@ -55,7 +55,7 @@ public class DataSourceFileResolverTest extends TestCase
     public void testResolvingFileNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("."), false);
-        assertNotNull(dataSourceResolver.resolve("./src/test/images/asf_logo_wide.gif"));
+        assertNotNull(dataSourceResolver.resolve("./src/test/resources/images/asf_logo_wide.gif"));
 
         try
         {
