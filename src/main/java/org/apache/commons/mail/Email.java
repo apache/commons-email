@@ -658,7 +658,7 @@ public abstract class Email implements EmailConstants
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
      */
-    public Email addTo(String[] emails)
+    public Email addTo(String... emails)
         throws EmailException
     {
         if(emails == null || emails.length == 0)
@@ -666,9 +666,9 @@ public abstract class Email implements EmailConstants
             throw new EmailException("Address List provided was invalid");
         }
         
-        for(int i = 0; i < emails.length; i++)
+        for(String email : emails)
         {
-            addTo(emails[i], null);
+            addTo(email, null);
         }
         
         return this;
@@ -767,7 +767,7 @@ public abstract class Email implements EmailConstants
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
      */
-    public Email addCc(String[] emails)
+    public Email addCc(String... emails)
         throws EmailException
     {
         if(emails == null || emails.length == 0)
@@ -775,9 +775,9 @@ public abstract class Email implements EmailConstants
             throw new EmailException("Address List provided was invalid");
         }
         
-        for(int i = 0; i < emails.length; i++)
+        for(String email : emails)
         {
-            addCc(emails[i], null);
+            addCc(email, null);
         }
         
         return this;
@@ -875,7 +875,7 @@ public abstract class Email implements EmailConstants
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
      */
-    public Email addBcc(String[] emails)
+    public Email addBcc(String... emails)
         throws EmailException
     {
         if(emails == null || emails.length == 0)
@@ -883,9 +883,9 @@ public abstract class Email implements EmailConstants
             throw new EmailException("Address List provided was invalid");
         }
         
-        for(int i = 0; i < emails.length; i++)
+        for(String email : emails)
         {
-            addBcc(emails[i], null);
+            addBcc(email, null);
         }
         
         return this;

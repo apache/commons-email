@@ -123,10 +123,10 @@ public class ImageHtmlEmail extends HtmlEmail
         StringBuffer stringBuffer = new StringBuffer();
 
         // maps "cid" --> name
-        Map cidCache = new HashMap();
+        Map<String, String> cidCache = new HashMap<String, String>();
 
         // maps "name" --> dataSource
-        Map dataSourceCache = new HashMap();
+        Map<String, DataSource> dataSourceCache = new HashMap<String, DataSource>();
 
         // in the String, replace all "img src" with a CID and embed the related
         // image file if we find it.
@@ -151,13 +151,13 @@ public class ImageHtmlEmail extends HtmlEmail
             }
             else
             {
-                dataSource = (DataSource) dataSourceCache.get(resourceLocation);
+                dataSource = dataSourceCache.get(resourceLocation);
             }
 
             if (dataSource != null)
             {
                 String name = dataSource.getName();
-                String cid = (String) cidCache.get(name);
+                String cid = cidCache.get(name);
 
                 if (cid == null)
                 {
