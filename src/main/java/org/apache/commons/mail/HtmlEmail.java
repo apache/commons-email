@@ -109,13 +109,13 @@ public class HtmlEmail extends MultiPartEmail
      * objects are now stored in {@link #inlineEmbeds}.
      */
     @Deprecated
-    protected List inlineImages;
+    protected List<InlineImage> inlineImages;
 
     /**
      * Embedded images Map<String, InlineImage> where the key is the
      * user-defined image name.
      */
-    protected Map inlineEmbeds = new HashMap();
+    protected Map<String, InlineImage> inlineEmbeds = new HashMap<String, InlineImage>();
 
     /**
      * Set the text content.
@@ -265,7 +265,7 @@ public class HtmlEmail extends MultiPartEmail
         // if so, return the cached CID value.
         if (inlineEmbeds.containsKey(name))
         {
-            InlineImage ii = (InlineImage) inlineEmbeds.get(name);
+            InlineImage ii = inlineEmbeds.get(name);
             URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
@@ -376,7 +376,7 @@ public class HtmlEmail extends MultiPartEmail
         // if so, return the cached CID value.
         if (inlineEmbeds.containsKey(file.getName()))
         {
-            InlineImage ii = (InlineImage) inlineEmbeds.get(file.getName());
+            InlineImage ii = inlineEmbeds.get(file.getName());
             FileDataSource fileDataSource = (FileDataSource) ii.getDataSource();
             // make sure the supplied file has the same canonical path
             // as the one already associated with this name.
@@ -438,7 +438,7 @@ public class HtmlEmail extends MultiPartEmail
         // if so, return the cached CID value.
         if (inlineEmbeds.containsKey(name))
         {
-            InlineImage ii = (InlineImage) inlineEmbeds.get(name);
+            InlineImage ii = inlineEmbeds.get(name);
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
             if (dataSource.equals(ii.getDataSource()))
@@ -583,10 +583,10 @@ public class HtmlEmail extends MultiPartEmail
                 msgHtml.setContent(this.html, Email.TEXT_HTML);
             }
 
-            Iterator iter = this.inlineEmbeds.values().iterator();
+            Iterator<InlineImage> iter = this.inlineEmbeds.values().iterator();
             while (iter.hasNext())
             {
-                InlineImage ii = (InlineImage) iter.next();
+                InlineImage ii = iter.next();
                 bodyEmbedsContainer.addBodyPart(ii.getMbp());
             }
         }
