@@ -115,16 +115,16 @@ public abstract class Email implements EmailConstants
     protected String sslSmtpPort = "465";
 
     /** List of "to" email adresses */
-    protected List toList = new ArrayList();
+    protected List<InternetAddress> toList = new ArrayList<InternetAddress>();
 
     /** List of "cc" email adresses */
-    protected List ccList = new ArrayList();
+    protected List<InternetAddress> ccList = new ArrayList<InternetAddress>();
 
     /** List of "bcc" email adresses */
-    protected List bccList = new ArrayList();
+    protected List<InternetAddress> bccList = new ArrayList<InternetAddress>();
 
     /** List of "replyTo" email adresses */
-    protected List replyList = new ArrayList();
+    protected List<InternetAddress> replyList = new ArrayList<InternetAddress>();
 
     /**
      * Address to which undeliverable mail should be sent.
@@ -141,7 +141,7 @@ public abstract class Email implements EmailConstants
      * or  2( high ) 3( normal ) 4( low ) and 5( lowest )
      * Disposition-Notification-To: user@domain.net
      */
-    protected Map headers = new HashMap();
+    protected Map<String, String> headers = new HashMap<String, String>();
 
     /**
      * Used to determine whether to use pop3 before smtp, and if so the settings.
@@ -727,14 +727,14 @@ public abstract class Email implements EmailConstants
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setTo(Collection aCollection) throws EmailException
+    public Email setTo(Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.toList = new ArrayList(aCollection);
+        this.toList = new ArrayList<InternetAddress>(aCollection);
         return this;
     }
 
@@ -835,14 +835,14 @@ public abstract class Email implements EmailConstants
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setCc(Collection aCollection) throws EmailException
+    public Email setCc(Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.ccList = new ArrayList(aCollection);
+        this.ccList = new ArrayList<InternetAddress>(aCollection);
         return this;
     }
 
@@ -943,14 +943,14 @@ public abstract class Email implements EmailConstants
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setBcc(Collection aCollection) throws EmailException
+    public Email setBcc(Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.bccList = new ArrayList(aCollection);
+        this.bccList = new ArrayList<InternetAddress>(aCollection);
         return this;
     }
 
@@ -1022,14 +1022,14 @@ public abstract class Email implements EmailConstants
      * @see javax.mail.internet.InternetAddress
      * @since 1.1
      */
-    public Email setReplyTo(Collection aCollection) throws EmailException
+    public Email setReplyTo(Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.replyList = new ArrayList(aCollection);
+        this.replyList = new ArrayList<InternetAddress>(aCollection);
         return this;
     }
 
@@ -1043,16 +1043,16 @@ public abstract class Email implements EmailConstants
      * @param map A Map.
      * @since 1.0
      */
-    public void setHeaders(Map map)
+    public void setHeaders(Map<String, String> map)
     {
         this.headers.clear();
 
-        Iterator iterKeyBad = map.entrySet().iterator();
+        Iterator<Map.Entry<String, String>> iterKeyBad = map.entrySet().iterator();
 
         while (iterKeyBad.hasNext())
         {
-            Map.Entry entry = (Map.Entry) iterKeyBad.next();
-            String name = (String) entry.getKey();
+            Map.Entry<String, String> entry = iterKeyBad.next();
+            String name = entry.getKey();
             this.headers.put(name, createFoldedHeaderValue(name, entry.getValue()));
         }
 
@@ -1226,11 +1226,11 @@ public abstract class Email implements EmailConstants
 
             if (this.headers.size() > 0)
             {
-                Iterator iterHeaderKeys = this.headers.keySet().iterator();
+                Iterator<String> iterHeaderKeys = this.headers.keySet().iterator();
                 while (iterHeaderKeys.hasNext())
                 {
-                    String name = (String) iterHeaderKeys.next();
-                    String value = (String) headers.get(name);
+                    String name = iterHeaderKeys.next();
+                    String value = headers.get(name);
                     String foldedValue = createFoldedHeaderValue(name, value);
                     this.message.addHeader(name, foldedValue);
                 }
@@ -1433,10 +1433,9 @@ public abstract class Email implements EmailConstants
      * @return An InternetAddress[].
      * @since 1.0
      */
-    protected InternetAddress[] toInternetAddressArray(List list)
+    protected InternetAddress[] toInternetAddressArray(List<InternetAddress> list)
     {
-        InternetAddress[] ia =
-            (InternetAddress[]) list.toArray(new InternetAddress[list.size()]);
+        InternetAddress[] ia = list.toArray(new InternetAddress[list.size()]);
 
         return ia;
     }
@@ -1569,7 +1568,7 @@ public abstract class Email implements EmailConstants
      *
      * @return List addresses
      */
-    public List getToAddresses()
+    public List<InternetAddress> getToAddresses()
     {
         return this.toList;
     }
@@ -1579,7 +1578,7 @@ public abstract class Email implements EmailConstants
      *
      * @return List addresses
      */
-    public List getCcAddresses()
+    public List<InternetAddress> getCcAddresses()
     {
         return this.ccList;
     }
@@ -1589,7 +1588,7 @@ public abstract class Email implements EmailConstants
      *
      * @return List addresses
      */
-    public List getBccAddresses()
+    public List<InternetAddress> getBccAddresses()
     {
         return this.bccList;
     }
@@ -1599,7 +1598,7 @@ public abstract class Email implements EmailConstants
      *
      * @return List addresses
      */
-    public List getReplyToAddresses()
+    public List<InternetAddress> getReplyToAddresses()
     {
         return this.replyList;
     }
