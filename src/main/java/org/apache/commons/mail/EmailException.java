@@ -35,7 +35,7 @@ import java.io.PrintWriter;
 public class EmailException
         extends Exception
 {
-    /** Serializable version identifier */
+    /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
 
     /**

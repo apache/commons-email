@@ -61,10 +61,10 @@ public class MultiPartEmail extends Email
     /** The MIME subtype. */
     private String subType;
 
-    /** Indicates if the message has been initialized */
+    /** Indicates if the message has been initialized. */
     private boolean initialized;
 
-    /** Indicates if attachments have been added to the message */
+    /** Indicates if attachments have been added to the message. */
     private boolean boolHasAttachments;
 
     /**
@@ -264,7 +264,7 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * Attach a file
+     * Attach a file.
      *
      * @param file A file attachment
      * @return A MultiPartEmail.

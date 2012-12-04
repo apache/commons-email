@@ -32,7 +32,7 @@ package org.apache.commons.mail;
 public class SimpleEmail extends Email
 {
     /**
-     * Set the content of the mail
+     * Set the content of the mail.
      *
      * @param msg A String.
      * @return An Email.

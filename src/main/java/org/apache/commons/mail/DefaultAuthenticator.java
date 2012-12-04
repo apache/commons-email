@@ -29,11 +29,11 @@ import javax.mail.PasswordAuthentication;
  */
 public class DefaultAuthenticator extends Authenticator
 {
-    /** Stores the login information for authentication */
+    /** Stores the login information for authentication. */
     private final PasswordAuthentication authentication;
 
     /**
-     * Default constructor
+     * Default constructor.
      *
      * @param userName user name to use when authentication is requested
      * @param password password to use when authentication is requested

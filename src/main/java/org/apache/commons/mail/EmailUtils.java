@@ -45,10 +45,8 @@ import java.io.IOException;
 final class EmailUtils
 {
     /**
-     * <p>
      * Random object used by random method. This has to be not local to the random method
      * so as to not return the same value in the same millisecond.
-     * </p>
      */
     private static final Random RANDOM = new Random();
 
@@ -61,9 +59,7 @@ final class EmailUtils
     }
 
     /**
-     * <p>
      * Checks if a String is empty ("") or null.
-     * </p>
      *
      * @param str the String to check, may be null
      *
@@ -77,9 +73,7 @@ final class EmailUtils
     }
 
     /**
-     * <p>
      * Checks if a String is not empty ("") and not null.
-     * </p>
      *
      * @param str the String to check, may be null
      *
@@ -93,9 +87,8 @@ final class EmailUtils
     }
 
     /**
-     * <p>
-     * Validate an argument, throwing <code>IllegalArgumentException</code> if the argument is <code>null</code>.
-     * </p>
+     * Validate an argument, throwing <code>IllegalArgumentException</code>
+     * if the argument is <code>null</code>.
      *
      * @param object the object to check is not <code>null</code>
      * @param message the exception message you would like to see if the object is <code>null</code>
@@ -113,9 +106,7 @@ final class EmailUtils
     }
 
     /**
-     * <p>
      * Creates a random string whose length is the number of characters specified.
-     * </p>
      *
      * <p>
      * Characters will be chosen from the set of alphabetic characters.
@@ -133,9 +124,7 @@ final class EmailUtils
     }
 
     /**
-     * <p>
      * Creates a random string based on a variety of options, using supplied source of randomness.
-     * </p>
      *
      * <p>
      * If start and end are both <code>0</code>, start and end are set to <code>' '</code> and <code>'z'</code>,

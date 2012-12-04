@@ -42,13 +42,13 @@ import javax.activation.DataSource;
  */
 public class ByteArrayDataSource implements DataSource
 {
-    /** define the buffer size */
+    /** Define the buffer size. */
     public static final int BUFFER_SIZE = 512;
 
-    /** Stream containg the Data */
+    /** Stream containing the Data. */
     private ByteArrayOutputStream baos;
 
-    /** Content-type. */
+    /** The Content-type. */
     private final String type;// = "application/octet-stream";
 
     /**
@@ -94,7 +94,7 @@ public class ByteArrayDataSource implements DataSource
 
     /**
      * Create a datasource from a String.
-     * N.B. assumes the data string can be converted using the charset iso-8859-1
+     * N.B. assumes the data string can be converted using the charset iso-8859-1.
      *
      * @param data A String.
      * @param aType A String.
@@ -109,9 +109,8 @@ public class ByteArrayDataSource implements DataSource
         {
             baos = new ByteArrayOutputStream();
 
-            // Assumption that the string contains only ASCII
-            // characters!  Else just pass in a charset into this
-            // constructor and use it in getBytes().
+            // Assumption that the string contains only ASCII characters!
+            // Else just pass in a charset into this constructor and use it in getBytes().
             baos.write(data.getBytes("iso-8859-1"));
             baos.flush();
             baos.close();
@@ -150,7 +149,7 @@ public class ByteArrayDataSource implements DataSource
             baos = new ByteArrayOutputStream();
             osWriter = new BufferedOutputStream(baos);
 
-            //Write the InputData to OutputStream
+            // Write the InputData to OutputStream
             while ((length = bis.read(buffer)) != -1)
             {
                 osWriter.write(buffer, 0, length);
@@ -215,7 +214,7 @@ public class ByteArrayDataSource implements DataSource
     }
 
     /**
-     * Get the OutputStream to write to
+     * Get the OutputStream to write to.
      *
      * @return  An OutputStream
      * @since 1.0

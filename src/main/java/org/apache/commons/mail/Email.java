@@ -44,7 +44,7 @@ import javax.naming.NamingException;
 
 /**
  * The base class for all email messages.  This class sets the
- * sender's email & name, receiver's email & name, subject, and the
+ * sender's email &amp; name, receiver's email &amp; name, subject, and the
  * sent date.  Subclasses are responsible for setting the message
  * body.
  *
@@ -66,28 +66,28 @@ public abstract class Email implements EmailConstants
     /** The email message to send. */
     protected MimeMessage message;
 
-    /** The charset to use for this message */
+    /** The charset to use for this message. */
     protected String charset;
 
-    /** The Address of the sending party, mandatory */
+    /** The Address of the sending party, mandatory. */
     protected InternetAddress fromAddress;
 
-    /** The Subject  */
+    /** The Subject. */
     protected String subject;
 
-    /** An attachment  */
+    /** An attachment. */
     protected MimeMultipart emailBody;
 
-    /** The content  */
+    /** The content. */
     protected Object content;
 
-    /** The content type  */
+    /** The content type. */
     protected String contentType;
 
-    /** Set session debugging on or off */
+    /** Set session debugging on or off. */
     protected boolean debug;
 
-    /** Sent date */
+    /** Sent date. */
     protected Date sentDate;
 
     /**
@@ -98,7 +98,7 @@ public abstract class Email implements EmailConstants
 
     /**
      * The hostname of the mail server with which to connect. If null will try
-     * to get property from system.properties. If still null, quit
+     * to get property from system.properties. If still null, quit.
      */
     protected String hostName;
 
@@ -114,16 +114,16 @@ public abstract class Email implements EmailConstants
      */
     protected String sslSmtpPort = "465";
 
-    /** List of "to" email adresses */
+    /** List of "to" email addresses. */
     protected List<InternetAddress> toList = new ArrayList<InternetAddress>();
 
-    /** List of "cc" email adresses */
+    /** List of "cc" email addresses. */
     protected List<InternetAddress> ccList = new ArrayList<InternetAddress>();
 
-    /** List of "bcc" email adresses */
+    /** List of "bcc" email addresses. */
     protected List<InternetAddress> bccList = new ArrayList<InternetAddress>();
 
-    /** List of "replyTo" email adresses */
+    /** List of "replyTo" email addresses. */
     protected List<InternetAddress> replyList = new ArrayList<InternetAddress>();
 
     /**
@@ -148,13 +148,13 @@ public abstract class Email implements EmailConstants
      */
     protected boolean popBeforeSmtp;
 
-    /** the host name of the pop3 server */
+    /** the host name of the pop3 server. */
     protected String popHost;
 
-    /** the user name to log into the pop3 server */
+    /** the user name to log into the pop3 server. */
     protected String popUsername;
 
-    /** the password to log into the pop3 server */
+    /** the password to log into the pop3 server. */
     protected String popPassword;
 
     /**
@@ -200,13 +200,13 @@ public abstract class Email implements EmailConstants
      */
     private boolean sslCheckServerIdentity;
 
-    /** socket I/O timeout value in milliseconds */
+    /** socket I/O timeout value in milliseconds. */
     protected int socketTimeout = SOCKET_TIMEOUT_MS;
 
-    /** socket connection timeout value in milliseconds */
+    /** socket connection timeout value in milliseconds. */
     protected int socketConnectionTimeout = SOCKET_TIMEOUT_MS;
 
-    /** The Session to mail with */
+    /** The Session to mail with. */
     private Session session;
 
     /**

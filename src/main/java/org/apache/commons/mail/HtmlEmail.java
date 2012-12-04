@@ -86,22 +86,22 @@ import javax.mail.internet.MimeMultipart;
  */
 public class HtmlEmail extends MultiPartEmail
 {
-    /** Definition of the length of generated CID's */
+    /** Definition of the length of generated CID's. */
     public static final int CID_LENGTH = 10;
 
-    /** prefix for default HTML mail */
+    /** prefix for default HTML mail. */
     private static final String HTML_MESSAGE_START = "<html><body><pre>";
-    /** suffix for default HTML mail */
+    /** suffix for default HTML mail. */
     private static final String HTML_MESSAGE_END = "</pre></body></html>";
 
 
     /**
-     * Text part of the message.  This will be used as alternative text if
+     * Text part of the message. This will be used as alternative text if
      * the email client does not support HTML messages.
      */
     protected String text;
 
-    /** Html part of the message */
+    /** Html part of the message. */
     protected String html;
 
     /**
@@ -204,7 +204,7 @@ public class HtmlEmail extends MultiPartEmail
      * @param urlString String representation of the URL.
      * @param name The name that will be set in the filename header field.
      * @return A String with the Content-ID of the URL.
-     * @throws EmailException when URL supplied is invalid or if <code> is null
+     * @throws EmailException when URL supplied is invalid or if {@code name} is null
      * or empty; also see {@link javax.mail.internet.MimeBodyPart} for definitions
      *
      * @see #embed(URL, String)
@@ -250,7 +250,7 @@ public class HtmlEmail extends MultiPartEmail
      * @param name The name that will be set in the filename header
      * field.
      * @return A String with the Content-ID of the file.
-     * @throws EmailException when URL supplied is invalid or if <code> is null
+     * @throws EmailException when URL supplied is invalid or if {@code name} is null
      * or empty; also see {@link javax.mail.internet.MimeBodyPart} for definitions
      * @since 1.0
      */
@@ -617,11 +617,11 @@ public class HtmlEmail extends MultiPartEmail
      */
     private static class InlineImage
     {
-        /** content id */
+        /** content id. */
         private String cid;
-        /** <code>DataSource</code> for the content */
+        /** <code>DataSource</code> for the content. */
         private DataSource dataSource;
-        /** the <code>MimeBodyPart</code> that contains the encoded data */
+        /** the <code>MimeBodyPart</code> that contains the encoded data. */
         private MimeBodyPart mbp;
 
         /**
