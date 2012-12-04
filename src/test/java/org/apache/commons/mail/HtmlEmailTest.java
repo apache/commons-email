@@ -670,7 +670,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         MimeMessageParser mmp = new MimeMessageParser(mm);
         mmp.parse();
 
-        List attachments = mmp.getAttachmentList();
+        List<?> attachments = mmp.getAttachmentList();
         assertEquals("Attachment size", 1, attachments.size());
 
         DataSource ds = (DataSource) attachments.get(0);

@@ -361,7 +361,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         InputStream stream = url.openStream();
         StringBuffer str = new StringBuffer();
         try {
-            List lines = IOUtils.readLines(stream);
+            List<?> lines = IOUtils.readLines(stream);
             for (int i = 0; i < lines.size(); i++) {
                 String line = (String) lines.get(i);
                 str.append(line).append("\n");
