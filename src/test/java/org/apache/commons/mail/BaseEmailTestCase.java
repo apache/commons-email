@@ -240,7 +240,7 @@ public abstract class BaseEmailTestCase extends TestCase
     {
         assertTrue("mail server doesn't contain expected message",
                 mailServer.getMessages().size() == 1);
-        WiserMessage emailMessage = (WiserMessage) mailServer.getMessages().get(0);
+        WiserMessage emailMessage = mailServer.getMessages().get(0);
 
         if (boolSaveToFile)
         {

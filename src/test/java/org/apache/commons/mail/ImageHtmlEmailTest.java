@@ -93,7 +93,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
 
         assertEquals(1, fakeMailServer.getMessages().size());
-        MimeMessage mimeMessage = ((WiserMessage) fakeMailServer.getMessages().get(0)).getMimeMessage();
+        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
 
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().indexOf("\"cid:") >= 0);
@@ -230,7 +230,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
 
         assertEquals(1, fakeMailServer.getMessages().size());
-        MimeMessage mimeMessage = ((WiserMessage) fakeMailServer.getMessages().get(0)).getMimeMessage();
+        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLClassPathFile.eml"));
 
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
@@ -272,7 +272,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
 
         assertEquals(1, fakeMailServer.getMessages().size());
-        MimeMessage mimeMessage = ((WiserMessage) fakeMailServer.getMessages().get(0)).getMimeMessage();
+        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLAutoFile.eml"));
 
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
