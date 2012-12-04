@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Session;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -750,16 +751,16 @@ public class EmailTest extends BaseEmailTestCase
     /**
      * @throws EmailException when there are problems adding an address
      */
-    public void testSetCc() throws EmailException
+    public void testSetCc() throws EmailException, AddressException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
-        List<String> testEmailValid2 = new ArrayList<String>();
-        testEmailValid2.add("Name1 <me@home.com>");
-        testEmailValid2.add("\"joe.doe@apache.org\" <joe.doe@apache.org>");
+        List<InternetAddress> testEmailValid2 = new ArrayList<InternetAddress>();
+        testEmailValid2.add(new InternetAddress("Name1 <me@home.com>"));
+        testEmailValid2.add(new InternetAddress("\"joe.doe@apache.org\" <joe.doe@apache.org>"));
         testEmailValid2.add(
-            "\"someone_here@work.com.au\" <someone_here@work.com.au>");
+                new InternetAddress("\"someone_here@work.com.au\" <someone_here@work.com.au>"));
 
         this.email.setCc(testEmailValid2);
         assertEquals(testEmailValid2, this.email.getCcAddresses());
@@ -782,7 +783,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         try
         {
-            this.email.setCc(new ArrayList<String>());
+            this.email.setCc(new ArrayList<InternetAddress>());
             fail("Should have thrown an exception");
         }
         catch (EmailException e)
