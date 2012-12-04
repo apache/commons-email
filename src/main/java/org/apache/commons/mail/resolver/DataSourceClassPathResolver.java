@@ -71,11 +71,13 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
         return classPathBase;
     }
 
+    /** {@inheritDoc} */
     public DataSource resolve(String resourceLocation) throws IOException
     {
         return resolve(resourceLocation, isLenient());
     }
 
+    /** {@inheritDoc} */
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
     {
         DataSource result = null;
@@ -121,6 +123,13 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
         }
     }
 
+    /**
+     * Returns the resource name for a given resource location.
+     *
+     * @param resourceLocation the resource location
+     * @return {@link #getClassPathBase()} + {@code resourceLocation}
+     * @see #getClassPathBase()
+     */
     private String getResourceName(final String resourceLocation)
     {
         return (getClassPathBase() + resourceLocation).replaceAll("//", "/");

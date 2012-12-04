@@ -49,7 +49,7 @@ public class ByteArrayDataSource implements DataSource
     private ByteArrayOutputStream baos;
 
     /** The Content-type. */
-    private final String type;// = "application/octet-stream";
+    private final String type; // = "application/octet-stream";
 
     /**
      * Create a datasource from a byte array.

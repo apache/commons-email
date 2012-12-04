@@ -664,16 +664,16 @@ public abstract class Email implements EmailConstants
     public Email addTo(String... emails)
         throws EmailException
     {
-        if(emails == null || emails.length == 0)
+        if (emails == null || emails.length == 0)
         {
             throw new EmailException("Address List provided was invalid");
         }
-        
-        for(String email : emails)
+
+        for (String email : emails)
         {
             addTo(email, null);
         }
-        
+
         return this;
     }
 
@@ -773,16 +773,16 @@ public abstract class Email implements EmailConstants
     public Email addCc(String... emails)
         throws EmailException
     {
-        if(emails == null || emails.length == 0)
+        if (emails == null || emails.length == 0)
         {
             throw new EmailException("Address List provided was invalid");
         }
-        
-        for(String email : emails)
+
+        for (String email : emails)
         {
             addCc(email, null);
         }
-        
+
         return this;
     }
 
@@ -881,16 +881,16 @@ public abstract class Email implements EmailConstants
     public Email addBcc(String... emails)
         throws EmailException
     {
-        if(emails == null || emails.length == 0)
+        if (emails == null || emails.length == 0)
         {
             throw new EmailException("Address List provided was invalid");
         }
-        
-        for(String email : emails)
+
+        for (String email : emails)
         {
             addBcc(email, null);
         }
-        
+
         return this;
     }
 

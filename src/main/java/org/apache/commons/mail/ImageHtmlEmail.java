@@ -48,10 +48,12 @@ public class ImageHtmlEmail extends HtmlEmail
     // can be arbitrary text between "IMG" and "SRC" like IDs and other things.
 
     /** regexp for extracting <img> tags */
-    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_IMG_SRC =
+            "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     /** regexp for extracting <script> tags */
-    public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_SCRIPT_SRC =
+            "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID

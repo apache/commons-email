@@ -72,11 +72,13 @@ public class DataSourceFileResolver extends DataSourceBaseResolver
         return baseDir;
     }
 
+    /** {@inheritDoc} */
     public DataSource resolve(final String resourceLocation) throws IOException
     {
         return resolve(resourceLocation, isLenient());
     }
 
+    /** {@inheritDoc} */
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
     {
         File file;

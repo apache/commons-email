@@ -433,7 +433,7 @@ public class MultiPartEmail extends Email
                 // close the input stream to prevent file locking on windows
                 is.close();
             }
-            
+
             if (is == null)
             {
                 throw new EmailException("Invalid Datasource");
