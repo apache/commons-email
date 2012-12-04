@@ -56,7 +56,7 @@ public class MimeMessageParser
     private String htmlContent;
 
     /** List of attachments of MimeMessage */
-    private final List attachmentList;
+    private final List<DataSource> attachmentList;
 
     /** Is this a Multipart email */
     private boolean isMultiPart;
@@ -68,7 +68,7 @@ public class MimeMessageParser
      */
     public MimeMessageParser(final MimeMessage message)
     {
-        attachmentList = new ArrayList();
+        attachmentList = new ArrayList<DataSource>();
         this.mimeMessage = message;
         this.isMultiPart = false;
     }
@@ -89,30 +89,30 @@ public class MimeMessageParser
      * @return the 'to' recipents of the message
      * @throws Exception determining the recipients failed
      */
-    public List getTo() throws Exception
+    public List<javax.mail.Address> getTo() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList();
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
     }
 
     /**
      * @return the 'cc' recipents of the message
      * @throws Exception determining the recipients failed
      */
-    public List getCc() throws Exception
+    public List<javax.mail.Address> getCc() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList();
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
     }
 
     /**
      * @return the 'bcc' recipents of the message
      * @throws Exception determining the recipients failed
      */
-    public List getBcc() throws Exception
+    public List<javax.mail.Address> getBcc() throws Exception
     {
         javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList();
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
     }
 
     /**
@@ -244,7 +244,7 @@ public class MimeMessageParser
     }
 
     /** @return Returns the attachmentList. */
-    public List getAttachmentList()
+    public List<DataSource> getAttachmentList()
     {
         return attachmentList;
     }
@@ -285,7 +285,7 @@ public class MimeMessageParser
 
         for (int i = 0; i < getAttachmentList().size(); i++)
         {
-            dataSource = (DataSource) getAttachmentList().get(i);
+            dataSource = getAttachmentList().get(i);
             if (name.equalsIgnoreCase(dataSource.getName()))
             {
                 return dataSource;
