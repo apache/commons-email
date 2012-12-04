@@ -159,7 +159,7 @@ public abstract class BaseEmailTestCase extends TestCase
      */
     public String getMessageAsString(int intMsgNo)
     {
-        List receivedMessages = fakeMailServer.getMessages();
+        List<?> receivedMessages = fakeMailServer.getMessages();
         assertTrue("mail server didn't get enough messages", receivedMessages.size() >= intMsgNo);
 
         WiserMessage emailMessage = (WiserMessage) receivedMessages.get(intMsgNo);
@@ -416,7 +416,7 @@ public abstract class BaseEmailTestCase extends TestCase
         MimeMessage message = wiserMessage.getMimeMessage();
 
         // Serialize the headers
-        for (Enumeration headers = message.getAllHeaders(); headers
+        for (Enumeration<?> headers = message.getAllHeaders(); headers
                 .hasMoreElements();)
         {
             Header header = (Header) headers.nextElement();

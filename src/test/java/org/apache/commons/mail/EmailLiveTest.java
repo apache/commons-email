@@ -92,9 +92,9 @@ public class EmailLiveTest extends BaseEmailTestCase
      * @return the new instance
      * @throws Exception creating the Email instance failed
      */
-    private Email create(Class clazz) throws Exception {
+    private Email create(Class<? extends Email> clazz) throws Exception {
 
-        Email email = (Email) clazz.newInstance();
+        Email email = clazz.newInstance();
 
         email.setStartTLSEnabled(EmailConfiguration.MAIL_USE_STARTTLS);
         email.setStartTLSRequired(EmailConfiguration.MAIL_STARTTLS_REQUIRED);
@@ -315,7 +315,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      */
     public void testSendingEmailsInBatch() throws Exception
     {
-        List emails = new ArrayList();
+        List<SimpleEmail> emails = new ArrayList<SimpleEmail>();
 
         // we need to instantiate an email to provide the mail session - a bit ugly
         Session session = create(SimpleEmail.class).getMailSession();
@@ -339,7 +339,7 @@ public class EmailLiveTest extends BaseEmailTestCase
 
             for(int i=0; i<emails.size(); i++)
             {
-                Email personalizedEmail = (Email) emails.get(i);
+                Email personalizedEmail = emails.get(i);
                 MimeMessage mimeMessage =  personalizedEmail.getMimeMessage();
                 Transport.send(mimeMessage);
                 System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());

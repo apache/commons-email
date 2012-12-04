@@ -143,7 +143,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
 
         testEmail.setMsg("Test Message");
 
-        Map ht = new HashMap();
+        Map<String, String> ht = new HashMap<String, String>();
         ht.put("X-Priority", "2");
         ht.put("Disposition-Notification-To", this.strTestMailFrom);
         ht.put("X-Mailer", "Sendmail");

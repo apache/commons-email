@@ -113,7 +113,7 @@ public class MimeMessageParserTest
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
-        List attachmentList = mimeMessageParser.getAttachmentList();
+        List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertTrue(attachmentList.size() == 2);
 
         dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
@@ -153,7 +153,7 @@ public class MimeMessageParserTest
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
-        List attachmentList = mimeMessageParser.getAttachmentList();
+        List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertTrue(attachmentList.size() == 1);
 
         dataSource = (DataSource) attachmentList.get(0);
@@ -190,7 +190,7 @@ public class MimeMessageParserTest
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
-        List attachmentList = mimeMessageParser.getAttachmentList();
+        List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertTrue(attachmentList.size() == 1);
 
         dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
