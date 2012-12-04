@@ -76,6 +76,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     /**
      * @deprecated as of commons-email 1.1, replaced by {@link #getInlineEmbeds}.
      */
+    @Deprecated
     public List getInlineImages()
     {
         return inlineImages;

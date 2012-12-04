@@ -161,6 +161,7 @@ public abstract class Email implements EmailConstants
      * Does server require TLS encryption for authentication?
      * @deprecated  since 1.3, use setStartTLSEnabled() instead
      */
+    @Deprecated
     protected boolean tls;
 
     /**
@@ -185,6 +186,7 @@ public abstract class Email implements EmailConstants
      * Does the current transport use SSL/TLS encryption upon connection?
      * @deprecated since 1.3, use setSSLOnConnect() instead
      */
+    @Deprecated
     protected boolean ssl;
 
     /** does the current transport use SSL/TLS encryption upon connection? */
@@ -365,6 +367,7 @@ public abstract class Email implements EmailConstants
      * @param withTLS true if STARTTLS requested, false otherwise
      * @since 1.1
      */
+    @Deprecated
     public void setTLS(boolean withTLS)
     {
         setStartTLSEnabled(withTLS);
@@ -1416,6 +1419,7 @@ public abstract class Email implements EmailConstants
      * @return true if using STARTTLS for authentication, false otherwise
      * @since 1.1
      */
+    @Deprecated
     public boolean isTLS()
     {
         return isStartTLSEnabled();
@@ -1465,6 +1469,7 @@ public abstract class Email implements EmailConstants
      * @deprecated since 1.3, use isSSLOnConnect() instead
      * @return true if SSL enabled for the transport
      */
+    @Deprecated
     public boolean isSSL()
     {
         return isSSLOnConnect();
@@ -1487,6 +1492,7 @@ public abstract class Email implements EmailConstants
      * @deprecated since 1.3, use setSSLOnConnect() instead
      * @param ssl whether to enable the SSL transport
      */
+    @Deprecated
     public void setSSL(boolean ssl)
     {
         setSSLOnConnect(ssl);

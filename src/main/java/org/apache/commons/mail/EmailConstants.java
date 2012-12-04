@@ -64,6 +64,7 @@ public interface EmailConstants
     /////////////////////////////////////////////////////////////////////////
 
     /** @deprecated since 1.3 */
+    @Deprecated
     String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
 
     String MAIL_TRANSPORT_STARTTLS_ENABLE = "mail.smtp.starttls.enable";
