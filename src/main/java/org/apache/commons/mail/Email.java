@@ -468,10 +468,10 @@ public abstract class Email implements EmailConstants
     /**
      * Supply a mail Session object from a JNDI directory.
      *
-     * @param jndiName name of JNDI ressource (javax.mail.Session type), ressource
-     * if searched in java:comp/env if name dont start with "java:"
+     * @param jndiName name of JNDI resource (javax.mail.Session type), resource
+     * if searched in java:comp/env if name does not start with "java:"
      * @throws IllegalArgumentException JNDI name null or empty
-     * @throws NamingException ressource can be retrieved from JNDI directory
+     * @throws NamingException resource can be retrieved from JNDI directory
      * @since 1.1
      */
     public void setMailSessionFromJNDI(String jndiName) throws NamingException
@@ -1111,7 +1111,7 @@ public abstract class Email implements EmailConstants
 
 
     /**
-     * Define the content of the mail. It should be overidden by the
+     * Define the content of the mail. It should be overridden by the
      * subclasses.
      *
      * @param msg A String.
@@ -1443,7 +1443,7 @@ public abstract class Email implements EmailConstants
     /**
      * Set details regarding "pop3 before smtp" authentication.
      *
-     * @param newPopBeforeSmtp Wether or not to log into pop3 server before sending mail.
+     * @param newPopBeforeSmtp Whether or not to log into pop3 server before sending mail.
      * @param newPopHost The pop3 host to use.
      * @param newPopUsername The pop3 username.
      * @param newPopPassword The pop3 password.

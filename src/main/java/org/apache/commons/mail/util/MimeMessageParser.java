@@ -86,7 +86,7 @@ public class MimeMessageParser
     }
 
     /**
-     * @return the 'to' recipents of the message
+     * @return the 'to' recipients of the message
      * @throws Exception determining the recipients failed
      */
     public List<javax.mail.Address> getTo() throws Exception
@@ -96,7 +96,7 @@ public class MimeMessageParser
     }
 
     /**
-     * @return the 'cc' recipents of the message
+     * @return the 'cc' recipients of the message
      * @throws Exception determining the recipients failed
      */
     public List<javax.mail.Address> getCc() throws Exception
@@ -106,7 +106,7 @@ public class MimeMessageParser
     }
 
     /**
-     * @return the 'bcc' recipents of the message
+     * @return the 'bcc' recipients of the message
      * @throws Exception determining the recipients failed
      */
     public List<javax.mail.Address> getBcc() throws Exception
@@ -161,7 +161,7 @@ public class MimeMessageParser
     /**
      * Extracts the content of a MimeMessage recursively.
      *
-     * @param parent the parent Mulitpart
+     * @param parent the parent multi-part
      * @param part   the current MimePart
      * @throws MessagingException parsing the MimeMessage failed
      * @throws IOException        parsing the MimeMessage failed
@@ -300,7 +300,7 @@ public class MimeMessageParser
      *
      * @param part the mail part
      * @param dataSource the data source
-     * @return the name of the data source or <b>null</b> if no name can be determined
+     * @return the name of the data source or {@code null} if no name can be determined
      * @throws MessagingException accessing the part failed
      * @throws UnsupportedEncodingException decoding the text failed
      */
