@@ -170,7 +170,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
                 && (ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0);
             try
             {
-                validateMethod.invoke(address, null);
+                validateMethod.invoke(address, (Object[]) null);
 
                 if (!(quoted || domainBracket))
                 {
@@ -190,7 +190,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         // test valid 'quoted' Email addresses
         try
         {
-            validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe"), null);
+            validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe"), (Object[]) null);
         }
         catch (Exception ex)
         {
@@ -228,7 +228,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
 
             try
             {
-                validateMethod.invoke(address, null);
+                validateMethod.invoke(address, (Object[]) null);
                 if (!(quoted || domainBracket))
                 {
                     fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
@@ -251,7 +251,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         // test valid 'quoted' Email addresses
         try
         {
-            validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe", "UTF-8"), null);
+            validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe", "UTF-8"), (Object[]) null);
         }
         catch (Exception ex)
         {
