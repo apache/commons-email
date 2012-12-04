@@ -52,6 +52,7 @@ public class EmailLiveTest extends BaseEmailTestCase
 
     /**
      * @throws Exception  */
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();

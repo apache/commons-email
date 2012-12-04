@@ -86,6 +86,7 @@ public class EmailException
     /**
      * Prints the stack trace of this exception to the standard error stream.
      */
+    @Override
     public void printStackTrace()
     {
         printStackTrace(System.err);
@@ -96,6 +97,7 @@ public class EmailException
      *
      * @param out  the <code>PrintStream</code> to use for output
      */
+    @Override
     public void printStackTrace(PrintStream out)
     {
         synchronized (out)
@@ -113,6 +115,7 @@ public class EmailException
      *
      * @param out  the <code>PrintWriter</code> to use for output
      */
+    @Override
     public void printStackTrace(PrintWriter out)
     {
         synchronized (out)

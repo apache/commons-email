@@ -188,6 +188,7 @@ public class MultiPartEmail extends Email
      *  for definitions
      * @since 1.0
      */
+    @Override
     public Email setMsg(String msg) throws EmailException
     {
         // throw exception on null message
@@ -224,6 +225,7 @@ public class MultiPartEmail extends Email
      * @exception EmailException if there was an error.
      * @since 1.0
      */
+    @Override
     public void buildMimeMessage() throws EmailException
     {
         try

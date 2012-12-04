@@ -64,6 +64,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
     /**
      * @return fromAddress
      */
+    @Override
     public InternetAddress getFromAddress()
     {
         return this.fromAddress;

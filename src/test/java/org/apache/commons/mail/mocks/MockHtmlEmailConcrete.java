@@ -92,6 +92,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     /**
      * @return fromAddress
      */
+    @Override
     public InternetAddress getFromAddress()
     {
         return this.fromAddress;

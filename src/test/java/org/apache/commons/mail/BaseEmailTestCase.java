@@ -116,6 +116,7 @@ public abstract class BaseEmailTestCase extends TestCase
     }
 
     /** */
+    @Override
     protected void tearDown()
     {
         //stop the fake email server (if started)

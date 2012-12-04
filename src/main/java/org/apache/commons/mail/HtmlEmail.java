@@ -171,6 +171,7 @@ public class HtmlEmail extends MultiPartEmail
      * see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0
      */
+    @Override
     public Email setMsg(String msg) throws EmailException
     {
         if (EmailUtils.isEmpty(msg))
@@ -504,6 +505,7 @@ public class HtmlEmail extends MultiPartEmail
      * @exception EmailException if there was an error.
      * @since 1.0
      */
+    @Override
     public void buildMimeMessage() throws EmailException
     {
         try
@@ -671,6 +673,7 @@ public class HtmlEmail extends MultiPartEmail
          * {@inheritDoc}
          * @return true if the other object is also an InlineImage with the same cid.
          */
+        @Override
         public boolean equals(Object obj)
         {
             if (this == obj)
@@ -691,6 +694,7 @@ public class HtmlEmail extends MultiPartEmail
          * {@inheritDoc}
          * @return the cid hashCode.
          */
+        @Override
         public int hashCode()
         {
             return cid.hashCode();

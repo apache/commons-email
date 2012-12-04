@@ -91,6 +91,7 @@ public class ImageHtmlEmail extends HtmlEmail
       * @see org.apache.commons.mail.HtmlEmail#buildMimeMessage()
       * @throws EmailException building the MimeMessage failed
       */
+    @Override
     public void buildMimeMessage() throws EmailException
     {
         try

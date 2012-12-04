@@ -44,6 +44,7 @@ public class MockEmailConcrete extends Email
      * @param msg The email message
      * @return Email msg.
      */
+    @Override
     public Email setMsg(String msg)
     {
         // This abstract method should be tested in the concrete
@@ -104,6 +105,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return fromAddress
      */
+    @Override
     public InternetAddress getFromAddress()
     {
         return this.fromAddress;
@@ -120,6 +122,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return hostName
      */
+    @Override
     public String getHostName()
     {
         return this.hostName;
@@ -160,6 +163,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return smtpPort
      */
+    @Override
     public String getSmtpPort()
     {
         return this.smtpPort;
@@ -168,6 +172,7 @@ public class MockEmailConcrete extends Email
     /**
      * @return subject
      */
+    @Override
     public String getSubject()
     {
         return this.subject;

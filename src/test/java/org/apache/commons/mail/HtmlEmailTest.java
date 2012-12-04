@@ -49,6 +49,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();

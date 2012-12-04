@@ -82,6 +82,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
      * Setup for a test
      * @throws Exception on any error
      */
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();

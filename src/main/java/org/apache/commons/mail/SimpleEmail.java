@@ -40,6 +40,7 @@ public class SimpleEmail extends Email
      *  for definitions
      * @since 1.0
      */
+    @Override
     public Email setMsg(String msg) throws EmailException
     {
         if (EmailUtils.isEmpty(msg))

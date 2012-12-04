@@ -52,6 +52,7 @@ public class DefaultAuthenticator extends Authenticator
      *         login information.
      * @since 1.0
      */
+    @Override
     protected PasswordAuthentication getPasswordAuthentication()
     {
         return this.authentication;

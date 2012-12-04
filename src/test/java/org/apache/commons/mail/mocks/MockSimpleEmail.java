@@ -42,6 +42,7 @@ public class MockSimpleEmail extends SimpleEmail
     /**
      * @return fromAddress
      */
+    @Override
     public InternetAddress getFromAddress()
     {
         return this.fromAddress;
