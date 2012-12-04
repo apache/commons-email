@@ -24,8 +24,6 @@ import org.apache.commons.mail.resolver.DataSourceUrlResolver;
 import org.apache.commons.mail.mocks.MockImageHtmlEmailConcrete;
 import org.apache.commons.mail.util.MimeMessageParser;
 import org.apache.commons.mail.util.MimeMessageUtils;
-import org.subethamail.wiser.WiserMessage;
-
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
