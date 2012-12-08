@@ -1714,22 +1714,20 @@ public abstract class Email implements EmailConstants
             address = new InternetAddress(email);
 
             // check name input
-            if (EmailUtils.isEmpty(name))
+            if (EmailUtils.isNotEmpty(name))
             {
-                name = email;
-            }
-
-            // check charset input.
-            if (EmailUtils.isEmpty(charsetName))
-            {
-                address.setPersonal(name);
-            }
-            else
-            {
-                // canonicalize the charset name and make sure
-                // the current platform supports it.
-                Charset set = Charset.forName(charsetName);
-                address.setPersonal(name, set.name());
+                // check charset input.
+                if (EmailUtils.isEmpty(charsetName))
+                {
+                    address.setPersonal(name);
+                }
+                else
+                {
+                    // canonicalize the charset name and make sure
+                    // the current platform supports it.
+                    Charset set = Charset.forName(charsetName);
+                    address.setPersonal(name, set.name());
+                }
             }
 
             // run sanity check on new InternetAddress object; if this fails

@@ -56,7 +56,7 @@ public class EmailTest extends BaseEmailTestCase
 
     /** mock for testing */
     private MockEmailConcrete email;
-                       
+
     /**
      * @param name test name
      */
@@ -393,22 +393,16 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddTo() throws EmailException, UnsupportedEncodingException
+    public void testAddTo() throws EmailException, AddressException, UnsupportedEncodingException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("me@home.com"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -425,22 +419,16 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddToArray() throws EmailException, UnsupportedEncodingException
+    public void testAddToArray() throws EmailException, AddressException, UnsupportedEncodingException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("me@home.com"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         //set To
         this.email.addTo(ARR_VALID_EMAILS);
@@ -454,34 +442,27 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddToWithEncoding() throws UnsupportedEncodingException, EmailException
+    public void testAddToWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
+        String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
         arrExpected.add(
             new InternetAddress(
                 "me@home.com",
-                "me@home.com",
+                "Name1",
                 testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org",
-                testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au",
-                testCharset));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
             // set from
-            this.email.addTo(ARR_VALID_EMAILS[i]);
+            this.email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -493,7 +474,7 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddTo2() throws UnsupportedEncodingException, EmailException
+    public void testAddTo2() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -503,14 +484,8 @@ public class EmailTest extends BaseEmailTestCase
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -600,22 +575,16 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddCc() throws UnsupportedEncodingException, EmailException
+    public void testAddCc() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("me@home.com"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -632,22 +601,16 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddCcArray() throws UnsupportedEncodingException, EmailException
+    public void testAddCcArray() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("me@home.com"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         //set Cc array
         this.email.addCc(ARR_VALID_EMAILS);
@@ -661,34 +624,24 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddCcWithEncoding() throws UnsupportedEncodingException, EmailException
+    public void testAddCcWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
+        String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
         arrExpected.add(
-            new InternetAddress(
-                "me@home.com",
-                "me@home.com",
-                testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org",
-                testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au",
-                testCharset));
+            new InternetAddress("me@home.com", "Name1", testCharset));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         // add valid ccs
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
-            this.email.addCc(ARR_VALID_EMAILS[i]);
+            this.email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -700,7 +653,7 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddCc2() throws UnsupportedEncodingException, EmailException
+    public void testAddCc2() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -710,14 +663,8 @@ public class EmailTest extends BaseEmailTestCase
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -796,22 +743,16 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddBcc() throws UnsupportedEncodingException, EmailException
+    public void testAddBcc() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("me@home.com"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -830,19 +771,16 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddBccArray() throws UnsupportedEncodingException, EmailException
+    public void testAddBccArray() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-        arrExpected.add(
-            new InternetAddress("joe.doe@apache.org", "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress("someone_here@work-address.com.au",
-                                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("me@home.com"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         // add a valid bcc
         this.email.addBcc(ARR_VALID_EMAILS);
@@ -858,34 +796,23 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddBccWithEncoding() throws UnsupportedEncodingException, EmailException
+    public void testAddBccWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
+        String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(
-            new InternetAddress(
-                "me@home.com",
-                "me@home.com",
-                testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org",
-                testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au",
-                testCharset));
+        arrExpected.add(new InternetAddress("me@home.com", "Name1", testCharset));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
             // set bccs
-            this.email.addBcc(ARR_VALID_EMAILS[i]);
+            this.email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -899,7 +826,7 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddBcc2() throws UnsupportedEncodingException, EmailException
+    public void testAddBcc2() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -910,14 +837,8 @@ public class EmailTest extends BaseEmailTestCase
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -1004,22 +925,16 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddReplyTo() throws UnsupportedEncodingException, EmailException
+    public void testAddReplyTo() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("me@home.com"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -1038,34 +953,23 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddReplyToWithEncoding() throws UnsupportedEncodingException, EmailException
+    public void testAddReplyToWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
         // ====================================================================
         String testCharset = Email.ISO_8859_1;
+        String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
-        arrExpected.add(
-            new InternetAddress(
-                "me@home.com",
-                "me@home.com",
-                testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org",
-                testCharset));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au",
-                testCharset));
+        arrExpected.add(new InternetAddress("me@home.com", "Name1", testCharset));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
             // set replyTo
-            this.email.addReplyTo(ARR_VALID_EMAILS[i]);
+            this.email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -1079,7 +983,7 @@ public class EmailTest extends BaseEmailTestCase
      * @throws EmailException when there are problems adding an address
      * @throws UnsupportedEncodingException on bad email addresses
      */
-    public void testAddReplyTo2() throws UnsupportedEncodingException, EmailException
+    public void testAddReplyTo2() throws UnsupportedEncodingException, AddressException, EmailException
     {
         // ====================================================================
         // Test Success
@@ -1089,14 +993,8 @@ public class EmailTest extends BaseEmailTestCase
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
-        arrExpected.add(
-            new InternetAddress(
-                "joe.doe@apache.org",
-                "joe.doe@apache.org"));
-        arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+        arrExpected.add(new InternetAddress("joe.doe@apache.org"));
+        arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
