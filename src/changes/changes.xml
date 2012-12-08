@@ -23,6 +23,10 @@
 
   <body>
     <release version="1.3" date="as in SVN">
+      <action dev="tn" type="fix" issue="EMAIL-122" date="2012-12-08" due-to="sebb">
+        Upgraded source and binary compatibility to JDK 1.5. Additionally the public/protected
+        methods and fields have been properly generified.
+      </action>
       <action dev="tn" type="fix" issue="EMAIL-103" date="2012-12-08" due-to="David Rees">
         Do not set the personal name of an address to the email address unless it is
         explicitly specified (affects TO, CC, BCC and FROM addresses).
