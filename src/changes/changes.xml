@@ -35,7 +35,7 @@
         Do not set the personal name of an address to the email address unless it is
         explicitly specified (affects TO, CC, BCC and FROM addresses).
       </action>
-      <action dev="tn" type="fix" issue="EMAIL-114" date="2012-12-02" due-to="Gokul Nanthakumar C">
+      <action dev="tn" type="add" issue="EMAIL-114" date="2012-12-02" due-to="Gokul Nanthakumar C">
         Added new methods addTo(String[]), addCc(String[]) and addBcc(String[]) to Email.
       </action>
       <action dev="tn" type="fix" issue="EMAIL-117" date="2012-12-02" due-to="sebb">
