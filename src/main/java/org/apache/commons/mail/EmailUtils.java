@@ -76,14 +76,17 @@ final class EmailUtils
     // Static initializer for safe_uri
     static {
         // alpha characters
-        for (int i = 'a'; i <= 'z'; i++) {
+        for (int i = 'a'; i <= 'z'; i++)
+        {
             SAFE_URL.set(i);
         }
-        for (int i = 'A'; i <= 'Z'; i++) {
+        for (int i = 'A'; i <= 'Z'; i++)
+        {
             SAFE_URL.set(i);
         }
         // numeric characters
-        for (int i = '0'; i <= '9'; i++) {
+        for (int i = '0'; i <= '9'; i++)
+        {
             SAFE_URL.set(i);
         }
 
