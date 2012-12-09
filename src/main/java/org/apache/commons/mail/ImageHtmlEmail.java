@@ -64,6 +64,9 @@ public class ImageHtmlEmail extends HtmlEmail
     /** pattern for extracting <script> tags */
     private static final Pattern SCRIPT_PATTERN = Pattern.compile(REGEX_SCRIPT_SRC);
 
+    /** the group of the remaining chars after the src attribute */
+    private static final int LAST_GROUP = 3;
+
     /** resolve the images and script resources to a DataSource */
     private DataSourceResolver dataSourceResolver;
 
@@ -171,7 +174,7 @@ public class ImageHtmlEmail extends HtmlEmail
                 // if we embedded something, then we need to replace the URL with
                 // the CID, otherwise the Matcher takes care of adding the
                 // non-replaced text afterwards, so no else is necessary here!
-                matcher.appendReplacement(stringBuffer, matcher.group(1) + "cid:" + cid + matcher.group(3));
+                matcher.appendReplacement(stringBuffer, matcher.group(1) + "cid:" + cid + matcher.group(LAST_GROUP));
             }
         }
 

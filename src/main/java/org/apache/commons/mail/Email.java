@@ -165,6 +165,19 @@ public abstract class Email implements EmailConstants
     protected boolean tls;
 
     /**
+     * Does the current transport use SSL/TLS encryption upon connection?
+     * @deprecated since 1.3, use setSSLOnConnect() instead
+     */
+    @Deprecated
+    protected boolean ssl;
+
+    /** socket I/O timeout value in milliseconds. */
+    protected int socketTimeout = SOCKET_TIMEOUT_MS;
+
+    /** socket connection timeout value in milliseconds. */
+    protected int socketConnectionTimeout = SOCKET_TIMEOUT_MS;
+
+    /**
      * If true, enables the use of the STARTTLS command (if supported by
      * the server) to switch the connection to a TLS-protected connection
      * before issuing any login commands. Note that an appropriate trust
@@ -182,13 +195,6 @@ public abstract class Email implements EmailConstants
      */
     private boolean startTlsRequired;
 
-    /**
-     * Does the current transport use SSL/TLS encryption upon connection?
-     * @deprecated since 1.3, use setSSLOnConnect() instead
-     */
-    @Deprecated
-    protected boolean ssl;
-
     /** does the current transport use SSL/TLS encryption upon connection? */
     private boolean sslOnConnect;
 
@@ -199,12 +205,6 @@ public abstract class Email implements EmailConstants
      * Defaults to false.
      */
     private boolean sslCheckServerIdentity;
-
-    /** socket I/O timeout value in milliseconds. */
-    protected int socketTimeout = SOCKET_TIMEOUT_MS;
-
-    /** socket connection timeout value in milliseconds. */
-    protected int socketConnectionTimeout = SOCKET_TIMEOUT_MS;
 
     /** The Session to mail with. */
     private Session session;

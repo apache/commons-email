@@ -160,7 +160,9 @@ public final class MimeMessageUtils
             {
                 if (!resultFile.getParentFile().mkdirs())
                 {
-                    throw new IOException("Failed to created the following parent directories : " + resultFile.getParentFile());
+                    throw new IOException(
+                            "Failed to create the following parent directories: "
+                                    + resultFile.getParentFile());
                 }
             }
 
