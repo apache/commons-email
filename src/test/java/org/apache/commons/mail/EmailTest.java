@@ -44,7 +44,6 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
-
 public class EmailTest extends BaseEmailTestCase
 {
     /** valid email addresses */

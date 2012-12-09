@@ -26,7 +26,6 @@ import java.net.URL;
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
-
 public class EmailAttachmentTest extends BaseEmailTestCase
 {
     /** */

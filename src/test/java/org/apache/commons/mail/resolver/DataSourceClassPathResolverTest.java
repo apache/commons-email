@@ -29,7 +29,6 @@ import java.io.InputStream;
  *
  * @since 1.3
  */
-
 public class DataSourceClassPathResolverTest extends TestCase
 {
     private final int IMG_SIZE = 5866;

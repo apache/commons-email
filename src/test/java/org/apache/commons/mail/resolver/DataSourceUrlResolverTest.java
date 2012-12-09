@@ -31,7 +31,6 @@ import java.net.URL;
  *
  * @since 1.3
  */
-
 public class DataSourceUrlResolverTest extends TestCase
 {
     private final int IMG_SIZE = 5866;

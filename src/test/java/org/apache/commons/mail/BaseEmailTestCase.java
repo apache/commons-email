@@ -45,7 +45,6 @@ import org.subethamail.wiser.WiserMessage;
  * @author <a href="mailto:epugh@opensourceconnections.com">Eric Pugh</a>
  * @version $Id$
  */
-
 public abstract class BaseEmailTestCase extends TestCase
 {
     /** Padding at end of body added by wiser/send */

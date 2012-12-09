@@ -26,7 +26,6 @@ import javax.mail.internet.InternetAddress;
  * @since 1.0
  * @version $Id$
  */
-
 public class InvalidInternetAddressTest extends BaseEmailTestCase
 {
 

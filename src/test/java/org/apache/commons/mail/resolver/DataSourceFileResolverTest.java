@@ -32,7 +32,6 @@ import org.apache.commons.mail.DataSourceResolver;
  *
  * @since 1.3
  */
-
 public class DataSourceFileResolverTest extends TestCase
 {
     private final int IMG_SIZE = 5866;

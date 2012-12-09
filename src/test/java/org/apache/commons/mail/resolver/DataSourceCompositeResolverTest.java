@@ -30,7 +30,6 @@ import java.net.URL;
  *
  * @since 1.3
  */
-
 public class DataSourceCompositeResolverTest extends TestCase
 {
     public DataSourceCompositeResolverTest(String name)

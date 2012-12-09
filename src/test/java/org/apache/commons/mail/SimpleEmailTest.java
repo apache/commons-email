@@ -25,7 +25,6 @@ import org.apache.commons.mail.mocks.MockSimpleEmail;
  * @since 1.0
  * @version $Revision$ $Date$
  */
-
 public class SimpleEmailTest extends BaseEmailTestCase
 {
     /** */

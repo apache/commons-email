@@ -43,6 +43,6 @@ public class EmailUtilsTest extends TestCase
         assertEquals("Test%20CID", EmailUtils.encodeUrl("Test CID"));
         assertEquals("joe.doe@apache.org", EmailUtils.encodeUrl("joe.doe@apache.org"));
         assertEquals("joe+doe@apache.org", EmailUtils.encodeUrl("joe+doe@apache.org"));
-        assertEquals("peter%26paul%26mary@oldmusic.org", EmailUtils.encodeUrl("peter&paul&mary@oldmusic.org"));        
+        assertEquals("peter%26paul%26mary@oldmusic.org", EmailUtils.encodeUrl("peter&paul&mary@oldmusic.org"));
     }
 }
