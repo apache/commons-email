@@ -629,7 +629,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
      *
      * see https://issues.apache.org/jira/browse/EMAIL-101
      */
-    public void _testEmbedFileWithCID() throws Exception
+    public void testEmbedFileWithCID() throws Exception
     {
          // ====================================================================
          // Test Success
@@ -639,18 +639,19 @@ public class HtmlEmailTest extends BaseEmailTestCase
          file.deleteOnExit();
 
          String testCid = "Test CID";
+         String encodedCid = EmailUtils.encodeUrl(testCid);
 
          // if we embed a new file, do we get the content ID we specified back?
          String strEmbed = this.email.embed(file, testCid);
          assertNotNull(strEmbed);
-         assertEquals("didn't get same CID when embedding with a specified CID", testCid, strEmbed);
+         assertEquals("didn't get same CID when embedding with a specified CID", encodedCid, strEmbed);
 
          // if we embed the same file again, do we get the same content ID
          // back?
          String returnedCid = this.email.embed(file);
-         assertEquals("didn't get same CID after embedding same file twice", testCid, returnedCid);
+         assertEquals("didn't get same CID after embedding same file twice", encodedCid, returnedCid);
      }
-    
+
     public void testHtmlMailMimeLayout() throws Exception
     {
         assertCorrectContentType("contentTypeTest.gif", "image/gif");

@@ -23,6 +23,10 @@
 
   <body>
     <release version="1.3" date="as in SVN">
+      <action dev="tn" type="fix" issue="EMAIL-101" date="2012-12-09" due-to="Andrew Starodub">
+        Use the provided Content-ID in HtmlEmail#embed(File, String) instead of creating
+        a random one. The used and returned Content-ID will be URL encoded (see RFC 2392).
+      </action>
       <action dev="tn" type="fix" issue="EMAIL-122" date="2012-12-08" due-to="sebb">
         Upgraded source and binary compatibility to JDK 1.5. Additionally the public/protected
         methods and fields have been properly generified.

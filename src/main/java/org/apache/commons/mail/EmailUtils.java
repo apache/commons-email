@@ -21,9 +21,12 @@ import org.apache.commons.mail.util.MimeMessageUtils;
 
 import javax.mail.internet.MimeMessage;
 import javax.mail.MessagingException;
+
+import java.util.BitSet;
 import java.util.Random;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  * Utility methods used by commons-email.
@@ -49,6 +52,55 @@ final class EmailUtils
      * so as to not return the same value in the same millisecond.
      */
     private static final Random RANDOM = new Random();
+
+    /**
+     * The default charset used for URL encoding.
+     */
+    private static final Charset US_ASCII = Charset.forName("US-ASCII");
+
+    /**
+     * Radix used in encoding.
+     */
+    private static final int RADIX = 16;
+
+    /**
+     * The escape character used for the URL encoding scheme.
+     */
+    private static final char ESCAPE_CHAR = '%';
+
+    /**
+     * BitSet of RFC 2392 safe URL characters.
+     */
+    private static final BitSet SAFE_URL = new BitSet(256);
+
+    // Static initializer for safe_uri
+    static {
+        // alpha characters
+        for (int i = 'a'; i <= 'z'; i++) {
+            SAFE_URL.set(i);
+        }
+        for (int i = 'A'; i <= 'Z'; i++) {
+            SAFE_URL.set(i);
+        }
+        // numeric characters
+        for (int i = '0'; i <= '9'; i++) {
+            SAFE_URL.set(i);
+        }
+
+        // safe chars
+        SAFE_URL.set('-');
+        SAFE_URL.set('_');
+        SAFE_URL.set('.');
+        SAFE_URL.set('*');
+        SAFE_URL.set('+');
+        SAFE_URL.set('$');
+        SAFE_URL.set('!');
+        SAFE_URL.set('\'');
+        SAFE_URL.set('(');
+        SAFE_URL.set(')');
+        SAFE_URL.set(',');
+        SAFE_URL.set('@');
+    }
 
     /**
      * Constructs a new <code>EmailException</code> with no detail message.
@@ -214,6 +266,44 @@ final class EmailUtils
             }
         }
 
+        return buffer.toString();
+    }
+
+    /**
+     * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
+     *
+     * @param input the input string to be URL encoded
+     * @return a URL encoded string
+     * @see <a href="http://tools.ietf.org/html/rfc2392">RFC 2392</a>
+     */
+    static String encodeUrl(final String input)
+    {
+        if (input == null)
+        {
+            return null;
+        }
+
+        final StringBuilder buffer = new StringBuilder();
+        for (byte c : input.getBytes(US_ASCII))
+        {
+            int b = c;
+            if (b < 0)
+            {
+                b = 256 + b;
+            }
+            if (SAFE_URL.get(b))
+            {
+                buffer.append((char) b);
+            }
+            else
+            {
+                buffer.append(ESCAPE_CHAR);
+                char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, RADIX));
+                char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
+                buffer.append(hex1);
+                buffer.append(hex2);
+            }
+        }
         return buffer.toString();
     }
 

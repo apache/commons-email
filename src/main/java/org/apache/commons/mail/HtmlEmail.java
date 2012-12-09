@@ -19,8 +19,10 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -417,7 +419,7 @@ public class HtmlEmail extends MultiPartEmail
             throw new EmailException("file " + filePath + " isn't readable");
         }
 
-        return embed(new FileDataSource(file), file.getName());
+        return embed(new FileDataSource(file), file.getName(), cid);
     }
 
     /**
@@ -464,7 +466,7 @@ public class HtmlEmail extends MultiPartEmail
      * @param dataSource the <code>DataSource</code> to embed
      * @param name the name that will be set in the filename header field
      * @param cid the Content-ID to use for this <code>DataSource</code>
-     * @return the supplied Content-ID for this <code>DataSource</code>
+     * @return the URL encoded Content-ID for this <code>DataSource</code>
      * @throws EmailException if the embedding fails or if <code>name</code> is
      * null or empty
      * @since 1.1
@@ -481,6 +483,9 @@ public class HtmlEmail extends MultiPartEmail
 
         try
         {
+            // url encode the cid according to rfc 2392
+            cid = EmailUtils.encodeUrl(cid);
+
             mbp.setDataHandler(new DataHandler(dataSource));
             mbp.setFileName(name);
             mbp.setDisposition(EmailAttachment.INLINE);
