@@ -23,6 +23,7 @@
 
 <module name="Checker">
     <property name="localeLanguage" value="en"/>
+    <property name="severity" value="warning"/>
 
     <!-- Checks that a package.html file exists for each package.     -->
     <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
@@ -140,7 +141,7 @@
         <module name="EqualsHashCode"/>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
-        <module name="MagicNumber"/>
+        <!--  <module name="MagicNumber"/> -->
         <module name="MissingSwitchDefault"/>
         <module name="RedundantThrows"/>
         <module name="SimplifyBooleanExpression"/>
@@ -160,7 +161,7 @@
         <!-- See http://checkstyle.sf.net/config_design.html -->
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
-        <module name="InterfaceIsType"/>
+        <!--  <module name="InterfaceIsType"/> -->
         <module name="VisibilityModifier">
             <property name="protectedAllowed" value="true"/>
         </module>
