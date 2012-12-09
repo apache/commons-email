@@ -30,7 +30,7 @@ public final class EmailConfiguration
 {
     // when using GMail for testing the following combination work
     //
-    // port 25      - MAIL_USE_STARTTLS, MAIL_STARTTLS_REQUIRED
+    // port 587     - MAIL_USE_STARTTLS, MAIL_STARTTLS_REQUIRED, MAIL_SERVER=smtp.gmail.com
     // port 465     - MAIL_USE_SSL
 
     // when using GMX for testing the following combination work
