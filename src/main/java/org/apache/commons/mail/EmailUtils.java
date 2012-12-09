@@ -26,7 +26,7 @@ import java.util.BitSet;
 import java.util.Random;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Utility methods used by commons-email.
@@ -56,7 +56,7 @@ final class EmailUtils
     /**
      * The default charset used for URL encoding.
      */
-    private static final Charset US_ASCII = Charset.forName("US-ASCII");
+    private static final String US_ASCII = "US-ASCII";
 
     /**
      * Radix used in encoding.
@@ -277,9 +277,10 @@ final class EmailUtils
      *
      * @param input the input string to be URL encoded
      * @return a URL encoded string
+     * @throws UnsupportedEncodingException if "US-ASCII" charset is not available
      * @see <a href="http://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
-    static String encodeUrl(final String input)
+    static String encodeUrl(final String input) throws UnsupportedEncodingException
     {
         if (input == null)
         {
