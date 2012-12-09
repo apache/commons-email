@@ -17,6 +17,8 @@
 
 package org.apache.commons.mail;
 
+import java.io.UnsupportedEncodingException;
+
 import junit.framework.TestCase;
 
 /**
@@ -36,7 +38,7 @@ public class EmailUtilsTest extends TestCase
         super(name);
     }
 
-    public void testUrlEncoding()
+    public void testUrlEncoding() throws UnsupportedEncodingException
     {
         assertEquals("abcdefg", EmailUtils.encodeUrl("abcdefg"));
         assertEquals("0123456789", EmailUtils.encodeUrl("0123456789"));
