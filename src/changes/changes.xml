@@ -55,20 +55,20 @@
         a couple of existing SMTP servers. Also added 'sslCheckServerIdentity' including
         setter and getter. Also added a chapter regarding "Security" to the user manual.
       </action>
-      <action dev="sgoeschl" type="add" issue="EMAIL-113" date="2012-02-19" due-to="Peter Kofler">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-113" date="2012-02-19" due-to="Peter Kofler">
         Maven Site fails with error in Checkstyle configuration.
       </action>
-      <action dev="sgoeschl" type="add" issue="EMAIL-112" date="2012-02-19" due-to="Peter Kofler">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-112" date="2012-02-19" due-to="Peter Kofler">
         DataSourceFileResolverTest fails under IBM JDK 1.4 and 1.6 running on Windows.
       </action>
-      <action dev="sgoeschl" type="add" issue="EMAIL-111" date="2012-02-18" due-to="Florian Pirchner">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-111" date="2012-02-18" due-to="Florian Pirchner">
         Update the current trunk to be binary compatible with the commons-email-1.2 release.
       </action>
-      <action dev="sgoeschl" type="add" issue="EMAIL-110" date="2012-02-18" due-to="Thomas Pummer">
+      <action dev="sgoeschl" type="fix" issue="EMAIL-110" date="2012-02-18" due-to="Thomas Pummer">
         Added unit test to ensure that parsing the broken mime message does not cause an OutOfMemoryException.
       </action>
       <action dev="sgoeschl" type="add" issue="EMAIL-108" date="2011-11-10" due-to="Elisabeth Kasimir, Alexander Kasimir">
-        HtmlmageEmail should support class path resources
+        ImageHtmlEmail should support class path resources.
       </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-107" date="2011-09-06" due-to="Claus Polanka, Michael Jakl">
         Added mime.types to META-INF - the definition is actually found in activation.jar
