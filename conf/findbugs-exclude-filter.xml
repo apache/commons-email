@@ -31,4 +31,11 @@
     <Bug pattern="DM_DEFAULT_ENCODING" />
   </Match>
 
+  <!--  printStackTrace is supposed to use the default character encoding  -->
+  <Match>
+    <Class name="org.apache.commons.mail.EmailException" />
+    <Method name="printStackTrace" params="java.io.PrintStream" returns="void" />
+    <Bug pattern="DM_DEFAULT_ENCODING" />
+  </Match>
+
 </FindBugsFilter>
