@@ -540,12 +540,9 @@ public abstract class Email implements EmailConstants
                 properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
             }
 
-            if (isSSLOnConnect() || isStartTLSEnabled())
+            if ((isSSLOnConnect() || isStartTLSEnabled()) && isSSLCheckServerIdentity())
             {
-                if (isSSLCheckServerIdentity())
-                {
-                    properties.setProperty(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
-                }
+                properties.setProperty(MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
             }
 
             if (this.bounceAddress != null)
