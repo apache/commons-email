@@ -19,8 +19,17 @@ This is a maintenance release which fixes several bugs present in the 1.2
 release and adds a number of small enhancements requested by
 users. All current users are encouraged to upgrade.
 
+
 CHANGES FROM 1.2:
 -----------------
+
+== Compatibility ==
+
+* Java 5 or later is now required.
+
+* Clirr reports several errors for this release due to moving constants
+  from the Email class to the newly introduced EmailConstants interface.
+  These changes are guaranteed to be binary compatible.
 
 == New Features ==
 
