@@ -26,7 +26,6 @@ import javax.mail.MessagingException;
 /**
  * Extension of the ImageHtmlEmail Class
  * (used to allow testing only)
- *
  */
 public class MockImageHtmlEmailConcrete extends ImageHtmlEmail
 {

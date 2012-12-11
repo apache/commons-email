@@ -26,6 +26,7 @@ import java.io.IOException;
  * also resolves file resources.
  *
  * @since 1.3
+ * @version $Id$
  */
 public class DataSourceFileResolver extends DataSourceBaseResolver
 {

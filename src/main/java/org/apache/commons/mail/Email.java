@@ -58,7 +58,6 @@ import javax.naming.NamingException;
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:matthias@wessendorf.net">Matthias Wessendorf</a>
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @version $Revision$ $Date$
  * @version $Id$
  */
 public abstract class Email implements EmailConstants

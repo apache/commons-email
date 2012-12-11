@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
  * </br>
  *
  * @since 1.3
+ * @version $Id$
  */
 public class ImageHtmlEmail extends HtmlEmail
 {

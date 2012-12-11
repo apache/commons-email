@@ -25,6 +25,7 @@ package org.apache.commons.mail;
  * </a>.
  *
  * @since 1.3
+ * @version $Id$
  */
 public interface EmailConstants
 {
