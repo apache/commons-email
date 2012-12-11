@@ -241,10 +241,10 @@ public class MultiPartEmail extends Email
                 {
                     body.getContent();
                 }
-                catch (IOException e)
+                catch (IOException e) // NOPMD
                 {
-                    // do nothing here.  content will be set to an empty string
-                    // as a result.
+                    // do nothing here.
+                    // content will be set to an empty string as a result.
                     // (Should this really be rethrown as an email exception?)
                     // throw new EmailException(e);
                 }
@@ -290,9 +290,7 @@ public class MultiPartEmail extends Email
         }
         catch (IOException e)
         {
-            throw new EmailException(
-                "Cannot attach file \"" + fileName + "\"",
-                e);
+            throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
         }
     }
 
@@ -326,8 +324,7 @@ public class MultiPartEmail extends Email
                 File file = new File(fileName);
                 if (!file.exists())
                 {
-                    throw new IOException(
-                        "\"" + fileName + "\" does not exist");
+                    throw new IOException("\"" + fileName + "\" does not exist");
                 }
                 result =
                     attach(
@@ -338,9 +335,7 @@ public class MultiPartEmail extends Email
             }
             catch (IOException e)
             {
-                throw new EmailException(
-                    "Cannot attach file \"" + fileName + "\"",
-                    e);
+                throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
             }
         }
         else

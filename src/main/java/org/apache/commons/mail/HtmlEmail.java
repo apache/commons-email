@@ -304,7 +304,7 @@ public class HtmlEmail extends MultiPartEmail
                     is.close();
                 }
             }
-            catch (IOException ioe)
+            catch (IOException ioe) // NOPMD
             { /* sigh */ }
         }
 
