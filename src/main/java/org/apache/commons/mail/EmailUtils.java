@@ -41,9 +41,8 @@ import java.io.UnsupportedEncodingException;
  * </p>
  *
  * @author jakarta-commons
- * @version $Id$
- *
  * @since 1.0
+ * @version $Id$
  */
 final class EmailUtils
 {

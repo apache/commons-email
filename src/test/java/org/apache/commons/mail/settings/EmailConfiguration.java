@@ -24,7 +24,7 @@ import org.apache.commons.mail.EmailConstants;
  *
  * @since 1.0
  * @author Eric Pugh
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public final class EmailConfiguration
 {

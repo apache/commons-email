@@ -24,7 +24,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
     <name>Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -199,7 +199,7 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4.4</version>
+            <version>1.4.5</version>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
@@ -236,7 +236,7 @@
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.3</commons.release.version>
-        <commons.rc.version>RC4</commons.rc.version>
+        <commons.rc.version>RC5</commons.rc.version>
         <commons.binary.suffix>-bin</commons.binary.suffix>
     </properties> 
 
@@ -337,7 +337,7 @@
                 <configuration>
                     <threshold>Normal</threshold>
                     <effort>Default</effort>
-                    <!-- <excludeFilterFile>${basedir}/findbugs-exclude-filter.xml</excludeFilterFile> -->
+                    <excludeFilterFile>${basedir}/conf/findbugs-exclude-filter.xml</excludeFilterFile>
                 </configuration>
             </plugin>
             <plugin>
