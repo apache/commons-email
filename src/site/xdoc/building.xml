@@ -40,27 +40,20 @@ limitations under the License.
   <p>
     To build the full website, run "mvn site".
     The result will be in "target/site".
-    You must be using JDK 1.4 or higher to successfully complete this target.
+    You must be using JDK 5 or higher to successfully complete this target.
   </p>
 </section>
 <!-- ================================================== -->
 <section name="Development">
   <p>
-    Commons Email may be used on any JRE from 1.4 onwards.
+    Commons Email may be used on any JRE from 1.5 onwards.
   </p>
   <p>
-    Commons Email requires <a href="http://subethasmtp.tigris.org/wiser.html">Wiser</a>
-    for its unit tests. The base distribution requires JDK 1.5, but 1.4-compatible
-    jars are also provided in the binary distribution
-    <a href="http://subethasmtp.tigris.org/files/documents/4046/36703/subethasmtp-1.2.zip">here</a>.<br />
+    Commons Email requires <a href="http://code.google.com/p/subethasmtp/">SubEtha SMTP</a>
+    for its unit tests. <br />
   </p>
   <p>
-    Finally, you will also need to install the Retroweaver runtime support
-    library on behalf of Wiser. That download is available
-    <a href="http://downloads.sourceforge.net/retroweaver/retroweaver-2.0.zip">here</a>.
-  </p>
-  <p>
-    These jars will be automatically installed to your local Maven 2 repository
+    This jar will be automatically installed to your local Maven 2 repository
     if you build using Maven.
   </p>
 </section>
