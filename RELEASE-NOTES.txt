@@ -27,10 +27,6 @@ CHANGES FROM 1.2:
 
 * Java 5 or later is now required.
 
-* Clirr reports several errors for this release due to moving constants
-  from the Email class to the newly introduced EmailConstants interface.
-  These changes are guaranteed to be binary compatible.
-
 == New Features ==
 
 * Added new methods addTo(String[]), addCc(String[]) and addBcc(String[]) to Email.
