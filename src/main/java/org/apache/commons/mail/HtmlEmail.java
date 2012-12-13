@@ -584,11 +584,11 @@ public class HtmlEmail extends MultiPartEmail
             {
                 msgHtml.setContent(
                     this.html,
-                    Email.TEXT_HTML + "; charset=" + this.charset);
+                    EmailConstants.TEXT_HTML + "; charset=" + this.charset);
             }
             else
             {
-                msgHtml.setContent(this.html, Email.TEXT_HTML);
+                msgHtml.setContent(this.html, EmailConstants.TEXT_HTML);
             }
 
             Iterator<InlineImage> iter = this.inlineEmbeds.values().iterator();
@@ -609,11 +609,11 @@ public class HtmlEmail extends MultiPartEmail
             {
                 msgText.setContent(
                     this.text,
-                    Email.TEXT_PLAIN + "; charset=" + this.charset);
+                    EmailConstants.TEXT_PLAIN + "; charset=" + this.charset);
             }
             else
             {
-                msgText.setContent(this.text, Email.TEXT_PLAIN);
+                msgText.setContent(this.text, EmailConstants.TEXT_PLAIN);
             }
         }
     }

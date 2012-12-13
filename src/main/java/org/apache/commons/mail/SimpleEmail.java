@@ -48,7 +48,7 @@ public class SimpleEmail extends Email
             throw new EmailException("Invalid message supplied");
         }
 
-        setContent(msg, TEXT_PLAIN);
+        setContent(msg, EmailConstants.TEXT_PLAIN);
         return this;
     }
 }
