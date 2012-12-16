@@ -24,7 +24,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
     <name>Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -41,9 +41,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/trunk</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/trunk</developerConnection>
-        <url>http://svn.apache.org/viewvc/commons/proper/email/trunk</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_3</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/tags/EMAIL_1_3</developerConnection>
+        <url>http://svn.apache.org/viewvc/commons/proper/email/tags/EMAIL_1_3</url>
     </scm> 
 
     <developers>
