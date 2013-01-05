@@ -493,6 +493,7 @@ public abstract class Email
      *
      * @param startTlsEnabled true if STARTTLS requested, false otherwise
      * @return An Email.
+     * @since 1.3
      */
     public Email setStartTLSEnabled(boolean startTlsEnabled)
     {
@@ -507,6 +508,7 @@ public abstract class Email
      *
      * @param startTlsRequired true if STARTTLS requested, false otherwise
      * @return An Email.
+     * @since 1.3
      */
     public Email setStartTLSRequired(boolean startTlsRequired)
     {
@@ -774,6 +776,7 @@ public abstract class Email
      * @param emails A String array.
      * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @since 1.3
      */
     public Email addTo(String... emails)
         throws EmailException
@@ -883,6 +886,7 @@ public abstract class Email
      * @param emails A String array.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
+     * @since 1.3
      */
     public Email addCc(String... emails)
         throws EmailException
@@ -991,6 +995,7 @@ public abstract class Email
      * @param emails A String array.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
+     * @since 1.3
      */
     public Email addBcc(String... emails)
         throws EmailException
@@ -1509,6 +1514,7 @@ public abstract class Email
      * Gets whether the client is configured to require STARTTLS.
      *
      * @return true if using STARTTLS for authentication, false otherwise
+     * @since 1.3
      */
     public boolean isStartTLSRequired()
     {
@@ -1519,6 +1525,7 @@ public abstract class Email
      * Gets whether the client is configured to try to enable STARTTLS.
      *
      * @return true if using STARTTLS for authentication, false otherwise
+     * @since 1.3
      */
     public boolean isStartTLSEnabled()
     {
@@ -1529,7 +1536,7 @@ public abstract class Email
      * Gets whether the client is configured to try to enable STARTTLS.
      * See EMAIL-105 for reason of deprecation.
      *
-     * @deprecated since 1.3
+     * @deprecated since 1.3, use isStartTLSEnabled() instead
      * @return true if using STARTTLS for authentication, false otherwise
      * @since 1.1
      */
@@ -1592,6 +1599,7 @@ public abstract class Email
      * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
      *
      * @return true if SSL enabled for the transport
+     * @since 1.3
      */
     public boolean isSSLOnConnect()
     {
@@ -1616,6 +1624,7 @@ public abstract class Email
      *
      * @param ssl whether to enable the SSL transport
      * @return An Email.
+     * @since 1.3
      */
     public Email setSSLOnConnect(boolean ssl)
     {
@@ -1629,6 +1638,7 @@ public abstract class Email
     * Is the server identity checked as specified by RFC 2595
     *
     * @return true if the server identity is checked
+    * @since 1.3
     */
     public boolean isSSLCheckServerIdentity()
     {
@@ -1640,6 +1650,7 @@ public abstract class Email
      *
      * @param sslCheckServerIdentity whether to enable server identity check
      * @return An Email.
+     * @since 1.3
      */
     public Email setSSLCheckServerIdentity(boolean sslCheckServerIdentity)
     {
