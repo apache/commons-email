@@ -181,20 +181,20 @@ REQUIREMENTS:
 J2SE environments
 -----------------
 
-Commons Email requires JavaMail 1.4.1 or later. The Sun implementation
+Commons Email requires JavaMail 1.4.1 or later. The Oracle implementation
 is available at:
 
-http://java.sun.com/products/javamail/
+http://www.oracle.com/technetwork/java/javamail/
 
 However, the Apache Geronimo project (http://geronimo.apache.org)
 provides a J2EE-certified implementation of the JavaMail 1.4
 specification licensed under the Apache Software License.  
 
 Commons Email also requires the JavaBeans Activation Framework unless
-you are running on Java SE 6 or later. The Sun implementation is available
+you are running on Java SE 6 or later. The Oracle implementation is available
 at:
 
-http://java.sun.com/javase/technologies/desktop/javabeans/jaf/
+http://www.oracle.com/technetwork/java/javase/downloads/index-135046.html
 
 Apache Geronimo likewise provides an implementation under the Apache
 Software License.
