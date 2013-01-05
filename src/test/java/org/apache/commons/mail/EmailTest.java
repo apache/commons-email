@@ -1271,6 +1271,29 @@ public class EmailTest extends BaseEmailTestCase
             this.fakeMailServer.stop();
             assertTrue(true);
         }
+        
+        // validate that the correct smtp port is visible in the exception message
+        // in case ssl connection is used
+        try
+        {
+            this.getMailServer();
+
+            this.email = new MockEmailConcrete();
+            this.email.setHostName("bad.host.com");
+            this.email.setSSL(true);
+            this.email.setFrom(this.strTestMailFrom);
+            this.email.addTo(this.strTestMailTo);
+            this.email.setAuthentication(null, null);
+            this.email.send();
+            fail("Should have thrown an exception");
+        }
+        catch (EmailException e)
+        {
+            assertTrue(e.getMessage().contains("bad.host.com:465"));
+            this.fakeMailServer.stop();
+            assertTrue(true);
+        }
+        
     }
 
     /** */
@@ -1428,5 +1451,5 @@ public class EmailTest extends BaseEmailTestCase
         MimeMessage msg = this.email.getMimeMessage();
         msg.saveChanges();
         assertEquals("image/png", msg.getContentType());
-    }
+    }    
 }

@@ -161,24 +161,6 @@ public class MockEmailConcrete extends Email
     }
 
     /**
-     * @return smtpPort
-     */
-    @Override
-    public String getSmtpPort()
-    {
-        return this.smtpPort;
-    }
-
-    /**
-     * @return subject
-     */
-    @Override
-    public String getSubject()
-    {
-        return this.subject;
-    }
-
-    /**
      * @return contentType
      */
     public String getContentType()
