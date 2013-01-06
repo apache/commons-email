@@ -28,6 +28,9 @@ import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * JUnit test case for MultiPartEmail Class
@@ -36,6 +39,8 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest( { MockMultiPartEmailConcrete.class, URLDataSource.class })
 public class MultiPartEmailTest extends BaseEmailTestCase
 {
     /** */
@@ -194,7 +199,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
      * @throws MalformedURLException when a bad attachment URL is used
      * @throws EmailException when a bad address or attachment is used
      */
-    public void testAttach() throws MalformedURLException, EmailException
+    public void testAttach() throws MalformedURLException, EmailException, Exception
     {
         EmailAttachment attachment;
 
@@ -241,7 +246,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         attachment = new EmailAttachment();
         try
         {
-            attachment.setURL(new URL("http://example.invalid"));
+            attachment.setURL(createInvalidURL());
             this.email.attach(attachment);
             fail("Should have thrown an exception");
         }
@@ -289,7 +294,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
      * @throws MalformedURLException when a bad attachment URL is used
      * @throws EmailException when a bad address or attachment is used
      */
-    public void testAttach3() throws MalformedURLException, EmailException
+    public void testAttach3() throws MalformedURLException, EmailException, Exception
     {
         // ====================================================================
         // Test Success - URL
@@ -317,7 +322,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         // invalid datasource
         try
         {
-            URLDataSource urlDs = new URLDataSource(new URL("http://example.invalid/"));
+            URLDataSource urlDs = new URLDataSource(createInvalidURL());
             this.email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
             fail("Should have thrown an exception");
         }

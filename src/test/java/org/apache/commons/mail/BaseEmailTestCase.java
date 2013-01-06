@@ -16,10 +16,15 @@
  */
 package org.apache.commons.mail;
 
+import static org.easymock.EasyMock.expect;
+import static org.powermock.api.easymock.PowerMock.createMock;
+import static org.powermock.api.easymock.PowerMock.replay;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -512,5 +517,22 @@ public abstract class BaseEmailTestCase extends TestCase
      */
     protected boolean isMailServerStopped(Wiser fakeMailServer) {
         return !fakeMailServer.getServer().isRunning();
+    }
+    
+    /**
+     * Create a mocked URL object which always throws an IOException
+     * when the openStream() method is called.
+     * <p>
+     * Several ISPs do resolve invalid URLs like {@code http://example.invalid}
+     * to some error page causing tests to fail otherwise.
+     *
+     * @return an invalid URL
+     */
+    protected URL createInvalidURL() throws Exception {
+        URL url = createMock(URL.class);
+        expect(url.openStream()).andThrow(new IOException());
+        replay(url);
+        
+        return url;
     }
 }

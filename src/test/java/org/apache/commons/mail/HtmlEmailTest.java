@@ -29,6 +29,10 @@ import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.apache.commons.mail.util.MimeMessageParser;
 
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
 /**
  * JUnit test case for HtmlEmail Class.
  *
@@ -36,6 +40,8 @@ import org.apache.commons.mail.util.MimeMessageParser;
  * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest( { MockHtmlEmailConcrete.class })
 public class HtmlEmailTest extends BaseEmailTestCase
 {
     /** */
@@ -177,7 +183,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         // Does an invalid URL throw an exception?
         try
         {
-            this.email.embed(new URL("http://example.invalid"), "Bad URL");
+            this.email.embed(createInvalidURL(), "Bad URL");
             fail("Should have thrown an exception");
         }
         catch (EmailException e)
