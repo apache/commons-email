@@ -236,9 +236,9 @@ public abstract class BaseEmailTestCase extends TestCase
         Wiser mailServer,
         String strSubject,
         InternetAddress fromAdd,
-        List toAdd,
-        List ccAdd,
-        List bccAdd,
+        List<InternetAddress> toAdd,
+        List<InternetAddress> ccAdd,
+        List<InternetAddress> bccAdd,
         boolean boolSaveToFile)
         throws IOException
     {
@@ -322,9 +322,9 @@ public abstract class BaseEmailTestCase extends TestCase
         String strSubject,
         Multipart content,
         InternetAddress fromAdd,
-        List toAdd,
-        List ccAdd,
-        List bccAdd,
+        List<InternetAddress> toAdd,
+        List<InternetAddress> ccAdd,
+        List<InternetAddress> bccAdd,
         boolean boolSaveToFile)
         throws IOException
     {
@@ -371,9 +371,9 @@ public abstract class BaseEmailTestCase extends TestCase
         String strSubject,
         String strMessage,
         InternetAddress fromAdd,
-        List toAdd,
-        List ccAdd,
-        List bccAdd,
+        List<InternetAddress> toAdd,
+        List<InternetAddress> ccAdd,
+        List<InternetAddress> bccAdd,
         boolean boolSaveToFile)
         throws IOException
     {

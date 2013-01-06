@@ -107,7 +107,7 @@ public class SimpleEmailTest extends BaseEmailTestCase
         String strSubject = "Test Msg Subject";
         String strMessage = "Test Msg Body";
 
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
 
         this.email.setMsg(strMessage);

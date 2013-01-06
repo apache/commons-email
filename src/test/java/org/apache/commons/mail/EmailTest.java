@@ -95,13 +95,13 @@ public class EmailTest extends BaseEmailTestCase
     {
 
         Properties properties = new Properties(System.getProperties());
-        properties.setProperty(Email.MAIL_TRANSPORT_PROTOCOL, Email.SMTP);
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, EmailConstants.SMTP);
 
         properties.setProperty(
-            Email.MAIL_PORT,
+            EmailConstants.MAIL_PORT,
             String.valueOf(this.getMailServerPort()));
-        properties.setProperty(Email.MAIL_HOST, this.strTestMailServer);
-        properties.setProperty(Email.MAIL_DEBUG, String.valueOf(false));
+        properties.setProperty(EmailConstants.MAIL_HOST, this.strTestMailServer);
+        properties.setProperty(EmailConstants.MAIL_DEBUG, String.valueOf(false));
 
         Session mySession = Session.getInstance(properties, null);
 
@@ -197,7 +197,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // test (string object and valid content type)
         testObject = "test string object";
-        testContentType = " ; charset=" + Email.US_ASCII;
+        testContentType = " ; charset=" + EmailConstants.US_ASCII;
 
         this.email.setContent(testObject, testContentType);
         assertEquals(testObject, this.email.getContentObject());
@@ -206,7 +206,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // test (null string object and valid content type)
         testObject = null;
-        testContentType = " ; charset=" + Email.US_ASCII + " some more here";
+        testContentType = " ; charset=" + EmailConstants.US_ASCII + " some more here";
 
         this.email.setContent(testObject, testContentType);
         assertEquals(testObject, this.email.getContentObject());
@@ -322,10 +322,10 @@ public class EmailTest extends BaseEmailTestCase
         String testValidEmail = "me@home.com";
 
         InternetAddress inetExpected =
-            new InternetAddress("me@home.com", "me@home.com", Email.ISO_8859_1);
+            new InternetAddress("me@home.com", "me@home.com", EmailConstants.ISO_8859_1);
 
         // set from
-        this.email.setFrom(testValidEmail, testValidEmail, Email.ISO_8859_1);
+        this.email.setFrom(testValidEmail, testValidEmail, EmailConstants.ISO_8859_1);
 
         // retrieve and verify
         assertEquals(inetExpected, this.email.getFromAddress());
@@ -446,7 +446,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        String testCharset = Email.ISO_8859_1;
+        String testCharset = EmailConstants.ISO_8859_1;
         String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
@@ -628,7 +628,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        String testCharset = Email.ISO_8859_1;
+        String testCharset = EmailConstants.ISO_8859_1;
         String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
@@ -800,7 +800,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        String testCharset = Email.ISO_8859_1;
+        String testCharset = EmailConstants.ISO_8859_1;
         String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
@@ -957,7 +957,7 @@ public class EmailTest extends BaseEmailTestCase
         // ====================================================================
         // Test Success
         // ====================================================================
-        String testCharset = Email.ISO_8859_1;
+        String testCharset = EmailConstants.ISO_8859_1;
         String[] testEmailNames = {"Name1", "", null};
 
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
@@ -1201,7 +1201,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email.setContent(
                 "test string object",
-                " ; charset=" + Email.US_ASCII);
+                " ; charset=" + EmailConstants.US_ASCII);
 
             this.email.send();
             fail("Should have thrown an exception");
@@ -1280,7 +1280,7 @@ public class EmailTest extends BaseEmailTestCase
 
             this.email = new MockEmailConcrete();
             this.email.setHostName("bad.host.com");
-            this.email.setSSL(true);
+            this.email.setSSLOnConnect(true);
             this.email.setFrom(this.strTestMailFrom);
             this.email.addTo(this.strTestMailTo);
             this.email.setAuthentication(null, null);

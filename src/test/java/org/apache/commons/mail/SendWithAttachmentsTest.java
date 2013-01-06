@@ -71,7 +71,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 
         this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
 
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
 
         URL url = new URL(EmailConfiguration.TEST_URL);
@@ -143,7 +143,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
 
         this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
 
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
 
         URL url = new URL(EmailConfiguration.TEST_URL);

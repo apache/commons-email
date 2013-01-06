@@ -83,7 +83,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         }
 
         // with charset set
-        this.email.setCharset(Email.US_ASCII);
+        this.email.setCharset(EmailConstants.US_ASCII);
         for (int i = 0; i < testCharsValid.length; i++)
         {
             this.email.setMsg(testCharsValid[i]);

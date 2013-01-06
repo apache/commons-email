@@ -319,7 +319,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
         this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
 
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
 
         URL url = new URL(EmailConfiguration.TEST_URL);
@@ -465,7 +465,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         }
 
         strSubject = "Test HTML Send #2 Subject (w charset)";
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
         this.email.setMsg("Test txt msg");
 
@@ -516,7 +516,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         this.email.setSmtpPort(this.getMailServerPort());
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
 
         if (this.strTestUser != null && this.strTestPasswd != null)
         {
@@ -562,7 +562,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         this.email.setSmtpPort(this.getMailServerPort());
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
 
         if (this.strTestUser != null && this.strTestPasswd != null)
         {
@@ -606,7 +606,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
         this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
-        this.email.setCharset(Email.ISO_8859_1);
+        this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
         this.email.setMsg("This is a plain text content : <b><&npsb;></html></b>");
 
