@@ -22,7 +22,9 @@
   </properties>
 
   <body>
-    <release version="1.3" date="2012-01-10">
+    <release version="1.4" date="TBD">
+    </release>
+    <release version="1.3" date="2013-01-10">
       <action dev="tn" type="fix" issue="EMAIL-101" date="2012-12-09" due-to="Andrew Starodub">
         Use the provided Content-ID in HtmlEmail#embed(File, String) instead of creating
         a random one. The used and returned Content-ID will be URL encoded (see RFC 2392).
