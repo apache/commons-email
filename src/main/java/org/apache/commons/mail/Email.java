@@ -521,6 +521,7 @@ public abstract class Email
      * Set the port number of the outgoing mail server.
      *
      * @param  aPortNumber aPortNumber
+     * @throws IllegalArgumentException if the port number is &lt; 1
      * @since 1.0
      */
     public void setSmtpPort(int aPortNumber)
@@ -549,6 +550,7 @@ public abstract class Email
      * authenticator and will use the existing mail session (as expected).
      *
      * @param aSession mail session to be used
+     * @throws IllegalArgumentException if the session is {@code null}
      * @since 1.0
      */
     public void setMailSession(Session aSession)
@@ -587,8 +589,8 @@ public abstract class Email
      *
      * @param jndiName name of JNDI resource (javax.mail.Session type), resource
      * if searched in java:comp/env if name does not start with "java:"
-     * @throws IllegalArgumentException JNDI name null or empty
-     * @throws NamingException resource can be retrieved from JNDI directory
+     * @throws IllegalArgumentException if the JNDI name is null or empty
+     * @throws NamingException if the resource cannot be retrieved from JNDI directory
      * @since 1.1
      */
     public void setMailSessionFromJNDI(String jndiName) throws NamingException
@@ -617,7 +619,7 @@ public abstract class Email
      * an IllegalStateException.
      *
      * @return A Session.
-     * @throws EmailException thrown when host name was not set.
+     * @throws EmailException if the host name was not set
      * @since 1.0
      */
     public Session getMailSession() throws EmailException
@@ -634,8 +636,7 @@ public abstract class Email
 
             if (EmailUtils.isEmpty(this.hostName))
             {
-                throw new EmailException(
-                    "Cannot find valid hostname for mail session");
+                throw new EmailException("Cannot find valid hostname for mail session");
             }
 
             properties.setProperty(MAIL_PORT, this.smtpPort);
@@ -716,8 +717,8 @@ public abstract class Email
      *
      * @param email A String.
      * @param name A String.
-     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
     public Email setFrom(String email, String name)
@@ -733,8 +734,8 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @param charset The charset to encode the name with.
-     * @throws EmailException Indicates an invalid email address or charset.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address or charset.
      * @since 1.1
      */
     public Email setFrom(String email, String name, String charset)
@@ -754,8 +755,8 @@ public abstract class Email
      * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
-     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
     public Email addTo(String email)
@@ -774,8 +775,8 @@ public abstract class Email
      * non-ASCII characters; otherwise, it is used as is.
      *
      * @param emails A String array.
-     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
      * @since 1.3
      */
     public Email addTo(String... emails)
@@ -805,8 +806,8 @@ public abstract class Email
      *
      * @param email A String.
      * @param name A String.
-     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
     public Email addTo(String email, String name)
@@ -822,8 +823,8 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @param charset The charset to encode the name with.
-     * @throws EmailException Indicates an invalid email address or charset.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address or charset.
      * @since 1.1
      */
     public Email addTo(String email, String name, String charset)
@@ -839,8 +840,8 @@ public abstract class Email
      * <code>java.mail.internet.InternetAddress</code>.
      *
      * @param  aCollection collection of <code>InternetAddress</code> objects.
-     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
@@ -914,8 +915,8 @@ public abstract class Email
      *
      * @param email A String.
      * @param name A String.
-     * @throws EmailException Indicates an invalid email address.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
     public Email addCc(String email, String name)
@@ -931,8 +932,8 @@ public abstract class Email
      * @param email A String.
      * @param name A String.
      * @param charset The charset to encode the name with.
-     * @throws EmailException Indicates an invalid email address or charset.
      * @return An Email.
+     * @throws EmailException Indicates an invalid email address or charset.
      * @since 1.1
      */
     public Email addCc(String email, String name, String charset)
@@ -1174,7 +1175,6 @@ public abstract class Email
             Map.Entry<String, String> entry = iterKeyBad.next();
             addHeader(entry.getKey(), entry.getValue());
         }
-
     }
 
     /**
@@ -1220,6 +1220,7 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
+     * @throws IllegalStateException when the mail session is already initialized
      * @since 1.0
      */
     public Email setBounceAddress(String email)
@@ -1247,7 +1248,8 @@ public abstract class Email
      * interested in the sending the underlying MimeMessage without
      * commons-email.
      *
-     * @exception EmailException if there was an error.
+     * @throws IllegalStateException if the MimeMessage was already built
+     * @throws EmailException if there was an error.
      * @since 1.0
      */
     public void buildMimeMessage() throws EmailException
@@ -1312,8 +1314,7 @@ public abstract class Email
 
             if (this.toList.size() + this.ccList.size() + this.bccList.size() == 0)
             {
-                throw new EmailException(
-                            "At least one receiver address required");
+                throw new EmailException("At least one receiver address required");
             }
 
             if (this.toList.size() > 0)
@@ -1377,12 +1378,13 @@ public abstract class Email
      * Sends the previously created MimeMessage to the SMTP server.
      *
      * @return the message id of the underlying MimeMessage
+     * @throws IllegalArgumentException if the MimeMessage has not been created
      * @throws EmailException the sending failed
      */
     public String sendMimeMessage()
        throws EmailException
     {
-        EmailUtils.notNull(this.message, "message");
+        EmailUtils.notNull(this.message, "MimeMessage has not been created yet");
 
         try
         {
@@ -1416,6 +1418,8 @@ public abstract class Email
      * which is afterwards sent to the SMTP server.
      *
      * @return the message id of the underlying MimeMessage
+     * @throws IllegalStateException if the MimeMessage was already built, ie {@link #buildMimeMessage()}
+     *   was already called
      * @throws EmailException the sending failed
      */
     public String send() throws EmailException
@@ -1795,6 +1799,7 @@ public abstract class Email
      * @param name the name of the header
      * @param value the value of the header
      * @return the folded header value
+     * @throws IllegalArgumentException if either the name or value is null or empty
      */
     private String createFoldedHeaderValue(String name, Object value)
     {
@@ -1802,11 +1807,11 @@ public abstract class Email
 
         if (EmailUtils.isEmpty(name))
         {
-            throw new IllegalArgumentException("name can not be null");
+            throw new IllegalArgumentException("name can not be null or empty");
         }
         if (value == null || EmailUtils.isEmpty(value.toString()))
         {
-            throw new IllegalArgumentException("value can not be null");
+            throw new IllegalArgumentException("value can not be null or empty");
         }
 
         try
@@ -1876,8 +1881,7 @@ public abstract class Email
      * session properties has no effect. In order to flag the
      * problem throw an IllegalStateException.
      *
-     * @throws IllegalStateException when the mail session is
-     *      already initialized
+     * @throws IllegalStateException when the mail session is already initialized
      */
     private void checkSessionAlreadyInitialized()
     {
