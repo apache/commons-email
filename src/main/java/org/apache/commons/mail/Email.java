@@ -1160,6 +1160,7 @@ public abstract class Email
      * Disposition-Notification-To: user@domain.net
      *
      * @param map A Map.
+     * @throws IllegalArgumentException if either of the provided header / value is null or empty
      * @since 1.0
      */
     public void setHeaders(Map<String, String> map)
@@ -1171,7 +1172,7 @@ public abstract class Email
         while (iterKeyBad.hasNext())
         {
             Map.Entry<String, String> entry = iterKeyBad.next();
-            this.headers.put(entry.getKey(), entry.getValue());
+            addHeader(entry.getKey(), entry.getValue());
         }
 
     }
@@ -1182,16 +1183,17 @@ public abstract class Email
      * @param name A String with the name.
      * @param value A String with the value.
      * @since 1.0
+     * @throws IllegalArgumentException if either {@code name} or {@code value} is null or empty
      */
     public void addHeader(String name, String value)
     {
         if (EmailUtils.isEmpty(name))
         {
-            throw new IllegalArgumentException("name can not be null");
+            throw new IllegalArgumentException("name can not be null or empty");
         }
         if (EmailUtils.isEmpty(value))
         {
-            throw new IllegalArgumentException("value can not be null");
+            throw new IllegalArgumentException("value can not be null or empty");
         }
 
         this.headers.put(name, value);
