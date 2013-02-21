@@ -1171,8 +1171,7 @@ public abstract class Email
         while (iterKeyBad.hasNext())
         {
             Map.Entry<String, String> entry = iterKeyBad.next();
-            String name = entry.getKey();
-            this.headers.put(name, createFoldedHeaderValue(name, entry.getValue()));
+            this.headers.put(entry.getKey(), entry.getValue());
         }
 
     }
@@ -1195,7 +1194,7 @@ public abstract class Email
             throw new IllegalArgumentException("value can not be null");
         }
 
-        this.headers.put(name, createFoldedHeaderValue(name, value));
+        this.headers.put(name, value);
     }
 
     /**

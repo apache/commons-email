@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Hashtable;
@@ -28,6 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.StringTokenizer;
+
 import javax.mail.Authenticator;
 import javax.mail.Session;
 import javax.mail.internet.AddressException;
@@ -1098,11 +1101,35 @@ public class EmailTest extends BaseEmailTestCase
         assertEquals(ht, this.email.getHeaders());
     }
 
-    public void testFoldingHeaders()
+    public void testFoldingHeaders() throws Exception
     {
-        this.email.addHeader("X-LongHeader", "1234567890 1234567890 123456789 01234567890 123456789 0123456789 01234567890 01234567890");
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom("a@b.com");
+        this.email.addTo("c@d.com");
+        this.email.setSubject("test mail");
+
+        final String headerValue = "1234567890 1234567890 123456789 01234567890 123456789 0123456789 01234567890 01234567890";
+        this.email.addHeader("X-LongHeader", headerValue);
+        
         assertTrue(this.email.getHeaders().size() == 1);
-        assertTrue(this.email.getHeaders().get("X-LongHeader").toString().indexOf("\r\n") >= 0);
+        // the header should not yet be folded -> will be done by buildMimeMessage()
+        assertTrue(this.email.getHeaders().get("X-LongHeader").toString().indexOf("\r\n") == -1);
+        
+        this.email.buildMimeMessage();
+
+        MimeMessage msg = this.email.getMimeMessage();
+        msg.saveChanges();
+        
+        String[] values = msg.getHeader("X-LongHeader");
+        assertEquals(1, values.length);
+        
+        // the header should be split in two lines
+        String[] lines = values[0].split("\\r\\n");
+        assertEquals(2, lines.length);
+        
+        // there should only be one line-break
+        assertTrue(values[0].indexOf("\n") == values[0].lastIndexOf("\n"));
     }
 
     /** */
