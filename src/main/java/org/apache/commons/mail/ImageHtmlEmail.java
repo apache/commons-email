@@ -161,6 +161,11 @@ public class ImageHtmlEmail extends HtmlEmail
             if (dataSource != null)
             {
                 String name = dataSource.getName();
+                if (EmailUtils.isEmpty(name))
+                {
+                    name = resourceLocation;
+                }
+
                 String cid = cidCache.get(name);
 
                 if (cid == null)

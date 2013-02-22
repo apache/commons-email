@@ -93,7 +93,11 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
 
                 if (is != null)
                 {
-                    result = new ByteArrayDataSource(is, mimeType);
+                    ByteArrayDataSource ds = new ByteArrayDataSource(is, mimeType);
+                    // EMAIL-125: set the name of the DataSource to the normalized resource URL
+                    // similar to other DataSource implementations, e.g. FileDataSource, URLDataSource
+                    ds.setName(DataSourceClassPathResolver.class.getResource(resourceName).toString());
+                    result = ds;
                 }
                 else
                 {

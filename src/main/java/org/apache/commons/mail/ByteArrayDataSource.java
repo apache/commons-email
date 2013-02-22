@@ -34,6 +34,10 @@ import javax.activation.DataSource;
  * - a byte array<br>
  * - a String<br>
  *
+ * <p>
+ * From version 1.3.1, it is possible to set a name for this DataSource,
+ * and it is recommended to do so.
+ *
  * @since 1.0
  * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
@@ -51,6 +55,13 @@ public class ByteArrayDataSource implements DataSource
     /** The Content-type. */
     private final String type; // = "application/octet-stream";
 
+    /**
+     * The name associated with this data source.
+     * By default, the name is an empty string, similar to javax.mail.util.ByteArrayDataSource.
+     * @since 1.3.1
+     */
+    private String name = "";
+    
     /**
      * Create a datasource from a byte array.
      *
@@ -203,6 +214,17 @@ public class ByteArrayDataSource implements DataSource
     }
 
     /**
+     * Sets the name for this DataSource.
+     *
+     * @param name The name.
+     * @since 1.3.1
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
      * Get the name.
      *
      * @return A String.
@@ -210,7 +232,7 @@ public class ByteArrayDataSource implements DataSource
      */
     public String getName()
     {
-        return "ByteArrayDataSource";
+        return name;
     }
 
     /**

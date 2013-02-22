@@ -278,6 +278,48 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
 
+    public void testSendHTMLAutoResolveMultipleFiles() throws Exception {
+        Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
+
+        // Create the email message
+        getMailServer();
+
+        String strSubject = "Test HTML Send default";
+
+        email = new MockImageHtmlEmailConcrete();
+        DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", true);
+
+        email.setDataSourceResolver(dataSourceResolver);
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setSubject(strSubject);
+
+        String html = "<p>First image  <img src=\"images/contentTypeTest.gif\"/></p>" +
+                      "<p>Second image <img src=\"images/contentTypeTest.jpg\"/></p>" +
+                      "<p>Third image  <img src=\"images/contentTypeTest.png\"/></p>";
+
+        // set the html message
+        email.setHtmlMsg(html);
+
+        // set the alternative message
+        email.setTextMsg("Your email client does not support HTML messages");
+
+        // send the email
+        email.send();
+
+        fakeMailServer.stop();
+
+        assertEquals(1, fakeMailServer.getMessages().size());
+        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLAutoMultipleFiles.eml"));
+
+        MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        assertTrue(mimeMessageParser.getHtmlContent().indexOf("\"cid:") >= 0);
+        assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
+    }
+
     public void testRegex() {
         Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
 
