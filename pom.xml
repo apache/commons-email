@@ -147,6 +147,8 @@
         <developer>
             <name>Thomas Neidhart</name>
             <id>tn</id>
+            <email>tn at apache dot org</email>
+            <organization>Apache Software Foundation</organization>
             <roles />
         </developer>        
     </developers>
