@@ -61,7 +61,7 @@ public class ByteArrayDataSource implements DataSource
      * @since 1.3.1
      */
     private String name = "";
-    
+
     /**
      * Create a datasource from a byte array.
      *
