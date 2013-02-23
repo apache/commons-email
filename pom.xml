@@ -372,9 +372,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
-                <configuration>
-                  <comparisonVersion>1.2</comparisonVersion>
-                </configuration>                
             </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
