@@ -22,7 +22,7 @@
   </properties>
 
   <body>
-    <release version="1.3.1" date="2013-02-28">
+    <release version="1.3.1" date="2013-03-04">
       <action dev="tn" type="fix" issue="EMAIL-125" date="2013-02-22" due-to="Jean-Marc">
         DataSourceClassPathResolver will now correctly set the DataSource name for resolved
         resources. Additionally, it is now possible to set the name for a ByteArrayDataSource.
