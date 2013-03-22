@@ -81,7 +81,7 @@ public abstract class AbstractEmailTest
     /** Mailserver strTestPasswd (set if needed) */
     protected String strTestPasswd = "password";
 
-    /** URL to used to test URL attachmetns (Must be valid) */
+    /** URL to used to test URL attachments (Must be valid) */
     protected String strTestURL = EmailConfiguration.TEST_URL;
 
     /** Test characters acceptable to email */
