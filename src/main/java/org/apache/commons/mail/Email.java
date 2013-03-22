@@ -45,8 +45,9 @@ import javax.naming.NamingException;
 /**
  * The base class for all email messages.  This class sets the
  * sender's email &amp; name, receiver's email &amp; name, subject, and the
- * sent date.  Subclasses are responsible for setting the message
- * body.
+ * sent date.
+ * <p>
+ * Subclasses are responsible for setting the message body.
  *
  * @since 1.0
  * @version $Id$

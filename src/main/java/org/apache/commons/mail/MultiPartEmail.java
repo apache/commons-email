@@ -137,7 +137,7 @@ public class MultiPartEmail extends Email
      * @param multipart The part to add.
      * @param index The index to add at.
      * @return The email.
-     * @throws EmailException An error occured while adding the part.
+     * @throws EmailException An error occurred while adding the part.
      * @since 1.0
      */
     public Email addPart(MimeMultipart multipart, int index) throws EmailException
