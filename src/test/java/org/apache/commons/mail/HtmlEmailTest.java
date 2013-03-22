@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +31,8 @@ import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.apache.commons.mail.util.MimeMessageParser;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -41,27 +45,18 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { MockHtmlEmailConcrete.class })
-public class HtmlEmailTest extends BaseEmailTestCase
+public class HtmlEmailTest extends AbstractEmailTest
 {
-    /** */
     private MockHtmlEmailConcrete email;
 
-    /**
-     * @param name name
-     */
-    public HtmlEmailTest(String name)
+    @Before
+    public void setUpHtmlEmailTest()
     {
-        super(name);
-    }
-
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
     }
 
+    @Test
     public void testGetSetTextMsg() throws EmailException
     {
         // ====================================================================
@@ -91,6 +86,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
+    @Test
     public void testGetSetHtmlMsg() throws EmailException
     {
         // ====================================================================
@@ -120,6 +116,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
+    @Test
     public void testGetSetMsg() throws EmailException
     {
         // ====================================================================
@@ -152,6 +149,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
 
     }
 
+    @Test
     public void testEmbedUrl() throws Exception
     {
         // ====================================================================
@@ -203,6 +201,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
         }
     }
 
+    @Test
     public void testEmbedFile() throws Exception
     {
         // ====================================================================
@@ -231,6 +230,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
                 strEmbed.equals(newCid));
     }
 
+    @Test
     public void testEmbedUrlAndFile() throws Exception
     {
         File tmpFile = File.createTempFile("testfile", "txt");
@@ -244,6 +244,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
                 fileCid.equals(urlCid));
     }
 
+    @Test
     public void testEmbedDataSource() throws Exception
     {
         File tmpFile = File.createTempFile("testEmbedDataSource", "txt");
@@ -288,6 +289,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
      * @throws EmailException when bad addresses and attachments are used
      * @throws IOException if creating a temp file, URL or sending fails
      */
+    @Test
     public void testSend() throws EmailException, IOException
     {
         EmailAttachment attachment = new EmailAttachment();
@@ -399,6 +401,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
             true);
     }
 
+    @Test
     public void testSend2() throws Exception
     {
         // ====================================================================
@@ -500,6 +503,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
      * "http://paradisedelivery.homeip.net/delivery/?file=TZC268X93337..zip"
      * contains TWO dots instead of one dot which breaks the link.
      */
+    @Test
     public void testAddZipUrl() throws Exception
     {
         String htmlMsg =
@@ -552,6 +556,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
      * causes duplicate mime parts - now we throw an exception to catch the
      * problem
      */
+    @Test
     public void testCallingBuildMimeMessageBeforeSent() throws Exception {
 
         String htmlMsg = "<b>Hello World</b>";
@@ -593,6 +598,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
      * EMAIL-73 - check that providing a plain text content using setMsg()
      * creates a plain content and HTML content using <pre> tags.
      */
+    @Test
     public void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException
     {
         this.getMailServer();
@@ -634,6 +640,7 @@ public class HtmlEmailTest extends BaseEmailTestCase
      *
      * see https://issues.apache.org/jira/browse/EMAIL-101
      */
+    @Test
     public void testEmbedFileWithCID() throws Exception
     {
          // ====================================================================
@@ -655,8 +662,9 @@ public class HtmlEmailTest extends BaseEmailTestCase
          // back?
          String returnedCid = this.email.embed(file);
          assertEquals("didn't get same CID after embedding same file twice", encodedCid, returnedCid);
-     }
+    }
 
+    @Test
     public void testHtmlMailMimeLayout() throws Exception
     {
         assertCorrectContentType("contentTypeTest.gif", "image/gif");

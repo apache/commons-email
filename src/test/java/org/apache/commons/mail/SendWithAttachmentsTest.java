@@ -22,6 +22,8 @@ import java.net.URL;
 
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * JUnit test case verifying bugzilla issue 30973 is fixed.
@@ -29,25 +31,13 @@ import org.apache.commons.mail.settings.EmailConfiguration;
  * @since 1.0
  * @version $Id$
  */
-public class SendWithAttachmentsTest extends BaseEmailTestCase
+public class SendWithAttachmentsTest extends AbstractEmailTest
 {
-    /** */
     private MockHtmlEmailConcrete email;
 
-    /**
-     * @param name name
-     */
-    public SendWithAttachmentsTest(String name)
+    @Before
+    public void setUpSendWithAttachmentsTest()
     {
-        super(name);
-    }
-
-    /**
-     * @throws Exception  */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
     }
@@ -56,6 +46,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
      * @throws EmailException on an email error
      * @throws IOException when sending fails, or a bad URL is used
      */
+    @Test
     public void testSendNoAttachments() throws EmailException, IOException
     {
         this.getMailServer();
@@ -113,6 +104,7 @@ public class SendWithAttachmentsTest extends BaseEmailTestCase
      * @throws EmailException on an email error
      * @throws IOException when sending fails, or a bad URL is used
      */
+    @Test
     public void testSendWAttachments() throws EmailException, IOException
     {
         EmailAttachment attachment = new EmailAttachment();

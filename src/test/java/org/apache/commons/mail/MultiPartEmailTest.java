@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,6 +30,8 @@ import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -40,34 +44,22 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { MockMultiPartEmailConcrete.class, URLDataSource.class })
-public class MultiPartEmailTest extends BaseEmailTestCase
+public class MultiPartEmailTest extends AbstractEmailTest
 {
     /** */
     private MockMultiPartEmailConcrete email;
     /** File to used to test file attachments (Must be valid) */
     private File testFile;
 
-    /**
-     * @param name name
-     */
-    public MultiPartEmailTest(String name)
+    @Before
+    public void setUpMultiPartEmailTest() throws Exception
     {
-        super(name);
-    }
-
-    /**
-     * @throws Exception  */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
         // reusable objects to be used across multiple tests
         this.email = new MockMultiPartEmailConcrete();
         testFile = File.createTempFile("testfile", ".txt");
     }
 
-    /**
-     * @throws EmailException  */
+    @Test
     public void testSetMsg() throws EmailException
     {
         // ====================================================================
@@ -110,6 +102,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
      * @throws EmailException when a bad address or attachment is used
      * @throws IOException when sending fails
      */
+    @Test
     public void testSend() throws EmailException, IOException
     {
         // ====================================================================
@@ -198,6 +191,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
      * @throws MalformedURLException when a bad attachment URL is used
      * @throws EmailException when a bad address or attachment is used
      */
+    @Test
     public void testAttach() throws MalformedURLException, EmailException, Exception
     {
         EmailAttachment attachment;
@@ -272,6 +266,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
      * @throws MalformedURLException when a bad attachment URL is used
      * @throws EmailException when a bad address or attachment is used
      */
+    @Test
     public void testAttach2() throws MalformedURLException, EmailException
     {
         // ====================================================================
@@ -293,6 +288,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
      * @throws MalformedURLException when a bad attachment URL is used
      * @throws EmailException when a bad address or attachment is used
      */
+    @Test
     public void testAttach3() throws MalformedURLException, EmailException, Exception
     {
         // ====================================================================
@@ -331,6 +327,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         }
     }
 
+    @Test
     public void testAttachFileLocking() throws Exception {
 
         // ====================================================================
@@ -348,10 +345,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
         assertTrue(tmpFile.delete());
     }
     
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testAddPart() throws Exception
     {
 
@@ -374,10 +368,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
 
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testAddPart2() throws Exception
     {
 
@@ -402,12 +393,14 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /** @todo implement test for GetContainer */
+    @Test
     public void testGetContainer()
     {
         assertTrue(true);
     }
 
     /** init called twice should fail */
+    @Test
     public void testInit()
     {
         // call the init function twice to trigger the IllegalStateException
@@ -424,6 +417,7 @@ public class MultiPartEmailTest extends BaseEmailTestCase
     }
 
     /** test get/set sub type */
+    @Test
     public void testGetSetSubType()
     {
         for (int i = 0; i < testCharsValid.length; i++)

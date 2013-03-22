@@ -16,11 +16,14 @@
  */
 package org.apache.commons.mail.util;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 import javax.activation.DataSource;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+
+import org.junit.Test;
+
 import java.io.File;
 import java.util.List;
 import java.util.Properties;
@@ -29,22 +32,8 @@ import java.util.Properties;
  * Testing the MimeMessageParser.
  */
 public class MimeMessageParserTest
-    extends TestCase
 {
-    /**
-     * Defines the test case name for JUnit.
-     *
-     * @param name the test case's name.
-     */
-    public MimeMessageParserTest(String name)
-    {
-        super(name);
-    }
-
-    // ======================================================================
-    // Start of Tests
-    // ======================================================================
-
+    @Test
     public void testParseSimpleEmail() throws Exception
     {
         Session session = Session.getDefaultInstance(new Properties());
@@ -68,6 +57,7 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasAttachments());
     }
 
+    @Test
     public void testParseSimpleReplyEmail() throws Exception
     {
         Session session = Session.getDefaultInstance(new Properties());
@@ -91,6 +81,7 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasAttachments());
     }
 
+    @Test
     public void testParseHtmlEmailWithAttachments() throws Exception
     {
         DataSource dataSource;
@@ -131,6 +122,7 @@ public class MimeMessageParserTest
      *
      * @throws Exception the test failed
      */
+    @Test    
     public void testParseMultipartReport() throws Exception
     {
         DataSource dataSource;
@@ -168,6 +160,7 @@ public class MimeMessageParserTest
      *
      * @throws Exception the test failed
      */
+    @Test    
     public void testAttachmentOnly() throws Exception
     {
         DataSource dataSource;
@@ -205,6 +198,7 @@ public class MimeMessageParserTest
      * 
      * @throws Exception the test failed
      */
+    @Test    
     public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception
     {
         Session session = Session.getDefaultInstance(new Properties());

@@ -20,6 +20,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.resolver.DataSourceUrlResolver;
 import org.apache.commons.mail.settings.EmailConfiguration;
+import org.junit.Before;
+import org.junit.Test;
 
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
@@ -40,23 +42,11 @@ import java.util.List;
  * of email using a variety of mail clients since I'm not a mockist
  * (see http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
-public class EmailLiveTest extends BaseEmailTestCase
+public class EmailLiveTest extends AbstractEmailTest
 {
-    /**
-     * @param name name
-     */
-    public EmailLiveTest(String name)
+    @Before
+    public void setUpLiveTest()
     {
-        super(name);
-    }
-
-    /**
-     * @throws Exception  */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-
         // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work 
         System.setProperty("mail.mime.charset", "utf-8");
 
@@ -124,6 +114,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed
      */
+    @Test
     public void testSimpleEmail() throws Exception
     {
         SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
@@ -138,6 +129,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed
      */
+    @Test
     public void testFoldedHeaderValue() throws Exception
     {
         SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
@@ -153,6 +145,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed
      */
+    @Test
     public void testMultiPartEmail() throws Exception
     {
         MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
@@ -170,6 +163,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed
      */
+    @Test    
     public void testHtmlMailMimeLayout() throws Exception
     {
         String textMsg;
@@ -251,6 +245,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed
      */
+    @Test    
     public void testCorrectCharacterEncoding() throws Exception
     {
         // U+03B1 : GREEK SMALL LETTER ALPHA
@@ -278,6 +273,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed                               
      */
+    @Test    
     public void testImageHtmlEmailLocal() throws Exception
     {
         // use a simple HTML page with one image 
@@ -301,6 +297,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed
      */
+    @Test    
     public void testImageHtmlEmailRemote() throws Exception
     {
         if(EmailConfiguration.MAIL_FORCE_SEND)
@@ -328,6 +325,7 @@ public class EmailLiveTest extends BaseEmailTestCase
      *
      * @throws Exception the test failed.
      */
+    @Test    
     public void testSendingEmailsInBatch() throws Exception
     {
         List<SimpleEmail> emails = new ArrayList<SimpleEmail>();

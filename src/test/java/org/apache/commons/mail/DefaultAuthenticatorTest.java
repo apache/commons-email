@@ -16,9 +16,11 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.*;
+
 import javax.mail.PasswordAuthentication;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * JUnit test case for DefaultAuthenticator Class.
@@ -26,24 +28,15 @@ import junit.framework.TestCase;
  * @since 1.0
  * @version $Id$
  */
-public class DefaultAuthenticatorTest extends TestCase
+public class DefaultAuthenticatorTest
 {
-    /**
-     * @param name name
-     */
-    public DefaultAuthenticatorTest(String name)
-    {
-        super(name);
-    }
-
-    /** */
+    @Test
     public void testDefaultAuthenticatorConstructor()
     {
         //insert code testing basic functionality
         String strUsername = "user.name";
         String strPassword = "user.pwd";
-        DefaultAuthenticator authenicator =
-            new DefaultAuthenticator(strUsername, strPassword);
+        DefaultAuthenticator authenicator = new DefaultAuthenticator(strUsername, strPassword);
 
         assertTrue(
             PasswordAuthentication.class.isInstance(

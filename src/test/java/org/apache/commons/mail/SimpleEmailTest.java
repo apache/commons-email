@@ -16,40 +16,33 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 
 import org.apache.commons.mail.mocks.MockSimpleEmail;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * JUnit test case for SimpleEmailTest
  * @since 1.0
  * @version $Id$
  */
-public class SimpleEmailTest extends BaseEmailTestCase
+public class SimpleEmailTest extends AbstractEmailTest
 {
-    /** */
     private MockSimpleEmail email;
 
-    /**
-     * @param name name
-     */
-    public SimpleEmailTest(String name)
+    @Before
+    public void setUpSimpleEmailTest()
     {
-        super(name);
-    }
-
-    /**
-     * @throws Exception  */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
         // reusable objects to be used across multiple tests
         this.email = new MockSimpleEmail();
     }
 
-    /**
-     * @throws EmailException  */
+    @Test
     public void testGetSetMsg() throws EmailException
     {
         // ====================================================================
@@ -84,6 +77,7 @@ public class SimpleEmailTest extends BaseEmailTestCase
      * @throws IOException when sending fails
      * @todo Add code to test the popBeforeSmtp() settings
      */
+    @Test
     public void testSend() throws EmailException, IOException
     {
         // ====================================================================

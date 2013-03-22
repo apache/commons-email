@@ -16,8 +16,13 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.*;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * JUnit test case for EmailAttachment Class.
@@ -25,33 +30,20 @@ import java.net.URL;
  * @since 1.0
  * @version $Id$
  */
-public class EmailAttachmentTest extends BaseEmailTestCase
+public class EmailAttachmentTest extends AbstractEmailTest
 {
-    /** */
     private EmailAttachment attachment;
 
-    /**
-     * @param name name
-     */
-    public EmailAttachmentTest(String name)
+    @Before
+    public void setUpAttachmentTest()
     {
-        super(name);
-    }
-
-    /**
-     * @throws Exception  */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
         // reusable objects to be used across multiple tests
         this.attachment = new EmailAttachment();
     }
 
-    /** */
+    @Test
     public void testGetSetDescription()
     {
-
         for (int i = 0; i < testCharsValid.length; i++)
         {
             this.attachment.setDescription(testCharsValid[i]);
@@ -59,10 +51,9 @@ public class EmailAttachmentTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    @Test
     public void testGetSetName()
     {
-
         for (int i = 0; i < testCharsValid.length; i++)
         {
             this.attachment.setName(testCharsValid[i]);
@@ -70,10 +61,9 @@ public class EmailAttachmentTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    @Test
     public void testGetSetPath()
     {
-
         for (int i = 0; i < testCharsValid.length; i++)
         {
             this.attachment.setPath(testCharsValid[i]);
@@ -81,7 +71,7 @@ public class EmailAttachmentTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    @Test
     public void testGetSetURL()
     {
         String[] tests =
@@ -105,10 +95,9 @@ public class EmailAttachmentTest extends BaseEmailTestCase
         }
     }
 
-    /** */
+    @Test
     public void testGetSetDisposition()
     {
-
         for (int i = 0; i < testCharsValid.length; i++)
         {
             this.attachment.setDisposition(testCharsValid[i]);

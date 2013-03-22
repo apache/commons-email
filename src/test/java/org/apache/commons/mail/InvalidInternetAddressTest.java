@@ -16,9 +16,15 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.lang.reflect.Method;
 
 import javax.mail.internet.InternetAddress;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * JUnit test case demonstrating InternetAddress validation.
@@ -26,9 +32,8 @@ import javax.mail.internet.InternetAddress;
  * @since 1.0
  * @version $Id$
  */
-public class InvalidInternetAddressTest extends BaseEmailTestCase
+public class InvalidInternetAddressTest extends AbstractEmailTest
 {
-
     /** */
     private static final String VALID_QUOTED_EMAIL = "\"John O'Groats\"@domain.com";
 
@@ -69,23 +74,14 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
             "local.name@domain\rcom",
             "local.name@",
             "@domain.com" };
-    /**
-     * @param name name
-     */
-    public InvalidInternetAddressTest(String name)
-    {
-        super(name);
-    }
 
     /**
      * Setup for a test
      * @throws Exception on any error
      */
-    @Override
-    protected void setUp() throws Exception
+    @Before
+    public void setUpInvalidInternetAddressTest()
     {
-        super.setUp();
-
         try
         {
             validateMethod = InternetAddress.class.getMethod("validate", new Class [0]);
@@ -96,10 +92,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         }
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testStrictConstructor() throws Exception
     {
         // ====================================================================
@@ -141,10 +134,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         }
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testValidateMethod() throws Exception
     {
         if (validateMethod == null)
@@ -198,10 +188,7 @@ public class InvalidInternetAddressTest extends BaseEmailTestCase
         }
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testValidateMethodCharset() throws Exception
     {
         if (validateMethod == null)

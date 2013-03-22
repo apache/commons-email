@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.*;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.resolver.DataSourceClassPathResolver;
@@ -24,6 +26,9 @@ import org.apache.commons.mail.resolver.DataSourceUrlResolver;
 import org.apache.commons.mail.mocks.MockImageHtmlEmailConcrete;
 import org.apache.commons.mail.util.MimeMessageParser;
 import org.apache.commons.mail.util.MimeMessageUtils;
+import org.junit.Before;
+import org.junit.Test;
+
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
@@ -45,13 +50,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
     private MockImageHtmlEmailConcrete email;
 
-    public ImageHtmlEmailTest(String name) {
-        super(name);
-    }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setupImageHtmlEmailTest() {
         // reusable objects to be used across multiple tests
         email = new MockImageHtmlEmailConcrete();
     }
@@ -60,6 +60,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     // Start of Tests
     // ======================================================================
 
+    @Test
     public void testSendHtml() throws Exception {
 
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
@@ -98,6 +99,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
     }
 
+    @Test
     public void testSendEmptyHTML() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -114,6 +116,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         }
     }
 
+    @Test
     public void testSendEmptyHTML2() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -131,6 +134,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
     }
 
+    @Test
     public void testSendHtmlUrl() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -162,6 +166,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                 email.getCcAddresses(), email.getBccAddresses(), true);
     }
 
+    @Test
     public void testSendHTMLAbsoluteLocalFile() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -198,6 +203,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                 email.getCcAddresses(), email.getBccAddresses(), true);
     }
 
+    @Test
     public void testSendHTMLClassPathFile() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -236,6 +242,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
 
+    @Test
     public void testSendHTMLAutoResolveFile() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -278,6 +285,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
 
+    @Test
     public void testSendHTMLAutoResolveMultipleFiles() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -320,6 +328,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
     }
 
+    @Test
     public void testRegex() {
         Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
 

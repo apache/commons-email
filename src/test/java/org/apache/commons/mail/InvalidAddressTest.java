@@ -16,7 +16,11 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.Assert.fail;
+
 import org.apache.commons.mail.mocks.MockEmailConcrete;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * JUnit test case for invalid Addresses in Email Class
@@ -24,7 +28,7 @@ import org.apache.commons.mail.mocks.MockEmailConcrete;
  * @since 1.0
  * @version $Id$
  */
-public class InvalidAddressTest extends BaseEmailTestCase
+public class InvalidAddressTest extends AbstractEmailTest
 {
     /** */
     private static final String [] ARR_INVALID_EMAILS = {
@@ -62,32 +66,16 @@ public class InvalidAddressTest extends BaseEmailTestCase
         "@domain.com"
     };
 
-    /** */
     private MockEmailConcrete email;
 
-    /**
-     * @param name name
-     */
-    public InvalidAddressTest(String name)
+    @Before
+    public void setUpInvalidAddressTest()
     {
-        super(name);
-    }
-
-    /**
-     * @throws Exception  */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-
         // reusable objects to be used across multiple tests
         this.email = new MockEmailConcrete();
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testSetInvalidFrom()
             throws Exception
     {
@@ -111,10 +99,7 @@ public class InvalidAddressTest extends BaseEmailTestCase
         }
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testAddInvalidTo()
             throws Exception
     {
@@ -138,10 +123,7 @@ public class InvalidAddressTest extends BaseEmailTestCase
         }
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testAddInvalidCc()
             throws Exception
     {
@@ -165,10 +147,7 @@ public class InvalidAddressTest extends BaseEmailTestCase
         }
     }
 
-    /**
-     *
-     * @throws Exception Exception
-     */
+    @Test
     public void testAddInvalidBcc()
             throws Exception
     {

@@ -293,7 +293,6 @@
                 <configuration>
                     <!-- exclude test case support classes -->
                     <excludes>
-                        <exclude>org/apache/commons/mail/BaseEmailTestCase.java</exclude>
                         <exclude>org/apache/commons/mail/mocks/*</exclude>
                         <exclude>org/apache/commons/mail/settings/*</exclude>
                         <exclude>**/Abstract*Test.java</exclude>

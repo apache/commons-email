@@ -17,6 +17,7 @@
 package org.apache.commons.mail;
 
 import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.*;
 import static org.powermock.api.easymock.PowerMock.createMock;
 import static org.powermock.api.easymock.PowerMock.replay;
 
@@ -36,9 +37,9 @@ import javax.mail.Multipart;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.mail.settings.EmailConfiguration;
+import org.junit.After;
+import org.junit.Before;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
@@ -48,7 +49,7 @@ import org.subethamail.wiser.WiserMessage;
  * @since 1.0
  * @version $Id$
  */
-public abstract class BaseEmailTestCase extends TestCase
+public abstract class AbstractEmailTest
 {
     /** Padding at end of body added by wiser/send */
     public static final int BODY_END_PAD = 3;
@@ -107,9 +108,9 @@ public abstract class BaseEmailTestCase extends TestCase
     /**
      * @param name name
      */
-    public BaseEmailTestCase(String name)
+    @Before
+    public void setUpAbstractEmailTest()
     {
-        super(name);
         emailOutputDir = new File("target/test-emails");
         if (!emailOutputDir.exists())
         {
@@ -117,9 +118,8 @@ public abstract class BaseEmailTestCase extends TestCase
         }
     }
 
-    /** */
-    @Override
-    protected void tearDown()
+    @After
+    public void tearDownEmailTest()
     {
         //stop the fake email server (if started)
         if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer))
@@ -345,9 +345,9 @@ public abstract class BaseEmailTestCase extends TestCase
         // and -- (front and end)
         String emailMessageBody = getMessageBody(emailMessage);
         String strMessageBody =
-            emailMessageBody.substring(BaseEmailTestCase.BODY_START_PAD,
+            emailMessageBody.substring(AbstractEmailTest.BODY_START_PAD,
                                        emailMessageBody.length()
-                                       - BaseEmailTestCase.BODY_END_PAD);
+                                       - AbstractEmailTest.BODY_END_PAD);
         assertTrue("didn't find expected content type in message body",
                 strMessageBody.indexOf(strSentContent) != -1);
     }

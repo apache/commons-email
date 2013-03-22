@@ -17,9 +17,11 @@
 
 package org.apache.commons.mail;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.UnsupportedEncodingException;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * JUnit test case for EmailUtils Class
@@ -27,17 +29,9 @@ import junit.framework.TestCase;
  * @since 1.3
  * @version $Id$
  */
-public class EmailUtilsTest extends TestCase
+public class EmailUtilsTest
 {
-
-    /**
-     * @param name name
-     */
-    public EmailUtilsTest(String name)
-    {
-        super(name);
-    }
-
+    @Test
     public void testUrlEncoding() throws UnsupportedEncodingException
     {
         assertEquals("abcdefg", EmailUtils.encodeUrl("abcdefg"));
