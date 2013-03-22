@@ -20,10 +20,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * JUnit test case for EmailAttachment Class
+ * JUnit test case for EmailAttachment Class.
  *
  * @since 1.0
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
 public class EmailAttachmentTest extends BaseEmailTestCase

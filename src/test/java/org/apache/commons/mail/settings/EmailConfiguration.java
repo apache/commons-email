@@ -23,7 +23,6 @@ import org.apache.commons.mail.EmailConstants;
  * for the JUnit tests.
  *
  * @since 1.0
- * @author Eric Pugh
  * @version $Id$
  */
 public final class EmailConfiguration

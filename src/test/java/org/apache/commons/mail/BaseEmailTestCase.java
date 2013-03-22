@@ -43,11 +43,9 @@ import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
 /**
- * Base test case for Email test classes
+ * Base test case for Email test classes.
  *
  * @since 1.0
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
- * @author <a href="mailto:epugh@opensourceconnections.com">Eric Pugh</a>
  * @version $Id$
  */
 public abstract class BaseEmailTestCase extends TestCase

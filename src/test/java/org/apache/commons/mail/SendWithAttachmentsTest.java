@@ -27,7 +27,6 @@ import org.apache.commons.mail.settings.EmailConfiguration;
  * JUnit test case verifying bugzilla issue 30973 is fixed.
  *
  * @since 1.0
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
 public class SendWithAttachmentsTest extends BaseEmailTestCase

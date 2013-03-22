@@ -37,8 +37,8 @@ import java.util.List;
  * servers using REAL recipients.
  *
  * The intention is to field-test certain aspects
- * of email using a variety of mail clients since I'm not
- * a mockist (see http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
+ * of email using a variety of mail clients since I'm not a mockist
+ * (see http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
 public class EmailLiveTest extends BaseEmailTestCase
 {
@@ -267,7 +267,7 @@ public class EmailLiveTest extends BaseEmailTestCase
         email.setMsg(textMsg);
 
         // create a proper UTF-8 sequence for the text attachment (matching our default charset)
-        DataSource attachment = new ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
+        DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
         
         EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());

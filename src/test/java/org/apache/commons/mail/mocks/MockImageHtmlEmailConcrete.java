@@ -70,6 +70,7 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail
     /**
      * @return inlineEmbeds
      */
+    @SuppressWarnings("rawtypes") // InlineImage is a private inner class
     public Map getInlineEmbeds()
     {
         return inlineEmbeds;

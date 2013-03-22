@@ -37,7 +37,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * JUnit test case for HtmlEmail Class.
  *
  * @since 1.0
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
 @RunWith(PowerMockRunner.class)

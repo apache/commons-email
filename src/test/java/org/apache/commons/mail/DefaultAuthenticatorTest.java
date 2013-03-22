@@ -21,10 +21,9 @@ import javax.mail.PasswordAuthentication;
 import junit.framework.TestCase;
 
 /**
- * JUnit test case for DefaultAuthenticator Class
+ * JUnit test case for DefaultAuthenticator Class.
  *
  * @since 1.0
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
 public class DefaultAuthenticatorTest extends TestCase

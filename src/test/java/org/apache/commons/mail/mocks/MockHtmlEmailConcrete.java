@@ -17,7 +17,6 @@
 package org.apache.commons.mail.mocks;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -30,7 +29,6 @@ import org.apache.commons.mail.HtmlEmail;
  * (used to allow testing only)
  *
  * @since 1.0
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
 public class MockHtmlEmailConcrete extends HtmlEmail
@@ -74,17 +72,9 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     }
 
     /**
-     * @deprecated as of commons-email 1.1, replaced by {@link #getInlineEmbeds}.
-     */
-    @Deprecated
-    public List getInlineImages()
-    {
-        return inlineImages;
-    }
-
-    /**
      * @return inlineEmbeds
      */
+    @SuppressWarnings("rawtypes") // InlineImage is a private inner class
     public Map getInlineEmbeds()
     {
         return inlineEmbeds;

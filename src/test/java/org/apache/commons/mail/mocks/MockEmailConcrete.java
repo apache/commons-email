@@ -28,12 +28,10 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 
 /**
- * Concrete Implementation on the Abstract Email
- * Class (used to allow testing only).  Supplies
- * getters for methods that normally only have setters.
+ * Concrete Implementation on the Abstract Email Class (used to allow testing only).
+ * Supplies getters for methods that normally only have setters.
  *
  * @since 1.0
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
 public class MockEmailConcrete extends Email
