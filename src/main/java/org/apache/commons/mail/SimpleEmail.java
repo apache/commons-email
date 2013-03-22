@@ -21,12 +21,6 @@ package org.apache.commons.mail;
  * attachments.
  *
  * @since 1.0
- * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
- * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
- * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
- * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>
- * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
- * @author <a href="mailto:unknown">Regis Koenig</a>
  * @version $Id$
 */
 public class SimpleEmail extends Email

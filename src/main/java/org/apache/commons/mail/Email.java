@@ -49,15 +49,6 @@ import javax.naming.NamingException;
  * body.
  *
  * @since 1.0
- * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
- * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
- * @author <a href="mailto:frank.kim@clearink.com">Frank Y. Kim</a>
- * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
- * @author <a href="mailto:greg@shwoop.com">Greg Ritter</a>
- * @author <a href="mailto:unknown">Regis Koenig</a>
- * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
- * @author <a href="mailto:matthias@wessendorf.net">Matthias Wessendorf</a>
- * @author <a href="mailto:corey.scott@gmail.com">Corey Scott</a>
  * @version $Id$
  */
 public abstract class Email

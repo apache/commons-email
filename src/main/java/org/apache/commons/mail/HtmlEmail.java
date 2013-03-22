@@ -81,8 +81,6 @@ import javax.mail.internet.MimeMultipart;
  * method defined on the <code>DataSource</code>s to make the determination.
  *
  * @since 1.0
- * @author <a href="mailto:unknown">Regis Koenig</a>
- * @author <a href="mailto:sean@informage.net">Sean Legassick</a>
  * @version $Id$
  */
 public class HtmlEmail extends MultiPartEmail

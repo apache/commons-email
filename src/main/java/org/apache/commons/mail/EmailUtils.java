@@ -40,7 +40,6 @@ import java.io.UnsupportedEncodingException;
  * This is a package scoped class, and should not be used directly by users.
  * </p>
  *
- * @author jakarta-commons
  * @since 1.0
  * @version $Id$
  */

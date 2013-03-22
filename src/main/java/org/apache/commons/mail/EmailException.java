@@ -28,7 +28,6 @@ import java.io.PrintWriter;
  * Emulation support for nested exceptions has been removed in {@code Email 1.3},
  * supported by JDK &ge; 1.4.
  *
- * @author jakarta-commons
  * @since 1.0
  * @version $Id$
  */

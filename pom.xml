@@ -139,6 +139,7 @@
         <developer>
             <name>Siegfried Goeschl</name>
             <id>sgoeschl</id>
+            <email>sgoeschl@apache.org</email>            
             <roles>
               <role>Java Developer</role>
             </roles>
@@ -147,44 +148,29 @@
         <developer>
             <name>Thomas Neidhart</name>
             <id>tn</id>
-            <email>tn at apache dot org</email>
+            <email>tn@apache.org</email>
             <organization>Apache Software Foundation</organization>
             <roles />
         </developer>        
     </developers>
-    <contributors>
-        <contributor>
-            <name>Mark Lowe</name>
-            <email>mark.lowe@boxstuff.com</email>
-            <roles />
-        </contributor>
-        <contributor>
-            <name>Niall Pemberton</name>
-            <roles />
-        </contributor>
-        <contributor>
-            <name>Corey Scott</name>
-            <email>corey.scott@gmail.com</email>
-            <roles />
-        </contributor>
-        <contributor>
-            <name>Eric Spiegelberg</name>
-            <email>eric@spiegs.com</email>
-            <roles />
-        </contributor>
-        <contributor>
-            <name>Matthias Wessendorf</name>
-            <email>matthias@wessendorf.net</email>
-            <roles />
-        </contributor>
+    <contributors>    
         <contributor>
             <name>Bindul Bhowmik</name>
         </contributor>
         <contributor>
-            <name>Brandon Wolfe</name>
+            <name>Colin Chalmers</name>
+            <email>colin.chalmers@maxware.nl</email>
+        </contributor> 
+        <contributor>
+            <name>Frank Y. Kim</name>
+            <email>frank.kim@clearink.com</email>
         </contributor>
         <contributor>
-            <name>Piero Ottuzzi</name>
+            <name>Regis Koenig</name>
+        </contributor>
+        <contributor>
+            <name>Sean Legassick</name>
+            <email>sean@informage.net</email>
         </contributor>
         <contributor>
             <name>Andrew Liles</name>
@@ -193,7 +179,40 @@
             <name>Cedrik Lime</name>
         </contributor>
         <contributor>
+            <name>Mark Lowe</name>
+            <email>mark.lowe@boxstuff.com</email>
+        </contributor>
+        <contributor>
+            <name>Brett McLaughlin</name>
+            <email>bmclaugh@algx.net</email>
+        </contributor>
+        <contributor>
+            <name>Piero Ottuzzi</name>
+        </contributor>
+        <contributor>
+            <name>Niall Pemberton</name>
+        </contributor>
+        <contributor>
+            <name>Greg Ritter</name>
+            <email>greg@shwoop.com</email>
+        </contributor>
+        <contributor>
+            <name>Corey Scott</name>
+            <email>corey.scott@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Eric Spiegelberg</name>
+            <email>eric@spiegs.com</email>
+        </contributor>
+        <contributor>
             <name>Dominik Stadler</name>
+        </contributor>
+        <contributor>
+            <name>Matthias Wessendorf</name>
+            <email>matthias@wessendorf.net</email>
+        </contributor>
+        <contributor>
+            <name>Brandon Wolfe</name>
         </contributor>
     </contributors>
 

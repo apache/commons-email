@@ -39,9 +39,6 @@ import javax.activation.DataSource;
  * and it is recommended to do so.
  *
  * @since 1.0
- * @author <a href="mailto:colin.chalmers@maxware.nl">Colin Chalmers</a>
- * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
- * @author <a href="mailto:bmclaugh@algx.net">Brett McLaughlin</a>
  * @version $Id$
  * @deprecated since 1.4, use {@link javax.mail.util.ByteArrayDataSource} instead
  */
