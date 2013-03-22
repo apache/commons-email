@@ -16,13 +16,12 @@
  */
 package org.apache.commons.mail.resolver;
 
-import junit.framework.TestCase;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail.DataSourceResolver;
+import static org.junit.Assert.*;
 
-import javax.activation.DataSource;
+import org.apache.commons.mail.DataSourceResolver;
+import org.junit.Test;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -30,13 +29,9 @@ import java.net.URL;
  *
  * @since 1.3
  */
-public class DataSourceCompositeResolverTest extends TestCase
+public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest
 {
-    public DataSourceCompositeResolverTest(String name)
-    {
-        super(name);
-    }
-
+    @Test
     public void testResolvingFilesLenient() throws Exception
     {
         DataSourceResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
@@ -51,6 +46,7 @@ public class DataSourceCompositeResolverTest extends TestCase
         assertTrue(toByteArray(dataSourceResolver.resolve("/contentTypeTest.gif")).length > 0);
     }
 
+    @Test
     public void testResolvingFilesNonLenient() throws Exception
     {
         DataSourceResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
@@ -70,6 +66,7 @@ public class DataSourceCompositeResolverTest extends TestCase
         }
     }
 
+    @Test
     public void testExternalModification() throws Exception
     {
         DataSourceResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
@@ -88,16 +85,4 @@ public class DataSourceCompositeResolverTest extends TestCase
         assertNotNull(arr2[0]);        
     }
 
-    private byte[] toByteArray(DataSource dataSource) throws IOException
-    {
-        if(dataSource != null)
-        {
-            InputStream is = dataSource.getInputStream();
-            return IOUtils.toByteArray(is);
-        }
-        else
-        {
-            return null;
-        }
-    }
 }

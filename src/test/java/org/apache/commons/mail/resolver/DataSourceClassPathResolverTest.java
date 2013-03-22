@@ -16,32 +16,23 @@
  */
 package org.apache.commons.mail.resolver;
 
-import junit.framework.TestCase;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail.DataSourceResolver;
+import static org.junit.Assert.*;
 
-import javax.activation.DataSource;
+import org.apache.commons.mail.DataSourceResolver;
+import org.junit.Test;
+
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
- * JUnit test case for DataSourceClassPathResolver..
+ * JUnit test case for DataSourceClassPathResolver.
  *
  * @since 1.3
  */
-public class DataSourceClassPathResolverTest extends TestCase
+public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest
 {
     private final int IMG_SIZE = 5866;
 
-    public DataSourceClassPathResolverTest(String name)
-    {
-        super(name);
-    }
-
-    // ======================================================================
-    // Start of Tests
-    // ======================================================================
-    
+    @Test
     public void testResolvingClassPathLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver;
@@ -59,6 +50,7 @@ public class DataSourceClassPathResolverTest extends TestCase
         assertNull(dataSourceResolver.resolve("./images/asf_logo_wide.gif"));
     }
 
+    @Test
     public void testResolvingClassPathNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver;
@@ -74,19 +66,6 @@ public class DataSourceClassPathResolverTest extends TestCase
         catch(IOException e)
         {
             return;
-        }
-    }
-
-    private byte[] toByteArray(DataSource dataSource) throws IOException
-    {
-        if(dataSource != null)
-        {
-            InputStream is = dataSource.getInputStream();
-            return IOUtils.toByteArray(is);
-        }
-        else
-        {
-            return null;
         }
     }
 

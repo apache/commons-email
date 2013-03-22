@@ -16,14 +16,13 @@
  */
 package org.apache.commons.mail.resolver;
 
-import junit.framework.TestCase;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail.DataSourceResolver;
+import static org.junit.Assert.*;
 
-import javax.activation.DataSource;
+import org.apache.commons.mail.DataSourceResolver;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -31,14 +30,9 @@ import java.net.URL;
  *
  * @since 1.3
  */
-public class DataSourceUrlResolverTest extends TestCase
+public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
 {
     private final int IMG_SIZE = 5866;
-
-    public DataSourceUrlResolverTest(String name)
-    {
-        super(name);
-    }
 
     /**
      * Shows how the DataSourceUrlResolver can resolve files as well but this should
@@ -46,6 +40,7 @@ public class DataSourceUrlResolverTest extends TestCase
      *
      * @throws Exception the test failed
      */
+    @Test
     public void testResolvingFilesLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test/resources").toURI().toURL(), true);
@@ -60,6 +55,7 @@ public class DataSourceUrlResolverTest extends TestCase
      *
      * @throws Exception the test failed
      */
+    @Test
     public void testResolvingHttpLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), true);
@@ -75,6 +71,7 @@ public class DataSourceUrlResolverTest extends TestCase
      *
      * @throws Exception the test failed
      */
+    @Test
     public void testResolvingHttpNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
@@ -92,16 +89,4 @@ public class DataSourceUrlResolverTest extends TestCase
         }
     }
 
-    private byte[] toByteArray(DataSource dataSource) throws IOException
-    {
-        if(dataSource != null)
-        {
-            InputStream is = dataSource.getInputStream();
-            return IOUtils.toByteArray(is);
-        }
-        else
-        {
-            return null;
-        }
-    }
 }

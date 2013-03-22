@@ -16,31 +16,24 @@
  */
 package org.apache.commons.mail.resolver;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
-import javax.activation.DataSource;
-
-import junit.framework.TestCase;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.DataSourceResolver;
+import org.junit.Test;
 
 /**
  * JUnit test case for DateSourceResolver.
  *
  * @since 1.3
  */
-public class DataSourceFileResolverTest extends TestCase
+public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest
 {
     private final int IMG_SIZE = 5866;
 
-    public DataSourceFileResolverTest(String name)
-    {
-        super(name);
-    }
-
+    @Test
     public void testResolvingFileLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("./src/test/resources"), true);
@@ -51,6 +44,7 @@ public class DataSourceFileResolverTest extends TestCase
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
     }
 
+    @Test
     public void testResolvingFileNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("."), false);
@@ -67,16 +61,4 @@ public class DataSourceFileResolverTest extends TestCase
         }
     }
 
-    private byte[] toByteArray(DataSource dataSource) throws IOException
-    {
-        if(dataSource != null)
-        {
-            InputStream is = dataSource.getInputStream();
-            return IOUtils.toByteArray(is);
-        }
-        else
-        {
-            return null;
-        }
-    }
 }
