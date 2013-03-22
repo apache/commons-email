@@ -33,7 +33,7 @@
         the JavaMail API, which it aims to simplify.
     </description>
 
-    <url>http://commons.apache.org/email/</url>
+    <url>http://commons.apache.org/proper/commons-email/</url>
 
     <issueManagement>
         <system>jira</system>
