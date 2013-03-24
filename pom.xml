@@ -51,7 +51,7 @@
             <name>dIon Gillard</name>
             <id>dion</id>
             <email>dion@apache.org</email>
-            <organization>Apache Software Foundation</organization>
+            <organization>The Apache Software Foundation</organization>
             <roles>
               <role>Java Developer</role>
             </roles>
@@ -130,7 +130,7 @@
             <name>Ben Speakmon</name>
             <id>bspeakmon</id>
             <email>bspeakmon@apache.org</email>
-            <organization>Apache Software Foundation</organization>
+            <organization>The Apache Software Foundation</organization>
             <roles>
                 <role>Java Developer</role>
             </roles>
@@ -149,7 +149,7 @@
             <name>Thomas Neidhart</name>
             <id>tn</id>
             <email>tn@apache.org</email>
-            <organization>Apache Software Foundation</organization>
+            <organization>The Apache Software Foundation</organization>
             <roles />
         </developer>        
     </developers>
