@@ -22,7 +22,11 @@
   </properties>
 
   <body>
-    <release version="1.4" date="TBD">
+    <release version="1.3.2" date="TBD">
+      <action dev="tn" type="fix" issue="EMAIL-127" date="2013-07-01" due-to="Dominik Stadler">
+        Special characters in the body of an HTML email could lead to an exception when the
+        mime message was built.
+      </action>
     </release>
     <release version="1.3.1" date="2013-03-04">
       <action dev="tn" type="fix" issue="EMAIL-125" date="2013-02-22" due-to="Jean-Marc">

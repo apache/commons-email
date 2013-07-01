@@ -399,15 +399,44 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         assertTrue(matcher.find());
         assertEquals("file5", matcher.group(2));
 
-        // try with invalid HTML that is seens sometimes, i.e. without closing "/" or "</img>"
-        matcher = pattern
-                .matcher("<img src=\"file1\"><img src=\"file2\">");
+        // try with invalid HTML that is seems sometimes, i.e. without closing "/" or "</img>"
+        matcher = pattern.matcher("<img src=\"file1\"><img src=\"file2\">");
         assertTrue(matcher.find());
         assertEquals("file1", matcher.group(2));
         assertTrue(matcher.find());
         assertEquals("file2", matcher.group(2));
     }
 
+    @Test
+    public void testEmail127() throws Exception {
+        Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
+
+        getMailServer();
+
+        String strSubject = "Test HTML Send default with URL";
+
+        // Create the email message
+        email = new MockImageHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setSubject(strSubject);
+        email.setDataSourceResolver(new DataSourceUrlResolver(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
+
+        // set the html message
+        email.setHtmlMsg("<html><body><img title=\"$\" src=\"http://www.apache.org/images/feather.gif\"/></body></html>");
+
+        // send the email
+        email.send();
+
+        fakeMailServer.stop();
+        // validate txt message
+        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(),
+                     email.getFromAddress(), email.getToAddresses(),
+                     email.getCcAddresses(), email.getBccAddresses(), true);
+    }
+    
     private String loadUrlContent(URL url) throws IOException {
         InputStream stream = url.openStream();
         StringBuffer str = new StringBuffer();

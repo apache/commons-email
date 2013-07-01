@@ -177,7 +177,8 @@ public class ImageHtmlEmail extends HtmlEmail
                 // if we embedded something, then we need to replace the URL with
                 // the CID, otherwise the Matcher takes care of adding the
                 // non-replaced text afterwards, so no else is necessary here!
-                matcher.appendReplacement(stringBuffer, matcher.group(1) + "cid:" + cid + matcher.group(3));
+                matcher.appendReplacement(stringBuffer,
+                        Matcher.quoteReplacement(matcher.group(1) + "cid:" + cid + matcher.group(3)));
             }
         }
 
