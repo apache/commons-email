@@ -236,18 +236,15 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testGetSetSmtpPort()
     {
-        // ====================================================================
-        // Test Success
-        // ====================================================================
-        int[] tests = {1, Integer.MAX_VALUE};
+        this.email.setSmtpPort(1);
+        assertEquals(
+            1,
+            Integer.valueOf(this.email.getSmtpPort()).intValue());
 
-        for (int i = 0; i < tests.length; i++)
-        {
-            this.email.setSmtpPort(tests[i]);
-            assertEquals(
-                tests[i],
-                Integer.valueOf(this.email.getSmtpPort()).intValue());
-        }
+        this.email.setSmtpPort(Integer.MAX_VALUE);
+        assertEquals(
+            Integer.MAX_VALUE,
+            Integer.valueOf(this.email.getSmtpPort()).intValue());
 
         // ====================================================================
         // Test Exceptions
