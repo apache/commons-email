@@ -245,25 +245,24 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(
             Integer.MAX_VALUE,
             Integer.valueOf(this.email.getSmtpPort()).intValue());
+    }
 
-        // ====================================================================
-        // Test Exceptions
-        // ====================================================================
-        int[] testExs = {Integer.MIN_VALUE, -1, 0};
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetSmtpPortZero()
+    {
+        this.email.setSmtpPort(0);
+    }
 
-        for (int i = 0; i < testExs.length; i++)
-        {
-            try
-            {
-                this.email.setSmtpPort(testExs[i]);
-                fail("Should have thrown an exception");
-            }
-            catch (IllegalArgumentException e)
-            {
-                assertTrue(true);
-            }
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetSmptPortNegative()
+    {
+        this.email.setSmtpPort(-1);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetSmtpPortMinValue()
+    {
+        this.email.setSmtpPort(Integer.MIN_VALUE);
     }
 
     @Test
