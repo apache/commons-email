@@ -40,7 +40,9 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.ParseException;
 import org.apache.commons.mail.mocks.MockEmailConcrete;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * JUnit test case for Email Class
@@ -144,8 +146,8 @@ public class EmailTest extends AbstractEmailTest
         assertTrue(
             Authenticator.class.isInstance(this.email.getAuthenticator()));
         assertEquals(
-            strUsername,
-            retrievedAuth.getPasswordAuthentication().getUserName());
+                strUsername,
+                retrievedAuth.getPasswordAuthentication().getUserName());
         assertEquals(
             strPassword,
             retrievedAuth.getPasswordAuthentication().getPassword());
@@ -283,9 +285,9 @@ public class EmailTest extends AbstractEmailTest
                 "joe.doe@apache.org",
                 "joe.doe@apache.org"));
         arrExpected.add(
-            new InternetAddress(
-                "someone_here@work-address.com.au",
-                "someone_here@work-address.com.au"));
+                new InternetAddress(
+                        "someone_here@work-address.com.au",
+                        "someone_here@work-address.com.au"));
 
         for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
@@ -1189,21 +1191,13 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    @Test
-    public void testSendNoHostName()
+    @Test(expected = EmailException.class)
+    public void testSendNoHostName() throws Exception
     {
-        try
-        {
-            this.getMailServer();
+        this.getMailServer();
 
-            this.email = new MockEmailConcrete();
-            this.email.send();
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            this.fakeMailServer.stop();
-        }
+        this.email = new MockEmailConcrete();
+        this.email.send();
     }
 
     @Test
@@ -1223,8 +1217,8 @@ public class EmailTest extends AbstractEmailTest
             this.email.addReplyTo("me@home.com");
 
             this.email.setContent(
-                "test string object",
-                " ; charset=" + EmailConstants.US_ASCII);
+                    "test string object",
+                    " ; charset=" + EmailConstants.US_ASCII);
 
             this.email.send();
             fail("Should have thrown an exception");
@@ -1236,66 +1230,44 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    @Test
-    public void testSendFromNotSet()
+    @Test(expected = EmailException.class)
+    public void testSendFromNotSet() throws Exception
     {
-        try
-        {
-            this.getMailServer();
+         this.getMailServer();
 
-            this.email = new MockEmailConcrete();
-            this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.getMailServerPort());
+         this.email = new MockEmailConcrete();
+         this.email.setHostName(this.strTestMailServer);
+         this.email.setSmtpPort(this.getMailServerPort());
 
-            this.email.send();
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            this.fakeMailServer.stop();
-        }
+         this.email.send();
     }
 
-    @Test
-    public void testSendDestinationNotSet()
+    @Test(expected = EmailException.class)
+    public void testSendDestinationNotSet() throws Exception
     {
-        try
-        {
-            this.getMailServer();
+        this.getMailServer();
 
-            this.email = new MockEmailConcrete();
-            this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.getMailServerPort());
-            this.email.setFrom("me@home.com");
-            this.email.send();
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            this.fakeMailServer.stop();
-        }
+        this.email = new MockEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom("me@home.com");
+
+        this.email.send();
     }
 
-    @Test
-    public void testSendBadAuthSet()
+    @Test(expected = EmailException.class)
+    public void testSendBadAuthSet() throws Exception
     {
-        try
-        {
-            this.getMailServer();
+        this.getMailServer();
 
-            this.email = new MockEmailConcrete();
-            this.email.setHostName(this.strTestMailServer);
-            this.email.setSmtpPort(this.getMailServerPort());
-            this.email.setFrom(this.strTestMailFrom);
-            this.email.addTo(this.strTestMailTo);
-            this.email.setAuthentication(null, null);
-            this.email.send();
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            this.fakeMailServer.stop();
-        }
+        this.email = new MockEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+        this.email.setAuthentication(null, null);
+
+        this.email.send();
     }
 
     @Test
