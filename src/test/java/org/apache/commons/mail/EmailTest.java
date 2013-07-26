@@ -319,12 +319,6 @@ public class EmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Success
         // ====================================================================
-        String[] testEmails =
-        {
-            "me@home.com",
-            "joe.doe@apache.org",
-            "someone_here@work-address.com.au"
-        };
         String[] testEmailNames = {"Name1", "", null};
         List<InternetAddress> arrExpected = new ArrayList<InternetAddress>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
@@ -337,10 +331,10 @@ public class EmailTest extends AbstractEmailTest
                         "someone_here@work-address.com.au",
                         "someone_here@work-address.com.au"));
 
-        for (int i = 0; i < testEmails.length; i++)
+        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
         {
             // set from
-            this.email.setFrom(testEmails[i], testEmailNames[i]);
+            this.email.setFrom(ARR_VALID_EMAILS[i], testEmailNames[i]);
 
             // retrieve and verify
             assertEquals(arrExpected.get(i), this.email.getFromAddress());
