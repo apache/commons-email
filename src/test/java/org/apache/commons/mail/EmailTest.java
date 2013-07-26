@@ -1190,12 +1190,8 @@ public class EmailTest extends AbstractEmailTest
     }
 
     @Test
-    public void testSendEx()
+    public void testSendNoHostName()
     {
-        // ====================================================================
-        // Test Exceptions (in getMailSession)
-        // ====================================================================
-        // hostname not set
         try
         {
             this.getMailServer();
@@ -1209,8 +1205,11 @@ public class EmailTest extends AbstractEmailTest
             this.fakeMailServer.stop();
             assertTrue(true);
         }
+    }
 
-        // bad hostname
+    @Test
+    public void testSendBadHostName()
+    {
         try
         {
             this.getMailServer();
@@ -1237,11 +1236,11 @@ public class EmailTest extends AbstractEmailTest
             this.fakeMailServer.stop();
             assertTrue(true);
         }
+    }
 
-        // ====================================================================
-        // Test Exceptions (in send)
-        // ====================================================================
-        // from add not set
+    @Test
+    public void testSendFromNotSet()
+    {
         try
         {
             this.getMailServer();
@@ -1258,8 +1257,11 @@ public class EmailTest extends AbstractEmailTest
             this.fakeMailServer.stop();
             assertTrue(true);
         }
+    }
 
-        // destination (to/cc/bcc) dd not set
+    @Test
+    public void testSendDestinationNotSet()
+    {
         try
         {
             this.getMailServer();
@@ -1276,8 +1278,11 @@ public class EmailTest extends AbstractEmailTest
             this.fakeMailServer.stop();
             assertTrue(true);
         }
+    }
 
-        // bad auth set
+    @Test
+    public void testSendBadAuthSet()
+    {
         try
         {
             this.getMailServer();
@@ -1296,9 +1301,11 @@ public class EmailTest extends AbstractEmailTest
             this.fakeMailServer.stop();
             assertTrue(true);
         }
-        
-        // validate that the correct smtp port is visible in the exception message
-        // in case ssl connection is used
+    }
+
+    @Test
+    public void testSendCorrectSmtpPortContainedInException()
+    {
         try
         {
             this.getMailServer();
@@ -1318,7 +1325,6 @@ public class EmailTest extends AbstractEmailTest
             this.fakeMailServer.stop();
             assertTrue(true);
         }
-        
     }
 
     @Test
