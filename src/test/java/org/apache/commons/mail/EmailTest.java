@@ -40,9 +40,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.ParseException;
 import org.apache.commons.mail.mocks.MockEmailConcrete;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 /**
  * JUnit test case for Email Class
