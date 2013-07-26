@@ -347,12 +347,8 @@ public class EmailTest extends AbstractEmailTest
         this.email.setFrom("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test    
-    public void testAddTo() throws EmailException, AddressException, UnsupportedEncodingException
+    public void testAddTo() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -374,12 +370,8 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddToArray() throws EmailException, AddressException, UnsupportedEncodingException
+    public void testAddToArray() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -398,12 +390,8 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddToWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddToWithEncoding() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -431,12 +419,8 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddTo2() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddTo2() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -478,12 +462,8 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testSetTo() throws UnsupportedEncodingException, EmailException
+    public void testSetTo() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -534,12 +514,8 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddCc() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddCc() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -561,12 +537,8 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddCcArray() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddCcArray() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -585,12 +557,8 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddCcWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddCcWithEncoding() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -615,12 +583,8 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddCc2() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddCc2() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -662,11 +626,8 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     */
     @Test
-    public void testSetCc() throws EmailException, AddressException
+    public void testSetCc() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -707,12 +668,8 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddBcc() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddBcc() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -736,12 +693,8 @@ public class EmailTest extends AbstractEmailTest
             this.email.getBccAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddBccArray() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddBccArray() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -762,12 +715,8 @@ public class EmailTest extends AbstractEmailTest
             this.email.getBccAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddBccWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddBccWithEncoding() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -793,12 +742,8 @@ public class EmailTest extends AbstractEmailTest
             this.email.getBccAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddBcc2() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddBcc2() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -843,12 +788,8 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testSetBcc() throws UnsupportedEncodingException, EmailException
+    public void testSetBcc() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -894,12 +835,8 @@ public class EmailTest extends AbstractEmailTest
         }
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddReplyTo() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddReplyTo() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -923,12 +860,8 @@ public class EmailTest extends AbstractEmailTest
             this.email.getReplyToAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddReplyToWithEncoding() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddReplyToWithEncoding() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -954,12 +887,8 @@ public class EmailTest extends AbstractEmailTest
             this.email.getReplyToAddresses().toString());
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testAddReplyTo2() throws UnsupportedEncodingException, AddressException, EmailException
+    public void testAddReplyTo2() throws Exception
     {
         // ====================================================================
         // Test Success
@@ -1289,12 +1218,8 @@ public class EmailTest extends AbstractEmailTest
         assertTrue(Math.abs(sentDate.getTime() - dtTest.getTime()) < 1000);
     }
 
-    /**
-     * @throws EmailException when there are problems adding an address
-     * @throws UnsupportedEncodingException on bad email addresses
-     */
     @Test
-    public void testToInternetAddressArray() throws EmailException, UnsupportedEncodingException
+    public void testToInternetAddressArray() throws Exception
     {
         List<InternetAddress> testInetEmailValid = new ArrayList<InternetAddress>();
 
