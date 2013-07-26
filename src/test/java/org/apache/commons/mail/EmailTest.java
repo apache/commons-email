@@ -442,24 +442,12 @@ public class EmailTest extends AbstractEmailTest
         // retrieve and verify
         assertEquals(arrExpected.size(), this.email.getToAddresses().size());
         assertEquals(arrExpected.toString(), this.email.getToAddresses().toString());
+    }
 
-        // ====================================================================
-        // Test Exceptions
-        // ====================================================================
-        // reset the mail class
-        MockEmailConcrete anotherEmail = new MockEmailConcrete();
-
-        // bad encoding
-        try
-        {
-            // set a dodgy encoding scheme
-            anotherEmail.addTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
-            fail("setting invalid charset should have failed!");
-        }
-        catch (IllegalCharsetNameException  e)
-        {
-            // expected runtime exception.
-        }
+    @Test(expected = IllegalCharsetNameException.class)
+    public void testAddToBadEncoding() throws Exception
+    {
+        this.email.addTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
     }
 
     @Test
