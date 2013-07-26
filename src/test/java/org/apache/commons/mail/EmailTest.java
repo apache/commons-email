@@ -1203,7 +1203,6 @@ public class EmailTest extends AbstractEmailTest
         catch (EmailException e)
         {
             this.fakeMailServer.stop();
-            assertTrue(true);
         }
     }
 
@@ -1234,7 +1233,6 @@ public class EmailTest extends AbstractEmailTest
         {
             assertTrue(e.getCause() instanceof ParseException);
             this.fakeMailServer.stop();
-            assertTrue(true);
         }
     }
 
@@ -1255,7 +1253,6 @@ public class EmailTest extends AbstractEmailTest
         catch (EmailException e)
         {
             this.fakeMailServer.stop();
-            assertTrue(true);
         }
     }
 
@@ -1276,7 +1273,6 @@ public class EmailTest extends AbstractEmailTest
         catch (EmailException e)
         {
             this.fakeMailServer.stop();
-            assertTrue(true);
         }
     }
 
@@ -1299,7 +1295,6 @@ public class EmailTest extends AbstractEmailTest
         catch (EmailException e)
         {
             this.fakeMailServer.stop();
-            assertTrue(true);
         }
     }
 
@@ -1323,7 +1318,6 @@ public class EmailTest extends AbstractEmailTest
         {
             assertTrue(e.getMessage().contains("bad.host.com:465"));
             this.fakeMailServer.stop();
-            assertTrue(true);
         }
     }
 
