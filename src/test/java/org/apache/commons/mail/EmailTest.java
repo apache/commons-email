@@ -127,9 +127,9 @@ public class EmailTest extends AbstractEmailTest
         // setup
         String strUsername = "user.name";
         String strPassword = "user.pwd";
-        DefaultAuthenticator authenicator =
+        DefaultAuthenticator authenticator =
             new DefaultAuthenticator(strUsername, strPassword);
-        email.setAuthenticator(authenicator);
+        email.setAuthenticator(authenticator);
 
         // this is cast into DefaultAuthenticator for convenience
         // and give us access to the getPasswordAuthentication fn
