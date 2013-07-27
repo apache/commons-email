@@ -21,7 +21,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import javax.mail.Authenticator;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -137,8 +136,6 @@ public class EmailTest extends AbstractEmailTest
             (DefaultAuthenticator) email.getAuthenticator();
 
         // tests
-        assertTrue(
-            Authenticator.class.isInstance(email.getAuthenticator()));
         assertEquals(
                 strUsername,
                 retrievedAuth.getPasswordAuthentication().getUserName());
