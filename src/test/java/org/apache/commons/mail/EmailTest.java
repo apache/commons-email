@@ -53,7 +53,7 @@ import org.junit.Test;
 public class EmailTest extends AbstractEmailTest
 {
     /** valid email addresses */
-    public static final String[] ARR_VALID_EMAILS =
+    private static final String[] ARR_VALID_EMAILS =
         {
             "me@home.com",
             "joe.doe@apache.org",
