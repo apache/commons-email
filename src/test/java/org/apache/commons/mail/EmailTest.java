@@ -18,6 +18,7 @@ package org.apache.commons.mail;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -159,16 +160,28 @@ public class EmailTest extends AbstractEmailTest
     }
 
     @Test
+    public void testSetContentEmptyMimeMultipart()
+    {
+        MimeMultipart part = new MimeMultipart();
+        email.setContent(part);
+
+        assertEquals(part, email.getContentMimeMultipart());
+    }
+
+    @Test
     public void testSetContentMimeMultipart()
     {
-        MimeMultipart[] tests =
-            {new MimeMultipart(), new MimeMultipart("abc123"), null};
+        MimeMultipart part = new MimeMultipart("abc123");
+        email.setContent(part);
 
-        for (int i = 0; i < tests.length; i++)
-        {
-            email.setContent(tests[i]);
-            assertEquals(tests[i], email.getContentMimeMultipart());
-        }
+        assertEquals(part, email.getContentMimeMultipart());
+    }
+
+    @Test
+    public void testSetContentNull() throws Exception
+    {
+        email.setContent(null);
+        assertNull(email.getContentMimeMultipart());
     }
 
     @Test
