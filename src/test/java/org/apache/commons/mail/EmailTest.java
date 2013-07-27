@@ -113,8 +113,6 @@ public class EmailTest extends AbstractEmailTest
             (DefaultAuthenticator) email.getAuthenticator();
 
         // tests
-        assertTrue(
-            Authenticator.class.isInstance(email.getAuthenticator()));
         assertEquals(
             strUsername,
             retrievedAuth.getPasswordAuthentication().getUserName());
