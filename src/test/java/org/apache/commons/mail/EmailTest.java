@@ -17,6 +17,7 @@
 package org.apache.commons.mail;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -72,14 +73,10 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testGetSetDebug()
     {
-        // JUnitDoclet begin method setBoolTest isBoolTest
-        boolean[] tests = {true, false};
-
-        for (int i = 0; i < tests.length; i++)
-        {
-            email.setDebug(tests[i]);
-            assertEquals(tests[i], email.isDebug());
-        }
+        email.setDebug(true);
+        assertTrue(email.isDebug());
+        email.setDebug(false);
+        assertFalse(email.isDebug());
     }
 
     @Test
