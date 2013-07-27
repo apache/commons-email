@@ -34,8 +34,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -230,11 +230,9 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testGetSetHostName()
     {
-
-        for (int i = 0; i < testCharsValid.length; i++)
-        {
-            email.setHostName(testCharsValid[i]);
-            assertEquals(testCharsValid[i], email.getHostName());
+        for (String validChar : testCharsValid) {
+            email.setHostName(validChar);
+            assertEquals(validChar, email.getHostName());
         }
     }
 
@@ -364,10 +362,8 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < VALID_EMAILS.length; i++)
-        {
-            // set from
-            email.addTo(VALID_EMAILS[i]);
+        for (String address : VALID_EMAILS) {
+            email.addTo(address);
         }
 
         // retrieve and verify
@@ -505,10 +501,8 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < VALID_EMAILS.length; i++)
-        {
-            // set from
-            email.addCc(VALID_EMAILS[i]);
+        for (String address : VALID_EMAILS) {
+            email.addCc(address);
         }
 
         // retrieve and verify
@@ -633,10 +627,8 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < VALID_EMAILS.length; i++)
-        {
-            // add a valid bcc
-            email.addBcc(VALID_EMAILS[i]);
+        for (String address : VALID_EMAILS) {
+            email.addBcc(address);
         }
 
         // retrieve and verify
@@ -774,10 +766,8 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < VALID_EMAILS.length; i++)
-        {
-            // set replyTo
-            email.addReplyTo(VALID_EMAILS[i]);
+        for (String address : VALID_EMAILS) {
+            email.addReplyTo(address);
         }
 
         // retrieve and verify
@@ -853,21 +843,19 @@ public class EmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Success
         // ====================================================================
-        Map<String, String> ht = new Hashtable<String, String>();
-        ht.put("X-Priority", "1");
-        ht.put("Disposition-Notification-To", "me@home.com");
-        ht.put("X-Mailer", "Sendmail");
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("X-Priority", "1");
+        headers.put("Disposition-Notification-To", "me@home.com");
+        headers.put("X-Mailer", "Sendmail");
 
-        for (Iterator<Map.Entry<String, String>> items = ht.entrySet().iterator(); items.hasNext();)
-        {
-            Map.Entry<String, String> entry = items.next();
-            String strName = entry.getKey();
-            String strValue = entry.getValue();
-            email.addHeader(strName, strValue);
+        for (Map.Entry<String, String> header : headers.entrySet()) {
+            String name = header.getKey();
+            String value = header.getValue();
+            email.addHeader(name, value);
         }
 
-        assertEquals(ht.size(), email.getHeaders().size());
-        assertEquals(ht, email.getHeaders());
+        assertEquals(headers.size(), email.getHeaders().size());
+        assertEquals(headers, email.getHeaders());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -967,11 +955,9 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testSetSubject()
     {
-
-        for (int i = 0; i < testCharsValid.length; i++)
-        {
-            email.setSubject(testCharsValid[i]);
-            assertEquals(testCharsValid[i], email.getSubject());
+        for (String validChar : testCharsValid) {
+            email.setSubject(validChar);
+            assertEquals(validChar, email.getSubject());
         }
     }
 
