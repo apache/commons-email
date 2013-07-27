@@ -910,7 +910,7 @@ public class EmailTest extends AbstractEmailTest
         
         assertTrue(email.getHeaders().size() == 1);
         // the header should not yet be folded -> will be done by buildMimeMessage()
-        assertFalse(email.getHeaders().get("X-LongHeader").toString().contains("\r\n"));
+        assertFalse(email.getHeaders().get("X-LongHeader").contains("\r\n"));
         
         email.buildMimeMessage();
 
