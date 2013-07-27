@@ -24,6 +24,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -243,8 +244,8 @@ public class EmailTest extends AbstractEmailTest
 
         this.email.setSmtpPort(Integer.MAX_VALUE);
         assertEquals(
-            Integer.MAX_VALUE,
-            Integer.valueOf(this.email.getSmtpPort()).intValue());
+                Integer.MAX_VALUE,
+                Integer.valueOf(this.email.getSmtpPort()).intValue());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -472,34 +473,20 @@ public class EmailTest extends AbstractEmailTest
         // retrieve and verify
         assertEquals(testEmailValid2.size(), this.email.getToAddresses().size());
         assertEquals(
-            testEmailValid2.toString(),
-            this.email.getToAddresses().toString());
+                testEmailValid2.toString(),
+                this.email.getToAddresses().toString());
+    }
 
-        // ====================================================================
-        // Exception (Null Input)
-        // ====================================================================
-        try
-        {
-            this.email.setTo(null);
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            assertTrue(true);
-        }
+    @Test(expected = EmailException.class)
+    public void testSetToNull() throws Exception
+    {
+        this.email.setTo(null);
+    }
 
-        // ====================================================================
-        // Exception (Empty Collection)
-        // ====================================================================
-        try
-        {
-            this.email.setTo(new ArrayList<InternetAddress>());
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            assertTrue(true);
-        }
+    @Test(expected = EmailException.class)
+    public void testSetToEmpty() throws Exception
+    {
+        this.email.setTo(Collections.<InternetAddress>emptyList());
     }
 
     @Test
@@ -594,24 +581,12 @@ public class EmailTest extends AbstractEmailTest
         // retrieve and verify
         assertEquals(arrExpected.size(), this.email.getCcAddresses().size());
         assertEquals(arrExpected.toString(), this.email.getCcAddresses().toString());
+    }
 
-        // ====================================================================
-        // Test Exceptions
-        // ====================================================================
-        // reset the mail class
-        MockEmailConcrete anotherEmail = new MockEmailConcrete();
-
-        // bad encoding
-        try
-        {
-            // set a dodgy encoding scheme
-            anotherEmail.addCc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
-            fail("setting invalid charset should have failed!");
-        }
-        catch (IllegalCharsetNameException e)
-        {
-            // expected runtime exception.
-        }
+    @Test(expected = IllegalCharsetNameException.class)
+    public void testAddCcBadEncoding() throws Exception
+    {
+        this.email.addCc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
     }
 
     @Test
@@ -628,32 +603,18 @@ public class EmailTest extends AbstractEmailTest
 
         this.email.setCc(testEmailValid2);
         assertEquals(testEmailValid2, this.email.getCcAddresses());
+    }
 
-        // ====================================================================
-        // Exception (Null Input)
-        // ====================================================================
-        try
-        {
-            this.email.setCc(null);
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            assertTrue(true);
-        }
+    @Test(expected = EmailException.class)
+    public void testSetCcNull() throws Exception
+    {
+        this.email.setCc(null);
+    }
 
-        // ====================================================================
-        // Exception (Empty Collection)
-        // ====================================================================
-        try
-        {
-            this.email.setCc(new ArrayList<InternetAddress>());
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            assertTrue(true);
-        }
+    @Test(expected = EmailException.class)
+    public void testSetCcEmpty() throws Exception
+    {
+        this.email.setCc(Collections.<InternetAddress>emptyList());
     }
 
     @Test
@@ -756,24 +717,12 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(
             arrExpected.toString(),
             this.email.getBccAddresses().toString());
+    }
 
-        // ====================================================================
-        // Test Exceptions
-        // ====================================================================
-        // reset the mail class
-        MockEmailConcrete anotherEmail = new MockEmailConcrete();
-
-        // bad encoding
-        try
-        {
-            // set a dodgy encoding scheme
-            anotherEmail.addBcc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
-            fail("setting invalid charset should have failed!");
-        }
-        catch (IllegalCharsetNameException e)
-        {
-            // expected runtime exception.
-        }
+    @Test(expected = IllegalCharsetNameException.class)
+    public void testAddBccBadEncoding() throws Exception
+    {
+        this.email.addBcc("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
     }
 
     @Test
@@ -795,32 +744,18 @@ public class EmailTest extends AbstractEmailTest
 
         this.email.setBcc(testInetEmailValid);
         assertEquals(testInetEmailValid, this.email.getBccAddresses());
+    }
 
-        // ====================================================================
-        // Exception (Null Input)
-        // ====================================================================
-        try
-        {
-            this.email.setBcc(null);
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            assertTrue(true);
-        }
+    @Test(expected = EmailException.class)
+    public void testSetBccNull() throws Exception
+    {
+        this.email.setBcc(null);
+    }
 
-        // ====================================================================
-        // Exception (Empty Collection)
-        // ====================================================================
-        try
-        {
-            this.email.setBcc(new ArrayList<InternetAddress>());
-            fail("Should have thrown an exception");
-        }
-        catch (EmailException e)
-        {
-            assertTrue(true);
-        }
+    @Test(expected = EmailException.class)
+    public void testSetBccEmpty() throws Exception
+    {
+        this.email.setBcc(Collections.<InternetAddress>emptyList());
     }
 
     @Test
@@ -900,24 +835,12 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(
             arrExpected.toString(),
             this.email.getReplyToAddresses().toString());
+    }
 
-        // ====================================================================
-        // Test Exceptions
-        // ====================================================================
-        // reset the mail class
-        MockEmailConcrete anotherEmail = new MockEmailConcrete();
-
-        // bad encoding
-        try
-        {
-            // set a dodgy encoding scheme
-            anotherEmail.addReplyTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
-            fail("setting invalid charset should have failed!");
-        }
-        catch (IllegalCharsetNameException e)
-        {
-            // expected runtime exception.
-        }
+    @Test(expected = IllegalCharsetNameException.class)
+    public void testAddReplyToBadEncoding() throws Exception
+    {
+        this.email.addReplyTo("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
     }
 
     @Test
@@ -943,39 +866,28 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(ht, this.email.getHeaders());
     }
 
-    @Test
-    public void testAddHeaderEx()
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddHeaderEmptyName() throws Exception
     {
-        // ====================================================================
-        // Test Exceptions
-        // ====================================================================
-        Map<String, String> htBad = new Hashtable<String, String>();
-        htBad.put("X-Mailer", "");
-        htBad.put("X-Priority", "");
-        htBad.put("", "me@home.com");
+        this.email.addHeader("", "me@home.com");
+    }
 
-        Map<?, ?> arrExpected = new Hashtable<Object, Object>();
-        for (Iterator<Map.Entry<String, String>> items = htBad.entrySet().iterator(); items.hasNext();)
-        {
-            Map.Entry<String, String> element = items.next();
-            try
-            {
-                String strName = element.getKey();
-                String strValue = element.getValue();
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddHeaderNullName() throws Exception
+    {
+        this.email.addHeader(null, "me@home.com");
+    }
 
-                this.email.addHeader(strName, strValue);
-                fail("Should have thrown an exception");
-            }
-            catch (IllegalArgumentException e)
-            {
-                assertTrue(true);
-            }
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddHeaderEmptyValue() throws Exception
+    {
+        this.email.addHeader("X-Mailer", "");
+    }
 
-        assertEquals(arrExpected.size(), this.email.getHeaders().size());
-        assertEquals(
-            arrExpected.toString(),
-            this.email.getHeaders().toString());
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddHeaderNullValue() throws Exception
+    {
+        this.email.addHeader("X-Mailer", null);
     }
 
     @Test
@@ -1024,52 +936,28 @@ public class EmailTest extends AbstractEmailTest
         assertTrue(values[0].indexOf("\n") == values[0].lastIndexOf("\n"));
     }
 
-    @Test
-    public void testSetHeadersEx()
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetHeaderEmptyValue() throws Exception
     {
-        // ====================================================================
-        // Test Exceptions
-        // ====================================================================
-        // first test
-        Map<String, String> htBad = new Hashtable<String, String>();
-        htBad.put("X-Mailer", "");
+        this.email.setHeaders(Collections.singletonMap("X-Mailer", ""));
+    }
 
-        Map<?, ?> arrExpected = new Hashtable<Object, Object>();
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetHeaderNullValue() throws Exception
+    {
+        this.email.setHeaders(Collections.singletonMap("X-Mailer", (String) null));
+    }
 
-        try
-        {
-            this.email.setHeaders(htBad);
-            fail("Should have thrown an exception");
-        }
-        catch (IllegalArgumentException e)
-        {
-            assertTrue(true);
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetHeaderEmptyName() throws Exception
+    {
+        this.email.setHeaders(Collections.singletonMap("", "me@home.com"));
+    }
 
-        assertEquals(arrExpected.size(), this.email.getHeaders().size());
-        assertEquals(
-            arrExpected.toString(),
-            this.email.getHeaders().toString());
-
-        // ====================================================================
-        // second test
-        htBad = new Hashtable<String, String>();
-        htBad.put("", "me@home.com");
-
-        try
-        {
-            this.email.setHeaders(htBad);
-            fail("Should have thrown an exception");
-        }
-        catch (IllegalArgumentException e)
-        {
-            assertTrue(true);
-        }
-
-        assertEquals(arrExpected.size(), this.email.getHeaders().size());
-        assertEquals(
-            arrExpected.toString(),
-            this.email.getHeaders().toString());
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetHeaderNullName() throws Exception
+    {
+        this.email.setHeaders(Collections.singletonMap((String) null, "me@home.com"));
     }
 
     @Test
