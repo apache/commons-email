@@ -52,8 +52,7 @@ import org.junit.Test;
  */
 public class EmailTest extends AbstractEmailTest
 {
-    /** valid email addresses */
-    private static final String[] ARR_VALID_EMAILS =
+    private static final String[] VALID_EMAILS =
         {
             "me@home.com",
             "joe.doe@apache.org",
@@ -289,11 +288,11 @@ public class EmailTest extends AbstractEmailTest
                         "someone_here@work-address.com.au",
                         "someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
 
             // set from
-            email.setFrom(ARR_VALID_EMAILS[i]);
+            email.setFrom(VALID_EMAILS[i]);
 
             // retrieve and verify
             assertEquals(arrExpected.get(i), email.getFromAddress());
@@ -337,10 +336,10 @@ public class EmailTest extends AbstractEmailTest
                         "someone_here@work-address.com.au",
                         "someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set from
-            email.setFrom(ARR_VALID_EMAILS[i], testEmailNames[i]);
+            email.setFrom(VALID_EMAILS[i], testEmailNames[i]);
 
             // retrieve and verify
             assertEquals(arrExpected.get(i), email.getFromAddress());
@@ -365,10 +364,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set from
-            email.addTo(ARR_VALID_EMAILS[i]);
+            email.addTo(VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -389,7 +388,7 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         //set To
-        email.addTo(ARR_VALID_EMAILS);
+        email.addTo(VALID_EMAILS);
 
         // retrieve and verify
         assertEquals(arrExpected.size(), email.getToAddresses().size());
@@ -414,10 +413,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set from
-            email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
+            email.addTo(VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -439,10 +438,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set from
-            email.addTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
+            email.addTo(VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
@@ -506,10 +505,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set from
-            email.addCc(ARR_VALID_EMAILS[i]);
+            email.addCc(VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -530,7 +529,7 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         //set Cc array
-        email.addCc(ARR_VALID_EMAILS);
+        email.addCc(VALID_EMAILS);
 
         // retrieve and verify
         assertEquals(arrExpected.size(), email.getCcAddresses().size());
@@ -553,9 +552,9 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         // add valid ccs
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
-            email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
+            email.addCc(VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -577,10 +576,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set from
-            email.addCc(ARR_VALID_EMAILS[i], testEmailNames[i]);
+            email.addCc(VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
@@ -634,10 +633,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // add a valid bcc
-            email.addBcc(ARR_VALID_EMAILS[i]);
+            email.addBcc(VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -660,7 +659,7 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
         // add a valid bcc
-        email.addBcc(ARR_VALID_EMAILS);
+        email.addBcc(VALID_EMAILS);
 
         // retrieve and verify
         assertEquals(arrExpected.size(), email.getBccAddresses().size());
@@ -683,10 +682,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set bccs
-            email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
+            email.addBcc(VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -711,10 +710,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set from
-            email.addBcc(ARR_VALID_EMAILS[i], testEmailNames[i]);
+            email.addBcc(VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
@@ -775,10 +774,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set replyTo
-            email.addReplyTo(ARR_VALID_EMAILS[i]);
+            email.addReplyTo(VALID_EMAILS[i]);
         }
 
         // retrieve and verify
@@ -802,10 +801,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set replyTo
-            email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i], testCharset);
+            email.addReplyTo(VALID_EMAILS[i], testEmailNames[i], testCharset);
         }
 
         // retrieve and verify
@@ -829,10 +828,10 @@ public class EmailTest extends AbstractEmailTest
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
         arrExpected.add(new InternetAddress("someone_here@work-address.com.au"));
 
-        for (int i = 0; i < ARR_VALID_EMAILS.length; i++)
+        for (int i = 0; i < VALID_EMAILS.length; i++)
         {
             // set replyTo
-            email.addReplyTo(ARR_VALID_EMAILS[i], testEmailNames[i]);
+            email.addReplyTo(VALID_EMAILS[i], testEmailNames[i]);
         }
 
         // retrieve and verify
