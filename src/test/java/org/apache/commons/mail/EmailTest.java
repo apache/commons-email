@@ -186,14 +186,10 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testSetContentObject()
     {
-        // setup
-        String testObject = "test string object";
-        String testContentType = "";
-
         // ====================================================================
         // test (string object and valid content type)
-        testObject = "test string object";
-        testContentType = " ; charset=" + EmailConstants.US_ASCII;
+        String testObject = "test string object";
+        String testContentType = " ; charset=" + EmailConstants.US_ASCII;
 
         email.setContent(testObject, testContentType);
         assertEquals(testObject, email.getContentObject());
