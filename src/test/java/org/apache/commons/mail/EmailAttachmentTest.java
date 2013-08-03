@@ -72,7 +72,7 @@ public class EmailAttachmentTest extends AbstractEmailTest
     }
 
     @Test
-    public void testGetSetURL()
+    public void testGetSetURL() throws Exception
     {
         String[] tests =
             {
@@ -82,16 +82,9 @@ public class EmailAttachmentTest extends AbstractEmailTest
 
         for (int i = 0; i < tests.length; i++)
         {
-            try
-            {
-                URL testURL = new URL(tests[i]);
-                this.attachment.setURL(testURL);
-                assertEquals(testURL, this.attachment.getURL());
-            }
-            catch (MalformedURLException e)
-            {
-                fail(e.getMessage());
-            }
+            URL testURL = new URL(tests[i]);
+            this.attachment.setURL(testURL);
+            assertEquals(testURL, this.attachment.getURL());
         }
     }
 
