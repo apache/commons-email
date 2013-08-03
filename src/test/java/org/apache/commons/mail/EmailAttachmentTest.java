@@ -37,7 +37,6 @@ public class EmailAttachmentTest extends AbstractEmailTest
     @Before
     public void setUpAttachmentTest()
     {
-        // reusable objects to be used across multiple tests
         this.attachment = new EmailAttachment();
     }
 
