@@ -37,7 +37,7 @@ public class EmailAttachmentTest extends AbstractEmailTest
     @Before
     public void setUpAttachmentTest()
     {
-        this.attachment = new EmailAttachment();
+        attachment = new EmailAttachment();
     }
 
     @Test
@@ -45,8 +45,8 @@ public class EmailAttachmentTest extends AbstractEmailTest
     {
         for (int i = 0; i < testCharsValid.length; i++)
         {
-            this.attachment.setDescription(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.attachment.getDescription());
+            attachment.setDescription(testCharsValid[i]);
+            assertEquals(testCharsValid[i], attachment.getDescription());
         }
     }
 
@@ -55,8 +55,8 @@ public class EmailAttachmentTest extends AbstractEmailTest
     {
         for (int i = 0; i < testCharsValid.length; i++)
         {
-            this.attachment.setName(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.attachment.getName());
+            attachment.setName(testCharsValid[i]);
+            assertEquals(testCharsValid[i], attachment.getName());
         }
     }
 
@@ -65,8 +65,8 @@ public class EmailAttachmentTest extends AbstractEmailTest
     {
         for (int i = 0; i < testCharsValid.length; i++)
         {
-            this.attachment.setPath(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.attachment.getPath());
+            attachment.setPath(testCharsValid[i]);
+            assertEquals(testCharsValid[i], attachment.getPath());
         }
     }
 
@@ -82,8 +82,8 @@ public class EmailAttachmentTest extends AbstractEmailTest
         for (int i = 0; i < tests.length; i++)
         {
             URL testURL = new URL(tests[i]);
-            this.attachment.setURL(testURL);
-            assertEquals(testURL, this.attachment.getURL());
+            attachment.setURL(testURL);
+            assertEquals(testURL, attachment.getURL());
         }
     }
 
@@ -92,8 +92,8 @@ public class EmailAttachmentTest extends AbstractEmailTest
     {
         for (int i = 0; i < testCharsValid.length; i++)
         {
-            this.attachment.setDisposition(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.attachment.getDisposition());
+            attachment.setDisposition(testCharsValid[i]);
+            assertEquals(testCharsValid[i], attachment.getDisposition());
         }
     }
 
