@@ -36,17 +36,17 @@ public class DefaultAuthenticatorTest
         //insert code testing basic functionality
         String strUsername = "user.name";
         String strPassword = "user.pwd";
-        DefaultAuthenticator authenicator = new DefaultAuthenticator(strUsername, strPassword);
+        DefaultAuthenticator authenticator = new DefaultAuthenticator(strUsername, strPassword);
 
         assertTrue(
             PasswordAuthentication.class.isInstance(
-                authenicator.getPasswordAuthentication()));
+                    authenticator.getPasswordAuthentication()));
         assertEquals(
-            strUsername,
-            authenicator.getPasswordAuthentication().getUserName());
+                strUsername,
+                authenticator.getPasswordAuthentication().getUserName());
         assertEquals(
             strPassword,
-            authenicator.getPasswordAuthentication().getPassword());
+            authenticator.getPasswordAuthentication().getPassword());
     }
 
 }
