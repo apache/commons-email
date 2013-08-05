@@ -1553,9 +1553,7 @@ public abstract class Email
      */
     protected InternetAddress[] toInternetAddressArray(List<InternetAddress> list)
     {
-        InternetAddress[] ia = list.toArray(new InternetAddress[list.size()]);
-
-        return ia;
+        return list.toArray(new InternetAddress[list.size()]);
     }
 
     /**
