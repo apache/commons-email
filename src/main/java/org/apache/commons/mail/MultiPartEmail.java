@@ -525,8 +525,7 @@ public class MultiPartEmail extends Email
      */
     protected BodyPart createBodyPart()
     {
-        BodyPart bodyPart = new MimeBodyPart();
-        return bodyPart;
+        return new MimeBodyPart();
     }
 
     /**
@@ -536,8 +535,7 @@ public class MultiPartEmail extends Email
      */
     protected MimeMultipart createMimeMultipart()
     {
-        MimeMultipart mmp = new MimeMultipart();
-        return mmp;
+        return new MimeMultipart();
     }
 
     /**
