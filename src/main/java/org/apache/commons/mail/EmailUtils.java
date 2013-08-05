@@ -285,7 +285,7 @@ final class EmailUtils
             return null;
         }
 
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         for (byte c : input.getBytes(US_ASCII))
         {
             int b = c;
@@ -295,18 +295,18 @@ final class EmailUtils
             }
             if (SAFE_URL.get(b))
             {
-                buffer.append((char) b);
+                builder.append((char) b);
             }
             else
             {
-                buffer.append(ESCAPE_CHAR);
+                builder.append(ESCAPE_CHAR);
                 char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, RADIX));
                 char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
-                buffer.append(hex1);
-                buffer.append(hex2);
+                builder.append(hex1);
+                builder.append(hex2);
             }
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**
