@@ -95,7 +95,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
 
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
-        assertTrue(mimeMessageParser.getHtmlContent().indexOf("\"cid:") >= 0);
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
     }
 
@@ -111,8 +111,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
             email.setHtmlMsg(null);
             fail("Should fail here!");
         } catch (EmailException e) {
-            assertTrue(e.getMessage(), e.getMessage().indexOf(
-                    "Invalid message supplied") >= 0);
+            assertTrue(e.getMessage(), e.getMessage().contains("Invalid message supplied"));
         }
     }
 
@@ -128,8 +127,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
             email.setHtmlMsg("");
             fail("Should fail here!");
         } catch (EmailException e) {
-            assertTrue(e.getMessage(), e.getMessage().indexOf(
-                    "Invalid message supplied") >= 0);
+            assertTrue(e.getMessage(), e.getMessage().contains("Invalid message supplied"));
         }
 
     }
@@ -238,7 +236,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLClassPathFile.eml"));
 
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
-        assertTrue(mimeMessageParser.getHtmlContent().indexOf("\"cid:") >= 0);
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
 
@@ -281,7 +279,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLAutoFile.eml"));
 
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
-        assertTrue(mimeMessageParser.getHtmlContent().indexOf("\"cid:") >= 0);
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
 
@@ -324,7 +322,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLAutoMultipleFiles.eml"));
 
         MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
-        assertTrue(mimeMessageParser.getHtmlContent().indexOf("\"cid:") >= 0);
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
     }
 

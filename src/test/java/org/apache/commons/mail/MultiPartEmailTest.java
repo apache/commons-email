@@ -379,8 +379,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
                 .getBodyPart(0)
                 .getDataHandler()
                 .getContentType()
-                .indexOf(strSubtype)
-                != -1);
+                .contains(strSubtype));
 
     }
 

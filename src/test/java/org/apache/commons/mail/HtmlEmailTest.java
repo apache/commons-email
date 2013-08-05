@@ -128,7 +128,7 @@ public class HtmlEmailTest extends AbstractEmailTest
             assertEquals(testCharsValid[i], this.email.getTextMsg());
 
             assertTrue(
-                this.email.getHtmlMsg().indexOf(testCharsValid[i]) != -1);
+                    this.email.getHtmlMsg().contains(testCharsValid[i]));
         }
 
         // ====================================================================
@@ -547,8 +547,8 @@ public class HtmlEmailTest extends AbstractEmailTest
             false);
         
         // make sure that no double dots show up
-        assertTrue(this.email.getHtmlMsg().indexOf("3DTZC268X93337.zip") >= 0);
-        assertFalse(this.email.getHtmlMsg().indexOf("3DTZC268X93337..zip") >= 0);
+        assertTrue(this.email.getHtmlMsg().contains("3DTZC268X93337.zip"));
+        assertFalse(this.email.getHtmlMsg().contains("3DTZC268X93337..zip"));
     }
 
     /**

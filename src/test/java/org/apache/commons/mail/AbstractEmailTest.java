@@ -271,22 +271,20 @@ public abstract class AbstractEmailTest
 
             //test to address
             assertTrue("got wrong To: address from mail",
-                toAdd.toString().indexOf(mimeMessage.getHeader("To", null)) != -1);
+                    toAdd.toString().contains(mimeMessage.getHeader("To", null)));
 
             //test cc address
             if (ccAdd.size() > 0)
             {
                 assertTrue("got wrong Cc: address from mail",
-                    ccAdd.toString().indexOf(mimeMessage.getHeader("Cc", null))
-                        != -1);
+                    ccAdd.toString().contains(mimeMessage.getHeader("Cc", null)));
             }
 
             //test bcc address
             if (bccAdd.size() > 0)
             {
                 assertTrue("got wrong Bcc: address from mail",
-                    bccAdd.toString().indexOf(mimeMessage.getHeader("Bcc", null))
-                        != -1);
+                    bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)));
             }
         }
         catch (MessagingException me)
@@ -346,7 +344,7 @@ public abstract class AbstractEmailTest
                                        emailMessageBody.length()
                                        - AbstractEmailTest.BODY_END_PAD);
         assertTrue("didn't find expected content type in message body",
-                strMessageBody.indexOf(strSentContent) != -1);
+                strMessageBody.contains(strSentContent));
     }
 
     /**
@@ -384,7 +382,7 @@ public abstract class AbstractEmailTest
 
         // test message content
         assertTrue("didn't find expected message content in message body",
-                getMessageBody(emailMessage).indexOf(strMessage) != -1);
+                getMessageBody(emailMessage).contains(strMessage));
     }
 
     /**
