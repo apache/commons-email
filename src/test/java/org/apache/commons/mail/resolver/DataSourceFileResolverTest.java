@@ -43,21 +43,13 @@ public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
     }
 
-    @Test
+    @Test(expected = IOException.class)
     public void testResolvingFileNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("."), false);
         assertNotNull(dataSourceResolver.resolve("./src/test/resources/images/asf_logo_wide.gif"));
 
-        try
-        {
-            dataSourceResolver.resolve("asf_logo_wide.gif");
-            fail("Expecting an IOException");
-        }
-        catch(IOException e)
-        {
-            return;
-        }
+        dataSourceResolver.resolve("asf_logo_wide.gif");
     }
 
 }
