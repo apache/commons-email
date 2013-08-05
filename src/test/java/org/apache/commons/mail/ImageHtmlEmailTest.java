@@ -441,9 +441,9 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         InputStream stream = url.openStream();
         StringBuilder html = new StringBuilder();
         try {
-            List<?> lines = IOUtils.readLines(stream);
+            List<String> lines = IOUtils.readLines(stream);
             for (int i = 0; i < lines.size(); i++) {
-                String line = (String) lines.get(i);
+                String line = lines.get(i);
                 html.append(line).append("\n");
             }
         } finally {
