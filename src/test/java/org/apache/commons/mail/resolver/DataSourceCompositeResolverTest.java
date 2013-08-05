@@ -55,21 +55,12 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
         assertTrue(toByteArray(dataSourceResolver.resolve("/contentTypeTest.gif")).length > 0);
     }
 
-    @Test
+    @Test(expected = IOException.class)
     public void testResolvingFilesNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, false);
 
-        try
-        {
-            dataSourceResolver.resolve("./image/does-not-exist.gif");
-            fail("Expected an IOException");
-        }
-        catch(IOException e)
-        {
-            // expected
-            return;
-        }
+        dataSourceResolver.resolve("./image/does-not-exist.gif");
     }
 
     @Test
