@@ -439,17 +439,16 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     
     private String loadUrlContent(URL url) throws IOException {
         InputStream stream = url.openStream();
-        StringBuffer str = new StringBuffer();
+        StringBuilder html = new StringBuilder();
         try {
             List<?> lines = IOUtils.readLines(stream);
             for (int i = 0; i < lines.size(); i++) {
                 String line = (String) lines.get(i);
-                str.append(line).append("\n");
+                html.append(line).append("\n");
             }
         } finally {
             stream.close();
         }
-        String html = str.toString();
-        return html;
+        return html.toString();
     }
 }
