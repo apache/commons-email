@@ -105,9 +105,6 @@ public abstract class AbstractEmailTest
     /** counter for creating a file name */
     private static int fileNameCounter;
 
-    /**
-     * @param name name
-     */
     @Before
     public void setUpAbstractEmailTest()
     {
