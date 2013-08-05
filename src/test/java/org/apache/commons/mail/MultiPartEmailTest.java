@@ -67,28 +67,28 @@ public class MultiPartEmailTest extends AbstractEmailTest
         // ====================================================================
 
         // without charset set
-        for (int i = 0; i < testCharsValid.length; i++)
+        for (String validChar : testCharsValid)
         {
-            this.email.setMsg(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getMsg());
+            this.email.setMsg(validChar);
+            assertEquals(validChar, this.email.getMsg());
         }
 
         // with charset set
         this.email.setCharset(EmailConstants.US_ASCII);
-        for (int i = 0; i < testCharsValid.length; i++)
+        for (String validChar : testCharsValid)
         {
-            this.email.setMsg(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getMsg());
+            this.email.setMsg(validChar);
+            assertEquals(validChar, this.email.getMsg());
         }
 
         // ====================================================================
         // Test Exceptions
         // ====================================================================
-        for (int i = 0; i < testCharsNotValid.length; i++)
+        for (String invalidChar : testCharsNotValid)
         {
             try
             {
-                this.email.setMsg(testCharsNotValid[i]);
+                this.email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
             }
             catch (EmailException e)
@@ -411,10 +411,10 @@ public class MultiPartEmailTest extends AbstractEmailTest
     @Test
     public void testGetSetSubType()
     {
-        for (int i = 0; i < testCharsValid.length; i++)
+        for (String validChar : testCharsValid)
         {
-            this.email.setSubType(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getSubType());
+            this.email.setSubType(validChar);
+            assertEquals(validChar, this.email.getSubType());
         }
     }
 }

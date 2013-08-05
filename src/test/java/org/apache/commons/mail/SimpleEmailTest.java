@@ -48,20 +48,20 @@ public class SimpleEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (int i = 0; i < testCharsValid.length; i++)
+        for (String validChar : testCharsValid)
         {
-            this.email.setMsg(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getMsg());
+            this.email.setMsg(validChar);
+            assertEquals(validChar, this.email.getMsg());
         }
 
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (int i = 0; i < this.testCharsNotValid.length; i++)
+        for (String invalidChar : this.testCharsNotValid)
         {
             try
             {
-                this.email.setMsg(this.testCharsNotValid[i]);
+                this.email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
             }
             catch (EmailException e)

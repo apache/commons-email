@@ -350,9 +350,8 @@ public class EmailLiveTest extends AbstractEmailTest
         {
             transport.connect();
 
-            for(int i=0; i<emails.size(); i++)
+            for (SimpleEmail personalizedEmail : emails)
             {
-                Email personalizedEmail = emails.get(i);
                 MimeMessage mimeMessage =  personalizedEmail.getMimeMessage();
                 Transport.send(mimeMessage);
                 System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());

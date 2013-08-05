@@ -62,20 +62,20 @@ public class HtmlEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (int i = 0; i < testCharsValid.length; i++)
+        for (String validChar : testCharsValid)
         {
-            this.email.setTextMsg(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getTextMsg());
+            this.email.setTextMsg(validChar);
+            assertEquals(validChar, this.email.getTextMsg());
         }
 
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (int i = 0; i < this.testCharsNotValid.length; i++)
+        for (String invalidChar : this.testCharsNotValid)
         {
             try
             {
-                this.email.setTextMsg(this.testCharsNotValid[i]);
+                this.email.setTextMsg(invalidChar);
                 fail("Should have thrown an exception");
             }
             catch (EmailException e)
@@ -92,20 +92,20 @@ public class HtmlEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (int i = 0; i < testCharsValid.length; i++)
+        for (String validChar : testCharsValid)
         {
-            this.email.setHtmlMsg(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getHtmlMsg());
+            this.email.setHtmlMsg(validChar);
+            assertEquals(validChar, this.email.getHtmlMsg());
         }
 
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (int i = 0; i < this.testCharsNotValid.length; i++)
+        for (String invalidChar : this.testCharsNotValid)
         {
             try
             {
-                this.email.setHtmlMsg(this.testCharsNotValid[i]);
+                this.email.setHtmlMsg(invalidChar);
                 fail("Should have thrown an exception");
             }
             catch (EmailException e)
@@ -122,23 +122,23 @@ public class HtmlEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (int i = 0; i < testCharsValid.length; i++)
+        for (String validChar : testCharsValid)
         {
-            this.email.setMsg(testCharsValid[i]);
-            assertEquals(testCharsValid[i], this.email.getTextMsg());
+            this.email.setMsg(validChar);
+            assertEquals(validChar, this.email.getTextMsg());
 
             assertTrue(
-                    this.email.getHtmlMsg().contains(testCharsValid[i]));
+                    this.email.getHtmlMsg().contains(validChar));
         }
 
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (int i = 0; i < this.testCharsNotValid.length; i++)
+        for (String invalidChar : this.testCharsNotValid)
         {
             try
             {
-                this.email.setMsg(this.testCharsNotValid[i]);
+                this.email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
             }
             catch (EmailException e)
