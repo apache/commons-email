@@ -19,6 +19,7 @@ package org.apache.commons.mail.resolver;
 import static org.junit.Assert.*;
 
 import org.apache.commons.mail.DataSourceResolver;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -31,12 +32,20 @@ import java.net.URL;
  */
 public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest
 {
+
+    private DataSourceResolver[] dataSourceResolvers;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
+        DataSourceClassPathResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
+        dataSourceResolvers = new DataSourceResolver[] { urlResolver, classPathResolver };
+    }
+
     @Test
     public void testResolvingFilesLenient() throws Exception
     {
-        DataSourceResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
-        DataSourceResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
-        DataSourceResolver[] dataSourceResolvers = new DataSourceResolver[] { urlResolver, classPathResolver };
         DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         // resolve using HTTP
@@ -49,9 +58,6 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     @Test
     public void testResolvingFilesNonLenient() throws Exception
     {
-        DataSourceResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
-        DataSourceResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
-        DataSourceResolver[] dataSourceResolvers = new DataSourceResolver[] { urlResolver, classPathResolver };
         DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, false);
 
         try
@@ -69,9 +75,6 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     @Test
     public void testExternalModification() throws Exception
     {
-        DataSourceResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
-        DataSourceResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
-        DataSourceResolver[] dataSourceResolvers = new DataSourceResolver[] { urlResolver, classPathResolver };
         DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();
