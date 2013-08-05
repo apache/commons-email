@@ -1335,13 +1335,10 @@ public abstract class Email
 
             if (this.headers.size() > 0)
             {
-                Iterator<String> iterHeaderKeys = this.headers.keySet().iterator();
-                while (iterHeaderKeys.hasNext())
+                for (Map.Entry<String, String> entry : this.headers.entrySet())
                 {
-                    String name = iterHeaderKeys.next();
-                    String value = headers.get(name);
-                    String foldedValue = createFoldedHeaderValue(name, value);
-                    this.message.addHeader(name, foldedValue);
+                    String foldedValue = createFoldedHeaderValue(entry.getKey(), entry.getValue());
+                    this.message.addHeader(entry.getKey(), foldedValue);
                 }
             }
 
