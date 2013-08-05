@@ -187,12 +187,8 @@ public class MultiPartEmailTest extends AbstractEmailTest
         }
     }
 
-    /**
-     * @throws MalformedURLException when a bad attachment URL is used
-     * @throws EmailException when a bad address or attachment is used
-     */
     @Test
-    public void testAttach() throws MalformedURLException, EmailException, Exception
+    public void testAttach() throws Exception
     {
         EmailAttachment attachment;
 
@@ -284,12 +280,8 @@ public class MultiPartEmailTest extends AbstractEmailTest
             "Test Attachment Desc");
     }
 
-    /**
-     * @throws MalformedURLException when a bad attachment URL is used
-     * @throws EmailException when a bad address or attachment is used
-     */
     @Test
-    public void testAttach3() throws MalformedURLException, EmailException, Exception
+    public void testAttach3() throws Exception
     {
         // ====================================================================
         // Test Success - URL
