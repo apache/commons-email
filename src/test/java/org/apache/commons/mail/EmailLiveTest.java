@@ -352,7 +352,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
             for (SimpleEmail personalizedEmail : emails)
             {
-                MimeMessage mimeMessage =  personalizedEmail.getMimeMessage();
+                MimeMessage mimeMessage = personalizedEmail.getMimeMessage();
                 Transport.send(mimeMessage);
                 System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());
             }
