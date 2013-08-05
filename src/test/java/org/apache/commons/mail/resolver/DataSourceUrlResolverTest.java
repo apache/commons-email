@@ -32,7 +32,6 @@ import java.net.URL;
  */
 public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
 {
-    private final int IMG_SIZE = 5866;
 
     /**
      * Shows how the DataSourceUrlResolver can resolve files as well but this should

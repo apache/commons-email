@@ -31,7 +31,6 @@ import org.junit.Test;
  */
 public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest
 {
-    private final int IMG_SIZE = 5866;
 
     @Test
     public void testResolvingFileLenient() throws Exception

@@ -30,7 +30,6 @@ import java.io.IOException;
  */
 public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest
 {
-    private final int IMG_SIZE = 5866;
 
     @Test
     public void testResolvingClassPathLenient() throws Exception

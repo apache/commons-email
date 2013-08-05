@@ -9,6 +9,8 @@ import org.apache.commons.io.IOUtils;
 
 public abstract class AbstractDataSourceResolverTest {
 
+    protected final int IMG_SIZE = 5866;
+
     protected byte[] toByteArray(DataSource dataSource) throws IOException
     {
         if(dataSource != null)
