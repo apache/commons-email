@@ -71,22 +71,13 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
      *
      * @throws Exception the test failed
      */
-    @Test
+    @Test(expected = IOException.class)
     public void testResolvingHttpNonLenient() throws Exception
     {
         DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 
-        try
-        {
-            dataSourceResolver.resolve("images/does-not-exist.gif");
-            fail("Expecting an IOException");
-        }
-        catch(IOException e)
-        {
-            // expected
-            return;
-        }
+        dataSourceResolver.resolve("images/does-not-exist.gif");
     }
 
 }
