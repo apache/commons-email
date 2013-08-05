@@ -49,23 +49,13 @@ public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverT
         assertNull(dataSourceResolver.resolve("./images/asf_logo_wide.gif"));
     }
 
-    @Test
+    @Test(expected = IOException.class)
     public void testResolvingClassPathNonLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver;
-
-        dataSourceResolver = new DataSourceClassPathResolver("/", false);
+        DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 
-        try
-        {
-            dataSourceResolver.resolve("asf_logo_wide.gif");
-            fail("Expecting an IOException");
-        }
-        catch(IOException e)
-        {
-            return;
-        }
+        dataSourceResolver.resolve("asf_logo_wide.gif");
     }
 
 }
