@@ -1160,11 +1160,7 @@ public abstract class Email
     {
         this.headers.clear();
 
-        Iterator<Map.Entry<String, String>> iterKeyBad = map.entrySet().iterator();
-
-        while (iterKeyBad.hasNext())
-        {
-            Map.Entry<String, String> entry = iterKeyBad.next();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             addHeader(entry.getKey(), entry.getValue());
         }
     }

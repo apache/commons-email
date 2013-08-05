@@ -589,11 +589,8 @@ public class HtmlEmail extends MultiPartEmail
                 msgHtml.setContent(this.html, EmailConstants.TEXT_HTML);
             }
 
-            Iterator<InlineImage> iter = this.inlineEmbeds.values().iterator();
-            while (iter.hasNext())
-            {
-                InlineImage ii = iter.next();
-                bodyEmbedsContainer.addBodyPart(ii.getMbp());
+            for (InlineImage image : this.inlineEmbeds.values()) {
+                bodyEmbedsContainer.addBodyPart(image.getMbp());
             }
         }
 
