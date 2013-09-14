@@ -170,13 +170,15 @@ public class MimeMessageParser
     protected void parse(Multipart parent, MimePart part)
         throws MessagingException, IOException
     {
-        if (part.isMimeType("text/plain") && (plainContent == null))
+        if (part.isMimeType("text/plain") && (plainContent == null)
+                && (! MimePart.ATTACHMENT.equalsIgnoreCase(part.getDisposition())))
         {
             plainContent = (String) part.getContent();
         }
         else
         {
-            if (part.isMimeType("text/html") && (htmlContent == null))
+            if (part.isMimeType("text/html") && (htmlContent == null)
+                    && (! MimePart.ATTACHMENT.equalsIgnoreCase(part.getDisposition())))
             {
                 htmlContent = (String) part.getContent();
             }
