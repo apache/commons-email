@@ -18,7 +18,6 @@ package org.apache.commons.mail;
 
 import static org.junit.Assert.*;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.Before;
