@@ -279,8 +279,7 @@ import org.apache.commons.mail.HtmlEmail;
         <ul>
           <li>
             When using a secured transport (STARTTLS or SSL) you can force validating the server's 
-            certificate by calling <code>Email.setSSLCheckServerIdentity(true)</code>. Having said that
-            this does not seem to work on any of my test servers (GMAIL, GMX).          
+            certificate by calling <code>Email.setSSLCheckServerIdentity(true)</code>.  
           </li>
           <li>
             Enforce using STARTTLS by calling <code>Email.setStartTLSRequired(true)</code>
