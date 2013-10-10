@@ -588,7 +588,8 @@ public class HtmlEmail extends MultiPartEmail
                 msgHtml.setContent(this.html, EmailConstants.TEXT_HTML);
             }
 
-            for (InlineImage image : this.inlineEmbeds.values()) {
+            for (InlineImage image : this.inlineEmbeds.values())
+            {
                 bodyEmbedsContainer.addBodyPart(image.getMbp());
             }
         }

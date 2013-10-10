@@ -29,7 +29,6 @@ import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
@@ -1174,7 +1173,8 @@ public abstract class Email
     {
         this.headers.clear();
 
-        for (Map.Entry<String, String> entry : map.entrySet()) {
+        for (Map.Entry<String, String> entry : map.entrySet())
+        {
             addHeader(entry.getKey(), entry.getValue());
         }
     }
@@ -1706,7 +1706,7 @@ public abstract class Email
      * Sets whether the email is partially send in case of invalid addresses.
      * <p>
      * In case the mail server rejects an address as invalid, the call to {@link #send()}
-     * may throw a {@link SendFailedException}, even if partial send mode is enabled (emails
+     * may throw a {@link javax.mail.SendFailedException}, even if partial send mode is enabled (emails
      * to valid addresses will be transmitted). In case the email server does not reject
      * invalid addresses immediately, but return a bounce message, no exception will be thrown
      * by the {@link #send()} method.
