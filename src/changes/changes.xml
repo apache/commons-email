@@ -23,6 +23,9 @@
 
   <body>
     <release version="1.3.2" date="TBD">
+      <action dev="tn" type="add" issue="EMAIL-132" date="2013-10-10" due-to="Allen Xudong Cheng">
+        Added support for sending partial emails in case of invalid addresses.
+      </action>
       <action dev="tn" type="fix" issue="EMAIL-131" date="2013-09-14" due-to="Raju Y">
         The MimeMessageParser will now correctly parse MIME multi-parts of type "text/plain"
         and "text/html" with a content disposition header of "attachment". The parts will

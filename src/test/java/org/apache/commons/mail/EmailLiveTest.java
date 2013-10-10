@@ -360,4 +360,26 @@ public class EmailLiveTest extends AbstractEmailTest
             transport.close();
          }
     }
+    
+    /**
+     * Testing if we are able to send a partial email with an invalid address.
+     *
+     * https://issues.apache.org/jira/browse/EMAIL-132
+     *
+     * @throws Exception the test failed.
+     */
+    @Test
+    public void testPartialSend() throws Exception
+    {
+        SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
+        email.addTo("tn@apache.org");
+        email.addTo("asdkljfakld@kadjfka.com");
+        email.setSubject("TestPartialMail");
+        email.setMsg("This is a test mail ... :-)");
+
+        email.setSendPartial(true);
+
+        EmailUtils.writeMimeMessage( new File("./target/test-emails/partialmail.eml"), send(email).getMimeMessage());
+    }
+
 }

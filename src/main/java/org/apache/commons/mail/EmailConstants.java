@@ -199,6 +199,28 @@ public final class EmailConstants
      */
     public static final String MAIL_SMTP_SSL_SOCKET_FACTORY_PORT = "mail.smtp.ssl.socketFactory.port";
 
+    /////////////////////////////////////////////////////////////////////////
+    // since 1.3.2
+    /////////////////////////////////////////////////////////////////////////
+
+    /**
+     * If set to true, and a message has some valid and some invalid addresses, send the message anyway,
+     * reporting the partial failure with a SendFailedException.
+     * If set to false (the default), the message is not sent to any of the recipients
+     * if there is an invalid recipient address.
+     * @since 1.3.2
+     */
+    public static final String MAIL_SMTP_SEND_PARTIAL = "mail.smtp.sendpartial";
+
+    /**
+     * If set to true, and a message has some valid and some invalid addresses, send the message anyway,
+     * reporting the partial failure with a SendFailedException.
+     * If set to false (the default), the message is not sent to any of the recipients
+     * if there is an invalid recipient address.
+     * @since 1.3.2
+     */
+    public static final String MAIL_SMTPS_SEND_PARTIAL = "mail.smtps.sendpartial";
+
     /** Hide constructor. */
     private EmailConstants()
     {

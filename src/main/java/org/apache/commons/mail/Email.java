@@ -29,6 +29,7 @@ import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
@@ -311,6 +312,15 @@ public abstract class Email
      * Defaults to false.
      */
     private boolean sslCheckServerIdentity;
+
+    /**
+     * If set to true, and a message has some valid and some invalid addresses, send the message anyway,
+     * reporting the partial failure with a SendFailedException.
+     * If set to false (the default), the message is not sent to any of the recipients
+     * if there is an invalid recipient address.
+     * Defaults to false.
+     */
+    private boolean sendPartial;
 
     /** The Session to mail with. */
     private Session session;
@@ -638,6 +648,11 @@ public abstract class Email
                     isStartTLSEnabled() ? "true" : "false");
             properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_REQUIRED,
                     isStartTLSRequired() ? "true" : "false");
+
+            properties.setProperty(EmailConstants.MAIL_SMTP_SEND_PARTIAL,
+                    isSendPartial() ? "true" : "false");
+            properties.setProperty(EmailConstants.MAIL_SMTPS_SEND_PARTIAL,
+                    isSendPartial() ? "true" : "false");
 
             if (this.authenticator != null)
             {
@@ -1641,6 +1656,7 @@ public abstract class Email
      */
     public Email setSSLCheckServerIdentity(boolean sslCheckServerIdentity)
     {
+        checkSessionAlreadyInitialized();
         this.sslCheckServerIdentity = sslCheckServerIdentity;
         return this;
     }
@@ -1673,6 +1689,37 @@ public abstract class Email
     {
         checkSessionAlreadyInitialized();
         this.sslSmtpPort = sslSmtpPort;
+    }
+
+    /**
+    * If partial sending of email enabled.
+    *
+    * @return true if sending partial email is enabled
+    * @since 1.3.2
+    */
+    public boolean isSendPartial()
+    {
+        return sendPartial;
+    }
+
+    /**
+     * Sets whether the email is partially send in case of invalid addresses.
+     * <p>
+     * In case the mail server rejects an address as invalid, the call to {@link #send()}
+     * may throw a {@link SendFailedException}, even if partial send mode is enabled (emails
+     * to valid addresses will be transmitted). In case the email server does not reject
+     * invalid addresses immediately, but return a bounce message, no exception will be thrown
+     * by the {@link #send()} method.
+     *
+     * @param sendPartial whether to enable partial send mode
+     * @return An Email.
+     * @since 1.3.2
+     */
+    public Email setSendPartial(boolean sendPartial)
+    {
+        checkSessionAlreadyInitialized();
+        this.sendPartial = sendPartial;
+        return this;
     }
 
     /**
