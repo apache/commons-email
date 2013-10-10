@@ -24,7 +24,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.3.2-SNAPSHOT</version>
     <name>Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -380,7 +380,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>2.7.1</version>
                 <configuration>
-                    <targetJdk>${maven.compile.target}</targetJdk>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
                 </configuration>
             </plugin>
             <plugin>
