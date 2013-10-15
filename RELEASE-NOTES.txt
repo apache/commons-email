@@ -1,5 +1,5 @@
                          Commons Email Package
-                              Version 1.3.1
+                              Version 1.3.2
                               Release Notes
 
 INTRODUCTION:
@@ -15,8 +15,37 @@ downloads, reports, and bug status:
 
 http://commons.apache.org/email/
 
-This is a maintenance release which fixes several bugs present in the 1.3
+This is a maintenance release which fixes several bugs present in the 1.3.1
 release. All current users are encouraged to upgrade.
+
+CHANGES FROM 1.3.1:
+-----------------
+
+== Compatibility ==
+
+* Java 5 or later is required (unchanged since 1.3).
+
+== Fixed Bugs ==
+
+* Change visibility of DataSourceUrlResourceResolver.createUrl(String) to protected so
+  that sub-classes can override it.
+  Issue: EMAIL-135. Thanks to Andreas Kohn.
+
+* Support default mime charset property "mail.mime.charset" when adding text content
+  to instances of either SimpleEmail or HtmlEmail.
+  Issue: EMAIL-104. Thanks to Hiroshi Ikeda.
+
+* Added support for sending partial emails in case of invalid addresses.
+  Issue: EMAIL-132. Thanks to Allen Xudong Cheng.
+
+* The MimeMessageParser will now correctly parse MIME multi-parts of type "text/plain"
+  and "text/html" with a content disposition header of "attachment". The parts will
+  be added to the list of attachments even if there is no other text or html content.
+  Issue: EMAIL-131. Thanks to Raju Y.
+
+* Special characters in the body of an HTML email could lead to an exception when the
+  mime message was built.
+  Issue: EMAIL-127. Thanks to Dominik Stadler.
 
 
 CHANGES FROM 1.3:
