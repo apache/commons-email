@@ -119,4 +119,49 @@ public class SimpleEmailTest extends AbstractEmailTest
             this.email.getBccAddresses(),
             true);
     }
+
+    @Test
+    public void testDefaultMimeCharset() throws EmailException, IOException
+    {
+        System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "utf-8");
+
+        // ====================================================================
+        // Test Success
+        // ====================================================================
+        this.getMailServer();
+
+        this.email = new MockSimpleEmail();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+
+        if (this.strTestUser != null && this.strTestPasswd != null)
+        {
+            this.email.setAuthentication(
+                this.strTestUser,
+                this.strTestPasswd);
+        }
+
+        String strSubject = "Test Msg Subject";
+        String strMessage = "Test Msg Body グ ケ ゲ コ ゴ";
+
+        this.email.setSubject(strSubject);
+        this.email.setMsg(strMessage);
+
+        this.email.send();
+
+        this.fakeMailServer.stop();
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            this.email.getMsg(),
+            this.email.getFromAddress(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
+            true);
+
+        System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
+    }
 }

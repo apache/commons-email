@@ -107,6 +107,9 @@ public final class EmailConstants
     /** defines the text/html content type */
     public static final String TEXT_HTML = "text/html";
 
+    /** defines the html subtype */
+    public static final String TEXT_SUBTYPE_HTML = "html";
+
     /** defines the text/plain content type */
     public static final String TEXT_PLAIN = "text/plain";
 
@@ -220,6 +223,12 @@ public final class EmailConstants
      * @since 1.3.2
      */
     public static final String MAIL_SMTPS_SEND_PARTIAL = "mail.smtps.sendpartial";
+
+    /**
+     * Defines the default mime charset to use when none has been specified for the message.
+     * @since 1.3.2
+     */
+    public static final String MAIL_MIME_CHARSET = "mail.mime.charset";
 
     /** Hide constructor. */
     private EmailConstants()

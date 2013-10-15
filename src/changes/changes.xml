@@ -23,6 +23,10 @@
 
   <body>
     <release version="1.3.2" date="TBD">
+      <action dev="tn" type="fix" issue="EMAIL-104" date="2013-10-15" due-to="Hiroshi Ikeda">
+        Support default mime charset property "mail.mime.charset" when adding text content
+        to instances of either SimpleEmail or HtmlEmail.
+      </action>
       <action dev="tn" type="add" issue="EMAIL-132" date="2013-10-10" due-to="Allen Xudong Cheng">
         Added support for sending partial emails in case of invalid addresses.
       </action>

@@ -21,7 +21,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -30,7 +32,6 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.apache.commons.mail.util.MimeMessageParser;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -494,6 +495,51 @@ public class HtmlEmailTest extends AbstractEmailTest
             this.email.getCcAddresses(),
             this.email.getBccAddresses(),
             false);
+
+    }
+
+    @Test
+    public void testSendWithDefaultCharset() throws Exception
+    {
+        // ====================================================================
+        // Test Success
+        // ====================================================================
+
+        System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "iso-8859-15");
+
+        this.getMailServer();
+
+        this.email = new MockHtmlEmailConcrete();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+
+        if (this.strTestUser != null && this.strTestPasswd != null)
+        {
+            this.email.setAuthentication(
+                this.strTestUser,
+                this.strTestPasswd);
+        }
+
+        String strSubject = "Test HTML Send Subject (w default charset)";
+        this.email.setSubject(strSubject);
+        this.email.setMsg("Test txt msg ä"); // add non-ascii character, otherwise us-ascii will be used
+
+        this.email.send();
+        this.fakeMailServer.stop();
+        // validate charset
+        validateSend(
+            this.fakeMailServer,
+            strSubject,
+            "charset=iso-8859-15",
+            this.email.getFromAddress(),
+            this.email.getToAddresses(),
+            this.email.getCcAddresses(),
+            this.email.getBccAddresses(),
+            true);
+
+        System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
 
     }
 

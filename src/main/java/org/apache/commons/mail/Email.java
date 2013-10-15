@@ -1284,7 +1284,17 @@ public abstract class Email
 
             if (this.content != null)
             {
-                this.message.setContent(this.content, this.contentType);
+                if (EmailConstants.TEXT_PLAIN.equalsIgnoreCase(this.contentType)
+                        && this.content instanceof String)
+                {
+                    // EMAIL-104: call explicitly setText to use default mime charset
+                    //            (property "mail.mime.charset") in case none has been set
+                    this.message.setText(this.content.toString(), this.charset);
+                }
+                else
+                {
+                    this.message.setContent(this.content, this.contentType);
+                }
             }
             else if (this.emailBody != null)
             {
@@ -1299,7 +1309,7 @@ public abstract class Email
             }
             else
             {
-                this.message.setContent("", Email.TEXT_PLAIN);
+                this.message.setText("");
             }
 
             if (this.fromAddress != null)

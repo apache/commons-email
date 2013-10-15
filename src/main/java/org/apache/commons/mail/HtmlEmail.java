@@ -534,8 +534,8 @@ public class HtmlEmail extends MultiPartEmail
         MimeMultipart rootContainer = this.getContainer();
         MimeMultipart bodyEmbedsContainer = rootContainer;
         MimeMultipart bodyContainer = rootContainer;
-        BodyPart msgHtml = null;
-        BodyPart msgText = null;
+        MimeBodyPart msgHtml = null;
+        MimeBodyPart msgText = null;
 
         rootContainer.setSubType("mixed");
 
@@ -576,17 +576,9 @@ public class HtmlEmail extends MultiPartEmail
             msgHtml = new MimeBodyPart();
             bodyContainer.addBodyPart(msgHtml, 0);
 
-            // apply default charset if one has been set
-            if (EmailUtils.isNotEmpty(this.charset))
-            {
-                msgHtml.setContent(
-                    this.html,
-                    EmailConstants.TEXT_HTML + "; charset=" + this.charset);
-            }
-            else
-            {
-                msgHtml.setContent(this.html, EmailConstants.TEXT_HTML);
-            }
+            // EMAIL-104: call explicitly setText to use default mime charset
+            //            (property "mail.mime.charset") in case none has been set
+            msgHtml.setText(this.html, this.charset, EmailConstants.TEXT_SUBTYPE_HTML);
 
             for (InlineImage image : this.inlineEmbeds.values())
             {
@@ -599,17 +591,9 @@ public class HtmlEmail extends MultiPartEmail
             msgText = new MimeBodyPart();
             bodyContainer.addBodyPart(msgText, 0);
 
-            // apply default charset if one has been set
-            if (EmailUtils.isNotEmpty(this.charset))
-            {
-                msgText.setContent(
-                    this.text,
-                    EmailConstants.TEXT_PLAIN + "; charset=" + this.charset);
-            }
-            else
-            {
-                msgText.setContent(this.text, EmailConstants.TEXT_PLAIN);
-            }
+            // EMAIL-104: call explicitly setText to use default mime charset
+            //            (property "mail.mime.charset") in case none has been set
+            msgText.setText(this.text, this.charset);
         }
     }
 
