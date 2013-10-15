@@ -109,7 +109,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
      * @return the corresponding URL
      * @throws java.net.MalformedURLException creating the URL failed
      */
-    private URL createUrl(final String resourceLocation) throws MalformedURLException
+    protected URL createUrl(final String resourceLocation) throws MalformedURLException
     {
         // if we get an non-existing base url than the resource can
         // be directly used to create an URL
