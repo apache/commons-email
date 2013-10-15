@@ -22,7 +22,7 @@
   </properties>
 
   <body>
-    <release version="1.3.2" date="TBD">
+    <release version="1.3.2" date="2013-10-22">
       <action dev="tn" type="update" issue="EMAIL-135" date="2013-10-15" due-to="Andreas Kohn">
         Change visibility of DataSourceUrlResourceResolver.createUrl(String) to protected so
         that sub-classes can override it.
