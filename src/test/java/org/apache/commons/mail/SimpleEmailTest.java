@@ -144,7 +144,7 @@ public class SimpleEmailTest extends AbstractEmailTest
         }
 
         String strSubject = "Test Msg Subject";
-        String strMessage = "Test Msg Body グ ケ ゲ コ ゴ";
+        String strMessage = "Test Msg Body ä"; // add non-ascii character, otherwise us-ascii will be used
 
         this.email.setSubject(strSubject);
         this.email.setMsg(strMessage);
@@ -152,15 +152,10 @@ public class SimpleEmailTest extends AbstractEmailTest
         this.email.send();
 
         this.fakeMailServer.stop();
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+
+        String message = getMessageAsString(0);
+        // check that the charset has been correctly set
+        assertTrue(message.contains("Content-Type: text/plain; charset=utf-8"));
 
         System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
     }
