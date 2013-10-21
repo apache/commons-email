@@ -25,11 +25,11 @@
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
     <version>1.3.2-SNAPSHOT</version>
-    <name>Commons Email</name>
+    <name>Apache Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
     <description>
-        Commons-Email aims to provide an API for sending email. It is built on top of
+        Apache Commons Email aims to provide an API for sending email. It is built on top of
         the JavaMail API, which it aims to simplify.
     </description>
 
