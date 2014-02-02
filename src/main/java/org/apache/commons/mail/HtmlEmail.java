@@ -59,7 +59,7 @@ import javax.mail.internet.MimeMultipart;
  *
  * <p>It is also possible to embed URLs, files, or arbitrary
  * <code>DataSource</code>s directly into the body of the mail:
- * <pre><code>
+ * <pre>
  * HtmlEmail he = new HtmlEmail();
  * File img = new File("my/image.gif");
  * PNGDataSource png = new PNGDataSource(decodedPNGOutputStream); // a custom class
@@ -70,7 +70,7 @@ import javax.mail.internet.MimeMultipart;
  * msg.append("&lt;/body&gt;&lt;/html&gt;");
  * he.setHtmlMsg(msg.toString());
  * // code to set the other email fields (not shown)
- * </pre></code>
+ * </pre>
  *
  * <p>Embedded entities are tracked by their name, which for <code>File</code>s is
  * the filename itself and for <code>URL</code>s is the canonical path. It is
@@ -110,7 +110,7 @@ public class HtmlEmail extends MultiPartEmail
     protected List<InlineImage> inlineImages;
 
     /**
-     * Embedded images Map<String, InlineImage> where the key is the
+     * Embedded images Map&lt;String, InlineImage&gt; where the key is the
      * user-defined image name.
      */
     protected Map<String, InlineImage> inlineEmbeds = new HashMap<String, InlineImage>();

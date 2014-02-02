@@ -397,7 +397,7 @@ public abstract class Email
     }
 
     /**
-     * Set the content & contentType
+     * Set the content and contentType.
      *
      * @param   aObject aObject
      * @param   aContentType aContentType

@@ -24,19 +24,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Small wrapper class on top of HtmlEmail which encapsulates the required logic
+ * <p>Small wrapper class on top of HtmlEmail which encapsulates the required logic
  * to retrieve images that are contained in "&lt;img src=../&gt;" elements in the HTML
  * code. This is done by replacing all img-src-elements with "cid:"-entries and
  * embedding images in the email.
- * </br>
+ * </p>
+ * <p>
  * For local files the class tries to either load them via an absolute path or -
  * if available - use a relative path starting from a base directory. For files
  * that are not found locally, the implementation tries to download
  * the element and link it in.
- * </br>
+ * </p>
+ * <p>
  * The image loading is done by an instance of <code>DataSourceResolver</code>
  * which has to be provided by the caller.
- * </br>
+ * </p>
  *
  * @since 1.3
  * @version $Id$
@@ -48,11 +50,11 @@ public class ImageHtmlEmail extends HtmlEmail
     // including newlines on any place, HTML is not case sensitive and there
     // can be arbitrary text between "IMG" and "SRC" like IDs and other things.
 
-    /** regexp for extracting <img> tags */
+    /** Regexp for extracting {@code <img>} tags */
     public static final String REGEX_IMG_SRC =
             "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
-    /** regexp for extracting <script> tags */
+    /** regexp for extracting {@code <script>} tags */
     public static final String REGEX_SCRIPT_SRC =
             "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
