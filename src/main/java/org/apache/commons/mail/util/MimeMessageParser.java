@@ -16,18 +16,6 @@
  */
 package org.apache.commons.mail.util;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimePart;
-import javax.mail.internet.MimeUtility;
-import javax.mail.util.ByteArrayDataSource;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -37,6 +25,21 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
+import javax.mail.internet.ContentType;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimePart;
+import javax.mail.internet.MimeUtility;
+import javax.mail.internet.ParseException;
+import javax.mail.util.ByteArrayDataSource;
 
 /**
  * Parses a MimeMessage and stores the individual parts such a plain text,
@@ -170,21 +173,21 @@ public class MimeMessageParser
     protected void parse(Multipart parent, MimePart part)
         throws MessagingException, IOException
     {
-        if (part.isMimeType("text/plain") && (plainContent == null)
+        if (isMimeType(part, "text/plain") && (plainContent == null)
                 && (!MimePart.ATTACHMENT.equalsIgnoreCase(part.getDisposition())))
         {
             plainContent = (String) part.getContent();
         }
         else
         {
-            if (part.isMimeType("text/html") && (htmlContent == null)
+            if (isMimeType(part, "text/html") && (htmlContent == null)
                     && (!MimePart.ATTACHMENT.equalsIgnoreCase(part.getDisposition())))
             {
                 htmlContent = (String) part.getContent();
             }
             else
             {
-                if (part.isMimeType("multipart/*"))
+                if (isMimeType(part, "multipart/*"))
                 {
                     this.isMultiPart = true;
                     Multipart mp = (Multipart) part.getContent();
@@ -202,6 +205,32 @@ public class MimeMessageParser
                     this.attachmentList.add(createDataSource(parent, part));
                 }
             }
+        }
+    }
+
+    /**
+     * Checks whether the MimePart contains an object of the given mime type.
+     *
+     * @param part     the current MimePart
+     * @param mimeType the mime type to check
+     * @return {@code true} if the MimePart matches the given mime type, {@code false} otherwise
+     * @throws MessagingException parsing the MimeMessage failed
+     * @throws IOException        parsing the MimeMessage failed
+     */
+    private boolean isMimeType(MimePart part, String mimeType)
+        throws MessagingException, IOException
+    {
+        // Do not use part.isMimeType(String) as it is broken for MimeBodyPart
+        // and does not really check the actual content type.
+
+        try
+        {
+            ContentType ct = new ContentType(part.getDataHandler().getContentType());
+            return ct.match(mimeType);
+        }
+        catch (ParseException ex)
+        {
+            return part.getContentType().equalsIgnoreCase(mimeType);
         }
     }
 
