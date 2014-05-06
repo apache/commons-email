@@ -19,6 +19,7 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 import javax.activation.DataHandler;
@@ -30,6 +31,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
+import javax.mail.internet.MimeUtility;
 
 /**
  * A multipart email.
@@ -462,12 +464,17 @@ public class MultiPartEmail extends Email
         BodyPart bodyPart = createBodyPart();
         try
         {
-            getContainer().addBodyPart(bodyPart);
-
             bodyPart.setDisposition(disposition);
-            bodyPart.setFileName(name);
+            bodyPart.setFileName(MimeUtility.encodeText(name));
             bodyPart.setDescription(description);
             bodyPart.setDataHandler(new DataHandler(ds));
+
+            getContainer().addBodyPart(bodyPart);
+        }
+        catch (UnsupportedEncodingException uee)
+        {
+            // in case the filename could not be encoded
+            throw new EmailException(uee);
         }
         catch (MessagingException me)
         {

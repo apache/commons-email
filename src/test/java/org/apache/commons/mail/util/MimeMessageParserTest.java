@@ -121,6 +121,38 @@ public class MimeMessageParserTest
         assertEquals("application/pdf", dataSource.getContentType());
     }
 
+    @Test
+    public void testParseHtmlEmailWithAttachmentAndEncodedFilename() throws Exception
+    {
+        DataSource dataSource;
+        Session session = Session.getDefaultInstance(new Properties());
+        MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-encoded-filename.eml"));
+        MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Test HTML Send #1 Subject (w charset)", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertTrue(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasPlainContent());
+        assertNotNull(mimeMessageParser.getPlainContent());
+        assertNotNull(mimeMessageParser.getHtmlContent());
+        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertTrue(mimeMessageParser.getCc().size() == 0);
+        assertTrue(mimeMessageParser.getBcc().size() == 0);
+        assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
+        assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+        List<?> attachmentList = mimeMessageParser.getAttachmentList();
+        assertTrue(attachmentList.size() == 1);
+
+        dataSource = mimeMessageParser.getAttachmentList().get(0);
+        assertNotNull(dataSource);
+        assertEquals("text/plain", dataSource.getContentType());
+        assertEquals("Test Attachment - a>ä, o>ö, u>ü, au>äu", dataSource.getName());
+    }
+
     /**
      * This test parses an "email read notification" where the resulting data source has no name. Originally
      * the missing name caused a NPE in MimeUtility.decodeText().

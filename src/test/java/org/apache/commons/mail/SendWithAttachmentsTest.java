@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.mail.internet.MimeUtility;
+
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.junit.Before;
@@ -110,7 +112,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         EmailAttachment attachment = new EmailAttachment();
         File testFile = null;
 
-        /** File to used to test file attachmetns (Must be valid) */
+        /** File to used to test file attachments (Must be valid) */
         testFile = File.createTempFile("commons-email-testfile", ".txt");
 
         // ====================================================================
@@ -126,8 +128,9 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
-        /** File to used to test file attachmetns (Must be valid) */
-        attachment.setName("Test Attachment");
+        /** File to be used to test file attachments (Must be valid) */
+        /** Use umlaut characters to test if the filename is properly encoded */
+        attachment.setName("Test Attachment - a>ä, o>ö, u>ü, au>äu");
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());
         this.email.attach(attachment);
@@ -137,11 +140,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
 
-        URL url = new URL(EmailConfiguration.TEST_URL);
-        String cid = this.email.embed(url, "Apache Logo");
-
-        String strHtmlMsg =
-            "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
+        String strHtmlMsg = "<html>Test Message<html>";
 
         this.email.setHtmlMsg(strHtmlMsg);
         this.email.setTextMsg(
@@ -175,7 +174,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         validateSend(
             this.fakeMailServer,
             strSubject,
-            attachment.getName(),
+            MimeUtility.encodeText(attachment.getName()),
             this.email.getFromAddress(),
             this.email.getToAddresses(),
             this.email.getCcAddresses(),
