@@ -22,7 +22,7 @@
   </properties>
 
   <body>
-    <release version="1.3.3" date="xxx">
+    <release version="1.3.3" date="2014-07-04">
       <action dev="tn" type="fix" issue="EMAIL-138" date="2014-05-06" due-to="qed">
         The filename of an attachment was not properly encoded in case it contained
         non-ascii characters.
