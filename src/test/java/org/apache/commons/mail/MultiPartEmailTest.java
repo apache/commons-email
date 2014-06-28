@@ -383,7 +383,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
 
     }
 
-    /** @todo implement test for GetContainer */
+    /** TODO implement test for GetContainer */
     @Test
     public void testGetContainer()
     {
