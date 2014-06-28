@@ -75,7 +75,7 @@ public class SimpleEmailTest extends AbstractEmailTest
     /**
      * @throws EmailException when a bad address is set.
      * @throws IOException when sending fails
-     * @todo Add code to test the popBeforeSmtp() settings
+     * TODO Add code to test the popBeforeSmtp() settings
      */
     @Test
     public void testSend() throws EmailException, IOException
