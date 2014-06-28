@@ -77,7 +77,6 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
 
     /**
      * Setup for a test
-     * @throws Exception on any error
      */
     @Before
     public void setUpInvalidInternetAddressTest()
