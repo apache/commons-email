@@ -642,7 +642,7 @@ public class HtmlEmailTest extends AbstractEmailTest
 
     /**
      * EMAIL-73 - check that providing a plain text content using setMsg()
-     * creates a plain content and HTML content using <pre> tags.
+     * creates a plain content and HTML content using {@code <pre>} tags.
      */
     @Test
     public void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException
