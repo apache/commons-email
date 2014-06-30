@@ -372,7 +372,7 @@ public class EmailLiveTest extends AbstractEmailTest
     public void testPartialSend() throws Exception
     {
         SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
-        email.addTo("tn@apache.org");
+        email.addTo(EmailConfiguration.TEST_TO);
         email.addTo("asdkljfakld@kadjfka.com");
         email.setSubject("TestPartialMail");
         email.setMsg("This is a test mail ... :-)");
