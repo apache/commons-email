@@ -49,7 +49,7 @@ public class SimpleEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (String validChar : testCharsValid)
+        for (final String validChar : testCharsValid)
         {
             this.email.setMsg(validChar);
             assertEquals(validChar, this.email.getMsg());
@@ -58,14 +58,14 @@ public class SimpleEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (String invalidChar : this.testCharsNotValid)
+        for (final String invalidChar : this.testCharsNotValid)
         {
             try
             {
                 this.email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
             }
-            catch (EmailException e)
+            catch (final EmailException e)
             {
                 assertTrue(true);
             }
@@ -99,8 +99,8 @@ public class SimpleEmailTest extends AbstractEmailTest
                 this.strTestPasswd);
         }
 
-        String strSubject = "Test Msg Subject";
-        String strMessage = "Test Msg Body";
+        final String strSubject = "Test Msg Subject";
+        final String strMessage = "Test Msg Body";
 
         this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
@@ -151,8 +151,8 @@ public class SimpleEmailTest extends AbstractEmailTest
                 this.strTestPasswd);
         }
 
-        String strSubject = "Test Msg Subject";
-        String strMessage = "Test Msg Body ä"; // add non-ascii character, otherwise us-ascii will be used
+        final String strSubject = "Test Msg Subject";
+        final String strMessage = "Test Msg Body ä"; // add non-ascii character, otherwise us-ascii will be used
 
         this.email.setSubject(strSubject);
         this.email.setMsg(strMessage);
@@ -171,7 +171,7 @@ public class SimpleEmailTest extends AbstractEmailTest
                 this.email.getBccAddresses(),
                 true);
 
-        String message = getMessageAsString(0);
+        final String message = getMessageAsString(0);
         // check that the charset has been correctly set
         assertTrue(message.toLowerCase().contains("content-type: text/plain; charset=utf-8"));
 

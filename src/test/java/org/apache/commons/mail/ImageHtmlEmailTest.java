@@ -68,7 +68,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // Create the email message
         getMailServer();
 
-        String strSubject = "Test HTML Send default";
+        final String strSubject = "Test HTML Send default";
 
         email = new MockImageHtmlEmailConcrete();
         email.setDataSourceResolver(new DataSourceUrlResolver(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
@@ -78,7 +78,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.addTo(strTestMailTo);
         email.setSubject(strSubject);
 
-        String html = loadUrlContent(TEST_HTML_URL);
+        final String html = loadUrlContent(TEST_HTML_URL);
 
         // set the html message
         email.setHtmlMsg(html);
@@ -92,9 +92,9 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
 
         assertEquals(1, fakeMailServer.getMessages().size());
-        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
 
-        MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
     }
@@ -104,13 +104,13 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
-        ImageHtmlEmail email = new ImageHtmlEmail();
+        final ImageHtmlEmail email = new ImageHtmlEmail();
 
         // set the html message
         try {
             email.setHtmlMsg(null);
             fail("Should fail here!");
-        } catch (EmailException e) {
+        } catch (final EmailException e) {
             assertTrue(e.getMessage(), e.getMessage().contains("Invalid message supplied"));
         }
     }
@@ -120,13 +120,13 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
-        ImageHtmlEmail email = new ImageHtmlEmail();
+        final ImageHtmlEmail email = new ImageHtmlEmail();
 
         // set the html message
         try {
             email.setHtmlMsg("");
             fail("Should fail here!");
-        } catch (EmailException e) {
+        } catch (final EmailException e) {
             assertTrue(e.getMessage(), e.getMessage().contains("Invalid message supplied"));
         }
 
@@ -138,7 +138,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         getMailServer();
 
-        String strSubject = "Test HTML Send default with URL";
+        final String strSubject = "Test HTML Send default with URL";
 
         // Create the email message
         email = new MockImageHtmlEmailConcrete();
@@ -171,7 +171,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // Create the email message
         getMailServer();
 
-        String strSubject = "Test HTML Send default with absolute local path";
+        final String strSubject = "Test HTML Send default with absolute local path";
 
         // Create the email message
         email = new MockImageHtmlEmailConcrete();
@@ -182,7 +182,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.setSubject(strSubject);
         email.setDataSourceResolver(new DataSourceUrlResolver(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
 
-        File file = File.createTempFile("emailtest", ".tst");
+        final File file = File.createTempFile("emailtest", ".tst");
         FileUtils.writeStringToFile(file,
                 "just some silly data that we won't be able to display anyway");
 
@@ -208,7 +208,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // Create the email message
         getMailServer();
 
-        String strSubject = "Test HTML Send default";
+        final String strSubject = "Test HTML Send default";
 
         email = new MockImageHtmlEmailConcrete();
         email.setDataSourceResolver(new DataSourceClassPathResolver("/", TEST_IS_LENIENT));
@@ -218,7 +218,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.addTo(strTestMailTo);
         email.setSubject(strSubject);
 
-        String html = loadUrlContent(TEST2_HTML_URL);
+        final String html = loadUrlContent(TEST2_HTML_URL);
 
         // set the html message
         email.setHtmlMsg(html);
@@ -232,10 +232,10 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
 
         assertEquals(1, fakeMailServer.getMessages().size());
-        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLClassPathFile.eml"));
 
-        MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
@@ -247,10 +247,10 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // Create the email message
         getMailServer();
 
-        String strSubject = "Test HTML Send default";
+        final String strSubject = "Test HTML Send default";
 
         email = new MockImageHtmlEmailConcrete();
-        DataSourceResolver dataSourceResolvers[] = new DataSourceResolver[2];
+        final DataSourceResolver dataSourceResolvers[] = new DataSourceResolver[2];
         dataSourceResolvers[0] = new DataSourceUrlResolver(new URL("http://foo"), true);
         dataSourceResolvers[1] = new DataSourceClassPathResolver("/", true);
 
@@ -261,7 +261,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.addTo(strTestMailTo);
         email.setSubject(strSubject);
 
-        String html = loadUrlContent(TEST2_HTML_URL);
+        final String html = loadUrlContent(TEST2_HTML_URL);
 
         // set the html message
         email.setHtmlMsg(html);
@@ -275,10 +275,10 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
 
         assertEquals(1, fakeMailServer.getMessages().size());
-        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLAutoFile.eml"));
 
-        MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
@@ -290,10 +290,10 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // Create the email message
         getMailServer();
 
-        String strSubject = "Test HTML Send default";
+        final String strSubject = "Test HTML Send default";
 
         email = new MockImageHtmlEmailConcrete();
-        DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", true);
+        final DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", true);
 
         email.setDataSourceResolver(dataSourceResolver);
         email.setHostName(strTestMailServer);
@@ -302,7 +302,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.addTo(strTestMailTo);
         email.setSubject(strSubject);
 
-        String html = "<p>First image  <img src=\"images/contentTypeTest.gif\"/></p>" +
+        final String html = "<p>First image  <img src=\"images/contentTypeTest.gif\"/></p>" +
                       "<p>Second image <img src=\"images/contentTypeTest.jpg\"/></p>" +
                       "<p>Third image  <img src=\"images/contentTypeTest.png\"/></p>";
 
@@ -318,17 +318,17 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
 
         assertEquals(1, fakeMailServer.getMessages().size());
-        MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLAutoMultipleFiles.eml"));
 
-        MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
         assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
     }
 
     @Test
     public void testRegex() {
-        Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
+        final Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
 
         // ensure that the regex that we use is catching the cases correctly
         Matcher matcher = pattern
@@ -411,7 +411,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         getMailServer();
 
-        String strSubject = "Test HTML Send default with URL";
+        final String strSubject = "Test HTML Send default with URL";
 
         // Create the email message
         email = new MockImageHtmlEmailConcrete();
@@ -435,12 +435,12 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                      email.getCcAddresses(), email.getBccAddresses(), true);
     }
     
-    private String loadUrlContent(URL url) throws IOException {
-        InputStream stream = url.openStream();
-        StringBuilder html = new StringBuilder();
+    private String loadUrlContent(final URL url) throws IOException {
+        final InputStream stream = url.openStream();
+        final StringBuilder html = new StringBuilder();
         try {
-            List<String> lines = IOUtils.readLines(stream);
-            for (String line : lines) {
+            final List<String> lines = IOUtils.readLines(stream);
+            for (final String line : lines) {
                 html.append(line).append("\n");
             }
         } finally {

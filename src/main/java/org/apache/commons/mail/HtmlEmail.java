@@ -124,7 +124,7 @@ public class HtmlEmail extends MultiPartEmail
      *  for definitions
      * @since 1.0
      */
-    public HtmlEmail setTextMsg(String aText) throws EmailException
+    public HtmlEmail setTextMsg(final String aText) throws EmailException
     {
         if (EmailUtils.isEmpty(aText))
         {
@@ -144,7 +144,7 @@ public class HtmlEmail extends MultiPartEmail
      *  for definitions
      * @since 1.0
      */
-    public HtmlEmail setHtmlMsg(String aHtml) throws EmailException
+    public HtmlEmail setHtmlMsg(final String aHtml) throws EmailException
     {
         if (EmailUtils.isEmpty(aHtml))
         {
@@ -171,7 +171,7 @@ public class HtmlEmail extends MultiPartEmail
      * @since 1.0
      */
     @Override
-    public Email setMsg(String msg) throws EmailException
+    public Email setMsg(final String msg) throws EmailException
     {
         if (EmailUtils.isEmpty(msg))
         {
@@ -180,7 +180,7 @@ public class HtmlEmail extends MultiPartEmail
 
         setTextMsg(msg);
 
-        StringBuffer htmlMsgBuf = new StringBuffer(
+        final StringBuffer htmlMsgBuf = new StringBuffer(
             msg.length()
             + HTML_MESSAGE_START.length()
             + HTML_MESSAGE_END.length()
@@ -208,13 +208,13 @@ public class HtmlEmail extends MultiPartEmail
      * @see #embed(URL, String)
      * @since 1.1
      */
-    public String embed(String urlString, String name) throws EmailException
+    public String embed(final String urlString, final String name) throws EmailException
     {
         try
         {
             return embed(new URL(urlString), name);
         }
-        catch (MalformedURLException e)
+        catch (final MalformedURLException e)
         {
             throw new EmailException("Invalid URL", e);
         }
@@ -252,7 +252,7 @@ public class HtmlEmail extends MultiPartEmail
      * or empty; also see {@link javax.mail.internet.MimeBodyPart} for definitions
      * @since 1.0
      */
-    public String embed(URL url, String name) throws EmailException
+    public String embed(final URL url, final String name) throws EmailException
     {
         if (EmailUtils.isEmpty(name))
         {
@@ -263,8 +263,8 @@ public class HtmlEmail extends MultiPartEmail
         // if so, return the cached CID value.
         if (inlineEmbeds.containsKey(name))
         {
-            InlineImage ii = inlineEmbeds.get(name);
-            URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
+            final InlineImage ii = inlineEmbeds.get(name);
+            final URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
             // NOTE: Comparing URLs with URL.equals() is a blocking operation
@@ -288,7 +288,7 @@ public class HtmlEmail extends MultiPartEmail
         {
             is = url.openStream();
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             throw new EmailException("Invalid URL", e);
         }
@@ -301,7 +301,7 @@ public class HtmlEmail extends MultiPartEmail
                     is.close();
                 }
             }
-            catch (IOException ioe) // NOPMD
+            catch (final IOException ioe) // NOPMD
             { /* sigh */ }
         }
 
@@ -320,9 +320,9 @@ public class HtmlEmail extends MultiPartEmail
      * @see #embed(File, String)
      * @since 1.1
      */
-    public String embed(File file) throws EmailException
+    public String embed(final File file) throws EmailException
     {
-        String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase(Locale.ENGLISH);
+        final String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase(Locale.ENGLISH);
         return embed(file, cid);
     }
 
@@ -351,7 +351,7 @@ public class HtmlEmail extends MultiPartEmail
      *  also see {@link javax.mail.internet.MimeBodyPart} for definitions
      * @since 1.1
      */
-    public String embed(File file, String cid) throws EmailException
+    public String embed(final File file, final String cid) throws EmailException
     {
         if (EmailUtils.isEmpty(file.getName()))
         {
@@ -364,7 +364,7 @@ public class HtmlEmail extends MultiPartEmail
         {
             filePath = file.getCanonicalPath();
         }
-        catch (IOException ioe)
+        catch (final IOException ioe)
         {
             throw new EmailException("couldn't get canonical path for "
                     + file.getName(), ioe);
@@ -374,8 +374,8 @@ public class HtmlEmail extends MultiPartEmail
         // if so, return the cached CID value.
         if (inlineEmbeds.containsKey(file.getName()))
         {
-            InlineImage ii = inlineEmbeds.get(file.getName());
-            FileDataSource fileDataSource = (FileDataSource) ii.getDataSource();
+            final InlineImage ii = inlineEmbeds.get(file.getName());
+            final FileDataSource fileDataSource = (FileDataSource) ii.getDataSource();
             // make sure the supplied file has the same canonical path
             // as the one already associated with this name.
             String existingFilePath = null;
@@ -383,7 +383,7 @@ public class HtmlEmail extends MultiPartEmail
             {
                 existingFilePath = fileDataSource.getFile().getCanonicalPath();
             }
-            catch (IOException ioe)
+            catch (final IOException ioe)
             {
                 throw new EmailException("couldn't get canonical path for file "
                         + fileDataSource.getFile().getName()
@@ -430,13 +430,13 @@ public class HtmlEmail extends MultiPartEmail
      * @see #embed(DataSource, String, String)
      * @since 1.1
      */
-    public String embed(DataSource dataSource, String name) throws EmailException
+    public String embed(final DataSource dataSource, final String name) throws EmailException
     {
         // check if the DataSource has already been attached;
         // if so, return the cached CID value.
         if (inlineEmbeds.containsKey(name))
         {
-            InlineImage ii = inlineEmbeds.get(name);
+            final InlineImage ii = inlineEmbeds.get(name);
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
             if (dataSource.equals(ii.getDataSource()))
@@ -451,7 +451,7 @@ public class HtmlEmail extends MultiPartEmail
             }
         }
 
-        String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
+        final String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
         return embed(dataSource, name, cid);
     }
 
@@ -467,7 +467,7 @@ public class HtmlEmail extends MultiPartEmail
      * null or empty
      * @since 1.1
      */
-    public String embed(DataSource dataSource, String name, String cid)
+    public String embed(final DataSource dataSource, final String name, String cid)
         throws EmailException
     {
         if (EmailUtils.isEmpty(name))
@@ -475,7 +475,7 @@ public class HtmlEmail extends MultiPartEmail
             throw new EmailException("name cannot be null or empty");
         }
 
-        MimeBodyPart mbp = new MimeBodyPart();
+        final MimeBodyPart mbp = new MimeBodyPart();
 
         try
         {
@@ -487,16 +487,16 @@ public class HtmlEmail extends MultiPartEmail
             mbp.setDisposition(EmailAttachment.INLINE);
             mbp.setContentID("<" + cid + ">");
 
-            InlineImage ii = new InlineImage(cid, dataSource, mbp);
+            final InlineImage ii = new InlineImage(cid, dataSource, mbp);
             this.inlineEmbeds.put(name, ii);
 
             return cid;
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
-        catch (UnsupportedEncodingException uee)
+        catch (final UnsupportedEncodingException uee)
         {
             throw new EmailException(uee);
         }
@@ -518,7 +518,7 @@ public class HtmlEmail extends MultiPartEmail
         {
             build();
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -531,7 +531,7 @@ public class HtmlEmail extends MultiPartEmail
      */
     private void build() throws MessagingException, EmailException
     {
-        MimeMultipart rootContainer = this.getContainer();
+        final MimeMultipart rootContainer = this.getContainer();
         MimeMultipart bodyEmbedsContainer = rootContainer;
         MimeMultipart bodyContainer = rootContainer;
         MimeBodyPart msgHtml = null;
@@ -552,13 +552,13 @@ public class HtmlEmail extends MultiPartEmail
             if (EmailUtils.isNotEmpty(this.text))
             {
                 bodyContainer = new MimeMultipart("alternative");
-                BodyPart bodyPart = createBodyPart();
+                final BodyPart bodyPart = createBodyPart();
                 try
                 {
                     bodyPart.setContent(bodyContainer);
                     bodyEmbedsContainer.addBodyPart(bodyPart, 0);
                 }
-                catch (MessagingException me)
+                catch (final MessagingException me)
                 {
                     throw new EmailException(me);
                 }
@@ -580,7 +580,7 @@ public class HtmlEmail extends MultiPartEmail
             //            (property "mail.mime.charset") in case none has been set
             msgHtml.setText(this.html, this.charset, EmailConstants.TEXT_SUBTYPE_HTML);
 
-            for (InlineImage image : this.inlineEmbeds.values())
+            for (final InlineImage image : this.inlineEmbeds.values())
             {
                 bodyEmbedsContainer.addBodyPart(image.getMbp());
             }
@@ -605,11 +605,11 @@ public class HtmlEmail extends MultiPartEmail
     private static class InlineImage
     {
         /** content id. */
-        private String cid;
+        private final String cid;
         /** <code>DataSource</code> for the content. */
-        private DataSource dataSource;
+        private final DataSource dataSource;
         /** the <code>MimeBodyPart</code> that contains the encoded data. */
-        private MimeBodyPart mbp;
+        private final MimeBodyPart mbp;
 
         /**
          * Creates an InlineImage object to represent the
@@ -619,7 +619,7 @@ public class HtmlEmail extends MultiPartEmail
          * @param mbp the <code>MimeBodyPart</code> that contains the encoded
          * data
          */
-        public InlineImage(String cid, DataSource dataSource, MimeBodyPart mbp)
+        public InlineImage(final String cid, final DataSource dataSource, final MimeBodyPart mbp)
         {
             this.cid = cid;
             this.dataSource = dataSource;
@@ -662,7 +662,7 @@ public class HtmlEmail extends MultiPartEmail
          * @return true if the other object is also an InlineImage with the same cid.
          */
         @Override
-        public boolean equals(Object obj)
+        public boolean equals(final Object obj)
         {
             if (this == obj)
             {
@@ -673,7 +673,7 @@ public class HtmlEmail extends MultiPartEmail
                 return false;
             }
 
-            InlineImage that = (InlineImage) obj;
+            final InlineImage that = (InlineImage) obj;
 
             return this.cid.equals(that.cid);
         }

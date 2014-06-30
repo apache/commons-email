@@ -69,7 +69,7 @@ public class ByteArrayDataSource implements DataSource
      * @throws IOException IOException
      * @since 1.0
      */
-    public ByteArrayDataSource(byte[] data, String aType) throws IOException
+    public ByteArrayDataSource(final byte[] data, final String aType) throws IOException
     {
         this.type = aType;
         ByteArrayInputStream bis = null;
@@ -96,7 +96,7 @@ public class ByteArrayDataSource implements DataSource
      * @throws IOException IOException
      * @since 1.0
      */
-    public ByteArrayDataSource(InputStream aIs, String aType) throws IOException
+    public ByteArrayDataSource(final InputStream aIs, final String aType) throws IOException
     {
         this.type = aType;
         this.byteArrayDataSource(aIs);
@@ -111,7 +111,7 @@ public class ByteArrayDataSource implements DataSource
      * @throws IOException IOException
      * @since 1.0
      */
-    public ByteArrayDataSource(String data, String aType) throws IOException
+    public ByteArrayDataSource(final String data, final String aType) throws IOException
     {
         this.type = aType;
 
@@ -125,7 +125,7 @@ public class ByteArrayDataSource implements DataSource
             baos.flush();
             baos.close();
         }
-        catch (UnsupportedEncodingException uex)
+        catch (final UnsupportedEncodingException uex)
         {
             throw new IOException("The Character Encoding is not supported.");
         }
@@ -144,7 +144,7 @@ public class ByteArrayDataSource implements DataSource
       * @param aIs An InputStream.
       * @throws IOException IOException
       */
-    private void byteArrayDataSource(InputStream aIs)
+    private void byteArrayDataSource(final InputStream aIs)
         throws IOException
     {
         BufferedInputStream bis = null;
@@ -153,7 +153,7 @@ public class ByteArrayDataSource implements DataSource
         try
         {
             int length = 0;
-            byte[] buffer = new byte[ByteArrayDataSource.BUFFER_SIZE];
+            final byte[] buffer = new byte[ByteArrayDataSource.BUFFER_SIZE];
 
             bis = new BufferedInputStream(aIs);
             baos = new ByteArrayOutputStream();
@@ -218,7 +218,7 @@ public class ByteArrayDataSource implements DataSource
      * @param name The name.
      * @since 1.3.1
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }

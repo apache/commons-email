@@ -95,7 +95,7 @@ public class MimeMessageParser
      */
     public List<javax.mail.Address> getTo() throws Exception
     {
-        javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
+        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
     }
 
@@ -105,7 +105,7 @@ public class MimeMessageParser
      */
     public List<javax.mail.Address> getCc() throws Exception
     {
-        javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
+        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
     }
 
@@ -115,7 +115,7 @@ public class MimeMessageParser
      */
     public List<javax.mail.Address> getBcc() throws Exception
     {
-        javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
+        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
     }
 
@@ -125,7 +125,7 @@ public class MimeMessageParser
      */
     public String getFrom() throws Exception
     {
-        javax.mail.Address[] addresses = this.mimeMessage.getFrom();
+        final javax.mail.Address[] addresses = this.mimeMessage.getFrom();
         if ((addresses == null) || (addresses.length == 0))
         {
             return null;
@@ -142,7 +142,7 @@ public class MimeMessageParser
      */
     public String getReplyTo() throws Exception
     {
-        javax.mail.Address[] addresses = this.mimeMessage.getReplyTo();
+        final javax.mail.Address[] addresses = this.mimeMessage.getReplyTo();
         if ((addresses == null) || (addresses.length == 0))
         {
             return null;
@@ -170,7 +170,7 @@ public class MimeMessageParser
      * @throws MessagingException parsing the MimeMessage failed
      * @throws IOException        parsing the MimeMessage failed
      */
-    protected void parse(Multipart parent, MimePart part)
+    protected void parse(final Multipart parent, final MimePart part)
         throws MessagingException, IOException
     {
         if (isMimeType(part, "text/plain") && (plainContent == null)
@@ -190,8 +190,8 @@ public class MimeMessageParser
                 if (isMimeType(part, "multipart/*"))
                 {
                     this.isMultiPart = true;
-                    Multipart mp = (Multipart) part.getContent();
-                    int count = mp.getCount();
+                    final Multipart mp = (Multipart) part.getContent();
+                    final int count = mp.getCount();
 
                     // iterate over all MimeBodyPart
 
@@ -217,7 +217,7 @@ public class MimeMessageParser
      * @throws MessagingException parsing the MimeMessage failed
      * @throws IOException        parsing the MimeMessage failed
      */
-    private boolean isMimeType(MimePart part, String mimeType)
+    private boolean isMimeType(final MimePart part, final String mimeType)
         throws MessagingException, IOException
     {
         // Do not use part.isMimeType(String) as it is broken for MimeBodyPart
@@ -225,10 +225,10 @@ public class MimeMessageParser
 
         try
         {
-            ContentType ct = new ContentType(part.getDataHandler().getContentType());
+            final ContentType ct = new ContentType(part.getDataHandler().getContentType());
             return ct.match(mimeType);
         }
-        catch (ParseException ex)
+        catch (final ParseException ex)
         {
             return part.getContentType().equalsIgnoreCase(mimeType);
         }
@@ -243,15 +243,15 @@ public class MimeMessageParser
      * @throws MessagingException creating the DataSource failed
      * @throws IOException        creating the DataSource failed
      */
-    protected DataSource createDataSource(Multipart parent, MimePart part)
+    protected DataSource createDataSource(final Multipart parent, final MimePart part)
         throws MessagingException, IOException
     {
-        DataHandler dataHandler = part.getDataHandler();
-        DataSource dataSource = dataHandler.getDataSource();
-        String contentType = getBaseMimeType(dataSource.getContentType());
-        byte[] content = this.getContent(dataSource.getInputStream());
-        ByteArrayDataSource result = new ByteArrayDataSource(content, contentType);
-        String dataSourceName = getDataSourceName(part, dataSource);
+        final DataHandler dataHandler = part.getDataHandler();
+        final DataSource dataSource = dataHandler.getDataSource();
+        final String contentType = getBaseMimeType(dataSource.getContentType());
+        final byte[] content = this.getContent(dataSource.getInputStream());
+        final ByteArrayDataSource result = new ByteArrayDataSource(content, contentType);
+        final String dataSourceName = getDataSourceName(part, dataSource);
 
         result.setName(dataSourceName);
         return result;
@@ -311,7 +311,7 @@ public class MimeMessageParser
      * @param name the name of the attachment
      * @return the corresponding datasource or null if nothing was found
      */
-    public DataSource findAttachmentByName(String name)
+    public DataSource findAttachmentByName(final String name)
     {
         DataSource dataSource;
 
@@ -336,7 +336,7 @@ public class MimeMessageParser
      * @throws MessagingException accessing the part failed
      * @throws UnsupportedEncodingException decoding the text failed
      */
-    protected String getDataSourceName(Part part, DataSource dataSource)
+    protected String getDataSourceName(final Part part, final DataSource dataSource)
         throws MessagingException, UnsupportedEncodingException
     {
         String result = dataSource.getName();
@@ -365,15 +365,15 @@ public class MimeMessageParser
      * @return the content of the input stream
      * @throws IOException reading the input stream failed
      */
-    private byte[] getContent(InputStream is)
+    private byte[] getContent(final InputStream is)
         throws IOException
     {
         int ch;
         byte[] result;
 
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        BufferedInputStream isReader = new BufferedInputStream(is);
-        BufferedOutputStream osWriter = new BufferedOutputStream(os);
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        final BufferedInputStream isReader = new BufferedInputStream(is);
+        final BufferedOutputStream osWriter = new BufferedOutputStream(os);
 
         while ((ch = isReader.read()) != -1)
         {
@@ -393,9 +393,9 @@ public class MimeMessageParser
      * @param fullMimeType the mime type from the mail api
      * @return the real mime type
      */
-    private String getBaseMimeType(String fullMimeType)
+    private String getBaseMimeType(final String fullMimeType)
     {
-        int pos = fullMimeType.indexOf(';');
+        final int pos = fullMimeType.indexOf(';');
         if (pos >= 0)
         {
             return fullMimeType.substring(0, pos);

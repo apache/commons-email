@@ -144,11 +144,11 @@ public abstract class AbstractEmailTest
      * @throws IOException writing the email failed
      * @throws MessagingException writing the email failed
      */
-    protected void saveEmailToFile(WiserMessage email) throws IOException, MessagingException
+    protected void saveEmailToFile(final WiserMessage email) throws IOException, MessagingException
     {
-        int currCounter = fileNameCounter++ % 10;
-        String emailFileName = "email" + new Date().getTime() + "-" + currCounter + ".eml";
-        File emailFile = new File(emailOutputDir, emailFileName);
+        final int currCounter = fileNameCounter++ % 10;
+        final String emailFileName = "email" + new Date().getTime() + "-" + currCounter + ".eml";
+        final File emailFile = new File(emailOutputDir, emailFileName);
         EmailUtils.writeMimeMessage(emailFile, email.getMimeMessage() );
     }
 
@@ -156,12 +156,12 @@ public abstract class AbstractEmailTest
      * @param intMsgNo the message to retrieve
      * @return message as string
      */
-    public String getMessageAsString(int intMsgNo)
+    public String getMessageAsString(final int intMsgNo)
     {
-        List<?> receivedMessages = fakeMailServer.getMessages();
+        final List<?> receivedMessages = fakeMailServer.getMessages();
         assertTrue("mail server didn't get enough messages", receivedMessages.size() >= intMsgNo);
 
-        WiserMessage emailMessage = (WiserMessage) receivedMessages.get(intMsgNo);
+        final WiserMessage emailMessage = (WiserMessage) receivedMessages.get(intMsgNo);
 
         if (emailMessage != null)
         {
@@ -169,7 +169,7 @@ public abstract class AbstractEmailTest
             {
                 return serializeEmailMessage(emailMessage);
             }
-            catch (Exception e)
+            catch (final Exception e)
             {
                 // ignore, since the test will fail on an empty string return
             }
@@ -195,7 +195,7 @@ public abstract class AbstractEmailTest
 
             assertFalse("fake mail server didn't start", isMailServerStopped(fakeMailServer));
 
-            Date dtStartWait = new Date();
+            final Date dtStartWait = new Date();
             while (isMailServerStopped(fakeMailServer))
             {
                 // test for connected
@@ -228,18 +228,18 @@ public abstract class AbstractEmailTest
      * @throws IOException Exception
      */
     protected WiserMessage validateSend(
-        Wiser mailServer,
-        String strSubject,
-        InternetAddress fromAdd,
-        List<InternetAddress> toAdd,
-        List<InternetAddress> ccAdd,
-        List<InternetAddress> bccAdd,
-        boolean boolSaveToFile)
+        final Wiser mailServer,
+        final String strSubject,
+        final InternetAddress fromAdd,
+        final List<InternetAddress> toAdd,
+        final List<InternetAddress> ccAdd,
+        final List<InternetAddress> bccAdd,
+        final boolean boolSaveToFile)
         throws IOException
     {
         assertTrue("mail server doesn't contain expected message",
                 mailServer.getMessages().size() == 1);
-        WiserMessage emailMessage = mailServer.getMessages().get(0);
+        final WiserMessage emailMessage = mailServer.getMessages().get(0);
 
         if (boolSaveToFile)
         {
@@ -247,9 +247,9 @@ public abstract class AbstractEmailTest
             {
                 this.saveEmailToFile(emailMessage);
             }
-            catch(MessagingException me)
+            catch(final MessagingException me)
             {
-                IllegalStateException ise =
+                final IllegalStateException ise =
                     new IllegalStateException("caught MessagingException during saving the email");
                 ise.initCause(me);
                 throw ise;
@@ -259,7 +259,7 @@ public abstract class AbstractEmailTest
         try
         {
             // get the MimeMessage
-            MimeMessage mimeMessage = emailMessage.getMimeMessage();
+            final MimeMessage mimeMessage = emailMessage.getMimeMessage();
 
             // test subject
             assertEquals("got wrong subject from mail",
@@ -287,9 +287,9 @@ public abstract class AbstractEmailTest
                     bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)));
             }
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
-            IllegalStateException ise =
+            final IllegalStateException ise =
                 new IllegalStateException("caught MessagingException in validateSend()");
             ise.initCause(me);
             throw ise;
@@ -311,18 +311,18 @@ public abstract class AbstractEmailTest
      * @throws IOException Exception
      */
     protected void validateSend(
-        Wiser mailServer,
-        String strSubject,
-        Multipart content,
-        InternetAddress fromAdd,
-        List<InternetAddress> toAdd,
-        List<InternetAddress> ccAdd,
-        List<InternetAddress> bccAdd,
-        boolean boolSaveToFile)
+        final Wiser mailServer,
+        final String strSubject,
+        final Multipart content,
+        final InternetAddress fromAdd,
+        final List<InternetAddress> toAdd,
+        final List<InternetAddress> ccAdd,
+        final List<InternetAddress> bccAdd,
+        final boolean boolSaveToFile)
         throws IOException
     {
         // test other properties
-        WiserMessage emailMessage = this.validateSend(
+        final WiserMessage emailMessage = this.validateSend(
             mailServer,
             strSubject,
             fromAdd,
@@ -334,12 +334,12 @@ public abstract class AbstractEmailTest
         // test message content
 
         // get sent email content
-        String strSentContent =
+        final String strSentContent =
             content.getContentType();
         // get received email content (chop off the auto-added \n
         // and -- (front and end)
-        String emailMessageBody = getMessageBody(emailMessage);
-        String strMessageBody =
+        final String emailMessageBody = getMessageBody(emailMessage);
+        final String strMessageBody =
             emailMessageBody.substring(AbstractEmailTest.BODY_START_PAD,
                                        emailMessageBody.length()
                                        - AbstractEmailTest.BODY_END_PAD);
@@ -360,18 +360,18 @@ public abstract class AbstractEmailTest
      * @throws IOException Exception
      */
     protected void validateSend(
-        Wiser mailServer,
-        String strSubject,
-        String strMessage,
-        InternetAddress fromAdd,
-        List<InternetAddress> toAdd,
-        List<InternetAddress> ccAdd,
-        List<InternetAddress> bccAdd,
-        boolean boolSaveToFile)
+        final Wiser mailServer,
+        final String strSubject,
+        final String strMessage,
+        final InternetAddress fromAdd,
+        final List<InternetAddress> toAdd,
+        final List<InternetAddress> ccAdd,
+        final List<InternetAddress> bccAdd,
+        final boolean boolSaveToFile)
         throws IOException
     {
         // test other properties
-        WiserMessage emailMessage = this.validateSend(
+        final WiserMessage emailMessage = this.validateSend(
             mailServer,
             strSubject,
             fromAdd,
@@ -401,7 +401,7 @@ public abstract class AbstractEmailTest
      *             {@link MimeMessage#getDataHandler()}
      * @since 1.1
      */
-    private String serializeEmailMessage(WiserMessage wiserMessage)
+    private String serializeEmailMessage(final WiserMessage wiserMessage)
             throws MessagingException, IOException
     {
         if (wiserMessage == null)
@@ -409,14 +409,14 @@ public abstract class AbstractEmailTest
             return "";
         }
 
-        StringBuffer serializedEmail = new StringBuffer();
-        MimeMessage message = wiserMessage.getMimeMessage();
+        final StringBuffer serializedEmail = new StringBuffer();
+        final MimeMessage message = wiserMessage.getMimeMessage();
 
         // Serialize the headers
-        for (Enumeration<?> headers = message.getAllHeaders(); headers
+        for (final Enumeration<?> headers = message.getAllHeaders(); headers
                 .hasMoreElements();)
         {
-            Header header = (Header) headers.nextElement();
+            final Header header = (Header) headers.nextElement();
             serializedEmail.append(header.getName());
             serializedEmail.append(": ");
             serializedEmail.append(header.getValue());
@@ -424,7 +424,7 @@ public abstract class AbstractEmailTest
         }
 
         // Serialize the body
-        byte[] messageBody = getMessageBodyBytes(message);
+        final byte[] messageBody = getMessageBodyBytes(message);
 
         serializedEmail.append(LINE_SEPARATOR);
         serializedEmail.append(messageBody);
@@ -444,7 +444,7 @@ public abstract class AbstractEmailTest
      *             {@link DataHandler#writeTo(java.io.OutputStream)}.
      * @since 1.1
      */
-    private String getMessageBody(WiserMessage wiserMessage)
+    private String getMessageBody(final WiserMessage wiserMessage)
             throws IOException
     {
         if (wiserMessage == null)
@@ -456,14 +456,14 @@ public abstract class AbstractEmailTest
 
         try
         {
-            MimeMessage message = wiserMessage.getMimeMessage();
+            final MimeMessage message = wiserMessage.getMimeMessage();
             messageBody = getMessageBodyBytes(message);
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             // Thrown while getting the body content from
             // {@link MimeMessage#getDataHandler()}
-            IllegalStateException ise =
+            final IllegalStateException ise =
                 new IllegalStateException("couldn't process MimeMessage from WiserMessage in getMessageBody()");
             ise.initCause(me);
             throw ise;
@@ -486,12 +486,12 @@ public abstract class AbstractEmailTest
      *             {@link MimeMessage#getDataHandler()}
      * @since 1.1
      */
-    private byte[] getMessageBodyBytes(MimeMessage mimeMessage)
+    private byte[] getMessageBodyBytes(final MimeMessage mimeMessage)
             throws IOException, MessagingException
     {
-        DataHandler dataHandler = mimeMessage.getDataHandler();
-        ByteArrayOutputStream byteArrayOutStream = new ByteArrayOutputStream();
-        BufferedOutputStream buffOs = new BufferedOutputStream(
+        final DataHandler dataHandler = mimeMessage.getDataHandler();
+        final ByteArrayOutputStream byteArrayOutStream = new ByteArrayOutputStream();
+        final BufferedOutputStream buffOs = new BufferedOutputStream(
                 byteArrayOutStream);
         dataHandler.writeTo(buffOs);
         buffOs.flush();
@@ -508,7 +508,7 @@ public abstract class AbstractEmailTest
      * @return <code>true</code> if the server claims to be running
      * @since 1.1
      */
-    protected boolean isMailServerStopped(Wiser fakeMailServer) {
+    protected boolean isMailServerStopped(final Wiser fakeMailServer) {
         return !fakeMailServer.getServer().isRunning();
     }
     
@@ -522,7 +522,7 @@ public abstract class AbstractEmailTest
      * @return an invalid URL
      */
     protected URL createInvalidURL() throws Exception {
-        URL url = createMock(URL.class);
+        final URL url = createMock(URL.class);
         expect(url.openStream()).andThrow(new IOException());
         replay(url);
         

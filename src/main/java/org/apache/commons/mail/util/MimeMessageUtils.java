@@ -51,7 +51,7 @@ public final class MimeMessageUtils
      * @throws MessagingException creating the MimeMessage failed
      * @throws IOException creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(Session session, byte[] source)
+    public static MimeMessage createMimeMessage(final Session session, final byte[] source)
         throws MessagingException, IOException
     {
         ByteArrayInputStream is = null;
@@ -79,7 +79,7 @@ public final class MimeMessageUtils
      * @throws MessagingException creating the MimeMessage failed
      * @throws IOException creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(Session session, File source)
+    public static MimeMessage createMimeMessage(final Session session, final File source)
         throws MessagingException, IOException
     {
         FileInputStream is = null;
@@ -106,7 +106,7 @@ public final class MimeMessageUtils
      * @return the MimeMessage
      * @throws MessagingException creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(Session session, InputStream source)
+    public static MimeMessage createMimeMessage(final Session session, final InputStream source)
         throws MessagingException
     {
         return new MimeMessage(session, source);
@@ -121,14 +121,14 @@ public final class MimeMessageUtils
      * @throws MessagingException creating the MimeMessage failed
      * @throws IOException creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(Session session, String source)
+    public static MimeMessage createMimeMessage(final Session session, final String source)
         throws MessagingException, IOException
     {
         ByteArrayInputStream is = null;
 
         try
         {
-            byte[] byteSource = source.getBytes();
+            final byte[] byteSource = source.getBytes();
             is = new ByteArrayInputStream(byteSource);
             return createMimeMessage(session, is);
         }
@@ -149,7 +149,7 @@ public final class MimeMessageUtils
      * @throws MessagingException accessing MimeMessage failed
      * @throws IOException        writing the MimeMessage failed
      */
-    public static void writeMimeMessage(MimeMessage mimeMessage, File resultFile)
+    public static void writeMimeMessage(final MimeMessage mimeMessage, final File resultFile)
         throws MessagingException, IOException
     {
 
@@ -178,7 +178,7 @@ public final class MimeMessageUtils
                 {
                     fos.close();
                 }
-                catch (Exception e)
+                catch (final Exception e)
                 {
                     e.printStackTrace();
                 }

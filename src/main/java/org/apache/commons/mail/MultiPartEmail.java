@@ -69,7 +69,7 @@ public class MultiPartEmail extends Email
      * @param aSubType MIME subtype of the email
      * @since 1.0
      */
-    public void setSubType(String aSubType)
+    public void setSubType(final String aSubType)
     {
         this.subType = aSubType;
     }
@@ -95,16 +95,16 @@ public class MultiPartEmail extends Email
      *  for definitions
      * @since 1.0
      */
-    public Email addPart(String partContent, String partContentType)
+    public Email addPart(final String partContent, final String partContentType)
         throws EmailException
     {
-            BodyPart bodyPart = createBodyPart();
+            final BodyPart bodyPart = createBodyPart();
         try
         {
             bodyPart.setContent(partContent, partContentType);
             getContainer().addBodyPart(bodyPart);
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -121,13 +121,13 @@ public class MultiPartEmail extends Email
      *  for definitions
      *  @since 1.0
      */
-    public Email addPart(MimeMultipart multipart) throws EmailException
+    public Email addPart(final MimeMultipart multipart) throws EmailException
     {
         try
         {
             return addPart(multipart, getContainer().getCount());
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -142,15 +142,15 @@ public class MultiPartEmail extends Email
      * @throws EmailException An error occurred while adding the part.
      * @since 1.0
      */
-    public Email addPart(MimeMultipart multipart, int index) throws EmailException
+    public Email addPart(final MimeMultipart multipart, final int index) throws EmailException
     {
-            BodyPart bodyPart = createBodyPart();
+            final BodyPart bodyPart = createBodyPart();
         try
         {
             bodyPart.setContent(multipart);
             getContainer().addBodyPart(bodyPart, index);
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -185,7 +185,7 @@ public class MultiPartEmail extends Email
      * @since 1.0
      */
     @Override
-    public Email setMsg(String msg) throws EmailException
+    public Email setMsg(final String msg) throws EmailException
     {
         // throw exception on null message
         if (EmailUtils.isEmpty(msg))
@@ -194,7 +194,7 @@ public class MultiPartEmail extends Email
         }
         try
         {
-            BodyPart primary = getPrimaryBodyPart();
+            final BodyPart primary = getPrimaryBodyPart();
 
             if ((primary instanceof MimePart) && EmailUtils.isNotEmpty(charset))
             {
@@ -205,7 +205,7 @@ public class MultiPartEmail extends Email
                 primary.setText(msg);
             }
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -232,12 +232,12 @@ public class MultiPartEmail extends Email
                 // the content for the main body part was actually set.  If not,
                 // an IOException will be thrown during super.send().
 
-                BodyPart body = this.getPrimaryBodyPart();
+                final BodyPart body = this.getPrimaryBodyPart();
                 try
                 {
                     body.getContent();
                 }
-                catch (IOException e) // NOPMD
+                catch (final IOException e) // NOPMD
                 {
                     // do nothing here.
                     // content will be set to an empty string as a result.
@@ -253,7 +253,7 @@ public class MultiPartEmail extends Email
 
             super.buildMimeMessage();
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -268,10 +268,10 @@ public class MultiPartEmail extends Email
      *  for definitions
      * @since 1.3
      */
-    public MultiPartEmail attach(File file)
+    public MultiPartEmail attach(final File file)
         throws EmailException
     {
-        String fileName = file.getAbsolutePath();
+        final String fileName = file.getAbsolutePath();
 
         try
         {
@@ -280,11 +280,11 @@ public class MultiPartEmail extends Email
                 throw new IOException("\"" + fileName + "\" does not exist");
             }
 
-            FileDataSource fds = new FileDataSource(file);
+            final FileDataSource fds = new FileDataSource(file);
 
             return attach(fds, file.getName(), null, EmailAttachment.ATTACHMENT);
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
         }
@@ -299,7 +299,7 @@ public class MultiPartEmail extends Email
      *  for definitions
      * @since 1.0
      */
-    public MultiPartEmail attach(EmailAttachment attachment)
+    public MultiPartEmail attach(final EmailAttachment attachment)
         throws EmailException
     {
         MultiPartEmail result = null;
@@ -309,7 +309,7 @@ public class MultiPartEmail extends Email
             throw new EmailException("Invalid attachment supplied");
         }
 
-        URL url = attachment.getURL();
+        final URL url = attachment.getURL();
 
         if (url == null)
         {
@@ -317,7 +317,7 @@ public class MultiPartEmail extends Email
             try
             {
                 fileName = attachment.getPath();
-                File file = new File(fileName);
+                final File file = new File(fileName);
                 if (!file.exists())
                 {
                     throw new IOException("\"" + fileName + "\" does not exist");
@@ -329,7 +329,7 @@ public class MultiPartEmail extends Email
                         attachment.getDescription(),
                         attachment.getDisposition());
             }
-            catch (IOException e)
+            catch (final IOException e)
             {
                 throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
             }
@@ -359,7 +359,7 @@ public class MultiPartEmail extends Email
      *  for definitions
      * @since 1.0
      */
-    public MultiPartEmail attach(URL url, String name, String description)
+    public MultiPartEmail attach(final URL url, final String name, final String description)
         throws EmailException
     {
         return attach(url, name, description, EmailAttachment.ATTACHMENT);
@@ -378,19 +378,19 @@ public class MultiPartEmail extends Email
      * @since 1.0
      */
     public MultiPartEmail attach(
-        URL url,
-        String name,
-        String description,
-        String disposition)
+        final URL url,
+        final String name,
+        final String description,
+        final String disposition)
         throws EmailException
     {
         // verify that the URL is valid
        try
        {
-           InputStream is = url.openStream();
+           final InputStream is = url.openStream();
            is.close();
        }
-       catch (IOException e)
+       catch (final IOException e)
        {
            throw new EmailException("Invalid URL set:" + url, e);
        }
@@ -410,9 +410,9 @@ public class MultiPartEmail extends Email
      * @since 1.0
      */
     public MultiPartEmail attach(
-        DataSource ds,
-        String name,
-        String description)
+        final DataSource ds,
+        final String name,
+        final String description)
         throws EmailException
     {
         // verify that the DataSource is valid
@@ -430,7 +430,7 @@ public class MultiPartEmail extends Email
                 throw new EmailException("Invalid Datasource");
             }
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             throw new EmailException("Invalid Datasource", e);
         }
@@ -451,17 +451,17 @@ public class MultiPartEmail extends Email
      * @since 1.0
      */
     public MultiPartEmail attach(
-        DataSource ds,
+        final DataSource ds,
         String name,
-        String description,
-        String disposition)
+        final String description,
+        final String disposition)
         throws EmailException
     {
         if (EmailUtils.isEmpty(name))
         {
             name = ds.getName();
         }
-        BodyPart bodyPart = createBodyPart();
+        final BodyPart bodyPart = createBodyPart();
         try
         {
             bodyPart.setDisposition(disposition);
@@ -471,12 +471,12 @@ public class MultiPartEmail extends Email
 
             getContainer().addBodyPart(bodyPart);
         }
-        catch (UnsupportedEncodingException uee)
+        catch (final UnsupportedEncodingException uee)
         {
             // in case the filename could not be encoded
             throw new EmailException(uee);
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -562,7 +562,7 @@ public class MultiPartEmail extends Email
      * @param b  the attachments flag
      * @since 1.0
      */
-    public void setBoolHasAttachments(boolean b)
+    public void setBoolHasAttachments(final boolean b)
     {
         boolHasAttachments = b;
     }
@@ -582,7 +582,7 @@ public class MultiPartEmail extends Email
      *
      * @param b  the initialized status flag
      */
-    protected void setInitialized(boolean b)
+    protected void setInitialized(final boolean b)
     {
         initialized = b;
     }

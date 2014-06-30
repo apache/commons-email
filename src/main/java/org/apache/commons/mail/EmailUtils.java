@@ -120,7 +120,7 @@ final class EmailUtils
      *
      * @since Commons Lang v2.1, svn 240418
      */
-    static boolean isEmpty(String str)
+    static boolean isEmpty(final String str)
     {
         return (str == null) || (str.length() == 0);
     }
@@ -134,7 +134,7 @@ final class EmailUtils
      *
      * @since Commons Lang v2.1, svn 240418
      */
-    static boolean isNotEmpty(String str)
+    static boolean isNotEmpty(final String str)
     {
         return (str != null) && (str.length() > 0);
     }
@@ -150,7 +150,7 @@ final class EmailUtils
      *
      * @since Commons Lang v2.1, svn 201930
      */
-    static void notNull(Object object, String message)
+    static void notNull(final Object object, final String message)
     {
         if (object == null)
         {
@@ -171,7 +171,7 @@ final class EmailUtils
      *
      * @since Commons Lang v2.1, svn 201930
      */
-    static String randomAlphabetic(int count)
+    static String randomAlphabetic(final int count)
     {
         return random(count, 0, 0, true, false, null, RANDOM);
     }
@@ -214,10 +214,10 @@ final class EmailUtils
         int count,
         int start,
         int end,
-        boolean letters,
-        boolean numbers,
-        char [] chars,
-        Random random)
+        final boolean letters,
+        final boolean numbers,
+        final char [] chars,
+        final Random random)
     {
         if (count == 0)
         {
@@ -240,8 +240,8 @@ final class EmailUtils
             }
         }
 
-        StringBuffer buffer = new StringBuffer();
-        int gap = end - start;
+        final StringBuffer buffer = new StringBuffer();
+        final int gap = end - start;
 
         while (count-- != 0)
         {
@@ -286,7 +286,7 @@ final class EmailUtils
         }
 
         final StringBuilder builder = new StringBuilder();
-        for (byte c : input.getBytes(US_ASCII))
+        for (final byte c : input.getBytes(US_ASCII))
         {
             int b = c;
             if (b < 0)
@@ -300,8 +300,8 @@ final class EmailUtils
             else
             {
                 builder.append(ESCAPE_CHAR);
-                char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, RADIX));
-                char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
+                final char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, RADIX));
+                final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
                 builder.append(hex1);
                 builder.append(hex2);
             }
@@ -317,7 +317,7 @@ final class EmailUtils
      * @throws IOException writing the MimeMessage failed
      * @throws MessagingException writing the MimeMessage failed
      */
-    static void writeMimeMessage(File resultFile, MimeMessage mimeMessage) throws IOException, MessagingException
+    static void writeMimeMessage(final File resultFile, final MimeMessage mimeMessage) throws IOException, MessagingException
     {
         MimeMessageUtils.writeMimeMessage(mimeMessage, resultFile);
     }

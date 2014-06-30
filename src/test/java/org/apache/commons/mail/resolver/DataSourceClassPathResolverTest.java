@@ -52,7 +52,7 @@ public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverT
     @Test(expected = IOException.class)
     public void testResolvingClassPathNonLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", false);
+        final DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 
         dataSourceResolver.resolve("asf_logo_wide.gif");

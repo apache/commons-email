@@ -42,7 +42,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
     @Test
     public void testResolvingFilesLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test/resources").toURI().toURL(), true);
+        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test/resources").toURI().toURL(), true);
         assertTrue(toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length == IMG_SIZE);
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
@@ -57,7 +57,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
     @Test
     public void testResolvingHttpLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), true);
+        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), true);
         assertTrue(toByteArray(dataSourceResolver.resolve("http://www.apache.org/images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/feather-small.gif")).length > 1);
@@ -73,7 +73,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
     @Test(expected = IOException.class)
     public void testResolvingHttpNonLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
+        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 
         dataSourceResolver.resolve("images/does-not-exist.gif");

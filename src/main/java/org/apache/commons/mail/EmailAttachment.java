@@ -108,7 +108,7 @@ public class EmailAttachment
      * @param desc A String.
      * @since 1.0
      */
-    public void setDescription(String desc)
+    public void setDescription(final String desc)
     {
         this.description = desc;
     }
@@ -119,7 +119,7 @@ public class EmailAttachment
      * @param aName A String.
      * @since 1.0
      */
-    public void setName(String aName)
+    public void setName(final String aName)
     {
         this.name = aName;
     }
@@ -134,7 +134,7 @@ public class EmailAttachment
      * @param aPath A String.
      * @since 1.0
      */
-    public void setPath(String aPath)
+    public void setPath(final String aPath)
     {
         this.path = aPath;
     }
@@ -145,7 +145,7 @@ public class EmailAttachment
      * @param aUrl A URL.
      * @since 1.0
      */
-    public void setURL(URL aUrl)
+    public void setURL(final URL aUrl)
     {
         this.url = aUrl;
     }
@@ -156,7 +156,7 @@ public class EmailAttachment
      * @param aDisposition A String.
      * @since 1.0
      */
-    public void setDisposition(String aDisposition)
+    public void setDisposition(final String aDisposition)
     {
         this.disposition = aDisposition;
     }

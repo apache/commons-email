@@ -73,7 +73,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
     }
 
     /** {@inheritDoc} */
-    public DataSource resolve(String resourceLocation) throws IOException
+    public DataSource resolve(final String resourceLocation) throws IOException
     {
         return resolve(resourceLocation, isLenient());
     }
@@ -87,13 +87,13 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
         {
             if (!isCid(resourceLocation) && !isHttpUrl(resourceLocation))
             {
-                String mimeType = FileTypeMap.getDefaultFileTypeMap().getContentType(resourceLocation);
-                String resourceName = getResourceName(resourceLocation);
-                InputStream is = DataSourceClassPathResolver.class.getResourceAsStream(resourceName);
+                final String mimeType = FileTypeMap.getDefaultFileTypeMap().getContentType(resourceLocation);
+                final String resourceName = getResourceName(resourceLocation);
+                final InputStream is = DataSourceClassPathResolver.class.getResourceAsStream(resourceName);
 
                 if (is != null)
                 {
-                    ByteArrayDataSource ds = new ByteArrayDataSource(is, mimeType);
+                    final ByteArrayDataSource ds = new ByteArrayDataSource(is, mimeType);
                     // EMAIL-125: set the name of the DataSource to the normalized resource URL
                     // similar to other DataSource implementations, e.g. FileDataSource, URLDataSource
                     ds.setName(DataSourceClassPathResolver.class.getResource(resourceName).toString());
@@ -115,7 +115,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
 
             return result;
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             if (isLenient)
             {

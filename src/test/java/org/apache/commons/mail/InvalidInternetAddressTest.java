@@ -85,7 +85,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         {
             validateMethod = InternetAddress.class.getMethod("validate", new Class [0]);
         }
-        catch (Exception e)
+        catch (final Exception e)
         {
             assertEquals("Got wrong Exception when looking for validate()", NoSuchMethodException.class, e.getClass());
         }
@@ -111,7 +111,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
                 // Expected an exception to be thrown
                 fail("Strict " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             }
-            catch (Exception ex)
+            catch (final Exception ex)
             {
                 // Expected Result
             }
@@ -126,7 +126,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
             new InternetAddress(VALID_QUOTED_EMAIL);
 
         }
-        catch (Exception ex)
+        catch (final Exception ex)
         {
             fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
                 + " - " + ex.getMessage());
@@ -149,12 +149,12 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
         {
 
-            InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe");
+            final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe");
 
             // N.B. validate() doesn't check addresses containing quotes or '['
-            boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
-            int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
-            boolean domainBracket  = (atIndex >= 0)
+            final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
+            final int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
+            final boolean domainBracket  = (atIndex >= 0)
                 && (ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0);
             try
             {
@@ -165,7 +165,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
                     fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
                 }
             }
-            catch (Exception ex)
+            catch (final Exception ex)
             {
                 if (quoted || domainBracket)
                 {
@@ -180,7 +180,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         {
             validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe"), (Object[]) null);
         }
-        catch (Exception ex)
+        catch (final Exception ex)
         {
             fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
                 + " - " + ex.getMessage());
@@ -203,12 +203,12 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
         {
 
-            InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", "UTF-8");
+            final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", "UTF-8");
 
             // N.B. validate() doesn't check addresses containing quotes or '['
-            boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
-            int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
-            boolean domainBracket  = (atIndex >= 0)
+            final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
+            final int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
+            final boolean domainBracket  = (atIndex >= 0)
                 && (ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0);
 
             try
@@ -220,7 +220,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
                 }
 
             }
-            catch (Exception ex)
+            catch (final Exception ex)
             {
 
                 if (quoted || domainBracket)
@@ -238,7 +238,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         {
             validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe", "UTF-8"), (Object[]) null);
         }
-        catch (Exception ex)
+        catch (final Exception ex)
         {
             fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
                 + " - " + ex.getMessage());

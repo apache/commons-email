@@ -330,7 +330,7 @@ public abstract class Email
      * @param d A boolean.
      * @since 1.0
      */
-    public void setDebug(boolean d)
+    public void setDebug(final boolean d)
     {
         this.debug = d;
     }
@@ -348,7 +348,7 @@ public abstract class Email
      * @see #setAuthenticator
      * @since 1.0
      */
-    public void setAuthentication(String userName, String password)
+    public void setAuthentication(final String userName, final String password)
     {
         this.setAuthenticator(new DefaultAuthenticator(userName, password));
     }
@@ -364,7 +364,7 @@ public abstract class Email
      * @see Authenticator
      * @since 1.0
      */
-    public void setAuthenticator(Authenticator newAuthenticator)
+    public void setAuthenticator(final Authenticator newAuthenticator)
     {
         this.authenticator = newAuthenticator;
     }
@@ -379,9 +379,9 @@ public abstract class Email
      * exists in the current JVM
      * @since 1.0
      */
-    public void setCharset(String newCharset)
+    public void setCharset(final String newCharset)
     {
-        Charset set = Charset.forName(newCharset);
+        final Charset set = Charset.forName(newCharset);
         this.charset = set.name();
     }
 
@@ -391,7 +391,7 @@ public abstract class Email
      * @param aMimeMultipart aMimeMultipart
      * @since 1.0
      */
-    public void setContent(MimeMultipart aMimeMultipart)
+    public void setContent(final MimeMultipart aMimeMultipart)
     {
         this.emailBody = aMimeMultipart;
     }
@@ -403,7 +403,7 @@ public abstract class Email
      * @param   aContentType aContentType
      * @since 1.0
      */
-    public void setContent(Object aObject, String aContentType)
+    public void setContent(final Object aObject, final String aContentType)
     {
         this.content = aObject;
         this.updateContentType(aContentType);
@@ -427,14 +427,14 @@ public abstract class Email
             this.contentType = aContentType;
 
             // set the charset if the input was properly formed
-            String strMarker = "; charset=";
+            final String strMarker = "; charset=";
             int charsetPos = aContentType.toLowerCase().indexOf(strMarker);
 
             if (charsetPos != -1)
             {
                 // find the next space (after the marker)
                 charsetPos += strMarker.length();
-                int intCharsetEnd =
+                final int intCharsetEnd =
                     aContentType.toLowerCase().indexOf(" ", charsetPos);
 
                 if (intCharsetEnd != -1)
@@ -453,7 +453,7 @@ public abstract class Email
                 // whose content-type is some form of text.
                 if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset))
                 {
-                    StringBuffer contentTypeBuf = new StringBuffer(this.contentType);
+                    final StringBuffer contentTypeBuf = new StringBuffer(this.contentType);
                     contentTypeBuf.append(strMarker);
                     contentTypeBuf.append(this.charset);
                     this.contentType = contentTypeBuf.toString();
@@ -468,7 +468,7 @@ public abstract class Email
      * @param   aHostName aHostName
      * @since 1.0
      */
-    public void setHostName(String aHostName)
+    public void setHostName(final String aHostName)
     {
         checkSessionAlreadyInitialized();
         this.hostName = aHostName;
@@ -483,7 +483,7 @@ public abstract class Email
      * @since 1.1
      */
     @Deprecated
-    public void setTLS(boolean withTLS)
+    public void setTLS(final boolean withTLS)
     {
         setStartTLSEnabled(withTLS);
     }
@@ -495,7 +495,7 @@ public abstract class Email
      * @return An Email.
      * @since 1.3
      */
-    public Email setStartTLSEnabled(boolean startTlsEnabled)
+    public Email setStartTLSEnabled(final boolean startTlsEnabled)
     {
         checkSessionAlreadyInitialized();
         this.startTlsEnabled = startTlsEnabled;
@@ -510,7 +510,7 @@ public abstract class Email
      * @return An Email.
      * @since 1.3
      */
-    public Email setStartTLSRequired(boolean startTlsRequired)
+    public Email setStartTLSRequired(final boolean startTlsRequired)
     {
         checkSessionAlreadyInitialized();
         this.startTlsRequired = startTlsRequired;
@@ -524,7 +524,7 @@ public abstract class Email
      * @throws IllegalArgumentException if the port number is &lt; 1
      * @since 1.0
      */
-    public void setSmtpPort(int aPortNumber)
+    public void setSmtpPort(final int aPortNumber)
     {
         checkSessionAlreadyInitialized();
 
@@ -553,17 +553,17 @@ public abstract class Email
      * @throws IllegalArgumentException if the session is {@code null}
      * @since 1.0
      */
-    public void setMailSession(Session aSession)
+    public void setMailSession(final Session aSession)
     {
         EmailUtils.notNull(aSession, "no mail session supplied");
 
-        Properties sessionProperties = aSession.getProperties();
-        String auth = sessionProperties.getProperty(MAIL_SMTP_AUTH);
+        final Properties sessionProperties = aSession.getProperties();
+        final String auth = sessionProperties.getProperty(MAIL_SMTP_AUTH);
 
         if ("true".equalsIgnoreCase(auth))
         {
-            String userName = sessionProperties.getProperty(MAIL_SMTP_USER);
-            String password = sessionProperties.getProperty(MAIL_SMTP_PASSWORD);
+            final String userName = sessionProperties.getProperty(MAIL_SMTP_USER);
+            final String password = sessionProperties.getProperty(MAIL_SMTP_PASSWORD);
 
             if (EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password))
             {
@@ -593,7 +593,7 @@ public abstract class Email
      * @throws NamingException if the resource cannot be retrieved from JNDI directory
      * @since 1.1
      */
-    public void setMailSessionFromJNDI(String jndiName) throws NamingException
+    public void setMailSessionFromJNDI(final String jndiName) throws NamingException
     {
         if (EmailUtils.isEmpty(jndiName))
         {
@@ -626,7 +626,7 @@ public abstract class Email
     {
         if (this.session == null)
         {
-            Properties properties = new Properties(System.getProperties());
+            final Properties properties = new Properties(System.getProperties());
             properties.setProperty(MAIL_TRANSPORT_PROTOCOL, SMTP);
 
             if (EmailUtils.isEmpty(this.hostName))
@@ -706,7 +706,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public Email setFrom(String email)
+    public Email setFrom(final String email)
         throws EmailException
     {
         return setFrom(email, null);
@@ -726,7 +726,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public Email setFrom(String email, String name)
+    public Email setFrom(final String email, final String name)
         throws EmailException
     {
         return setFrom(email, name, this.charset);
@@ -743,7 +743,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address or charset.
      * @since 1.1
      */
-    public Email setFrom(String email, String name, String charset)
+    public Email setFrom(final String email, final String name, final String charset)
         throws EmailException
     {
         this.fromAddress = createInternetAddress(email, name, charset);
@@ -764,7 +764,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public Email addTo(String email)
+    public Email addTo(final String email)
         throws EmailException
     {
         return addTo(email, null);
@@ -784,7 +784,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.3
      */
-    public Email addTo(String... emails)
+    public Email addTo(final String... emails)
         throws EmailException
     {
         if (emails == null || emails.length == 0)
@@ -792,7 +792,7 @@ public abstract class Email
             throw new EmailException("Address List provided was invalid");
         }
 
-        for (String email : emails)
+        for (final String email : emails)
         {
             addTo(email, null);
         }
@@ -815,7 +815,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public Email addTo(String email, String name)
+    public Email addTo(final String email, final String name)
         throws EmailException
     {
         return addTo(email, name, this.charset);
@@ -832,7 +832,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address or charset.
      * @since 1.1
      */
-    public Email addTo(String email, String name, String charset)
+    public Email addTo(final String email, final String name, final String charset)
         throws EmailException
     {
         this.toList.add(createInternetAddress(email, name, charset));
@@ -850,7 +850,7 @@ public abstract class Email
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setTo(Collection<InternetAddress> aCollection) throws EmailException
+    public Email setTo(final Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
@@ -874,7 +874,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public Email addCc(String email)
+    public Email addCc(final String email)
         throws EmailException
     {
         return this.addCc(email, null);
@@ -894,7 +894,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.3
      */
-    public Email addCc(String... emails)
+    public Email addCc(final String... emails)
         throws EmailException
     {
         if (emails == null || emails.length == 0)
@@ -902,7 +902,7 @@ public abstract class Email
             throw new EmailException("Address List provided was invalid");
         }
 
-        for (String email : emails)
+        for (final String email : emails)
         {
             addCc(email, null);
         }
@@ -924,7 +924,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public Email addCc(String email, String name)
+    public Email addCc(final String email, final String name)
         throws EmailException
     {
         return addCc(email, name, this.charset);
@@ -941,7 +941,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address or charset.
      * @since 1.1
      */
-    public Email addCc(String email, String name, String charset)
+    public Email addCc(final String email, final String name, final String charset)
         throws EmailException
     {
         this.ccList.add(createInternetAddress(email, name, charset));
@@ -959,7 +959,7 @@ public abstract class Email
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setCc(Collection<InternetAddress> aCollection) throws EmailException
+    public Email setCc(final Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
@@ -983,7 +983,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address
      * @since 1.0
      */
-    public Email addBcc(String email)
+    public Email addBcc(final String email)
         throws EmailException
     {
         return this.addBcc(email, null);
@@ -1003,7 +1003,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address
      * @since 1.3
      */
-    public Email addBcc(String... emails)
+    public Email addBcc(final String... emails)
         throws EmailException
     {
         if (emails == null || emails.length == 0)
@@ -1011,7 +1011,7 @@ public abstract class Email
             throw new EmailException("Address List provided was invalid");
         }
 
-        for (String email : emails)
+        for (final String email : emails)
         {
             addBcc(email, null);
         }
@@ -1033,7 +1033,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address
      * @since 1.0
      */
-    public Email addBcc(String email, String name)
+    public Email addBcc(final String email, final String name)
         throws EmailException
     {
         return addBcc(email, name, this.charset);
@@ -1050,7 +1050,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address
      * @since 1.1
      */
-    public Email addBcc(String email, String name, String charset)
+    public Email addBcc(final String email, final String name, final String charset)
         throws EmailException
     {
         this.bccList.add(createInternetAddress(email, name, charset));
@@ -1068,7 +1068,7 @@ public abstract class Email
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setBcc(Collection<InternetAddress> aCollection) throws EmailException
+    public Email setBcc(final Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
@@ -1092,7 +1092,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address
      * @since 1.0
      */
-    public Email addReplyTo(String email)
+    public Email addReplyTo(final String email)
         throws EmailException
     {
         return this.addReplyTo(email, null);
@@ -1112,7 +1112,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address
      * @since 1.0
      */
-    public Email addReplyTo(String email, String name)
+    public Email addReplyTo(final String email, final String name)
         throws EmailException
     {
         return addReplyTo(email, name, this.charset);
@@ -1129,7 +1129,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address or charset.
      * @since 1.1
      */
-    public Email addReplyTo(String email, String name, String charset)
+    public Email addReplyTo(final String email, final String name, final String charset)
         throws EmailException
     {
         this.replyList.add(createInternetAddress(email, name, charset));
@@ -1147,7 +1147,7 @@ public abstract class Email
      * @see javax.mail.internet.InternetAddress
      * @since 1.1
      */
-    public Email setReplyTo(Collection<InternetAddress> aCollection) throws EmailException
+    public Email setReplyTo(final Collection<InternetAddress> aCollection) throws EmailException
     {
         if (aCollection == null || aCollection.isEmpty())
         {
@@ -1169,11 +1169,11 @@ public abstract class Email
      * @throws IllegalArgumentException if either of the provided header / value is null or empty
      * @since 1.0
      */
-    public void setHeaders(Map<String, String> map)
+    public void setHeaders(final Map<String, String> map)
     {
         this.headers.clear();
 
-        for (Map.Entry<String, String> entry : map.entrySet())
+        for (final Map.Entry<String, String> entry : map.entrySet())
         {
             addHeader(entry.getKey(), entry.getValue());
         }
@@ -1187,7 +1187,7 @@ public abstract class Email
      * @since 1.0
      * @throws IllegalArgumentException if either {@code name} or {@code value} is null or empty
      */
-    public void addHeader(String name, String value)
+    public void addHeader(final String name, final String value)
     {
         if (EmailUtils.isEmpty(name))
         {
@@ -1208,7 +1208,7 @@ public abstract class Email
      * @return An Email.
      * @since 1.0
      */
-    public Email setSubject(String aSubject)
+    public Email setSubject(final String aSubject)
     {
         this.subject = aSubject;
         return this;
@@ -1225,7 +1225,7 @@ public abstract class Email
      * @throws IllegalStateException when the mail session is already initialized
      * @since 1.0
      */
-    public Email setBounceAddress(String email)
+    public Email setBounceAddress(final String email)
     {
         checkSessionAlreadyInitialized();
         this.bounceAddress = email;
@@ -1359,9 +1359,9 @@ public abstract class Email
 
             if (this.headers.size() > 0)
             {
-                for (Map.Entry<String, String> entry : this.headers.entrySet())
+                for (final Map.Entry<String, String> entry : this.headers.entrySet())
                 {
-                    String foldedValue = createFoldedHeaderValue(entry.getKey(), entry.getValue());
+                    final String foldedValue = createFoldedHeaderValue(entry.getKey(), entry.getValue());
                     this.message.addHeader(entry.getKey(), foldedValue);
                 }
             }
@@ -1373,11 +1373,11 @@ public abstract class Email
 
             if (this.popBeforeSmtp)
             {
-                Store store = session.getStore("pop3");
+                final Store store = session.getStore("pop3");
                 store.connect(this.popHost, this.popUsername, this.popPassword);
             }
         }
-        catch (MessagingException me)
+        catch (final MessagingException me)
         {
             throw new EmailException(me);
         }
@@ -1400,9 +1400,9 @@ public abstract class Email
             Transport.send(this.message);
             return this.message.getMessageID();
         }
-        catch (Throwable t)
+        catch (final Throwable t)
         {
-            String msg = "Sending the email to the following server failed : "
+            final String msg = "Sending the email to the following server failed : "
                 + this.getHostName()
                 + ":"
                 + this.getSmtpPort();
@@ -1444,7 +1444,7 @@ public abstract class Email
      * @param date Date to use as the sent date on the email
      * @since 1.0
      */
-    public void setSentDate(Date date)
+    public void setSentDate(final Date date)
     {
         if (date != null)
         {
@@ -1568,7 +1568,7 @@ public abstract class Email
      * @return An InternetAddress[].
      * @since 1.0
      */
-    protected InternetAddress[] toInternetAddressArray(List<InternetAddress> list)
+    protected InternetAddress[] toInternetAddressArray(final List<InternetAddress> list)
     {
         return list.toArray(new InternetAddress[list.size()]);
     }
@@ -1583,10 +1583,10 @@ public abstract class Email
      * @since 1.0
      */
     public void setPopBeforeSmtp(
-        boolean newPopBeforeSmtp,
-        String newPopHost,
-        String newPopUsername,
-        String newPopPassword)
+        final boolean newPopBeforeSmtp,
+        final String newPopHost,
+        final String newPopUsername,
+        final String newPopPassword)
     {
         this.popBeforeSmtp = newPopBeforeSmtp;
         this.popHost = newPopHost;
@@ -1626,7 +1626,7 @@ public abstract class Email
      * @param ssl whether to enable the SSL transport
      */
     @Deprecated
-    public void setSSL(boolean ssl)
+    public void setSSL(final boolean ssl)
     {
         setSSLOnConnect(ssl);
     }
@@ -1638,7 +1638,7 @@ public abstract class Email
      * @return An Email.
      * @since 1.3
      */
-    public Email setSSLOnConnect(boolean ssl)
+    public Email setSSLOnConnect(final boolean ssl)
     {
         checkSessionAlreadyInitialized();
         this.sslOnConnect = ssl;
@@ -1664,7 +1664,7 @@ public abstract class Email
      * @return An Email.
      * @since 1.3
      */
-    public Email setSSLCheckServerIdentity(boolean sslCheckServerIdentity)
+    public Email setSSLCheckServerIdentity(final boolean sslCheckServerIdentity)
     {
         checkSessionAlreadyInitialized();
         this.sslCheckServerIdentity = sslCheckServerIdentity;
@@ -1695,7 +1695,7 @@ public abstract class Email
      *
      * @param sslSmtpPort the SSL port to use for the SMTP transport
      */
-    public void setSslSmtpPort(String sslSmtpPort)
+    public void setSslSmtpPort(final String sslSmtpPort)
     {
         checkSessionAlreadyInitialized();
         this.sslSmtpPort = sslSmtpPort;
@@ -1725,7 +1725,7 @@ public abstract class Email
      * @return An Email.
      * @since 1.3.2
      */
-    public Email setSendPartial(boolean sendPartial)
+    public Email setSendPartial(final boolean sendPartial)
     {
         checkSessionAlreadyInitialized();
         this.sendPartial = sendPartial;
@@ -1790,7 +1790,7 @@ public abstract class Email
      * @param socketConnectionTimeout the connection timeout
      * @since 1.2
      */
-    public void setSocketConnectionTimeout(int socketConnectionTimeout)
+    public void setSocketConnectionTimeout(final int socketConnectionTimeout)
     {
         checkSessionAlreadyInitialized();
         this.socketConnectionTimeout = socketConnectionTimeout;
@@ -1814,7 +1814,7 @@ public abstract class Email
      * @param socketTimeout the socket I/O timeout
      * @since 1.2
      */
-    public void setSocketTimeout(int socketTimeout)
+    public void setSocketTimeout(final int socketTimeout)
     {
         checkSessionAlreadyInitialized();
         this.socketTimeout = socketTimeout;
@@ -1827,7 +1827,7 @@ public abstract class Email
      * @param aSession mail session to be used
      * @return the newly created message
      */
-    protected MimeMessage createMimeMessage(Session aSession)
+    protected MimeMessage createMimeMessage(final Session aSession)
     {
         return new MimeMessage(aSession);
     }
@@ -1840,7 +1840,7 @@ public abstract class Email
      * @return the folded header value
      * @throws IllegalArgumentException if either the name or value is null or empty
      */
-    private String createFoldedHeaderValue(String name, Object value)
+    private String createFoldedHeaderValue(final String name, final Object value)
     {
         String result;
 
@@ -1857,7 +1857,7 @@ public abstract class Email
         {
             result = MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value.toString(), this.charset, null));
         }
-        catch (UnsupportedEncodingException e)
+        catch (final UnsupportedEncodingException e)
         {
             result = value.toString();
         }
@@ -1874,7 +1874,7 @@ public abstract class Email
      * @return An internet address.
      * @throws EmailException Thrown when the supplied address, name or charset were invalid.
      */
-    private InternetAddress createInternetAddress(String email, String name, String charsetName)
+    private InternetAddress createInternetAddress(final String email, final String name, final String charsetName)
         throws EmailException
     {
         InternetAddress address = null;
@@ -1895,7 +1895,7 @@ public abstract class Email
                 {
                     // canonicalize the charset name and make sure
                     // the current platform supports it.
-                    Charset set = Charset.forName(charsetName);
+                    final Charset set = Charset.forName(charsetName);
                     address.setPersonal(name, set.name());
                 }
             }
@@ -1904,11 +1904,11 @@ public abstract class Email
             // it will throw AddressException.
             address.validate();
         }
-        catch (AddressException e)
+        catch (final AddressException e)
         {
             throw new EmailException(e);
         }
-        catch (UnsupportedEncodingException e)
+        catch (final UnsupportedEncodingException e)
         {
             throw new EmailException(e);
         }

@@ -43,11 +43,11 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
         {
             return this.getPrimaryBodyPart().getContent().toString();
         }
-        catch (IOException ioE)
+        catch (final IOException ioE)
         {
             return null;
         }
-        catch (MessagingException msgE)
+        catch (final MessagingException msgE)
         {
             return null;
         }

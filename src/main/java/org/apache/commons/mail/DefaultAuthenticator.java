@@ -38,7 +38,7 @@ public class DefaultAuthenticator extends Authenticator
      * @param password password to use when authentication is requested
      * @since 1.0
      */
-    public DefaultAuthenticator(String userName, String password)
+    public DefaultAuthenticator(final String userName, final String password)
     {
         this.authentication = new PasswordAuthentication(userName, password);
     }

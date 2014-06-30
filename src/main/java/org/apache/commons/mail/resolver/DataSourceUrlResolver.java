@@ -67,7 +67,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
     }
 
     /** {@inheritDoc} */
-    public DataSource resolve(String resourceLocation) throws IOException
+    public DataSource resolve(final String resourceLocation) throws IOException
     {
         return resolve(resourceLocation, isLenient());
     }
@@ -81,14 +81,14 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         {
             if (!isCid(resourceLocation))
             {
-                URL url = createUrl(resourceLocation);
+                final URL url = createUrl(resourceLocation);
                 result = new URLDataSource(url);
                 result.getInputStream();
             }
 
             return result;
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             if (isLenient)
             {

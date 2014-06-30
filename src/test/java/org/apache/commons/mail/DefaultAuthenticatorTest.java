@@ -34,9 +34,9 @@ public class DefaultAuthenticatorTest
     public void testDefaultAuthenticatorConstructor()
     {
         //insert code testing basic functionality
-        String strUsername = "user.name";
-        String strPassword = "user.pwd";
-        DefaultAuthenticator authenticator = new DefaultAuthenticator(strUsername, strPassword);
+        final String strUsername = "user.name";
+        final String strPassword = "user.pwd";
+        final DefaultAuthenticator authenticator = new DefaultAuthenticator(strUsername, strPassword);
 
         assertTrue(
             PasswordAuthentication.class.isInstance(

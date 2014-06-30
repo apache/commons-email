@@ -38,15 +38,15 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     @Before
     public void setUp() throws Exception
     {
-        DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
-        DataSourceClassPathResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
+        final DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
+        final DataSourceClassPathResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
         dataSourceResolvers = new DataSourceResolver[] { urlResolver, classPathResolver };
     }
 
     @Test
     public void testResolvingFilesLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
+        final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         // resolve using HTTP
         assertTrue(toByteArray(dataSourceResolver.resolve("/images/feather-small.gif")).length > 0);
@@ -58,7 +58,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     @Test(expected = IOException.class)
     public void testResolvingFilesNonLenient() throws Exception
     {
-        DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, false);
+        final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, false);
 
         dataSourceResolver.resolve("./image/does-not-exist.gif");
     }
@@ -66,14 +66,14 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     @Test
     public void testExternalModification() throws Exception
     {
-        DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
+        final DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
-        DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();
+        final DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();
         
         // modify an element in the returned array
         arr[0] = null;
         
-        DataSourceResolver[] arr2 = dataSourceResolver.getDataSourceResolvers();
+        final DataSourceResolver[] arr2 = dataSourceResolver.getDataSourceResolvers();
         
         // assert that the external modification is not propagated to the internal array
         assertNotNull(arr2[0]);        

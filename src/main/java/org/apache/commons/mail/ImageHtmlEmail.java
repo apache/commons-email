@@ -85,7 +85,7 @@ public class ImageHtmlEmail extends HtmlEmail
      *
      * @param dataSourceResolver the resolver
      */
-    public void setDataSourceResolver(DataSourceResolver dataSourceResolver)
+    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver)
     {
         this.dataSourceResolver = dataSourceResolver;
     }
@@ -107,7 +107,7 @@ public class ImageHtmlEmail extends HtmlEmail
             setHtmlMsg(temp);
             super.buildMimeMessage();
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             throw new EmailException("Building the MimeMessage failed", e);
         }
@@ -126,23 +126,23 @@ public class ImageHtmlEmail extends HtmlEmail
             throws EmailException, IOException
     {
         DataSource dataSource;
-        StringBuffer stringBuffer = new StringBuffer();
+        final StringBuffer stringBuffer = new StringBuffer();
 
         // maps "cid" --> name
-        Map<String, String> cidCache = new HashMap<String, String>();
+        final Map<String, String> cidCache = new HashMap<String, String>();
 
         // maps "name" --> dataSource
-        Map<String, DataSource> dataSourceCache = new HashMap<String, DataSource>();
+        final Map<String, DataSource> dataSourceCache = new HashMap<String, DataSource>();
 
         // in the String, replace all "img src" with a CID and embed the related
         // image file if we find it.
-        Matcher matcher = pattern.matcher(htmlMessage);
+        final Matcher matcher = pattern.matcher(htmlMessage);
 
         // the matcher returns all instances one by one
         while (matcher.find())
         {
             // in the RegEx we have the <src> element as second "group"
-            String resourceLocation = matcher.group(2);
+            final String resourceLocation = matcher.group(2);
 
             // avoid loading the same data source more than once
             if (dataSourceCache.get(resourceLocation) == null)

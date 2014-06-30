@@ -27,11 +27,11 @@ public abstract class AbstractDataSourceResolverTest {
 
     protected final int IMG_SIZE = 5866;
 
-    protected byte[] toByteArray(DataSource dataSource) throws IOException
+    protected byte[] toByteArray(final DataSource dataSource) throws IOException
     {
         if(dataSource != null)
         {
-            InputStream is = dataSource.getInputStream();
+            final InputStream is = dataSource.getInputStream();
             return IOUtils.toByteArray(is);
         }
         else

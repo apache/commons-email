@@ -52,7 +52,7 @@ public class EmailException
      *
      * @param msg  the error message.
      */
-    public EmailException(String msg)
+    public EmailException(final String msg)
     {
         super(msg);
     }
@@ -64,7 +64,7 @@ public class EmailException
      * @param rootCause  the exception or error that caused this exception
      *                   to be thrown.
      */
-    public EmailException(Throwable rootCause)
+    public EmailException(final Throwable rootCause)
     {
         super(rootCause);
     }
@@ -77,7 +77,7 @@ public class EmailException
      * @param rootCause  the exception or error that caused this exception
      *                   to be thrown.
      */
-    public EmailException(String msg, Throwable rootCause)
+    public EmailException(final String msg, final Throwable rootCause)
     {
         super(msg, rootCause);
     }
@@ -97,11 +97,11 @@ public class EmailException
      * @param out  the <code>PrintStream</code> to use for output
      */
     @Override
-    public void printStackTrace(PrintStream out)
+    public void printStackTrace(final PrintStream out)
     {
         synchronized (out)
         {
-            PrintWriter pw = new PrintWriter(out, false);
+            final PrintWriter pw = new PrintWriter(out, false);
             printStackTrace(pw);
 
             // Flush the PrintWriter before it's GC'ed.
@@ -115,7 +115,7 @@ public class EmailException
      * @param out  the <code>PrintWriter</code> to use for output
      */
     @Override
-    public void printStackTrace(PrintWriter out)
+    public void printStackTrace(final PrintWriter out)
     {
         synchronized (out)
         {

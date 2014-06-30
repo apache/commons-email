@@ -53,7 +53,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
     {
         this.getMailServer();
 
-        String strSubject = "Test HTML Send #1 Subject (w charset)";
+        final String strSubject = "Test HTML Send #1 Subject (w charset)";
 
         this.email = new MockHtmlEmailConcrete();
         this.email.setHostName(this.strTestMailServer);
@@ -66,10 +66,10 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
 
-        URL url = new URL(EmailConfiguration.TEST_URL);
-        String cid = this.email.embed(url, "Apache Logo");
+        final URL url = new URL(EmailConfiguration.TEST_URL);
+        final String cid = this.email.embed(url, "Apache Logo");
 
-        String strHtmlMsg =
+        final String strHtmlMsg =
             "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
 
         this.email.setHtmlMsg(strHtmlMsg);
@@ -109,7 +109,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
     @Test
     public void testSendWAttachments() throws EmailException, IOException
     {
-        EmailAttachment attachment = new EmailAttachment();
+        final EmailAttachment attachment = new EmailAttachment();
         File testFile = null;
 
         /** File to used to test file attachments (Must be valid) */
@@ -120,7 +120,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         // ====================================================================
         this.getMailServer();
 
-        String strSubject = "Test HTML Send #1 Subject (w charset)";
+        final String strSubject = "Test HTML Send #1 Subject (w charset)";
 
         this.email = new MockHtmlEmailConcrete();
         this.email.setHostName(this.strTestMailServer);
@@ -140,7 +140,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
 
-        String strHtmlMsg = "<html>Test Message<html>";
+        final String strHtmlMsg = "<html>Test Message<html>";
 
         this.email.setHtmlMsg(strHtmlMsg);
         this.email.setTextMsg(

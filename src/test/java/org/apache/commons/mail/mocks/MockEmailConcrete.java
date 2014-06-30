@@ -43,7 +43,7 @@ public class MockEmailConcrete extends Email
      * @return Email msg.
      */
     @Override
-    public Email setMsg(String msg)
+    public Email setMsg(final String msg)
     {
         // This abstract method should be tested in the concrete
         // implementation classes only.

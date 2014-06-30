@@ -71,9 +71,9 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     }
 
     /** {@inheritDoc} */
-    public DataSource resolve(String resourceLocation) throws IOException
+    public DataSource resolve(final String resourceLocation) throws IOException
     {
-        DataSource result = resolve(resourceLocation, true);
+        final DataSource result = resolve(resourceLocation, true);
 
         if (isLenient() || result != null)
         {
@@ -91,8 +91,8 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     {
         for (int i = 0; i < getDataSourceResolvers().length; i++)
         {
-            DataSourceResolver dataSourceResolver = getDataSourceResolvers()[i];
-            DataSource dataSource = dataSourceResolver.resolve(resourceLocation, isLenient);
+            final DataSourceResolver dataSourceResolver = getDataSourceResolvers()[i];
+            final DataSource dataSource = dataSourceResolver.resolve(resourceLocation, isLenient);
 
             if (dataSource != null)
             {

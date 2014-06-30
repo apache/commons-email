@@ -92,7 +92,7 @@ public class InvalidAddressTest extends AbstractEmailTest
                 // Expected an exception to be thrown
                 fail("setFrom " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             }
-            catch (EmailException ignore)
+            catch (final EmailException ignore)
             {
                 // Expected Result
             }
@@ -116,7 +116,7 @@ public class InvalidAddressTest extends AbstractEmailTest
                 // Expected an exception to be thrown
                 fail("addTo " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             }
-            catch (EmailException ignore)
+            catch (final EmailException ignore)
             {
                 // Expected Result
             }
@@ -140,7 +140,7 @@ public class InvalidAddressTest extends AbstractEmailTest
                 // Expected an exception to be thrown
                 fail("addCc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             }
-            catch (EmailException ignore)
+            catch (final EmailException ignore)
             {
                 // Expected Result
             }
@@ -164,7 +164,7 @@ public class InvalidAddressTest extends AbstractEmailTest
                 // Expected an exception to be thrown
                 fail("addBcc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             }
-            catch (EmailException ignore)
+            catch (final EmailException ignore)
             {
                 // Expected Result
             }

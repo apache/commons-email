@@ -55,7 +55,7 @@ public class EmailLiveTest extends AbstractEmailTest
         System.setProperty("mail.mime.encodefilename", "true");
     }
 
-    protected Email send(Email email) throws EmailException {
+    protected Email send(final Email email) throws EmailException {
 
         if( EmailConfiguration.MAIL_FORCE_SEND ) {
             email.send();
@@ -67,10 +67,10 @@ public class EmailLiveTest extends AbstractEmailTest
         return email;
     }
 
-    protected String getFromUrl(URL url) throws Exception {
+    protected String getFromUrl(final URL url) throws Exception {
 
-        URLDataSource dataSource = new URLDataSource(url);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final URLDataSource dataSource = new URLDataSource(url);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         IOUtils.copy(dataSource.getInputStream(), baos);
         return new String(baos.toByteArray(), "UTF-8");
     }
@@ -82,9 +82,9 @@ public class EmailLiveTest extends AbstractEmailTest
      * @return the new instance
      * @throws Exception creating the Email instance failed
      */
-    private Email create(Class<? extends Email> clazz) throws Exception {
+    private Email create(final Class<? extends Email> clazz) throws Exception {
 
-        Email email = clazz.newInstance();
+        final Email email = clazz.newInstance();
 
         email.setStartTLSEnabled(EmailConfiguration.MAIL_USE_STARTTLS);
         email.setStartTLSRequired(EmailConfiguration.MAIL_STARTTLS_REQUIRED);
@@ -117,7 +117,7 @@ public class EmailLiveTest extends AbstractEmailTest
     @Test
     public void testSimpleEmail() throws Exception
     {
-        SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
+        final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.setSubject("TestSimpleMail");
         email.setMsg("This is a test mail ... :-)");
 
@@ -132,7 +132,7 @@ public class EmailLiveTest extends AbstractEmailTest
     @Test
     public void testFoldedHeaderValue() throws Exception
     {
-        SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
+        final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.setSubject("TestFoldedHeaderMail");
         email.setMsg("This is a test mail with a folded header value... :-)");
         email.addHeader("X-TestHeader", "This is a very long header value which should be folded into two lines, hopefully");
@@ -148,7 +148,7 @@ public class EmailLiveTest extends AbstractEmailTest
     @Test
     public void testMultiPartEmail() throws Exception
     {
-        MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
+        final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject("TestMultiPartMail");
         email.setMsg("This is a test mail ... :-)");
         email.attach(new File("./src/test/resources/attachments/logo.pdf"));
@@ -173,18 +173,18 @@ public class EmailLiveTest extends AbstractEmailTest
 
         String cid;
 
-        URL url = new URL(EmailConfiguration.TEST_URL);
-        File imageFile = new File("./src/test/resources/images/asf_logo_wide.gif");
+        final URL url = new URL(EmailConfiguration.TEST_URL);
+        final File imageFile = new File("./src/test/resources/images/asf_logo_wide.gif");
 
-        EmailAttachment attachment = new EmailAttachment();
-        File attachmentFile = new File("./src/test/resources/attachments/logo.pdf");
+        final EmailAttachment attachment = new EmailAttachment();
+        final File attachmentFile = new File("./src/test/resources/attachments/logo.pdf");
         attachment.setName("logo.pdf");
         attachment.setDescription("The official Apache logo");
         attachment.setPath(attachmentFile.getAbsolutePath());
 
         // 1) text + html content
 
-        HtmlEmail htmlEmail1 = (HtmlEmail) create(HtmlEmail.class);
+        final HtmlEmail htmlEmail1 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         htmlMsg = "<html><b>This is a HTML message without any image</b><html>";
 
@@ -196,7 +196,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
         // 2) text + html content + image as attachment
 
-        HtmlEmail htmlEmail2 = (HtmlEmail) create(HtmlEmail.class);
+        final HtmlEmail htmlEmail2 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         htmlMsg = "<html><b>This is a HTML message with an image attachment</b><html>";
 
@@ -209,7 +209,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
         // 3) text + html content + inline image
 
-        HtmlEmail htmlEmail3 = (HtmlEmail) create(HtmlEmail.class);
+        final HtmlEmail htmlEmail3 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         cid = htmlEmail3.embed(imageFile, "Apache Logo");
 
@@ -224,7 +224,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
         // 4) text + html content + inline image + attachment
 
-        HtmlEmail htmlEmail4 = (HtmlEmail) create(HtmlEmail.class);
+        final HtmlEmail htmlEmail4 = (HtmlEmail) create(HtmlEmail.class);
         textMsg = "Your email client does not support HTML messages";
         cid = htmlEmail4.embed(imageFile, "Apache Logo");
         htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:" + cid + "\"> and attachment</b><html>";
@@ -257,12 +257,12 @@ public class EmailLiveTest extends AbstractEmailTest
         final String attachmentName = "\u03B1\u03B2\u03B3.txt";
 
         // make sure to set the charset before adding the message content
-        MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
+        final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject(subject);
         email.setMsg(textMsg);
 
         // create a proper UTF-8 sequence for the text attachment (matching our default charset)
-        DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
+        final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
         
         EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
@@ -278,10 +278,10 @@ public class EmailLiveTest extends AbstractEmailTest
     {
         // use a simple HTML page with one image 
 
-        File htmlFile = new File("./src/test/resources/html/www.apache.org.html");
-        String htmlMsg1 = FileUtils.readFileToString(htmlFile);
+        final File htmlFile = new File("./src/test/resources/html/www.apache.org.html");
+        final String htmlMsg1 = FileUtils.readFileToString(htmlFile);
 
-        ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
+        final ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
         email.setDataSourceResolver(new DataSourceUrlResolver(htmlFile.getParentFile().toURI().toURL(), false));
         email.setSubject("[testImageHtmlEmail] 1.Test: simple html content");
         email.setHtmlMsg(htmlMsg1);
@@ -302,11 +302,11 @@ public class EmailLiveTest extends AbstractEmailTest
     {
         if(EmailConfiguration.MAIL_FORCE_SEND)
         {
-            URL url = new URL("http://commons.apache.org/email/");
+            final URL url = new URL("http://commons.apache.org/email/");
             // URL url = new URL("http://www.dzone.com/links/index.html");
-            String htmlMsg = getFromUrl(url);
+            final String htmlMsg = getFromUrl(url);
 
-            ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
+            final ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
             email.setDataSourceResolver(new DataSourceUrlResolver(url, true));
             email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
             email.setHtmlMsg(htmlMsg);
@@ -328,16 +328,16 @@ public class EmailLiveTest extends AbstractEmailTest
     @Test    
     public void testSendingEmailsInBatch() throws Exception
     {
-        List<SimpleEmail> emails = new ArrayList<SimpleEmail>();
+        final List<SimpleEmail> emails = new ArrayList<SimpleEmail>();
 
         // we need to instantiate an email to provide the mail session - a bit ugly
-        Session session = create(SimpleEmail.class).getMailSession();
-        Transport transport = session.getTransport();
+        final Session session = create(SimpleEmail.class).getMailSession();
+        final Transport transport = session.getTransport();
 
         // simulate creating a bunch of emails using an existing mail session
         for(int i=0; i<3; i++)
         {
-            SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
+            final SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
             personalizedEmail.setMailSession(session);
             personalizedEmail.setSubject("Personalized Test Mail Nr. " + i);
             personalizedEmail.setMsg("This is a personalized test mail ... :-)");
@@ -350,9 +350,9 @@ public class EmailLiveTest extends AbstractEmailTest
         {
             transport.connect();
 
-            for (SimpleEmail personalizedEmail : emails)
+            for (final SimpleEmail personalizedEmail : emails)
             {
-                MimeMessage mimeMessage = personalizedEmail.getMimeMessage();
+                final MimeMessage mimeMessage = personalizedEmail.getMimeMessage();
                 Transport.send(mimeMessage);
                 System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());
             }
@@ -371,7 +371,7 @@ public class EmailLiveTest extends AbstractEmailTest
     @Test
     public void testPartialSend() throws Exception
     {
-        SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
+        final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.addTo(EmailConfiguration.TEST_TO);
         email.addTo("asdkljfakld@kadjfka.com");
         email.setSubject("TestPartialMail");
