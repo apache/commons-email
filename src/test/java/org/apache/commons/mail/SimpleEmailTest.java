@@ -153,6 +153,16 @@ public class SimpleEmailTest extends AbstractEmailTest
 
         this.fakeMailServer.stop();
 
+        validateSend(
+                this.fakeMailServer,
+                strSubject,
+                this.email.getMsg(),
+                this.email.getFromAddress(),
+                this.email.getToAddresses(),
+                this.email.getCcAddresses(),
+                this.email.getBccAddresses(),
+                true);
+
         String message = getMessageAsString(0);
         // check that the charset has been correctly set
         assertTrue(message.toLowerCase().contains("content-type: text/plain; charset=utf-8"));
