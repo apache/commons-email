@@ -41,6 +41,7 @@ public final class EmailConstants
     public static final String RECEIVER_EMAIL = "receiver.email";
 
     /** @deprecated since 1.3, not in use since 1.0 */
+    @Deprecated
     public static final String RECEIVER_NAME = "receiver.name";
 
     /** @deprecated since 1.3, not in use since 1.0 */
