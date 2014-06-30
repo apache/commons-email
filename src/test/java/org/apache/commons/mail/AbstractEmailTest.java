@@ -206,7 +206,7 @@ public abstract class AbstractEmailTest
                 }
 
                 // test for timeout
-                if ((dtStartWait.getTime() + EmailConfiguration.TIME_OUT)
+                if (dtStartWait.getTime() + EmailConfiguration.TIME_OUT
                     <= new Date().getTime())
                 {
                     fail("Mail server failed to start");
@@ -469,7 +469,7 @@ public abstract class AbstractEmailTest
             throw ise;
         }
 
-        return (messageBody != null) ? (new String(messageBody).intern()) : "";
+        return messageBody != null ? new String(messageBody).intern() : "";
     }
 
     /**

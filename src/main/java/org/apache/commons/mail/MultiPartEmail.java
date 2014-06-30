@@ -196,7 +196,7 @@ public class MultiPartEmail extends Email
         {
             final BodyPart primary = getPrimaryBodyPart();
 
-            if ((primary instanceof MimePart) && EmailUtils.isNotEmpty(charset))
+            if (primary instanceof MimePart && EmailUtils.isNotEmpty(charset))
             {
                 ((MimePart) primary).setText(msg, charset);
             }
@@ -418,7 +418,7 @@ public class MultiPartEmail extends Email
         // verify that the DataSource is valid
         try
         {
-            final InputStream is = (ds != null) ? ds.getInputStream() : null;
+            final InputStream is = ds != null ? ds.getInputStream() : null;
             if (is != null)
             {
                 // close the input stream to prevent file locking on windows
