@@ -256,19 +256,19 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.4.12</version>
+            <version>${powermock.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-easymock</artifactId>
-            <version>1.4.12</version>
+            <version>${powermock.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>3.1</version>
+            <version>${easymock.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -293,6 +293,9 @@
 
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
+        
+        <powermock.version>1.4.12</powermock.version>
+        <easymock.version>3.1</easymock.version>
     </properties> 
 
     <build>
@@ -431,5 +434,18 @@
                 </site>
             </distributionManagement>
         </profile>
+        
+  		<profile>
+  			<!-- Use a profile to detect if we are running in a Java 1.8 environment.
+  			     Use different versions of easymock/powermock, otherwise the test execution will fail -->
+  		    <id>test_java_5_to_7</id>
+    		<activation>
+      			<jdk>1.8</jdk>
+    		</activation>
+    		<properties>
+        		<powermock.version>1.5.5</powermock.version>
+        		<easymock.version>3.2</easymock.version>
+    		</properties>
+		</profile>        
     </profiles>
 </project>
