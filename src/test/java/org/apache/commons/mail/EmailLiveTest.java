@@ -16,23 +16,24 @@
  */
 package org.apache.commons.mail;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail.resolver.DataSourceUrlResolver;
-import org.apache.commons.mail.settings.EmailConfiguration;
-import org.junit.Before;
-import org.junit.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.mail.resolver.DataSourceUrlResolver;
+import org.apache.commons.mail.settings.EmailConfiguration;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * This are regression test sending REAL email to REAL mail
@@ -47,7 +48,7 @@ public class EmailLiveTest extends AbstractEmailTest
     @Before
     public void setUpLiveTest()
     {
-        // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work 
+        // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
         System.setProperty("mail.mime.charset", "utf-8");
 
         // enforce encoding of non-ASCII characters (violating the MIME specification - see
@@ -94,7 +95,7 @@ public class EmailLiveTest extends AbstractEmailTest
         email.setSmtpPort(EmailConfiguration.MAIL_SERVER_PORT);
         email.setBounceAddress(EmailConfiguration.TEST_FROM);
         email.setDebug(EmailConfiguration.MAIL_DEBUG);
-        email.setCharset(EmailConfiguration.MAIL_CHARSET);        
+        email.setCharset(EmailConfiguration.MAIL_CHARSET);
         email.setFrom(EmailConfiguration.TEST_FROM);
         email.addTo(EmailConfiguration.TEST_TO);
 
@@ -155,7 +156,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
     }
-    
+
     /**
      * This test checks the various options of building a HTML email.
      *
@@ -163,7 +164,7 @@ public class EmailLiveTest extends AbstractEmailTest
      *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testHtmlMailMimeLayout() throws Exception
     {
         String textMsg;
@@ -245,7 +246,7 @@ public class EmailLiveTest extends AbstractEmailTest
      *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testCorrectCharacterEncoding() throws Exception
     {
         // U+03B1 : GREEK SMALL LETTER ALPHA
@@ -264,19 +265,19 @@ public class EmailLiveTest extends AbstractEmailTest
         // create a proper UTF-8 sequence for the text attachment (matching our default charset)
         final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
-        
+
         EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
     }
 
     /**
      * Test sending a image HTML mail bases on a local HTML page and local image.
      *
-     * @throws Exception the test failed                               
+     * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testImageHtmlEmailLocal() throws Exception
     {
-        // use a simple HTML page with one image 
+        // use a simple HTML page with one image
 
         final File htmlFile = new File("./src/test/resources/html/www.apache.org.html");
         final String htmlMsg1 = FileUtils.readFileToString(htmlFile);
@@ -297,7 +298,7 @@ public class EmailLiveTest extends AbstractEmailTest
      *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testImageHtmlEmailRemote() throws Exception
     {
         if(EmailConfiguration.MAIL_FORCE_SEND)
@@ -325,7 +326,7 @@ public class EmailLiveTest extends AbstractEmailTest
      *
      * @throws Exception the test failed.
      */
-    @Test    
+    @Test
     public void testSendingEmailsInBatch() throws Exception
     {
         final List<SimpleEmail> emails = new ArrayList<SimpleEmail>();
@@ -335,7 +336,7 @@ public class EmailLiveTest extends AbstractEmailTest
         final Transport transport = session.getTransport();
 
         // simulate creating a bunch of emails using an existing mail session
-        for(int i=0; i<3; i++)
+        for(int i = 0; i<3; i++)
         {
             final SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
             personalizedEmail.setMailSession(session);
@@ -360,7 +361,7 @@ public class EmailLiveTest extends AbstractEmailTest
             transport.close();
          }
     }
-    
+
     /**
      * Testing if we are able to send a partial email with an invalid address.
      *
@@ -373,7 +374,7 @@ public class EmailLiveTest extends AbstractEmailTest
     {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.addTo(EmailConfiguration.TEST_TO);
-        email.addTo("asdkljfakld@kadjfka.com");
+        email.addTo("nobody@is.invalid");
         email.setSubject("TestPartialMail");
         email.setMsg("This is a test mail ... :-)");
 
