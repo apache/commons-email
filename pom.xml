@@ -438,7 +438,7 @@
   		<profile>
   			<!-- Use a profile to detect if we are running in a Java 1.8 environment.
   			     Use different versions of easymock/powermock, otherwise the test execution will fail -->
-  		    <id>test_java_5_to_7</id>
+  		    <id>test_java_8</id>
     		<activation>
       			<jdk>1.8</jdk>
     		</activation>
