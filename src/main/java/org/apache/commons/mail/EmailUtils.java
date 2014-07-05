@@ -17,16 +17,16 @@
 
 package org.apache.commons.mail;
 
-import org.apache.commons.mail.util.MimeMessageUtils;
-
-import javax.mail.internet.MimeMessage;
-import javax.mail.MessagingException;
-
-import java.util.BitSet;
-import java.util.Random;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.BitSet;
+import java.util.Random;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.apache.commons.mail.util.MimeMessageUtils;
 
 /**
  * Utility methods used by commons-email.
@@ -317,7 +317,8 @@ final class EmailUtils
      * @throws IOException writing the MimeMessage failed
      * @throws MessagingException writing the MimeMessage failed
      */
-    static void writeMimeMessage(final File resultFile, final MimeMessage mimeMessage) throws IOException, MessagingException
+    static void writeMimeMessage(final File resultFile, final MimeMessage mimeMessage)
+            throws IOException, MessagingException
     {
         MimeMessageUtils.writeMimeMessage(mimeMessage, resultFile);
     }
