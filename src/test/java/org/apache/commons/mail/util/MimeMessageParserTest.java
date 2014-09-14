@@ -468,4 +468,34 @@ public class MimeMessageParserTest
         assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
         assertFalse(mimeMessageParser.hasAttachments());
     }
+
+    @Test
+    public void testParseInlineCID() throws Exception
+    {
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Test", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertTrue(mimeMessageParser.hasHtmlContent());
+        assertNotNull(mimeMessageParser.getHtmlContent());
+        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertTrue(mimeMessageParser.getCc().size() == 0);
+        assertTrue(mimeMessageParser.getBcc().size() == 0);
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+
+        assertTrue(mimeMessageParser.getContentIds().contains("part1.01080006.06060206@it20one.at"));
+        assertFalse(mimeMessageParser.getContentIds().contains("part2"));
+
+        final DataSource ds = mimeMessageParser.findAttachmentByCid("part1.01080006.06060206@it20one.at");
+        assertNotNull(ds);
+        assertEquals(ds, mimeMessageParser.getAttachmentList().get(0));
+    }
+
 }

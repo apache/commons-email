@@ -23,6 +23,9 @@
 
   <body>
     <release version="1.3.4" date="TBD">
+      <action dev="tn" type="add" issue="EMAIL-141" date="2014-09-14" due-to="Stephen Kruger">
+        Added support for mapping of content-ids to DataSource in "MimeMessageParser".
+      </action>
     </release>
     <release version="1.3.3" date="2014-07-12">
       <action dev="tn" type="fix" issue="EMAIL-140" date="2014-07-01" due-to="Gary Gregory">

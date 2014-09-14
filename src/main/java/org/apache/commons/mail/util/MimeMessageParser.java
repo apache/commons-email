@@ -24,7 +24,11 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -62,6 +66,9 @@ public class MimeMessageParser
     /** List of attachments of MimeMessage */
     private final List<DataSource> attachmentList;
 
+    /** Attachments stored by their content-id */
+    private final Map<String, DataSource> cidMap;
+
     /** Is this a Multipart email */
     private boolean isMultiPart;
 
@@ -73,6 +80,7 @@ public class MimeMessageParser
     public MimeMessageParser(final MimeMessage message)
     {
         attachmentList = new ArrayList<DataSource>();
+        cidMap = new HashMap<String, DataSource>();
         this.mimeMessage = message;
         this.isMultiPart = false;
     }
@@ -202,10 +210,30 @@ public class MimeMessageParser
                 }
                 else
                 {
-                    this.attachmentList.add(createDataSource(parent, part));
+                    final String cid = stripContentId(part.getContentID());
+                    final DataSource ds = createDataSource(parent, part);
+                    if (cid != null)
+                    {
+                        this.cidMap.put(cid, ds);
+                    }
+                    this.attachmentList.add(ds);
                 }
             }
         }
+    }
+
+    /**
+     * Strips the content id of any whitespace and angle brackets.
+     * @param contentId the string to strip
+     * @return a stripped version of the content id
+     */
+    private String stripContentId(final String contentId)
+    {
+        if (contentId == null)
+        {
+            return null;
+        }
+        return contentId.trim().replaceAll("[\\<\\>]", "");
     }
 
     /**
@@ -281,6 +309,20 @@ public class MimeMessageParser
         return attachmentList;
     }
 
+    /**
+     * Returns a collection of all content-ids in the parsed message.
+     * <p>
+     * The content-ids are stripped of any angle brackets, i.e. "part1" instead
+     * of "&lt;part1&gt;".
+     *
+     * @return the collection of content ids.
+     * @since 1.3.4
+     */
+    public Collection<String> getContentIds()
+    {
+        return Collections.unmodifiableSet(cidMap.keySet());
+    }
+
     /** @return Returns the htmlContent if any */
     public String getHtmlContent()
     {
@@ -325,6 +367,22 @@ public class MimeMessageParser
         }
 
         return null;
+    }
+
+    /**
+     * Find an attachment using its content-id.
+     * <p>
+     * The content-id must be stripped of any angle brackets,
+     * i.e. "part1" instead of "&lt;part1&gt;".
+     *
+     * @param cid the content-id of the attachment
+     * @return the corresponding datasource or null if nothing was found
+     * @since 1.3.4
+     */
+    public DataSource findAttachmentByCid(final String cid)
+    {
+        final DataSource dataSource = cidMap.get(cid);
+        return dataSource;
     }
 
     /**
