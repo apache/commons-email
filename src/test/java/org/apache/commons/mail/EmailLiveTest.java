@@ -193,7 +193,7 @@ public class EmailLiveTest extends AbstractEmailTest
         htmlEmail1.setTextMsg(textMsg);
         htmlEmail1.setHtmlMsg(htmlMsg);
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemai12.eml"), send(htmlEmail1).getMimeMessage());
+        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail1.eml"), send(htmlEmail1).getMimeMessage());
 
         // 2) text + html content + image as attachment
 
