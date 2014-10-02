@@ -548,7 +548,7 @@ public class HtmlEmail extends MultiPartEmail
             bodyContainer = bodyEmbedsContainer;
             this.addPart(bodyEmbedsContainer, 0);
 
-            //If TEXT body was specified, create a alternative container and add it to the embeds container
+            // If TEXT body was specified, create a alternative container and add it to the embeds container
             if (EmailUtils.isNotEmpty(this.text))
             {
                 bodyContainer = new MimeMultipart("alternative");
@@ -566,9 +566,23 @@ public class HtmlEmail extends MultiPartEmail
         }
         else if (EmailUtils.isNotEmpty(this.text) && EmailUtils.isNotEmpty(this.html))
         {
-            //If both HTML and TEXT bodies are provided, create a alternative container and add it to the root container
-            bodyContainer = new MimeMultipart("alternative");
-            this.addPart(bodyContainer, 0);
+            // EMAIL-142: if we have both an HTML and TEXT body, but no attachments or
+            //            inline images, the root container should have mimetype
+            //            "multipart/alternative".
+            // reference: http://tools.ietf.org/html/rfc2046#section-5.1.4
+            if (this.inlineEmbeds.size() > 0 || isBoolHasAttachments())
+            {
+                // If both HTML and TEXT bodies are provided, create an alternative
+                // container and add it to the root container
+                bodyContainer = new MimeMultipart("alternative");
+                this.addPart(bodyContainer, 0);
+            }
+            else
+            {
+                // no attachments or embedded images present, change the mimetype
+                // of the root container (= body container)
+                rootContainer.setSubType("alternative");
+            }
         }
 
         if (EmailUtils.isNotEmpty(this.html))

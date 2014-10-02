@@ -23,6 +23,10 @@
 
   <body>
     <release version="1.3.4" date="TBD">
+      <action dev="tn" type="fix" issue="EMAIL-142" date="2014-10-02" due-to="Marcin Tomiak">
+        An "HtmlEmail" with both, an html and plain text content but no attachments or embedded
+        images will now be created with mimetype "multipart/alternative" instead of "multipart/mixed".
+      </action>
       <action dev="tn" type="add" issue="EMAIL-141" date="2014-09-14" due-to="Stephen Kruger">
         Added support for mapping of content-ids to DataSource in "MimeMessageParser".
       </action>
