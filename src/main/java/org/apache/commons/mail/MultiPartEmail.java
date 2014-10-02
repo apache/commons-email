@@ -144,7 +144,7 @@ public class MultiPartEmail extends Email
      */
     public Email addPart(final MimeMultipart multipart, final int index) throws EmailException
     {
-            final BodyPart bodyPart = createBodyPart();
+        final BodyPart bodyPart = createBodyPart();
         try
         {
             bodyPart.setContent(multipart);
