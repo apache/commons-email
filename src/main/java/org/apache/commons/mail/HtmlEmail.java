@@ -452,7 +452,7 @@ public class HtmlEmail extends MultiPartEmail
      *
      * @param dataSource the <code>DataSource</code> to embed
      * @param name the name that will be set in the filename header field
-     * @param encodedCid the Content-ID to use for this <code>DataSource</code>
+     * @param cid the Content-ID to use for this <code>DataSource</code>
      * @return the URL encoded Content-ID for this <code>DataSource</code>
      * @throws EmailException if the embedding fails or if <code>name</code> is
      * null or empty
