@@ -299,7 +299,7 @@
         <commons.encoding>UTF-8</commons.encoding>
         
         <powermock.version>1.4.12</powermock.version>
-        <easymock.version>3.1</easymock.version>
+        <easymock.version>3.2</easymock.version>
     </properties> 
 
     <build>
