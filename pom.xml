@@ -232,6 +232,7 @@
             <artifactId>mail</artifactId>
             <version>1.4.5</version>
         </dependency>
+        <!-- JAF is built-in to Java 6 -->
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
