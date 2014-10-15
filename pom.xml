@@ -300,6 +300,7 @@
         
         <powermock.version>1.4.12</powermock.version>
         <easymock.version>3.2</easymock.version>
+        <findbugs.version>2.5.5</findbugs.version>
     </properties> 
 
     <build>
@@ -403,7 +404,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.5.5</version>
+                <version>${findbugs.version}</version>
                 <configuration>
                     <threshold>Normal</threshold>
                     <effort>Default</effort>
@@ -447,7 +448,8 @@
       			<jdk>1.8</jdk>
     		</activation>
     		<properties>
-        		<powermock.version>1.5.5</powermock.version>
+        		<powermock.version>1.5.6</powermock.version>
+                <findbugs.version>3.0.0</findbugs.version>
     		</properties>
 		</profile>        
     </profiles>
