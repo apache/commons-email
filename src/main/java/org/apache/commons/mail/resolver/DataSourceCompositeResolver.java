@@ -79,10 +79,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
         {
             return result;
         }
-        else
-        {
-            throw new IOException("The following resource was not found : " + resourceLocation);
-        }
+        throw new IOException("The following resource was not found : " + resourceLocation);
 
     }
 
