@@ -94,10 +94,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
             {
                 return null;
             }
-            else
-            {
-                throw e;
-            }
+            throw e;
         }
     }
 
