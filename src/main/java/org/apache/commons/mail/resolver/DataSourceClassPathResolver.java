@@ -118,10 +118,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
             {
                 return null;
             }
-            else
-            {
-                throw e;
-            }
+            throw e;
         }
     }
 
