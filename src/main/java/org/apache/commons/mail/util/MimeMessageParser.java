@@ -152,10 +152,7 @@ public class MimeMessageParser
         {
             return null;
         }
-        else
-        {
-            return ((InternetAddress) addresses[0]).getAddress();
-        }
+        return ((InternetAddress) addresses[0]).getAddress();
     }
 
     /**
