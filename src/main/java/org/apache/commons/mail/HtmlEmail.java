@@ -390,12 +390,9 @@ public class HtmlEmail extends MultiPartEmail
             {
                 return ii.getCid();
             }
-            else
-            {
-                throw new EmailException("embedded name '" + file.getName()
-                    + "' is already bound to file " + existingFilePath
-                    + "; existing names cannot be rebound");
-            }
+            throw new EmailException("embedded name '" + file.getName()
+                + "' is already bound to file " + existingFilePath
+                + "; existing names cannot be rebound");
         }
 
         // verify that the file is valid
