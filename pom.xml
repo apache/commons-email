@@ -245,6 +245,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <!-- IO 2.2 is the last version compatible with 1.5; IO 2.4 needs Java 1.6 -->
@@ -256,6 +262,12 @@
     		<artifactId>subethasmtp</artifactId>
     		<version>3.1.7</version>
     		<scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+            </exclusions>
     	</dependency>
         <dependency>
             <groupId>org.powermock</groupId>
@@ -273,12 +285,6 @@
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
             <version>${easymock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>1.7.7</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
