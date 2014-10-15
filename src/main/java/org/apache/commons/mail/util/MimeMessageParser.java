@@ -455,9 +455,6 @@ public class MimeMessageParser
         {
             return fullMimeType.substring(0, pos);
         }
-        else
-        {
-            return fullMimeType;
-        }
+        return fullMimeType;
     }
 }
