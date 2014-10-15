@@ -437,12 +437,9 @@ public class HtmlEmail extends MultiPartEmail
             {
                 return ii.getCid();
             }
-            else
-            {
-                throw new EmailException("embedded DataSource '" + name
-                    + "' is already bound to name " + ii.getDataSource().toString()
-                    + "; existing names cannot be rebound");
-            }
+            throw new EmailException("embedded DataSource '" + name
+                + "' is already bound to name " + ii.getDataSource().toString()
+                + "; existing names cannot be rebound");
         }
 
         final String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
