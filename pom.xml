@@ -228,9 +228,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.2</version>
         </dependency>
         <!-- JAF is built-in to Java 6 -->
         <dependency>
