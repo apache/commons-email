@@ -452,13 +452,13 @@ public class HtmlEmail extends MultiPartEmail
      *
      * @param dataSource the <code>DataSource</code> to embed
      * @param name the name that will be set in the filename header field
-     * @param cid the Content-ID to use for this <code>DataSource</code>
+     * @param encodedCid the Content-ID to use for this <code>DataSource</code>
      * @return the URL encoded Content-ID for this <code>DataSource</code>
      * @throws EmailException if the embedding fails or if <code>name</code> is
      * null or empty
      * @since 1.1
      */
-    public String embed(final DataSource dataSource, final String name, String cid)
+    public String embed(final DataSource dataSource, final String name, final String cid)
         throws EmailException
     {
         if (EmailUtils.isEmpty(name))
@@ -470,18 +470,18 @@ public class HtmlEmail extends MultiPartEmail
 
         try
         {
-            // url encode the cid according to rfc 2392
-            cid = EmailUtils.encodeUrl(cid);
+            // URL encode the cid according to RFC 2392
+            String encodedCid = EmailUtils.encodeUrl(cid);
 
             mbp.setDataHandler(new DataHandler(dataSource));
             mbp.setFileName(name);
             mbp.setDisposition(EmailAttachment.INLINE);
-            mbp.setContentID("<" + cid + ">");
+            mbp.setContentID("<" + encodedCid + ">");
 
-            final InlineImage ii = new InlineImage(cid, dataSource, mbp);
+            final InlineImage ii = new InlineImage(encodedCid, dataSource, mbp);
             this.inlineEmbeds.put(name, ii);
 
-            return cid;
+            return encodedCid;
         }
         catch (final MessagingException me)
         {
