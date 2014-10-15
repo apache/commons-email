@@ -274,12 +274,9 @@ public class HtmlEmail extends MultiPartEmail
             {
                 return ii.getCid();
             }
-            else
-            {
-                throw new EmailException("embedded name '" + name
-                    + "' is already bound to URL " + urlDataSource.getURL()
-                    + "; existing names cannot be rebound");
-            }
+            throw new EmailException("embedded name '" + name
+                + "' is already bound to URL " + urlDataSource.getURL()
+                + "; existing names cannot be rebound");
         }
 
         // verify that the URL is valid
