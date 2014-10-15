@@ -101,9 +101,6 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
         {
             return null;
         }
-        else
-        {
-            throw new IOException("The following resource was not found : " + resourceLocation);
-        }
+        throw new IOException("The following resource was not found : " + resourceLocation);
     }
 }
