@@ -448,7 +448,6 @@
     		</activation>
     		<properties>
         		<powermock.version>1.5.5</powermock.version>
-        		<easymock.version>3.2</easymock.version>
     		</properties>
 		</profile>        
     </profiles>
