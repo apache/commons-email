@@ -16,17 +16,8 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.ParseException;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
@@ -39,6 +30,12 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.ParseException;
 
 import org.apache.commons.mail.mocks.MockEmailConcrete;
 import org.junit.Before;
@@ -1215,5 +1212,18 @@ public class EmailTest extends AbstractEmailTest
         final MimeMessage msg = email.getMimeMessage();
         msg.saveChanges();
         assertEquals("image/png", msg.getContentType());
-    }    
+    }
+
+    @Test
+    public void testGetSetBounceAddress()
+    {
+        assertNull(email.getBounceAddress());
+
+        final String bounceAddress = "test_bounce@apache.org";
+        email.setBounceAddress(bounceAddress);
+
+        // tests
+        assertEquals(bounceAddress, email.getBounceAddress());        
+    }
+
 }

@@ -1215,6 +1215,17 @@ public abstract class Email
     }
 
     /**
+     * Gets the "bounce address" of this email.
+     *
+     * @return the bounce address as string
+     * @since 1.4
+     */
+    public String getBounceAddress()
+    {
+        return this.bounceAddress;
+    }
+
+    /**
      * Set the "bounce address" - the address to which undeliverable messages
      * will be returned.  If this value is never set, then the message will be
      * sent to the address specified with the System property "mail.smtp.from",
@@ -1231,7 +1242,6 @@ public abstract class Email
         this.bounceAddress = email;
         return this;
     }
-
 
     /**
      * Define the content of the mail. It should be overridden by the

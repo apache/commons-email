@@ -23,6 +23,9 @@
 
   <body>
     <release version="1.4.0" date="2014-??-??">
+      <action dev="tn" type="add" issue="EMAIL-146" date="2014-12-01" due-to="Alexander Lehmann">
+        Added getter for the bounce address of an email to class Email.
+      </action>
       <action dev="ggregory" type="update" issue="EMAIL-144" date="2014-10-15">
         Update Oracle JavaMail dependency from 1.4.5 to 1.5.2.
       </action>
