@@ -16,12 +16,17 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.internet.MimeMessage;
@@ -30,6 +35,7 @@ import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.apache.commons.mail.util.MimeMessageParser;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -316,7 +322,7 @@ public class HtmlEmailTest extends AbstractEmailTest
         attachment.setPath(testFile.getAbsolutePath());
         this.email.attach(attachment);
 
-        this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        //this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
 
         this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
@@ -496,8 +502,14 @@ public class HtmlEmailTest extends AbstractEmailTest
     }
 
     @Test
+    @Ignore
     public void testSendWithDefaultCharset() throws Exception
     {
+        // Test is disabled as its result is dependent on the execution order:
+        // the mail.mime.charset property is normally cached by the MimeUtility
+        // class, thus setting it to another value while running the tests
+        // might not have the expected result.
+
         // ====================================================================
         // Test Success
         // ====================================================================

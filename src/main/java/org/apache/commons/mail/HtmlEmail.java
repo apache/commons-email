@@ -585,6 +585,26 @@ public class HtmlEmail extends MultiPartEmail
             //            (property "mail.mime.charset") in case none has been set
             msgHtml.setText(this.html, this.charset, EmailConstants.TEXT_SUBTYPE_HTML);
 
+            // EMAIL-147: work-around for buggy JavaMail implementations;
+            //            in case setText(...) does not set the correct content type,
+            //            use the setContent() method instead.
+            final String contentType = msgHtml.getContentType();
+            if (contentType == null || !contentType.equals(EmailConstants.TEXT_HTML))
+            {
+                // apply default charset if one has been set
+                if (EmailUtils.isNotEmpty(this.charset))
+                {
+                    msgHtml.setContent(this.html, EmailConstants.TEXT_HTML + "; charset=" + this.charset);
+                }
+                else
+                {
+                    // unfortunately, MimeUtility.getDefaultMIMECharset() is package private
+                    // and thus can not be used to set the default system charset in case
+                    // no charset has been provided by the user
+                    msgHtml.setContent(this.html, EmailConstants.TEXT_HTML);
+                }
+            }
+
             for (final InlineImage image : this.inlineEmbeds.values())
             {
                 bodyEmbedsContainer.addBodyPart(image.getMbp());

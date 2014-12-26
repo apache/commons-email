@@ -23,6 +23,10 @@
 
   <body>
     <release version="1.4.0" date="2014-??-??">
+      <action dev="tn" type="fix" issue="EMAIL-147" date="2014-12-26" due-to="Can Eskikaya">
+        Html emails did not have the correct content-type set when using the Apache Geronimo
+        JavaMail implementation v1.8.x.
+      </action>
       <action dev="tn" type="add" issue="EMAIL-146" date="2014-12-01" due-to="Alexander Lehmann">
         Added getter for the bounce address of an email to class Email.
       </action>
