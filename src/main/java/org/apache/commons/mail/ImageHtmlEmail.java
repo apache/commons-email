@@ -172,7 +172,7 @@ public class ImageHtmlEmail extends HtmlEmail
 
                 if (cid == null)
                 {
-                    cid = embed(dataSource, dataSource.getName());
+                    cid = embed(dataSource, name);
                     cidCache.put(name, cid);
                 }
 

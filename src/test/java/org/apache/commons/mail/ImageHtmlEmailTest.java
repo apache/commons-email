@@ -29,7 +29,9 @@ import org.apache.commons.mail.util.MimeMessageUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.activation.DataSource;
 import javax.mail.internet.MimeMessage;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -234,6 +236,46 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         assertEquals(1, fakeMailServer.getMessages().size());
         final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLClassPathFile.eml"));
+
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
+        assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
+    }
+
+    @Test
+    public void testSendClassPathFileWithNullName() throws Exception {
+        Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
+
+        // Create the email message
+        getMailServer();
+
+        final String strSubject = "Test HTML Send default";
+
+        email = new MockImageHtmlEmailConcrete();
+        email.setDataSourceResolver(new MockDataSourceClassPathResolver("/", TEST_IS_LENIENT));
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setSubject(strSubject);
+
+        final String html = loadUrlContent(TEST2_HTML_URL);
+
+        // set the html message
+        email.setHtmlMsg(html);
+
+        // set the alternative message
+        email.setTextMsg("Your email client does not support HTML messages");
+
+        // send the email
+        email.send();
+
+        fakeMailServer.stop();
+
+        assertEquals(1, fakeMailServer.getMessages().size());
+        final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        MimeMessageUtils.writeMimeMessage(mimeMessage,
+                new File("./target/test-emails/testSendClassPathFileWithNullName.eml"));
 
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
@@ -447,5 +489,21 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
             stream.close();
         }
         return html.toString();
+    }
+    
+    private static final class MockDataSourceClassPathResolver extends DataSourceClassPathResolver {
+
+        public MockDataSourceClassPathResolver(final String classPathBase, final boolean lenient) {
+            super(classPathBase, lenient);
+        }
+
+        @Override
+        public DataSource resolve(String resourceLocation, boolean isLenient) throws IOException {
+            javax.mail.util.ByteArrayDataSource ds =
+                    (javax.mail.util.ByteArrayDataSource) super.resolve(resourceLocation, isLenient);
+            ds.setName(null);
+            return ds;
+        }
+        
     }
 }

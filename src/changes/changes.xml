@@ -23,6 +23,9 @@
 
   <body>
     <release version="1.4.0" date="2014-??-??">
+      <action dev="tn" type="fix" issue="EMAIL-151" date="2015-03-10" due-to="Andreas Kohn">
+        "ImageHtmlEmail" failed to embed attachments if their data source name was null.
+      </action>
       <action dev="tn" type="fix" issue="EMAIL-147" date="2014-12-26" due-to="Can Eskikaya">
         Html emails did not have the correct content-type set when using the Apache Geronimo
         JavaMail implementation v1.8.x.
