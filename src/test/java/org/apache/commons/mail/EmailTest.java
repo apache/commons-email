@@ -1001,6 +1001,21 @@ public class EmailTest extends AbstractEmailTest
          email = new MockEmailConcrete();
          email.setHostName(strTestMailServer);
          email.setSmtpPort(getMailServerPort());
+         email.addTo("me@home.com");
+
+         email.send();
+    }
+
+    @Test
+    public void testSendFromSetInSession() throws Exception
+    {
+         getMailServer();
+
+         email = new MockEmailConcrete();
+         email.setHostName(strTestMailServer);
+         email.setSmtpPort(getMailServerPort());
+         email.addTo("me@home.com");
+         email.getSession().getProperties().setProperty(EmailConstants.MAIL_FROM, "me@home.com");
 
          email.send();
     }

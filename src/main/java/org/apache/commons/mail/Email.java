@@ -1328,7 +1328,8 @@ public abstract class Email
             }
             else
             {
-                if (session.getProperty(MAIL_SMTP_FROM) == null)
+                if (session.getProperty(EmailConstants.MAIL_SMTP_FROM) == null
+                        && session.getProperty(EmailConstants.MAIL_FROM) == null)
                 {
                     throw new EmailException("From address required");
                 }

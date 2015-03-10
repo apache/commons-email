@@ -231,6 +231,17 @@ public final class EmailConstants
      */
     public static final String MAIL_MIME_CHARSET = "mail.mime.charset";
 
+    /////////////////////////////////////////////////////////////////////////
+    // since 1.4
+    /////////////////////////////////////////////////////////////////////////
+
+    /**
+     * The from email address.
+     * @since 1.4
+     */
+    public static final String MAIL_FROM = "mail.from";
+
+
     /** Hide constructor. */
     private EmailConstants()
     {
