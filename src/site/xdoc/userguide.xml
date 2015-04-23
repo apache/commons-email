@@ -188,14 +188,14 @@ import org.apache.commons.mail.HtmlEmail;
 ...
 
   // load your HTML email template
-  String htmlEmailTemplate = ....
+  String htmlEmailTemplate = ".... <img src=\"http://www.apache.org/images/feather.gif\"> ....";
 
   // define you base URL to resolve relative resource locations
   URL url = new URL("http://www.apache.org");
 
   // create the email message
-  HtmlEmail email = new ImageHtmlEmail();
-  email.setDataSourceResolver(new DataSourceResolverImpl(url));
+  ImageHtmlEmail email = new ImageHtmlEmail();
+  email.setDataSourceResolver(new DataSourceUrlResolver(url));
   email.setHostName("mail.myserver.com");
   email.addTo("jdoe@somewhere.org", "John Doe");
   email.setFrom("me@apache.org", "Me");
@@ -212,8 +212,8 @@ import org.apache.commons.mail.HtmlEmail;
   ]]></source>        
       <p>
         First we create a HTML email template referencing some images. All  
-        referenced images are automatically transformed to inline images
-        starting from the current working directory.  
+        referenced images are automatically transformed to inline images by
+        the specified DataSourceResolver.
       </p>
     </section>  
     <section name="Debugging">
