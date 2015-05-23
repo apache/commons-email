@@ -22,7 +22,7 @@
   </properties>
 
   <body>
-    <release version="1.4.0" date="2014-??-??">
+    <release version="1.4" date="2015-05-23">
       <action dev="tn" type="fix" issue="EMAIL-149" date="2015-03-10" due-to="Richard DiCroce">
         "Email" threw an "EmailException" when trying to send the email if neither a from
         nor bounce address was specified, although a "mail.from" property was set in the

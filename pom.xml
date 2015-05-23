@@ -24,7 +24,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.5-SNAPSHOT</version>
     <name>Apache Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -297,8 +297,8 @@
         <commons.componentid>email</commons.componentid>
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
-        <commons.release.version>1.3.3</commons.release.version>
-        <commons.rc.version>RC2</commons.rc.version>
+        <commons.release.version>1.4</commons.release.version>
+        <commons.rc.version>RC1</commons.rc.version>
         <commons.binary.suffix>-bin</commons.binary.suffix>
 
         <!-- override the default commons encoding property -->

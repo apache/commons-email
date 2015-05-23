@@ -1,6 +1,6 @@
                          Commons Email Package
-                              Version 1.3.3
-                              Release Notes
+                              Version 1.4
+                             Release Notes
 
 INTRODUCTION:
 -------------
@@ -15,8 +15,55 @@ downloads, reports, and bug status:
 
 http://commons.apache.org/email/
 
-This is a maintenance release which fixes several bugs present in the 1.3.2
-release. All current users are encouraged to upgrade.
+This is a minor release which adds some new features and fixes several bugs
+present in the 1.3.3 release. All current users are encouraged to upgrade.
+
+CHANGES FROM 1.3.3:
+-----------------
+
+== Compatibility ==
+
+* Java 5 or later is required (unchanged since 1.3).
+
+* JavaMail dependency has been upgraded to version 1.5.2,
+  as a consequence, the maven dependency has changed to:
+
+  <dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.5.2</version>
+  </dependency>
+
+== New Features ==
+
+* Added getter for the bounce address of an email to class Email.
+  Issue: EMAIL-146. Thanks to Alexander Lehmann.
+
+* Added support for mapping of content-ids to DataSource in "MimeMessageParser".
+  Issue: EMAIL-141. Thanks to Stephen Kruger.
+
+== Updates ==
+
+* Update Oracle JavaMail dependency from 1.4.5 to 1.5.2.
+  Issue: EMAIL-144.
+
+== Fixed Bugs ==
+
+* "Email" threw an "EmailException" when trying to send the email if neither a from
+  nor bounce address was specified, although a "mail.from" property was set in the mail session.
+  Issue: EMAIL-149. Thanks to Richard DiCroce.
+
+* "ImageHtmlEmail" failed to embed attachments if their data source name was null.
+  Issue: EMAIL-151. Thanks to Andreas Kohn.
+
+* Html emails did not have the correct content-type set when using the Apache Geronimo
+  JavaMail implementation v1.8.x.
+  Issue: EMAIL-147. Thanks to Can Eskikaya.
+
+* An "HtmlEmail" with both, an html and plain text content but no attachments or embedded
+  images will now be created with mimetype "multipart/alternative" instead of "multipart/mixed".
+  Issue: EMAIL-142. Thanks to Marcin Tomiak.
+
 
 CHANGES FROM 1.3.2:
 -----------------
@@ -196,62 +243,15 @@ CHANGES FROM 1.2:
   Issue: EMAIL-91. Thanks to Kevin Lester. 
 
 
-CHANGES FROM 1.1:
------------------
-
-== Compatibility ==
-
-* Java 1.4 or later is now required. Earlier versions are no longer
-  supported by Sun.
-
-* JavaMail 1.4 or later and JavaBeans Activation Framework 1.1 or later are now
-  required.
-
-== New Features ==
-
-* Email.setFrom and Email.addTo are using Email.charset to properly encode 
-  the name.
-  
-* SimpleEmail#setMsg() with UTF-8 content honors correct charset in header 
-  and does encode the content correctly now.
-  
-* Created additional methods to support timeouts.
-
-* Create an overridable method in Email.java to create the MimeMessage instance.
-
-* Add getTo and getReplyTo to Email class. 
-
-== Fixed Bugs ==
-
-* If setHostName() has not been called, getHostName() tries to return
-  this.session.getProperty(MAIL_HOST). If mail session has not been
-  created yet, this will throw a NullPointerException. Now getHostName()
-  checks that this.session is not null before trying to access it. 
-
-* Provide better diagnostics when attaching  documents fail. 
-
-* When mail authentication is required and no username/password is supplied
-  than the provided mail session is used. If a username/password is found
-  the implementation creates a new mail session and a DefaultAuthenticator
-  as convenience implementation. 
-
-* Using Kenneth's implementation of HtmlEmail.buildMimeMessage() to fix a
-  couple of HtmlEmail layout issues. Also thanks to Martin Lau and Morten
-  Hattesen for providing in-depth analysis of the problem. 
-
-* During regression tests write out the generated MimeMessage instead of
-  WiserEmail.toString(). 
-
-
 REQUIREMENTS:
 
 J2SE environments
 -----------------
 
-Commons Email requires JavaMail 1.4.1 or later. The Oracle implementation
+Commons Email requires JavaMail 1.5.2 or later. The reference implementation
 is available at:
 
-http://www.oracle.com/technetwork/java/javamail/
+https://java.net/projects/javamail/pages/Home
 
 However, the Apache Geronimo project (http://geronimo.apache.org)
 provides a J2EE-certified implementation of the JavaMail 1.4
@@ -266,7 +266,7 @@ http://www.oracle.com/technetwork/java/javase/downloads/index-135046.html
 Apache Geronimo likewise provides an implementation under the Apache
 Software License.
 
-Commons Email has been tested with JDK 1.5 and 1.6.
+Commons Email has been tested with JDK 1.6 and 1.7.
 
 J2EE environments
 -----------------
