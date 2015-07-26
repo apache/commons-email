@@ -22,6 +22,11 @@
   </properties>
 
   <body>
+    <release version="1.5" date="2015-MM-DD">
+      <action dev="ggregory" type="add" issue="EMAIL-154" date="2015-07-26" due-to="Ken Geis, Balachandran Sivakumar">
+        Add Email#getHeader(String) and Email#getHeaders() methods
+      </action>
+    </release>
     <release version="1.4" date="2015-05-23">
       <action dev="tn" type="fix" issue="EMAIL-149" date="2015-03-10" due-to="Richard DiCroce">
         "Email" threw an "EmailException" when trying to send the email if neither a from

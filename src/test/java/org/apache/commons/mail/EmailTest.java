@@ -890,6 +890,31 @@ public class EmailTest extends AbstractEmailTest
     }
 
     @Test
+    public void testGetHeader()
+    {
+        final Map<String, String> ht = new Hashtable<String, String>();
+        ht.put("X-Foo", "Bar");
+        ht.put("X-Int", "1");
+
+        email.setHeaders(ht);
+
+        assertEquals("Bar", email.getHeader("X-Foo"));
+        assertEquals("1", email.getHeader("X-Int"));
+    }
+
+    @Test
+    public void testGetHeaders()
+    {
+        final Map<String, String> ht = new Hashtable<String, String>();
+        ht.put("X-Foo", "Bar");
+        ht.put("X-Int", "1");
+
+        email.setHeaders(ht);
+
+        assertEquals(ht.size(), email.getHeaders().size());
+    }
+    
+    @Test
     public void testFoldingHeaders() throws Exception
     {
         email.setHostName(strTestMailServer);

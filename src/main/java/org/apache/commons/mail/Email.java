@@ -1202,6 +1202,27 @@ public abstract class Email
     }
 
     /**
+     * Gets the specified header.
+     *
+     * @param header A string with the header. 
+     * @return The value of the header, or null if no such header.
+     */
+    public String getHeader(final String header)
+    {
+        return headers.get(header);
+    }
+
+    /**
+     * Gets all headers on an Email.
+     *
+     * @return a Map of all headers.
+     */
+    public Map<String, String> getHeaders()
+    {
+        return this.headers;
+    }
+    
+    /**
      * Set the email subject.
      *
      * @param aSubject A String.
