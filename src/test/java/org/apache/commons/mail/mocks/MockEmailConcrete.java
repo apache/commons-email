@@ -112,7 +112,8 @@ public class MockEmailConcrete extends Email
     /**
      * @return headers
      */
-    public Map<String, String> getHeaders()
+    @Override
+	public Map<String, String> getHeaders()
     {
         return this.headers;
     }
