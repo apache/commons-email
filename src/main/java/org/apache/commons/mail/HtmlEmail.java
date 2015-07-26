@@ -471,7 +471,7 @@ public class HtmlEmail extends MultiPartEmail
         try
         {
             // URL encode the cid according to RFC 2392
-            String encodedCid = EmailUtils.encodeUrl(cid);
+            final String encodedCid = EmailUtils.encodeUrl(cid);
 
             mbp.setDataHandler(new DataHandler(dataSource));
             mbp.setFileName(name);

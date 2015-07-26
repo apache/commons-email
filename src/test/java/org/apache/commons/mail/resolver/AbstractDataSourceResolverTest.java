@@ -31,7 +31,7 @@ public abstract class AbstractDataSourceResolverTest {
     {
         if(dataSource != null)
         {
-            InputStream is = dataSource.getInputStream();
+            final InputStream is = dataSource.getInputStream();
             try {
                 return IOUtils.toByteArray(is);
             } finally {

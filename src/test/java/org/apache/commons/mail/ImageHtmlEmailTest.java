@@ -498,8 +498,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         }
 
         @Override
-        public DataSource resolve(String resourceLocation, boolean isLenient) throws IOException {
-            javax.mail.util.ByteArrayDataSource ds =
+        public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
+            final javax.mail.util.ByteArrayDataSource ds =
                     (javax.mail.util.ByteArrayDataSource) super.resolve(resourceLocation, isLenient);
             ds.setName(null);
             return ds;
