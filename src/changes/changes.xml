@@ -24,7 +24,7 @@
   <body>
     <release version="1.5" date="2015-MM-DD">
       <action dev="ggregory" type="add" issue="EMAIL-154" date="2015-07-26" due-to="Ken Geis, Balachandran Sivakumar">
-        Add Email#getHeader(String) and Email#getHeaders() methods
+        Add Email#getHeader(String) and Email#getHeaders() methods.
       </action>
     </release>
     <release version="1.4" date="2015-05-23">
