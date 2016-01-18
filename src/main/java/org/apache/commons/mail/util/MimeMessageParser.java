@@ -176,14 +176,14 @@ public class MimeMessageParser
         throws MessagingException, IOException
     {
         if (isMimeType(part, "text/plain") && plainContent == null
-                && !MimePart.ATTACHMENT.equalsIgnoreCase(part.getDisposition()))
+                && !Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition()))
         {
             plainContent = (String) part.getContent();
         }
         else
         {
             if (isMimeType(part, "text/html") && htmlContent == null
-                    && !MimePart.ATTACHMENT.equalsIgnoreCase(part.getDisposition()))
+                    && !Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition()))
             {
                 htmlContent = (String) part.getContent();
             }
