@@ -560,12 +560,12 @@ public abstract class Email
         EmailUtils.notNull(aSession, "no mail session supplied");
 
         final Properties sessionProperties = aSession.getProperties();
-        final String auth = sessionProperties.getProperty(MAIL_SMTP_AUTH);
+        final String auth = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_AUTH);
 
         if ("true".equalsIgnoreCase(auth))
         {
-            final String userName = sessionProperties.getProperty(MAIL_SMTP_USER);
-            final String password = sessionProperties.getProperty(MAIL_SMTP_PASSWORD);
+            final String userName = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_USER);
+            final String password = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_PASSWORD);
 
             if (EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password))
             {
@@ -629,11 +629,11 @@ public abstract class Email
         if (this.session == null)
         {
             final Properties properties = new Properties(System.getProperties());
-            properties.setProperty(MAIL_TRANSPORT_PROTOCOL, SMTP);
+            properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, EmailConstants.SMTP);
 
             if (EmailUtils.isEmpty(this.hostName))
             {
-                this.hostName = properties.getProperty(MAIL_HOST);
+                this.hostName = properties.getProperty(EmailConstants.MAIL_HOST);
             }
 
             if (EmailUtils.isEmpty(this.hostName))
@@ -641,9 +641,9 @@ public abstract class Email
                 throw new EmailException("Cannot find valid hostname for mail session");
             }
 
-            properties.setProperty(MAIL_PORT, this.smtpPort);
-            properties.setProperty(MAIL_HOST, this.hostName);
-            properties.setProperty(MAIL_DEBUG, String.valueOf(this.debug));
+            properties.setProperty(EmailConstants.MAIL_PORT, this.smtpPort);
+            properties.setProperty(EmailConstants.MAIL_HOST, this.hostName);
+            properties.setProperty(EmailConstants.MAIL_DEBUG, String.valueOf(this.debug));
 
             properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_ENABLE,
                     isStartTLSEnabled() ? "true" : "false");
@@ -657,15 +657,15 @@ public abstract class Email
 
             if (this.authenticator != null)
             {
-                properties.setProperty(MAIL_SMTP_AUTH, "true");
+                properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
             }
 
             if (isSSLOnConnect())
             {
-                properties.setProperty(MAIL_PORT, this.sslSmtpPort);
-                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
-                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
-                properties.setProperty(MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
+                properties.setProperty(EmailConstants.MAIL_PORT, this.sslSmtpPort);
+                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
+                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
+                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
             }
 
             if ((isSSLOnConnect() || isStartTLSEnabled()) && isSSLCheckServerIdentity())
@@ -675,17 +675,17 @@ public abstract class Email
 
             if (this.bounceAddress != null)
             {
-                properties.setProperty(MAIL_SMTP_FROM, this.bounceAddress);
+                properties.setProperty(EmailConstants.MAIL_SMTP_FROM, this.bounceAddress);
             }
 
             if (this.socketTimeout > 0)
             {
-                properties.setProperty(MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));
+                properties.setProperty(EmailConstants.MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));
             }
 
             if (this.socketConnectionTimeout > 0)
             {
-                properties.setProperty(MAIL_SMTP_CONNECTIONTIMEOUT, Integer.toString(this.socketConnectionTimeout));
+                properties.setProperty(EmailConstants.MAIL_SMTP_CONNECTIONTIMEOUT, Integer.toString(this.socketConnectionTimeout));
             }
 
             // changed this (back) to getInstance due to security exceptions
@@ -1531,7 +1531,7 @@ public abstract class Email
     {
         if (this.session != null)
         {
-            return this.session.getProperty(MAIL_HOST);
+            return this.session.getProperty(EmailConstants.MAIL_HOST);
         }
         else if (EmailUtils.isNotEmpty(this.hostName))
         {
@@ -1549,7 +1549,7 @@ public abstract class Email
     {
         if (this.session != null)
         {
-            return this.session.getProperty(MAIL_PORT);
+            return this.session.getProperty(EmailConstants.MAIL_PORT);
         }
         else if (EmailUtils.isNotEmpty(this.smtpPort))
         {
@@ -1714,7 +1714,7 @@ public abstract class Email
     {
         if (this.session != null)
         {
-            return this.session.getProperty(MAIL_SMTP_SOCKET_FACTORY_PORT);
+            return this.session.getProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT);
         }
         else if (EmailUtils.isNotEmpty(this.sslSmtpPort))
         {
