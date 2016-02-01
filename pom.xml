@@ -230,13 +230,7 @@
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.5.2</version>
-        </dependency>
-        <!-- JAF is built-in to Java 6 -->
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.1.1</version>
+            <version>1.5.5</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

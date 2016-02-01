@@ -66,7 +66,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
             "local.name@domain,com",
             "local.name@domain;com",
             "local.name@domain:com",
-            "local.name@domain[com",
+            // "local.name@domain[com", -- works for javamail-1.5.5
             "local.name@domain]com",
             "local.name@domain\\com",
             "local.name@domain\tcom",
@@ -222,13 +222,11 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
             }
             catch (final Exception ex)
             {
-
                 if (quoted || domainBracket)
                 {
                     fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i]
                         + " - " + ex.getMessage());
                 }
-
             }
 
         }
