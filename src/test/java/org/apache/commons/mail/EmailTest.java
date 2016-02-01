@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -1266,4 +1267,25 @@ public class EmailTest extends AbstractEmailTest
         assertEquals(bounceAddress, email.getBounceAddress());        
     }
 
+    @Test
+    public void testSupportForInternationalDomainNames() throws Exception
+    {
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom("from@d\u00F6m\u00E4in.example");
+        email.addTo("to@d\u00F6m\u00E4in.example");
+        email.addCc("cc@d\u00F6m\u00E4in.example");
+        email.addBcc("bcc@d\u00F6m\u00E4in.example");
+        email.setSubject("test mail");
+        email.setSubject("testSupportForInternationalDomainNames");
+        email.setMsg("This is a test mail ... :-)");
+
+        email.buildMimeMessage();
+        final MimeMessage msg = email.getMimeMessage();
+
+        assertEquals("from@xn--dmin-moa0i.example", msg.getFrom()[0].toString());
+        assertEquals("to@xn--dmin-moa0i.example", msg.getRecipients(Message.RecipientType.TO)[0].toString());
+        assertEquals("cc@xn--dmin-moa0i.example", msg.getRecipients(Message.RecipientType.CC)[0].toString());
+        assertEquals("bcc@xn--dmin-moa0i.example", msg.getRecipients(Message.RecipientType.BCC)[0].toString());
+    }
 }

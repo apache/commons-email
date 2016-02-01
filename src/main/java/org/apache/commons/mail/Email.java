@@ -41,6 +41,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.mail.util.IDNEmailAddressConverter;
+
 /**
  * The base class for all email messages.  This class sets the
  * sender's email &amp; name, receiver's email &amp; name, subject, and the
@@ -1913,7 +1915,7 @@ public abstract class Email
 
         try
         {
-            address = new InternetAddress(email);
+            address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
 
             // check name input
             if (EmailUtils.isNotEmpty(name))

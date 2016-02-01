@@ -1,0 +1,10 @@
+.DS_Store
+*.iml
+*.iws
+*.ipr
+target
+.swp
+.idea
+.classpath
+.project
+.settings

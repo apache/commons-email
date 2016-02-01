@@ -22,7 +22,10 @@
   </properties>
 
   <body>
-    <release version="1.5" date="2015-MM-DD">
+    <release version="1.5" date="2016-MM-DD">
+      <action dev="sgoeschl" type="add" issue="EMAIL-160" date="2016-02-01">
+        Add Support for International Domain Names.
+      </action>
       <action dev="ggregory" type="add" issue="EMAIL-154" date="2015-07-26" due-to="Ken Geis, Balachandran Sivakumar">
         Add Email#getHeader(String) and Email#getHeaders() methods.
       </action>
