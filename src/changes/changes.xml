@@ -27,7 +27,7 @@
         Remove "javax.activation" dependency since it is included in JDK 1.6 and update to javax.mail-1.5.5
       </action>
       <action dev="sgoeschl" type="add" issue="EMAIL-160" date="2016-02-01">
-        Add Support for International Domain Names.
+        Add Support for International Domain Names. This change requires JDK 1.6+.
       </action>
       <action dev="ggregory" type="add" issue="EMAIL-154" date="2015-07-26" due-to="Ken Geis, Balachandran Sivakumar">
         Add Email#getHeader(String) and Email#getHeaders() methods.
