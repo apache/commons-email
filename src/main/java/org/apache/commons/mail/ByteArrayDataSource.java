@@ -191,6 +191,7 @@ public class ByteArrayDataSource implements DataSource
      * @return A String.
      * @since 1.0
      */
+    @Override
     public String getContentType()
     {
         return type == null ? "application/octet-stream" : type;
@@ -203,6 +204,7 @@ public class ByteArrayDataSource implements DataSource
      * @throws IOException IOException
      * @since 1.0
      */
+    @Override
     public InputStream getInputStream() throws IOException
     {
         if (baos == null)
@@ -229,6 +231,7 @@ public class ByteArrayDataSource implements DataSource
      * @return A String.
      * @since 1.0
      */
+    @Override
     public String getName()
     {
         return name;
@@ -240,6 +243,7 @@ public class ByteArrayDataSource implements DataSource
      * @return  An OutputStream
      * @since 1.0
      */
+    @Override
     public OutputStream getOutputStream()
     {
         baos = new ByteArrayOutputStream();

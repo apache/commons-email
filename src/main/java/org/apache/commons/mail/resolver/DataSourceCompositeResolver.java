@@ -71,6 +71,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     }
 
     /** {@inheritDoc} */
+    @Override
     public DataSource resolve(final String resourceLocation) throws IOException
     {
         final DataSource result = resolve(resourceLocation, true);
@@ -84,6 +85,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     }
 
     /** {@inheritDoc} */
+    @Override
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
     {
         for (int i = 0; i < getDataSourceResolvers().length; i++)

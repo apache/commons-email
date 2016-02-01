@@ -67,12 +67,14 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
     }
 
     /** {@inheritDoc} */
+    @Override
     public DataSource resolve(final String resourceLocation) throws IOException
     {
         return resolve(resourceLocation, isLenient());
     }
 
     /** {@inheritDoc} */
+    @Override
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
     {
         DataSource result = null;
