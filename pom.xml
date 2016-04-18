@@ -293,7 +293,6 @@
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.4</commons.release.version>
         <commons.rc.version>RC1</commons.rc.version>
-        <commons.binary.suffix>-bin</commons.binary.suffix>
 
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
