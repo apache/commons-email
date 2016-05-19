@@ -297,7 +297,7 @@
         <commons.encoding>UTF-8</commons.encoding>
         
         <powermock.version>1.6.5</powermock.version>
-        <easymock.version>3.2</easymock.version>
+        <easymock.version>3.4</easymock.version>
         <findbugs.version>2.5.5</findbugs.version>
     </properties> 
 
