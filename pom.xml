@@ -247,8 +247,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <!-- IO 2.2 is the last version compatible with 1.5; IO 2.4 needs Java 1.6 -->
-            <version>2.2</version>
+            <version>2.5</version>
             <scope>test</scope>
         </dependency>
     	<dependency>
