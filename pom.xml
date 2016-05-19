@@ -446,7 +446,7 @@
       			<jdk>1.8</jdk>
     		</activation>
     		<properties>
-                <findbugs.version>3.0.0</findbugs.version>
+                <findbugs.version>3.0.3</findbugs.version>
     		</properties>
 		</profile>        
     </profiles>
