@@ -218,7 +218,7 @@ public class MultiPartEmail extends Email
      * interested in the sending the underlying MimeMessage without
      * commons-email.
      *
-     * @exception EmailException if there was an error.
+     * @throws EmailException if there was an error.
      * @since 1.0
      */
     @Override
