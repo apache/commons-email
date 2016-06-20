@@ -17,6 +17,7 @@
 package org.apache.commons.mail;
 
 import static org.easymock.EasyMock.expect;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 import static org.powermock.api.easymock.PowerMock.createMock;
 import static org.powermock.api.easymock.PowerMock.replay;
@@ -381,8 +382,8 @@ public abstract class AbstractEmailTest
             true);
 
         // test message content
-        assertTrue("didn't find expected message content in message body",
-                getMessageBody(emailMessage).contains(strMessage));
+        assertThat("didn't find expected message content in message body",
+                getMessageBody(emailMessage), containsString(strMessage));
     }
 
     /**
