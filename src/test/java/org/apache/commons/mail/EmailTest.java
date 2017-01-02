@@ -1264,7 +1264,20 @@ public class EmailTest extends AbstractEmailTest
         email.setBounceAddress(bounceAddress);
 
         // tests
-        assertEquals(bounceAddress, email.getBounceAddress());        
+        assertEquals(bounceAddress, email.getBounceAddress());
+    }
+
+    @Test
+    public void testSetNullAndEmptyBounceAddress()
+    {
+        assertNull(email.setBounceAddress(null).getBounceAddress());
+        assertNull(email.setBounceAddress("").getBounceAddress());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testGetSetInvalidBounceAddress()
+    {
+        email.setBounceAddress("invalid-bounce-address");
     }
 
     @Test

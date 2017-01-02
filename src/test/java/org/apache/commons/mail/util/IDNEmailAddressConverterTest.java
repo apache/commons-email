@@ -63,6 +63,13 @@ public class IDNEmailAddressConverterTest {
     }
 
     @Test
+    public void testNonIDNEmailAddressToAsciiConversion()
+    {
+        assertEquals("me@home.com", idnEmailConverter.toASCII("me@home.com"));
+    }
+
+
+    @Test
     public void testInternetAddressToAsciiConversion() throws Exception
     {
         InternetAddress address = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
@@ -70,18 +77,6 @@ public class IDNEmailAddressConverterTest {
 
         InternetAddress addressWithPersonalName = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS), GERMAN_IDN_EMAIL_NAME);
         assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(addressWithPersonalName));
-    }
-
-    @Test
-    public void testInternetAddressCollectionToAsciiConversion() throws Exception
-    {
-        Collection<InternetAddress> addresses = new ArrayList<InternetAddress>();
-        addresses.add(new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS)));
-
-        Collection<String> emails = idnEmailConverter.toUnicode(addresses);
-
-        assertEquals(1, emails.size());
-        assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, emails.iterator().next());
     }
 
     @Test
@@ -93,9 +88,4 @@ public class IDNEmailAddressConverterTest {
         }
     }
 
-    @Test
-    public void testNonIDNEmailAddressToAsciiConversion()
-    {
-        assertEquals("me@home.com", idnEmailConverter.toASCII("me@home.com"));
-    }
 }

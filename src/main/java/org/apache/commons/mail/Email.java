@@ -1206,12 +1206,12 @@ public abstract class Email
     /**
      * Gets the specified header.
      *
-     * @param header A string with the header. 
+     * @param header A string with the header.
      * @return The value of the header, or null if no such header.
      */
     public String getHeader(final String header)
     {
-        return headers.get(header);
+        return this.headers.get(header);
     }
 
     /**
@@ -1223,7 +1223,7 @@ public abstract class Email
     {
         return this.headers;
     }
-    
+
     /**
      * Set the email subject.
      *
@@ -1262,7 +1262,24 @@ public abstract class Email
     public Email setBounceAddress(final String email)
     {
         checkSessionAlreadyInitialized();
-        this.bounceAddress = email;
+
+        if (email != null && !email.isEmpty())
+        {
+            try
+            {
+                this.bounceAddress = createInternetAddress(email, null, this.charset).getAddress();
+            }
+            catch (EmailException e)
+            {
+                // Can't throw 'EmailException' to keep backward-compatibility
+                throw new IllegalArgumentException("Failed to set the bounce address : " + email, e);
+            }
+        }
+        else
+        {
+            this.bounceAddress = null;
+        }
+
         return this;
     }
 
@@ -1911,7 +1928,7 @@ public abstract class Email
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName)
         throws EmailException
     {
-        InternetAddress address = null;
+        InternetAddress address;
 
         try
         {
