@@ -23,6 +23,9 @@
 
   <body>
     <release version="1.5" date="2016-MM-DD">
+      <action dev="sgoeschl" type="update" issue="EMAIL-165" date="2017-01-02">
+        Upgrade to javax.mail-1.5.6
+      </action>
       <action dev="sgoeschl" type="update" issue="EMAIL-161" date="2016-02-01">
         Remove "javax.activation" dependency since it is included in JDK 1.6 and update to javax.mail-1.5.5
       </action>
