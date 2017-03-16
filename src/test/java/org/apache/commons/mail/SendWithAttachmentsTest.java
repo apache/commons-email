@@ -130,7 +130,8 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
 
         /** File to be used to test file attachments (Must be valid) */
         /** Use umlaut characters to test if the filename is properly encoded */
-        attachment.setName("Test Attachment - a>ä, o>ö, u>ü, au>äu");
+        // use short name to avoid folding. Otherwise need to unfold when checking result.
+        attachment.setName("a>ä, o>ö, u>ü, au>äu");
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());
         this.email.attach(attachment);
