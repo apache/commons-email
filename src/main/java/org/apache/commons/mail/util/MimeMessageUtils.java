@@ -174,14 +174,7 @@ public final class MimeMessageUtils
         {
             if (fos != null)
             {
-                try
-                {
-                    fos.close();
-                }
-                catch (final Exception e)
-                {
-                    e.printStackTrace();
-                }
+                fos.close();
             }
         }
     }

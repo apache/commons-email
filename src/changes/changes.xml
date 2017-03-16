@@ -24,6 +24,9 @@
   <body>
     <release version="1.5" date="2017-MM-DD">
       <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
+      <action dev="sebb" type="fix" issue="EMAIL-169">
+        MimeMessageUtils.writeMimeMessage writes stacktrace
+      </action>
       <action dev="sebb" type="fix" issue="EMAIL-167" due-to="Lucian Burja">
         DataSourceClassPathResolver doesn't close InputStream when resolving resources
       </action>
