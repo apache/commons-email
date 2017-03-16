@@ -468,6 +468,7 @@ public abstract class Email
      * Set the hostname of the outgoing mail server.
      *
      * @param   aHostName aHostName
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.0
      */
     public void setHostName(final String aHostName)
@@ -495,6 +496,7 @@ public abstract class Email
      *
      * @param startTlsEnabled true if STARTTLS requested, false otherwise
      * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.3
      */
     public Email setStartTLSEnabled(final boolean startTlsEnabled)
@@ -510,6 +512,7 @@ public abstract class Email
      *
      * @param startTlsRequired true if STARTTLS requested, false otherwise
      * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.3
      */
     public Email setStartTLSRequired(final boolean startTlsRequired)
@@ -524,6 +527,7 @@ public abstract class Email
      *
      * @param  aPortNumber aPortNumber
      * @throws IllegalArgumentException if the port number is &lt; 1
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.0
      */
     public void setSmtpPort(final int aPortNumber)
@@ -1256,7 +1260,7 @@ public abstract class Email
      *
      * @param email A String.
      * @return An Email.
-     * @throws IllegalStateException when the mail session is already initialized
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.0
      */
     public Email setBounceAddress(final String email)
@@ -1687,6 +1691,7 @@ public abstract class Email
      *
      * @param ssl whether to enable the SSL transport
      * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.3
      */
     public Email setSSLOnConnect(final boolean ssl)
@@ -1713,6 +1718,7 @@ public abstract class Email
      *
      * @param sslCheckServerIdentity whether to enable server identity check
      * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.3
      */
     public Email setSSLCheckServerIdentity(final boolean sslCheckServerIdentity)
@@ -1745,6 +1751,7 @@ public abstract class Email
      * port, 465.
      *
      * @param sslSmtpPort the SSL port to use for the SMTP transport
+     * @throws IllegalStateException if the mail session is already initialized
      */
     public void setSslSmtpPort(final String sslSmtpPort)
     {
@@ -1774,6 +1781,7 @@ public abstract class Email
      *
      * @param sendPartial whether to enable partial send mode
      * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.3.2
      */
     public Email setSendPartial(final boolean sendPartial)
@@ -1839,6 +1847,7 @@ public abstract class Email
      * Default is a 60 second timeout.
      *
      * @param socketConnectionTimeout the connection timeout
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.2
      */
     public void setSocketConnectionTimeout(final int socketConnectionTimeout)
@@ -1863,6 +1872,7 @@ public abstract class Email
      * Default is 60 second timeout.
      *
      * @param socketTimeout the socket I/O timeout
+     * @throws IllegalStateException if the mail session is already initialized
      * @since 1.2
      */
     public void setSocketTimeout(final int socketTimeout)
