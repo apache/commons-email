@@ -509,6 +509,8 @@ public abstract class Email
 
     /**
      * Set or disable the required STARTTLS encryption.
+     * <p>
+     * Defaults to {@link #smtpPort}; can be overridden by using {@link #setSmtpPort(int)}
      *
      * @param startTlsRequired true if STARTTLS requested, false otherwise
      * @return An Email.
@@ -523,12 +525,13 @@ public abstract class Email
     }
 
     /**
-     * Set the port number of the outgoing mail server.
+     * Set the non-SSL port number of the outgoing mail server.
      *
      * @param  aPortNumber aPortNumber
      * @throws IllegalArgumentException if the port number is &lt; 1
      * @throws IllegalStateException if the mail session is already initialized
      * @since 1.0
+     * @see #setSslSmtpPort(String)
      */
     public void setSmtpPort(final int aPortNumber)
     {
@@ -1688,6 +1691,9 @@ public abstract class Email
 
     /**
      * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS).
+     * Takes precedence over {@link #setStartTLSRequired(boolean)}
+     * <p>
+     * Defaults to {@link #sslSmtpPort}; can be overridden by using {@link #setSslSmtpPort(String)}
      *
      * @param ssl whether to enable the SSL transport
      * @return An Email.
@@ -1752,6 +1758,7 @@ public abstract class Email
      *
      * @param sslSmtpPort the SSL port to use for the SMTP transport
      * @throws IllegalStateException if the mail session is already initialized
+     * @see #setSmtpPort(int)
      */
     public void setSslSmtpPort(final String sslSmtpPort)
     {
