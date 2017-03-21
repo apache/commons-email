@@ -1908,10 +1908,8 @@ public abstract class Email
      * @return the folded header value
      * @throws IllegalArgumentException if either the name or value is null or empty
      */
-    private String createFoldedHeaderValue(final String name, final Object value)
+    private String createFoldedHeaderValue(final String name, final String value)
     {
-        String result;
-
         if (EmailUtils.isEmpty(name))
         {
             throw new IllegalArgumentException("name can not be null or empty");
@@ -1923,14 +1921,12 @@ public abstract class Email
 
         try
         {
-            result = MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value.toString(), this.charset, null));
+            return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value.toString(), this.charset, null));
         }
         catch (final UnsupportedEncodingException e)
         {
-            result = value.toString();
+            return value;
         }
-
-        return result;
     }
 
     /**
