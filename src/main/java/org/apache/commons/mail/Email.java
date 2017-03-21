@@ -1914,14 +1914,14 @@ public abstract class Email
         {
             throw new IllegalArgumentException("name can not be null or empty");
         }
-        if (value == null || EmailUtils.isEmpty(value.toString()))
+        if (value == null || EmailUtils.isEmpty(value))
         {
             throw new IllegalArgumentException("value can not be null or empty");
         }
 
         try
         {
-            return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value.toString(), this.charset, null));
+            return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value, this.charset, null));
         }
         catch (final UnsupportedEncodingException e)
         {
