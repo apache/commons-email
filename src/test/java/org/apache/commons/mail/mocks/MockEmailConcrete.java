@@ -16,11 +16,8 @@
  */
 package org.apache.commons.mail.mocks;
 
-import java.util.Map;
-
 import javax.mail.Authenticator;
 import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
@@ -98,24 +95,6 @@ public class MockEmailConcrete extends Email
     public MimeMultipart getEmailBody()
     {
         return this.emailBody;
-    }
-
-    /**
-     * @return fromAddress
-     */
-    @Override
-    public InternetAddress getFromAddress()
-    {
-        return this.fromAddress;
-    }
-
-    /**
-     * @return headers
-     */
-    @Override
-	public Map<String, String> getHeaders()
-    {
-        return this.headers;
     }
 
     /**
