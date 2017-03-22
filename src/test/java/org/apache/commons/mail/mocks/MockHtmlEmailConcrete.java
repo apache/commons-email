@@ -17,8 +17,6 @@
 package org.apache.commons.mail.mocks;
 
 import java.io.IOException;
-import java.util.Map;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 
@@ -69,15 +67,6 @@ public class MockHtmlEmailConcrete extends HtmlEmail
     public String getHtmlMsg()
     {
         return this.html;
-    }
-
-    /**
-     * @return inlineEmbeds
-     */
-    @SuppressWarnings("rawtypes") // InlineImage is a private inner class
-    public Map getInlineEmbeds()
-    {
-        return inlineEmbeds;
     }
 
     /**

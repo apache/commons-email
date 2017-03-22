@@ -19,8 +19,6 @@ package org.apache.commons.mail.mocks;
 import org.apache.commons.mail.ImageHtmlEmail;
 
 import java.io.IOException;
-import java.util.Map;
-
 import javax.mail.MessagingException;
 
 /**
@@ -50,29 +48,11 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail
     }
 
     /**
-     * Retrieve the text msg
-     * @return Message Content
-     */
-    public String getTextMsg()
-    {
-        return this.text;
-    }
-
-    /**
      * Retrieve the html msg
      * @return Message Content
      */
     public String getHtmlMsg()
     {
         return this.html;
-    }
-
-    /**
-     * @return inlineEmbeds
-     */
-    @SuppressWarnings("rawtypes") // InlineImage is a private inner class
-    public Map getInlineEmbeds()
-    {
-        return inlineEmbeds;
     }
 }
