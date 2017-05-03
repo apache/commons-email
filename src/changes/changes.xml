@@ -24,6 +24,9 @@
   <body>
     <release version="1.5" date="2017-MM-DD">
       <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
+      <action dev="kinow" type="fix" issue="EMAIL-172" due-to="Thomas Grainger">
+        Grammar error in comment
+      </action>
       <action dev="sebb" type="fix" issue="EMAIL-169">
         MimeMessageUtils.writeMimeMessage writes stacktrace
       </action>
