@@ -1470,8 +1470,8 @@ public abstract class Email
     }
 
     /**
-     * Returns the internal MimeMessage. Please not that the
-     * MimeMessage is build by the buildMimeMessage() method.
+     * Returns the internal MimeMessage. Please note that the
+     * MimeMessage is built by the buildMimeMessage() method.
      *
      * @return the MimeMessage
      */
