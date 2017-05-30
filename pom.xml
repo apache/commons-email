@@ -288,6 +288,7 @@
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
         <commons.componentid>email</commons.componentid>
+        <commons.module.name>org.apache.commons.mail</commons.module.name>
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.4</commons.release.version>
