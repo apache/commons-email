@@ -275,7 +275,7 @@ final class EmailUtils
      * @param input the input string to be URL scanned.
      * @return a clean string
      */
-    static String clearEndOfLineCharacters(final String input) {
+    static String replaceEndOfLineCharactersWithSpaces(final String input) {
         return input.replace('\n', ' ').replace('\r', ' ');
     }
     

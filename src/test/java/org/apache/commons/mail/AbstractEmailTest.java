@@ -96,7 +96,7 @@ public abstract class AbstractEmailTest
     };
 
     /** Test characters not acceptable to email */
-    protected String[] testCharsInvalid =
+    protected String[] endOfLineCombinations =
     {
             "\n",
             "\r",

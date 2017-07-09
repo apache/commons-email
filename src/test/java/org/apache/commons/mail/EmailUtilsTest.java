@@ -32,11 +32,11 @@ public class EmailUtilsTest {
 
     @Test
     public void testClearEndOfLineCharacters() {
-        assertEquals("abcdefg", EmailUtils.clearEndOfLineCharacters("abcdefg"));
-        assertEquals("abc defg", EmailUtils.clearEndOfLineCharacters("abc\rdefg"));
-        assertEquals("abc defg", EmailUtils.clearEndOfLineCharacters("abc\ndefg"));
-        assertEquals("abc  defg", EmailUtils.clearEndOfLineCharacters("abc\r\ndefg"));
-        assertEquals("abc  defg", EmailUtils.clearEndOfLineCharacters("abc\n\rdefg"));
+        assertEquals("abcdefg", EmailUtils.replaceEndOfLineCharactersWithSpaces("abcdefg"));
+        assertEquals("abc defg", EmailUtils.replaceEndOfLineCharactersWithSpaces("abc\rdefg"));
+        assertEquals("abc defg", EmailUtils.replaceEndOfLineCharactersWithSpaces("abc\ndefg"));
+        assertEquals("abc  defg", EmailUtils.replaceEndOfLineCharactersWithSpaces("abc\r\ndefg"));
+        assertEquals("abc  defg", EmailUtils.replaceEndOfLineCharactersWithSpaces("abc\n\rdefg"));
     }
 
     @Test

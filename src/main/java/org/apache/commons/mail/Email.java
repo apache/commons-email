@@ -1238,7 +1238,7 @@ public abstract class Email
      * @since 1.0
      */
     public Email setSubject(final String aSubject) {
-        this.subject = EmailUtils.clearEndOfLineCharacters(aSubject);
+        this.subject = EmailUtils.replaceEndOfLineCharactersWithSpaces(aSubject);
         return this;
     }
 

@@ -979,8 +979,8 @@ public class EmailTest extends AbstractEmailTest
     }
 
     @Test
-    public void testSetSubjectInvalid() {
-        for (final String invalidChar : testCharsInvalid) {
+    public void testEndOflineCharactersInSubjectAreReplacedWithSpaces() {
+        for (final String invalidChar : endOfLineCombinations) {
             email.setSubject(invalidChar);
             assertNotEquals(invalidChar, email.getSubject());
         }
