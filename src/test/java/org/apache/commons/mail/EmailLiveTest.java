@@ -280,7 +280,7 @@ public class EmailLiveTest extends AbstractEmailTest
         // use a simple HTML page with one image
 
         final File htmlFile = new File("./src/test/resources/html/www.apache.org.html");
-        final String htmlMsg1 = FileUtils.readFileToString(htmlFile);
+        final String htmlMsg1 = FileUtils.readFileToString(htmlFile, "ISO-8859-1");
 
         final ImageHtmlEmail email = (ImageHtmlEmail) create(ImageHtmlEmail.class);
         email.setDataSourceResolver(new DataSourceUrlResolver(htmlFile.getParentFile().toURI().toURL(), false));
