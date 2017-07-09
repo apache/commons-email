@@ -971,12 +971,24 @@ public class EmailTest extends AbstractEmailTest
     }
 
     @Test
-    public void testSetSubject()
-    {
+    public void testSetSubjectValid() {
         for (final String validChar : testCharsValid) {
             email.setSubject(validChar);
             assertEquals(validChar, email.getSubject());
         }
+    }
+
+    @Test
+    public void testSetSubjectInvalid() {
+        for (final String invalidChar : testCharsInvalid) {
+            email.setSubject(invalidChar);
+            assertNotEquals(invalidChar, email.getSubject());
+        }
+        assertEquals("abcdefg", email.setSubject("abcdefg").getSubject());
+        assertEquals("abc defg", email.setSubject("abc\rdefg").getSubject());
+        assertEquals("abc defg", email.setSubject("abc\ndefg").getSubject());
+        assertEquals("abc  defg", email.setSubject("abc\r\ndefg").getSubject());
+        assertEquals("abc  defg", email.setSubject("abc\n\rdefg").getSubject());
     }
 
     @Test(expected = EmailException.class)

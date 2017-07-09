@@ -92,8 +92,16 @@ public abstract class AbstractEmailTest
             "A",
             "\uc5ec",
             "0123456789",
-            "012345678901234567890",
-            "\n"
+            "012345678901234567890"
+    };
+
+    /** Test characters not acceptable to email */
+    protected String[] testCharsInvalid =
+    {
+            "\n",
+            "\r",
+            "\r\n",
+            "\n\r",
     };
 
     /** Array of test strings */

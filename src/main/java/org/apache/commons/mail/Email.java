@@ -1231,15 +1231,14 @@ public abstract class Email
     }
 
     /**
-     * Set the email subject.
+     * Sets the email subject. Replaces end-of-line characters with spaces.
      *
      * @param aSubject A String.
      * @return An Email.
      * @since 1.0
      */
-    public Email setSubject(final String aSubject)
-    {
-        this.subject = aSubject;
+    public Email setSubject(final String aSubject) {
+        this.subject = EmailUtils.clearEndOfLineCharacters(aSubject);
         return this;
     }
 

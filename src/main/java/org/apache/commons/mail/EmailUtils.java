@@ -270,6 +270,16 @@ final class EmailUtils
     }
 
     /**
+     * Replaces end-of-line characters with spaces.
+     * 
+     * @param input the input string to be URL scanned.
+     * @return a clean string
+     */
+    static String clearEndOfLineCharacters(final String input) {
+        return input.replace('\n', ' ').replace('\r', ' ');
+    }
+    
+    /**
      * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
      *
      * @param input the input string to be URL encoded

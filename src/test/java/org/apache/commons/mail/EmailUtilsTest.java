@@ -28,11 +28,19 @@ import org.junit.Test;
  *
  * @since 1.3
  */
-public class EmailUtilsTest
-{
+public class EmailUtilsTest {
+
     @Test
-    public void testUrlEncoding() throws UnsupportedEncodingException
-    {
+    public void testClearEndOfLineCharacters() {
+        assertEquals("abcdefg", EmailUtils.clearEndOfLineCharacters("abcdefg"));
+        assertEquals("abc defg", EmailUtils.clearEndOfLineCharacters("abc\rdefg"));
+        assertEquals("abc defg", EmailUtils.clearEndOfLineCharacters("abc\ndefg"));
+        assertEquals("abc  defg", EmailUtils.clearEndOfLineCharacters("abc\r\ndefg"));
+        assertEquals("abc  defg", EmailUtils.clearEndOfLineCharacters("abc\n\rdefg"));
+    }
+
+    @Test
+    public void testUrlEncoding() throws UnsupportedEncodingException {
         assertEquals("abcdefg", EmailUtils.encodeUrl("abcdefg"));
         assertEquals("0123456789", EmailUtils.encodeUrl("0123456789"));
         assertEquals("Test%20CID", EmailUtils.encodeUrl("Test CID"));
