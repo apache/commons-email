@@ -276,7 +276,7 @@ final class EmailUtils
      * @return a clean string
      */
     static String replaceEndOfLineCharactersWithSpaces(final String input) {
-        return input.replace('\n', ' ').replace('\r', ' ');
+        return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
     }
     
     /**
