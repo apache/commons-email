@@ -1274,7 +1274,7 @@ public abstract class Email
             {
                 this.bounceAddress = createInternetAddress(email, null, this.charset).getAddress();
             }
-            catch (EmailException e)
+            catch (final EmailException e)
             {
                 // Can't throw 'EmailException' to keep backward-compatibility
                 throw new IllegalArgumentException("Failed to set the bounce address : " + email, e);

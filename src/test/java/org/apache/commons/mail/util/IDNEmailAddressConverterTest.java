@@ -69,17 +69,17 @@ public class IDNEmailAddressConverterTest {
     @Test
     public void testInternetAddressToAsciiConversion() throws Exception
     {
-        InternetAddress address = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
+        final InternetAddress address = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
         assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(address));
 
-        InternetAddress addressWithPersonalName = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS), GERMAN_IDN_EMAIL_NAME);
+        final InternetAddress addressWithPersonalName = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS), GERMAN_IDN_EMAIL_NAME);
         assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(addressWithPersonalName));
     }
 
     @Test
     public void testRoundTripConversionOfIDNEmailAddress()
     {
-        for(String email : IDN_EMAIL_ADDRESSES)
+        for(final String email : IDN_EMAIL_ADDRESSES)
         {
             assertEquals(email, idnEmailConverter.toUnicode(idnEmailConverter.toASCII(email)));
         }
