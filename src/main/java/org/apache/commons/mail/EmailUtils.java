@@ -272,7 +272,7 @@ final class EmailUtils
     /**
      * Replaces end-of-line characters with spaces.
      * 
-     * @param input the input string to be URL scanned.
+     * @param input the input string to be scanned.
      * @return a clean string
      */
     static String replaceEndOfLineCharactersWithSpaces(final String input) {
