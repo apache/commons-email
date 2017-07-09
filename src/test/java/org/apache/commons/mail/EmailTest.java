@@ -976,6 +976,10 @@ public class EmailTest extends AbstractEmailTest
             email.setSubject(validChar);
             assertEquals(validChar, email.getSubject());
         }
+        assertEquals(null, email.setSubject(null).getSubject());
+        assertEquals("", email.setSubject("").getSubject());
+        assertEquals("   ", email.setSubject("   ").getSubject());
+        assertEquals("\t", email.setSubject("\t").getSubject());
     }
 
     @Test
@@ -984,7 +988,6 @@ public class EmailTest extends AbstractEmailTest
             email.setSubject(invalidChar);
             assertNotEquals(invalidChar, email.getSubject());
         }
-        assertEquals(null, email.setSubject(null).getSubject());
         assertEquals("abcdefg", email.setSubject("abcdefg").getSubject());
         assertEquals("abc defg", email.setSubject("abc\rdefg").getSubject());
         assertEquals("abc defg", email.setSubject("abc\ndefg").getSubject());
