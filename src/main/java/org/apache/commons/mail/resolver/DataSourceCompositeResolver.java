@@ -26,7 +26,6 @@ import java.io.IOException;
  * multiple locations such as the classpath, the file system or an URL.
  *
  * @since 1.3
- * @version $Id$
  */
 public class DataSourceCompositeResolver extends DataSourceBaseResolver
 {

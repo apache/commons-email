@@ -23,7 +23,6 @@ import java.io.IOException;
  * Creates a <code>DataSource</code> based on an URL.
  *
  * @since 1.3
- * @version $Id$
  */
 public interface DataSourceResolver
 {

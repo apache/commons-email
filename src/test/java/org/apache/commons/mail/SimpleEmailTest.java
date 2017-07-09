@@ -30,7 +30,6 @@ import org.junit.Test;
 /**
  * JUnit test case for SimpleEmailTest
  * @since 1.0
- * @version $Id$
  */
 public class SimpleEmailTest extends AbstractEmailTest
 {

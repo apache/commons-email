@@ -30,7 +30,6 @@ import java.io.InputStream;
  * Static helper methods.
  *
  * @since 1.3
- * @version $Id$
  */
 public final class MimeMessageUtils
 {

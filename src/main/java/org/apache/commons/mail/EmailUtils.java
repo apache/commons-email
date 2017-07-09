@@ -41,7 +41,6 @@ import org.apache.commons.mail.util.MimeMessageUtils;
  * </p>
  *
  * @since 1.0
- * @version $Id$
  */
 final class EmailUtils
 {

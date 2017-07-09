@@ -25,7 +25,6 @@ import org.apache.commons.mail.SimpleEmail;
  * (used to allow testing only)
  *
  * @since 1.0
- * @version $Id$
  */
 public class MockSimpleEmail extends SimpleEmail
 {

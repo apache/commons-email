@@ -39,7 +39,6 @@ import javax.activation.DataSource;
  * and it is recommended to do so.
  *
  * @since 1.0
- * @version $Id$
  * @deprecated since 1.4, use {@link javax.mail.util.ByteArrayDataSource} instead
  */
 @Deprecated

@@ -27,7 +27,6 @@ import java.io.InputStream;
  * Creates a <code>DataSource</code> based on an class path.
  *
  * @since 1.3
- * @version $Id$
  */
 public class DataSourceClassPathResolver extends DataSourceBaseResolver
 {

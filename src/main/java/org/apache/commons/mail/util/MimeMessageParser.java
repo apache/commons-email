@@ -50,7 +50,6 @@ import javax.mail.util.ByteArrayDataSource;
  * HTML text and attachments.
  *
  * @since 1.3
- * @version $Id$
  */
 public class MimeMessageParser
 {

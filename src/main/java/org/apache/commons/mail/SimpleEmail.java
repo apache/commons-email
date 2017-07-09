@@ -21,7 +21,6 @@ package org.apache.commons.mail;
  * attachments.
  *
  * @since 1.0
- * @version $Id$
 */
 public class SimpleEmail extends Email
 {

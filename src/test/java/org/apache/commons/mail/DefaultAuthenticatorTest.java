@@ -26,7 +26,6 @@ import org.junit.Test;
  * JUnit test case for DefaultAuthenticator Class.
  *
  * @since 1.0
- * @version $Id$
  */
 public class DefaultAuthenticatorTest
 {

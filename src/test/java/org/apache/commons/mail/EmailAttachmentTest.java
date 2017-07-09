@@ -27,7 +27,6 @@ import org.junit.Test;
  * JUnit test case for EmailAttachment Class.
  *
  * @since 1.0
- * @version $Id$
  */
 public class EmailAttachmentTest extends AbstractEmailTest
 {

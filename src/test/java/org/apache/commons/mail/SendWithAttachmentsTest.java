@@ -31,7 +31,6 @@ import org.junit.Test;
  * JUnit test case verifying bugzilla issue 30973 is fixed.
  *
  * @since 1.0
- * @version $Id$
  */
 public class SendWithAttachmentsTest extends AbstractEmailTest
 {

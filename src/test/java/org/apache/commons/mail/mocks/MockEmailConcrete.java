@@ -29,7 +29,6 @@ import org.apache.commons.mail.EmailException;
  * Supplies getters for methods that normally only have setters.
  *
  * @since 1.0
- * @version $Id$
  */
 public class MockEmailConcrete extends Email
 {

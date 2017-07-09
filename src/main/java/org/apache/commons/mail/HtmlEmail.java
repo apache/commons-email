@@ -80,7 +80,6 @@ import javax.mail.internet.MimeMultipart;
  * method defined on the <code>DataSource</code>s to make the determination.
  *
  * @since 1.0
- * @version $Id$
  */
 public class HtmlEmail extends MultiPartEmail
 {

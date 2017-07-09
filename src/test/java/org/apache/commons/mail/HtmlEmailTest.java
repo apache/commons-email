@@ -45,7 +45,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * JUnit test case for HtmlEmail Class.
  *
  * @since 1.0
- * @version $Id$
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { MockHtmlEmailConcrete.class })

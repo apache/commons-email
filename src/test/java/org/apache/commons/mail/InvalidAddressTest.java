@@ -26,7 +26,6 @@ import org.junit.Test;
  * JUnit test case for invalid Addresses in Email Class
  *
  * @since 1.0
- * @version $Id$
  */
 public class InvalidAddressTest extends AbstractEmailTest
 {

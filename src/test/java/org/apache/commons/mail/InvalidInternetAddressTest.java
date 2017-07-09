@@ -30,7 +30,6 @@ import org.junit.Test;
  * JUnit test case demonstrating InternetAddress validation.
  *
  * @since 1.0
- * @version $Id$
  */
 public class InvalidInternetAddressTest extends AbstractEmailTest
 {

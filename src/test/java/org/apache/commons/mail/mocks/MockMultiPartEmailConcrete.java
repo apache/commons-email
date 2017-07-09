@@ -28,7 +28,6 @@ import org.apache.commons.mail.MultiPartEmail;
  * (used to allow testing only)
  *
  * @since 1.0
- * @version $Id$
  */
 public class MockMultiPartEmailConcrete extends MultiPartEmail
 {

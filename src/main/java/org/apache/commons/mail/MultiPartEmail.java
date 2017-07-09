@@ -44,7 +44,6 @@ import javax.mail.internet.MimeUtility;
  * different attach() methods.
  *
  * @since 1.0
- * @version $Id$
  */
 public class MultiPartEmail extends Email
 {

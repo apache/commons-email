@@ -29,7 +29,6 @@ import java.io.PrintWriter;
  * supported by JDK &ge; 1.4.
  *
  * @since 1.0
- * @version $Id$
  */
 public class EmailException
         extends Exception

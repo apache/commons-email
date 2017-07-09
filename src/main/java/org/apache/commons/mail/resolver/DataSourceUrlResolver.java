@@ -26,7 +26,6 @@ import java.net.URL;
  * Creates a <code>DataSource</code> based on an URL.
  *
  * @since 1.3
- * @version $Id$
  */
 public class DataSourceUrlResolver extends DataSourceBaseResolver
 {

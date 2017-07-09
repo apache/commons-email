@@ -22,7 +22,6 @@ import java.net.URL;
  * This class models an email attachment. Used by MultiPartEmail.
  *
  * @since 1.0
- * @version $Id$
  */
 public class EmailAttachment
 {

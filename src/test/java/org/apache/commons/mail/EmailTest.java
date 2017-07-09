@@ -46,7 +46,6 @@ import org.junit.Test;
  * JUnit test case for Email Class
  *
  * @since 1.0
- * @version $Id$
  */
 public class EmailTest extends AbstractEmailTest
 {

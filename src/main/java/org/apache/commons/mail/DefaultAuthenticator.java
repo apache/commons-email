@@ -24,7 +24,6 @@ import javax.mail.PasswordAuthentication;
  * transport needing basic userName and password type authentication.
  *
  * @since 1.0
- * @version $Id$
  */
 public class DefaultAuthenticator extends Authenticator
 {

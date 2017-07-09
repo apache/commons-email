@@ -27,7 +27,6 @@ import org.junit.Test;
  * JUnit test case for EmailUtils Class
  *
  * @since 1.3
- * @version $Id$
  */
 public class EmailUtilsTest
 {

@@ -40,7 +40,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * JUnit test case for MultiPartEmail Class.
  *
  * @since 1.0
- * @version $Id$
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { MockMultiPartEmailConcrete.class, URLDataSource.class })

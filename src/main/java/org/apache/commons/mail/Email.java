@@ -51,7 +51,6 @@ import org.apache.commons.mail.util.IDNEmailAddressConverter;
  * Subclasses are responsible for setting the message body.
  *
  * @since 1.0
- * @version $Id$
  */
 public abstract class Email
 {

@@ -22,7 +22,6 @@ import org.apache.commons.mail.DataSourceResolver;
  * Base class for various resolvers.
  *
  * @since 1.3
- * @version $Id$
  */
 public abstract class DataSourceBaseResolver implements DataSourceResolver
 {

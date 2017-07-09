@@ -24,7 +24,6 @@ package org.apache.commons.mail;
  * http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html</a>.
  *
  * @since 1.3
- * @version $Id$
  */
 public final class EmailConstants
 {

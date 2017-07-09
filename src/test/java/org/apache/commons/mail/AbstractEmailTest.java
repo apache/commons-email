@@ -48,7 +48,6 @@ import org.subethamail.wiser.WiserMessage;
  * Base test case for Email test classes.
  *
  * @since 1.0
- * @version $Id$
  */
 public abstract class AbstractEmailTest
 {
