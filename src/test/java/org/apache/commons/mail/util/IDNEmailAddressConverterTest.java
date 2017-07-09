@@ -32,7 +32,7 @@ public class IDNEmailAddressConverterTest {
 
     private static final String[] IDN_EMAIL_ADDRESSES = { AUSTRIAN_IDN_EMAIL_ADDRESS, CZECH_IDN_EMAIL_ADDRESS, RUSSIAN_IDN_EMAIL_ADDRESS };
 
-    private IDNEmailAddressConverter idnEmailConverter = new IDNEmailAddressConverter();
+    private final IDNEmailAddressConverter idnEmailConverter = new IDNEmailAddressConverter();
 
     @Test
     public void testConvertInvalidEmailAddressToAscii()
