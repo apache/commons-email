@@ -1282,7 +1282,7 @@ public abstract class Email
         }
         else
         {
-            this.bounceAddress = null;
+            this.bounceAddress = email;
         }
 
         return this;
