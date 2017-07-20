@@ -271,14 +271,15 @@ final class EmailUtils
 
     /**
      * Replaces end-of-line characters with spaces.
-     * 
+     *
      * @param input the input string to be scanned.
      * @return a clean string
      */
-    static String replaceEndOfLineCharactersWithSpaces(final String input) {
+    static String replaceEndOfLineCharactersWithSpaces(final String input)
+    {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
     }
-    
+
     /**
      * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
      *

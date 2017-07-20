@@ -1237,7 +1237,8 @@ public abstract class Email
      * @return An Email.
      * @since 1.0
      */
-    public Email setSubject(final String aSubject) {
+    public Email setSubject(final String aSubject)
+    {
         this.subject = EmailUtils.replaceEndOfLineCharactersWithSpaces(aSubject);
         return this;
     }

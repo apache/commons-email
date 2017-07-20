@@ -101,7 +101,8 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
                         // similar to other DataSource implementations, e.g. FileDataSource, URLDataSource
                         ds.setName(DataSourceClassPathResolver.class.getResource(resourceName).toString());
                         result = ds;
-                    } finally
+                    }
+                    finally
                     {
                         is.close();
                     }
