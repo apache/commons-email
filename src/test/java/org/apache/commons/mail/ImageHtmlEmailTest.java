@@ -98,7 +98,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
         assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
-        assertTrue(mimeMessageParser.getAttachmentList().size() == 3);
+        assertTrue(mimeMessageParser.getAttachmentList().size() == 1);
     }
 
     @Test
