@@ -1214,6 +1214,7 @@ public abstract class Email
      *
      * @param header A string with the header.
      * @return The value of the header, or null if no such header.
+     * @since 1.5
      */
     public String getHeader(final String header)
     {
@@ -1224,6 +1225,7 @@ public abstract class Email
      * Gets all headers on an Email.
      *
      * @return a Map of all headers.
+     * @since 1.5
      */
     public Map<String, String> getHeaders()
     {
