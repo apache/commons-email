@@ -354,6 +354,15 @@
               </ignorePathsToDelete>
             </configuration>
           </plugin>
+          <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>src/test/resources/eml/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -419,7 +428,7 @@
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>src/test/resources/eml/*.eml</exclude>
+                        <exclude>src/test/resources/eml/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>            
