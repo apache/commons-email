@@ -27,6 +27,7 @@
             <item name="Overview"                      href="/index.html"/>
             <item name="Download"                      href="http://commons.apache.org/email/download_email.cgi"/>
             <item name="User guide"                    href="/userguide.html"/>
+            <item name="Security Reports"              href="/security-reports.html"/>
             <item name="Latest API docs (development)" href="/apidocs/index.html"/>
             <item name="Javadoc (1.5 release)"         href="/javadocs/api-release/index.html"/>
             <item name="Javadoc (1.4 release)"         href="/javadocs/api-1.4/index.html"/>

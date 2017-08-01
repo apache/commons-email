@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<document>
+    <properties>
+        <title>Commons Email Security Reports</title>
+        <author email="dev@commons.apache.org">Commons Documentation Team</author>
+    </properties>
+    <body>
+      <section name="General Information">
+        <p>For information about reporting or asking questions about
+        security problems, please see the <a
+        href="http://commons.apache.org/security.html">security page
+        of the Commons project</a>.</p>
+      </section>
+
+      <section name="Apache Commons Email Security Vulnerabilities">
+        <p>This page lists all security vulnerabilities fixed in
+        released versions of Apache Commons Email. Each
+        vulnerability is given a security impact rating by the
+        development team - please note that this rating may vary from
+        platform to platform. We also list the versions of Commons
+        Email the flaw is known to affect, and where a flaw has not
+        been verified list the version with a question mark.</p>
+
+        <p>Please note that binary patches are never provided. If you
+        need to apply a source code patch, use the building
+        instructions for the Commons Email version that you are
+        using.</p>
+
+        <p>If you need help on building Commons Email or other help
+        on following the instructions to mitigate the known
+        vulnerabilities listed here, please send your questions to the
+        public <a href="mail-lists.html">Commons Users mailing
+        list</a>.</p>
+
+        <p>If you have encountered an unlisted security vulnerability
+        or other unexpected behaviour that has security impact, or if
+        the descriptions here are incomplete, please report them
+        privately to the Apache Security Team. Thank you.</p>
+
+        <subsection name="Fixed in Apache Commons Email 1.5">
+          <p><b>Low: SMTP header injection vulnerabilty</b> <a
+          href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9801">CVE-2017-9801</a></p>
+
+          <p>When passing text that contains line-breaks as the
+            subject of an email arbitrary SMTP headers can be added.</p>
+
+          <p>This was fixed in revisions
+          <a href="https://svn.apache.org/viewvc?view=revision&amp;revision=1801385">1801385</a>
+          <a href="https://svn.apache.org/viewvc?view=revision&amp;revision=1801388">1801388</a> and
+          <a href="https://svn.apache.org/viewvc?view=revision&amp;revision=1801389">1801389</a>.</p>
+
+          <p>This was first reported to the Security Team on 27 June
+          2017 and made public on 1 August 2017.</p>
+
+          <p>Affects: 1.0 - 1.4</p>
+
+        </subsection>
+      </section>
+
+      <section name="Errors and Ommissions">
+        <p>Please report any errors or omissions to <a
+        href="mail-lists.html">the dev mailing list</a>.</p>
+      </section>
+    </body>
+</document>
