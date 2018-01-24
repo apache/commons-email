@@ -1,5 +1,5 @@
                           Apache Commons Email
-                              Version 1.5
+                              Version 1.5.1
                              Release Notes
 
 INTRODUCTION:
@@ -21,6 +21,12 @@ current users are encouraged to upgrade.
 
 For the security bugfix see
 https://commons.apache.org/proper/commons-email/security-reports.html#Fixed_in_Apache_Commons_Email_1.5
+
+CHANGES FROM 1.5:
+
+* Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
+* Improved Email.setBounceAddress by no longer accepting invalid email addresses.
+
 
 CHANGES FROM 1.4:
 -----------------

@@ -224,6 +224,10 @@
         <contributor>
             <name>Brandon Wolfe</name>
         </contributor>
+        <contributor>
+            <name>Alexander Lehmann</name>
+            <email>alexlehm@gmail.com</email>
+        </contributor>
     </contributors>
 
     <dependencies>

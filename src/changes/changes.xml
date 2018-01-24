@@ -22,8 +22,9 @@
   </properties>
 
   <body>
-    <release version="1.6" date="2017-MM-DD">
+    <release version="1.5.1" date="2017-MM-DD">
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
+      <action type="fix" dev="sgoeschl" due-to="Alexander Lehmann">Email.setBounceAddress no longer accepts invalid email addresses.</action>
     </release>
     <release version="1.5" date="2017-08-01">
       <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
