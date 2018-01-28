@@ -71,6 +71,19 @@
 
           <p>Affects: 1.0 - 1.4</p>
 
+          <p><b>Moderate: Insufficient input validation for bounce address</b>
+            <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1294">CVE-2018-1294</a></p>
+
+            <p>When passing text that contains line-breaks as the bounce address of an Email, then
+               the email details (SMTP headers, recipient list, contents) can be manipulated.</p>
+
+            <p>This was fixed in revisions
+            <a href="https://svn.apache.org/viewvc?view=revision&amp;revision=1777030">1777030</a>
+            </p>
+
+            <p>This was first reported to the Security Team on 02-Sep-2016 and made public on 26-Jan-2018.</p>
+
+            <p>Affects: 1.0-1.4</p>
         </subsection>
       </section>
 
