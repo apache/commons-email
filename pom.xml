@@ -228,13 +228,17 @@
             <name>Alexander Lehmann</name>
             <email>alexlehm@gmail.com</email>
         </contributor>
+        <contributor>
+            <name>Vegard Stuen</name>
+            <email>vegard.stuen@gmail.com</email>
+        </contributor>
     </contributors>
 
     <dependencies>
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.5.6</version>
+            <version>1.6.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
