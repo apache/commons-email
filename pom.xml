@@ -305,7 +305,7 @@
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
         
-        <powermock.version>1.6.5</powermock.version>
+        <powermock.version>1.7.3</powermock.version>
         <easymock.version>3.5.1</easymock.version>
         <findbugs.version>2.5.5</findbugs.version>
     </properties> 
