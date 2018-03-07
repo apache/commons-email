@@ -121,7 +121,7 @@ final class EmailUtils
      */
     static boolean isEmpty(final String str)
     {
-        return (str == null) || (str.length() == 0);
+        return str == null || str.length() == 0;
     }
 
     /**
@@ -135,7 +135,7 @@ final class EmailUtils
      */
     static boolean isNotEmpty(final String str)
     {
-        return (str != null) && (str.length() > 0);
+        return str != null && str.length() > 0;
     }
 
     /**
@@ -227,7 +227,7 @@ final class EmailUtils
             throw new IllegalArgumentException("Requested random string length " + count + " is less than 0.");
         }
 
-        if ((start == 0) && (end == 0))
+        if (start == 0 && end == 0)
         {
             end = 'z' + 1;
             start = ' ';
