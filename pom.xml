@@ -298,7 +298,8 @@
         <commons.module.name>org.apache.commons.mail</commons.module.name>
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
-        <commons.release.version>1.5</commons.release.version>
+        <commons.release.version>1.6.0</commons.release.version>
+        <commons.release.desc>(Java 7)</commons.release.desc>
         <commons.rc.version>RC1</commons.rc.version>
 
         <!-- override the default commons encoding property -->
