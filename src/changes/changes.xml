@@ -22,9 +22,12 @@
   </properties>
 
   <body>
-    <release version="1.5.2" date="Not yet released">
+    <release version="1.6.0" date="Not yet released, update from Java 6 to 7.">
       <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">
         Upgrade javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.
+      </action>
+      <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
+        Update from Java 6 to 7.
       </action>
     </release>
     <release version="1.5.1" date="2017-MM-DD">

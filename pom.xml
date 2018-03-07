@@ -292,8 +292,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
         <commons.componentid>email</commons.componentid>
         <commons.module.name>org.apache.commons.mail</commons.module.name>
         <commons.jira.id>EMAIL</commons.jira.id>
