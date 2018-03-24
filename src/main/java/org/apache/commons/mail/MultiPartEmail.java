@@ -464,16 +464,11 @@ public class MultiPartEmail extends Email
         try
         {
             bodyPart.setDisposition(disposition);
-            bodyPart.setFileName(MimeUtility.encodeText(name));
+            bodyPart.setFileName(name);
             bodyPart.setDescription(description);
             bodyPart.setDataHandler(new DataHandler(ds));
 
             getContainer().addBodyPart(bodyPart);
-        }
-        catch (final UnsupportedEncodingException uee)
-        {
-            // in case the filename could not be encoded
-            throw new EmailException(uee);
         }
         catch (final MessagingException me)
         {
