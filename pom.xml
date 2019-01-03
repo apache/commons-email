@@ -409,7 +409,6 @@
         </plugins>
     </build>
 
-
     <distributionManagement>
       <site>
         <id>apache.website</id>
