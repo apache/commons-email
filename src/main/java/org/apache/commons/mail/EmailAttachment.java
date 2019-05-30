@@ -125,7 +125,7 @@ public class EmailAttachment
 
     /**
      * Set the path to the attachment.  The path can be absolute or relative
-     * and should include the filename.
+     * and should include the file name.
      * <p>
      * Example: /home/user/images/image.jpg<br>
      * Example: images/image.jpg

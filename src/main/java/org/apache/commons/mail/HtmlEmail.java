@@ -73,7 +73,7 @@ import javax.mail.internet.MimeMultipart;
  * </pre>
  *
  * <p>Embedded entities are tracked by their name, which for <code>File</code>s is
- * the filename itself and for <code>URL</code>s is the canonical path. It is
+ * the file name itself and for <code>URL</code>s is the canonical path. It is
  * an error to bind the same name to more than one entity, and this class will
  * attempt to validate that for <code>File</code>s and <code>URL</code>s. When
  * embedding a <code>DataSource</code>, the code uses the <code>equals()</code>
@@ -199,7 +199,7 @@ public class HtmlEmail extends MultiPartEmail
      * then be embedded in the message.
      *
      * @param urlString String representation of the URL.
-     * @param name The name that will be set in the filename header field.
+     * @param name The name that will be set in the file name header field.
      * @return A String with the Content-ID of the URL.
      * @throws EmailException when URL supplied is invalid or if {@code name} is null
      * or empty; also see {@link javax.mail.internet.MimeBodyPart} for definitions
@@ -244,7 +244,7 @@ public class HtmlEmail extends MultiPartEmail
      * may be part of a virtual host cluster.
      *
      * @param url The URL of the file.
-     * @param name The name that will be set in the filename header
+     * @param name The name that will be set in the file name header
      * field.
      * @return A String with the Content-ID of the file.
      * @throws EmailException when URL supplied is invalid or if {@code name} is null
@@ -416,7 +416,7 @@ public class HtmlEmail extends MultiPartEmail
      * randomly generated Content-ID. Returns the generated Content-ID string.
      *
      * @param dataSource the <code>DataSource</code> to embed
-     * @param name the name that will be set in the filename header field
+     * @param name the name that will be set in the file name header field
      * @return the generated Content-ID for this <code>DataSource</code>
      * @throws EmailException if the embedding fails or if <code>name</code> is
      * null or empty
@@ -450,7 +450,7 @@ public class HtmlEmail extends MultiPartEmail
      * specified Content-ID. Returns the specified Content-ID string.
      *
      * @param dataSource the <code>DataSource</code> to embed
-     * @param name the name that will be set in the filename header field
+     * @param name the name that will be set in the file name header field
      * @param cid the Content-ID to use for this <code>DataSource</code>
      * @return the URL encoded Content-ID for this <code>DataSource</code>
      * @throws EmailException if the embedding fails or if <code>name</code> is
