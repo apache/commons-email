@@ -472,7 +472,7 @@ public class MultiPartEmail extends Email
         }
         catch (final UnsupportedEncodingException uee)
         {
-            // in case the filename could not be encoded
+            // in case the file name could not be encoded
             throw new EmailException(uee);
         }
         catch (final MessagingException me)
