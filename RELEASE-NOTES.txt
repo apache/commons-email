@@ -13,7 +13,7 @@ classes.
 The Commons Email website is the source for the most recent information,
 downloads, reports, and bug status:
 
-http://commons.apache.org/email/
+https://commons.apache.org/email/
 
 This is a major and security bugfix release which adds some new
 features and fixes several bugs present in the 1.4 release. All

@@ -25,7 +25,7 @@
     <body>
         <menu name="Email">
             <item name="Overview"                      href="/index.html"/>
-            <item name="Download"                      href="http://commons.apache.org/email/download_email.cgi"/>
+            <item name="Download"                      href="https://commons.apache.org/email/download_email.cgi"/>
             <item name="User guide"                    href="/userguide.html"/>
             <item name="Security Reports"              href="/security-reports.html"/>
             <item name="Latest API docs (development)" href="/apidocs/index.html"/>

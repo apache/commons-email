@@ -303,7 +303,7 @@ public class EmailLiveTest extends AbstractEmailTest
     {
         if(EmailConfiguration.MAIL_FORCE_SEND)
         {
-            final URL url = new URL("http://commons.apache.org/email/");
+            final URL url = new URL("https://commons.apache.org/email/");
             // URL url = new URL("http://www.dzone.com/links/index.html");
             final String htmlMsg = getFromUrl(url);
 
