@@ -41,7 +41,7 @@
 
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/email/trunk</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/email/trunk</developerConnection>
+        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-email.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=commons-email.git</url>
     </scm> 
 
