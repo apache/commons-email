@@ -62,7 +62,7 @@
             is now deprecated. Its function is now performed by the
             <code>org.apache.commons.mail.HtmlEmail.inlineEmbeds</code> field; the new field
             is a <code>Map</code> instead of a <code>List</code>. The change was made
-            as a part of <a href="http://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>.
+            as a part of <a href="https://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>.
             Clients that have subclassed <code>HtmlEmail</code> should change their implementations
             accordingly.
           </li>
@@ -72,14 +72,14 @@
       <subsection name="Notable bugfixes">
         <ul>
           <li>
-            <a href="http://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>:
+            <a href="https://issues.apache.org/jira/browse/EMAIL-50">EMAIL-50</a>:
             HtmlEmails were not being constructed correctly; several
             email clients were not displaying attachments or embedded images
             properly. As part of the same problem, duplicate embeds were not
             being handled correctly.
           </li>
           <li>
-            <a href="http://issues.apache.org/jira/browse/EMAIL-1">EMAIL-1</a>: 
+            <a href="https://issues.apache.org/jira/browse/EMAIL-1">EMAIL-1</a>: 
             Email.setContent() was not taking a specified charset into
             account. Additional setContent() overloadings were also added to
             address common use cases.
@@ -90,7 +90,7 @@
       <subsection name="Notable enhancements">
         <ul>
           <li>
-            <a href="http://issues.apache.org/jira/browse/EMAIL-35">EMAIL-35</a>: 
+            <a href="https://issues.apache.org/jira/browse/EMAIL-35">EMAIL-35</a>: 
             HtmlEmail now supports the embedding of any DataSource
             implementation. Specific methods were added for File and URL
             objects, removing the need for clumsy circumlocution.
