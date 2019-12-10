@@ -198,7 +198,7 @@ public abstract class Email
     protected Date sentDate;
 
     /**
-     * Instance of an <code>Authenticator</code> object that will be used
+     * Instance of an {@code Authenticator} object that will be used
      * when authentication is requested from the mail server.
      */
     protected Authenticator authenticator;
@@ -236,8 +236,8 @@ public abstract class Email
     /**
      * Address to which undeliverable mail should be sent.
      * Because this is handled by JavaMail as a String property
-     * in the mail session, this property is of type <code>String</code>
-     * rather than <code>InternetAddress</code>.
+     * in the mail session, this property is of type {@code String}
+     * rather than {@code InternetAddress}.
      */
     protected String bounceAddress;
 
@@ -341,7 +341,7 @@ public abstract class Email
      * method is not used, no authentication will be performed.
      * <p>
      * This method will create a new instance of
-     * <code>DefaultAuthenticator</code> using the supplied parameters.
+     * {@code DefaultAuthenticator} using the supplied parameters.
      *
      * @param userName User name for the SMTP server
      * @param password password for the SMTP server
@@ -355,13 +355,13 @@ public abstract class Email
     }
 
     /**
-     * Sets the <code>Authenticator</code> to be used when authentication
+     * Sets the {@code Authenticator} to be used when authentication
      * is requested from the mail server.
      * <p>
      * This method should be used when your outgoing mail server requires
      * authentication.  Your mail server must also support RFC2554.
      *
-     * @param newAuthenticator the <code>Authenticator</code> object.
+     * @param newAuthenticator the {@code Authenticator} object.
      * @see Authenticator
      * @since 1.0
      */
@@ -849,10 +849,10 @@ public abstract class Email
 
     /**
      * Set a list of "TO" addresses. All elements in the specified
-     * <code>Collection</code> are expected to be of type
-     * <code>java.mail.internet.InternetAddress</code>.
+     * {@code Collection} are expected to be of type
+     * {@code java.mail.internet.InternetAddress}.
      *
-     * @param  aCollection collection of <code>InternetAddress</code> objects.
+     * @param  aCollection collection of {@code InternetAddress} objects.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
      * @see javax.mail.internet.InternetAddress
@@ -958,10 +958,10 @@ public abstract class Email
 
     /**
      * Set a list of "CC" addresses. All elements in the specified
-     * <code>Collection</code> are expected to be of type
-     * <code>java.mail.internet.InternetAddress</code>.
+     * {@code Collection} are expected to be of type
+     * {@code java.mail.internet.InternetAddress}.
      *
-     * @param aCollection collection of <code>InternetAddress</code> objects.
+     * @param aCollection collection of {@code InternetAddress} objects.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
      * @see javax.mail.internet.InternetAddress
@@ -1067,10 +1067,10 @@ public abstract class Email
 
     /**
      * Set a list of "BCC" addresses. All elements in the specified
-     * <code>Collection</code> are expected to be of type
-     * <code>java.mail.internet.InternetAddress</code>.
+     * {@code Collection} are expected to be of type
+     * {@code java.mail.internet.InternetAddress}.
      *
-     * @param  aCollection collection of <code>InternetAddress</code> objects
+     * @param  aCollection collection of {@code InternetAddress} objects
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
      * @see javax.mail.internet.InternetAddress
@@ -1146,10 +1146,10 @@ public abstract class Email
 
     /**
      * Set a list of reply to addresses. All elements in the specified
-     * <code>Collection</code> are expected to be of type
-     * <code>java.mail.internet.InternetAddress</code>.
+     * {@code Collection} are expected to be of type
+     * {@code java.mail.internet.InternetAddress}.
      *
-     * @param   aCollection collection of <code>InternetAddress</code> objects
+     * @param   aCollection collection of {@code InternetAddress} objects
      * @return  An Email.
      * @throws EmailException Indicates an invalid email address
      * @see javax.mail.internet.InternetAddress

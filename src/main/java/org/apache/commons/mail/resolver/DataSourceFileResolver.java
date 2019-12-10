@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Creates a <code>DataSource</code> based on an URL. The implementation
+ * Creates a {@code DataSource} based on an URL. The implementation
  * also resolves file resources.
  *
  * @since 1.3

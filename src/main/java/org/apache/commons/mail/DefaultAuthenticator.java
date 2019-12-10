@@ -46,7 +46,7 @@ public class DefaultAuthenticator extends Authenticator
      * Gets the authentication object that will be used to login to the mail
      * server.
      *
-     * @return A <code>PasswordAuthentication</code> object containing the
+     * @return A {@code PasswordAuthentication} object containing the
      *         login information.
      * @since 1.0
      */

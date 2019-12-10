@@ -394,11 +394,11 @@ public abstract class AbstractEmailTest
     }
 
     /**
-     * Serializes the {@link MimeMessage} from the <code>WiserMessage</code>
+     * Serializes the {@link MimeMessage} from the {@code WiserMessage}
      * passed in. The headers are serialized first followed by the message
      * body.
      *
-     * @param wiserMessage The <code>WiserMessage</code> to serialize.
+     * @param wiserMessage The {@code WiserMessage} to serialize.
      * @return The string format of the message.
      * @throws MessagingException
      * @throws IOException
@@ -509,11 +509,11 @@ public abstract class AbstractEmailTest
 
     /**
      * Checks if an email server is running at the address stored in the
-     * <code>fakeMailServer</code>.
+     * {@code fakeMailServer}.
      *
      * @param fakeMailServer
      *            The server from which the address is picked up.
-     * @return <code>true</code> if the server claims to be running
+     * @return {@code true} if the server claims to be running
      * @since 1.1
      */
     protected boolean isMailServerStopped(final Wiser fakeMailServer) {

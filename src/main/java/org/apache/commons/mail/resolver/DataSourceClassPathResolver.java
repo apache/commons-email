@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Creates a <code>DataSource</code> based on an class path.
+ * Creates a {@code DataSource} based on an class path.
  *
  * @since 1.3
  */

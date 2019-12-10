@@ -20,23 +20,23 @@ import javax.activation.DataSource;
 import java.io.IOException;
 
 /**
- * Creates a <code>DataSource</code> based on an URL.
+ * Creates a {@code DataSource} based on an URL.
  *
  * @since 1.3
  */
 public interface DataSourceResolver
 {
     /**
-     * Resolves the given resource location to a <code>DataSource</code>.
+     * Resolves the given resource location to a {@code DataSource}.
      *
      * @param resourceLocation the location of the resource
-     * @return the <code>DataSource</code>
+     * @return the {@code DataSource}
      * @throws IOException the resource was not found
      */
     DataSource resolve(final String resourceLocation) throws IOException;
 
     /**
-     * Resolves the given resource location to a <code>DataSource</code>.
+     * Resolves the given resource location to a {@code DataSource}.
      *
      * @param resourceLocation the location of the resource
      * @param isLenient shall we ignore resources not found or complain with an exception?

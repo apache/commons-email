@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * the element and link it in.
  * </p>
  * <p>
- * The image loading is done by an instance of <code>DataSourceResolver</code>
+ * The image loading is done by an instance of {@code DataSourceResolver}
  * which has to be provided by the caller.
  * </p>
  *

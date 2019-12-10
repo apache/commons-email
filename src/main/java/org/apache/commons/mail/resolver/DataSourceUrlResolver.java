@@ -23,7 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Creates a <code>DataSource</code> based on an URL.
+ * Creates a {@code DataSource} based on an URL.
  *
  * @since 1.3
  */

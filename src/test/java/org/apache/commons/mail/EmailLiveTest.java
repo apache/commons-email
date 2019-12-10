@@ -318,7 +318,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
     /**
      * Testing if we are able to send a few emails in a batch, i.e.
-     * using a single authenticated <code>Transport</code> instance.
+     * using a single authenticated {@code Transport} instance.
      * Use a single instance speeds up processing since the
      * authorization is only done once.
      *

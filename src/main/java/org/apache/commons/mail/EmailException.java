@@ -37,7 +37,7 @@ public class EmailException
     private static final long serialVersionUID = 5550674499282474616L;
 
     /**
-     * Constructs a new <code>EmailException</code> with no
+     * Constructs a new {@code EmailException} with no
      * detail message.
      */
     public EmailException()
@@ -46,7 +46,7 @@ public class EmailException
     }
 
     /**
-     * Constructs a new <code>EmailException</code> with specified
+     * Constructs a new {@code EmailException} with specified
      * detail message.
      *
      * @param msg  the error message.
@@ -57,8 +57,8 @@ public class EmailException
     }
 
     /**
-     * Constructs a new <code>EmailException</code> with specified
-     * nested <code>Throwable</code> root cause.
+     * Constructs a new {@code EmailException} with specified
+     * nested {@code Throwable} root cause.
      *
      * @param rootCause  the exception or error that caused this exception
      *                   to be thrown.
@@ -69,8 +69,8 @@ public class EmailException
     }
 
     /**
-     * Constructs a new <code>EmailException</code> with specified
-     * detail message and nested <code>Throwable</code> root cause.
+     * Constructs a new {@code EmailException} with specified
+     * detail message and nested {@code Throwable} root cause.
      *
      * @param msg  the error message.
      * @param rootCause  the exception or error that caused this exception
@@ -93,7 +93,7 @@ public class EmailException
     /**
      * Prints the stack trace of this exception to the specified stream.
      *
-     * @param out  the <code>PrintStream</code> to use for output
+     * @param out  the {@code PrintStream} to use for output
      */
     @Override
     public void printStackTrace(final PrintStream out)
@@ -111,7 +111,7 @@ public class EmailException
     /**
      * Prints the stack trace of this exception to the specified writer.
      *
-     * @param out  the <code>PrintWriter</code> to use for output
+     * @param out  the {@code PrintWriter} to use for output
      */
     @Override
     public void printStackTrace(final PrintWriter out)

@@ -103,7 +103,7 @@ final class EmailUtils
     }
 
     /**
-     * Constructs a new <code>EmailException</code> with no detail message.
+     * Constructs a new {@code EmailException} with no detail message.
      */
     private EmailUtils()
     {
@@ -115,7 +115,7 @@ final class EmailUtils
      *
      * @param str the String to check, may be null
      *
-     * @return <code>true</code> if the String is empty or null
+     * @return {@code true} if the String is empty or null
      *
      * @since Commons Lang v2.1, svn 240418
      */
@@ -129,7 +129,7 @@ final class EmailUtils
      *
      * @param str the String to check, may be null
      *
-     * @return <code>true</code> if the String is not empty and not null
+     * @return {@code true} if the String is not empty and not null
      *
      * @since Commons Lang v2.1, svn 240418
      */
@@ -139,13 +139,13 @@ final class EmailUtils
     }
 
     /**
-     * Validate an argument, throwing <code>IllegalArgumentException</code>
-     * if the argument is <code>null</code>.
+     * Validate an argument, throwing {@code IllegalArgumentException}
+     * if the argument is {@code null}.
      *
-     * @param object the object to check is not <code>null</code>
-     * @param message the exception message you would like to see if the object is <code>null</code>
+     * @param object the object to check is not {@code null}
+     * @param message the exception message you would like to see if the object is {@code null}
      *
-     * @throws IllegalArgumentException if the object is <code>null</code>
+     * @throws IllegalArgumentException if the object is {@code null}
      *
      * @since Commons Lang v2.1, svn 201930
      */
@@ -179,13 +179,13 @@ final class EmailUtils
      * Creates a random string based on a variety of options, using supplied source of randomness.
      *
      * <p>
-     * If start and end are both <code>0</code>, start and end are set to <code>' '</code> and <code>'z'</code>,
-     * the ASCII printable characters, will be used, unless letters and numbers are both <code>false</code>,
-     * in which case, start and end are set to <code>0</code> and <code>Integer.MAX_VALUE</code>.
+     * If start and end are both {@code 0}, start and end are set to {@code ' '} and {@code 'z'},
+     * the ASCII printable characters, will be used, unless letters and numbers are both {@code false},
+     * in which case, start and end are set to {@code 0} and {@code Integer.MAX_VALUE}.
      * </p>
      *
      * <p>
-     * If set is not <code>null</code>, characters between start and end are chosen.
+     * If set is not {@code null}, characters between start and end are chosen.
      * </p>
      *
      * <p>
@@ -199,13 +199,13 @@ final class EmailUtils
      * @param end the position in set of chars to end before
      * @param letters only allow letters?
      * @param numbers only allow numbers?
-     * @param chars the set of chars to choose randoms from. If <code>null</code>,
+     * @param chars the set of chars to choose randoms from. If {@code null},
      *              then it will use the set of all chars.
      * @param random a source of randomness.
      *
      * @return the random string
      *
-     * @throws IllegalArgumentException if <code>count</code> &lt; 0.
+     * @throws IllegalArgumentException if {@code count} &lt; 0.
      *
      * @since Commons Lang v2.1, svn 201930
      */
