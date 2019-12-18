@@ -599,7 +599,7 @@ public class HtmlEmailTest extends AbstractEmailTest
             this.email.getCcAddresses(),
             this.email.getBccAddresses(),
             false);
-        
+
         // make sure that no double dots show up
         assertTrue(this.email.getHtmlMsg().contains("3DTZC268X93337.zip"));
         assertFalse(this.email.getHtmlMsg().contains("3DTZC268X93337..zip"));

@@ -476,7 +476,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                      email.getFromAddress(), email.getToAddresses(),
                      email.getCcAddresses(), email.getBccAddresses(), true);
     }
-    
+
     private String loadUrlContent(final URL url) throws IOException {
         final InputStream stream = url.openStream();
         final StringBuilder html = new StringBuilder();
@@ -490,7 +490,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         }
         return html.toString();
     }
-    
+
     private static final class MockDataSourceClassPathResolver extends DataSourceClassPathResolver {
 
         public MockDataSourceClassPathResolver(final String classPathBase, final boolean lenient) {
@@ -504,6 +504,6 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
             ds.setName(null);
             return ds;
         }
-        
+
     }
 }

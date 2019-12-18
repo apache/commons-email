@@ -519,7 +519,7 @@ public abstract class AbstractEmailTest
     protected boolean isMailServerStopped(final Wiser fakeMailServer) {
         return !fakeMailServer.getServer().isRunning();
     }
-    
+
     /**
      * Create a mocked URL object which always throws an IOException
      * when the openStream() method is called.
@@ -533,7 +533,7 @@ public abstract class AbstractEmailTest
         final URL url = createMock(URL.class);
         expect(url.openStream()).andThrow(new IOException());
         replay(url);
-        
+
         return url;
     }
 }

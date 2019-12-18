@@ -159,7 +159,7 @@ public class MimeMessageParserTest
      *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testParseMultipartReport() throws Exception
     {
         DataSource dataSource;
@@ -197,7 +197,7 @@ public class MimeMessageParserTest
      *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testAttachmentOnly() throws Exception
     {
         DataSource dataSource;
@@ -227,15 +227,15 @@ public class MimeMessageParserTest
         assertNotNull(dataSource);
         assertEquals("application/pdf", dataSource.getContentType());
     }
-    
+
     /**
      * This test parses an eml file published with issue EMAIL-110.
      * This eml file has a corrupted attachment but should not create
      * an OutOfMemoryException.
-     * 
+     *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception
     {
         final Session session = Session.getDefaultInstance(new Properties());
@@ -261,7 +261,7 @@ public class MimeMessageParserTest
      *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testMultipartTextAttachment() throws Exception
     {
         DataSource dataSource;
@@ -297,7 +297,7 @@ public class MimeMessageParserTest
      *
      * @throws Exception the test failed
      */
-    @Test    
+    @Test
     public void testMultipartTextAttachmentOnly() throws Exception
     {
         DataSource dataSource;

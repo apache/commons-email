@@ -343,7 +343,7 @@ public class EmailTest extends AbstractEmailTest
         email.setFrom("me@home.com", "me@home.com", "bad.encoding\uc5ec\n");
     }
 
-    @Test    
+    @Test
     public void testAddTo() throws Exception
     {
         // ====================================================================
@@ -913,7 +913,7 @@ public class EmailTest extends AbstractEmailTest
 
         assertEquals(ht.size(), email.getHeaders().size());
     }
-    
+
     @Test
     public void testFoldingHeaders() throws Exception
     {
@@ -925,23 +925,23 @@ public class EmailTest extends AbstractEmailTest
 
         final String headerValue = "1234567890 1234567890 123456789 01234567890 123456789 0123456789 01234567890 01234567890";
         email.addHeader("X-LongHeader", headerValue);
-        
+
         assertTrue(email.getHeaders().size() == 1);
         // the header should not yet be folded -> will be done by buildMimeMessage()
         assertFalse(email.getHeaders().get("X-LongHeader").contains("\r\n"));
-        
+
         email.buildMimeMessage();
 
         final MimeMessage msg = email.getMimeMessage();
         msg.saveChanges();
-        
+
         final String[] values = msg.getHeader("X-LongHeader");
         assertEquals(1, values.length);
-        
+
         // the header should be split in two lines
         final String[] lines = values[0].split("\\r\\n");
         assertEquals(2, lines.length);
-        
+
         // there should only be one line-break
         assertTrue(values[0].indexOf("\n") == values[0].lastIndexOf("\n"));
     }

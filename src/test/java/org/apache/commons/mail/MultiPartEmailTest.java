@@ -327,7 +327,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
         // ====================================================================
 
         final File tmpFile = File.createTempFile("attachment", ".eml");
-        
+
         this.email.attach(
                 new FileDataSource(tmpFile),
                 "Test Attachment",
@@ -335,7 +335,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
 
         assertTrue(tmpFile.delete());
     }
-    
+
     @Test
     public void testAddPart() throws Exception
     {

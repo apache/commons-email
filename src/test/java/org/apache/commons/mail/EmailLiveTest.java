@@ -235,7 +235,7 @@ public class EmailLiveTest extends AbstractEmailTest
         htmlEmail4.setHtmlMsg(htmlMsg);
         htmlEmail4.attach(attachment);
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail4.eml"), send(htmlEmail4).getMimeMessage());        
+        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail4.eml"), send(htmlEmail4).getMimeMessage());
     }
 
     /**
