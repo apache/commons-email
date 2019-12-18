@@ -82,7 +82,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
     {
         try
         {
-            validateMethod = InternetAddress.class.getMethod("validate", new Class [0]);
+            validateMethod = InternetAddress.class.getMethod("validate");
         }
         catch (final Exception e)
         {
