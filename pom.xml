@@ -19,7 +19,7 @@
     <parent>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-parent</artifactId>
-      <version>47</version>
+      <version>50</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-email</artifactId>
@@ -242,7 +242,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -305,8 +305,8 @@
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
         
-        <powermock.version>1.7.3</powermock.version>
-        <easymock.version>3.6</easymock.version>
+        <powermock.version>2.0.5</powermock.version>
+        <easymock.version>4.2</easymock.version>
         <findbugs.version>3.0.5</findbugs.version>
     </properties> 
 
@@ -447,7 +447,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <targetJdk>${maven.compiler.target}</targetJdk>
                 </configuration>

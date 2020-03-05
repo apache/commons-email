@@ -23,6 +23,12 @@
 
   <body>
     <release version="1.6.0" date="Not yet released, update from Java 6 to 7.">
+      <action issue="EMAIL-190" type="update" due-to="sgoeschl">
+        Fix broken JDK 1.9 build by updating "easymock" and other dependencies.
+      </action>
+      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte">
+        Change from javax.mail:1.6.1 to jakarta.mail:1.6.4.
+      </action>
       <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">
         Upgrade javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.
       </action>
