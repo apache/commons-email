@@ -22,6 +22,8 @@ jdk:
   - openjdk10
   - openjdk11
   - openjdk12
+  - openjdk13
+  - openjdk14
   
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
