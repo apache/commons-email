@@ -406,74 +406,36 @@
               </execution>
             </executions>
           </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <locale>en</locale>
-                    <show>private</show>
-                    <reportOutputDirectory>../javadocs</reportOutputDirectory>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <docencoding>${project.reporting.outputEncoding}
-                    </docencoding>
-                    <additionalJOption>-J-Duser.language=en_US
-                    </additionalJOption>
-
-                    <tags>
-                        <tag>
-                            <name>apiNote</name>
-                            <placement>a</placement>
-                            <head>API Note:</head>
-                        </tag>
-                        <tag>
-                            <name>implSpec</name>
-                            <placement>a</placement>
-                            <head>Implementation Requirements:</head>
-                        </tag>
-                        <tag>
-                            <name>implNote</name>
-                            <placement>a</placement>
-                            <head>Implementation Note:</head>
-                        </tag>
-                        <tag>
-                            <name>param</name>
-                        </tag>
-                        <tag>
-                            <name>return</name>
-                        </tag>
-                        <tag>
-                            <name>throws</name>
-                        </tag>
-                        <tag>
-                            <name>since</name>
-                        </tag>
-                        <tag>
-                            <name>version</name>
-                        </tag>
-                        <tag>
-                            <name>serialData</name>
-                        </tag>
-                        <tag>
-                            <name>see</name>
-                        </tag>
-                    </tags>
-
-                    <source>${maven.compiler.source}
-                    </source>
-                    <!--                    <javadocExecutable>${java.home}/bin/javadoc.exe-->
-                    <!--                    </javadocExecutable>-->
-                </configuration>
-
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+         <plugin>
+           <artifactId>maven-javadoc-plugin</artifactId>
+           <configuration>
+             <source>${maven.compiler.source}</source>
+             <quiet>true</quiet>
+             <encoding>utf-8</encoding>
+             <docEncoding>utf-8</docEncoding>
+             <notimestamp>true</notimestamp>
+             <links>
+               <link>https://docs.oracle.com/javase/8/docs/api/</link>
+               <link>http://docs.oracle.com/javaee/6/api/</link>
+             </links>
+             <archive>
+               <manifest>
+                 <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                 <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+               </manifest>
+             </archive>
+           </configuration>
+           <executions>
+             <execution>
+               <id>create-javadoc-jar</id>
+               <goals>
+                 <goal>javadoc</goal>
+                 <goal>jar</goal>
+               </goals>
+               <phase>package</phase>
+             </execution>
+           </executions>
+         </plugin>
         </plugins>
     </build>
 
