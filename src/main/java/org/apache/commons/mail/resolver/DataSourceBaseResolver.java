@@ -99,7 +99,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
         return IS_HTTP_URL_PATTERN.matcher(urlString).find();
     }
 
-    private static final Pattern IS_CID_OR_HTTP_URL_PATTERN = Pattern.compile("^(" + CID_REGEX_STRING + ")|(" + HTTPS_REGEX_STRING + ")");
+    private static final Pattern IS_CID_OR_HTTP_URL_PATTERN = Pattern.compile("^((" + CID_REGEX_STRING + ")|(" + HTTPS_REGEX_STRING + "))");
 
     /**
      * Is this a content id, or a HTTP/HTTPS URL?
@@ -112,7 +112,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
         return IS_CID_OR_HTTP_URL_PATTERN.matcher(urlString).find();
     }
 
-    private static final Pattern IS_FILE_URL_OR_HTTP_URL_PATTERN = Pattern.compile("^(" + FILE_URL_REGEX_STRING + ")|(" + HTTPS_REGEX_STRING + ")");
+    private static final Pattern IS_FILE_URL_OR_HTTP_URL_PATTERN = Pattern.compile("^((" + FILE_URL_REGEX_STRING + ")|(" + HTTPS_REGEX_STRING + "))");
 
     /**
      * Is this a file URL, or a HTTP/HTTPS URL?
