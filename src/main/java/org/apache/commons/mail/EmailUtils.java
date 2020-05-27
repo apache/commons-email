@@ -20,6 +20,7 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.Random;
 
@@ -296,7 +297,7 @@ final class EmailUtils
         }
 
         final StringBuilder builder = new StringBuilder();
-        for (final byte c : input.getBytes(US_ASCII))
+        for (final byte c : input.getBytes(StandardCharsets.US_ASCII))
         {
             int b = c;
             if (b < 0)
