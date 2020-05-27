@@ -39,6 +39,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.settings.EmailConfiguration;
+import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.subethamail.wiser.Wiser;
@@ -389,7 +390,7 @@ public abstract class AbstractEmailTest
             true);
 
         // test message content
-        assertThat("didn't find expected message content in message body",
+        MatcherAssert.assertThat("didn't find expected message content in message body",
                 getMessageBody(emailMessage), containsString(strMessage));
     }
 

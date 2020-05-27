@@ -18,6 +18,7 @@ package org.apache.commons.mail;
 
 import static org.junit.Assert.*;
 
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.resolver.DataSourceClassPathResolver;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -185,8 +187,11 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.setDataSourceResolver(new DataSourceUrlResolver(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
 
         final File file = File.createTempFile("emailtest", ".tst");
-        FileUtils.writeStringToFile(file,
-                "just some silly data that we won't be able to display anyway");
+        FileUtils.writeStringToFile(
+                file,
+                "just some silly data that we won't be able to display anyway",
+                StandardCharsets.UTF_8
+        );
 
         // set the html message
         email.setHtmlMsg("<html><body><img src=\"" + file.getAbsolutePath()
@@ -481,7 +486,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         final InputStream stream = url.openStream();
         final StringBuilder html = new StringBuilder();
         try {
-            final List<String> lines = IOUtils.readLines(stream);
+            final List<String> lines = IOUtils.readLines(stream, StandardCharsets.UTF_8);
             for (final String line : lines) {
                 html.append(line).append("\n");
             }
