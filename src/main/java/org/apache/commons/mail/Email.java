@@ -454,7 +454,7 @@ public abstract class Email
                 // whose content-type is some form of text.
                 if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset))
                 {
-                    final StringBuffer contentTypeBuf = new StringBuffer(this.contentType);
+                    final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
                     contentTypeBuf.append(strMarker);
                     contentTypeBuf.append(this.charset);
                     this.contentType = contentTypeBuf.toString();
@@ -1969,11 +1969,7 @@ public abstract class Email
             // it will throw AddressException.
             address.validate();
         }
-        catch (final AddressException e)
-        {
-            throw new EmailException(e);
-        }
-        catch (final UnsupportedEncodingException e)
+        catch (final AddressException | UnsupportedEncodingException e)
         {
             throw new EmailException(e);
         }

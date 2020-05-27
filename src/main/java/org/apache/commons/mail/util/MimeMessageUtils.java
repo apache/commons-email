@@ -53,19 +53,9 @@ public final class MimeMessageUtils
     public static MimeMessage createMimeMessage(final Session session, final byte[] source)
         throws MessagingException, IOException
     {
-        ByteArrayInputStream is = null;
 
-        try
-        {
-            is = new ByteArrayInputStream(source);
+        try (ByteArrayInputStream is = new ByteArrayInputStream(source)) {
             return new MimeMessage(session, is);
-        }
-        finally
-        {
-            if (is != null)
-            {
-                is.close();
-            }
         }
     }
 
@@ -81,19 +71,9 @@ public final class MimeMessageUtils
     public static MimeMessage createMimeMessage(final Session session, final File source)
         throws MessagingException, IOException
     {
-        FileInputStream is = null;
 
-        try
-        {
-            is = new FileInputStream(source);
+        try (FileInputStream is = new FileInputStream(source)) {
             return createMimeMessage(session, is);
-        }
-        finally
-        {
-            if (is != null)
-            {
-                is.close();
-            }
         }
     }
 

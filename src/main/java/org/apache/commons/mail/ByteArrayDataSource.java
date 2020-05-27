@@ -72,19 +72,9 @@ public class ByteArrayDataSource implements DataSource
     public ByteArrayDataSource(final byte[] data, final String aType) throws IOException
     {
         this.type = aType;
-        ByteArrayInputStream bis = null;
 
-        try
-        {
-            bis = new ByteArrayInputStream(data);
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(data)) {
             this.byteArrayDataSource(bis);
-        }
-        finally
-        {
-            if (bis != null)
-            {
-                bis.close();
-            }
         }
     }
 

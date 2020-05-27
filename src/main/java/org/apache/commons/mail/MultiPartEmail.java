@@ -470,14 +470,10 @@ public class MultiPartEmail extends Email
 
             getContainer().addBodyPart(bodyPart);
         }
-        catch (final UnsupportedEncodingException uee)
+        catch (final UnsupportedEncodingException | MessagingException uee)
         {
             // in case the file name could not be encoded
             throw new EmailException(uee);
-        }
-        catch (final MessagingException me)
-        {
-            throw new EmailException(me);
         }
         setBoolHasAttachments(true);
 
