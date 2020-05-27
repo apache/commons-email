@@ -18,6 +18,8 @@ package org.apache.commons.mail.resolver;
 
 import org.apache.commons.mail.DataSourceResolver;
 
+import java.util.regex.Pattern;
+
 /**
  * Base class for various resolvers.
  *
@@ -25,6 +27,12 @@ import org.apache.commons.mail.DataSourceResolver;
  */
 public abstract class DataSourceBaseResolver implements DataSourceResolver
 {
+    private static final String CID_REGEX_STRING = "cid:";
+
+    private static final String FILE_URL_REGEX_STRING = "file:/";
+
+    private static final String HTTPS_REGEX_STRING = "http(s)?://";
+
     /** shall we ignore resources not found or complain with an exception */
     private final boolean lenient;
 
@@ -59,12 +67,12 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
     /**
      * Is this a content id?
      *
-     * @param resourceLocation the resource location
+     * @param urlString the URL string
      * @return true if it is a CID
      */
-    protected boolean isCid(final String resourceLocation)
+    protected boolean isCid(final String urlString)
     {
-        return resourceLocation.startsWith("cid:");
+        return urlString.startsWith(CID_REGEX_STRING);
     }
 
     /**
@@ -75,8 +83,10 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
      */
     protected boolean isFileUrl(final String urlString)
     {
-        return urlString.startsWith("file:/");
+        return urlString.startsWith(FILE_URL_REGEX_STRING);
     }
+
+    private static final Pattern IS_HTTP_URL_PATTERN = Pattern.compile("^" + HTTPS_REGEX_STRING);
 
     /**
      * Is this a HTTP/HTTPS URL?
@@ -86,6 +96,32 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
      */
     protected boolean isHttpUrl(final String urlString)
     {
-        return urlString.startsWith("http://") || urlString.startsWith("https://");
+        return IS_HTTP_URL_PATTERN.matcher(urlString).find();
+    }
+
+    private static final Pattern IS_CID_OR_HTTP_URL_PATTERN = Pattern.compile("^(" + CID_REGEX_STRING + ")|(" + HTTPS_REGEX_STRING + ")");
+
+    /**
+     * Is this a content id, or a HTTP/HTTPS URL?
+     *
+     * @param urlString the URL string
+     * @return true if it is a CID or a HTTP/HTTPS URL
+     */
+    protected boolean isCidOrHttpUrl(final String urlString)
+    {
+        return IS_CID_OR_HTTP_URL_PATTERN.matcher(urlString).find();
+    }
+
+    private static final Pattern IS_FILE_URL_OR_HTTP_URL_PATTERN = Pattern.compile("^(" + FILE_URL_REGEX_STRING + ")|(" + HTTPS_REGEX_STRING + ")");
+
+    /**
+     * Is this a file URL, or a HTTP/HTTPS URL?
+     *
+     * @param urlString the URL string
+     * @return true if it is a file URL or a HTTP/HTTPS URL
+     */
+    protected boolean isFileUrlOrHttpUrl(final String urlString)
+    {
+        return IS_FILE_URL_OR_HTTP_URL_PATTERN.matcher(urlString).find();
     }
 }

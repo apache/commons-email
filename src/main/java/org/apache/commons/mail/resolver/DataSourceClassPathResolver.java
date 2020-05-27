@@ -87,7 +87,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
 
         try
         {
-            if (!isCid(resourceLocation) && !isHttpUrl(resourceLocation))
+            if (!isCidOrHttpUrl(resourceLocation))
             {
                 final String mimeType = FileTypeMap.getDefaultFileTypeMap().getContentType(resourceLocation);
                 final String resourceName = getResourceName(resourceLocation);

@@ -128,7 +128,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         }
 
         // if we get a stand-alone resource than ignore the base url
-        if (isFileUrl(resourceLocation) || isHttpUrl(resourceLocation))
+        if (isFileUrlOrHttpUrl(resourceLocation))
         {
             return new URL(resourceLocation);
         }
