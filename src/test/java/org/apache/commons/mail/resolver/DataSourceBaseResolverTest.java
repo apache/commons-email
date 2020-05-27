@@ -21,9 +21,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * notice for the test data:
+ * every String in isCidFalseArray shall never pass all the 3 (actually 5) functions.
+ * also for isFileUrlFalseArray and isHttpUrlFalseArray.
+ */
 public class DataSourceBaseResolverTest {
     final DataSourceFileResolver resolver = new DataSourceFileResolver();
-
     final String[] isCidTrueArray = new String[]{
             "cid:",
             "cid:test",
@@ -79,70 +83,70 @@ public class DataSourceBaseResolverTest {
     @Test
     public void testIsCid() {
         for (String au : isCidTrueArray) {
-            assertTrue("must be true : \""+au+"\"", resolver.isCid(au));
+            assertTrue("must be true : \"" + au + "\"", resolver.isCid(au));
         }
         for (String au : isCidFalseArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isCid(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isCid(au));
         }
     }
 
     @Test
     public void testIsFileUrl() {
         for (String au : isFileUrlTrueArray) {
-            assertTrue("must be true : \""+au+"\"", resolver.isFileUrl(au));
+            assertTrue("must be true : \"" + au + "\"", resolver.isFileUrl(au));
         }
         for (String au : isFileUrlFalseArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isFileUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isFileUrl(au));
         }
     }
 
     @Test
     public void testIsHttpUrl() {
         for (String au : isHttpUrlTrueArray) {
-            assertTrue("must be true : \""+au+"\"", resolver.isHttpUrl(au));
+            assertTrue("must be true : \"" + au + "\"", resolver.isHttpUrl(au));
         }
         for (String au : isHttpUrlFalseArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isHttpUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isHttpUrl(au));
         }
     }
 
     @Test
     public void testIsCidOrHttpUrl() {
         for (String au : isCidTrueArray) {
-            assertTrue("must be true : \""+au+"\"", resolver.isCidOrHttpUrl(au));
+            assertTrue("must be true : \"" + au + "\"", resolver.isCidOrHttpUrl(au));
         }
         for (String au : isHttpUrlTrueArray) {
-            assertTrue("must be true : \""+au+"\"", resolver.isCidOrHttpUrl(au));
+            assertTrue("must be true : \"" + au + "\"", resolver.isCidOrHttpUrl(au));
         }
 
         for (String au : isCidFalseArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isCidOrHttpUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isCidOrHttpUrl(au));
         }
         for (String au : isHttpUrlFalseArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isCidOrHttpUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isCidOrHttpUrl(au));
         }
         for (String au : isFileUrlTrueArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isCidOrHttpUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isCidOrHttpUrl(au));
         }
     }
 
     @Test
     public void testIsFileUrlOrHttpUrl() {
         for (String au : isFileUrlTrueArray) {
-            assertTrue("must be true : \""+au+"\"", resolver.isFileUrlOrHttpUrl(au));
+            assertTrue("must be true : \"" + au + "\"", resolver.isFileUrlOrHttpUrl(au));
         }
         for (String au : isHttpUrlTrueArray) {
-            assertTrue("must be true : \""+au+"\"", resolver.isFileUrlOrHttpUrl(au));
+            assertTrue("must be true : \"" + au + "\"", resolver.isFileUrlOrHttpUrl(au));
         }
 
         for (String au : isFileUrlFalseArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isFileUrlOrHttpUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isFileUrlOrHttpUrl(au));
         }
         for (String au : isHttpUrlFalseArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isFileUrlOrHttpUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isFileUrlOrHttpUrl(au));
         }
         for (String au : isCidTrueArray) {
-            assertFalse("must be false : \""+au+"\"", resolver.isFileUrlOrHttpUrl(au));
+            assertFalse("must be false : \"" + au + "\"", resolver.isFileUrlOrHttpUrl(au));
         }
     }
 }
