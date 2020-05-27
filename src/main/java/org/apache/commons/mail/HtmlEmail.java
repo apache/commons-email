@@ -179,17 +179,7 @@ public class HtmlEmail extends MultiPartEmail
 
         setTextMsg(msg);
 
-        final StringBuilder htmlMsgBuf = new StringBuilder(
-            msg.length()
-            + HTML_MESSAGE_START.length()
-            + HTML_MESSAGE_END.length()
-        );
-
-        htmlMsgBuf.append(HTML_MESSAGE_START)
-            .append(msg)
-            .append(HTML_MESSAGE_END);
-
-        setHtmlMsg(htmlMsgBuf.toString());
+        setHtmlMsg(HTML_MESSAGE_START + msg + HTML_MESSAGE_END);
 
         return this;
     }
