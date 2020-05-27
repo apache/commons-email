@@ -22,6 +22,7 @@ import javax.mail.util.ByteArrayDataSource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Pattern;
 
 /**
  * Creates a {@code DataSource} based on an class path.
@@ -130,6 +131,8 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
         }
     }
 
+    private static final Pattern GET_RESOURCE_NAME_PATTERN = Pattern.compile("//");
+
     /**
      * Returns the resource name for a given resource location.
      *
@@ -139,6 +142,6 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
      */
     private String getResourceName(final String resourceLocation)
     {
-        return (getClassPathBase() + resourceLocation).replaceAll("//", "/");
+        return GET_RESOURCE_NAME_PATTERN.matcher(getClassPathBase() + resourceLocation).replaceAll("/");
     }
 }

@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -215,6 +216,7 @@ public class MimeMessageParser
         }
     }
 
+    private static final Pattern STRIP_CONTENT_ID_PATTERN = Pattern.compile("[\\<\\>]");
     /**
      * Strips the content id of any whitespace and angle brackets.
      * @param contentId the string to strip
@@ -226,7 +228,7 @@ public class MimeMessageParser
         {
             return null;
         }
-        return contentId.trim().replaceAll("[\\<\\>]", "");
+        return STRIP_CONTENT_ID_PATTERN.matcher(contentId.trim()).replaceAll("");
     }
 
     /**
