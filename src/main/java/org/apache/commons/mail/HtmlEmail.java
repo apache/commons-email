@@ -557,7 +557,7 @@ public class HtmlEmail extends MultiPartEmail
             //            in case setText(...) does not set the correct content type,
             //            use the setContent() method instead.
             final String contentType = msgHtml.getContentType();
-            if (contentType == null || !contentType.equals(EmailConstants.TEXT_HTML))
+            if (!EmailConstants.TEXT_HTML.equals(contentType))
             {
                 // apply default charset if one has been set
                 if (EmailUtils.isNotEmpty(this.charset))

@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail.resolver;
 
+import org.apache.commons.mail.EmailUtils;
+
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 import java.io.IOException;
@@ -120,7 +122,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         }
 
         // if we get an non-existing location what we shall do?
-        if (resourceLocation == null || resourceLocation.length() == 0)
+        if (EmailUtils.isEmpty(resourceLocation))
         {
             throw new IllegalArgumentException("No resource defined");
         }

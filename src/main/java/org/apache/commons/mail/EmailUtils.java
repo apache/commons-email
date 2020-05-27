@@ -43,7 +43,7 @@ import org.apache.commons.mail.util.MimeMessageUtils;
  *
  * @since 1.0
  */
-final class EmailUtils
+public final class EmailUtils
 {
     /**
      * Random object used by random method. This has to be not local to the random method
@@ -120,7 +120,7 @@ final class EmailUtils
      *
      * @since Commons Lang v2.1, svn 240418
      */
-    static boolean isEmpty(final String str)
+    public static boolean isEmpty(final String str)
     {
         return str == null || str.length() == 0;
     }

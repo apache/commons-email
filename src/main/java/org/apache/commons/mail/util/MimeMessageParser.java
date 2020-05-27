@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail.util;
 
+import org.apache.commons.mail.EmailUtils;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -394,7 +396,7 @@ public class MimeMessageParser
     {
         String result = dataSource.getName();
 
-        if (result == null || result.length() == 0)
+        if (EmailUtils.isEmpty(result))
         {
             result = part.getFileName();
         }
