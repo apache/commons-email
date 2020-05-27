@@ -18,7 +18,6 @@ package org.apache.commons.mail;
 
 import static org.junit.Assert.*;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.resolver.DataSourceClassPathResolver;
