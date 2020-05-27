@@ -412,7 +412,7 @@
              <source>${maven.compiler.source}</source>
              <quiet>true</quiet>
              <encoding>utf-8</encoding>
-             <docEncoding>utf-8</docEncoding>
+             <docencoding>utf-8</docencoding>
              <notimestamp>true</notimestamp>
              <links>
                <link>https://docs.oracle.com/javase/8/docs/api/</link>
