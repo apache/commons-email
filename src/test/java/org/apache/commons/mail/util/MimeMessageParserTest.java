@@ -239,7 +239,7 @@ public class MimeMessageParserTest
     public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception
     {
         final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/outofmemory-no-header-seperation.eml"));
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/outofmemory-no-header-separation.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();
