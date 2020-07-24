@@ -55,7 +55,7 @@ import javax.mail.internet.MimeMultipart;
  * part of the multipart becomes whichever is supplied rather than a
  * {@code multipart/alternative}.
  *
- * <h3>Embedding Images and Media</h3>
+ * <h2>Embedding Images and Media</h2>
  *
  * <p>It is also possible to embed URLs, files, or arbitrary
  * {@code DataSource}s directly into the body of the mail:
