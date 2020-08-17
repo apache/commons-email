@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 /**
  * Static helper methods.
@@ -107,7 +108,7 @@ public final class MimeMessageUtils
 
         try
         {
-            final byte[] byteSource = source.getBytes();
+            final byte[] byteSource = source.getBytes(Charset.defaultCharset());
             is = new ByteArrayInputStream(byteSource);
             return createMimeMessage(session, is);
         }

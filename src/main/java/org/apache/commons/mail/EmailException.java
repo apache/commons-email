@@ -17,8 +17,11 @@
 
 package org.apache.commons.mail;
 
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Exception thrown when a checked error occurs in commons-email.
@@ -100,7 +103,7 @@ public class EmailException
     {
         synchronized (out)
         {
-            final PrintWriter pw = new PrintWriter(out, false);
+            final PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, Charset.defaultCharset()), false);
             printStackTrace(pw);
 
             // Flush the PrintWriter before it's GC'ed.

@@ -18,12 +18,8 @@ sudo: false
 
 jdk:
   - openjdk8
-  - openjdk9
-  - openjdk10
   - openjdk11
-  - openjdk12
-  - openjdk13
   - openjdk14
   
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn -V clean cobertura:cobertura coveralls:report --no-transfer-progress

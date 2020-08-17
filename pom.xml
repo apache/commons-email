@@ -19,7 +19,7 @@
     <parent>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-parent</artifactId>
-      <version>50</version>
+      <version>51</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-email</artifactId>
@@ -308,7 +308,9 @@
         <powermock.version>2.0.5</powermock.version>
         <easymock.version>4.2</easymock.version>
         <findbugs.version>3.0.5</findbugs.version>
-    </properties> 
+        <spotbugs.plugin.version>4.0.4</spotbugs.plugin.version>
+        <spotbugs.impl.version>4.0.6</spotbugs.impl.version>
+    </properties>
 
     <build>
         <plugins>
@@ -405,6 +407,21 @@
                 </goals>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+            <version>${spotbugs.plugin.version}</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs</artifactId>
+                <version>${spotbugs.impl.version}</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+            <!-- <excludeFilterFile>${basedir}/spotbugs-exclude-filter.xml</excludeFilterFile> -->
+            </configuration>
           </plugin>
          <plugin>
            <artifactId>maven-javadoc-plugin</artifactId>
@@ -505,6 +522,14 @@
                     </excludes>
                 </configuration>
             </plugin>            
+            <plugin>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs-maven-plugin</artifactId>
+              <version>${spotbugs.plugin.version}</version>
+              <configuration>
+                <!-- <excludeFilterFile>${basedir}/spotbugs-exclude-filter.xml</excludeFilterFile>  -->
+              </configuration>
+            </plugin>
         </plugins>
     </reporting>
 

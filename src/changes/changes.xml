@@ -24,7 +24,7 @@
   <body>
     <release version="1.6.0" date="Not yet released, update from Java 6 to 7.">
       <action issue="EMAIL-190" type="update" due-to="sgoeschl">
-        Fix broken JDK 1.9 build by updating "easymock" and other dependencies.
+        Fix broken JDK 9 build by updating "easymock" and other dependencies.
       </action>
       <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte">
         Change from javax.mail:1.6.1 to jakarta.mail:1.6.4.
@@ -34,6 +34,18 @@
       </action>
       <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
         Update from Java 6 to 7.
+      </action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">
+        Update commons-parent from 50 to 51.
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Update actions/checkout from v1 to v2.3.2 #17, #25.
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Update spotbugs-maven-plugin from 4.0.0 to 4.0.4 #18.
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Update jakarta.mail from 1.6.4 to 1.6.5 #22.
       </action>
     </release>
     <release version="1.5.1" date="2017-MM-DD">
