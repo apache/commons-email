@@ -47,6 +47,9 @@
       <action type="update" due-to="Dependabot" dev="ggregory">
         Update jakarta.mail from 1.6.4 to 1.6.5 #22.
       </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump junit from 4.13 to 4.13.1 #32.
+      </action>
     </release>
     <release version="1.5.1" date="2017-MM-DD">
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
