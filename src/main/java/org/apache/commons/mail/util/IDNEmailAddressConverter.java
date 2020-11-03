@@ -104,7 +104,7 @@ public class IDNEmailAddressConverter
     }
 
     /**
-     * Null-safe wrapper for {@link String#indexOf} to find the '@' character.
+     * Null-safe wrapper for {@link String#indexOf(int)} to find the '@' character.
      *
      * @param value String value.
      * @return index of first '@' character or {@code -1}

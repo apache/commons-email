@@ -179,17 +179,7 @@ public class HtmlEmail extends MultiPartEmail
 
         setTextMsg(msg);
 
-        final StringBuffer htmlMsgBuf = new StringBuffer(
-            msg.length()
-            + HTML_MESSAGE_START.length()
-            + HTML_MESSAGE_END.length()
-        );
-
-        htmlMsgBuf.append(HTML_MESSAGE_START)
-            .append(msg)
-            .append(HTML_MESSAGE_END);
-
-        setHtmlMsg(htmlMsgBuf.toString());
+        setHtmlMsg(HTML_MESSAGE_START + msg + HTML_MESSAGE_END);
 
         return this;
     }
@@ -279,26 +269,9 @@ public class HtmlEmail extends MultiPartEmail
         }
 
         // verify that the URL is valid
-        InputStream is = null;
-        try
-        {
-            is = url.openStream();
-        }
-        catch (final IOException e)
-        {
+        try (InputStream is = url.openStream()) {
+        } catch (final IOException e) {
             throw new EmailException("Invalid URL", e);
-        }
-        finally
-        {
-            try
-            {
-                if (is != null)
-                {
-                    is.close();
-                }
-            }
-            catch (final IOException ioe) // NOPMD
-            { /* sigh */ }
         }
 
         return embed(new URLDataSource(url), name);
@@ -482,13 +455,9 @@ public class HtmlEmail extends MultiPartEmail
 
             return encodedCid;
         }
-        catch (final MessagingException me)
+        catch (final MessagingException | UnsupportedEncodingException me)
         {
             throw new EmailException(me);
-        }
-        catch (final UnsupportedEncodingException uee)
-        {
-            throw new EmailException(uee);
         }
     }
 
@@ -588,7 +557,7 @@ public class HtmlEmail extends MultiPartEmail
             //            in case setText(...) does not set the correct content type,
             //            use the setContent() method instead.
             final String contentType = msgHtml.getContentType();
-            if (contentType == null || !contentType.equals(EmailConstants.TEXT_HTML))
+            if (!EmailConstants.TEXT_HTML.equals(contentType))
             {
                 // apply default charset if one has been set
                 if (EmailUtils.isNotEmpty(this.charset))

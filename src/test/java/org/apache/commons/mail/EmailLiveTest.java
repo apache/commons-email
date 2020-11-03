@@ -19,6 +19,7 @@ package org.apache.commons.mail;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class EmailLiveTest extends AbstractEmailTest
         final URLDataSource dataSource = new URLDataSource(url);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         IOUtils.copy(dataSource.getInputStream(), baos);
-        return new String(baos.toByteArray(), "UTF-8");
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**
@@ -263,7 +264,7 @@ public class EmailLiveTest extends AbstractEmailTest
         email.setMsg(textMsg);
 
         // create a proper UTF-8 sequence for the text attachment (matching our default charset)
-        final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
+        final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes(StandardCharsets.UTF_8), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());

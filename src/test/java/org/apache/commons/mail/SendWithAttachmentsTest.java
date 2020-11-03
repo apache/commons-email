@@ -111,7 +111,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         final EmailAttachment attachment = new EmailAttachment();
         File testFile = null;
 
-        /** File to used to test file attachments (Must be valid) */
+        /* File to used to test file attachments (Must be valid) */
         testFile = File.createTempFile("commons-email-testfile", ".txt");
 
         // ====================================================================
@@ -127,8 +127,8 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
-        /** File to be used to test file attachments (Must be valid) */
-        /** Use umlaut characters to test if the file name is properly encoded */
+        /* File to be used to test file attachments (Must be valid) */
+        /* Use umlaut characters to test if the file name is properly encoded */
         // use short name to avoid folding. Otherwise need to unfold when checking result.
         attachment.setName("a>ä, o>ö, u>ü, au>äu");
         attachment.setDescription("Test Attachment Desc");

@@ -20,6 +20,7 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.Random;
 
@@ -42,7 +43,7 @@ import org.apache.commons.mail.util.MimeMessageUtils;
  *
  * @since 1.0
  */
-final class EmailUtils
+public final class EmailUtils
 {
     /**
      * Random object used by random method. This has to be not local to the random method
@@ -119,7 +120,7 @@ final class EmailUtils
      *
      * @since Commons Lang v2.1, svn 240418
      */
-    static boolean isEmpty(final String str)
+    public static boolean isEmpty(final String str)
     {
         return str == null || str.length() == 0;
     }
@@ -239,7 +240,7 @@ final class EmailUtils
             }
         }
 
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         final int gap = end - start;
 
         while (count-- != 0)
@@ -296,7 +297,7 @@ final class EmailUtils
         }
 
         final StringBuilder builder = new StringBuilder();
-        for (final byte c : input.getBytes(US_ASCII))
+        for (final byte c : input.getBytes(StandardCharsets.US_ASCII))
         {
             int b = c;
             if (b < 0)
@@ -322,7 +323,7 @@ final class EmailUtils
     /**
      * Convenience method to write a MimeMessage into a file.
      *
-     * @param resultFile the file containing the MimeMessgae
+     * @param resultFile the file containing the MimeMessage
      * @param mimeMessage the MimeMessage to write
      * @throws IOException writing the MimeMessage failed
      * @throws MessagingException writing the MimeMessage failed

@@ -310,7 +310,7 @@
         <findbugs.version>3.0.5</findbugs.version>
         <spotbugs.plugin.version>4.0.4</spotbugs.plugin.version>
         <spotbugs.impl.version>4.0.6</spotbugs.impl.version>
-    </properties> 
+    </properties>
 
     <build>
         <plugins>
@@ -418,11 +418,41 @@
                 <artifactId>spotbugs</artifactId>
                 <version>${spotbugs.impl.version}</version>
               </dependency>
-            </dependencies>        
+            </dependencies>
             <configuration>
             <!-- <excludeFilterFile>${basedir}/spotbugs-exclude-filter.xml</excludeFilterFile> -->
             </configuration>
           </plugin>
+         <plugin>
+           <artifactId>maven-javadoc-plugin</artifactId>
+           <configuration>
+             <source>${maven.compiler.source}</source>
+             <quiet>true</quiet>
+             <encoding>utf-8</encoding>
+             <docencoding>utf-8</docencoding>
+             <notimestamp>true</notimestamp>
+             <links>
+               <link>https://docs.oracle.com/javase/8/docs/api/</link>
+               <link>http://docs.oracle.com/javaee/6/api/</link>
+             </links>
+             <archive>
+               <manifest>
+                 <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                 <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+               </manifest>
+             </archive>
+           </configuration>
+           <executions>
+             <execution>
+               <id>create-javadoc-jar</id>
+               <goals>
+                 <goal>javadoc</goal>
+                 <goal>jar</goal>
+               </goals>
+               <phase>package</phase>
+             </execution>
+           </executions>
+         </plugin>
         </plugins>
     </build>
 

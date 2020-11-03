@@ -298,7 +298,7 @@ public class HtmlEmailTest extends AbstractEmailTest
         final EmailAttachment attachment = new EmailAttachment();
         File testFile = null;
 
-        /** File to used to test file attachments (Must be valid) */
+        /* File to used to test file attachments (Must be valid) */
         testFile = File.createTempFile("commons-email-testfile", ".txt");
         testFile.deleteOnExit();
 
@@ -315,7 +315,7 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
-        /** File to used to test file attachmetns (Must be valid) */
+        /* File to used to test file attachmetns (Must be valid) */
         attachment.setName("Test Attachment");
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());

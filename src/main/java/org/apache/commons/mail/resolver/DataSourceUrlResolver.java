@@ -16,11 +16,14 @@
  */
 package org.apache.commons.mail.resolver;
 
+import org.apache.commons.mail.EmailUtils;
+
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Pattern;
 
 /**
  * Creates a {@code DataSource} based on an URL.
@@ -99,6 +102,8 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         }
     }
 
+    private static final Pattern CREATE_URL_PATTERN = Pattern.compile("&amp;");
+
     /**
      * Create an URL based on a base URL and a resource location suitable for loading
      * the resource.
@@ -117,17 +122,17 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         }
 
         // if we get an non-existing location what we shall do?
-        if (resourceLocation == null || resourceLocation.length() == 0)
+        if (EmailUtils.isEmpty(resourceLocation))
         {
             throw new IllegalArgumentException("No resource defined");
         }
 
         // if we get a stand-alone resource than ignore the base url
-        if (isFileUrl(resourceLocation) || isHttpUrl(resourceLocation))
+        if (isFileUrlOrHttpUrl(resourceLocation))
         {
             return new URL(resourceLocation);
         }
 
-        return new URL(getBaseUrl(), resourceLocation.replaceAll("&amp;", "&"));
+        return new URL(getBaseUrl(), CREATE_URL_PATTERN.matcher(resourceLocation).replaceAll("&"));
     }
 }
