@@ -39,7 +39,6 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
      */
     public DataSourceUrlResolver(final URL baseUrl)
     {
-        super();
         this.baseUrl = baseUrl;
     }
 

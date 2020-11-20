@@ -107,7 +107,6 @@ final class EmailUtils
      */
     private EmailUtils()
     {
-        super();
     }
 
     /**

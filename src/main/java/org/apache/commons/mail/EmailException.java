@@ -45,7 +45,6 @@ public class EmailException
      */
     public EmailException()
     {
-        super();
     }
 
     /**

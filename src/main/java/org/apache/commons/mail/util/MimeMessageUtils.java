@@ -39,7 +39,6 @@ public final class MimeMessageUtils
      */
     private MimeMessageUtils()
     {
-        super();
     }
 
     /**
