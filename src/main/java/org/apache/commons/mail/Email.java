@@ -222,16 +222,16 @@ public abstract class Email
     protected String sslSmtpPort = "465";
 
     /** List of "to" email addresses. */
-    protected List<InternetAddress> toList = new ArrayList<InternetAddress>();
+    protected List<InternetAddress> toList = new ArrayList<>();
 
     /** List of "cc" email addresses. */
-    protected List<InternetAddress> ccList = new ArrayList<InternetAddress>();
+    protected List<InternetAddress> ccList = new ArrayList<>();
 
     /** List of "bcc" email addresses. */
-    protected List<InternetAddress> bccList = new ArrayList<InternetAddress>();
+    protected List<InternetAddress> bccList = new ArrayList<>();
 
     /** List of "replyTo" email addresses. */
-    protected List<InternetAddress> replyList = new ArrayList<InternetAddress>();
+    protected List<InternetAddress> replyList = new ArrayList<>();
 
     /**
      * Address to which undeliverable mail should be sent.
@@ -248,7 +248,7 @@ public abstract class Email
      * or  2( high ) 3( normal ) 4( low ) and 5( lowest )
      * Disposition-Notification-To: user@domain.net
      */
-    protected Map<String, String> headers = new HashMap<String, String>();
+    protected Map<String, String> headers = new HashMap<>();
 
     /**
      * Used to determine whether to use pop3 before smtp, and if so the settings.
@@ -865,7 +865,7 @@ public abstract class Email
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.toList = new ArrayList<InternetAddress>(aCollection);
+        this.toList = new ArrayList<>(aCollection);
         return this;
     }
 
@@ -974,7 +974,7 @@ public abstract class Email
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.ccList = new ArrayList<InternetAddress>(aCollection);
+        this.ccList = new ArrayList<>(aCollection);
         return this;
     }
 
@@ -1083,7 +1083,7 @@ public abstract class Email
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.bccList = new ArrayList<InternetAddress>(aCollection);
+        this.bccList = new ArrayList<>(aCollection);
         return this;
     }
 
@@ -1162,7 +1162,7 @@ public abstract class Email
             throw new EmailException("Address List provided was invalid");
         }
 
-        this.replyList = new ArrayList<InternetAddress>(aCollection);
+        this.replyList = new ArrayList<>(aCollection);
         return this;
     }
 

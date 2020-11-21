@@ -78,8 +78,8 @@ public class MimeMessageParser
      */
     public MimeMessageParser(final MimeMessage message)
     {
-        attachmentList = new ArrayList<DataSource>();
-        cidMap = new HashMap<String, DataSource>();
+        attachmentList = new ArrayList<>();
+        cidMap = new HashMap<>();
         this.mimeMessage = message;
         this.isMultiPart = false;
     }

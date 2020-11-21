@@ -112,7 +112,7 @@ public class HtmlEmail extends MultiPartEmail
      * Embedded images Map&lt;String, InlineImage&gt; where the key is the
      * user-defined image name.
      */
-    protected Map<String, InlineImage> inlineEmbeds = new HashMap<String, InlineImage>();
+    protected Map<String, InlineImage> inlineEmbeds = new HashMap<>();
 
     /**
      * Set the text content.

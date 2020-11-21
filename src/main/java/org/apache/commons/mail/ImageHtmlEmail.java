@@ -128,10 +128,10 @@ public class ImageHtmlEmail extends HtmlEmail
         final StringBuffer stringBuffer = new StringBuffer();
 
         // maps "cid" --> name
-        final Map<String, String> cidCache = new HashMap<String, String>();
+        final Map<String, String> cidCache = new HashMap<>();
 
         // maps "name" --> dataSource
-        final Map<String, DataSource> dataSourceCache = new HashMap<String, DataSource>();
+        final Map<String, DataSource> dataSourceCache = new HashMap<>();
 
         // in the String, replace all "img src" with a CID and embed the related
         // image file if we find it.

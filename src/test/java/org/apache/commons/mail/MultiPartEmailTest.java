@@ -138,7 +138,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
 
         testEmail.setMsg("Test Message");
 
-        final Map<String, String> ht = new HashMap<String, String>();
+        final Map<String, String> ht = new HashMap<>();
         ht.put("X-Priority", "2");
         ht.put("Disposition-Notification-To", this.strTestMailFrom);
         ht.put("X-Mailer", "Sendmail");

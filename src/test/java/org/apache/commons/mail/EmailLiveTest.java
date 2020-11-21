@@ -329,7 +329,7 @@ public class EmailLiveTest extends AbstractEmailTest
     @Test
     public void testSendingEmailsInBatch() throws Exception
     {
-        final List<SimpleEmail> emails = new ArrayList<SimpleEmail>();
+        final List<SimpleEmail> emails = new ArrayList<>();
 
         // we need to instantiate an email to provide the mail session - a bit ugly
         final Session session = create(SimpleEmail.class).getMailSession();
