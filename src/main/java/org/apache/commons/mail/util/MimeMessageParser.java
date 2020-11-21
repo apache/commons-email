@@ -350,9 +350,8 @@ public class MimeMessageParser
     {
         DataSource dataSource;
 
-        for (int i = 0; i < getAttachmentList().size(); i++)
-        {
-            dataSource = getAttachmentList().get(i);
+        for (final DataSource element : getAttachmentList()) {
+            dataSource = element;
             if (name.equalsIgnoreCase(dataSource.getName()))
             {
                 return dataSource;
