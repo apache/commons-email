@@ -111,7 +111,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         final EmailAttachment attachment = new EmailAttachment();
 
         /** File to used to test file attachments (Must be valid) */
-        File testFile = File.createTempFile("commons-email-testfile", ".txt");
+        final File testFile = File.createTempFile("commons-email-testfile", ".txt");
 
         // ====================================================================
         // Test Success
