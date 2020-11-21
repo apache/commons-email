@@ -296,10 +296,9 @@ public class HtmlEmailTest extends AbstractEmailTest
     public void testSend() throws EmailException, IOException
     {
         final EmailAttachment attachment = new EmailAttachment();
-        File testFile = null;
 
         /** File to used to test file attachments (Must be valid) */
-        testFile = File.createTempFile("commons-email-testfile", ".txt");
+        File testFile = File.createTempFile("commons-email-testfile", ".txt");
         testFile.deleteOnExit();
 
         // ====================================================================

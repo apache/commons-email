@@ -109,10 +109,9 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
     public void testSendWAttachments() throws EmailException, IOException
     {
         final EmailAttachment attachment = new EmailAttachment();
-        File testFile = null;
 
         /** File to used to test file attachments (Must be valid) */
-        testFile = File.createTempFile("commons-email-testfile", ".txt");
+        File testFile = File.createTempFile("commons-email-testfile", ".txt");
 
         // ====================================================================
         // Test Success
