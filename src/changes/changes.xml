@@ -50,6 +50,15 @@
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump junit from 4.13 to 4.13.1 #32.
       </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump actions/setup-java from v1.4.0 to v1.4.3 #30
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump actions/checkout from v2.3.2 to v2.3.4 #33
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump commons-release-plugin from 1.0 to 1.7 #23
+      </action>
     </release>
     <release version="1.5.1" date="2017-MM-DD">
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
