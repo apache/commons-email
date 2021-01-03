@@ -39,8 +39,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
      */
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers)
     {
-        this.dataSourceResolvers = new DataSourceResolver[dataSourceResolvers.length];
-        System.arraycopy(dataSourceResolvers, 0, this.dataSourceResolvers, 0, dataSourceResolvers.length);
+        this.dataSourceResolvers = dataSourceResolvers.clone();
     }
 
     /**
@@ -52,8 +51,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers, final boolean isLenient)
     {
         super(isLenient);
-        this.dataSourceResolvers = new DataSourceResolver[dataSourceResolvers.length];
-        System.arraycopy(dataSourceResolvers, 0, this.dataSourceResolvers, 0, dataSourceResolvers.length);
+        this.dataSourceResolvers = dataSourceResolvers.clone();
     }
 
     /**
@@ -64,9 +62,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     public DataSourceResolver[] getDataSourceResolvers()
     {
         // clone the internal array to prevent external modification (see EMAIL-116)
-        final DataSourceResolver[] resolvers = new DataSourceResolver[dataSourceResolvers.length];
-        System.arraycopy(dataSourceResolvers, 0, resolvers, 0, dataSourceResolvers.length);
-        return resolvers;
+        return dataSourceResolvers.clone();
     }
 
     /** {@inheritDoc} */
