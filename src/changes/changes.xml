@@ -59,6 +59,9 @@
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump commons-release-plugin from 1.0 to 1.7 #23
       </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump maven-pmd-plugin from 3.13.0 to 3.14.0 #34.
+      </action>
     </release>
     <release version="1.5.1" date="2017-MM-DD">
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
