@@ -20,8 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.mail.internet.MimeUtility;
-
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.junit.Before;
@@ -173,7 +171,9 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         validateSend(
             this.fakeMailServer,
             strSubject,
-            MimeUtility.encodeText(attachment.getName()),
+            //as it is not possible to get directly encoded value of javax.mail.internet.encodeValue(String value, String charset)
+            //setting expected value directly here
+            "UTF-8''a%3E%C3%A4%2C%20o%3E%C3%B6%2C%20u%3E%C3%BC%2C%20au%3E%C3%A4u",
             this.email.getFromAddress(),
             this.email.getToAddresses(),
             this.email.getCcAddresses(),
