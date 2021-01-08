@@ -37,11 +37,7 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail
         {
             return this.getPrimaryBodyPart().getContent().toString();
         }
-        catch (final IOException ioE)
-        {
-            return null;
-        }
-        catch (final MessagingException msgE)
+        catch (final IOException | MessagingException msgE)
         {
             return null;
         }

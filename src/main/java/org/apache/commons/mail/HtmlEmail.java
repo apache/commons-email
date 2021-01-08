@@ -482,11 +482,7 @@ public class HtmlEmail extends MultiPartEmail
 
             return encodedCid;
         }
-        catch (final MessagingException me)
-        {
-            throw new EmailException(me);
-        }
-        catch (final UnsupportedEncodingException uee)
+        catch (final MessagingException | UnsupportedEncodingException uee)
         {
             throw new EmailException(uee);
         }

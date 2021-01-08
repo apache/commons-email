@@ -1969,11 +1969,7 @@ public abstract class Email
             // it will throw AddressException.
             address.validate();
         }
-        catch (final AddressException e)
-        {
-            throw new EmailException(e);
-        }
-        catch (final UnsupportedEncodingException e)
+        catch (final AddressException | UnsupportedEncodingException e)
         {
             throw new EmailException(e);
         }
