@@ -391,12 +391,12 @@ public class MimeMessageParser
     {
         String result = dataSource.getName();
 
-        if (result == null || result.length() == 0)
+        if (result == null || result.isEmpty())
         {
             result = part.getFileName();
         }
 
-        if (result != null && result.length() > 0)
+        if (result != null && !result.isEmpty())
         {
             result = MimeUtility.decodeText(result);
         }

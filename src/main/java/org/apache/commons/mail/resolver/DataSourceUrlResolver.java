@@ -116,7 +116,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         }
 
         // if we get an non-existing location what we shall do?
-        if (resourceLocation == null || resourceLocation.length() == 0)
+        if (resourceLocation == null || resourceLocation.isEmpty())
         {
             throw new IllegalArgumentException("No resource defined");
         }
