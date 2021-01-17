@@ -337,7 +337,7 @@ public class MimeMessageParser
     /** @return true if attachments are available */
     public boolean hasAttachments()
     {
-        return this.attachmentList.size() > 0;
+        return !this.attachmentList.isEmpty();
     }
 
     /**

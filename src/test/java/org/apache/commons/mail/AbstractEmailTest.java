@@ -282,14 +282,14 @@ public abstract class AbstractEmailTest
                     toAdd.toString().contains(mimeMessage.getHeader("To", null)));
 
             //test cc address
-            if (ccAdd.size() > 0)
+            if (!ccAdd.isEmpty())
             {
                 assertTrue("got wrong Cc: address from mail",
                     ccAdd.toString().contains(mimeMessage.getHeader("Cc", null)));
             }
 
             //test bcc address
-            if (bccAdd.size() > 0)
+            if (!bccAdd.isEmpty())
             {
                 assertTrue("got wrong Bcc: address from mail",
                     bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)));

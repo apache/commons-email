@@ -1388,35 +1388,35 @@ public abstract class Email
                 throw new EmailException("At least one receiver address required");
             }
 
-            if (this.toList.size() > 0)
+            if (!this.toList.isEmpty())
             {
                 this.message.setRecipients(
                     Message.RecipientType.TO,
                     this.toInternetAddressArray(this.toList));
             }
 
-            if (this.ccList.size() > 0)
+            if (!this.ccList.isEmpty())
             {
                 this.message.setRecipients(
                     Message.RecipientType.CC,
                     this.toInternetAddressArray(this.ccList));
             }
 
-            if (this.bccList.size() > 0)
+            if (!this.bccList.isEmpty())
             {
                 this.message.setRecipients(
                     Message.RecipientType.BCC,
                     this.toInternetAddressArray(this.bccList));
             }
 
-            if (this.replyList.size() > 0)
+            if (!this.replyList.isEmpty())
             {
                 this.message.setReplyTo(
                     this.toInternetAddressArray(this.replyList));
             }
 
 
-            if (this.headers.size() > 0)
+            if (!this.headers.isEmpty())
             {
                 for (final Map.Entry<String, String> entry : this.headers.entrySet())
                 {
