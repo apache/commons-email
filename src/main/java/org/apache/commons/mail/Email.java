@@ -326,6 +326,11 @@ public abstract class Email
     private Session session;
 
     /**
+     * An empty immutable {@code InternetAddress} array.
+     */
+    private static final InternetAddress[] EMPTY_INTERNET_ADDRESS_ARRAY = new InternetAddress[0];
+
+    /**
      * Setting to true will enable the display of debug information.
      *
      * @param d A boolean.
@@ -454,7 +459,7 @@ public abstract class Email
                 // whose content-type is some form of text.
                 if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset))
                 {
-                    final StringBuffer contentTypeBuf = new StringBuffer(this.contentType);
+                    final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
                     contentTypeBuf.append(strMarker);
                     contentTypeBuf.append(this.charset);
                     this.contentType = contentTypeBuf.toString();
@@ -1629,7 +1634,7 @@ public abstract class Email
      */
     protected InternetAddress[] toInternetAddressArray(final List<InternetAddress> list)
     {
-        return list.toArray(new InternetAddress[list.size()]);
+        return list.toArray(EMPTY_INTERNET_ADDRESS_ARRAY);
     }
 
     /**
@@ -1942,7 +1947,7 @@ public abstract class Email
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName)
         throws EmailException
     {
-        InternetAddress address;
+        final InternetAddress address;
 
         try
         {
