@@ -16,7 +16,7 @@
  */
 package org.apache.commons.mail.util;
 
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.internet.InternetAddress;
 import java.net.IDN;
 
 /**

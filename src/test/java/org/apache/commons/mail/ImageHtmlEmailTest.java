@@ -16,21 +16,9 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.Assert.*;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail.resolver.DataSourceClassPathResolver;
-import org.apache.commons.mail.resolver.DataSourceCompositeResolver;
-import org.apache.commons.mail.resolver.DataSourceUrlResolver;
-import org.apache.commons.mail.mocks.MockImageHtmlEmailConcrete;
-import org.apache.commons.mail.util.MimeMessageParser;
-import org.apache.commons.mail.util.MimeMessageUtils;
-import org.junit.Before;
-import org.junit.Test;
-
-import javax.activation.DataSource;
-import javax.mail.internet.MimeMessage;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +29,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import jakarta.activation.DataSource;
+import jakarta.mail.internet.MimeMessage;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.mail.mocks.MockImageHtmlEmailConcrete;
+import org.apache.commons.mail.resolver.DataSourceClassPathResolver;
+import org.apache.commons.mail.resolver.DataSourceCompositeResolver;
+import org.apache.commons.mail.resolver.DataSourceUrlResolver;
+import org.apache.commons.mail.util.MimeMessageParser;
+import org.apache.commons.mail.util.MimeMessageUtils;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ImageHtmlEmailTest extends HtmlEmailTest {
 
@@ -499,8 +500,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         @Override
         public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
-            final javax.mail.util.ByteArrayDataSource ds =
-                    (javax.mail.util.ByteArrayDataSource) super.resolve(resourceLocation, isLenient);
+            final jakarta.mail.util.ByteArrayDataSource ds = (jakarta.mail.util.ByteArrayDataSource) super.resolve(
+                    resourceLocation, isLenient);
             ds.setName(null);
             return ds;
         }

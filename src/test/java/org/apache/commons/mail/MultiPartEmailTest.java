@@ -25,9 +25,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.activation.FileDataSource;
-import javax.activation.URLDataSource;
-import javax.mail.internet.MimeMultipart;
+import jakarta.activation.FileDataSource;
+import jakarta.activation.URLDataSource;
+import jakarta.mail.internet.MimeMultipart;
 
 import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 import org.junit.Before;

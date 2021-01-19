@@ -25,7 +25,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
-import javax.activation.DataSource;
+import jakarta.activation.DataSource;
 
 /**
  * This class implements a typed DataSource from:<br>
@@ -39,7 +39,7 @@ import javax.activation.DataSource;
  * and it is recommended to do so.
  *
  * @since 1.0
- * @deprecated since 1.4, use {@link javax.mail.util.ByteArrayDataSource} instead
+ * @deprecated since 1.4, use {@link jakarta.mail.util.ByteArrayDataSource} instead
  */
 @Deprecated
 public class ByteArrayDataSource implements DataSource
@@ -55,7 +55,7 @@ public class ByteArrayDataSource implements DataSource
 
     /**
      * The name associated with this data source.
-     * By default, the name is an empty string, similar to javax.mail.util.ByteArrayDataSource.
+     * By default, the name is an empty string, similar to jakarta.mail.util.ByteArrayDataSource.
      * @since 1.3.1
      */
     private String name = "";
