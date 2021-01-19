@@ -26,9 +26,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Properties;
 
-import javax.activation.DataSource;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
+import jakarta.activation.DataSource;
+import jakarta.mail.Session;
+import jakarta.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.junit.Test;

@@ -22,7 +22,7 @@
   </properties>
 
   <body>
-    <release version="1.6.0" date="YYYY-MM-DD" description="Feature release (Java 8).">
+    <release version="2.0.0" date="Not yet released, update from javax.mail to jakarta.mail.">
       <action issue="EMAIL-190" type="update" due-to="sgoeschl">
         Fix broken JDK 9 build by updating "easymock" and other dependencies.
       </action>

@@ -21,7 +21,7 @@ import static org.junit.Assert.fail;
 
 import java.lang.reflect.Method;
 
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.internet.InternetAddress;
 
 import org.junit.Before;
 import org.junit.Test;
