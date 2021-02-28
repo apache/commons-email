@@ -127,6 +127,6 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
             return new URL(resourceLocation);
         }
 
-        return new URL(getBaseUrl(), resourceLocation.replaceAll("&amp;", "&"));
+        return new URL(getBaseUrl(), resourceLocation.replace("&amp;", "&"));
     }
 }

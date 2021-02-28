@@ -139,6 +139,6 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
      */
     private String getResourceName(final String resourceLocation)
     {
-        return (getClassPathBase() + resourceLocation).replaceAll("//", "/");
+        return (getClassPathBase() + resourceLocation).replace("//", "/");
     }
 }
