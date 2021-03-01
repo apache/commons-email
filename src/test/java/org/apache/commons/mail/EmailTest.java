@@ -235,12 +235,12 @@ public class EmailTest extends AbstractEmailTest
         email.setSmtpPort(1);
         assertEquals(
             1,
-            Integer.valueOf(email.getSmtpPort()).intValue());
+            Integer.parseInt(email.getSmtpPort()));
 
         email.setSmtpPort(Integer.MAX_VALUE);
         assertEquals(
                 Integer.MAX_VALUE,
-                Integer.valueOf(email.getSmtpPort()).intValue());
+                Integer.parseInt(email.getSmtpPort()));
     }
 
     @Test(expected = IllegalArgumentException.class)
