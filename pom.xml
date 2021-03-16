@@ -318,7 +318,7 @@
     </properties> 
 
     <build>
-        <defaultGoal>clean verify apache-rat:check clirr:check spotbugs:check javadoc:javadoc</defaultGoal>
+        <defaultGoal>clean verify spotbugs:check javadoc:javadoc</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
