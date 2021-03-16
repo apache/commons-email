@@ -1558,7 +1558,7 @@ public abstract class Email
         {
             return this.session.getProperty(EmailConstants.MAIL_HOST);
         }
-        else if (EmailUtils.isNotEmpty(this.hostName))
+        if (EmailUtils.isNotEmpty(this.hostName))
         {
             return this.hostName;
         }
@@ -1576,7 +1576,7 @@ public abstract class Email
         {
             return this.session.getProperty(EmailConstants.MAIL_PORT);
         }
-        else if (EmailUtils.isNotEmpty(this.smtpPort))
+        if (EmailUtils.isNotEmpty(this.smtpPort))
         {
             return this.smtpPort;
         }
@@ -1746,7 +1746,7 @@ public abstract class Email
         {
             return this.session.getProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT);
         }
-        else if (EmailUtils.isNotEmpty(this.sslSmtpPort))
+        if (EmailUtils.isNotEmpty(this.sslSmtpPort))
         {
             return this.sslSmtpPort;
         }
