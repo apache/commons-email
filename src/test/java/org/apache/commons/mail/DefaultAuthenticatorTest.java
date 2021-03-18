@@ -18,7 +18,7 @@ package org.apache.commons.mail;
 
 import static org.junit.Assert.*;
 
-import javax.mail.PasswordAuthentication;
+import jakarta.mail.PasswordAuthentication;
 
 import org.junit.Test;
 

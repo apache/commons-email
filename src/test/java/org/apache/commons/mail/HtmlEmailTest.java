@@ -27,9 +27,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.internet.MimeMessage;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;

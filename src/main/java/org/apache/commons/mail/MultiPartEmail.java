@@ -22,16 +22,16 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.activation.URLDataSource;
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimePart;
-import javax.mail.internet.MimeUtility;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.activation.URLDataSource;
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.internet.MimePart;
+import jakarta.mail.internet.MimeUtility;
 
 /**
  * A multipart email.
@@ -90,7 +90,7 @@ public class MultiPartEmail extends Email
      * @param partContent The content.
      * @param partContentType The content type.
      * @return An Email.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */
@@ -116,7 +116,7 @@ public class MultiPartEmail extends Email
      *
      * @param multipart The MimeMultipart.
      * @return An Email.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      *  @since 1.0
      */
@@ -179,7 +179,7 @@ public class MultiPartEmail extends Email
      *
      * @param msg A String.
      * @return An Email.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */
@@ -263,7 +263,7 @@ public class MultiPartEmail extends Email
      *
      * @param file A file attachment
      * @return A MultiPartEmail.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.3
      */
@@ -294,7 +294,7 @@ public class MultiPartEmail extends Email
      *
      * @param attachment An EmailAttachment.
      * @return A MultiPartEmail.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */
@@ -354,7 +354,7 @@ public class MultiPartEmail extends Email
      * @param name The name field for the attachment.
      * @param description A description for the attachment.
      * @return A MultiPartEmail.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */
@@ -372,7 +372,7 @@ public class MultiPartEmail extends Email
      * @param description A description for the attachment.
      * @param disposition Either mixed or inline.
      * @return A MultiPartEmail.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */
@@ -404,7 +404,7 @@ public class MultiPartEmail extends Email
      * @param name The name field for the attachment.
      * @param description A description for the attachment.
      * @return A MultiPartEmail.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */
@@ -445,7 +445,7 @@ public class MultiPartEmail extends Email
      * @param description A description for the attachment.
      * @param disposition Either mixed or inline.
      * @return A MultiPartEmail.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
+     * @throws EmailException see jakarta.mail.internet.MimeBodyPart
      *  for definitions
      * @since 1.0
      */

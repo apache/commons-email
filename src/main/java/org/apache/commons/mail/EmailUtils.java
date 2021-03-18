@@ -23,8 +23,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.BitSet;
 import java.util.Random;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.util.MimeMessageUtils;
 

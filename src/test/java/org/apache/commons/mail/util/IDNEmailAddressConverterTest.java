@@ -18,7 +18,7 @@ package org.apache.commons.mail.util;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.internet.InternetAddress;
 
 import org.junit.Test;
 

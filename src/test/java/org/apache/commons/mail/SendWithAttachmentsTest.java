@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.mail.internet.MimeUtility;
+import jakarta.mail.internet.MimeUtility;
 
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;

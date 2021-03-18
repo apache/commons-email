@@ -17,10 +17,16 @@
 package org.apache.commons.mail;
 
 import static org.easymock.EasyMock.expect;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.*;
 import static org.powermock.api.easymock.PowerMock.createMock;
 import static org.powermock.api.easymock.PowerMock.replay;
+
+import static org.hamcrest.CoreMatchers.containsString;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,13 +37,12 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.activation.DataHandler;
-import javax.mail.Header;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
+import jakarta.activation.DataHandler;
+import jakarta.mail.Header;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.junit.After;
 import org.junit.Before;
@@ -197,8 +202,7 @@ public abstract class AbstractEmailTest
         {
             mailServerPort++;
 
-            this.fakeMailServer = new Wiser();
-            this.fakeMailServer.setPort(getMailServerPort());
+            this.fakeMailServer = Wiser.port(getMailServerPort());
             this.fakeMailServer.start();
 
             assertFalse("fake mail server didn't start", isMailServerStopped(fakeMailServer));

@@ -22,11 +22,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.activation.DataSource;
-import javax.activation.URLDataSource;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.MimeMessage;
+import jakarta.activation.DataSource;
+import jakarta.activation.URLDataSource;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.MimeMessage;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -263,7 +263,7 @@ public class EmailLiveTest extends AbstractEmailTest
         email.setMsg(textMsg);
 
         // create a proper UTF-8 sequence for the text attachment (matching our default charset)
-        final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
+        final DataSource attachment = new jakarta.mail.util.ByteArrayDataSource(textMsg.getBytes("utf-8"), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
 
         EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());

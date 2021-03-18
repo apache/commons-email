@@ -22,6 +22,23 @@ current users are encouraged to upgrade.
 For the security bugfix see
 https://commons.apache.org/proper/commons-email/security-reports.html#Fixed_in_Apache_Commons_Email_1.5
 
+CHANGES FROM 2.0:
+-----------------
+
+== Compatibility ==
+
+* JavaMail dependency has been upgraded to version 2.0.0,
+  as a consequence, all types javax.mail.* changed to jakarta.mail.* and 
+  the maven dependency has changed to:
+
+  <dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>jakarta.mail</artifactId>
+    <version>2.0.0</version>
+  </dependency>
+  
+CHANGES FROM 1.6:
+
 CHANGES FROM 1.5:
 
 * Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.

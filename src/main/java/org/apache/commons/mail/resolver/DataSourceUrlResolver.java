@@ -16,8 +16,8 @@
  */
 package org.apache.commons.mail.resolver;
 
-import javax.activation.DataSource;
-import javax.activation.URLDataSource;
+import jakarta.activation.DataSource;
+import jakarta.activation.URLDataSource;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;

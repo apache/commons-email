@@ -16,7 +16,7 @@
  */
 package org.apache.commons.mail;
 
-import javax.activation.DataSource;
+import jakarta.activation.DataSource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

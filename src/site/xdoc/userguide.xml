@@ -242,7 +242,7 @@ import org.apache.commons.mail.HtmlEmail;
       <p>
         You can perform a more complex authentication method such as displaying
         a dialog box to the user by creating a subclass of the
-        <code>javax.mail.Authenticator</code> object.  You will need to
+        <code>jakarta.mail.Authenticator</code> object.  You will need to
         override the <code>getPasswordAuthentication()</code> method where
         you will handle collecting the user's information.  To make use of
         your new <code>Authenticator</code> class, use the

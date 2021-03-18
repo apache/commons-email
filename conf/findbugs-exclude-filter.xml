@@ -27,7 +27,7 @@
   <!--  when converting a string into a byte[]                          -->
   <Match>
     <Class name="org.apache.commons.mail.util.MimeMessageUtils" />
-    <Method name="createMimeMessage" params="javax.mail.Session, java.lang.String" returns="javax.mail.internet.MimeMessage" />
+    <Method name="createMimeMessage" params="jakarta.mail.Session, java.lang.String" returns="jakarta.mail.internet.MimeMessage" />
     <Bug pattern="DM_DEFAULT_ENCODING" />
   </Match>
 
