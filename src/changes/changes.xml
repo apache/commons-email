@@ -36,7 +36,7 @@
         Update from Java 6 to 7.
       </action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">
-        Update commons-parent from 50 to 51.
+        Update commons-parent from 50 to 52.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Update actions/checkout from v1 to v2.3.2 #17, #25.
@@ -47,8 +47,8 @@
       <action type="update" due-to="Dependabot" dev="ggregory">
         Update jakarta.mail from 1.6.4 to 1.6.5 #22.
       </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump junit from 4.13 to 4.13.1 #32.
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
+        Bump junit from 4.13 to 4.13.2 #32.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump actions/setup-java from v1.4.0 to v1.4.3 #30
@@ -61,6 +61,12 @@
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump maven-pmd-plugin from 3.13.0 to 3.14.0 #34.
+      </action>
+      <action type="update" due-to="Gary Gregory">
+        Update from Java 7 to 8.
+      </action>
+      <action type="update" due-to="Gary Gregory">
+        Update tests from Apache Commons IO 2.6 to 2.8.0.
       </action>
     </release>
     <release version="1.5.1" date="2017-MM-DD">
