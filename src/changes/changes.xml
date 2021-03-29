@@ -22,7 +22,7 @@
   </properties>
 
   <body>
-    <release version="1.6.0" date="Not yet released, update from Java 6 to 7.">
+    <release version="1.6.0" date="YYYY-MM-DD" description="Feature release (Java 8).">
       <action issue="EMAIL-190" type="update" due-to="sgoeschl">
         Fix broken JDK 9 build by updating "easymock" and other dependencies.
       </action>
@@ -69,7 +69,7 @@
         Bump actions/cache from v2 to v2.1.4 #39.
       </action>
     </release>
-    <release version="1.5.1" date="2017-MM-DD">
+    <release version="1.5.1" date="2017-MM-DD" description="Maintenance release (Java 6).">
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
       <action type="fix" dev="sgoeschl" due-to="Alexander Lehmann">Email.setBounceAddress no longer accepts invalid email addresses.</action>
     </release>
