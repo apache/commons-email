@@ -45,6 +45,9 @@
         Update spotbugs-maven-plugin from 4.0.0 to 4.0.4 #18.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump spotbugs from 4.0.6 to 4.2.2 #40.
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
         Update jakarta.mail from 1.6.4 to 1.6.5 #22.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
