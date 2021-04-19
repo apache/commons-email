@@ -53,8 +53,8 @@
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump junit from 4.13 to 4.13.2 #32.
       </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump actions/setup-java from v1.4.0 to v1.4.3 #30
+      <action type="update" due-to="Dependabot" dev="ggregory, Gary Gregory">
+        Bump actions/setup-java from v1.4.0 to v2 #30.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump commons-release-plugin from 1.0 to 1.7 #23
