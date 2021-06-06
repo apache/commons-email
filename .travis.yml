@@ -19,7 +19,7 @@ sudo: false
 jdk:
   - openjdk8
   - openjdk11
-  - openjdk15
+  - openjdk16
   
 after_success:
   - mvn -V clean cobertura:cobertura coveralls:report --no-transfer-progress
