@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import javax.activation.DataSource;
 
@@ -110,7 +111,7 @@ public class ByteArrayDataSource implements DataSource
 
             // Assumption that the string contains only ASCII characters!
             // Else just pass in a charset into this constructor and use it in getBytes().
-            baos.write(data.getBytes("iso-8859-1"));
+            baos.write(data.getBytes(StandardCharsets.ISO_8859_1));
             baos.flush();
             baos.close();
         }

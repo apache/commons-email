@@ -124,7 +124,7 @@ public class MimeMessageParserTest
     @Test
     public void testParseHtmlEmailWithAttachmentAndEncodedFilename() throws Exception
     {
-        DataSource dataSource;
+        final DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-encoded-filename.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -162,7 +162,7 @@ public class MimeMessageParserTest
     @Test
     public void testParseMultipartReport() throws Exception
     {
-        DataSource dataSource;
+        final DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-report.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -200,7 +200,7 @@ public class MimeMessageParserTest
     @Test
     public void testAttachmentOnly() throws Exception
     {
-        DataSource dataSource;
+        final DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/attachment-only.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -264,7 +264,7 @@ public class MimeMessageParserTest
     @Test
     public void testMultipartTextAttachment() throws Exception
     {
-        DataSource dataSource;
+        final DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -300,7 +300,7 @@ public class MimeMessageParserTest
     @Test
     public void testMultipartTextAttachmentOnly() throws Exception
     {
-        DataSource dataSource;
+        final DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment-only.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -336,7 +336,7 @@ public class MimeMessageParserTest
     @Test
     public void testParseHtmlEmailWithHtmlAttachment() throws Exception
     {
-        DataSource dataSource;
+        final DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-content-disposition.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);

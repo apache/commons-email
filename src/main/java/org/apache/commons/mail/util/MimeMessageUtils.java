@@ -124,7 +124,7 @@ public final class MimeMessageUtils
      * Convenience method to write a MimeMessage into a file.
      *
      * @param mimeMessage the MimeMessage to write
-     * @param resultFile  the file containing the MimeMessgae
+     * @param resultFile  the file containing the MimeMessage
      * @throws MessagingException accessing MimeMessage failed
      * @throws IOException        writing the MimeMessage failed
      */

@@ -20,6 +20,7 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.Random;
 
@@ -238,12 +239,12 @@ final class EmailUtils
             }
         }
 
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         final int gap = end - start;
 
         while (count-- != 0)
         {
-            char ch;
+            final char ch;
 
             if (chars == null)
             {
@@ -295,7 +296,7 @@ final class EmailUtils
         }
 
         final StringBuilder builder = new StringBuilder();
-        for (final byte c : input.getBytes(US_ASCII))
+        for (final byte c : input.getBytes(StandardCharsets.US_ASCII))
         {
             int b = c;
             if (b < 0)
@@ -321,7 +322,7 @@ final class EmailUtils
     /**
      * Convenience method to write a MimeMessage into a file.
      *
-     * @param resultFile the file containing the MimeMessgae
+     * @param resultFile the file containing the MimeMessage
      * @param mimeMessage the MimeMessage to write
      * @throws IOException writing the MimeMessage failed
      * @throws MessagingException writing the MimeMessage failed

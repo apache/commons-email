@@ -419,7 +419,7 @@ public class MimeMessageParser
         throws IOException
     {
         int ch;
-        byte[] result;
+        final byte[] result;
 
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
         final BufferedInputStream isReader = new BufferedInputStream(is);
