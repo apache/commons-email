@@ -1942,11 +1942,13 @@ public abstract class Email
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName)
         throws EmailException
     {
-        InternetAddress address;
+        InternetAddress address = new InternetAddress();
 
         try
         {
-            address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            if (EmailUtils.isNotEmpty(email)) {
+                address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            }
 
             // check name input
             if (EmailUtils.isNotEmpty(name))
