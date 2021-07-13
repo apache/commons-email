@@ -69,7 +69,7 @@
         Update tests from Apache Commons IO 2.6 to 2.8.0.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump actions/cache from v2 to v2.1.4 #39.
+        Bump actions/cache from v2 to v2.1.6 #39, #48.
       </action>
     </release>
     <release version="1.5.1" date="2017-MM-DD" description="Maintenance release (Java 6).">
