@@ -62,6 +62,17 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
         assertTrue(toByteArray(dataSourceResolver.resolve("images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("/images/feather-small.gif")).length > 1);
+    }
+
+    /**
+     * Tests resolving resources over HTTP.
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    public void testResolvingHttpLenientHost() throws Exception
+    {
+        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://does.not.exist"), true);
         assertNull(toByteArray(dataSourceResolver.resolve("/images/does-not-exist.gif")));
     }
 
@@ -73,7 +84,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
     @Test(expected = IOException.class)
     public void testResolvingHttpNonLenient() throws Exception
     {
-        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
+        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://does.not.exist"), false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 
         dataSourceResolver.resolve("images/does-not-exist.gif");
