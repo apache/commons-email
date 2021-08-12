@@ -26,6 +26,7 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.BindException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Enumeration;
@@ -199,7 +200,14 @@ public abstract class AbstractEmailTest
 
             this.fakeMailServer = new Wiser();
             this.fakeMailServer.setPort(getMailServerPort());
-            this.fakeMailServer.start();
+            try {
+            	this.fakeMailServer.start();
+            } catch (RuntimeException e) {
+            	if (e.getCause() != null  &&  e.getCause() instanceof BindException) {
+            		throw new IllegalStateException("Port " + getMailServerPort()
+            		                                + " is already in use.");
+            	}
+            }
 
             assertFalse("fake mail server didn't start", isMailServerStopped(fakeMailServer));
 

@@ -477,6 +477,26 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                      email.getCcAddresses(), email.getBccAddresses(), true);
     }
 
+    @Test
+    public void testSlowRegularExpressions() throws Exception {
+        ImageHtmlEmail mail = new ImageHtmlEmail();
+        mail.setHostName("example.com");
+        mail.setFrom("from@example.com");
+        mail.addTo("to@example.com");
+        StringBuilder text = new StringBuilder("<img");
+        for (int i = 0; i < 3000; i++) {
+            text.append(" ");
+        }
+        mail.setMsg("<html><body><pre>" + text + "</pre></body></html>");
+
+        long startTime = System.currentTimeMillis();
+        mail.buildMimeMessage();
+        long duration = System.currentTimeMillis() - startTime;
+        final int permittedDurationInSeconds = 200;
+		assertTrue("Run time exceeds permitted duration of " + permittedDurationInSeconds
+				   + " seconds: " + duration, duration < permittedDurationInSeconds*1000);
+    }
+
     private String loadUrlContent(final URL url) throws IOException {
         final InputStream stream = url.openStream();
         final StringBuilder html = new StringBuilder();
@@ -492,7 +512,6 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     private static final class MockDataSourceClassPathResolver extends DataSourceClassPathResolver {
-
         public MockDataSourceClassPathResolver(final String classPathBase, final boolean lenient) {
             super(classPathBase, lenient);
         }
@@ -504,6 +523,5 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
             ds.setName(null);
             return ds;
         }
-
     }
 }
