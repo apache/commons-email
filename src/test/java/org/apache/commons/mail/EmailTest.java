@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -146,11 +147,11 @@ public class EmailTest extends AbstractEmailTest
     {
         // test ASCII and UTF-8 charsets; since every JVM is required
         // to support these, testing them should always succeed.
-        Charset set = Charset.forName("US-ASCII");
+        Charset set = StandardCharsets.US_ASCII;
         email.setCharset(set.name());
         assertEquals(set.name(), email.getCharset());
 
-        set = Charset.forName("UTF-8");
+        set = StandardCharsets.UTF_8;
         email.setCharset(set.name());
         assertEquals(set.name(), email.getCharset());
     }

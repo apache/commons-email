@@ -179,7 +179,7 @@ public class HtmlEmail extends MultiPartEmail
 
         setTextMsg(msg);
 
-        final StringBuffer htmlMsgBuf = new StringBuffer(
+        final StringBuilder htmlMsgBuf = new StringBuilder(
             msg.length()
             + HTML_MESSAGE_START.length()
             + HTML_MESSAGE_END.length()
@@ -279,28 +279,10 @@ public class HtmlEmail extends MultiPartEmail
         }
 
         // verify that the URL is valid
-        InputStream is = null;
-        try
-        {
-            is = url.openStream();
-        }
-        catch (final IOException e)
-        {
+        try (InputStream is = url.openStream()) {
+        } catch (final IOException e) {
             throw new EmailException("Invalid URL", e);
         }
-        finally
-        {
-            try
-            {
-                if (is != null)
-                {
-                    is.close();
-                }
-            }
-            catch (final IOException ioe) // NOPMD
-            { /* sigh */ }
-        }
-
         return embed(new URLDataSource(url), name);
     }
 

@@ -60,10 +60,10 @@ public class ImageHtmlEmail extends HtmlEmail
     // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
 
-    /** pattern for extracting <img> tags */
+    /** pattern for extracting {@code <img>} tags */
     private static final Pattern IMG_PATTERN = Pattern.compile(REGEX_IMG_SRC);
 
-    /** pattern for extracting <script> tags */
+    /** pattern for extracting {@code <script>} tags */
     private static final Pattern SCRIPT_PATTERN = Pattern.compile(REGEX_SCRIPT_SRC);
 
     /** resolve the images and script resources to a DataSource */
