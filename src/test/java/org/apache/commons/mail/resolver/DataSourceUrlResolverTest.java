@@ -57,8 +57,8 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
     @Test
     public void testResolvingHttpLenient() throws Exception
     {
-        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), true);
-        assertTrue(toByteArray(dataSourceResolver.resolve("http://www.apache.org/images/feather-small.gif")).length > 1);
+        final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("https://www.apache.org"), true);
+        assertTrue(toByteArray(dataSourceResolver.resolve("https://www.apache.org/images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("./images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("/images/feather-small.gif")).length > 1);

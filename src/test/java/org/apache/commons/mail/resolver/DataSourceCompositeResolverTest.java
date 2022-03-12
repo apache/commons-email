@@ -39,8 +39,8 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     @Before
     public void setUp() throws Exception
     {
-        final DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("http://www.apache.org"), false);
-        final DataSourceUrlResolver urlResolverMissing = new DataSourceUrlResolver(new URL("http://does.not.exist"), false);
+        final DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("https://www.apache.org"), false);
+        final DataSourceUrlResolver urlResolverMissing = new DataSourceUrlResolver(new URL("https://does.not.exist"), false);
         final DataSourceClassPathResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
         dataSourceResolvers = new DataSourceResolver[] { urlResolver, classPathResolver };
         dataSourceResolversMissing = new DataSourceResolver[] { urlResolverMissing };
