@@ -39,7 +39,7 @@
         Update commons-parent from 50 to 52.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump actions/checkout from v1 to v2.3.4, #25 #33.
+        Bump actions/checkout from 1 to 3, #25 #33, #67.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Update spotbugs-maven-plugin from 4.0.0 to 4.2.2 #18.
