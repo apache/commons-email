@@ -60,7 +60,7 @@
         Bump commons-release-plugin from 1.0 to 1.7 #23
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump maven-pmd-plugin from 3.13.0 to 3.14.0 #34.
+        Bump maven-pmd-plugin from 3.13.0 to 3.16.0 #34, #72.
       </action>
       <action type="update" due-to="Gary Gregory">
         Update from Java 7 to 8.
