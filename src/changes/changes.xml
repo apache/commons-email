@@ -26,35 +26,42 @@
       <action issue="EMAIL-190" type="update" due-to="sgoeschl">
         Fix broken JDK 9 build by updating "easymock" and other dependencies.
       </action>
-      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte">
-        Change from javax.mail:1.6.1 to jakarta.mail:1.6.4.
-      </action>
-      <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">
-        Upgrade javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.
-      </action>
-      <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
-        Update from Java 6 to 7.
-      </action>
-      <action type="update" due-to="Gary Gregory" dev="ggregory">
-        Update commons-parent from 50 to 52.
-      </action>
+      <!-- UPDATE -->
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump actions/checkout from 1 to 3, #25 #33, #67.
       </action>
+      <action type="update" due-to="Dependabot" dev="ggregory, Gary Gregory">
+        Bump actions/setup-java from 1.4.0 to v3 #30, #74.
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump actions/cache from 2 to 3 #39, #48, #60, #70.
+      </action>
+      <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
+        Bump from Java 6 to 7.
+      </action>
+      <action type="update" due-to="Gary Gregory">
+        Bump from Java 7 to 8.
+      </action>
+      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte">
+        Bump javax.mail:1.6.1 to jakarta.mail:1.6.4.
+      </action>
+      <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">
+        Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.
+      </action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">
+        Bump commons-parent from 50 to 52.
+      </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Update spotbugs-maven-plugin from 4.0.0 to 4.2.2 #18.
+        Bump spotbugs-maven-plugin from 4.0.0 to 4.2.2 #18.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump spotbugs from 4.0.6 to 4.2.2 #40.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Update jakarta.mail from 1.6.4 to 1.6.7 #22.
+        Bump jakarta.mail from 1.6.4 to 1.6.7 #22.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump junit from 4.13 to 4.13.2 #32.
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory, Gary Gregory">
-        Bump actions/setup-java from 1.4.0 to v3 #30, #74.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump commons-release-plugin from 1.0 to 1.7 #23
@@ -63,13 +70,7 @@
         Bump maven-pmd-plugin from 3.13.0 to 3.16.0 #34, #72.
       </action>
       <action type="update" due-to="Gary Gregory">
-        Update from Java 7 to 8.
-      </action>
-      <action type="update" due-to="Gary Gregory">
         Bump tests commons-io:commons-io 2.6 to 2.11.0.
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump actions/cache from 2 to 3 #39, #48, #60, #70.
       </action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">
         Bump jacoco from 0.8.6 to 0.8.7; fixes jacoco on Java 17.
