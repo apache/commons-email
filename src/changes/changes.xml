@@ -26,6 +26,10 @@
       <action issue="EMAIL-190" type="update" due-to="sgoeschl">
         Fix broken JDK 9 build by updating "easymock" and other dependencies.
       </action>
+      <!-- ADD -->
+      <action type="add" due-to="Dependabot" dev="ggregory">
+        Add github/codeql-action #75.
+      </action>
       <!-- UPDATE -->
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump actions/checkout from 1 to 3, #25 #33, #67.
