@@ -256,7 +256,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
-            <version>1.7.30</version>
+            <version>1.7.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -266,7 +266,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.github.davidmoten/subethasmtp -->
 		<dependency>
 		    <groupId>com.github.davidmoten</groupId>
 		    <artifactId>subethasmtp</artifactId>
@@ -318,6 +317,7 @@
     </properties> 
 
     <build>
+        <!-- TODO: return back `apache-rat:check clirr:check` after the release -->
         <defaultGoal>clean verify spotbugs:check javadoc:javadoc</defaultGoal>
         <plugins>
             <plugin>
