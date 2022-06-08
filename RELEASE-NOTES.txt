@@ -27,14 +27,14 @@ CHANGES FROM 2.0:
 
 == Compatibility ==
 
-* JavaMail dependency has been upgraded to version 2.0.0,
+* JavaMail dependency has been upgraded to version 2.0.1,
   as a consequence, all types javax.mail.* changed to jakarta.mail.* and 
   the maven dependency has changed to:
 
   <dependency>
     <groupId>com.sun.mail</groupId>
     <artifactId>jakarta.mail</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
   </dependency>
   
 CHANGES FROM 1.6:

@@ -25,7 +25,7 @@
  | commons-build-plugin/trunk/src/main/resources/commons-xdoc-templates |
  +======================================================================+
  |                                                                      |
- | 1) Re-generate using: mvn commons:readme-md                          |
+ | 1) Re-generate using: mvn commons-build:readme-md                    |
  |                                                                      |
  | 2) Set the following properties in the component's pom:              |
  |    - commons.componentid (required, alphabetic, lower case)          |
@@ -43,8 +43,11 @@
 Apache Commons Email
 ===================
 
-[![Build Status](https://travis-ci.org/apache/commons-email.svg?branch=trunk)](https://travis-ci.org/apache/commons-email)
+[![Travis-CI Status](https://travis-ci.org/apache/commons-email.svg)](https://travis-ci.org/apache/commons-email)
+[![GitHub Actions Status](https://github.com/apache/commons-email/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-email/actions)
+[![Coverage Status](https://coveralls.io/repos/apache/commons-email/badge.svg)](https://coveralls.io/r/apache/commons-email)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/)
+[![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-email/2.0.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-email/2.0.0)
 
 Apache Commons Email aims to provide an API for sending email. It is built on top of
         the JavaMail API, which it aims to simplify.
@@ -53,7 +56,7 @@ Documentation
 -------------
 
 More information can be found on the [Apache Commons Email homepage](https://commons.apache.org/proper/commons-email).
-The [Javadoc](https://commons.apache.org/proper/commons-email/javadocs/api-release) can be browsed.
+The [Javadoc](https://commons.apache.org/proper/commons-email/apidocs) can be browsed.
 Questions related to the usage of Apache Commons Email should be posted to the [user mailing list][ml].
 
 Where can I get the latest release?
@@ -66,7 +69,7 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-email</artifactId>
-  <version>1.5</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 

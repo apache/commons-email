@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 /**
- * Commons-Email aims to provide a API for sending email.
- * It is built on top of the Java Mail API, which it aims to simplify.
+ * Commons-Email aims to provide an API for sending email.
+ * It is built on top of the Jakarta Mail API, which it aims to simplify.
  * All help is gratefully received.
  */
 package org.apache.commons.mail;
