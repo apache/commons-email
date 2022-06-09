@@ -103,7 +103,7 @@ public class MimeMessageParser
     public List<javax.mail.Address> getTo() throws Exception
     {
         final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
     }
 
     /**
@@ -113,7 +113,7 @@ public class MimeMessageParser
     public List<javax.mail.Address> getCc() throws Exception
     {
         final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
     }
 
     /**
@@ -123,7 +123,7 @@ public class MimeMessageParser
     public List<javax.mail.Address> getBcc() throws Exception
     {
         final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList<javax.mail.Address>();
+        return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
     }
 
     /**

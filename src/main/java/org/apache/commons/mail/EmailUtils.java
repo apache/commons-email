@@ -238,7 +238,7 @@ final class EmailUtils
             }
         }
 
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         final int gap = end - start;
 
         while (count-- != 0)

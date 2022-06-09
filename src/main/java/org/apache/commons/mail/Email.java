@@ -454,7 +454,7 @@ public abstract class Email
                 // whose content-type is some form of text.
                 if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset))
                 {
-                    final StringBuffer contentTypeBuf = new StringBuffer(this.contentType);
+                    final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
                     contentTypeBuf.append(strMarker);
                     contentTypeBuf.append(this.charset);
                     this.contentType = contentTypeBuf.toString();

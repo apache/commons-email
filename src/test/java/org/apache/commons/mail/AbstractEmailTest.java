@@ -417,7 +417,7 @@ public abstract class AbstractEmailTest
             return "";
         }
 
-        final StringBuffer serializedEmail = new StringBuffer();
+        final StringBuilder serializedEmail = new StringBuilder();
         final MimeMessage message = wiserMessage.getMimeMessage();
 
         // Serialize the headers
