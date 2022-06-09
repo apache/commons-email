@@ -318,7 +318,7 @@
         <easymock.version>4.3</easymock.version>
         <findbugs.version>3.0.5</findbugs.version>
         <spotbugs.plugin.version>4.2.2</spotbugs.plugin.version>
-        <spotbugs.impl.version>4.2.2</spotbugs.impl.version>
+        <spotbugs.impl.version>4.7.0</spotbugs.impl.version>
         <commons.jacoco.version>0.8.8</commons.jacoco.version>
     </properties> 
 
