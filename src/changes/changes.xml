@@ -49,8 +49,8 @@
       <action type="update" due-to="Gary Gregory">
         Bump from Java 7 to 8.
       </action>
-      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte">
-        Bump javax.mail:1.6.1 to jakarta.mail:1.6.4.
+      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte, Dependabot, Gary Gregory">
+        Bump javax.mail:1.6.1 to jakarta.mail:1.6.7.
       </action>
       <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">
         Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.
@@ -63,9 +63,6 @@
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump spotbugs from 4.0.6 to 4.2.2 #40.
-      </action>
-      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump jakarta.mail from 1.6.4 to 1.6.7 #22.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump junit from 4.13 to 4.13.2 #32.
