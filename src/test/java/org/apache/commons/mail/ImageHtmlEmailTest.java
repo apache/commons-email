@@ -478,17 +478,18 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     private String loadUrlContent(final URL url) throws IOException {
-        final InputStream stream = url.openStream();
-        final StringBuilder html = new StringBuilder();
-        try {
-            final List<String> lines = IOUtils.readLines(stream);
-            for (final String line : lines) {
-                html.append(line).append("\n");
+        try (final InputStream stream = url.openStream()) {
+            final StringBuilder html = new StringBuilder();
+            try {
+                final List<String> lines = IOUtils.readLines(stream);
+                for (final String line : lines) {
+                    html.append(line).append("\n");
+                }
+            } finally {
+                stream.close();
             }
-        } finally {
-            stream.close();
+            return html.toString();
         }
-        return html.toString();
     }
 
     private static final class MockDataSourceClassPathResolver extends DataSourceClassPathResolver {
