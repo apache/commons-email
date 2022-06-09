@@ -420,7 +420,7 @@ public class MimeMessageParser
     {
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
         final BufferedInputStream isReader = new BufferedInputStream(is);
-        try (final BufferedOutputStream osWriter = new BufferedOutputStream(os)) {
+        try (BufferedOutputStream osWriter = new BufferedOutputStream(os)) {
             int ch;
             while ((ch = isReader.read()) != -1)
             {
