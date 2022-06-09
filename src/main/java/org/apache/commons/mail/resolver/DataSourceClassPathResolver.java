@@ -90,26 +90,19 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
             {
                 final String mimeType = FileTypeMap.getDefaultFileTypeMap().getContentType(resourceLocation);
                 final String resourceName = getResourceName(resourceLocation);
-                final InputStream is = DataSourceClassPathResolver.class.getResourceAsStream(resourceName);
-
-                if (is == null) {
-                    if (isLenient)
-                    {
-                        return null;
+                try (InputStream is = DataSourceClassPathResolver.class.getResourceAsStream(resourceName)){
+                    if (is == null) {
+                        if (isLenient)
+                        {
+                            return null;
+                        }
+                        throw new IOException("The following class path resource was not found : " + resourceLocation);
                     }
-                    throw new IOException("The following class path resource was not found : " + resourceLocation);
-                }
-                try
-                {
                     final ByteArrayDataSource ds = new ByteArrayDataSource(is, mimeType);
                     // EMAIL-125: set the name of the DataSource to the normalized resource URL
                     // similar to other DataSource implementations, e.g. FileDataSource, URLDataSource
                     ds.setName(DataSourceClassPathResolver.class.getResource(resourceName).toString());
                     result = ds;
-                }
-                finally
-                {
-                    is.close();
                 }
             }
 

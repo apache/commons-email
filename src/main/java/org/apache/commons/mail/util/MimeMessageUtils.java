@@ -131,30 +131,15 @@ public final class MimeMessageUtils
     public static void writeMimeMessage(final MimeMessage mimeMessage, final File resultFile)
         throws MessagingException, IOException
     {
-
-        FileOutputStream fos = null;
-
-        try
+        if (!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs())
         {
-            if (!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs())
-            {
-                throw new IOException(
-                        "Failed to create the following parent directories: "
-                                + resultFile.getParentFile());
-            }
-
-            fos = new FileOutputStream(resultFile);
+            throw new IOException(
+                    "Failed to create the following parent directories: "
+                            + resultFile.getParentFile());
+        }
+        try (FileOutputStream fos = new FileOutputStream(resultFile)) {
             mimeMessage.writeTo(fos);
             fos.flush();
-            fos.close();
-            fos = null;
-        }
-        finally
-        {
-            if (fos != null)
-            {
-                fos.close();
-            }
         }
     }
 }
