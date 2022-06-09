@@ -418,23 +418,17 @@ public class MimeMessageParser
     private byte[] getContent(final InputStream is)
         throws IOException
     {
-        int ch;
-        byte[] result;
-
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
         final BufferedInputStream isReader = new BufferedInputStream(is);
-        final BufferedOutputStream osWriter = new BufferedOutputStream(os);
-
-        while ((ch = isReader.read()) != -1)
-        {
-            osWriter.write(ch);
+        try (final BufferedOutputStream osWriter = new BufferedOutputStream(os)) {
+            int ch;
+            while ((ch = isReader.read()) != -1)
+            {
+                osWriter.write(ch);
+            }
+            osWriter.flush();
+            return os.toByteArray();
         }
-
-        osWriter.flush();
-        result = os.toByteArray();
-        osWriter.close();
-
-        return result;
     }
 
     /**
