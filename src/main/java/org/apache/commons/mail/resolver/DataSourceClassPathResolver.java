@@ -105,8 +105,6 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
                     result = ds;
                 }
             }
-
-
             return result;
         }
         catch (final IOException e)

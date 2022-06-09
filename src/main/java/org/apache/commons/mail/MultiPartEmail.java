@@ -386,8 +386,7 @@ public class MultiPartEmail extends Email
         // verify that the URL is valid
        try
        {
-           final InputStream is = url.openStream();
-           is.close();
+           url.openStream().close();
        }
        catch (final IOException e)
        {
@@ -414,16 +413,13 @@ public class MultiPartEmail extends Email
         final String description)
         throws EmailException
     {
-        // verify that the DataSource is valid
-        try
+        if (ds == null)
         {
-            final InputStream is = ds != null ? ds.getInputStream() : null;
-            if (is != null)
-            {
-                // close the input stream to prevent file locking on windows
-                is.close();
-            }
-
+            throw new EmailException("Invalid Datasource");
+        }
+        // verify that the DataSource is valid
+        try (InputStream is = ds.getInputStream())
+        {
             if (is == null)
             {
                 throw new EmailException("Invalid Datasource");
@@ -433,7 +429,6 @@ public class MultiPartEmail extends Email
         {
             throw new EmailException("Invalid Datasource", e);
         }
-
         return attach(ds, name, description, EmailAttachment.ATTACHMENT);
     }
 

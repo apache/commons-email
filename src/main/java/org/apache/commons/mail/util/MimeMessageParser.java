@@ -270,10 +270,13 @@ public class MimeMessageParser
         final DataHandler dataHandler = part.getDataHandler();
         final DataSource dataSource = dataHandler.getDataSource();
         final String contentType = getBaseMimeType(dataSource.getContentType());
-        final byte[] content = this.getContent(dataSource.getInputStream());
+        byte[] content;
+        try (InputStream inputStream = dataSource.getInputStream()) 
+        {
+            content = this.getContent(inputStream);
+        }
         final ByteArrayDataSource result = new ByteArrayDataSource(content, contentType);
         final String dataSourceName = getDataSourceName(part, dataSource);
-
         result.setName(dataSourceName);
         return result;
     }

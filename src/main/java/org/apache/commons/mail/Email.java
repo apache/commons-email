@@ -1432,6 +1432,7 @@ public abstract class Email
 
             if (this.popBeforeSmtp)
             {
+                // TODO Why is this not a Store leak? When to close?
                 final Store store = session.getStore("pop3");
                 store.connect(this.popHost, this.popUsername, this.popPassword);
             }
