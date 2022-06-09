@@ -319,7 +319,7 @@
         <findbugs.version>3.0.5</findbugs.version>
         <spotbugs.plugin.version>4.2.2</spotbugs.plugin.version>
         <spotbugs.impl.version>4.2.2</spotbugs.impl.version>
-        <commons.jacoco.version>0.8.7</commons.jacoco.version>
+        <commons.jacoco.version>0.8.8</commons.jacoco.version>
     </properties> 
 
     <build>

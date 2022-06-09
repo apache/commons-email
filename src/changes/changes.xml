@@ -77,7 +77,7 @@
         Bump tests commons-io:commons-io 2.6 to 2.11.0.
       </action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">
-        Bump jacoco from 0.8.6 to 0.8.7; fixes jacoco on Java 17.
+        Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17.
       </action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">
         Bump org.easymock:easymock from 4.2 to 4.3.
