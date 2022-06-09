@@ -221,7 +221,7 @@ final class EmailUtils
         {
             return "";
         }
-        else if (count < 0)
+        if (count < 0)
         {
             throw new IllegalArgumentException("Requested random string length " + count + " is less than 0.");
         }
