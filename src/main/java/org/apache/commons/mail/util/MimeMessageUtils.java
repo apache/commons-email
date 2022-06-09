@@ -42,7 +42,7 @@ public final class MimeMessageUtils
     }
 
     /**
-     * Create a MimeMessage.
+     * Creates a MimeMessage.
      *
      * @param session the mail session
      * @param source the input data
@@ -60,7 +60,7 @@ public final class MimeMessageUtils
     }
 
     /**
-     * Create a MimeMessage.
+     * Creates a MimeMessage.
      *
      * @param session the mail session
      * @param source the input data
@@ -78,7 +78,7 @@ public final class MimeMessageUtils
     }
 
     /**
-     * Create a MimeMessage.
+     * Creates a MimeMessage.
      *
      * @param session the mail session
      * @param source the input data
@@ -92,7 +92,7 @@ public final class MimeMessageUtils
     }
 
     /**
-     * Create a MimeMessage using the platform's default character encoding.
+     * Creates a MimeMessage using the platform's default character encoding.
      *
      * @param session the mail session
      * @param source the input data
@@ -121,7 +121,7 @@ public final class MimeMessageUtils
     }
 
     /**
-     * Convenience method to write a MimeMessage into a file.
+     * Writes a MimeMessage into a file.
      *
      * @param mimeMessage the MimeMessage to write
      * @param resultFile  the file containing the MimeMessgae
