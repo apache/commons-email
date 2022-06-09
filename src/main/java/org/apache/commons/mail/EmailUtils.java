@@ -254,8 +254,8 @@ final class EmailUtils
                 ch = chars[random.nextInt(gap) + start];
             }
 
-            if ((letters && numbers && Character.isLetterOrDigit(ch)) || (letters && Character.isLetter(ch))
-                            || (numbers && Character.isDigit(ch)) || (!letters && !numbers))
+            if (letters && numbers && Character.isLetterOrDigit(ch) || letters && Character.isLetter(ch)
+                            || numbers && Character.isDigit(ch) || !letters && !numbers)
             {
                 buffer.append(ch);
             }
@@ -309,7 +309,7 @@ final class EmailUtils
             else
             {
                 builder.append(ESCAPE_CHAR);
-                final char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, RADIX));
+                final char hex1 = Character.toUpperCase(Character.forDigit(b >> 4 & 0xF, RADIX));
                 final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
                 builder.append(hex1);
                 builder.append(hex2);
