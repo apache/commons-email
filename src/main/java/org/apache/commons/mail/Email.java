@@ -251,7 +251,7 @@ public abstract class Email
     protected Map<String, String> headers = new HashMap<>();
 
     /**
-     * Used to determine whether to use pop3 before smtp, and if so the settings.
+     * Used to determine whether to use pop3 before SMTP, and if so the settings.
      */
     protected boolean popBeforeSmtp;
 
@@ -1569,7 +1569,7 @@ public abstract class Email
     /**
      * Gets the listening port of the SMTP server.
      *
-     * @return smtp port
+     * @return SMTP port
      */
     public String getSmtpPort()
     {
@@ -1634,7 +1634,7 @@ public abstract class Email
     }
 
     /**
-     * Set details regarding "pop3 before smtp" authentication.
+     * Set details regarding "pop3 before SMTP" authentication.
      *
      * @param newPopBeforeSmtp Whether or not to log into pop3 server before sending mail.
      * @param newPopHost The pop3 host to use.
