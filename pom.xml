@@ -309,6 +309,7 @@
         <commons.release.version>1.6.0</commons.release.version>
         <commons.release.desc>(Java 7)</commons.release.desc>
         <commons.rc.version>RC1</commons.rc.version>
+        <commons.bc.version>1.5</commons.bc.version>
 
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
@@ -322,7 +323,7 @@
     </properties> 
 
     <build>
-        <defaultGoal>clean verify apache-rat:check clirr:check spotbugs:check javadoc:javadoc</defaultGoal>
+        <defaultGoal>clean verify apache-rat:check japicmp:cmp spotbugs:check javadoc:javadoc</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -488,10 +489,6 @@
                     <effort>Default</effort>
                     <excludeFilterFile>${basedir}/conf/findbugs-exclude-filter.xml</excludeFilterFile>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>clirr-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>

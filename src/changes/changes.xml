@@ -30,6 +30,9 @@
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
       </action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">
+        Add Maven plugin JapiCmp and remove Clirr.
+      </action>
       <!-- UPDATE -->
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump actions/cache from 2 to 3.0.4 #39, #48, #60, #70.
