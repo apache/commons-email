@@ -45,6 +45,8 @@ Apache Commons Email
 
 [![Build Status](https://travis-ci.org/apache/commons-email.svg?branch=trunk)](https://travis-ci.org/apache/commons-email)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/)
+[![CodeQL](https://github.com/apache/commons-email/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
+
 
 Apache Commons Email aims to provide an API for sending email. It is built on top of
         the JavaMail API, which it aims to simplify.
