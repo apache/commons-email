@@ -111,12 +111,12 @@ final class EmailUtils
 
     /**
      * Checks if a String is empty ("") or null.
+     * <p>
+     * Copied from Commons Lang v2.1, svn 240418
+     * <p>
      *
      * @param str the String to check, may be null
-     *
      * @return {@code true} if the String is empty or null
-     *
-     * @since Commons Lang v2.1, svn 240418
      */
     static boolean isEmpty(final String str)
     {
@@ -125,12 +125,12 @@ final class EmailUtils
 
     /**
      * Checks if a String is not empty ("") and not null.
+     * <p>
+     * Copied from Commons Lang v2.1, svn 240418
+     * <p>
      *
      * @param str the String to check, may be null
-     *
      * @return {@code true} if the String is not empty and not null
-     *
-     * @since Commons Lang v2.1, svn 240418
      */
     static boolean isNotEmpty(final String str)
     {
@@ -140,13 +140,13 @@ final class EmailUtils
     /**
      * Validate an argument, throwing {@code IllegalArgumentException}
      * if the argument is {@code null}.
+     * <p>
+     * Copied from Commons Lang v2.1, svn 201930
+     * <p>
      *
      * @param object the object to check is not {@code null}
      * @param message the exception message you would like to see if the object is {@code null}
-     *
      * @throws IllegalArgumentException if the object is {@code null}
-     *
-     * @since Commons Lang v2.1, svn 201930
      */
     static void notNull(final Object object, final String message)
     {
@@ -158,16 +158,14 @@ final class EmailUtils
 
     /**
      * Creates a random string whose length is the number of characters specified.
-     *
      * <p>
      * Characters will be chosen from the set of alphabetic characters.
      * </p>
-     *
+     * <p>
+     * Copied from Commons Lang v2.1, svn 201930
+     * </p>
      * @param count the length of random string to create
-     *
      * @return the random string
-     *
-     * @since Commons Lang v2.1, svn 201930
      */
     static String randomAlphabetic(final int count)
     {
@@ -192,6 +190,9 @@ final class EmailUtils
      * single {@link Random} instance with a fixed seed and using it for each call, the same random sequence of strings
      * can be generated repeatedly and predictably.
      * </p>
+     * <p>
+     * Copied from Commons Lang v2.1, svn 201930
+     * </p>
      *
      * @param count the length of random string to create
      * @param start the position in set of chars to start at
@@ -201,12 +202,8 @@ final class EmailUtils
      * @param chars the set of chars to choose randoms from. If {@code null},
      *              then it will use the set of all chars.
      * @param random a source of randomness.
-     *
      * @return the random string
-     *
      * @throws IllegalArgumentException if {@code count} &lt; 0.
-     *
-     * @since Commons Lang v2.1, svn 201930
      */
     private static String random(
         int count,
