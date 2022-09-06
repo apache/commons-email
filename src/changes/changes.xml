@@ -37,10 +37,10 @@
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump actions/cache from 2 to 3.0.8 #39, #48, #60, #70.
       </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump actions/checkout from 1 to 3, #25 #33, #67.
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
+        Bump actions/checkout from 1 to 3.0.2, #25 #33, #67.
       </action>
-      <action type="update" due-to="Dependabot" dev="ggregory, Gary Gregory">
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump actions/setup-java from 1.4.0 to v3 #30, #74.
       </action>
       <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
