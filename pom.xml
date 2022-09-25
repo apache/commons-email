@@ -318,6 +318,10 @@
         <easymock.version>4.3</easymock.version>
         <spotbugs.plugin.version>4.2.2</spotbugs.plugin.version>
         <spotbugs.impl.version>4.2.2</spotbugs.impl.version>
+        
+        <commons.spotbugs.plugin.version>4.5.3.0</commons.spotbugs.plugin.version>
+        <commons.spotbugs.impl.version>4.5.3</commons.spotbugs.impl.version>    
+
         <commons.jacoco.version>0.8.8</commons.jacoco.version>
     </properties> 
 
@@ -477,16 +481,6 @@
                 <version>3.17.0</version>
                 <configuration>
                     <targetJdk>${maven.compiler.target}</targetJdk>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${findbugs.version}</version>
-                <configuration>
-                    <threshold>Normal</threshold>
-                    <effort>Default</effort>
-                    <excludeFilterFile>${basedir}/conf/findbugs-exclude-filter.xml</excludeFilterFile>
                 </configuration>
             </plugin>
             <plugin>
