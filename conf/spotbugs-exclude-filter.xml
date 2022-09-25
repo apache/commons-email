@@ -41,4 +41,13 @@
     <Bug pattern="DM_DEFAULT_ENCODING" />
   </Match>
 
+  <!-- TODO Can any of these be done without breaking binary compatibility? -->
+  <Match>
+    <Class name="~.*" />
+    <Or>
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+    </Or>
+  </Match>
+
 </FindBugsFilter>

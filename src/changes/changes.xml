@@ -59,10 +59,10 @@
         Bump commons-parent from 50 to 53.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump spotbugs-maven-plugin from 4.0.0 to 4.2.2 #18.
+        Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump spotbugs from 4.0.6 to 4.2.2 #40.
+        Bump spotbugs from 4.0.6 to 4.7.2 #40.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump junit from 4.13 to 4.13.2 #32.
