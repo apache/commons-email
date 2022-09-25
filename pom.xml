@@ -316,12 +316,8 @@
         
         <powermock.version>2.0.9</powermock.version>
         <easymock.version>4.3</easymock.version>
-        <spotbugs.plugin.version>4.2.2</spotbugs.plugin.version>
-        <spotbugs.impl.version>4.2.2</spotbugs.impl.version>
-        
-        <commons.spotbugs.plugin.version>4.5.3.0</commons.spotbugs.plugin.version>
-        <commons.spotbugs.impl.version>4.5.3</commons.spotbugs.impl.version>    
-
+        <commons.spotbugs.plugin.version>4.2.2</commons.spotbugs.plugin.version>
+        <commons.spotbugs.impl.version>4.2.2</commons.spotbugs.impl.version>    
         <commons.jacoco.version>0.8.8</commons.jacoco.version>
     </properties> 
 
@@ -425,12 +421,12 @@
           <plugin>
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-maven-plugin</artifactId>
-            <version>${spotbugs.plugin.version}</version>
+            <version>${commons.spotbugs.plugin.version}</version>
             <dependencies>
               <dependency>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs</artifactId>
-                <version>${spotbugs.impl.version}</version>
+                <version>${commons.spotbugs.impl.version}</version>
               </dependency>
             </dependencies>        
             <configuration>
