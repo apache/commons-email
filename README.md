@@ -43,7 +43,7 @@
 Apache Commons Email
 ===================
 
-[![Build Status](https://travis-ci.org/apache/commons-email.svg?branch=trunk)](https://travis-ci.org/apache/commons-email)
+[![GitHub Actions Status](https://github.com/apache/commons-email/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-email/actions)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/?gav=true)
 [![CodeQL](https://github.com/apache/commons-email/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
 
