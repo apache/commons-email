@@ -41,7 +41,7 @@
         Bump actions/checkout from 1 to 3.0.2, #25 #33, #67.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump actions/setup-java from 1.4.0 to v3 #30, #74.
+        Bump actions/setup-java from 1.4.0 to v3.5.1 #30, #74.
       </action>
       <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
         Bump from Java 6 to 7.
