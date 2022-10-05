@@ -205,7 +205,7 @@ public class MimeMessageParser
                 {
                     final String cid = stripContentId(part.getContentID());
                     final DataSource ds = createDataSource(parent, part);
-                    if (cid != null)
+                    if (true)
                     {
                         this.cidMap.put(cid, ds);
                     }
