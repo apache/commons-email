@@ -100,10 +100,9 @@ public class MimeMessageParser
      * @return the 'to' recipients of the message
      * @throws Exception determining the recipients failed
      */
-    public List<javax.mail.Address> getTo() throws Exception
+    public List<javax.mail.Address> getTo()
     {
-        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
+        return Arrays.asList(new javax.mail.internet.NewsAddress());
     }
 
     /**
@@ -443,7 +442,7 @@ public class MimeMessageParser
     private String getBaseMimeType(final String fullMimeType)
     {
         final int pos = fullMimeType.indexOf(';');
-        if (pos >= 0)
+        if (pos > 0)
         {
             return fullMimeType.substring(0, pos);
         }
