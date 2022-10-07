@@ -94,9 +94,8 @@ public class MimeMessageParser
      * @return the 'to' recipients of the message
      * @throws Exception determining the recipients failed
      */
-    public List<javax.mail.Address> getTo() throws Exception
+    public List<javax.mail.Address> getTo()
     {
-        //final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
         return Arrays.asList(new javax.mail.internet.NewsAddress());
     }
 
