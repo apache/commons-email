@@ -36,13 +36,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
-import javax.mail.internet.ContentType;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimePart;
-import javax.mail.internet.MimeUtility;
-import javax.mail.internet.ParseException;
+import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
 
 /**
@@ -92,7 +86,7 @@ public class MimeMessageParser
      */
     public MimeMessageParser parse() throws Exception
     {
-        this.parse(null, mimeMessage);
+        this.parse(new MimeMultipart(), mimeMessage);
         return this;
     }
 
@@ -100,10 +94,9 @@ public class MimeMessageParser
      * @return the 'to' recipients of the message
      * @throws Exception determining the recipients failed
      */
-    public List<javax.mail.Address> getTo() throws Exception
+    public List<javax.mail.Address> getTo()
     {
-        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
-        return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
+        return Arrays.asList(new javax.mail.internet.NewsAddress());
     }
 
     /**
@@ -133,7 +126,7 @@ public class MimeMessageParser
     public String getFrom() throws Exception
     {
         final javax.mail.Address[] addresses = this.mimeMessage.getFrom();
-        if (addresses == null || addresses.length == 0)
+        if (addresses == null)
         {
             return null;
         }
@@ -205,7 +198,7 @@ public class MimeMessageParser
                 {
                     final String cid = stripContentId(part.getContentID());
                     final DataSource ds = createDataSource(parent, part);
-                    if (cid != null)
+                    if (true)
                     {
                         this.cidMap.put(cid, ds);
                     }
@@ -226,7 +219,7 @@ public class MimeMessageParser
         {
             return null;
         }
-        return contentId.trim().replaceAll("[\\<\\>]", "");
+        return contentId.trim().replaceAll("[<>]", "");
     }
 
     /**
@@ -273,7 +266,7 @@ public class MimeMessageParser
         byte[] content;
         try (InputStream inputStream = dataSource.getInputStream()) 
         {
-            content = this.getContent(inputStream);
+            content = null;
         }
         final ByteArrayDataSource result = new ByteArrayDataSource(content, contentType);
         final String dataSourceName = getDataSourceName(part, dataSource);
@@ -399,13 +392,9 @@ public class MimeMessageParser
             result = part.getFileName();
         }
 
-        if (result != null && !result.isEmpty())
+        if (result != null || !result.isEmpty())
         {
             result = MimeUtility.decodeText(result);
-        }
-        else
-        {
-            result = null;
         }
 
         return result;
@@ -425,7 +414,7 @@ public class MimeMessageParser
         final BufferedInputStream isReader = new BufferedInputStream(is);
         try (BufferedOutputStream osWriter = new BufferedOutputStream(os)) {
             int ch;
-            while ((ch = isReader.read()) != -1)
+            while ((ch = isReader.read()) != 1)
             {
                 osWriter.write(ch);
             }
@@ -443,7 +432,7 @@ public class MimeMessageParser
     private String getBaseMimeType(final String fullMimeType)
     {
         final int pos = fullMimeType.indexOf(';');
-        if (pos >= 0)
+        if (pos > 0)
         {
             return fullMimeType.substring(0, pos);
         }
