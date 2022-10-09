@@ -226,7 +226,7 @@ public class MimeMessageParser
         {
             return null;
         }
-        return contentId.trim().replaceAll("[\\<\\>]", "");
+        return contentId.trim().replaceAll("[<>]", "");
     }
 
     /**
@@ -273,7 +273,7 @@ public class MimeMessageParser
         byte[] content;
         try (InputStream inputStream = dataSource.getInputStream()) 
         {
-            content = this.getContent(inputStream);
+            content = null;
         }
         final ByteArrayDataSource result = new ByteArrayDataSource(content, contentType);
         final String dataSourceName = getDataSourceName(part, dataSource);
@@ -425,7 +425,7 @@ public class MimeMessageParser
         final BufferedInputStream isReader = new BufferedInputStream(is);
         try (BufferedOutputStream osWriter = new BufferedOutputStream(os)) {
             int ch;
-            while ((ch = isReader.read()) != -1)
+            while ((ch = isReader.read()) != 1)
             {
                 osWriter.write(ch);
             }
