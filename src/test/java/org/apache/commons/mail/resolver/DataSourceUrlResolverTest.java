@@ -16,6 +16,7 @@
  */
 package org.apache.commons.mail.resolver;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.Assert.*;
 
 import org.apache.commons.mail.DataSourceResolver;
@@ -81,13 +82,13 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest
      *
      * @throws Exception the test failed
      */
-    @Test(expected = IOException.class)
+    @Test
     public void testResolvingHttpNonLenient() throws Exception
     {
         final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://does.not.exist"), false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 
-        dataSourceResolver.resolve("images/does-not-exist.gif");
+        assertThrows(IOException.class, () -> dataSourceResolver.resolve("images/does-not-exist.gif"));
     }
 
 }
