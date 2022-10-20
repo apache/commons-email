@@ -17,12 +17,14 @@
 package org.apache.commons.mail.resolver;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.Test;
+import org.junit.jupiter.api.function.Executable;
 
 /**
  * JUnit test case for DateSourceResolver.
@@ -43,13 +45,13 @@ public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
     }
 
-    @Test(expected = IOException.class)
+    @Test
     public void testResolvingFileNonLenient() throws Exception
     {
         final DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("."), false);
         assertNotNull(dataSourceResolver.resolve("./src/test/resources/images/asf_logo_wide.gif"));
 
-        dataSourceResolver.resolve("asf_logo_wide.gif");
+        assertThrows(IOException.class, () -> dataSourceResolver.resolve("asf_logo_wide.gif"));
     }
 
 }
