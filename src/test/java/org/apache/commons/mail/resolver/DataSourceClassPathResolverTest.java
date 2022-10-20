@@ -16,10 +16,12 @@
  */
 package org.apache.commons.mail.resolver;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.Assert.*;
 
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 
@@ -49,13 +51,13 @@ public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverT
         assertNull(dataSourceResolver.resolve("./images/asf_logo_wide.gif"));
     }
 
-    @Test(expected = IOException.class)
+    @Test
     public void testResolvingClassPathNonLenient() throws Exception
     {
         final DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 
-        dataSourceResolver.resolve("asf_logo_wide.gif");
+        assertThrows(IOException.class, () -> dataSourceResolver.resolve("asf_logo_wide.gif"));
     }
 
 }
