@@ -75,7 +75,7 @@
         Bump commons-release-plugin from 1.0 to 1.7 #23
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump maven-pmd-plugin from 3.13.0 to 3.17.0 #34, #72, #79.
+        Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94.
       </action>
       <action type="update" due-to="Gary Gregory">
         Bump tests commons-io:commons-io 2.6 to 2.11.0.
