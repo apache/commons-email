@@ -23,7 +23,8 @@
 
   <body>
     <release version="1.6.0" date="YYYY-MM-DD" description="Feature release (Java 8).">
-      <action issue="EMAIL-190" type="update" due-to="sgoeschl">
+      <!-- FIX -->
+      <action issue="EMAIL-190" type="fix" due-to="sgoeschl">
         Fix broken JDK 9 build by updating "easymock" and other dependencies.
       </action>
       <!-- ADD -->
@@ -42,6 +43,9 @@
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump actions/setup-java from 1.4.0 to v3.5.1 #30, #74.
+      </action>
+      <action type="update" due-to="Dependabot" dev="ggregory">
+        Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110
       </action>
       <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
         Bump from Java 6 to 7.
