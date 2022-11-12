@@ -82,8 +82,6 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
     @Override
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
     {
-        DataSource result = null;
-
         try
         {
             if (!isCid(resourceLocation) && !isHttpUrl(resourceLocation))
@@ -102,10 +100,10 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
                     // EMAIL-125: set the name of the DataSource to the normalized resource URL
                     // similar to other DataSource implementations, e.g. FileDataSource, URLDataSource
                     ds.setName(DataSourceClassPathResolver.class.getResource(resourceName).toString());
-                    result = ds;
+                    return ds;
                 }
             }
-            return result;
+            return null;
         }
         catch (final IOException e)
         {
