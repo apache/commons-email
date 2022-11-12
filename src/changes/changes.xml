@@ -42,7 +42,7 @@
         Bump actions/checkout from 1 to 3.0.2, #25 #33, #67.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump actions/setup-java from 1.4.0 to v3.5.1 #30, #74.
+        Bump actions/setup-java from 1.4.0 to v3.6.0 #30, #74, #103.
       </action>
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110
