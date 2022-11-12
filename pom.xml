@@ -23,7 +23,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-email</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.6.0-SNAPSHOT</version>
     <name>Apache Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -523,6 +523,19 @@
                   --add-opens java.base/sun.nio.cs=ALL-UNNAMED
                   --add-opens java.logging/java.util.logging=ALL-UNNAMED
                 </argLine>
+              </configuration>
+            </plugin>
+            <plugin>
+              <!-- SpotBugs has false positives on Java 17:
+[ERROR] Medium: Load of known null value in org.apache.commons.mail.MultiPartEmail.attach(DataSource, String, String) [org.apache.commons.mail.MultiPartEmail] At MultiPartEmail.java:[line 421] NP_LOAD_OF_KNOWN_NULL_VALUE
+[ERROR] Medium: Redundant nullcheck of is which is known to be null in org.apache.commons.mail.MultiPartEmail.attach(DataSource, String, String) [org.apache.commons.mail.MultiPartEmail] Redundant null check at MultiPartEmail.java:[line 421] RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE
+[ERROR] Medium: Load of known null value in org.apache.commons.mail.resolver.DataSourceClassPathResolver.resolve(String, boolean) [org.apache.commons.mail.resolver.DataSourceClassPathResolver] At DataSourceClassPathResolver.java:[line 104] NP_LOAD_OF_KNOWN_NULL_VALUE
+[ERROR] Medium: Redundant nullcheck of is which is known to be null in org.apache.commons.mail.resolver.DataSourceClassPathResolver.resolve(String, boolean) [org.apache.commons.mail.resolver.DataSourceClassPathResolver] Redundant null check at DataSourceClassPathResolver.java:[line 104] RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE
+              -->
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs-maven-plugin</artifactId>
+              <configuration>
+                <maxAllowedViolations>4</maxAllowedViolations>
               </configuration>
             </plugin>
           </plugins>
