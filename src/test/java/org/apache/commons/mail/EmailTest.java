@@ -868,7 +868,7 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testAddHeaderEmptyValue()
     {
-        assertThrows(IllegalArgumentException.class, () -> email.addHeader("X-Mailer", ""););
+        assertThrows(IllegalArgumentException.class, () -> email.addHeader("X-Mailer", ""));
     }
 
     @Test
