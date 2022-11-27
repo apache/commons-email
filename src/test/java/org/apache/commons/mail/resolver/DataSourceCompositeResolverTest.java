@@ -16,11 +16,13 @@
  */
 package org.apache.commons.mail.resolver;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.Assert.*;
 
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,12 +60,12 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
         assertTrue(toByteArray(dataSourceResolver.resolve("/contentTypeTest.gif")).length > 0);
     }
 
-    @Test(expected = IOException.class)
-    public void testResolvingFilesNonLenient() throws Exception
+    @Test
+    public void testResolvingFilesNonLenient()
     {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolversMissing, false);
 
-        dataSourceResolver.resolve("./image/does-not-exist.gif");
+        assertThrows(IOException.class, () -> dataSourceResolver.resolve("./image/does-not-exist.gif"));
     }
 
     @Test
