@@ -27,6 +27,9 @@
       <action issue="EMAIL-190" type="fix" due-to="sgoeschl">
         Fix broken JDK 9 build by updating "easymock" and other dependencies.
       </action>
+      <action type="fix" dev="ggregory" due-to="John Patrick">
+        Use JUnit 5 APIs #108, #109, #114.
+      </action>     
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
