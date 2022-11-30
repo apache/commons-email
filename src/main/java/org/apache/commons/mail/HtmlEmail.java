@@ -260,9 +260,9 @@ public class HtmlEmail extends MultiPartEmail
 
         // check if a URLDataSource for this name has already been attached;
         // if so, return the cached CID value.
-        if (inlineEmbeds.containsKey(name))
+        final InlineImage ii = inlineEmbeds.get(name);
+        if (ii != null)
         {
-            final InlineImage ii = inlineEmbeds.get(name);
             final URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
@@ -368,9 +368,9 @@ public class HtmlEmail extends MultiPartEmail
 
         // check if a FileDataSource for this name has already been attached;
         // if so, return the cached CID value.
-        if (inlineEmbeds.containsKey(file.getName()))
+        final InlineImage ii = inlineEmbeds.get(file.getName());
+        if (ii != null)
         {
-            final InlineImage ii = inlineEmbeds.get(file.getName());
             final FileDataSource fileDataSource = (FileDataSource) ii.getDataSource();
             // make sure the supplied file has the same canonical path
             // as the one already associated with this name.
@@ -427,9 +427,9 @@ public class HtmlEmail extends MultiPartEmail
     {
         // check if the DataSource has already been attached;
         // if so, return the cached CID value.
-        if (inlineEmbeds.containsKey(name))
+        final InlineImage ii = inlineEmbeds.get(name);
+        if (ii != null)
         {
-            final InlineImage ii = inlineEmbeds.get(name);
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
             if (dataSource.equals(ii.getDataSource()))
