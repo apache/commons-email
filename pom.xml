@@ -321,7 +321,7 @@
         <commons.encoding>UTF-8</commons.encoding>
         
         <powermock.version>2.0.9</powermock.version>
-        <easymock.version>4.3</easymock.version>
+        <easymock.version>5.0.1</easymock.version>
         <commons.spotbugs.plugin.version>4.7.3.0</commons.spotbugs.plugin.version>
         <commons.spotbugs.impl.version>4.7.3</commons.spotbugs.impl.version>    
         <commons.jacoco.version>0.8.8</commons.jacoco.version>
