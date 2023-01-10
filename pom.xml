@@ -321,8 +321,6 @@
         
         <powermock.version>2.0.9</powermock.version>
         <easymock.version>5.1.0</easymock.version>
-        <commons.spotbugs.plugin.version>4.7.3.0</commons.spotbugs.plugin.version>
-        <commons.spotbugs.impl.version>4.7.3</commons.spotbugs.impl.version>    
     </properties> 
 
     <build>
