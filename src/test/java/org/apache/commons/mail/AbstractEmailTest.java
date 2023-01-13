@@ -231,7 +231,7 @@ public abstract class AbstractEmailTest
      * @param toAdd list of expected to addresses
      * @param ccAdd list of expected cc addresses
      * @param bccAdd list of expected bcc addresses
-     * @param boolSaveToFile true will output to file, false doesnt
+     * @param boolSaveToFile true will output to file, false doesn't
      * @return WiserMessage email to check
      * @throws IOException Exception
      */
@@ -315,7 +315,7 @@ public abstract class AbstractEmailTest
      * @param toAdd list of expected to addresses
      * @param ccAdd list of expected cc addresses
      * @param bccAdd list of expected bcc addresses
-     * @param boolSaveToFile true will output to file, false doesnt
+     * @param boolSaveToFile true will output to file, false doesn't
      * @throws IOException Exception
      */
     protected void validateSend(
@@ -364,7 +364,7 @@ public abstract class AbstractEmailTest
      * @param toAdd list of expected to addresses
      * @param ccAdd list of expected cc addresses
      * @param bccAdd list of expected bcc addresses
-     * @param boolSaveToFile true will output to file, false doesnt
+     * @param boolSaveToFile true will output to file, false doesn't
      * @throws IOException Exception
      */
     protected void validateSend(
