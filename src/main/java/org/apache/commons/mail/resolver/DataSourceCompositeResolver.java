@@ -35,7 +35,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     /**
      * Constructor.
      *
-     * @param dataSourceResolvers a list of of resolvers being used
+     * @param dataSourceResolvers a list of resolvers being used
      */
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers)
     {
@@ -45,7 +45,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     /**
      * Constructor.
      *
-     * @param dataSourceResolvers a list of of resolvers being used
+     * @param dataSourceResolvers a list of resolvers being used
      * @param isLenient shall we ignore resources not found or throw an exception?
      */
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers, final boolean isLenient)

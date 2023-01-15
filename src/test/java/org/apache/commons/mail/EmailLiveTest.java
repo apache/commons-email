@@ -254,7 +254,7 @@ public class EmailLiveTest extends AbstractEmailTest
         // U+03B3 : GREEK SMALL LETTER GAMMA
 
         final String subject = "[email] 5.Test: Subject with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
-        final String textMsg = "My test body with with three greek UTF-8 characters : \u03B1\u03B2\u03B3\n";
+        final String textMsg = "My test body with three greek UTF-8 characters : \u03B1\u03B2\u03B3\n";
         final String attachmentName = "\u03B1\u03B2\u03B3.txt";
 
         // make sure to set the charset before adding the message content
