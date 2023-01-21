@@ -29,14 +29,14 @@
   <!--  the javadoc states that the default character encoding is used  -->
   <!--  when converting a string into a byte[]                          -->
   <Match>
-    <Class name="org.apache.commons.mail.util.MimeMessageUtils" />
-    <Method name="createMimeMessage" params="javax.mail.Session, java.lang.String" returns="javax.mail.internet.MimeMessage" />
+    <Class name="org.apache.commons.mail2.util.MimeMessageUtils" />
+    <Method name="createMimeMessage" params="jakarta.mail.Session, java.lang.String" returns="jakarta.mail.internet.MimeMessage" />
     <Bug pattern="DM_DEFAULT_ENCODING" />
   </Match>
 
   <!--  printStackTrace is supposed to use the default character encoding  -->
   <Match>
-    <Class name="org.apache.commons.mail.EmailException" />
+    <Class name="org.apache.commons.mail2.EmailException" />
     <Method name="printStackTrace" params="java.io.PrintStream" returns="void" />
     <Bug pattern="DM_DEFAULT_ENCODING" />
   </Match>

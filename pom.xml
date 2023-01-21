@@ -22,14 +22,14 @@
       <version>56</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>commons-email</artifactId>
-    <version>1.6.0-SNAPSHOT</version>
+    <artifactId>commons-email2</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
     <name>Apache Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
     <description>
         Apache Commons Email aims to provide an API for sending email. It is built on top of
-        the JavaMail API, which it aims to simplify.
+        the JakartaMail API, which it aims to simplify.
     </description>
 
     <url>https://commons.apache.org/proper/commons-email/</url>
@@ -239,13 +239,17 @@
             <name>Vegard Stuen</name>
             <email>vegard.stuen@gmail.com</email>
         </contributor>
+        <contributor>
+            <name>Réda Housni Alaoui</name>
+            <email>reda-alaoui@hey.com</email>
+        </contributor>
     </contributors>
 
     <dependencies>
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>jakarta.mail</artifactId>
-            <version>1.6.7</version>
+          <groupId>org.eclipse.angus</groupId>
+          <artifactId>angus-mail</artifactId>
+          <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -271,9 +275,9 @@
             <scope>test</scope>
         </dependency>
     	<dependency>
-    		<groupId>org.subethamail</groupId>
+    		<groupId>com.github.davidmoten</groupId>
     		<artifactId>subethasmtp</artifactId>
-    		<version>3.1.7</version>
+    		<version>6.0.5</version>
     		<scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -308,13 +312,13 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <commons.componentid>email</commons.componentid>
-        <commons.module.name>org.apache.commons.mail</commons.module.name>
+        <commons.module.name>org.apache.commons.mail2</commons.module.name>
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.6.0</commons.release.version>
         <commons.release.desc>(Java 8)</commons.release.desc>
         <commons.rc.version>RC1</commons.rc.version>
-        <commons.bc.version>1.5</commons.bc.version>
+        <commons.bc.version>2.0.0-SNAPSHOT</commons.bc.version>
 
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
@@ -324,7 +328,7 @@
     </properties> 
 
     <build>
-        <defaultGoal>clean verify apache-rat:check japicmp:cmp pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>
+        <defaultGoal>clean verify apache-rat:check pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -332,8 +336,8 @@
                 <configuration>
                     <!-- exclude test case support classes -->
                     <excludes>
-                        <exclude>org/apache/commons/mail/mocks/*</exclude>
-                        <exclude>org/apache/commons/mail/settings/*</exclude>
+                        <exclude>org/apache/commons/mail2/mocks/*</exclude>
+                        <exclude>org/apache/commons/mail2/settings/*</exclude>
                         <exclude>**/Abstract*Test.java</exclude>
                     </excludes>
                 </configuration>
@@ -536,6 +540,7 @@
                   --add-opens java.base/java.util.regex=ALL-UNNAMED
                   --add-opens java.base/java.nio.charset=ALL-UNNAMED
                   --add-opens java.base/sun.nio.cs=ALL-UNNAMED
+                  --add-opens java.base/java.util.concurrent=ALL-UNNAMED
                   --add-opens java.logging/java.util.logging=ALL-UNNAMED
                 </argLine>
               </configuration>

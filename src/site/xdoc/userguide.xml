@@ -65,8 +65,8 @@ email.send();
         We will then attach the picture to the email and send it.
       </p>
       <source>
-<![CDATA[
-import org.apache.commons.mail.*;
+        <![CDATA[
+import org.apache.commons.mail2.*;
 ...
 
   // Create the attachment
@@ -100,8 +100,8 @@ import org.apache.commons.mail.*;
         to John instead.
       </p>
       <source>
-<![CDATA[
-import org.apache.commons.mail.*;
+        <![CDATA[
+import org.apache.commons.mail2.*;
 ...
 
   // Create the attachment
@@ -138,8 +138,8 @@ import org.apache.commons.mail.*;
         content with an inline image.
       </p>
       <source>
-<![CDATA[
-import org.apache.commons.mail.HtmlEmail;
+        <![CDATA[
+import org.apache.commons.mail2.HtmlEmail;
 ...
 
   // Create the email message
@@ -184,7 +184,7 @@ import org.apache.commons.mail.HtmlEmail;
       </p>        
       <source>
         <![CDATA[
-import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail2.HtmlEmail;
 ...
 
   // load your HTML email template
@@ -242,7 +242,7 @@ import org.apache.commons.mail.HtmlEmail;
       <p>
         You can perform a more complex authentication method such as displaying
         a dialog box to the user by creating a subclass of the
-        <code>javax.mail.Authenticator</code> object.  You will need to
+        <code>jakarta.mail.Authenticator</code> object.  You will need to
         override the <code>getPasswordAuthentication()</code> method where
         you will handle collecting the user's information.  To make use of
         your new <code>Authenticator</code> class, use the
