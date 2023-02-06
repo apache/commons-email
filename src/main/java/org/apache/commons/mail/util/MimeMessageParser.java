@@ -16,34 +16,17 @@
  */
 package org.apache.commons.mail.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
-import javax.mail.internet.ContentType;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimePart;
-import javax.mail.internet.MimeUtility;
-import javax.mail.internet.ParseException;
+import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * Parses a MimeMessage and stores the individual parts such a plain text,
@@ -406,28 +389,6 @@ public class MimeMessageParser
         return result;
     }
 
-    /**
-     * Read the content of the input stream.
-     *
-     * @param is the input stream to process
-     * @return the content of the input stream
-     * @throws IOException reading the input stream failed
-     */
-    private byte[] getContent(final InputStream is)
-        throws IOException
-    {
-        final ByteArrayOutputStream os = new ByteArrayOutputStream();
-        final BufferedInputStream isReader = new BufferedInputStream(is);
-        try (BufferedOutputStream osWriter = new BufferedOutputStream(os)) {
-            int ch;
-            while ((ch = isReader.read()) != -1)
-            {
-                osWriter.write(ch);
-            }
-            osWriter.flush();
-            return os.toByteArray();
-        }
-    }
 
     /**
      * Parses the mimeType.
