@@ -16,6 +16,7 @@
  */
 package org.apache.commons.mail.util;
 import org.apache.commons.mail.AttachmentDataSource;
+import org.apache.commons.mail.LazyByteArrayDataSource;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -267,9 +268,7 @@ public class MimeMessageParser
         final DataSource dataSource = dataHandler.getDataSource();
         final String contentType = getBaseMimeType(dataSource.getContentType());
         final String dataSourceName = getDataSourceName(part, dataSource);
-        final AttachmentDataSource result = new AttachmentDataSource(dataSource, contentType, dataSourceName);
-        System.out.println("New stream: " + result.getInputStream());
-
+        final LazyByteArrayDataSource result = new LazyByteArrayDataSource(dataSource.getInputStream(), contentType, dataSourceName);
         return result;
     }
 

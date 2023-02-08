@@ -527,12 +527,11 @@ public class MimeMessageParserTest
         assertNotNull(dataSource);
         assertEquals("image/jpeg", dataSource.getContentType());
 
-        System.out.println(dataSource.getInputStream().available());
 
         dataSource = mimeMessageParser.findAttachmentByName("it20one.pdf");
         assertNotNull(dataSource);
         assertEquals("application/pdf", dataSource.getContentType());
-        System.out.println(dataSource.getInputStream().available());
+
     }
 
 
