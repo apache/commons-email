@@ -497,5 +497,43 @@ public class MimeMessageParserTest
         assertNotNull(ds);
         assertEquals(ds, mimeMessageParser.getAttachmentList().get(0));
     }
+    @Test
+    public void testParseHtmlEmailWithAttachments_size() throws Exception
+    {
+        DataSource dataSource;
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Test", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertTrue(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasPlainContent());
+        assertNotNull(mimeMessageParser.getPlainContent());
+        assertNotNull(mimeMessageParser.getHtmlContent());
+        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertTrue(mimeMessageParser.getCc().isEmpty());
+        assertTrue(mimeMessageParser.getBcc().isEmpty());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
+        assertTrue(attachmentList.size() == 2);
+
+        dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
+        assertNotNull(dataSource);
+        assertEquals("image/jpeg", dataSource.getContentType());
+
+        System.out.println(dataSource.getInputStream().available());
+
+        dataSource = mimeMessageParser.findAttachmentByName("it20one.pdf");
+        assertNotNull(dataSource);
+        assertEquals("application/pdf", dataSource.getContentType());
+        System.out.println(dataSource.getInputStream().available());
+    }
+
 
 }

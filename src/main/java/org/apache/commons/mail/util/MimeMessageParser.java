@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 package org.apache.commons.mail.util;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import org.apache.commons.mail.AttachmentDataSource;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -265,9 +266,10 @@ public class MimeMessageParser
         final DataHandler dataHandler = part.getDataHandler();
         final DataSource dataSource = dataHandler.getDataSource();
         final String contentType = getBaseMimeType(dataSource.getContentType());
-        final ByteArrayDataSource result = new ByteArrayDataSource(dataSource.getInputStream(), contentType);
         final String dataSourceName = getDataSourceName(part, dataSource);
-        result.setName(dataSourceName);
+        final AttachmentDataSource result = new AttachmentDataSource(dataSource, contentType, dataSourceName);
+        System.out.println("New stream: " + result.getInputStream());
+
         return result;
     }
 
