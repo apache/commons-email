@@ -502,72 +502,71 @@ public class MimeMessageParserTest
         assertNotNull(ds);
         assertEquals(ds, mimeMessageParser.getAttachmentList().get(0));
     }
-//
-//    @Test
-//    public void testAttachmentNotLoaded() throws Exception
-//    {
-//        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
-//
-//        final InputStream inputStream = createMock(InputStream.class);
-//        final MimePart mimePart = createMock(MimePart.class);
-//        final DataHandler dataHandler = createMock(DataHandler.class);
-//        final DataSource dataSource = createMock(DataSource.class);
-//
-//        expect(dataSource.getContentType()).andReturn("test_type");
-//        expect(dataSource.getName()).andReturn("test_name");
-//        expect(dataSource.getInputStream()).andReturn(inputStream).once();
-//
-//        expect(mimePart.getDataHandler()).andReturn(dataHandler);
-//        expect(dataHandler.getDataSource()).andReturn(dataSource);
-//        replay(mimePart,dataHandler,dataSource,inputStream);
-//
-//        // Create data source with mock data.
-//        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
-//        // No inputStream.read() is made as this point (Lazy initialization).
-//        verify(inputStream);
-//
-//
-//        // Assert on no call made to input stream
-//        // Call a get call on data stream
-//
-//        // Assert now the method call count is 1.
-//
-//
-//    }
-//
-//
-//    @Test
-//    public void testAttachmentLoaded() throws Exception
-//    {
-//        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
-//
-//        final InputStream inputStream = createMock(InputStream.class);
-//        final MimePart mimePart = createMock(MimePart.class);
-//        final DataHandler dataHandler = createMock(DataHandler.class);
-//        final DataSource dataSource = createMock(DataSource.class);
-//
-//        expect(dataSource.getContentType()).andReturn("test_type");
-//        expect(dataSource.getName()).andReturn("test_name");
-//        expect(dataSource.getInputStream()).andReturn(inputStream).once();
-//        // Verify the input stream.read() method call count, as this indicate whether attachment loaded into memory or not.
-//        expect(inputStream.read(new byte[8192])).andReturn(0).once();
-//
-//        expect(mimePart.getDataHandler()).andReturn(dataHandler);
-//        expect(dataHandler.getDataSource()).andReturn(dataSource);
-//        replay(mimePart,dataHandler,dataSource,inputStream);
-//
-//        // Create data source with mock data.
-//        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
-//
-//        // No matter how many .getInputStream call from the call, it will only load the attachment once, after its frist call.
-//        dataSource_new.getInputStream();
-//        dataSource_new.getInputStream();
-//        dataSource_new.getInputStream();
-//        // No inputStream.read() is made as this point (Lazy initialization).
-//        verify(inputStream);
-//
-//        // Assert now the method call count is 1.
-//    }
-//
+
+    @Test
+    public void testAttachmentNotLoaded() throws Exception
+    {
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
+
+        final InputStream inputStream = createMock(InputStream.class);
+        final MimePart mimePart = createMock(MimePart.class);
+        final DataHandler dataHandler = createMock(DataHandler.class);
+        final DataSource dataSource = createMock(DataSource.class);
+
+        expect(dataSource.getContentType()).andReturn("test_type");
+        expect(dataSource.getName()).andReturn("test_name");
+        expect(dataSource.getInputStream()).andReturn(inputStream).once();
+
+        expect(mimePart.getDataHandler()).andReturn(dataHandler);
+        expect(dataHandler.getDataSource()).andReturn(dataSource);
+        replay(mimePart,dataHandler,dataSource,inputStream);
+
+        // Create data source with mock data.
+        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
+        // No inputStream.read() is made as this point (Lazy initialization).
+        verify(inputStream);
+
+
+        // Assert on no call made to input stream
+        // Call a get call on data stream
+
+        // Assert now the method call count is 1.
+
+
+    }
+
+
+    @Test
+    public void testAttachmentLoaded() throws Exception
+    {
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
+
+        final InputStream inputStream = createMock(InputStream.class);
+        final MimePart mimePart = createMock(MimePart.class);
+        final DataHandler dataHandler = createMock(DataHandler.class);
+        final DataSource dataSource = createMock(DataSource.class);
+
+        expect(dataSource.getContentType()).andReturn("test_type");
+        expect(dataSource.getName()).andReturn("test_name");
+        expect(dataSource.getInputStream()).andReturn(inputStream).once();
+        // Verify the input stream.read() method call count, as this indicate whether attachment loaded into memory or not.
+        expect(inputStream.read(new byte[8192])).andReturn(0).once();
+
+        expect(mimePart.getDataHandler()).andReturn(dataHandler);
+        expect(dataHandler.getDataSource()).andReturn(dataSource);
+        replay(mimePart,dataHandler,dataSource,inputStream);
+
+        // Create data source with mock data.
+        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
+
+        // No matter how many .getInputStream call from the call, it will only load the attachment once, after its frist call.
+        dataSource_new.getInputStream();
+        dataSource_new.getInputStream();
+        dataSource_new.getInputStream();
+        // No inputStream.read() is made as this point (Lazy initialization).
+        verify(inputStream);
+
+    }
+
 
 }
