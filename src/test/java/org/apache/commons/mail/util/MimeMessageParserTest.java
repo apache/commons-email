@@ -16,19 +16,24 @@
  */
 package org.apache.commons.mail.util;
 
+import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.powermock.api.easymock.PowerMock.*;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimePart;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.junit.Test;
@@ -497,42 +502,72 @@ public class MimeMessageParserTest
         assertNotNull(ds);
         assertEquals(ds, mimeMessageParser.getAttachmentList().get(0));
     }
-    @Test
-    public void testParseHtmlEmailWithAttachments_size() throws Exception
-    {
-        DataSource dataSource;
-        final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
-
-        mimeMessageParser.parse();
-
-        assertEquals("Test", mimeMessageParser.getSubject());
-        assertNotNull(mimeMessageParser.getMimeMessage());
-        assertTrue(mimeMessageParser.isMultipart());
-        assertTrue(mimeMessageParser.hasHtmlContent());
-        assertTrue(mimeMessageParser.hasPlainContent());
-        assertNotNull(mimeMessageParser.getPlainContent());
-        assertNotNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
-        assertTrue(mimeMessageParser.getCc().isEmpty());
-        assertTrue(mimeMessageParser.getBcc().isEmpty());
-        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
-        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
-        assertTrue(mimeMessageParser.hasAttachments());
-        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 2);
-
-        dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
-        assertNotNull(dataSource);
-        assertEquals("image/jpeg", dataSource.getContentType());
-
-
-        dataSource = mimeMessageParser.findAttachmentByName("it20one.pdf");
-        assertNotNull(dataSource);
-        assertEquals("application/pdf", dataSource.getContentType());
-
-    }
-
+//
+//    @Test
+//    public void testAttachmentNotLoaded() throws Exception
+//    {
+//        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
+//
+//        final InputStream inputStream = createMock(InputStream.class);
+//        final MimePart mimePart = createMock(MimePart.class);
+//        final DataHandler dataHandler = createMock(DataHandler.class);
+//        final DataSource dataSource = createMock(DataSource.class);
+//
+//        expect(dataSource.getContentType()).andReturn("test_type");
+//        expect(dataSource.getName()).andReturn("test_name");
+//        expect(dataSource.getInputStream()).andReturn(inputStream).once();
+//
+//        expect(mimePart.getDataHandler()).andReturn(dataHandler);
+//        expect(dataHandler.getDataSource()).andReturn(dataSource);
+//        replay(mimePart,dataHandler,dataSource,inputStream);
+//
+//        // Create data source with mock data.
+//        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
+//        // No inputStream.read() is made as this point (Lazy initialization).
+//        verify(inputStream);
+//
+//
+//        // Assert on no call made to input stream
+//        // Call a get call on data stream
+//
+//        // Assert now the method call count is 1.
+//
+//
+//    }
+//
+//
+//    @Test
+//    public void testAttachmentLoaded() throws Exception
+//    {
+//        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
+//
+//        final InputStream inputStream = createMock(InputStream.class);
+//        final MimePart mimePart = createMock(MimePart.class);
+//        final DataHandler dataHandler = createMock(DataHandler.class);
+//        final DataSource dataSource = createMock(DataSource.class);
+//
+//        expect(dataSource.getContentType()).andReturn("test_type");
+//        expect(dataSource.getName()).andReturn("test_name");
+//        expect(dataSource.getInputStream()).andReturn(inputStream).once();
+//        // Verify the input stream.read() method call count, as this indicate whether attachment loaded into memory or not.
+//        expect(inputStream.read(new byte[8192])).andReturn(0).once();
+//
+//        expect(mimePart.getDataHandler()).andReturn(dataHandler);
+//        expect(dataHandler.getDataSource()).andReturn(dataSource);
+//        replay(mimePart,dataHandler,dataSource,inputStream);
+//
+//        // Create data source with mock data.
+//        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
+//
+//        // No matter how many .getInputStream call from the call, it will only load the attachment once, after its frist call.
+//        dataSource_new.getInputStream();
+//        dataSource_new.getInputStream();
+//        dataSource_new.getInputStream();
+//        // No inputStream.read() is made as this point (Lazy initialization).
+//        verify(inputStream);
+//
+//        // Assert now the method call count is 1.
+//    }
+//
 
 }

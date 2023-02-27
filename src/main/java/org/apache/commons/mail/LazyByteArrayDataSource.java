@@ -46,6 +46,7 @@ public class LazyByteArrayDataSource implements DataSource {
         if (ds == null) {
             //Only read attachment data to memory when getInputStream() is called.
             ds = new ByteArrayDataSource(referenceInputStream, type);
+            ds.setName(name);
         }
         return ds.getInputStream();
     }

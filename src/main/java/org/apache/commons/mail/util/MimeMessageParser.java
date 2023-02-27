@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 package org.apache.commons.mail.util;
-import org.apache.commons.mail.AttachmentDataSource;
+
 import org.apache.commons.mail.LazyByteArrayDataSource;
 
 import java.io.*;
@@ -40,7 +40,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimePart;
 import javax.mail.internet.MimeUtility;
 import javax.mail.internet.ParseException;
-import javax.mail.util.ByteArrayDataSource;
 
 /**
  * Parses a MimeMessage and stores the individual parts such a plain text,
