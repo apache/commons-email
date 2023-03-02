@@ -507,32 +507,13 @@ public class MimeMessageParserTest
     public void testAttachmentNotLoaded() throws Exception
     {
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
-
         final InputStream inputStream = createMock(InputStream.class);
-        final MimePart mimePart = createMock(MimePart.class);
-        final DataHandler dataHandler = createMock(DataHandler.class);
-        final DataSource dataSource = createMock(DataSource.class);
+        final MimePart mimePart = getMockedMimePart(inputStream);
 
-        expect(dataSource.getContentType()).andReturn("test_type");
-        expect(dataSource.getName()).andReturn("test_name");
-        expect(dataSource.getInputStream()).andReturn(inputStream).once();
-
-        expect(mimePart.getDataHandler()).andReturn(dataHandler);
-        expect(dataHandler.getDataSource()).andReturn(dataSource);
-        replay(mimePart,dataHandler,dataSource,inputStream);
-
-        // Create data source with mock data.
+        // Create data source with mocked data.
         final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
-        // No inputStream.read() is made as this point (Lazy initialization).
+        // Verify no inputStream.read() is made at this point (Lazy initialization).
         verify(inputStream);
-
-
-        // Assert on no call made to input stream
-        // Call a get call on data stream
-
-        // Assert now the method call count is 1.
-
-
     }
 
 
@@ -540,8 +521,31 @@ public class MimeMessageParserTest
     public void testAttachmentLoaded() throws Exception
     {
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
-
         final InputStream inputStream = createMock(InputStream.class);
+        // Despite .getInputStream() called for 3 times, but the desk IO for attachment read should only happen once.
+        expect(inputStream.read(new byte[8192])).andReturn(0).once();
+        final MimePart mimePart = getMockedMimePart(inputStream);
+
+        // Create data source with mocked data.
+        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
+
+        dataSource_new.getInputStream();
+        dataSource_new.getInputStream();
+        dataSource_new.getInputStream();
+        // To make sure disk IO only happen when .getInputStream() invoked for first time but during the object construction.
+        verify(inputStream);
+
+    }
+
+    /**
+     * Helper method to return a mocked MimePart class.
+     * @param inputStream Mocked input stream
+     * @return Mocked MimePart instance.
+     * @throws Exception When attachment read failed.
+     */
+    private MimePart getMockedMimePart(InputStream inputStream) throws Exception
+    {
+
         final MimePart mimePart = createMock(MimePart.class);
         final DataHandler dataHandler = createMock(DataHandler.class);
         final DataSource dataSource = createMock(DataSource.class);
@@ -549,24 +553,11 @@ public class MimeMessageParserTest
         expect(dataSource.getContentType()).andReturn("test_type");
         expect(dataSource.getName()).andReturn("test_name");
         expect(dataSource.getInputStream()).andReturn(inputStream).once();
-        // Verify the input stream.read() method call count, as this indicate whether attachment loaded into memory or not.
-        expect(inputStream.read(new byte[8192])).andReturn(0).once();
-
         expect(mimePart.getDataHandler()).andReturn(dataHandler);
         expect(dataHandler.getDataSource()).andReturn(dataSource);
         replay(mimePart,dataHandler,dataSource,inputStream);
 
-        // Create data source with mock data.
-        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
-
-        // No matter how many .getInputStream call from the call, it will only load the attachment once, after its frist call.
-        dataSource_new.getInputStream();
-        dataSource_new.getInputStream();
-        dataSource_new.getInputStream();
-        // No inputStream.read() is made as this point (Lazy initialization).
-        verify(inputStream);
-
+        return mimePart;
     }
-
 
 }
