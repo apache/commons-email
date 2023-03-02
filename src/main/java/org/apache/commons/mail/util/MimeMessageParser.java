@@ -20,7 +20,6 @@ import org.apache.commons.mail.LazyByteArrayDataSource;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
