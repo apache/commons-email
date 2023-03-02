@@ -532,7 +532,7 @@ public class MimeMessageParserTest
         dataSource_new.getInputStream();
         dataSource_new.getInputStream();
         dataSource_new.getInputStream();
-        // To make sure disk IO only happen when .getInputStream() invoked for first time but during the object construction.
+        // To make sure disk IO only happen when .getInputStream() invoked for first time but not during the object construction.
         verify(inputStream);
 
     }
