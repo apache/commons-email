@@ -44,7 +44,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
     }
 
     /**
-     * @throws EmailException on an email error
+     * @throws EmailException on a¡n email error
      * @throws IOException when sending fails, or a bad URL is used
      */
     @Test

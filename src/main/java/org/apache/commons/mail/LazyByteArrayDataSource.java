@@ -23,24 +23,46 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * Proxy dataSource class which contain reference of MimePartDataSource for given attachment,
- * with revised type and name, in order delay the memory allocation for attachment until when the content of the attachment is needed.
+ * <p>Wrapper class for ByteArrayDataSource, which contain reference of MimePartDataSource for given attachment.
+ * Both type and name are duplicated stored in this class, in order to delay the load of attachment binary till getInputStream() is called.
+ * </p>
  *
- * @since 1.3
+ * @since 1.5
  */
 public class LazyByteArrayDataSource implements DataSource {
 
-    private InputStream referenceInputStream;
-    private ByteArrayDataSource ds;
-    private String type;
-    private String name;
+    /** InputStream reference for the email attachment binary. */
+    private final InputStream referenceInputStream;
 
+    /** ByteArrayDateSource instance which contain email attachment binary in the form of byte array. */
+    private ByteArrayDataSource ds;
+
+    /** Name of the attachment. */
+    private final String name;
+
+    /** Type of the attachment. */
+    private final String type;
+
+
+    /**
+     * Constructor for this class to read all necessary information for an email attachment.
+     *
+     * @param is the InputStream which represent the attachment binary.
+     * @param type the type of the attachment.
+     * @param name the name of the attachment.
+     */
     public LazyByteArrayDataSource(InputStream is, String type, String name) {
         this.referenceInputStream = is;
         this.type = type;
         this.name = name;
     }
 
+    /**
+     * To return an {@code ByteArrayDataSource} instance which represent the email attachment.
+     *
+     * @return An ByteArrayDataSource instance which contain the email attachment.
+     * @throws IOException resolving the email attachment failed
+     */
     @Override
     public InputStream getInputStream() throws IOException {
         if (ds == null) {
@@ -51,16 +73,34 @@ public class LazyByteArrayDataSource implements DataSource {
         return ds.getInputStream();
     }
 
+    /**
+     * Not supported.
+     *
+     * @return  N/A
+     * @since 1.5
+     */
     @Override
     public OutputStream getOutputStream() throws IOException {
         throw new IOException("cannot do this");
     }
 
+    /**
+     * Get the content type.
+     *
+     * @return A String.
+     * @since 1.5
+     */
     @Override
     public String getContentType() {
         return type;
     }
 
+    /**
+     * Get the name.
+     *
+     * @return A String.
+     * @since 1.5
+     */
     @Override
     public String getName() {
         return name;
