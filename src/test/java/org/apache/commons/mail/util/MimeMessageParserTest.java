@@ -511,8 +511,8 @@ public class MimeMessageParserTest
         final MimePart mimePart = getMockedMimePart(inputStream);
 
         // Create data source with mocked data.
-        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
-        // Verify no inputStream.read() is made at this point (Lazy initialization).
+        final DataSource dataSource = mimeMessageParser.createDataSource(null,mimePart);
+        // Verify no inputStream.read() call is made at this point (Lazy initialization).
         verify(inputStream);
     }
 
@@ -527,11 +527,11 @@ public class MimeMessageParserTest
         final MimePart mimePart = getMockedMimePart(inputStream);
 
         // Create data source with mocked data.
-        final DataSource dataSource_new = mimeMessageParser.createDataSource(null,mimePart);
+        final DataSource dataSource = mimeMessageParser.createDataSource(null,mimePart);
 
-        dataSource_new.getInputStream();
-        dataSource_new.getInputStream();
-        dataSource_new.getInputStream();
+        dataSource.getInputStream();
+        dataSource.getInputStream();
+        dataSource.getInputStream();
         // To make sure disk IO only happen when .getInputStream() invoked for first time but not during the object construction.
         verify(inputStream);
 
