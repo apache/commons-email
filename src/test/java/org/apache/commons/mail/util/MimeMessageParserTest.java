@@ -549,15 +549,14 @@ public class MimeMessageParserTest
     {
 
         final MimePart mimePart = createMock(MimePart.class);
-        final DataHandler dataHandler = createMock(DataHandler.class);
         final DataSource dataSource = createMock(DataSource.class);
+        final DataHandler dataHandler = new DataHandler(dataSource);
 
         expect(dataSource.getContentType()).andReturn("test_type");
         expect(dataSource.getName()).andReturn("test_name");
         expect(dataSource.getInputStream()).andReturn(inputStream).once();
         expect(mimePart.getDataHandler()).andReturn(dataHandler);
-        expect(dataHandler.getDataSource()).andReturn(dataSource);
-        replay(mimePart,dataHandler,dataSource,inputStream);
+        replay(mimePart,dataSource,inputStream);
 
         return mimePart;
     }
