@@ -268,8 +268,7 @@ public class MimeMessageParser
         final DataSource dataSource = dataHandler.getDataSource();
         final String contentType = getBaseMimeType(dataSource.getContentType());
         final String dataSourceName = getDataSourceName(part, dataSource);
-        final LazyByteArrayDataSource result = new LazyByteArrayDataSource(dataSource.getInputStream(), contentType, dataSourceName);
-        return result;
+        return new LazyByteArrayDataSource(dataSource.getInputStream(), contentType, dataSourceName);
     }
 
     /** @return Returns the mimeMessage. */

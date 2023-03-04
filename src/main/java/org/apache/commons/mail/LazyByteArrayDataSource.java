@@ -43,7 +43,6 @@ public class LazyByteArrayDataSource implements DataSource {
     /** Type of the attachment. */
     private final String type;
 
-
     /**
      * Constructor for this class to read all necessary information for an email attachment.
      *
@@ -77,18 +76,16 @@ public class LazyByteArrayDataSource implements DataSource {
      * Not supported.
      *
      * @return  N/A
-     * @since 1.5
      */
     @Override
-    public OutputStream getOutputStream() throws IOException {
-        throw new IOException("cannot do this");
+    public OutputStream getOutputStream() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("cannot do this");
     }
 
     /**
-     * Get the content type.
+     * Gets the content type.
      *
      * @return A String.
-     * @since 1.5
      */
     @Override
     public String getContentType() {
@@ -96,10 +93,9 @@ public class LazyByteArrayDataSource implements DataSource {
     }
 
     /**
-     * Get the name.
+     * Gets the name.
      *
      * @return A String.
-     * @since 1.5
      */
     @Override
     public String getName() {
