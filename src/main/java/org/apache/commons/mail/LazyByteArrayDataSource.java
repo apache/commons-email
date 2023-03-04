@@ -23,9 +23,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * <p>Wrapper class for ByteArrayDataSource, which contain reference of MimePartDataSource for given attachment.
- * Both type and name are duplicated stored in this class, in order to delay the load of attachment binary till getInputStream() is called.
- * </p>
+ * <p> The class is created to replace the usage of {@code org.apache.commons.mail.ByteArrayDataSource} and {@code javax.mail.util.ByteArrayDataSource},
+ * as both implementations load attachment binary in eager manner.
+ *
+ * <p> In order to cater the scenario that user only access the metadata (Name, Type) but not interested in the actual attachment binary,
+ * in this scenario, the memory usage can be further reduced as attachment binary only loaded when .getInputStream() called.
  *
  * @since 1.5
  */
@@ -57,13 +59,13 @@ public class LazyByteArrayDataSource implements DataSource {
     }
 
     /**
-     * To return an {@code ByteArrayDataSource} instance which represent the email attachment.
+     * Gets an {@code ByteArrayDataSource} instance, to represent the email attachment.
      *
      * @return An ByteArrayDataSource instance which contain the email attachment.
      * @throws IOException resolving the email attachment failed
      */
     @Override
-    public InputStream getInputStream() throws IOException {
+    public synchronized InputStream getInputStream() throws IOException {
         if (ds == null) {
             //Only read attachment data to memory when getInputStream() is called.
             ds = new ByteArrayDataSource(referenceInputStream, type);
