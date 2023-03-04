@@ -23,7 +23,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * <p> The class is created to replace the usage of {@code org.apache.commons.mail.ByteArrayDataSource} and {@code javax.mail.util.ByteArrayDataSource},
+ * <p> This class is created to replace the usage of {@code org.apache.commons.mail.ByteArrayDataSource} and {@code javax.mail.util.ByteArrayDataSource},
  * as both implementations load attachment binary in eager manner.
  *
  * <p> In order to cater the scenario that user only access the metadata (Name, Type) but not interested in the actual attachment binary,
@@ -46,7 +46,7 @@ public class LazyByteArrayDataSource implements DataSource {
     private final String type;
 
     /**
-     * Constructor for this class to read all necessary information for an email attachment.
+     * Constructs a new instance to read all necessary information for an email attachment.
      *
      * @param is the InputStream which represent the attachment binary.
      * @param type the type of the attachment.
