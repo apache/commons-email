@@ -254,7 +254,7 @@ public abstract class AbstractEmailTest
             {
                 this.saveEmailToFile(emailMessage);
             }
-            catch(final MessagingException me)
+            catch (final MessagingException me)
             {
                 final IllegalStateException ise =
                     new IllegalStateException("caught MessagingException during saving the email");

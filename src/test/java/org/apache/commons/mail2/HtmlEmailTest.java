@@ -639,7 +639,7 @@ public class HtmlEmailTest extends AbstractEmailTest
         {
             this.email.send();
         }
-        catch(final IllegalStateException e)
+        catch (final IllegalStateException e)
         {
             return;
         }
