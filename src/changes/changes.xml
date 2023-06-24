@@ -32,6 +32,9 @@
       <action type="fix" dev="ggregory" due-to="John Patrick, Gary Gregory">
         Use JUnit 5 APIs #106, #108, #109, #114.
       </action>     
+      <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">
+        [StepSecurity] ci: Harden GitHub Actions #149.
+      </action>            
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
