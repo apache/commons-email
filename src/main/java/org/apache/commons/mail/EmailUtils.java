@@ -294,7 +294,7 @@ final class EmailUtils
         final StringBuilder builder = new StringBuilder();
         for (final byte c : input.getBytes(US_ASCII))
         {
-            int b = c;
+            int b = c & 0xff;
             if (SAFE_URL.get(b))
             {
                 builder.append((char) b);
