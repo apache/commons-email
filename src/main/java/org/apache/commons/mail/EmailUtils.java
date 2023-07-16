@@ -295,10 +295,6 @@ final class EmailUtils
         for (final byte c : input.getBytes(US_ASCII))
         {
             int b = c;
-            if (b < 0)
-            {
-                b = 256 + b;
-            }
             if (SAFE_URL.get(b))
             {
                 builder.append((char) b);
