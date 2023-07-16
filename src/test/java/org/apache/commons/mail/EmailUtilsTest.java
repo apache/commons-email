@@ -19,8 +19,6 @@ package org.apache.commons.mail;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.UnsupportedEncodingException;
-
 import org.junit.Test;
 
 /**
@@ -43,7 +41,7 @@ public class EmailUtilsTest {
     }
 
     @Test
-    public void testUrlEncoding() throws UnsupportedEncodingException {
+    public void testUrlEncoding() {
         assertEquals("abcdefg", EmailUtils.encodeUrl("abcdefg"));
         assertEquals("0123456789", EmailUtils.encodeUrl("0123456789"));
         assertEquals("Test%20CID", EmailUtils.encodeUrl("Test CID"));

@@ -19,7 +19,7 @@ package org.apache.commons.mail;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.Random;
 
@@ -49,11 +49,6 @@ final class EmailUtils
      * so as to not return the same value in the same millisecond.
      */
     private static final Random RANDOM = new Random();
-
-    /**
-     * The default charset used for URL encoding.
-     */
-    private static final String US_ASCII = "US-ASCII";
 
     /**
      * Radix used in encoding.
@@ -281,10 +276,9 @@ final class EmailUtils
      *
      * @param input the input string to be URL encoded
      * @return a URL encoded string
-     * @throws UnsupportedEncodingException if "US-ASCII" charset is not available
      * @see <a href="http://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
-    static String encodeUrl(final String input) throws UnsupportedEncodingException
+    static String encodeUrl(final String input)
     {
         if (input == null)
         {
@@ -292,7 +286,7 @@ final class EmailUtils
         }
 
         final StringBuilder builder = new StringBuilder();
-        for (final byte c : input.getBytes(US_ASCII))
+        for (final byte c : input.getBytes(StandardCharsets.US_ASCII))
         {
             int b = c;
             if (b < 0)
