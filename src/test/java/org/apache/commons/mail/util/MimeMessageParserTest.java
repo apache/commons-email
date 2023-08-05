@@ -54,7 +54,7 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
@@ -78,7 +78,7 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("coheigea@apache.org", mimeMessageParser.getFrom());
@@ -103,14 +103,14 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNotNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 2);
+        assertEquals(2, attachmentList.size());
 
         dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
         assertNotNull(dataSource);
@@ -138,14 +138,14 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNotNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
         assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 1);
+        assertEquals(1, attachmentList.size());
 
         dataSource = mimeMessageParser.getAttachmentList().get(0);
         assertNotNull(dataSource);
@@ -176,14 +176,14 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasPlainContent());
         assertNull(mimeMessageParser.getPlainContent());
         assertNotNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 1);
+        assertEquals(1, attachmentList.size());
 
         dataSource = (DataSource) attachmentList.get(0);
         assertNotNull(dataSource);
@@ -214,14 +214,14 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasPlainContent());
         assertNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 1);
+        assertEquals(1, attachmentList.size());
 
         dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
         assertNotNull(dataSource);
@@ -251,7 +251,7 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasPlainContent());
         assertNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertEquals(mimeMessageParser.getTo().size(), 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertEquals(mimeMessageParser.getCc().size(), 0);
         assertEquals(mimeMessageParser.getBcc().size(), 0);
     }
@@ -278,14 +278,14 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
         assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 1);
+        assertEquals(1, attachmentList.size());
 
         dataSource = mimeMessageParser.findAttachmentByName("test.txt");
         assertNotNull(dataSource);
@@ -314,14 +314,14 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasPlainContent());
         assertNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
         assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 1);
+        assertEquals(1, attachmentList.size());
 
         dataSource = mimeMessageParser.findAttachmentByName("test.txt");
         assertNotNull(dataSource);
@@ -350,14 +350,14 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
         assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
         assertTrue(mimeMessageParser.hasAttachments());
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertTrue(attachmentList.size() == 1);
+        assertEquals(1, attachmentList.size());
 
         dataSource = mimeMessageParser.findAttachmentByName("test.html");
         assertNotNull(dataSource);
@@ -390,7 +390,7 @@ public class MimeMessageParserTest
         assertFalse(mimeMessageParser.hasPlainContent());
         assertNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
@@ -425,7 +425,7 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
@@ -461,7 +461,7 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
         assertNotNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
@@ -483,7 +483,7 @@ public class MimeMessageParserTest
         assertTrue(mimeMessageParser.isMultipart());
         assertTrue(mimeMessageParser.hasHtmlContent());
         assertNotNull(mimeMessageParser.getHtmlContent());
-        assertTrue(mimeMessageParser.getTo().size() == 1);
+        assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());

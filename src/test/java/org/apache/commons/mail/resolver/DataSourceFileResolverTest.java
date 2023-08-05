@@ -16,7 +16,9 @@
  */
 package org.apache.commons.mail.resolver;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
@@ -24,7 +26,6 @@ import java.io.IOException;
 
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.Test;
-import org.junit.jupiter.api.function.Executable;
 
 /**
  * JUnit test case for DateSourceResolver.
@@ -38,9 +39,9 @@ public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest
     public void testResolvingFileLenient() throws Exception
     {
         final DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("./src/test/resources"), true);
-        assertTrue(toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length == IMG_SIZE);
-        assertTrue(toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length == IMG_SIZE);
-        assertTrue(toByteArray(dataSourceResolver.resolve("../resources/images/asf_logo_wide.gif")).length == IMG_SIZE);
+        assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length);
+        assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length);
+        assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("../resources/images/asf_logo_wide.gif")).length);
         assertNull(toByteArray(dataSourceResolver.resolve("/images/does-not-exist.gif")));
         assertNull(dataSourceResolver.resolve("./images/does-not-exist.gif"));
     }
