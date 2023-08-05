@@ -34,7 +34,10 @@
       </action>     
       <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">
         [StepSecurity] ci: Harden GitHub Actions #149.
-      </action>            
+      </action>
+      <action dev="ggregory" type="fix" due-to="Lee Jaeheon, sebbASF">
+        Better use of JUnit APIs #158.
+      </action>
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
