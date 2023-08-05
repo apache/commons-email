@@ -928,7 +928,7 @@ public class EmailTest extends AbstractEmailTest
         final String headerValue = "1234567890 1234567890 123456789 01234567890 123456789 0123456789 01234567890 01234567890";
         email.addHeader("X-LongHeader", headerValue);
 
-		assertEquals(1, email.getHeaders().size());
+        assertEquals(1, email.getHeaders().size());
         // the header should not yet be folded -> will be done by buildMimeMessage()
         assertFalse(email.getHeaders().get("X-LongHeader").contains("\r\n"));
 
