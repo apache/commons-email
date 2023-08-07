@@ -32,21 +32,48 @@ public class AttachmentDataSource implements DataSource {
     private final String type;
     private String name = "";
 
+    /**
+     * Create a AttachmentDataSource with data from the
+     * specified InputStream and with the specified MIME type.
+     *
+     * @param is   the InputStream
+     * @param type the MIME type
+     */
     public AttachmentDataSource(InputStream is, String type) {
         this.is = is;
         this.type = type;
     }
 
+    /**
+     * Create a AttachmentDataSource with data from the
+     * specified InputStream and with the specified MIME type
+     * and name for this DataSource.
+     *
+     * @param is
+     * @param type
+     * @param name
+     */
     public AttachmentDataSource(InputStream is, String type, String name) {
         this.is = is;
         this.type = type;
         this.name = name;
     }
 
+    /**
+     * Return an InputStream.
+     * @return the InputStream
+     */
     public InputStream getInputStream() {
         return is;
     }
 
+    /**
+     * Return an OutputStream for the data.
+     * Writing the data is not supported; an <code>IOException</code>
+     * is always thrown.
+     *
+     * @throws IOException
+     */
     public OutputStream getOutputStream() throws IOException {
         throw new IOException("cannot do this");
     }
