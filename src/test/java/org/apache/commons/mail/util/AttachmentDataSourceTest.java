@@ -68,7 +68,7 @@ public class AttachmentDataSourceTest
     public void testGetOutputStream()
     {
         AttachmentDataSource dataSource = new AttachmentDataSource(null, "text/html");
-        assertThrows(IOException.class, dataSource::getOutputStream);
+        assertThrows(UnsupportedOperationException.class, dataSource::getOutputStream);
     }
 
 }
