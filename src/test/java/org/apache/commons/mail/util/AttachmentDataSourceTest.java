@@ -27,7 +27,8 @@ import static org.junit.Assert.*;
 public class AttachmentDataSourceTest
 {
     @Test
-    public void testGetInputStream() throws IOException {
+    public void testGetInputStream() throws IOException
+    {
         byte[] testData = "Test data for InputStream".getBytes();
         InputStream testInputStream = new ByteArrayInputStream(testData);
 
@@ -42,26 +43,30 @@ public class AttachmentDataSourceTest
     }
 
     @Test
-    public void testGetContentType() {
+    public void testGetContentType()
+    {
         AttachmentDataSource dataSource = new AttachmentDataSource(null, "text/plain");
         assertEquals("text/plain", dataSource.getContentType());
     }
 
     @Test
-    public void testGetName() {
+    public void testGetName()
+    {
         AttachmentDataSource dataSource = new AttachmentDataSource(null, "application/pdf", "document.pdf");
         assertEquals("document.pdf", dataSource.getName());
     }
 
     @Test
-    public void testSetName() {
+    public void testSetName()
+    {
         AttachmentDataSource dataSource = new AttachmentDataSource(null, "image/jpeg");
         dataSource.setName("image.jpg");
         assertEquals("image.jpg", dataSource.getName());
     }
 
     @Test
-    public void testGetOutputStream() {
+    public void testGetOutputStream()
+    {
         AttachmentDataSource dataSource = new AttachmentDataSource(null, "text/html");
         assertThrows(IOException.class, dataSource::getOutputStream);
     }

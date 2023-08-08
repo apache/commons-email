@@ -27,7 +27,8 @@ import java.io.OutputStream;
  *
  * @since 1.5
  */
-public class AttachmentDataSource implements DataSource {
+public class AttachmentDataSource implements DataSource
+{
     private final InputStream is;
     private final String type;
     private String name = "";
@@ -39,7 +40,8 @@ public class AttachmentDataSource implements DataSource {
      * @param is   the InputStream
      * @param type the MIME type
      */
-    public AttachmentDataSource(InputStream is, String type) {
+    public AttachmentDataSource(InputStream is, String type)
+    {
         this.is = is;
         this.type = type;
     }
@@ -53,7 +55,8 @@ public class AttachmentDataSource implements DataSource {
      * @param type
      * @param name
      */
-    public AttachmentDataSource(InputStream is, String type, String name) {
+    public AttachmentDataSource(InputStream is, String type, String name)
+    {
         this.is = is;
         this.type = type;
         this.name = name;
@@ -63,7 +66,8 @@ public class AttachmentDataSource implements DataSource {
      * Return an InputStream.
      * @return the InputStream
      */
-    public InputStream getInputStream() {
+    public InputStream getInputStream()
+    {
         return is;
     }
 
@@ -74,22 +78,26 @@ public class AttachmentDataSource implements DataSource {
      *
      * @throws IOException
      */
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() throws IOException
+    {
         throw new IOException("cannot do this");
     }
 
     /** Get the content type. */
-    public String getContentType() {
+    public String getContentType()
+    {
         return this.type;
     }
 
     /** Get the name. */
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
     /** Sets the name for this DataSource. */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
