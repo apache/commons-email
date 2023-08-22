@@ -59,7 +59,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
     protected Email send(final Email email) throws EmailException {
 
-        if( EmailConfiguration.MAIL_FORCE_SEND ) {
+        if ( EmailConfiguration.MAIL_FORCE_SEND ) {
             email.send();
         }
         else {
@@ -100,7 +100,7 @@ public class EmailLiveTest extends AbstractEmailTest
         email.setFrom(EmailConfiguration.TEST_FROM);
         email.addTo(EmailConfiguration.TEST_TO);
 
-        if(EmailConfiguration.TEST_USER != null) {
+        if (EmailConfiguration.TEST_USER != null) {
             email.setAuthenticator(new DefaultAuthenticator(EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD));
         }
 
@@ -302,7 +302,7 @@ public class EmailLiveTest extends AbstractEmailTest
     @Test
     public void testImageHtmlEmailRemote() throws Exception
     {
-        if(EmailConfiguration.MAIL_FORCE_SEND)
+        if (EmailConfiguration.MAIL_FORCE_SEND)
         {
             final URL url = new URL("https://commons.apache.org/email/");
             // URL url = new URL("http://www.dzone.com/links/index.html");
@@ -337,7 +337,7 @@ public class EmailLiveTest extends AbstractEmailTest
         final Transport transport = session.getTransport();
 
         // simulate creating a bunch of emails using an existing mail session
-        for(int i = 0; i<3; i++)
+        for (int i = 0; i < 3; i++)
         {
             final SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
             personalizedEmail.setMailSession(session);
@@ -348,7 +348,7 @@ public class EmailLiveTest extends AbstractEmailTest
         }
 
         // send the list of emails using a single 'Transport' instance.
-        if( EmailConfiguration.MAIL_FORCE_SEND )
+        if ( EmailConfiguration.MAIL_FORCE_SEND )
         {
             transport.connect();
 
