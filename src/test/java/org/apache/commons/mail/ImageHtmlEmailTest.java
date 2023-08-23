@@ -292,7 +292,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         final String strSubject = "Test HTML Send default";
 
         email = new MockImageHtmlEmailConcrete();
-        final DataSourceResolver dataSourceResolvers[] = new DataSourceResolver[2];
+        final DataSourceResolver[] dataSourceResolvers = new DataSourceResolver[2];
         dataSourceResolvers[0] = new DataSourceUrlResolver(new URL("http://foo"), true);
         dataSourceResolvers[1] = new DataSourceClassPathResolver("/", true);
 
