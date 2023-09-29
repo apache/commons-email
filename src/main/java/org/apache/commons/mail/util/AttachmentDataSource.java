@@ -25,7 +25,7 @@ import java.io.OutputStream;
  * A DataSource create with InputStream.
  * It is possible to set a name and type.
  *
- * @since 1.5
+ * @since 1.6.0
  */
 public class AttachmentDataSource implements DataSource
 {
