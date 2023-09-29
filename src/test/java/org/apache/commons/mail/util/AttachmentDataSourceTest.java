@@ -29,14 +29,14 @@ public class AttachmentDataSourceTest
     @Test
     public void testGetInputStream() throws IOException
     {
-        byte[] testData = "Test data for InputStream".getBytes();
-        InputStream testInputStream = new ByteArrayInputStream(testData);
+        final byte[] testData = "Test data for InputStream".getBytes();
+        final InputStream testInputStream = new ByteArrayInputStream(testData);
 
-        AttachmentDataSource dataSource = new AttachmentDataSource(testInputStream, "application/octet-stream");
-        InputStream inputStream = dataSource.getInputStream();
+        final AttachmentDataSource dataSource = new AttachmentDataSource(testInputStream, "application/octet-stream");
+        final InputStream inputStream = dataSource.getInputStream();
 
-        byte[] readData = new byte[testData.length];
-        int bytesRead = inputStream.read(readData);
+        final byte[] readData = new byte[testData.length];
+        final int bytesRead = inputStream.read(readData);
 
         assertEquals(testData.length, bytesRead);
         assertArrayEquals(testData, readData);
@@ -45,21 +45,21 @@ public class AttachmentDataSourceTest
     @Test
     public void testGetContentType()
     {
-        AttachmentDataSource dataSource = new AttachmentDataSource(null, "text/plain");
+        final AttachmentDataSource dataSource = new AttachmentDataSource(null, "text/plain");
         assertEquals("text/plain", dataSource.getContentType());
     }
 
     @Test
     public void testGetName()
     {
-        AttachmentDataSource dataSource = new AttachmentDataSource(null, "application/pdf", "document.pdf");
+        final AttachmentDataSource dataSource = new AttachmentDataSource(null, "application/pdf", "document.pdf");
         assertEquals("document.pdf", dataSource.getName());
     }
 
     @Test
     public void testSetName()
     {
-        AttachmentDataSource dataSource = new AttachmentDataSource(null, "image/jpeg");
+        final AttachmentDataSource dataSource = new AttachmentDataSource(null, "image/jpeg");
         dataSource.setName("image.jpg");
         assertEquals("image.jpg", dataSource.getName());
     }
@@ -67,7 +67,7 @@ public class AttachmentDataSourceTest
     @Test
     public void testGetOutputStream()
     {
-        AttachmentDataSource dataSource = new AttachmentDataSource(null, "text/html");
+        final AttachmentDataSource dataSource = new AttachmentDataSource(null, "text/html");
         assertThrows(UnsupportedOperationException.class, dataSource::getOutputStream);
     }
 
