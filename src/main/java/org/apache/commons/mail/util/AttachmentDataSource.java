@@ -40,7 +40,7 @@ public class AttachmentDataSource implements DataSource
      * @param is   the InputStream
      * @param type the MIME type
      */
-    public AttachmentDataSource(final nputStream is, final String type)
+    public AttachmentDataSource(final InputStream is, final String type)
     {
         this.is = is;
         this.type = type;
