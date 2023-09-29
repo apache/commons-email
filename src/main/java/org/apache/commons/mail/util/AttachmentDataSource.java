@@ -80,7 +80,7 @@ public class AttachmentDataSource implements DataSource
      */
     public OutputStream getOutputStream() throws IOException
     {
-        throw new UnsupportedOperationException("cannot do this");
+        throw new UnsupportedOperationException("getOutputStream()");
     }
 
     /** Gets the content type. */
