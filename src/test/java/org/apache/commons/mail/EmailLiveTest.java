@@ -86,7 +86,7 @@ public class EmailLiveTest extends AbstractEmailTest
      */
     private Email create(final Class<? extends Email> clazz) throws Exception {
 
-        final Email email = clazz.newInstance();
+        final Email email = clazz.getConstructor().newInstance();
 
         email.setStartTLSEnabled(EmailConfiguration.MAIL_USE_STARTTLS);
         email.setStartTLSRequired(EmailConfiguration.MAIL_STARTTLS_REQUIRED);
