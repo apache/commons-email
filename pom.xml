@@ -458,7 +458,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
-                    <configLocation>${basedir}/conf/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
                     <enableRulesSummary>false</enableRulesSummary>
                     <headerFile>${basedir}/conf/HEADER.txt</headerFile>
                 </configuration>
