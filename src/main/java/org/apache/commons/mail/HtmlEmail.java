@@ -621,7 +621,7 @@ public class HtmlEmail extends MultiPartEmail
      * that are embedded in the final email.
      * @since 1.1
      */
-    private static class InlineImage
+    private static final class InlineImage
     {
         /** content id. */
         private final String cid;
