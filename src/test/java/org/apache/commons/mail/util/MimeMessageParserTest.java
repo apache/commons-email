@@ -122,7 +122,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseHtmlEmailWithAttachmentAndEncodedFilename() throws Exception
+    public void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception
     {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
