@@ -1489,7 +1489,7 @@ public abstract class Email
      * which is afterwards sent to the SMTP server.
      *
      * @return the message id of the underlying MimeMessage
-     * @throws IllegalStateException if the MimeMessage was already built, ie {@link #buildMimeMessage()}
+     * @throws IllegalStateException if the MimeMessage was already built, that is, {@link #buildMimeMessage()}
      *   was already called
      * @throws EmailException the sending failed
      */
