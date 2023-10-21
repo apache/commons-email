@@ -43,9 +43,9 @@
 Apache Commons Email
 ===================
 
-[![GitHub Actions Status](https://github.com/apache/commons-email/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-email/actions)
+[![Java CI](https://github.com/apache/commons-email/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-email/actions/workflows/maven.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/?gav=true)
-[![CodeQL](https://github.com/apache/commons-email/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
+[![CodeQL](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml)
 
 
 Apache Commons Email aims to provide an API for sending email. It is built on top of
