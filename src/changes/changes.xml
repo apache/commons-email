@@ -89,7 +89,7 @@
         Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94.
       </action>
       <action type="update" due-to="Gary Gregory">
-        Bump tests commons-io:commons-io 2.6 to 2.13.0.
+        Bump tests commons-io:commons-io 2.6 to 2.15.0.
       </action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">
         Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17.
