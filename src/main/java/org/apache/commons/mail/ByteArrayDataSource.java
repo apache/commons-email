@@ -176,7 +176,7 @@ public class ByteArrayDataSource implements DataSource
     }
 
     /**
-     * Get the content type.
+     * Gets the content type.
      *
      * @return A String.
      * @since 1.0
@@ -188,7 +188,7 @@ public class ByteArrayDataSource implements DataSource
     }
 
     /**
-     * Get the input stream.
+     * Gets the input stream.
      *
      * @return An InputStream.
      * @throws IOException IOException
@@ -216,7 +216,7 @@ public class ByteArrayDataSource implements DataSource
     }
 
     /**
-     * Get the name.
+     * Gets the name.
      *
      * @return A String.
      * @since 1.0
@@ -228,7 +228,7 @@ public class ByteArrayDataSource implements DataSource
     }
 
     /**
-     * Get the OutputStream to write to.
+     * Gets the OutputStream to write to.
      *
      * @return  An OutputStream
      * @since 1.0

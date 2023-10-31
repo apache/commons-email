@@ -74,7 +74,7 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * Get the MIME subtype of the email.
+     * Gets the MIME subtype of the email.
      *
      * @return MIME subtype of the email
      * @since 1.0

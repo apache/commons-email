@@ -47,7 +47,7 @@ public class EmailAttachment
     private String disposition = EmailAttachment.ATTACHMENT;
 
     /**
-     * Get the description.
+     * Gets the description.
      *
      * @return A String.
      * @since 1.0
@@ -58,7 +58,7 @@ public class EmailAttachment
     }
 
     /**
-     * Get the name.
+     * Gets the name.
      *
      * @return A String.
      * @since 1.0
@@ -69,7 +69,7 @@ public class EmailAttachment
     }
 
     /**
-     * Get the path.
+     * Gets the path.
      *
      * @return A String.
      * @since 1.0
@@ -80,7 +80,7 @@ public class EmailAttachment
     }
 
     /**
-     * Get the URL.
+     * Gets the URL.
      *
      * @return A URL.
      * @since 1.0
@@ -91,7 +91,7 @@ public class EmailAttachment
     }
 
     /**
-     * Get the disposition.
+     * Gets the disposition.
      *
      * @return A String.
      * @since 1.0

@@ -55,7 +55,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
     }
 
     /**
-     * Get the base URL used for resolving relative resource locations.
+     * Gets the base URL used for resolving relative resource locations.
      *
      * @return the baseUrl
      */

@@ -1803,7 +1803,7 @@ public abstract class Email
     }
 
     /**
-     * Get the list of "To" addresses.
+     * Gets the list of "To" addresses.
      *
      * @return List addresses
      */
@@ -1813,7 +1813,7 @@ public abstract class Email
     }
 
     /**
-     * Get the list of "CC" addresses.
+     * Gets the list of "CC" addresses.
      *
      * @return List addresses
      */
@@ -1823,7 +1823,7 @@ public abstract class Email
     }
 
     /**
-     * Get the list of "Bcc" addresses.
+     * Gets the list of "Bcc" addresses.
      *
      * @return List addresses
      */
@@ -1833,7 +1833,7 @@ public abstract class Email
     }
 
     /**
-     * Get the list of "Reply-To" addresses.
+     * Gets the list of "Reply-To" addresses.
      *
      * @return List addresses
      */
@@ -1843,7 +1843,7 @@ public abstract class Email
     }
 
     /**
-     * Get the socket connection timeout value in milliseconds.
+     * Gets the socket connection timeout value in milliseconds.
      *
      * @return the timeout in milliseconds.
      * @since 1.2
@@ -1868,7 +1868,7 @@ public abstract class Email
     }
 
     /**
-     * Get the socket I/O timeout value in milliseconds.
+     * Gets the socket I/O timeout value in milliseconds.
      *
      * @return the socket I/O timeout
      * @since 1.2

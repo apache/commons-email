@@ -70,7 +70,7 @@ public class ImageHtmlEmail extends HtmlEmail
     private DataSourceResolver dataSourceResolver;
 
     /**
-     * Get the data source resolver.
+     * Gets the data source resolver.
      *
      * @return the resolver
      */

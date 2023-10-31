@@ -55,7 +55,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
     }
 
     /**
-     * Get the underlying data source resolvers.
+     * Gets the underlying data source resolvers.
      *
      * @return underlying data source resolvers
      */
