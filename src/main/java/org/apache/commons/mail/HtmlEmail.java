@@ -114,7 +114,7 @@ public class HtmlEmail extends MultiPartEmail
     protected Map<String, InlineImage> inlineEmbeds = new HashMap<>();
 
     /**
-     * Set the text content.
+     * Sets the text content.
      *
      * @param aText A String.
      * @return An HtmlEmail.
@@ -134,7 +134,7 @@ public class HtmlEmail extends MultiPartEmail
     }
 
     /**
-     * Set the HTML content.
+     * Sets the HTML content.
      *
      * @param aHtml A String.
      * @return An HtmlEmail.
@@ -154,7 +154,7 @@ public class HtmlEmail extends MultiPartEmail
     }
 
     /**
-     * Set the message.
+     * Sets the message.
      *
      * <p>This method overrides {@link MultiPartEmail#setMsg(String)} in
      * order to send an HTML message instead of a plain text message in

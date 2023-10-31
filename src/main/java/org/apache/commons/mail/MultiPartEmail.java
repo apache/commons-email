@@ -63,7 +63,7 @@ public class MultiPartEmail extends Email
     private boolean boolHasAttachments;
 
     /**
-     * Set the MIME subtype of the email.
+     * Sets the MIME subtype of the email.
      *
      * @param aSubType MIME subtype of the email
      * @since 1.0
@@ -175,7 +175,7 @@ public class MultiPartEmail extends Email
     }
 
     /**
-     * Set the message of the email.
+     * Sets the message of the email.
      *
      * @param msg A String.
      * @return An Email.

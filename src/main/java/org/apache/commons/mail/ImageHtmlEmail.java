@@ -80,7 +80,7 @@ public class ImageHtmlEmail extends HtmlEmail
     }
 
     /**
-     * Set the data source resolver.
+     * Sets the data source resolver.
      *
      * @param dataSourceResolver the resolver
      */

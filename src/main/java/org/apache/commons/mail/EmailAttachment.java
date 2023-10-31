@@ -102,7 +102,7 @@ public class EmailAttachment
     }
 
     /**
-     * Set the description.
+     * Sets the description.
      *
      * @param desc A String.
      * @since 1.0
@@ -113,7 +113,7 @@ public class EmailAttachment
     }
 
     /**
-     * Set the name.
+     * Sets the name.
      *
      * @param aName A String.
      * @since 1.0
@@ -124,7 +124,7 @@ public class EmailAttachment
     }
 
     /**
-     * Set the path to the attachment.  The path can be absolute or relative
+     * Sets the path to the attachment.  The path can be absolute or relative
      * and should include the file name.
      * <p>
      * Example: /home/user/images/image.jpg<br>
@@ -139,7 +139,7 @@ public class EmailAttachment
     }
 
     /**
-     * Set the URL.
+     * Sets the URL.
      *
      * @param aUrl A URL.
      * @since 1.0
@@ -150,7 +150,7 @@ public class EmailAttachment
     }
 
     /**
-     * Set the disposition.
+     * Sets the disposition.
      *
      * @param aDisposition A String.
      * @since 1.0

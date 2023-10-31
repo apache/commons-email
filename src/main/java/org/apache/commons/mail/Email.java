@@ -373,7 +373,7 @@ public abstract class Email
     }
 
     /**
-     * Set the charset of the message. Please note that you should set the charset before
+     * Sets the charset of the message. Please note that you should set the charset before
      * adding the message content.
      *
      * @param newCharset A String.
@@ -389,7 +389,7 @@ public abstract class Email
     }
 
     /**
-     * Set the emailBody to a MimeMultiPart
+     * Sets the emailBody to a MimeMultiPart
      *
      * @param aMimeMultipart aMimeMultipart
      * @since 1.0
@@ -400,7 +400,7 @@ public abstract class Email
     }
 
     /**
-     * Set the content and contentType.
+     * Sets the content and contentType.
      *
      * @param   aObject aObject
      * @param   aContentType aContentType
@@ -466,7 +466,7 @@ public abstract class Email
     }
 
     /**
-     * Set the hostname of the outgoing mail server.
+     * Sets the hostname of the outgoing mail server.
      *
      * @param   aHostName aHostName
      * @throws IllegalStateException if the mail session is already initialized
@@ -479,7 +479,7 @@ public abstract class Email
     }
 
     /**
-     * Set or disable the STARTTLS encryption. Please see EMAIL-105
+     * Sets or disable the STARTTLS encryption. Please see EMAIL-105
      * for the reasons of deprecation.
      *
      * @deprecated since 1.3, use setStartTLSEnabled() instead
@@ -493,7 +493,7 @@ public abstract class Email
     }
 
     /**
-     * Set or disable the STARTTLS encryption.
+     * Sets or disable the STARTTLS encryption.
      *
      * @param startTlsEnabled true if STARTTLS requested, false otherwise
      * @return An Email.
@@ -509,7 +509,7 @@ public abstract class Email
     }
 
     /**
-     * Set or disable the required STARTTLS encryption.
+     * Sets or disable the required STARTTLS encryption.
      * <p>
      * Defaults to {@link #smtpPort}; can be overridden by using {@link #setSmtpPort(int)}
      *
@@ -526,7 +526,7 @@ public abstract class Email
     }
 
     /**
-     * Set the non-SSL port number of the outgoing mail server.
+     * Sets the non-SSL port number of the outgoing mail server.
      *
      * @param  aPortNumber aPortNumber
      * @throws IllegalArgumentException if the port number is &lt; 1
@@ -704,7 +704,7 @@ public abstract class Email
     }
 
     /**
-     * Set the FROM field of the email to use the specified address. The email
+     * Sets the FROM field of the email to use the specified address. The email
      * address will also be used as the personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
      * If it is not set, it will be encoded using
@@ -723,7 +723,7 @@ public abstract class Email
     }
 
     /**
-     * Set the FROM field of the email to use the specified address and the
+     * Sets the FROM field of the email to use the specified address and the
      * specified personal name.
      * The name will be encoded by the charset of {@link #setCharset(java.lang.String) setCharset()}.
      * If it is not set, it will be encoded using
@@ -743,7 +743,7 @@ public abstract class Email
     }
 
     /**
-     * Set the FROM field of the email to use the specified address, personal
+     * Sets the FROM field of the email to use the specified address, personal
      * name, and charset encoding for the name.
      *
      * @param email A String.
@@ -850,7 +850,7 @@ public abstract class Email
     }
 
     /**
-     * Set a list of "TO" addresses. All elements in the specified
+     * Sets a list of "TO" addresses. All elements in the specified
      * {@code Collection} are expected to be of type
      * {@code java.mail.internet.InternetAddress}.
      *
@@ -959,7 +959,7 @@ public abstract class Email
     }
 
     /**
-     * Set a list of "CC" addresses. All elements in the specified
+     * Sets a list of "CC" addresses. All elements in the specified
      * {@code Collection} are expected to be of type
      * {@code java.mail.internet.InternetAddress}.
      *
@@ -1068,7 +1068,7 @@ public abstract class Email
     }
 
     /**
-     * Set a list of "BCC" addresses. All elements in the specified
+     * Sets a list of "BCC" addresses. All elements in the specified
      * {@code Collection} are expected to be of type
      * {@code java.mail.internet.InternetAddress}.
      *
@@ -1147,7 +1147,7 @@ public abstract class Email
     }
 
     /**
-     * Set a list of reply to addresses. All elements in the specified
+     * Sets a list of reply to addresses. All elements in the specified
      * {@code Collection} are expected to be of type
      * {@code java.mail.internet.InternetAddress}.
      *
@@ -1259,7 +1259,7 @@ public abstract class Email
     }
 
     /**
-     * Set the "bounce address" - the address to which undeliverable messages
+     * Sets the "bounce address" - the address to which undeliverable messages
      * will be returned.  If this value is never set, then the message will be
      * sent to the address specified with the System property "mail.smtp.from",
      * or if that value is not set, then to the "from" address.
@@ -1636,7 +1636,7 @@ public abstract class Email
     }
 
     /**
-     * Set details regarding "pop3 before SMTP" authentication.
+     * Sets details regarding "pop3 before SMTP" authentication.
      *
      * @param newPopBeforeSmtp Whether or not to log into pop3 server before sending mail.
      * @param newPopHost The pop3 host to use.
@@ -1854,7 +1854,7 @@ public abstract class Email
     }
 
     /**
-     * Set the socket connection timeout value in milliseconds.
+     * Sets the socket connection timeout value in milliseconds.
      * Default is a 60 second timeout.
      *
      * @param socketConnectionTimeout the connection timeout
@@ -1879,7 +1879,7 @@ public abstract class Email
     }
 
     /**
-     * Set the socket I/O timeout value in milliseconds.
+     * Sets the socket I/O timeout value in milliseconds.
      * Default is 60 second timeout.
      *
      * @param socketTimeout the socket I/O timeout
