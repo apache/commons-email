@@ -311,7 +311,7 @@
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.6.0</commons.release.version>
-        <commons.release.desc>(Java 8)</commons.release.desc>
+        <commons.release.desc>(Java 8 or above)</commons.release.desc>
         <commons.rc.version>RC1</commons.rc.version>
         <commons.bc.version>1.5</commons.bc.version>
 
