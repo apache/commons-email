@@ -90,7 +90,6 @@ public class HtmlEmail extends MultiPartEmail
     /** suffix for default HTML mail. */
     private static final String HTML_MESSAGE_END = "</pre></body></html>";
 
-
     /**
      * Text part of the message. This will be used as alternative text if
      * the email client does not support HTML messages.

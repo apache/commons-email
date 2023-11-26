@@ -1417,7 +1417,6 @@ public abstract class Email
                     this.toInternetAddressArray(this.replyList));
             }
 
-
             if (!this.headers.isEmpty())
             {
                 for (final Map.Entry<String, String> entry : this.headers.entrySet())

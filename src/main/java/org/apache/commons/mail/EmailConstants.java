@@ -240,7 +240,6 @@ public final class EmailConstants
      */
     public static final String MAIL_FROM = "mail.from";
 
-
     /** Hide constructor. */
     private EmailConstants()
     {

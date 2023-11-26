@@ -65,7 +65,6 @@ public class IDNEmailAddressConverterTest {
         assertEquals("me@home.com", idnEmailConverter.toASCII("me@home.com"));
     }
 
-
     @Test
     public void testInternetAddressToAsciiConversion() throws Exception
     {

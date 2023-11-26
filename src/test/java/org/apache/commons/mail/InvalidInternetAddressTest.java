@@ -97,7 +97,6 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         // Prove InternetAddress constructor is throwing exception.
         // ====================================================================
 
-
         // test Invalid Email addresses
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
         {
