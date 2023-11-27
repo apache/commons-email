@@ -1,0 +1,5 @@
+FROM openjdk:8
+ADD target/commons-email-SNAPSHOT.jar commons-email-SNAPSHOT.jar
+ENTRYPOINT [ "java", "-jar","commons-email-1.0-SNAPSHOT.jar"]
+CMD ["-h"]
+EXPOSE 8080
