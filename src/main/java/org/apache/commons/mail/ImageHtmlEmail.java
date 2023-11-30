@@ -59,29 +59,6 @@ public class ImageHtmlEmail extends HtmlEmail {
     }
 
 
-    /** resolve the images and script resources to a DataSource */
-    private DataSourceResolver dataSourceResolver;
-
-    /**
-     * Gets the data source resolver.
-     *
-     * @return the resolver
-     */
-    public DataSourceResolver getDataSourceResolver()
-    {
-        return dataSourceResolver;
-    }
-
-    /**
-     * Sets the data source resolver.
-     *
-     * @param dataSourceResolver the resolver
-     */
-    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver)
-    {
-        this.dataSourceResolver = dataSourceResolver;
-    }
-
      /**
       * Does the work of actually building the MimeMessage.
       *
