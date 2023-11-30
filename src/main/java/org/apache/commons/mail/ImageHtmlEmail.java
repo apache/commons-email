@@ -51,7 +51,7 @@ public class ImageHtmlEmail extends HtmlEmail
 
     /** Regexp for extracting {@code <img>} tags */
     public static final String REGEX_IMG_SRC =
-            "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+	    "(<[Ii][Mm][Gg]\\s+(?:[^>]*?\\s+)?[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
 			
 
