@@ -61,10 +61,10 @@ public class ImageHtmlEmail extends HtmlEmail
     // the grouping is necessary to allow to replace the element with the CID
 
     /** pattern for extracting <img> tags */
-    private static final Pattern IMG_PATTERN = Pattern.compile(REGEX_IMG_SRC);
+    private static final Pattern IMG_PATTERN = Pattern.compile("(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])");
 
     /** pattern for extracting <script> tags */
-    private static final Pattern SCRIPT_PATTERN = Pattern.compile(REGEX_SCRIPT_SRC);
+    private static final Pattern SCRIPT_PATTERN = Pattern.compile("(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])");
 
     /** resolve the images and script resources to a DataSource */
     private DataSourceResolver dataSourceResolver;
