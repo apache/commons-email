@@ -1,63 +1,73 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.apache.commons.mail;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import javax.activation.DataSource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * <p>Class extends HtmlEmail to encapsulate logic to retrieve images and scripts
- * contained in "&lt;img src=../&gt;" and "&lt;script src=...&gt;" elements in HTML code.
- * Replaces all img and script src-elements with "cid:"-entries and embeds them in the email.
+ * <p>Small wrapper class on top of HtmlEmail which encapsulates the required logic
+ * to retrieve images that are contained in "&lt;img src=../&gt;" elements in the HTML
+ * code. This is done by replacing all img-src-elements with "cid:"-entries and
+ * embedding images in the email.
+ * </p>
+ * <p>
+ * For local files the class tries to either load them via an absolute path or -
+ * if available - use a relative path starting from a base directory. For files
+ * that are not found locally, the implementation tries to download
+ * the element and link it in.
+ * </p>
+ * <p>
+ * The image loading is done by an instance of {@code DataSourceResolver}
+ * which has to be provided by the caller.
  * </p>
  *
  * @since 1.3
  */
-public class ImageHtmlEmail extends HtmlEmail {
-    private DataSourceResolver dataSourceResolver;
+public class ImageHtmlEmail extends HtmlEmail
+{
+    // Regular Expression to find all <IMG SRC="..."> entries in an HTML
+    // document.It needs to cater for various things, like more whitespaces
+    // including newlines on any place, HTML is not case sensitive and there
+    // can be arbitrary text between "IMG" and "SRC" like IDs and other things.
 
-    // Getters and setters for dataSourceResolver
-    public DataSourceResolver getDataSourceResolver() {
-        return dataSourceResolver;
-    }
+    /** Regexp for extracting {@code <img>} tags */
+    public static final String REGEX_IMG_SRC =
+	    "(<[Ii][Mm][Gg]\\s+(?:[^>]*?\\s+)?[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
-    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver) {
-        this.dataSourceResolver = dataSourceResolver;
-    }
+			
 
-    @Override
-    protected void buildMimeMessage() throws EmailException {
-        try {
-            // Use Jsoup to parse the HTML and process <img> and <script> tags
-            Document document = Jsoup.parse(getHtmlMsg());
-            processElements(document, "img[src]", "src");
-            processElements(document, "script[src]", "src");
+    /** regexp for extracting {@code <script>} tags */
+    public static final String REGEX_SCRIPT_SRC =
+            "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
-            // Set the processed HTML back to the email content
-            setHtmlMsg(document.outerHtml());
-            super.buildMimeMessage();
-        } catch (IOException e) {
-            throw new EmailException("Failed to process the HTML content", e);
-        }
-    }
 
-    private void processElements(Document document, String cssQuery, String attribute) throws IOException, EmailException {
-        Elements elements = document.select(cssQuery);
-        for (Element element : elements) {
-            String src = element.attr(attribute);
-            DataSource dataSource = dataSourceResolver.resolve(src);
-            if (dataSource != null) {
-                // Replace the src attribute with the content ID (cid) of the embedded resource
-                String cid = embed(dataSource, src);
-                element.attr(attribute, "cid:" + cid);
-            }
-        }
-    }
+    // this pattern looks for the HTML image tag which indicates embedded images,
+    // the grouping is necessary to allow to replace the element with the CID
 
+    /** pattern for extracting <img> tags */
+    private static final Pattern IMG_PATTERN = Pattern.compile(REGEX_IMG_SRC);
+
+    /** pattern for extracting <script> tags */
+    private static final Pattern SCRIPT_PATTERN = Pattern.compile(REGEX_SCRIPT_SRC);
 
      /**
       * Does the work of actually building the MimeMessage.
