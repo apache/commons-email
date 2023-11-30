@@ -51,14 +51,11 @@ public class ImageHtmlEmail extends HtmlEmail
 
     /** Regexp for extracting {@code <img>} tags */
     public static final String REGEX_IMG_SRC =
-	    "(<[Ii][Mm][Gg]\\s+(?:[^>]*?\\s+)?[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
-
-			
+            "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     /** regexp for extracting {@code <script>} tags */
     public static final String REGEX_SCRIPT_SRC =
             "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
-
 
     // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
@@ -68,6 +65,29 @@ public class ImageHtmlEmail extends HtmlEmail
 
     /** pattern for extracting <script> tags */
     private static final Pattern SCRIPT_PATTERN = Pattern.compile(REGEX_SCRIPT_SRC);
+
+    /** resolve the images and script resources to a DataSource */
+    private DataSourceResolver dataSourceResolver;
+
+    /**
+     * Gets the data source resolver.
+     *
+     * @return the resolver
+     */
+    public DataSourceResolver getDataSourceResolver()
+    {
+        return dataSourceResolver;
+    }
+
+    /**
+     * Sets the data source resolver.
+     *
+     * @param dataSourceResolver the resolver
+     */
+    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver)
+    {
+        this.dataSourceResolver = dataSourceResolver;
+    }
 
      /**
       * Does the work of actually building the MimeMessage.
