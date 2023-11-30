@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
-import java.security.SecureRandom
+import java.security.SecureRandom;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
