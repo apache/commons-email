@@ -691,7 +691,6 @@ public class EmailTest extends AbstractEmailTest
 
         final String[] testEmailNames = {"Name1", "", null};
 
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -1036,7 +1035,6 @@ public class EmailTest extends AbstractEmailTest
             assertTrue(e.getCause() instanceof ParseException);
             fakeMailServer.stop();
         }
-	}
     }
 
     @Test
