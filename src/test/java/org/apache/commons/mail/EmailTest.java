@@ -1011,31 +1011,37 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testSendBadHostName()
     {
-        try
-        {
-            getMailServer();
+        MockEmailConcrete email = null; // Declare email outside the try block to have it accessible in catch block
 
-            email = new MockEmailConcrete();
-            email.setSubject("Test Email #1 Subject");
-            email.setHostName("bad.host.com");
-            email.setFrom("me@home.com");
-            email.addTo("me@home.com");
-            email.addCc("me@home.com");
-            email.addBcc("me@home.com");
-            email.addReplyTo("me@home.com");
+try {
+    getMailServer();
 
-            email.setContent(
-                    "test string object",
-                    " ; charset=" + EmailConstants.US_ASCII);
+    email = new MockEmailConcrete();
+    email.setSubject("Test Email #1 Subject");
+    email.setHostName("bad.host.com");
+    email.setFrom("me@home.com");
+    email.addTo("me@home.com");
+    email.addCc("me@home.com");
+    email.addBcc("me@home.com");
+    email.addReplyTo("me@home.com");
 
-            email.send();
-            fail("Should have thrown an exception");
-        }
-        catch (final EmailException e)
-        {
-            assertTrue(e.getCause() instanceof ParseException);
-            fakeMailServer.stop();
-        }
+    email.setContent(
+            "test string object",
+            " ; charset=" + EmailConstants.US_ASCII);
+
+    // The send method is the only call that is expected to throw an EmailException in this context.
+    // If any method call before send() throws an EmailException, it indicates an unexpected error
+    // and should be handled accordingly.
+    email.send();
+    fail("Should have thrown an exception");
+	} catch (final EmailException e) {
+    assertTrue(e.getCause() instanceof ParseException);
+    // The following line assumes that fakeMailServer is accessible from this catch block.
+    // If fakeMailServer is not accessible, you will need to handle it outside of the try/catch.
+    if (fakeMailServer != null) {
+        fakeMailServer.stop();
+    }
+	}
     }
 
     @Test
