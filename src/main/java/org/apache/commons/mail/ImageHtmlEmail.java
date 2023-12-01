@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-
+package org.apache.commons.mail;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.util.EmailUtils;
