@@ -1,3 +1,4 @@
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -16,9 +17,6 @@
  */
 
 package org.apache.commons.mail;
-//import org.apache.commons.mail.EmailException;
-//import org.apache.commons.mail.HtmlEmail;
-//import org.apache.commons.mail.util.EmailUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -74,10 +72,15 @@ public class ImageHtmlEmail extends HtmlEmail
 
     private String processHtmlContent(final String htmlContent) throws IOException, EmailException
     {
-        Document document = Jsoup.parse(htmlContent);
-        processElements(document.select("img[src]"), "src");
-        processElements(document.select("script[src]"), "src");
-        return document.toString();
+        try {
+            Document document = Jsoup.parse(htmlContent);
+            processElements(document.select("img[src]"), "src");
+            processElements(document.select("script[src]"), "src");
+            return document.toString();
+        } catch (IOException | EmailException e) {
+            // Log the exception, handle it, or rethrow it if needed
+            throw e;
+        }
     }
 
     private void processElements(Elements elements, String attributeKey) throws IOException, EmailException
@@ -95,7 +98,7 @@ public class ImageHtmlEmail extends HtmlEmail
 
             if (dataSource != null)
             {
-                String name = EmailUtils.isEmpty(dataSource.getName()) ? resourceLocation : dataSource.getName();
+                String name = dataSource.getName() != null && !dataSource.getName().isEmpty() ? dataSource.getName() : resourceLocation;
                 String cid = cidCache.computeIfAbsent(name, n -> embed(dataSource, n));
                 element.attr(attributeKey, "cid:" + cid);
             }
