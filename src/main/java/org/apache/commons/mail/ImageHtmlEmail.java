@@ -55,32 +55,20 @@ public class ImageHtmlEmail extends HtmlEmail
     }
 
     @Override
-    public void buildMimeMessage() throws EmailException
+    public void buildMimeMessage() throws EmailException, IOException
     {
-        try
-        {
-            String htmlContent = super.html;
-            htmlContent = processHtmlContent(htmlContent);
-            setHtmlMsg(htmlContent);
-            super.buildMimeMessage();
-        }
-        catch (final IOException e)
-        {
-            throw new EmailException("Building the MimeMessage failed", e);
-        }
+        String htmlContent = super.html;
+        htmlContent = processHtmlContent(htmlContent);
+        setHtmlMsg(htmlContent);
+        super.buildMimeMessage();
     }
 
     private String processHtmlContent(final String htmlContent) throws IOException, EmailException
     {
-        try {
-            Document document = Jsoup.parse(htmlContent);
-            processElements(document.select("img[src]"), "src");
-            processElements(document.select("script[src]"), "src");
-            return document.toString();
-        } catch (IOException | EmailException e) {
-            // Log the exception, handle it, or rethrow it if needed
-            throw e;
-        }
+        Document document = Jsoup.parse(htmlContent);
+        processElements(document.select("img[src]"), "src");
+        processElements(document.select("script[src]"), "src");
+        return document.toString();
     }
 
     private void processElements(Elements elements, String attributeKey) throws IOException, EmailException
