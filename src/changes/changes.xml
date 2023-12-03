@@ -41,6 +41,7 @@
       <action issue="EMAIL-205" dev="ggregory" type="fix" due-to="Dimitrios Efthymiou, Alex Herbert">
         Update conversion code #153.
       </action>
+      <action type="fix" dev="sgoeschl" due-to="Alexander Lehmann">Email.setBounceAddress no longer accepts invalid email addresses.</action>
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
@@ -48,6 +49,7 @@
       <action type="add" due-to="Gary Gregory" dev="ggregory">
         Add Maven plugin JapiCmp and remove Clirr.
       </action>
+      <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
       <!-- UPDATE -->
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102.
@@ -106,10 +108,6 @@
       <action type="update" due-to="Dependabot" dev="ggregory">
         Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87.
       </action>
-    </release>
-    <release version="1.5.1" date="2017-MM-DD" description="Maintenance release (Java 6 or above).">
-      <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
-      <action type="fix" dev="sgoeschl" due-to="Alexander Lehmann">Email.setBounceAddress no longer accepts invalid email addresses.</action>
     </release>
     <release version="1.5" date="2017-08-01">
       <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
