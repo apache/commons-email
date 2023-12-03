@@ -38,6 +38,9 @@
       <action dev="ggregory" type="fix" due-to="Lee Jaeheon, sebbASF">
         Better use of JUnit APIs #158.
       </action>
+      <action issue="EMAIL-205" dev="ggregory" type="fix" due-to="Dimitrios Efthymiou, Alex Herbert">
+        Update conversion code #153.
+      </action>
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
