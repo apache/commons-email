@@ -391,7 +391,7 @@
           <plugin>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-release-plugin</artifactId>
-            <version>1.8.0</version>
+            <version>1.8.1</version>
             <configuration>
               <distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/email</distSvnStagingUrl>
             </configuration>
