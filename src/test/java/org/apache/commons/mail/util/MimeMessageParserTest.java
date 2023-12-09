@@ -16,6 +16,10 @@
  */
 package org.apache.commons.mail.util;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -23,12 +27,15 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimePart;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.junit.Test;
@@ -496,6 +503,62 @@ public class MimeMessageParserTest
         final DataSource ds = mimeMessageParser.findAttachmentByCid("part1.01080006.06060206@it20one.at");
         assertNotNull(ds);
         assertEquals(ds, mimeMessageParser.getAttachmentList().get(0));
+    }
+
+    @Test
+    public void testAttachmentNotLoaded() throws Exception
+    {
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
+        final InputStream inputStream = createMock(InputStream.class);
+        final MimePart mimePart = getMockedMimePart(inputStream);
+
+        // Create data source with mocked data.
+        final DataSource dataSource = mimeMessageParser.createDataSource(null,mimePart);
+        // Verify no inputStream.read() call is made at this point (Lazy initialization).
+        verify(inputStream);
+    }
+
+
+    @Test
+    public void testAttachmentLoaded() throws Exception
+    {
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(null);
+        final InputStream inputStream = createMock(InputStream.class);
+        // Despite .getInputStream() called for 3 times, but the desk IO for attachment read should only happen once.
+        expect(inputStream.read(new byte[8192])).andReturn(0).once();
+        final MimePart mimePart = getMockedMimePart(inputStream);
+
+        // Create data source with mocked data.
+        final DataSource dataSource = mimeMessageParser.createDataSource(null,mimePart);
+
+        dataSource.getInputStream();
+        dataSource.getInputStream();
+        dataSource.getInputStream();
+        // To make sure disk IO only happen when .getInputStream() invoked for first time but not during the object construction.
+        verify(inputStream);
+
+    }
+
+    /**
+     * Helper method to return a mocked MimePart class.
+     * @param inputStream Mocked input stream
+     * @return Mocked MimePart instance.
+     * @throws Exception When attachment read failed.
+     */
+    private MimePart getMockedMimePart(InputStream inputStream) throws Exception
+    {
+
+        final MimePart mimePart = createMock(MimePart.class);
+        final DataSource dataSource = createMock(DataSource.class);
+        final DataHandler dataHandler = new DataHandler(dataSource);
+
+        expect(dataSource.getContentType()).andReturn("test_type");
+        expect(dataSource.getName()).andReturn("test_name");
+        expect(dataSource.getInputStream()).andReturn(inputStream).once();
+        expect(mimePart.getDataHandler()).andReturn(dataHandler);
+        replay(mimePart,dataSource,inputStream);
+
+        return mimePart;
     }
 
 }
