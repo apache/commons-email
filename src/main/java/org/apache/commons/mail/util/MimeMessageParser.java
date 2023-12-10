@@ -32,6 +32,7 @@ import java.util.Map;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -101,7 +102,7 @@ public class MimeMessageParser
      * @return the 'to' recipients of the message
      * @throws MessagingException determining the recipients failed
      */
-    public List<javax.mail.Address> getTo() throws MessagingException
+    public List<Address> getTo() throws MessagingException
     {
         final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
