@@ -54,7 +54,7 @@ import org.apache.commons.mail.util.IDNEmailAddressConverter;
  */
 public abstract class Email
 {
-    private static final InternetAddress[] EMPTY_INTERNET_ADDRESS_ARRAY = new InternetAddress[0];
+    private static final InternetAddress[] EMPTY_INTERNET_ADDRESS_ARRAY = {};
 
     /** @deprecated since 1.3, use {@link EmailConstants#SENDER_EMAIL} instead */
     @Deprecated
