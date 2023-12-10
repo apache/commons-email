@@ -25,22 +25,20 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 
 /**
- * Concrete Implementation on the Abstract Email Class (used to allow testing only).
- * Supplies getters for methods that normally only have setters.
+ * Concrete Implementation on the Abstract Email Class (used to allow testing only). Supplies getters for methods that normally only have setters.
  *
  * @since 1.0
  */
-public class MockEmailConcrete extends Email
-{
+public class MockEmailConcrete extends Email {
 
     /**
      * Not Implemented, should be implemented in subclasses of Email
+     * 
      * @param msg The email message
      * @return Email msg.
      */
     @Override
-    public Email setMsg(final String msg)
-    {
+    public Email setMsg(final String msg) {
         // This abstract method should be tested in the concrete
         // implementation classes only.
         return null;
@@ -48,51 +46,47 @@ public class MockEmailConcrete extends Email
 
     /**
      * Retrieve the current debug setting
+     * 
      * @return debug
      */
-    public boolean isDebug()
-    {
+    public boolean isDebug() {
         return this.debug;
     }
 
     /**
      * Retrieve the current authentication setting
+     * 
      * @return Authenticator Authenticator
      */
-    public Authenticator getAuthenticator()
-    {
+    public Authenticator getAuthenticator() {
         return this.authenticator;
     }
 
     /**
      * @return charset
      */
-    public String getCharset()
-    {
+    public String getCharset() {
         return this.charset;
     }
 
     /**
      * @return content
      */
-    public Object getContentObject()
-    {
+    public Object getContentObject() {
         return this.content;
     }
 
     /**
      * @return content
      */
-    public MimeMultipart getContentMimeMultipart()
-    {
+    public MimeMultipart getContentMimeMultipart() {
         return this.emailBody;
     }
 
     /**
      * @return emailBody
      */
-    public MimeMultipart getEmailBody()
-    {
+    public MimeMultipart getEmailBody() {
         return this.emailBody;
     }
 
@@ -100,56 +94,49 @@ public class MockEmailConcrete extends Email
      * @return hostName
      */
     @Override
-    public String getHostName()
-    {
+    public String getHostName() {
         return this.hostName;
     }
 
     /**
      * @return message
      */
-    public MimeMessage getMessage()
-    {
+    public MimeMessage getMessage() {
         return this.message;
     }
 
     /**
      * @return popHost
      */
-    public String getPopHost()
-    {
+    public String getPopHost() {
         return this.popHost;
     }
 
     /**
      * @return popPassword
      */
-    public String getPopPassword()
-    {
+    public String getPopPassword() {
         return this.popPassword;
     }
 
     /**
      * @return popUsername
      */
-    public String getPopUsername()
-    {
+    public String getPopUsername() {
         return this.popUsername;
     }
 
     /**
      * @return contentType
      */
-    public String getContentType()
-    {
+    public String getContentType() {
         return contentType;
     }
 
     /**
      * @return popBeforeSmtp
      */
-    public boolean isPopBeforeSmtp()
-    {
+    public boolean isPopBeforeSmtp() {
         return popBeforeSmtp;
     }
 
@@ -157,9 +144,7 @@ public class MockEmailConcrete extends Email
      * @return Session
      * @throws EmailException EmailException
      */
-    public Session getSession()
-        throws EmailException
-    {
+    public Session getSession() throws EmailException {
         return this.getMailSession();
     }
 

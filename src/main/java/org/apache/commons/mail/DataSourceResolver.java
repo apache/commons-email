@@ -24,8 +24,7 @@ import java.io.IOException;
  *
  * @since 1.3
  */
-public interface DataSourceResolver
-{
+public interface DataSourceResolver {
     /**
      * Resolves the given resource location to a {@code DataSource}.
      *
@@ -39,10 +38,9 @@ public interface DataSourceResolver
      * Resolves the given resource location to a {@code DataSource}.
      *
      * @param resourceLocation the location of the resource
-     * @param isLenient shall we ignore resources not found or complain with an exception?
+     * @param isLenient        shall we ignore resources not found or complain with an exception?
      * @return the data source containing the resource or null if the resource was not found in lenient mode
      * @throws IOException resolving the resource failed
      */
-    DataSource resolve(final String resourceLocation, final boolean isLenient)
-        throws IOException;
+    DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException;
 }

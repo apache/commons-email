@@ -47,26 +47,22 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * @since 1.0
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest( { MockHtmlEmailConcrete.class })
-public class HtmlEmailTest extends AbstractEmailTest
-{
+@PrepareForTest({ MockHtmlEmailConcrete.class })
+public class HtmlEmailTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
     @Before
-    public void setUpHtmlEmailTest()
-    {
+    public void setUpHtmlEmailTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
     }
 
     @Test
-    public void testGetSetTextMsg() throws EmailException
-    {
+    public void testGetSetTextMsg() throws EmailException {
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (final String validChar : testCharsValid)
-        {
+        for (final String validChar : testCharsValid) {
             this.email.setTextMsg(validChar);
             assertEquals(validChar, this.email.getTextMsg());
         }
@@ -74,15 +70,11 @@ public class HtmlEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (final String invalidChar : this.testCharsNotValid)
-        {
-            try
-            {
+        for (final String invalidChar : this.testCharsNotValid) {
+            try {
                 this.email.setTextMsg(invalidChar);
                 fail("Should have thrown an exception");
-            }
-            catch (final EmailException e)
-            {
+            } catch (final EmailException e) {
                 assertTrue(true);
             }
         }
@@ -90,13 +82,11 @@ public class HtmlEmailTest extends AbstractEmailTest
     }
 
     @Test
-    public void testGetSetHtmlMsg() throws EmailException
-    {
+    public void testGetSetHtmlMsg() throws EmailException {
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (final String validChar : testCharsValid)
-        {
+        for (final String validChar : testCharsValid) {
             this.email.setHtmlMsg(validChar);
             assertEquals(validChar, this.email.getHtmlMsg());
         }
@@ -104,15 +94,11 @@ public class HtmlEmailTest extends AbstractEmailTest
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (final String invalidChar : this.testCharsNotValid)
-        {
-            try
-            {
+        for (final String invalidChar : this.testCharsNotValid) {
+            try {
                 this.email.setHtmlMsg(invalidChar);
                 fail("Should have thrown an exception");
-            }
-            catch (final EmailException e)
-            {
+            } catch (final EmailException e) {
                 assertTrue(true);
             }
         }
@@ -120,32 +106,25 @@ public class HtmlEmailTest extends AbstractEmailTest
     }
 
     @Test
-    public void testGetSetMsg() throws EmailException
-    {
+    public void testGetSetMsg() throws EmailException {
         // ====================================================================
         // Test Success
         // ====================================================================
-        for (final String validChar : testCharsValid)
-        {
+        for (final String validChar : testCharsValid) {
             this.email.setMsg(validChar);
             assertEquals(validChar, this.email.getTextMsg());
 
-            assertTrue(
-                    this.email.getHtmlMsg().contains(validChar));
+            assertTrue(this.email.getHtmlMsg().contains(validChar));
         }
 
         // ====================================================================
         // Test Exception
         // ====================================================================
-        for (final String invalidChar : this.testCharsNotValid)
-        {
-            try
-            {
+        for (final String invalidChar : this.testCharsNotValid) {
+            try {
                 this.email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
-            }
-            catch (final EmailException e)
-            {
+            } catch (final EmailException e) {
                 assertTrue(true);
             }
         }
@@ -153,27 +132,23 @@ public class HtmlEmailTest extends AbstractEmailTest
     }
 
     @Test
-    public void testEmbedUrl() throws Exception
-    {
+    public void testEmbedUrl() throws Exception {
         // ====================================================================
         // Test Success
         // ====================================================================
 
-        final String strEmbed =
-            this.email.embed(new URL(this.strTestURL), "Test name");
+        final String strEmbed = this.email.embed(new URL(this.strTestURL), "Test name");
         assertNotNull(strEmbed);
         assertEquals(HtmlEmail.CID_LENGTH, strEmbed.length());
 
         // if we embed the same name again, do we get the same content ID
         // back?
-        final String testCid =
-            this.email.embed(new URL(this.strTestURL), "Test name");
+        final String testCid = this.email.embed(new URL(this.strTestURL), "Test name");
         assertEquals(strEmbed, testCid);
 
         // if we embed the same URL under a different name, is the content ID
         // unique?
-        final String newCid =
-            this.email.embed(new URL(this.strTestURL), "Test name 2");
+        final String newCid = this.email.embed(new URL(this.strTestURL), "Test name 2");
         assertFalse(strEmbed.equals(newCid));
 
         // ====================================================================
@@ -181,32 +156,25 @@ public class HtmlEmailTest extends AbstractEmailTest
         // ====================================================================
 
         // Does an invalid URL throw an exception?
-        try
-        {
+        try {
             this.email.embed(createInvalidURL(), "Bad URL");
             fail("Should have thrown an exception");
-        }
-        catch (final EmailException e)
-        {
+        } catch (final EmailException e) {
             // expected
         }
 
         // if we try to embed a different URL under a previously used name,
         // does it complain?
-        try
-        {
+        try {
             this.email.embed(new URL("http://www.google.com"), "Test name");
             fail("shouldn't be able to use an existing name with a different URL!");
-        }
-        catch (final EmailException e)
-        {
+        } catch (final EmailException e) {
             // expected
         }
     }
 
     @Test
-    public void testEmbedFile() throws Exception
-    {
+    public void testEmbedFile() throws Exception {
         // ====================================================================
         // Test Success
         // ====================================================================
@@ -215,27 +183,22 @@ public class HtmlEmailTest extends AbstractEmailTest
         file.deleteOnExit();
         final String strEmbed = this.email.embed(file);
         assertNotNull(strEmbed);
-        assertEquals("generated CID has wrong length",
-                HtmlEmail.CID_LENGTH, strEmbed.length());
+        assertEquals("generated CID has wrong length", HtmlEmail.CID_LENGTH, strEmbed.length());
 
         // if we embed the same file again, do we get the same content ID
         // back?
-        final String testCid =
-            this.email.embed(file);
-        assertEquals("didn't get same CID after embedding same file twice",
-                strEmbed, testCid);
+        final String testCid = this.email.embed(file);
+        assertEquals("didn't get same CID after embedding same file twice", strEmbed, testCid);
 
         // if we embed a new file, is the content ID unique?
         final File otherFile = File.createTempFile("testEmbedFile2", "txt");
         otherFile.deleteOnExit();
         final String newCid = this.email.embed(otherFile);
-        assertFalse("didn't get unique CID from embedding new file",
-                strEmbed.equals(newCid));
+        assertFalse("didn't get unique CID from embedding new file", strEmbed.equals(newCid));
     }
 
     @Test
-    public void testEmbedUrlAndFile() throws Exception
-    {
+    public void testEmbedUrlAndFile() throws Exception {
         final File tmpFile = File.createTempFile("testfile", "txt");
         tmpFile.deleteOnExit();
         final String fileCid = this.email.embed(tmpFile);
@@ -243,25 +206,20 @@ public class HtmlEmailTest extends AbstractEmailTest
         final URL fileUrl = tmpFile.toURI().toURL();
         final String urlCid = this.email.embed(fileUrl, "urlName");
 
-        assertFalse("file and URL cids should be different even for same resource",
-                fileCid.equals(urlCid));
+        assertFalse("file and URL cids should be different even for same resource", fileCid.equals(urlCid));
     }
 
     @Test
-    public void testEmbedDataSource() throws Exception
-    {
+    public void testEmbedDataSource() throws Exception {
         final File tmpFile = File.createTempFile("testEmbedDataSource", "txt");
         tmpFile.deleteOnExit();
         final FileDataSource dataSource = new FileDataSource(tmpFile);
 
         // does embedding a datasource without a name fail?
-        try
-        {
+        try {
             this.email.embed(dataSource, "");
             fail("embedding with an empty string for a name should fail");
-        }
-        catch (final EmailException e)
-        {
+        } catch (final EmailException e) {
             // expected
         }
 
@@ -271,30 +229,25 @@ public class HtmlEmailTest extends AbstractEmailTest
         // does embedding the same datasource under the same name return
         // the original cid?
         final String sameCid = this.email.embed(dataSource, "testname");
-        assertEquals("didn't get same CID for embedding same datasource twice",
-                cid, sameCid);
+        assertEquals("didn't get same CID for embedding same datasource twice", cid, sameCid);
 
         // does embedding another datasource under the same name fail?
         final File anotherFile = File.createTempFile("testEmbedDataSource2", "txt");
         anotherFile.deleteOnExit();
         final FileDataSource anotherDS = new FileDataSource(anotherFile);
-        try
-        {
+        try {
             this.email.embed(anotherDS, "testname");
-        }
-        catch (final EmailException e)
-        {
+        } catch (final EmailException e) {
             // expected
         }
     }
 
     /**
      * @throws EmailException when bad addresses and attachments are used
-     * @throws IOException if creating a temp file, URL or sending fails
+     * @throws IOException    if creating a temp file, URL or sending fails
      */
     @Test
-    public void testSend() throws EmailException, IOException
-    {
+    public void testSend() throws EmailException, IOException {
         final EmailAttachment attachment = new EmailAttachment();
 
         /** File to used to test file attachments (Must be valid) */
@@ -320,7 +273,7 @@ public class HtmlEmailTest extends AbstractEmailTest
         attachment.setPath(testFile.getAbsolutePath());
         this.email.attach(attachment);
 
-        //this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        // this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
 
         this.email.setCharset(EmailConstants.ISO_8859_1);
         this.email.setSubject(strSubject);
@@ -328,47 +281,24 @@ public class HtmlEmailTest extends AbstractEmailTest
         final URL url = new URL(EmailConfiguration.TEST_URL);
         final String cid = this.email.embed(url, "Apache Logo");
 
-        final String strHtmlMsg =
-            "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
+        final String strHtmlMsg = "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
 
         this.email.setHtmlMsg(strHtmlMsg);
-        this.email.setTextMsg(
-            "Your email client does not support HTML emails");
+        this.email.setTextMsg("Your email client does not support HTML emails");
 
         this.email.send();
         this.fakeMailServer.stop();
         // validate txt message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getTextMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getHtmlMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
 
         // validate attachment
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            attachment.getName(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, attachment.getName(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
 
         this.getMailServer();
 
@@ -378,11 +308,8 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null)
-        {
-            this.email.setAuthentication(
-                this.strTestUser,
-                this.strTestPasswd);
+        if (this.strTestUser != null && this.strTestPasswd != null) {
+            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
         }
 
         strSubject = "Test HTML Send #1 Subject (wo charset)";
@@ -392,20 +319,12 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.send();
         this.fakeMailServer.stop();
         // validate txt message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getTextMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
     }
 
     @Test
-    public void testSend2() throws Exception
-    {
+    public void testSend2() throws Exception {
         // ====================================================================
         // Test Success
         // ====================================================================
@@ -418,11 +337,8 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null)
-        {
-            this.email.setAuthentication(
-                this.strTestUser,
-                this.strTestPasswd);
+        if (this.strTestUser != null && this.strTestPasswd != null) {
+            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
         }
 
         String strSubject = "Test HTML Send #2 Subject (wo charset)";
@@ -432,26 +348,12 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.send();
         this.fakeMailServer.stop();
         // validate txt message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getTextMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getHtmlMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
 
         this.getMailServer();
 
@@ -461,11 +363,8 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.setSmtpPort(this.getMailServerPort());
         this.email.addTo(this.strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null)
-        {
-            this.email.setAuthentication(
-                this.strTestUser,
-                this.strTestPasswd);
+        if (this.strTestUser != null && this.strTestPasswd != null) {
+            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
         }
 
         strSubject = "Test HTML Send #2 Subject (w charset)";
@@ -476,33 +375,18 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.send();
         this.fakeMailServer.stop();
         // validate txt message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getTextMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getHtmlMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
 
     }
 
     @Test
     @Ignore
-    public void testSendWithDefaultCharset() throws Exception
-    {
+    public void testSendWithDefaultCharset() throws Exception {
         // Test is disabled as its result is dependent on the execution order:
         // the mail.mime.charset property is normally cached by the MimeUtility
         // class, thus setting it to another value while running the tests
@@ -522,11 +406,8 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null)
-        {
-            this.email.setAuthentication(
-                this.strTestUser,
-                this.strTestPasswd);
+        if (this.strTestUser != null && this.strTestPasswd != null) {
+            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
         }
 
         final String strSubject = "Test HTML Send Subject (w default charset)";
@@ -536,34 +417,22 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.send();
         this.fakeMailServer.stop();
         // validate charset
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            "charset=iso-8859-15",
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, "charset=iso-8859-15", this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
 
         System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
 
     }
 
     /**
-     * Create a HTML email containing an URL pointing to a ZIP file
-     * to be downloaded. According to EMAIL-93 the resulting URL
-     * "http://paradisedelivery.homeip.net/delivery/?file=TZC268X93337..zip"
-     * contains TWO dots instead of one dot which breaks the link.
+     * Create a HTML email containing an URL pointing to a ZIP file to be downloaded. According to EMAIL-93 the resulting URL
+     * "http://paradisedelivery.homeip.net/delivery/?file=TZC268X93337..zip" contains TWO dots instead of one dot which breaks the link.
      */
     @Test
-    public void testAddZipUrl() throws Exception
-    {
-        final String htmlMsg =
-                "Please click on the following link: <br><br>" +
-                "<a href=\"http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip\">" +
-                "http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip" +
-                "</a><br><br>Customer satisfaction is very important for us.";
+    public void testAddZipUrl() throws Exception {
+        final String htmlMsg = "Please click on the following link: <br><br>"
+                + "<a href=\"http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip\">"
+                + "http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip" + "</a><br><br>Customer satisfaction is very important for us.";
 
         this.getMailServer();
 
@@ -574,11 +443,8 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.addTo(this.strTestMailTo);
         this.email.setCharset(EmailConstants.ISO_8859_1);
 
-        if (this.strTestUser != null && this.strTestPasswd != null)
-        {
-            this.email.setAuthentication(
-                this.strTestUser,
-                this.strTestPasswd);
+        if (this.strTestUser != null && this.strTestPasswd != null) {
+            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
         }
 
         final String strSubject = "A dot (\".\") is appended to some ULRs of a HTML mail.";
@@ -589,15 +455,8 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.fakeMailServer.stop();
 
         // validate html message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getHtmlMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
 
         // make sure that no double dots show up
         assertTrue(this.email.getHtmlMsg().contains("3DTZC268X93337.zip"));
@@ -605,9 +464,7 @@ public class HtmlEmailTest extends AbstractEmailTest
     }
 
     /**
-     * According to EMAIL-95 calling buildMimeMessage() before calling send()
-     * causes duplicate mime parts - now we throw an exception to catch the
-     * problem
+     * According to EMAIL-95 calling buildMimeMessage() before calling send() causes duplicate mime parts - now we throw an exception to catch the problem
      */
     @Test
     public void testCallingBuildMimeMessageBeforeSent() throws Exception {
@@ -621,11 +478,8 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.email.addTo(this.strTestMailTo);
         this.email.setCharset(EmailConstants.ISO_8859_1);
 
-        if (this.strTestUser != null && this.strTestPasswd != null)
-        {
-            this.email.setAuthentication(
-                this.strTestUser,
-                this.strTestPasswd);
+        if (this.strTestUser != null && this.strTestPasswd != null) {
+            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
         }
 
         final String strSubject = "testCallingBuildMimeMessageBeforeSent";
@@ -635,12 +489,9 @@ public class HtmlEmailTest extends AbstractEmailTest
         // this should NOT be called when sending a message
         this.email.buildMimeMessage();
 
-        try
-        {
+        try {
             this.email.send();
-        }
-        catch (final IllegalStateException e)
-        {
+        } catch (final IllegalStateException e) {
             return;
         }
 
@@ -648,12 +499,13 @@ public class HtmlEmailTest extends AbstractEmailTest
     }
 
     /**
-     * EMAIL-73 - check that providing a plain text content using setMsg()
-     * creates a plain content and HTML content using {@code <pre>} tags.
+     * EMAIL-73 - check that providing a plain text content using setMsg() creates a plain content and HTML content using {@code 
+     * 
+     * <pre>
+     * } tags.
      */
     @Test
-    public void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException
-    {
+    public void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException {
         this.getMailServer();
 
         final String strSubject = "testSendWithPlainTextButNoHtmlContent";
@@ -673,53 +525,42 @@ public class HtmlEmailTest extends AbstractEmailTest
         this.fakeMailServer.stop();
 
         // validate text message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getTextMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
     }
 
     /**
-     * Test that the specified Content-ID is used when embedding a File
-     * object in an HtmlEmail.
+     * Test that the specified Content-ID is used when embedding a File object in an HtmlEmail.
      *
-     * Rolled back the changes since they broke real emails therefore
-     * the test is currently disabled.
+     * Rolled back the changes since they broke real emails therefore the test is currently disabled.
      *
      * see https://issues.apache.org/jira/browse/EMAIL-101
      */
     @Test
-    public void testEmbedFileWithCID() throws Exception
-    {
-         // ====================================================================
-         // Test Success
-         // ====================================================================
+    public void testEmbedFileWithCID() throws Exception {
+        // ====================================================================
+        // Test Success
+        // ====================================================================
 
-         final File file = File.createTempFile("testEmbedFile", "txt");
-         file.deleteOnExit();
+        final File file = File.createTempFile("testEmbedFile", "txt");
+        file.deleteOnExit();
 
-         final String testCid = "Test CID";
-         final String encodedCid = EmailUtils.encodeUrl(testCid);
+        final String testCid = "Test CID";
+        final String encodedCid = EmailUtils.encodeUrl(testCid);
 
-         // if we embed a new file, do we get the content ID we specified back?
-         final String strEmbed = this.email.embed(file, testCid);
-         assertNotNull(strEmbed);
-         assertEquals("didn't get same CID when embedding with a specified CID", encodedCid, strEmbed);
+        // if we embed a new file, do we get the content ID we specified back?
+        final String strEmbed = this.email.embed(file, testCid);
+        assertNotNull(strEmbed);
+        assertEquals("didn't get same CID when embedding with a specified CID", encodedCid, strEmbed);
 
-         // if we embed the same file again, do we get the same content ID
-         // back?
-         final String returnedCid = this.email.embed(file);
-         assertEquals("didn't get same CID after embedding same file twice", encodedCid, returnedCid);
+        // if we embed the same file again, do we get the same content ID
+        // back?
+        final String returnedCid = this.email.embed(file);
+        assertEquals("didn't get same CID after embedding same file twice", encodedCid, returnedCid);
     }
 
     @Test
-    public void testHtmlMailMimeLayout() throws Exception
-    {
+    public void testHtmlMailMimeLayout() throws Exception {
         assertCorrectContentType("contentTypeTest.gif", "image/gif");
         assertCorrectContentType("contentTypeTest.jpg", "image/jpeg");
         assertCorrectContentType("contentTypeTest.png", "image/png");

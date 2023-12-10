@@ -22,13 +22,11 @@ import javax.activation.DataSource;
 import java.io.IOException;
 
 /**
- * A composite data source resolver. It allows to resolve data sources coming from
- * multiple locations such as the classpath, the file system or an URL.
+ * A composite data source resolver. It allows to resolve data sources coming from multiple locations such as the classpath, the file system or an URL.
  *
  * @since 1.3
  */
-public class DataSourceCompositeResolver extends DataSourceBaseResolver
-{
+public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     /** the list of resolvers */
     private final DataSourceResolver[] dataSourceResolvers;
 
@@ -37,8 +35,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
      *
      * @param dataSourceResolvers a list of resolvers being used
      */
-    public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers)
-    {
+    public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers) {
         this.dataSourceResolvers = dataSourceResolvers.clone();
     }
 
@@ -46,10 +43,9 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
      * Constructor.
      *
      * @param dataSourceResolvers a list of resolvers being used
-     * @param isLenient shall we ignore resources not found or throw an exception?
+     * @param isLenient           shall we ignore resources not found or throw an exception?
      */
-    public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers, final boolean isLenient)
-    {
+    public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers, final boolean isLenient) {
         super(isLenient);
         this.dataSourceResolvers = dataSourceResolvers.clone();
     }
@@ -59,20 +55,17 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
      *
      * @return underlying data source resolvers
      */
-    public DataSourceResolver[] getDataSourceResolvers()
-    {
+    public DataSourceResolver[] getDataSourceResolvers() {
         // clone the internal array to prevent external modification (see EMAIL-116)
         return dataSourceResolvers.clone();
     }
 
     /** {@inheritDoc} */
     @Override
-    public DataSource resolve(final String resourceLocation) throws IOException
-    {
+    public DataSource resolve(final String resourceLocation) throws IOException {
         final DataSource result = resolve(resourceLocation, true);
 
-        if (isLenient() || result != null)
-        {
+        if (isLenient() || result != null) {
             return result;
         }
         throw new IOException("The following resource was not found : " + resourceLocation);
@@ -81,21 +74,17 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver
 
     /** {@inheritDoc} */
     @Override
-    public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
-    {
-        for (int i = 0; i < getDataSourceResolvers().length; i++)
-        {
+    public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
+        for (int i = 0; i < getDataSourceResolvers().length; i++) {
             final DataSourceResolver dataSourceResolver = getDataSourceResolvers()[i];
             final DataSource dataSource = dataSourceResolver.resolve(resourceLocation, isLenient);
 
-            if (dataSource != null)
-            {
+            if (dataSource != null) {
                 return dataSource;
             }
         }
 
-        if (isLenient)
-        {
+        if (isLenient) {
             return null;
         }
         throw new IOException("The following resource was not found : " + resourceLocation);

@@ -32,8 +32,7 @@ import org.junit.Test;
  *
  * @since 1.0
  */
-public class InvalidInternetAddressTest extends AbstractEmailTest
-{
+public class InvalidInternetAddressTest extends AbstractEmailTest {
     /** */
     private static final String VALID_QUOTED_EMAIL = "\"John O'Groats\"@domain.com";
 
@@ -41,102 +40,65 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
     private static Method validateMethod;
 
     /** */
-    private static final String[] ARR_INVALID_EMAILS =
-        {
-            "local name@domain.com",
-            "local(name@domain.com",
-            "local)name@domain.com",
-            "local<name@domain.com",
-            "local>name@domain.com",
-            "local,name@domain.com",
-            "local;name@domain.com",
-            "local:name@domain.com",
-            "local[name@domain.com",
+    private static final String[] ARR_INVALID_EMAILS = { "local name@domain.com", "local(name@domain.com", "local)name@domain.com", "local<name@domain.com",
+            "local>name@domain.com", "local,name@domain.com", "local;name@domain.com", "local:name@domain.com", "local[name@domain.com",
             "local]name@domain.com",
             // "local\\name@domain.com", -- works for javamail-1.4.4
             // "local\"name@domain.com", -- works for javamail-1.4.4
-            "local\tname@domain.com",
-            "local\nname@domain.com",
-            "local\rname@domain.com",
-            "local.name@domain com",
-            "local.name@domain(com",
-            "local.name@domain)com",
-            "local.name@domain<com",
-            "local.name@domain>com",
-            "local.name@domain,com",
-            "local.name@domain;com",
+            "local\tname@domain.com", "local\nname@domain.com", "local\rname@domain.com", "local.name@domain com", "local.name@domain(com",
+            "local.name@domain)com", "local.name@domain<com", "local.name@domain>com", "local.name@domain,com", "local.name@domain;com",
             "local.name@domain:com",
             // "local.name@domain[com", -- works for javamail-1.5.5
-            "local.name@domain]com",
-            "local.name@domain\\com",
-            "local.name@domain\tcom",
-            "local.name@domain\ncom",
-            "local.name@domain\rcom",
-            "local.name@",
+            "local.name@domain]com", "local.name@domain\\com", "local.name@domain\tcom", "local.name@domain\ncom", "local.name@domain\rcom", "local.name@",
             "@domain.com" };
 
     /**
      * Setup for a test
      */
     @Before
-    public void setUpInvalidInternetAddressTest()
-    {
-        try
-        {
+    public void setUpInvalidInternetAddressTest() {
+        try {
             validateMethod = InternetAddress.class.getMethod("validate");
-        }
-        catch (final Exception e)
-        {
+        } catch (final Exception e) {
             assertEquals("Got wrong Exception when looking for validate()", NoSuchMethodException.class, e.getClass());
         }
     }
 
     @Test
-    public void testStrictConstructor() throws Exception
-    {
+    public void testStrictConstructor() throws Exception {
         // ====================================================================
         // Prove InternetAddress constructor is throwing exception.
         // ====================================================================
 
         // test Invalid Email addresses
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
-        {
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
 
-            try
-            {
+            try {
                 // Create Internet Address using "strict" constructor
                 new InternetAddress(ARR_INVALID_EMAILS[i]);
 
                 // Expected an exception to be thrown
                 fail("Strict " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            }
-            catch (final Exception ex)
-            {
+            } catch (final Exception ex) {
                 // Expected Result
             }
 
         }
 
         // test valid 'quoted' Email addresses
-        try
-        {
+        try {
 
             // Create Internet Address using "strict" constructor
             new InternetAddress(VALID_QUOTED_EMAIL);
 
-        }
-        catch (final Exception ex)
-        {
-            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
-                + " - " + ex.getMessage());
+        } catch (final Exception ex) {
+            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL + " - " + ex.getMessage());
         }
     }
 
     @Test
-    public void testValidateMethod() throws Exception
-    {
-        if (validateMethod == null)
-        {
+    public void testValidateMethod() throws Exception {
+        if (validateMethod == null) {
             return;
         }
 
@@ -145,52 +107,38 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         // the validate() method is
         // ====================================================================
 
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
-        {
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
 
             final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe");
 
             // N.B. validate() doesn't check addresses containing quotes or '['
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
-            final int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
-            final boolean domainBracket  = atIndex >= 0
-                && ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0;
-            try
-            {
+            final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
+            final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;
+            try {
                 validateMethod.invoke(address, (Object[]) null);
 
-                if (!(quoted || domainBracket))
-                {
+                if (!(quoted || domainBracket)) {
                     fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
                 }
-            }
-            catch (final Exception ex)
-            {
-                if (quoted || domainBracket)
-                {
-                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i]
-                        + " - " + ex.getMessage());
+            } catch (final Exception ex) {
+                if (quoted || domainBracket) {
+                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i] + " - " + ex.getMessage());
                 }
             }
         }
 
         // test valid 'quoted' Email addresses
-        try
-        {
+        try {
             validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe"), (Object[]) null);
-        }
-        catch (final Exception ex)
-        {
-            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
-                + " - " + ex.getMessage());
+        } catch (final Exception ex) {
+            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL + " - " + ex.getMessage());
         }
     }
 
     @Test
-    public void testValidateMethodCharset() throws Exception
-    {
-        if (validateMethod == null)
-        {
+    public void testValidateMethodCharset() throws Exception {
+        if (validateMethod == null) {
             return;
         }
 
@@ -199,46 +147,34 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         // the validate() method is
         // ====================================================================
 
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
-        {
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
 
             final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", StandardCharsets.UTF_8.name());
 
             // N.B. validate() doesn't check addresses containing quotes or '['
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
-            final int atIndex    = ARR_INVALID_EMAILS[i].indexOf("@");
-            final boolean domainBracket  = atIndex >= 0
-                && ARR_INVALID_EMAILS[i].indexOf("[", atIndex)  >= 0;
+            final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
+            final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;
 
-            try
-            {
+            try {
                 validateMethod.invoke(address, (Object[]) null);
-                if (!(quoted || domainBracket))
-                {
+                if (!(quoted || domainBracket)) {
                     fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
                 }
 
-            }
-            catch (final Exception ex)
-            {
-                if (quoted || domainBracket)
-                {
-                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i]
-                        + " - " + ex.getMessage());
+            } catch (final Exception ex) {
+                if (quoted || domainBracket) {
+                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i] + " - " + ex.getMessage());
                 }
             }
 
         }
 
         // test valid 'quoted' Email addresses
-        try
-        {
+        try {
             validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe", StandardCharsets.UTF_8.name()), (Object[]) null);
-        }
-        catch (final Exception ex)
-        {
-            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL
-                + " - " + ex.getMessage());
+        } catch (final Exception ex) {
+            fail("Valid Quoted Email failed: " + VALID_QUOTED_EMAIL + " - " + ex.getMessage());
         }
     }
 

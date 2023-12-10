@@ -17,27 +17,22 @@
 package org.apache.commons.mail;
 
 /**
- * This class is used to send simple internet email messages without
- * attachments.
+ * This class is used to send simple internet email messages without attachments.
  *
  * @since 1.0
-*/
-public class SimpleEmail extends Email
-{
+ */
+public class SimpleEmail extends Email {
     /**
      * Sets the content of the mail.
      *
      * @param msg A String.
      * @return An Email.
-     * @throws EmailException see javax.mail.internet.MimeBodyPart
-     *  for definitions
+     * @throws EmailException see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0
      */
     @Override
-    public Email setMsg(final String msg) throws EmailException
-    {
-        if (EmailUtils.isEmpty(msg))
-        {
+    public Email setMsg(final String msg) throws EmailException {
+        if (EmailUtils.isEmpty(msg)) {
             throw new EmailException("Invalid message supplied");
         }
 

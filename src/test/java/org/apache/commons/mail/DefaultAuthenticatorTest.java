@@ -27,25 +27,17 @@ import org.junit.Test;
  *
  * @since 1.0
  */
-public class DefaultAuthenticatorTest
-{
+public class DefaultAuthenticatorTest {
     @Test
-    public void testDefaultAuthenticatorConstructor()
-    {
-        //insert code testing basic functionality
+    public void testDefaultAuthenticatorConstructor() {
+        // insert code testing basic functionality
         final String strUsername = "user.name";
         final String strPassword = "user.pwd";
         final DefaultAuthenticator authenticator = new DefaultAuthenticator(strUsername, strPassword);
 
-        assertTrue(
-            PasswordAuthentication.class.isInstance(
-                    authenticator.getPasswordAuthentication()));
-        assertEquals(
-                strUsername,
-                authenticator.getPasswordAuthentication().getUserName());
-        assertEquals(
-            strPassword,
-            authenticator.getPasswordAuthentication().getPassword());
+        assertTrue(PasswordAuthentication.class.isInstance(authenticator.getPasswordAuthentication()));
+        assertEquals(strUsername, authenticator.getPasswordAuthentication().getUserName());
+        assertEquals(strPassword, authenticator.getPasswordAuthentication().getPassword());
     }
 
 }

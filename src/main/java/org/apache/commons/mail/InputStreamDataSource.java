@@ -28,6 +28,7 @@ import javax.activation.DataSource;
  * <p>
  * Copied from <a href="https://cxf.apache.org/">Apache CXF</a> and modified.
  * </p>
+ * 
  * @since 1.6.0
  */
 public final class InputStreamDataSource implements DataSource {
@@ -52,7 +53,7 @@ public final class InputStreamDataSource implements DataSource {
      *
      * @param inputStream An input stream.
      * @param contentType A content type.
-     * @param name A name.
+     * @param name        A name.
      */
     public InputStreamDataSource(final InputStream inputStream, final String contentType, final String name) {
         this.inputStream = inputStream;

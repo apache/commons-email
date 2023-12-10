@@ -323,7 +323,7 @@
     </properties> 
 
     <build>
-        <defaultGoal>clean verify apache-rat:check japicmp:cmp pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>
+        <defaultGoal>clean verify apache-rat:check checkstyle:check japicmp:cmp pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -426,7 +426,15 @@
               <excludeFilterFile>${basedir}/src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
             </configuration>
           </plugin>
-        </plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <configuration>
+              <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+              <enableRulesSummary>false</enableRulesSummary>
+            </configuration>
+          </plugin>
+      </plugins>
     </build>
 
     <distributionManagement>

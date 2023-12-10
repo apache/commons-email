@@ -23,44 +23,39 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.mail.HtmlEmail;
 
 /**
- * Extension of the HtmlEmail Class
- * (used to allow testing only)
+ * Extension of the HtmlEmail Class (used to allow testing only)
  *
  * @since 1.0
  */
-public class MockHtmlEmailConcrete extends HtmlEmail
-{
+public class MockHtmlEmailConcrete extends HtmlEmail {
     /**
      * Retrieve the message content
+     * 
      * @return Message Content
      */
-    public String getMsg()
-    {
-        try
-        {
+    public String getMsg() {
+        try {
             return this.getPrimaryBodyPart().getContent().toString();
-        }
-        catch (final IOException | MessagingException msgE)
-        {
+        } catch (final IOException | MessagingException msgE) {
             return null;
         }
     }
 
     /**
      * Retrieve the text msg
+     * 
      * @return Message Content
      */
-    public String getTextMsg()
-    {
+    public String getTextMsg() {
         return this.text;
     }
 
     /**
      * Retrieve the html msg
+     * 
      * @return Message Content
      */
-    public String getHtmlMsg()
-    {
+    public String getHtmlMsg() {
         return this.html;
     }
 
@@ -68,8 +63,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail
      * @return fromAddress
      */
     @Override
-    public InternetAddress getFromAddress()
-    {
+    public InternetAddress getFromAddress() {
         return this.fromAddress;
     }
 

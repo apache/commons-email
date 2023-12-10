@@ -31,12 +31,10 @@ import org.junit.Test;
  *
  * @since 1.3
  */
-public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest
-{
+public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest {
 
     @Test
-    public void testResolvingClassPathLenient() throws Exception
-    {
+    public void testResolvingClassPathLenient() throws Exception {
         DataSourceResolver dataSourceResolver;
 
         dataSourceResolver = new DataSourceClassPathResolver("/", true);
@@ -53,8 +51,7 @@ public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingClassPathNonLenient() throws Exception
-    {
+    public void testResolvingClassPathNonLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 

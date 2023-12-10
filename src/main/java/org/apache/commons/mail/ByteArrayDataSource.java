@@ -36,15 +36,13 @@ import javax.activation.DataSource;
  * - a String<br>
  *
  * <p>
- * From version 1.3.1, it is possible to set a name for this DataSource,
- * and it is recommended to do so.
+ * From version 1.3.1, it is possible to set a name for this DataSource, and it is recommended to do so.
  *
  * @since 1.0
  * @deprecated since 1.4, use {@link javax.mail.util.ByteArrayDataSource} instead
  */
 @Deprecated
-public class ByteArrayDataSource implements DataSource
-{
+public class ByteArrayDataSource implements DataSource {
     /** Define the buffer size. */
     public static final int BUFFER_SIZE = 512;
 
@@ -55,8 +53,8 @@ public class ByteArrayDataSource implements DataSource
     private final String type; // = "application/octet-stream";
 
     /**
-     * The name associated with this data source.
-     * By default, the name is an empty string, similar to javax.mail.util.ByteArrayDataSource.
+     * The name associated with this data source. By default, the name is an empty string, similar to javax.mail.util.ByteArrayDataSource.
+     * 
      * @since 1.3.1
      */
     private String name = "";
@@ -64,16 +62,14 @@ public class ByteArrayDataSource implements DataSource
     /**
      * Create a datasource from a byte array.
      *
-     * @param data A byte[].
+     * @param data  A byte[].
      * @param aType A String.
      * @throws IOException IOException
      * @since 1.0
      */
-    public ByteArrayDataSource(final byte[] data, final String aType) throws IOException
-    {
+    public ByteArrayDataSource(final byte[] data, final String aType) throws IOException {
         this.type = aType;
-        try (ByteArrayInputStream bis = new ByteArrayInputStream(data))
-        {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(data)) {
             this.byteArrayDataSource(bis);
         }
     }
@@ -81,32 +77,28 @@ public class ByteArrayDataSource implements DataSource
     /**
      * Create a datasource from an input stream.
      *
-     * @param aIs An InputStream.
+     * @param aIs   An InputStream.
      * @param aType A String.
      * @throws IOException IOException
      * @since 1.0
      */
-    public ByteArrayDataSource(final InputStream aIs, final String aType) throws IOException
-    {
+    public ByteArrayDataSource(final InputStream aIs, final String aType) throws IOException {
         this.type = aType;
         this.byteArrayDataSource(aIs);
     }
 
     /**
-     * Create a datasource from a String.
-     * N.B. assumes the data string can be converted using the charset iso-8859-1.
+     * Create a datasource from a String. N.B. assumes the data string can be converted using the charset iso-8859-1.
      *
-     * @param data A String.
+     * @param data  A String.
      * @param aType A String.
      * @throws IOException IOException
      * @since 1.0
      */
-    public ByteArrayDataSource(final String data, final String aType) throws IOException
-    {
+    public ByteArrayDataSource(final String data, final String aType) throws IOException {
         this.type = aType;
 
-        try
-        {
+        try {
             baos = new ByteArrayOutputStream();
 
             // Assumption that the string contains only ASCII characters!
@@ -114,34 +106,26 @@ public class ByteArrayDataSource implements DataSource
             baos.write(data.getBytes(StandardCharsets.ISO_8859_1));
             baos.flush();
             baos.close();
-        }
-        catch (final UnsupportedEncodingException uex)
-        {
+        } catch (final UnsupportedEncodingException uex) {
             throw new IOException("The Character Encoding is not supported.");
-        }
-        finally
-        {
-            if (baos != null)
-            {
+        } finally {
+            if (baos != null) {
                 baos.close();
             }
         }
     }
 
     /**
-      * Create a datasource from an input stream.
-      *
-      * @param aIs An InputStream.
-      * @throws IOException IOException
-      */
-    private void byteArrayDataSource(final InputStream aIs)
-        throws IOException
-    {
+     * Create a datasource from an input stream.
+     *
+     * @param aIs An InputStream.
+     * @throws IOException IOException
+     */
+    private void byteArrayDataSource(final InputStream aIs) throws IOException {
         BufferedInputStream bis = null;
         BufferedOutputStream osWriter = null;
 
-        try
-        {
+        try {
             int length = 0;
             final byte[] buffer = new byte[ByteArrayDataSource.BUFFER_SIZE];
 
@@ -150,26 +134,20 @@ public class ByteArrayDataSource implements DataSource
             osWriter = new BufferedOutputStream(baos);
 
             // Write the InputData to OutputStream
-            while ((length = bis.read(buffer)) != -1)
-            {
+            while ((length = bis.read(buffer)) != -1) {
                 osWriter.write(buffer, 0, length);
             }
             osWriter.flush();
             osWriter.close();
 
-        }
-        finally
-        {
-            if (bis != null)
-            {
+        } finally {
+            if (bis != null) {
                 bis.close();
             }
-            if (baos != null)
-            {
+            if (baos != null) {
                 baos.close();
             }
-            if (osWriter != null)
-            {
+            if (osWriter != null) {
                 osWriter.close();
             }
         }
@@ -182,8 +160,7 @@ public class ByteArrayDataSource implements DataSource
      * @since 1.0
      */
     @Override
-    public String getContentType()
-    {
+    public String getContentType() {
         return type == null ? "application/octet-stream" : type;
     }
 
@@ -195,10 +172,8 @@ public class ByteArrayDataSource implements DataSource
      * @since 1.0
      */
     @Override
-    public InputStream getInputStream() throws IOException
-    {
-        if (baos == null)
-        {
+    public InputStream getInputStream() throws IOException {
+        if (baos == null) {
             throw new IOException("no data");
         }
         return new ByteArrayInputStream(baos.toByteArray());
@@ -210,8 +185,7 @@ public class ByteArrayDataSource implements DataSource
      * @param name The name.
      * @since 1.3.1
      */
-    public void setName(final String name)
-    {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -222,20 +196,18 @@ public class ByteArrayDataSource implements DataSource
      * @since 1.0
      */
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
     /**
      * Gets the OutputStream to write to.
      *
-     * @return  An OutputStream
+     * @return An OutputStream
      * @since 1.0
      */
     @Override
-    public OutputStream getOutputStream()
-    {
+    public OutputStream getOutputStream() {
         baos = new ByteArrayOutputStream();
         return baos;
     }

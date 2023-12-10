@@ -36,11 +36,9 @@ import org.junit.Test;
 /**
  * Testing the MimeMessageParser.
  */
-public class MimeMessageParserTest
-{
+public class MimeMessageParserTest {
     @Test
-    public void testParseSimpleEmail() throws Exception
-    {
+    public void testParseSimpleEmail() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -63,8 +61,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseSimpleReplyEmail() throws Exception
-    {
+    public void testParseSimpleReplyEmail() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple-reply.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -87,8 +84,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseHtmlEmailWithAttachments() throws Exception
-    {
+    public void testParseHtmlEmailWithAttachments() throws Exception {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
@@ -122,8 +118,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception
-    {
+    public void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-encoded-filename.eml"));
@@ -154,14 +149,13 @@ public class MimeMessageParserTest
     }
 
     /**
-     * This test parses an "email read notification" where the resulting data source has no name. Originally
-     * the missing name caused a NPE in MimeUtility.decodeText().
+     * This test parses an "email read notification" where the resulting data source has no name. Originally the missing name caused a NPE in
+     * MimeUtility.decodeText().
      *
      * @throws Exception the test failed
      */
     @Test
-    public void testParseMultipartReport() throws Exception
-    {
+    public void testParseMultipartReport() throws Exception {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-report.eml"));
@@ -192,14 +186,12 @@ public class MimeMessageParserTest
     }
 
     /**
-     * This test parses a SAP generated email which only contains a PDF but no email
-     * text.
+     * This test parses a SAP generated email which only contains a PDF but no email text.
      *
      * @throws Exception the test failed
      */
     @Test
-    public void testAttachmentOnly() throws Exception
-    {
+    public void testAttachmentOnly() throws Exception {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/attachment-only.eml"));
@@ -229,15 +221,12 @@ public class MimeMessageParserTest
     }
 
     /**
-     * This test parses an eml file published with issue EMAIL-110.
-     * This eml file has a corrupted attachment but should not create
-     * an OutOfMemoryException.
+     * This test parses an eml file published with issue EMAIL-110. This eml file has a corrupted attachment but should not create an OutOfMemoryException.
      *
      * @throws Exception the test failed
      */
     @Test
-    public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception
-    {
+    public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/outofmemory-no-header-seperation.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -262,8 +251,7 @@ public class MimeMessageParserTest
      * @throws Exception the test failed
      */
     @Test
-    public void testMultipartTextAttachment() throws Exception
-    {
+    public void testMultipartTextAttachment() throws Exception {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment.eml"));
@@ -298,8 +286,7 @@ public class MimeMessageParserTest
      * @throws Exception the test failed
      */
     @Test
-    public void testMultipartTextAttachmentOnly() throws Exception
-    {
+    public void testMultipartTextAttachmentOnly() throws Exception {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment-only.eml"));
@@ -334,8 +321,7 @@ public class MimeMessageParserTest
      * @throws Exception the test failed
      */
     @Test
-    public void testParseHtmlEmailWithHtmlAttachment() throws Exception
-    {
+    public void testParseHtmlEmailWithHtmlAttachment() throws Exception {
         DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-content-disposition.eml"));
@@ -365,8 +351,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseCreatedHtmlEmailWithNoContent() throws Exception
-    {
+    public void testParseCreatedHtmlEmailWithNoContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
 
         final HtmlEmail email = new HtmlEmail();
@@ -399,8 +384,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseCreatedHtmlEmailWithTextContent() throws Exception
-    {
+    public void testParseCreatedHtmlEmailWithTextContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
 
         final HtmlEmail email = new HtmlEmail();
@@ -434,8 +418,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseCreatedHtmlEmailWithMixedContent() throws Exception
-    {
+    public void testParseCreatedHtmlEmailWithMixedContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
 
         final HtmlEmail email = new HtmlEmail();
@@ -470,8 +453,7 @@ public class MimeMessageParserTest
     }
 
     @Test
-    public void testParseInlineCID() throws Exception
-    {
+    public void testParseInlineCID() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);

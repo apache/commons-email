@@ -22,21 +22,18 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Creates a {@code DataSource} based on an URL. The implementation
- * also resolves file resources.
+ * Creates a {@code DataSource} based on an URL. The implementation also resolves file resources.
  *
  * @since 1.3
  */
-public class DataSourceFileResolver extends DataSourceBaseResolver
-{
+public class DataSourceFileResolver extends DataSourceBaseResolver {
     /** the base directory of the resource when resolving relative paths */
     private final File baseDir;
 
     /**
      * Constructor.
      */
-    public DataSourceFileResolver()
-    {
+    public DataSourceFileResolver() {
         baseDir = new File(".");
     }
 
@@ -45,8 +42,7 @@ public class DataSourceFileResolver extends DataSourceBaseResolver
      *
      * @param baseDir the base directory of the resource when resolving relative paths
      */
-    public DataSourceFileResolver(final File baseDir)
-    {
+    public DataSourceFileResolver(final File baseDir) {
         this.baseDir = baseDir;
     }
 
@@ -56,8 +52,7 @@ public class DataSourceFileResolver extends DataSourceBaseResolver
      * @param baseDir the base directory of the resource when resolving relative paths
      * @param lenient shall we ignore resources not found or complain with an exception
      */
-    public DataSourceFileResolver(final File baseDir, final boolean lenient)
-    {
+    public DataSourceFileResolver(final File baseDir, final boolean lenient) {
         super(lenient);
         this.baseDir = baseDir;
     }
@@ -67,42 +62,33 @@ public class DataSourceFileResolver extends DataSourceBaseResolver
      *
      * @return the baseUrl
      */
-    public File getBaseDir()
-    {
+    public File getBaseDir() {
         return baseDir;
     }
 
     /** {@inheritDoc} */
     @Override
-    public DataSource resolve(final String resourceLocation) throws IOException
-    {
+    public DataSource resolve(final String resourceLocation) throws IOException {
         return resolve(resourceLocation, isLenient());
     }
 
     /** {@inheritDoc} */
     @Override
-    public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
-    {
+    public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
         File file;
         DataSource result = null;
 
-        if (!isCid(resourceLocation))
-        {
+        if (!isCid(resourceLocation)) {
             file = new File(resourceLocation);
 
-            if (!file.isAbsolute())
-            {
+            if (!file.isAbsolute()) {
                 file = getBaseDir() != null ? new File(getBaseDir(), resourceLocation) : new File(resourceLocation);
             }
 
-            if (file.exists())
-            {
+            if (file.exists()) {
                 result = new FileDataSource(file);
-            }
-            else
-            {
-                if (!isLenient)
-                {
+            } else {
+                if (!isLenient) {
                     throw new IOException("Cant resolve the following file resource :" + file.getAbsolutePath());
                 }
             }

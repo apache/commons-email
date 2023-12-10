@@ -22,33 +22,28 @@ import java.io.IOException;
 import javax.mail.MessagingException;
 
 /**
- * Extension of the ImageHtmlEmail Class
- * (used to allow testing only)
+ * Extension of the ImageHtmlEmail Class (used to allow testing only)
  */
-public class MockImageHtmlEmailConcrete extends ImageHtmlEmail
-{
+public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
     /**
      * Retrieve the message content
+     * 
      * @return Message Content
      */
-    public String getMsg()
-    {
-        try
-        {
+    public String getMsg() {
+        try {
             return this.getPrimaryBodyPart().getContent().toString();
-        }
-        catch (final IOException | MessagingException msgE)
-        {
+        } catch (final IOException | MessagingException msgE) {
             return null;
         }
     }
 
     /**
      * Retrieve the html msg
+     * 
      * @return Message Content
      */
-    public String getHtmlMsg()
-    {
+    public String getHtmlMsg() {
         return this.html;
     }
 }

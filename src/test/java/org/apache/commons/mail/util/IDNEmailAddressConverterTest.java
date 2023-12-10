@@ -35,8 +35,7 @@ public class IDNEmailAddressConverterTest {
     private final IDNEmailAddressConverter idnEmailConverter = new IDNEmailAddressConverter();
 
     @Test
-    public void testConvertInvalidEmailAddressToAscii()
-    {
+    public void testConvertInvalidEmailAddressToAscii() {
         assertEquals(null, idnEmailConverter.toASCII(null));
         assertEquals("", idnEmailConverter.toASCII(""));
         assertEquals("@", idnEmailConverter.toASCII("@"));
@@ -47,27 +46,23 @@ public class IDNEmailAddressConverterTest {
     }
 
     @Test
-    public void testIDNEmailAddressToAsciiConversion()
-    {
+    public void testIDNEmailAddressToAsciiConversion() {
         assertEquals("noreply@xn--dmin-moa0i.example", idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
         assertEquals("noreply@xn--h1alffa9f.xn--h1aegh.museum", idnEmailConverter.toASCII(RUSSIAN_IDN_EMAIL_ADDRESS));
     }
 
     @Test
-    public void testMultipleIDNEmailAddressToAsciiConversion()
-    {
+    public void testMultipleIDNEmailAddressToAsciiConversion() {
         assertEquals("noreply@xn--dmin-moa0i.example", idnEmailConverter.toASCII(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS)));
     }
 
     @Test
-    public void testNonIDNEmailAddressToAsciiConversion()
-    {
+    public void testNonIDNEmailAddressToAsciiConversion() {
         assertEquals("me@home.com", idnEmailConverter.toASCII("me@home.com"));
     }
 
     @Test
-    public void testInternetAddressToAsciiConversion() throws Exception
-    {
+    public void testInternetAddressToAsciiConversion() throws Exception {
         final InternetAddress address = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
         assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(address));
 
@@ -76,10 +71,8 @@ public class IDNEmailAddressConverterTest {
     }
 
     @Test
-    public void testRoundTripConversionOfIDNEmailAddress()
-    {
-        for(final String email : IDN_EMAIL_ADDRESSES)
-        {
+    public void testRoundTripConversionOfIDNEmailAddress() {
+        for (final String email : IDN_EMAIL_ADDRESSES) {
             assertEquals(email, idnEmailConverter.toUnicode(idnEmailConverter.toASCII(email)));
         }
     }

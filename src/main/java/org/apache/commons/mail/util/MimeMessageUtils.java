@@ -33,29 +33,24 @@ import java.nio.charset.Charset;
  *
  * @since 1.3
  */
-public final class MimeMessageUtils
-{
+public final class MimeMessageUtils {
     /**
      * Instances should NOT be constructed in standard programming.
      */
-    private MimeMessageUtils()
-    {
+    private MimeMessageUtils() {
     }
 
     /**
      * Creates a MimeMessage.
      *
      * @param session the mail session
-     * @param source the input data
+     * @param source  the input data
      * @return the MimeMessage
      * @throws MessagingException creating the MimeMessage failed
-     * @throws IOException creating the MimeMessage failed
+     * @throws IOException        creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(final Session session, final byte[] source)
-        throws MessagingException, IOException
-    {
-        try (ByteArrayInputStream is = new SharedByteArrayInputStream(source))
-        {
+    public static MimeMessage createMimeMessage(final Session session, final byte[] source) throws MessagingException, IOException {
+        try (ByteArrayInputStream is = new ByteArrayInputStream(source)) {
             return new MimeMessage(session, is);
         }
     }
@@ -64,16 +59,13 @@ public final class MimeMessageUtils
      * Creates a MimeMessage.
      *
      * @param session the mail session
-     * @param source the input data
+     * @param source  the input data
      * @return the MimeMessage
      * @throws MessagingException creating the MimeMessage failed
-     * @throws IOException creating the MimeMessage failed
+     * @throws IOException        creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(final Session session, final File source)
-        throws MessagingException, IOException
-    {
-        try (FileInputStream is = new FileInputStream(source))
-        {
+    public static MimeMessage createMimeMessage(final Session session, final File source) throws MessagingException, IOException {
+        try (FileInputStream is = new FileInputStream(source)) {
             return createMimeMessage(session, is);
         }
     }
@@ -82,13 +74,11 @@ public final class MimeMessageUtils
      * Creates a MimeMessage.
      *
      * @param session the mail session
-     * @param source the input data
+     * @param source  the input data
      * @return the MimeMessage
      * @throws MessagingException creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(final Session session, final InputStream source)
-        throws MessagingException
-    {
+    public static MimeMessage createMimeMessage(final Session session, final InputStream source) throws MessagingException {
         return new MimeMessage(session, source);
     }
 
@@ -96,26 +86,20 @@ public final class MimeMessageUtils
      * Creates a MimeMessage using the platform's default character encoding.
      *
      * @param session the mail session
-     * @param source the input data
+     * @param source  the input data
      * @return the MimeMessage
      * @throws MessagingException creating the MimeMessage failed
-     * @throws IOException creating the MimeMessage failed
+     * @throws IOException        creating the MimeMessage failed
      */
-    public static MimeMessage createMimeMessage(final Session session, final String source)
-        throws MessagingException, IOException
-    {
+    public static MimeMessage createMimeMessage(final Session session, final String source) throws MessagingException, IOException {
         ByteArrayInputStream is = null;
 
-        try
-        {
+        try {
             final byte[] byteSource = source.getBytes(Charset.defaultCharset());
             is = new SharedByteArrayInputStream(byteSource);
             return createMimeMessage(session, is);
-        }
-        finally
-        {
-            if (is != null)
-            {
+        } finally {
+            if (is != null) {
                 is.close();
             }
         }
@@ -129,14 +113,9 @@ public final class MimeMessageUtils
      * @throws MessagingException accessing MimeMessage failed
      * @throws IOException        writing the MimeMessage failed
      */
-    public static void writeMimeMessage(final MimeMessage mimeMessage, final File resultFile)
-        throws MessagingException, IOException
-    {
-        if (!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs())
-        {
-            throw new IOException(
-                    "Failed to create the following parent directories: "
-                            + resultFile.getParentFile());
+    public static void writeMimeMessage(final MimeMessage mimeMessage, final File resultFile) throws MessagingException, IOException {
+        if (!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs()) {
+            throw new IOException("Failed to create the following parent directories: " + resultFile.getParentFile());
         }
         try (FileOutputStream fos = new FileOutputStream(resultFile)) {
             mimeMessage.writeTo(fos);

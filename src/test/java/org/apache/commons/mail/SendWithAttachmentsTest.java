@@ -32,24 +32,21 @@ import org.junit.Test;
  *
  * @since 1.0
  */
-public class SendWithAttachmentsTest extends AbstractEmailTest
-{
+public class SendWithAttachmentsTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
     @Before
-    public void setUpSendWithAttachmentsTest()
-    {
+    public void setUpSendWithAttachmentsTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
     }
 
     /**
      * @throws EmailException on an email error
-     * @throws IOException when sending fails, or a bad URL is used
+     * @throws IOException    when sending fails, or a bad URL is used
      */
     @Test
-    public void testSendNoAttachments() throws EmailException, IOException
-    {
+    public void testSendNoAttachments() throws EmailException, IOException {
         this.getMailServer();
 
         final String strSubject = "Test HTML Send #1 Subject (w charset)";
@@ -68,46 +65,29 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         final URL url = new URL(EmailConfiguration.TEST_URL);
         final String cid = this.email.embed(url, "Apache Logo");
 
-        final String strHtmlMsg =
-            "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
+        final String strHtmlMsg = "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
 
         this.email.setHtmlMsg(strHtmlMsg);
-        this.email.setTextMsg(
-            "Your email client does not support HTML emails");
+        this.email.setTextMsg("Your email client does not support HTML emails");
 
         this.email.send();
         this.fakeMailServer.stop();
 
         // validate txt message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getTextMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getHtmlMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
     }
 
     /**
      * @throws EmailException on an email error
-     * @throws IOException when sending fails, or a bad URL is used
+     * @throws IOException    when sending fails, or a bad URL is used
      */
     @Test
-    public void testSendWAttachments() throws EmailException, IOException
-    {
+    public void testSendWAttachments() throws EmailException, IOException {
         final EmailAttachment attachment = new EmailAttachment();
 
         /** File to used to test file attachments (Must be valid) */
@@ -142,43 +122,21 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         final String strHtmlMsg = "<html>Test Message<html>";
 
         this.email.setHtmlMsg(strHtmlMsg);
-        this.email.setTextMsg(
-            "Your email client does not support HTML emails");
+        this.email.setTextMsg("Your email client does not support HTML emails");
 
         this.email.send();
         this.fakeMailServer.stop();
         // validate txt message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getTextMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            true);
+        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            this.email.getHtmlMsg(),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
 
         // validate attachment
-        validateSend(
-            this.fakeMailServer,
-            strSubject,
-            MimeUtility.encodeText(attachment.getName()),
-            this.email.getFromAddress(),
-            this.email.getToAddresses(),
-            this.email.getCcAddresses(),
-            this.email.getBccAddresses(),
-            false);
+        validateSend(this.fakeMailServer, strSubject, MimeUtility.encodeText(attachment.getName()), this.email.getFromAddress(), this.email.getToAddresses(),
+                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
     }
 
 }

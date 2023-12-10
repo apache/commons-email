@@ -24,38 +24,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <p>Small wrapper class on top of HtmlEmail which encapsulates the required logic
- * to retrieve images that are contained in "&lt;img src=../&gt;" elements in the HTML
- * code. This is done by replacing all img-src-elements with "cid:"-entries and
- * embedding images in the email.
+ * <p>
+ * Small wrapper class on top of HtmlEmail which encapsulates the required logic to retrieve images that are contained in "&lt;img src=../&gt;" elements in the
+ * HTML code. This is done by replacing all img-src-elements with "cid:"-entries and embedding images in the email.
  * </p>
  * <p>
- * For local files the class tries to either load them via an absolute path or -
- * if available - use a relative path starting from a base directory. For files
- * that are not found locally, the implementation tries to download
- * the element and link it in.
+ * For local files the class tries to either load them via an absolute path or - if available - use a relative path starting from a base directory. For files
+ * that are not found locally, the implementation tries to download the element and link it in.
  * </p>
  * <p>
- * The image loading is done by an instance of {@code DataSourceResolver}
- * which has to be provided by the caller.
+ * The image loading is done by an instance of {@code DataSourceResolver} which has to be provided by the caller.
  * </p>
  *
  * @since 1.3
  */
-public class ImageHtmlEmail extends HtmlEmail
-{
+public class ImageHtmlEmail extends HtmlEmail {
     // Regular Expression to find all <IMG SRC="..."> entries in an HTML
     // document.It needs to cater for various things, like more whitespaces
     // including newlines on any place, HTML is not case sensitive and there
     // can be arbitrary text between "IMG" and "SRC" like IDs and other things.
 
     /** Regexp for extracting {@code <img>} tags */
-    public static final String REGEX_IMG_SRC =
-            "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     /** regexp for extracting {@code <script>} tags */
-    public static final String REGEX_SCRIPT_SRC =
-            "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
@@ -74,8 +67,7 @@ public class ImageHtmlEmail extends HtmlEmail
      *
      * @return the resolver
      */
-    public DataSourceResolver getDataSourceResolver()
-    {
+    public DataSourceResolver getDataSourceResolver() {
         return dataSourceResolver;
     }
 
@@ -84,30 +76,25 @@ public class ImageHtmlEmail extends HtmlEmail
      *
      * @param dataSourceResolver the resolver
      */
-    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver)
-    {
+    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver) {
         this.dataSourceResolver = dataSourceResolver;
     }
 
-     /**
-      * Does the work of actually building the MimeMessage.
-      *
-      * @see org.apache.commons.mail.HtmlEmail#buildMimeMessage()
-      * @throws EmailException building the MimeMessage failed
-      */
+    /**
+     * Does the work of actually building the MimeMessage.
+     *
+     * @see org.apache.commons.mail.HtmlEmail#buildMimeMessage()
+     * @throws EmailException building the MimeMessage failed
+     */
     @Override
-    public void buildMimeMessage() throws EmailException
-    {
-        try
-        {
+    public void buildMimeMessage() throws EmailException {
+        try {
             // embed all the matching image and script resources within the email
             String temp = replacePattern(super.html, IMG_PATTERN);
             temp = replacePattern(temp, SCRIPT_PATTERN);
             setHtmlMsg(temp);
             super.buildMimeMessage();
-        }
-        catch (final IOException e)
-        {
+        } catch (final IOException e) {
             throw new EmailException("Building the MimeMessage failed", e);
         }
     }
@@ -116,14 +103,12 @@ public class ImageHtmlEmail extends HtmlEmail
      * Replace the regexp matching resource locations with "cid:..." references.
      *
      * @param htmlMessage the HTML message to analyze
-     * @param pattern the regular expression to find resources
+     * @param pattern     the regular expression to find resources
      * @return the HTML message containing "cid" references
      * @throws EmailException creating the email failed
-     * @throws IOException resolving the resources failed
+     * @throws IOException    resolving the resources failed
      */
-    private String replacePattern(final String htmlMessage, final Pattern pattern)
-            throws EmailException, IOException
-    {
+    private String replacePattern(final String htmlMessage, final Pattern pattern) throws EmailException, IOException {
         DataSource dataSource;
         final StringBuffer stringBuffer = new StringBuffer();
 
@@ -138,39 +123,31 @@ public class ImageHtmlEmail extends HtmlEmail
         final Matcher matcher = pattern.matcher(htmlMessage);
 
         // the matcher returns all instances one by one
-        while (matcher.find())
-        {
+        while (matcher.find()) {
             // in the RegEx we have the <src> element as second "group"
             final String resourceLocation = matcher.group(2);
 
             // avoid loading the same data source more than once
-            if (dataSourceCache.get(resourceLocation) == null)
-            {
+            if (dataSourceCache.get(resourceLocation) == null) {
                 // in lenient mode we might get a 'null' data source if the resource was not found
                 dataSource = getDataSourceResolver().resolve(resourceLocation);
 
-                if (dataSource != null)
-                {
+                if (dataSource != null) {
                     dataSourceCache.put(resourceLocation, dataSource);
                 }
-            }
-            else
-            {
+            } else {
                 dataSource = dataSourceCache.get(resourceLocation);
             }
 
-            if (dataSource != null)
-            {
+            if (dataSource != null) {
                 String name = dataSource.getName();
-                if (EmailUtils.isEmpty(name))
-                {
+                if (EmailUtils.isEmpty(name)) {
                     name = resourceLocation;
                 }
 
                 String cid = cidCache.get(name);
 
-                if (cid == null)
-                {
+                if (cid == null) {
                     cid = embed(dataSource, name);
                     cidCache.put(name, cid);
                 }
@@ -178,8 +155,7 @@ public class ImageHtmlEmail extends HtmlEmail
                 // if we embedded something, then we need to replace the URL with
                 // the CID, otherwise the Matcher takes care of adding the
                 // non-replaced text afterwards, so no else is necessary here!
-                matcher.appendReplacement(stringBuffer,
-                        Matcher.quoteReplacement(matcher.group(1) + "cid:" + cid + matcher.group(3)));
+                matcher.appendReplacement(stringBuffer, Matcher.quoteReplacement(matcher.group(1) + "cid:" + cid + matcher.group(3)));
             }
         }
 

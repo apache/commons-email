@@ -28,57 +28,43 @@ import org.junit.Test;
  *
  * @since 1.0
  */
-public class EmailAttachmentTest extends AbstractEmailTest
-{
+public class EmailAttachmentTest extends AbstractEmailTest {
     private EmailAttachment attachment;
 
     @Before
-    public void setUpAttachmentTest()
-    {
+    public void setUpAttachmentTest() {
         attachment = new EmailAttachment();
     }
 
     @Test
-    public void testGetSetDescription()
-    {
-        for (final String validChar : testCharsValid)
-        {
+    public void testGetSetDescription() {
+        for (final String validChar : testCharsValid) {
             attachment.setDescription(validChar);
             assertEquals(validChar, attachment.getDescription());
         }
     }
 
     @Test
-    public void testGetSetName()
-    {
-        for (final String validChar : testCharsValid)
-        {
+    public void testGetSetName() {
+        for (final String validChar : testCharsValid) {
             attachment.setName(validChar);
             assertEquals(validChar, attachment.getName());
         }
     }
 
     @Test
-    public void testGetSetPath()
-    {
-        for (final String validChar : testCharsValid)
-        {
+    public void testGetSetPath() {
+        for (final String validChar : testCharsValid) {
             attachment.setPath(validChar);
             assertEquals(validChar, attachment.getPath());
         }
     }
 
     @Test
-    public void testGetSetURL() throws Exception
-    {
-        final String[] tests =
-            {
-                "http://localhost/",
-                "http://www.apache.org/",
-                "http://foo.notexisting.org" };
+    public void testGetSetURL() throws Exception {
+        final String[] tests = { "http://localhost/", "http://www.apache.org/", "http://foo.notexisting.org" };
 
-        for (final String urlString : tests)
-        {
+        for (final String urlString : tests) {
             final URL testURL = new URL(urlString);
             attachment.setURL(testURL);
             assertEquals(testURL, attachment.getURL());
@@ -86,10 +72,8 @@ public class EmailAttachmentTest extends AbstractEmailTest
     }
 
     @Test
-    public void testGetSetDisposition()
-    {
-        for (final String validChar : testCharsValid)
-        {
+    public void testGetSetDisposition() {
+        for (final String validChar : testCharsValid) {
             attachment.setDisposition(validChar);
             assertEquals(validChar, attachment.getDisposition());
         }

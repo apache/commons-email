@@ -20,8 +20,7 @@ import javax.mail.internet.InternetAddress;
 import java.net.IDN;
 
 /**
- * Converts email addresses containing International Domain Names into an ASCII
- * representation suitable for sending an email.
+ * Converts email addresses containing International Domain Names into an ASCII representation suitable for sending an email.
  *
  * @see <a href="https://docs.oracle.com/javase/tutorial/i18n/network/idn.html">https://docs.oracle.com/javase/tutorial/i18n/network/idn.html</a>
  * @see <a href="https://en.wikipedia.org/wiki/Punycode">https://en.wikipedia.org/wiki/Punycode</a>
@@ -30,20 +29,17 @@ import java.net.IDN;
  *
  * @since 1.5
  */
-public class IDNEmailAddressConverter
-{
+public class IDNEmailAddressConverter {
     /**
      * Convert an email address to its ASCII representation using "Punycode".
      *
      * @param email email address.
      * @return The ASCII representation
      */
-    public String toASCII(final String email)
-    {
+    public String toASCII(final String email) {
         final int idx = findAtSymbolIndex(email);
 
-        if (idx < 0)
-        {
+        if (idx < 0) {
             return email;
         }
 
@@ -56,8 +52,7 @@ public class IDNEmailAddressConverter
      * @param address email address.
      * @return The Unicode representation
      */
-    String toUnicode(final InternetAddress address)
-    {
+    String toUnicode(final InternetAddress address) {
         return address != null ? toUnicode(address.getAddress()) : null;
     }
 
@@ -67,12 +62,10 @@ public class IDNEmailAddressConverter
      * @param email email address.
      * @return The Unicode representation
      */
-    String toUnicode(final String email)
-    {
+    String toUnicode(final String email) {
         final int idx = findAtSymbolIndex(email);
 
-        if (idx < 0)
-        {
+        if (idx < 0) {
             return email;
         }
 
@@ -83,11 +76,10 @@ public class IDNEmailAddressConverter
      * Extracts the local part of the email address.
      *
      * @param email email address.
-     * @param idx index of '@' character.
+     * @param idx   index of '@' character.
      * @return local part of email
      */
-    private String getLocalPart(final String email, final int idx)
-    {
+    private String getLocalPart(final String email, final int idx) {
         return email.substring(0, idx);
     }
 
@@ -95,11 +87,10 @@ public class IDNEmailAddressConverter
      * Extracts the domain part of the email address.
      *
      * @param email email address.
-     * @param idx index of '@' character.
+     * @param idx   index of '@' character.
      * @return domain part of email
      */
-    private String getDomainPart(final String email, final int idx)
-    {
+    private String getDomainPart(final String email, final int idx) {
         return email.substring(idx + 1);
     }
 
@@ -109,10 +100,8 @@ public class IDNEmailAddressConverter
      * @param value String value.
      * @return index of first '@' character or {@code -1}
      */
-    private int findAtSymbolIndex(final String value)
-    {
-        if (value == null)
-        {
+    private int findAtSymbolIndex(final String value) {
+        if (value == null) {
             return -1;
         }
 

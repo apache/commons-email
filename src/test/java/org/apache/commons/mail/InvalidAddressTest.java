@@ -27,144 +27,95 @@ import org.junit.Test;
  *
  * @since 1.0
  */
-public class InvalidAddressTest extends AbstractEmailTest
-{
+public class InvalidAddressTest extends AbstractEmailTest {
     /** */
-    private static final String [] ARR_INVALID_EMAILS = {
-        "local name@domain.com",
-        "local(name@domain.com",
-        "local)name@domain.com",
-        "local<name@domain.com",
-        "local>name@domain.com",
-        "local,name@domain.com",
-        "local;name@domain.com",
-        "local:name@domain.com",
-        "local[name@domain.com",
-        "local]name@domain.com",
-        // "local\\name@domain.com", is considered valid for mail-1.4.1
-        "local\"name@domain.com",
-        "local\tname@domain.com",
-        "local\nname@domain.com",
-        "local\rname@domain.com",
-        "local.name@domain com",
-        "local.name@domain(com",
-        "local.name@domain)com",
-        "local.name@domain<com",
-        "local.name@domain>com",
-        "local.name@domain,com",
-        "local.name@domain;com",
-        "local.name@domain:com",
+    private static final String[] ARR_INVALID_EMAILS = { "local name@domain.com", "local(name@domain.com", "local)name@domain.com", "local<name@domain.com",
+            "local>name@domain.com", "local,name@domain.com", "local;name@domain.com", "local:name@domain.com", "local[name@domain.com",
+            "local]name@domain.com",
+            // "local\\name@domain.com", is considered valid for mail-1.4.1
+            "local\"name@domain.com", "local\tname@domain.com", "local\nname@domain.com", "local\rname@domain.com", "local.name@domain com",
+            "local.name@domain(com", "local.name@domain)com", "local.name@domain<com", "local.name@domain>com", "local.name@domain,com",
+            "local.name@domain;com", "local.name@domain:com",
 
-        //      "local.name@domain[com",
-        "local.name@domain]com",
-        "local.name@domain\\com",
-        "local.name@domain\tcom",
-        "local.name@domain\ncom",
-        "local.name@domain\rcom",
-        "local.name@",
-        "@domain.com"
-    };
+            // "local.name@domain[com",
+            "local.name@domain]com", "local.name@domain\\com", "local.name@domain\tcom", "local.name@domain\ncom", "local.name@domain\rcom", "local.name@",
+            "@domain.com" };
 
     private MockEmailConcrete email;
 
     @Before
-    public void setUpInvalidAddressTest()
-    {
+    public void setUpInvalidAddressTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockEmailConcrete();
     }
 
     @Test
-    public void testSetInvalidFrom()
-            throws Exception
-    {
+    public void testSetInvalidFrom() throws Exception {
         // ====================================================================
         // Test setting invalid 'from' addresses
         // ====================================================================
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
-        {
-            try
-            {
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
+            try {
                 // set from
                 email.setFrom(ARR_INVALID_EMAILS[i]);
 
                 // Expected an exception to be thrown
                 fail("setFrom " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            }
-            catch (final EmailException ignore)
-            {
+            } catch (final EmailException ignore) {
                 // Expected Result
             }
         }
     }
 
     @Test
-    public void testAddInvalidTo()
-            throws Exception
-    {
+    public void testAddInvalidTo() throws Exception {
         // ====================================================================
         // Test adding invalid 'to' addresses
         // ====================================================================
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
-        {
-            try
-            {
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
+            try {
                 // Add To
                 email.addTo(ARR_INVALID_EMAILS[i], "Joe");
 
                 // Expected an exception to be thrown
                 fail("addTo " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            }
-            catch (final EmailException ignore)
-            {
+            } catch (final EmailException ignore) {
                 // Expected Result
             }
         }
     }
 
     @Test
-    public void testAddInvalidCc()
-            throws Exception
-    {
+    public void testAddInvalidCc() throws Exception {
         // ====================================================================
         // Test adding invalid 'cc' addresses
         // ====================================================================
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
-        {
-            try
-            {
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
+            try {
                 // add cc
                 email.addCc(ARR_INVALID_EMAILS[i], "Joe");
 
                 // Expected an exception to be thrown
                 fail("addCc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            }
-            catch (final EmailException ignore)
-            {
+            } catch (final EmailException ignore) {
                 // Expected Result
             }
         }
     }
 
     @Test
-    public void testAddInvalidBcc()
-            throws Exception
-    {
+    public void testAddInvalidBcc() throws Exception {
         // ====================================================================
         // Test adding invalid 'Bcc' addresses
         // ====================================================================
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
-        {
-            try
-            {
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
+            try {
                 // add bcc
                 email.addBcc(ARR_INVALID_EMAILS[i], "Joe");
 
                 // Expected an exception to be thrown
                 fail("addBcc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            }
-            catch (final EmailException ignore)
-            {
+            } catch (final EmailException ignore) {
                 // Expected Result
             }
         }

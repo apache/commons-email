@@ -24,34 +24,28 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.mail.MultiPartEmail;
 
 /**
- * Extension of MultiPartEmail Class
- * (used to allow testing only)
+ * Extension of MultiPartEmail Class (used to allow testing only)
  *
  * @since 1.0
  */
-public class MockMultiPartEmailConcrete extends MultiPartEmail
-{
+public class MockMultiPartEmailConcrete extends MultiPartEmail {
 
     /**
      * Retrieve the message content
+     * 
      * @return Message Content
      */
-    public String getMsg()
-    {
-        try
-        {
+    public String getMsg() {
+        try {
             return this.getPrimaryBodyPart().getContent().toString();
-        }
-        catch (final IOException | MessagingException msgE)
-        {
+        } catch (final IOException | MessagingException msgE) {
             return null;
         }
     }
 
     /**
      */
-    public void initTest()
-    {
+    public void initTest() {
         this.init();
     }
 
@@ -59,8 +53,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail
      * @return fromAddress
      */
     @Override
-    public InternetAddress getFromAddress()
-    {
+    public InternetAddress getFromAddress() {
         return this.fromAddress;
     }
 

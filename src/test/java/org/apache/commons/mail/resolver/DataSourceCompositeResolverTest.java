@@ -30,15 +30,13 @@ import java.net.URL;
  *
  * @since 1.3
  */
-public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest
-{
+public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest {
 
     private DataSourceResolver[] dataSourceResolvers;
     private DataSourceResolver[] dataSourceResolversMissing;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         final DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("https://www.apache.org"), false);
         final DataSourceUrlResolver urlResolverMissing = new DataSourceUrlResolver(new URL("https://does.not.exist"), false);
         final DataSourceClassPathResolver classPathResolver = new DataSourceClassPathResolver("/images", false);
@@ -47,8 +45,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingFilesLenient() throws Exception
-    {
+    public void testResolvingFilesLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         // resolve using HTTP
@@ -59,16 +56,14 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingFilesNonLenient()
-    {
+    public void testResolvingFilesNonLenient() {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolversMissing, false);
 
         assertThrows(IOException.class, () -> dataSourceResolver.resolve("./image/does-not-exist.gif"));
     }
 
     @Test
-    public void testExternalModification() throws Exception
-    {
+    public void testExternalModification() throws Exception {
         final DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         final DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();

@@ -32,8 +32,7 @@ import org.apache.commons.mail.util.MimeMessageUtils;
  * Utility methods used by commons-email.
  *
  * <p>
- * These methods are copied from other commons components (commons-lang) to avoid creating
- * a dependency for such a small component.
+ * These methods are copied from other commons components (commons-lang) to avoid creating a dependency for such a small component.
  * </p>
  *
  * <p>
@@ -42,11 +41,9 @@ import org.apache.commons.mail.util.MimeMessageUtils;
  *
  * @since 1.0
  */
-final class EmailUtils
-{
+final class EmailUtils {
     /**
-     * Random object used by random method. This has to be not local to the random method
-     * so as to not return the same value in the same millisecond.
+     * Random object used by random method. This has to be not local to the random method so as to not return the same value in the same millisecond.
      */
     private static final Random RANDOM = new Random();
 
@@ -68,17 +65,14 @@ final class EmailUtils
     // Static initializer for safe_uri
     static {
         // alpha characters
-        for (int i = 'a'; i <= 'z'; i++)
-        {
+        for (int i = 'a'; i <= 'z'; i++) {
             SAFE_URL.set(i);
         }
-        for (int i = 'A'; i <= 'Z'; i++)
-        {
+        for (int i = 'A'; i <= 'Z'; i++) {
             SAFE_URL.set(i);
         }
         // numeric characters
-        for (int i = '0'; i <= '9'; i++)
-        {
+        for (int i = '0'; i <= '9'; i++) {
             SAFE_URL.set(i);
         }
 
@@ -100,8 +94,7 @@ final class EmailUtils
     /**
      * Constructs a new {@code EmailException} with no detail message.
      */
-    private EmailUtils()
-    {
+    private EmailUtils() {
     }
 
     /**
@@ -113,8 +106,7 @@ final class EmailUtils
      * @param str the String to check, may be null
      * @return {@code true} if the String is empty or null
      */
-    static boolean isEmpty(final String str)
-    {
+    static boolean isEmpty(final String str) {
         return str == null || str.isEmpty();
     }
 
@@ -127,8 +119,7 @@ final class EmailUtils
      * @param str the String to check, may be null
      * @return {@code true} if the String is not empty and not null
      */
-    static boolean isNotEmpty(final String str)
-    {
+    static boolean isNotEmpty(final String str) {
         return str != null && !str.isEmpty();
     }
 
@@ -140,11 +131,11 @@ final class EmailUtils
      * <p>
      * Copied from Commons Lang v2.1, svn 201930
      * </p>
+     * 
      * @param count the length of random string to create
      * @return the random string
      */
-    static String randomAlphabetic(final int count)
-    {
+    static String randomAlphabetic(final int count) {
         return random(count, 0, 0, true, false, null, RANDOM);
     }
 
@@ -152,9 +143,8 @@ final class EmailUtils
      * Creates a random string based on a variety of options, using supplied source of randomness.
      *
      * <p>
-     * If start and end are both {@code 0}, start and end are set to {@code ' '} and {@code 'z'},
-     * the ASCII printable characters, will be used, unless letters and numbers are both {@code false},
-     * in which case, start and end are set to {@code 0} and {@code Integer.MAX_VALUE}.
+     * If start and end are both {@code 0}, start and end are set to {@code ' '} and {@code 'z'}, the ASCII printable characters, will be used, unless letters
+     * and numbers are both {@code false}, in which case, start and end are set to {@code 0} and {@code Integer.MAX_VALUE}.
      * </p>
      *
      * <p>
@@ -162,50 +152,36 @@ final class EmailUtils
      * </p>
      *
      * <p>
-     * This method accepts a user-supplied {@link Random} instance to use as a source of randomness. By seeding a
-     * single {@link Random} instance with a fixed seed and using it for each call, the same random sequence of strings
-     * can be generated repeatedly and predictably.
+     * This method accepts a user-supplied {@link Random} instance to use as a source of randomness. By seeding a single {@link Random} instance with a fixed
+     * seed and using it for each call, the same random sequence of strings can be generated repeatedly and predictably.
      * </p>
      * <p>
      * Copied from Commons Lang v2.1, svn 201930
      * </p>
      *
-     * @param count the length of random string to create
-     * @param start the position in set of chars to start at
-     * @param end the position in set of chars to end before
+     * @param count   the length of random string to create
+     * @param start   the position in set of chars to start at
+     * @param end     the position in set of chars to end before
      * @param letters only allow letters?
      * @param numbers only allow numbers?
-     * @param chars the set of chars to choose randoms from. If {@code null},
-     *              then it will use the set of all chars.
-     * @param random a source of randomness.
+     * @param chars   the set of chars to choose randoms from. If {@code null}, then it will use the set of all chars.
+     * @param random  a source of randomness.
      * @return the random string
      * @throws IllegalArgumentException if {@code count} &lt; 0.
      */
-    private static String random(
-        int count,
-        int start,
-        int end,
-        final boolean letters,
-        final boolean numbers,
-        final char [] chars,
-        final Random random)
-    {
-        if (count == 0)
-        {
+    private static String random(int count, int start, int end, final boolean letters, final boolean numbers, final char[] chars, final Random random) {
+        if (count == 0) {
             return "";
         }
-        if (count < 0)
-        {
+        if (count < 0) {
             throw new IllegalArgumentException("Requested random string length " + count + " is less than 0.");
         }
 
-        if (start == 0 && end == 0)
-        {
+        if (start == 0 && end == 0) {
             end = 'z' + 1;
             start = ' ';
 
-            if (!letters && !numbers)
-            {
+            if (!letters && !numbers) {
                 start = 0;
                 end = Integer.MAX_VALUE;
             }
@@ -214,26 +190,19 @@ final class EmailUtils
         final StringBuilder buffer = new StringBuilder();
         final int gap = end - start;
 
-        while (count-- != 0)
-        {
+        while (count-- != 0) {
             char ch;
 
-            if (chars == null)
-            {
+            if (chars == null) {
                 ch = (char) (random.nextInt(gap) + start);
-            }
-            else
-            {
+            } else {
                 ch = chars[random.nextInt(gap) + start];
             }
 
-            if (letters && numbers && Character.isLetterOrDigit(ch) || letters && Character.isLetter(ch)
-                            || numbers && Character.isDigit(ch) || !letters && !numbers)
-            {
+            if (letters && numbers && Character.isLetterOrDigit(ch) || letters && Character.isLetter(ch) || numbers && Character.isDigit(ch)
+                    || !letters && !numbers) {
                 buffer.append(ch);
-            }
-            else
-            {
+            } else {
                 count++;
             }
         }
@@ -247,8 +216,7 @@ final class EmailUtils
      * @param input the input string to be scanned.
      * @return a clean string
      */
-    static String replaceEndOfLineCharactersWithSpaces(final String input)
-    {
+    static String replaceEndOfLineCharactersWithSpaces(final String input) {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
     }
 
@@ -259,23 +227,17 @@ final class EmailUtils
      * @return a URL encoded string
      * @see <a href="http://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
-    static String encodeUrl(final String input)
-    {
-        if (input == null)
-        {
+    static String encodeUrl(final String input) {
+        if (input == null) {
             return null;
         }
 
         final StringBuilder builder = new StringBuilder();
-        for (final byte c : input.getBytes(StandardCharsets.US_ASCII))
-        {
+        for (final byte c : input.getBytes(StandardCharsets.US_ASCII)) {
             final int b = c & 0xff;
-            if (SAFE_URL.get(b))
-            {
+            if (SAFE_URL.get(b)) {
                 builder.append((char) b);
-            }
-            else
-            {
+            } else {
                 builder.append(ESCAPE_CHAR);
                 final char hex1 = Character.toUpperCase(Character.forDigit(b >> 4 & 0xF, RADIX));
                 final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
@@ -289,14 +251,12 @@ final class EmailUtils
     /**
      * Convenience method to write a MimeMessage into a file.
      *
-     * @param resultFile the file containing the MimeMessage
+     * @param resultFile  the file containing the MimeMessage
      * @param mimeMessage the MimeMessage to write
-     * @throws IOException writing the MimeMessage failed
+     * @throws IOException        writing the MimeMessage failed
      * @throws MessagingException writing the MimeMessage failed
      */
-    static void writeMimeMessage(final File resultFile, final MimeMessage mimeMessage)
-            throws IOException, MessagingException
-    {
+    static void writeMimeMessage(final File resultFile, final MimeMessage mimeMessage) throws IOException, MessagingException {
         MimeMessageUtils.writeMimeMessage(mimeMessage, resultFile);
     }
 }

@@ -37,18 +37,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * This are regression test sending REAL email to REAL mail
- * servers using REAL recipients.
+ * This are regression test sending REAL email to REAL mail servers using REAL recipients.
  *
- * The intention is to field-test certain aspects
- * of email using a variety of mail clients since I'm not a mockist
- * (see http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
+ * The intention is to field-test certain aspects of email using a variety of mail clients since I'm not a mockist (see
+ * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
-public class EmailLiveTest extends AbstractEmailTest
-{
+public class EmailLiveTest extends AbstractEmailTest {
     @Before
-    public void setUpLiveTest()
-    {
+    public void setUpLiveTest() {
         // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
         System.setProperty("mail.mime.charset", "utf-8");
 
@@ -59,10 +55,9 @@ public class EmailLiveTest extends AbstractEmailTest
 
     protected Email send(final Email email) throws EmailException {
 
-        if ( EmailConfiguration.MAIL_FORCE_SEND ) {
+        if (EmailConfiguration.MAIL_FORCE_SEND) {
             email.send();
-        }
-        else {
+        } else {
             email.buildMimeMessage();
         }
 
@@ -117,13 +112,12 @@ public class EmailLiveTest extends AbstractEmailTest
      * @throws Exception the test failed
      */
     @Test
-    public void testSimpleEmail() throws Exception
-    {
+    public void testSimpleEmail() throws Exception {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.setSubject("TestSimpleMail");
         email.setMsg("This is a test mail ... :-)");
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/simplemail.eml"), send(email).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/simplemail.eml"), send(email).getMimeMessage());
     }
 
     /**
@@ -132,14 +126,13 @@ public class EmailLiveTest extends AbstractEmailTest
      * @throws Exception the test failed
      */
     @Test
-    public void testFoldedHeaderValue() throws Exception
-    {
+    public void testFoldedHeaderValue() throws Exception {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.setSubject("TestFoldedHeaderMail");
         email.setMsg("This is a test mail with a folded header value... :-)");
         email.addHeader("X-TestHeader", "This is a very long header value which should be folded into two lines, hopefully");
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/foldedheader.eml"), send(email).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/foldedheader.eml"), send(email).getMimeMessage());
     }
 
     /**
@@ -148,14 +141,13 @@ public class EmailLiveTest extends AbstractEmailTest
      * @throws Exception the test failed
      */
     @Test
-    public void testMultiPartEmail() throws Exception
-    {
+    public void testMultiPartEmail() throws Exception {
         final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject("TestMultiPartMail");
         email.setMsg("This is a test mail ... :-)");
         email.attach(new File("./src/test/resources/attachments/logo.pdf"));
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
     }
 
     /**
@@ -166,8 +158,7 @@ public class EmailLiveTest extends AbstractEmailTest
      * @throws Exception the test failed
      */
     @Test
-    public void testHtmlMailMimeLayout() throws Exception
-    {
+    public void testHtmlMailMimeLayout() throws Exception {
         String textMsg;
         String htmlMsg;
 
@@ -190,11 +181,11 @@ public class EmailLiveTest extends AbstractEmailTest
         textMsg = "Your email client does not support HTML messages";
         htmlMsg = "<html><b>This is a HTML message without any image</b><html>";
 
-        htmlEmail1.setSubject( "[email] 1.Test: text + html content");
+        htmlEmail1.setSubject("[email] 1.Test: text + html content");
         htmlEmail1.setTextMsg(textMsg);
         htmlEmail1.setHtmlMsg(htmlMsg);
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail1.eml"), send(htmlEmail1).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/htmlemail1.eml"), send(htmlEmail1).getMimeMessage());
 
         // 2) text + html content + image as attachment
 
@@ -202,12 +193,12 @@ public class EmailLiveTest extends AbstractEmailTest
         textMsg = "Your email client does not support HTML messages";
         htmlMsg = "<html><b>This is a HTML message with an image attachment</b><html>";
 
-        htmlEmail2.setSubject( "[email] 2.Test: text + html content + image as attachment");
+        htmlEmail2.setSubject("[email] 2.Test: text + html content + image as attachment");
         htmlEmail2.setTextMsg(textMsg);
         htmlEmail2.setHtmlMsg(htmlMsg);
-        htmlEmail2.attach(url, "Apache Logo", "The official Apache logo" );
+        htmlEmail2.attach(url, "Apache Logo", "The official Apache logo");
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail2.eml"), send(htmlEmail2).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/htmlemail2.eml"), send(htmlEmail2).getMimeMessage());
 
         // 3) text + html content + inline image
 
@@ -215,14 +206,13 @@ public class EmailLiveTest extends AbstractEmailTest
         textMsg = "Your email client does not support HTML messages";
         cid = htmlEmail3.embed(imageFile, "Apache Logo");
 
-        htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:"
-            + cid + "\"> and NO attachment</b><html>";
+        htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:" + cid + "\"> and NO attachment</b><html>";
 
-        htmlEmail3.setSubject( "[email] 3.Test: text + html content + inline image");
+        htmlEmail3.setSubject("[email] 3.Test: text + html content + inline image");
         htmlEmail3.setTextMsg(textMsg);
         htmlEmail3.setHtmlMsg(htmlMsg);
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail3.eml"), send(htmlEmail3).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/htmlemail3.eml"), send(htmlEmail3).getMimeMessage());
 
         // 4) text + html content + inline image + attachment
 
@@ -231,25 +221,23 @@ public class EmailLiveTest extends AbstractEmailTest
         cid = htmlEmail4.embed(imageFile, "Apache Logo");
         htmlMsg = "<html><b>This is a HTML message with an inline image - <img src=\"cid:" + cid + "\"> and attachment</b><html>";
 
-        htmlEmail4.setSubject( "[email] 4.Test: text + html content + inline image + attachment");
+        htmlEmail4.setSubject("[email] 4.Test: text + html content + inline image + attachment");
         htmlEmail4.setTextMsg(textMsg);
         htmlEmail4.setHtmlMsg(htmlMsg);
         htmlEmail4.attach(attachment);
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/htmlemail4.eml"), send(htmlEmail4).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/htmlemail4.eml"), send(htmlEmail4).getMimeMessage());
     }
 
     /**
-     * This test checks the correct character encoding when sending
-     * non-ASCII content using SimpleEmail.
+     * This test checks the correct character encoding when sending non-ASCII content using SimpleEmail.
      *
      * https://issues.apache.org/jira/browse/EMAIL-79
      *
      * @throws Exception the test failed
      */
     @Test
-    public void testCorrectCharacterEncoding() throws Exception
-    {
+    public void testCorrectCharacterEncoding() throws Exception {
         // U+03B1 : GREEK SMALL LETTER ALPHA
         // U+03B2 : GREEK SMALL LETTER BETA
         // U+03B3 : GREEK SMALL LETTER GAMMA
@@ -267,7 +255,7 @@ public class EmailLiveTest extends AbstractEmailTest
         final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes(StandardCharsets.UTF_8), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
     }
 
     /**
@@ -276,8 +264,7 @@ public class EmailLiveTest extends AbstractEmailTest
      * @throws Exception the test failed
      */
     @Test
-    public void testImageHtmlEmailLocal() throws Exception
-    {
+    public void testImageHtmlEmailLocal() throws Exception {
         // use a simple HTML page with one image
 
         final File htmlFile = new File("./src/test/resources/html/www.apache.org.html");
@@ -288,22 +275,18 @@ public class EmailLiveTest extends AbstractEmailTest
         email.setSubject("[testImageHtmlEmail] 1.Test: simple html content");
         email.setHtmlMsg(htmlMsg1);
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailLocal.eml"), send(email).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/testImageHtmlEmailLocal.eml"), send(email).getMimeMessage());
     }
 
     /**
-     * Test sending a image HTML mail based on a real world website. We
-     * would expect to see the ApacheCon logo at the bottom of the email.
-     * Please note that not all major email clients can display the email
-     * properly.
+     * Test sending a image HTML mail based on a real world website. We would expect to see the ApacheCon logo at the bottom of the email. Please note that not
+     * all major email clients can display the email properly.
      *
      * @throws Exception the test failed
      */
     @Test
-    public void testImageHtmlEmailRemote() throws Exception
-    {
-        if (EmailConfiguration.MAIL_FORCE_SEND)
-        {
+    public void testImageHtmlEmailRemote() throws Exception {
+        if (EmailConfiguration.MAIL_FORCE_SEND) {
             final URL url = new URL("https://commons.apache.org/email/");
             // URL url = new URL("http://www.dzone.com/links/index.html");
             final String htmlMsg = getFromUrl(url);
@@ -313,23 +296,20 @@ public class EmailLiveTest extends AbstractEmailTest
             email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
             email.setHtmlMsg(htmlMsg);
 
-            EmailUtils.writeMimeMessage( new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
+            EmailUtils.writeMimeMessage(new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
         }
     }
 
     /**
-     * Testing if we are able to send a few emails in a batch, i.e.
-     * using a single authenticated {@code Transport} instance.
-     * Use a single instance speeds up processing since the
-     * authorization is only done once.
+     * Testing if we are able to send a few emails in a batch, i.e. using a single authenticated {@code Transport} instance. Use a single instance speeds up
+     * processing since the authorization is only done once.
      *
      * https://issues.apache.org/jira/browse/EMAIL-72
      *
      * @throws Exception the test failed.
      */
     @Test
-    public void testSendingEmailsInBatch() throws Exception
-    {
+    public void testSendingEmailsInBatch() throws Exception {
         final List<SimpleEmail> emails = new ArrayList<>();
 
         // we need to instantiate an email to provide the mail session - a bit ugly
@@ -337,8 +317,7 @@ public class EmailLiveTest extends AbstractEmailTest
         final Transport transport = session.getTransport();
 
         // simulate creating a bunch of emails using an existing mail session
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             final SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
             personalizedEmail.setMailSession(session);
             personalizedEmail.setSubject("Personalized Test Mail Nr. " + i);
@@ -348,19 +327,17 @@ public class EmailLiveTest extends AbstractEmailTest
         }
 
         // send the list of emails using a single 'Transport' instance.
-        if ( EmailConfiguration.MAIL_FORCE_SEND )
-        {
+        if (EmailConfiguration.MAIL_FORCE_SEND) {
             transport.connect();
 
-            for (final SimpleEmail personalizedEmail : emails)
-            {
+            for (final SimpleEmail personalizedEmail : emails) {
                 final MimeMessage mimeMessage = personalizedEmail.getMimeMessage();
                 Transport.send(mimeMessage);
                 System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());
             }
 
             transport.close();
-         }
+        }
     }
 
     /**
@@ -371,8 +348,7 @@ public class EmailLiveTest extends AbstractEmailTest
      * @throws Exception the test failed.
      */
     @Test
-    public void testPartialSend() throws Exception
-    {
+    public void testPartialSend() throws Exception {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.addTo(EmailConfiguration.TEST_TO);
         email.addTo("nobody@is.invalid");
@@ -381,7 +357,7 @@ public class EmailLiveTest extends AbstractEmailTest
 
         email.setSendPartial(true);
 
-        EmailUtils.writeMimeMessage( new File("./target/test-emails/partialmail.eml"), send(email).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/partialmail.eml"), send(email).getMimeMessage());
     }
 
 }

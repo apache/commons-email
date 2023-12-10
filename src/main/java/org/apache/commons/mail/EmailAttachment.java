@@ -23,8 +23,7 @@ import java.net.URL;
  *
  * @since 1.0
  */
-public class EmailAttachment
-{
+public class EmailAttachment {
     /** Definition of the part being an attachment. */
     public static final String ATTACHMENT = javax.mail.Part.ATTACHMENT;
 
@@ -52,8 +51,7 @@ public class EmailAttachment
      * @return A String.
      * @since 1.0
      */
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
@@ -63,8 +61,7 @@ public class EmailAttachment
      * @return A String.
      * @since 1.0
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -74,8 +71,7 @@ public class EmailAttachment
      * @return A String.
      * @since 1.0
      */
-    public String getPath()
-    {
+    public String getPath() {
         return path;
     }
 
@@ -85,8 +81,7 @@ public class EmailAttachment
      * @return A URL.
      * @since 1.0
      */
-    public URL getURL()
-    {
+    public URL getURL() {
         return url;
     }
 
@@ -96,8 +91,7 @@ public class EmailAttachment
      * @return A String.
      * @since 1.0
      */
-    public String getDisposition()
-    {
+    public String getDisposition() {
         return disposition;
     }
 
@@ -107,8 +101,7 @@ public class EmailAttachment
      * @param desc A String.
      * @since 1.0
      */
-    public void setDescription(final String desc)
-    {
+    public void setDescription(final String desc) {
         this.description = desc;
     }
 
@@ -118,14 +111,12 @@ public class EmailAttachment
      * @param aName A String.
      * @since 1.0
      */
-    public void setName(final String aName)
-    {
+    public void setName(final String aName) {
         this.name = aName;
     }
 
     /**
-     * Sets the path to the attachment.  The path can be absolute or relative
-     * and should include the file name.
+     * Sets the path to the attachment. The path can be absolute or relative and should include the file name.
      * <p>
      * Example: /home/user/images/image.jpg<br>
      * Example: images/image.jpg
@@ -133,8 +124,7 @@ public class EmailAttachment
      * @param aPath A String.
      * @since 1.0
      */
-    public void setPath(final String aPath)
-    {
+    public void setPath(final String aPath) {
         this.path = aPath;
     }
 
@@ -144,8 +134,7 @@ public class EmailAttachment
      * @param aUrl A URL.
      * @since 1.0
      */
-    public void setURL(final URL aUrl)
-    {
+    public void setURL(final URL aUrl) {
         this.url = aUrl;
     }
 
@@ -155,8 +144,7 @@ public class EmailAttachment
      * @param aDisposition A String.
      * @since 1.0
      */
-    public void setDisposition(final String aDisposition)
-    {
+    public void setDisposition(final String aDisposition) {
         this.disposition = aDisposition;
     }
 }

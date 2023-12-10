@@ -23,16 +23,14 @@ import org.apache.commons.mail.DataSourceResolver;
  *
  * @since 1.3
  */
-public abstract class DataSourceBaseResolver implements DataSourceResolver
-{
+public abstract class DataSourceBaseResolver implements DataSourceResolver {
     /** shall we ignore resources not found or complain with an exception */
     private final boolean lenient;
 
     /**
      * Constructor.
      */
-    public DataSourceBaseResolver()
-    {
+    public DataSourceBaseResolver() {
         this.lenient = false;
     }
 
@@ -41,8 +39,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
      *
      * @param lenient shall we ignore resources not found or throw an exception?
      */
-    public DataSourceBaseResolver(final boolean lenient)
-    {
+    public DataSourceBaseResolver(final boolean lenient) {
         this.lenient = lenient;
     }
 
@@ -51,8 +48,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
      *
      * @return the lenient flag
      */
-    public boolean isLenient()
-    {
+    public boolean isLenient() {
         return lenient;
     }
 
@@ -62,8 +58,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
      * @param resourceLocation the resource location
      * @return true if it is a CID
      */
-    protected boolean isCid(final String resourceLocation)
-    {
+    protected boolean isCid(final String resourceLocation) {
         return resourceLocation.startsWith("cid:");
     }
 
@@ -73,8 +68,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
      * @param urlString the URL string
      * @return true if it is a file URL
      */
-    protected boolean isFileUrl(final String urlString)
-    {
+    protected boolean isFileUrl(final String urlString) {
         return urlString.startsWith("file:/");
     }
 
@@ -84,8 +78,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver
      * @param urlString the URL string
      * @return true if it is a HTTP/HTTPS URL
      */
-    protected boolean isHttpUrl(final String urlString)
-    {
+    protected boolean isHttpUrl(final String urlString) {
         return urlString.startsWith("http://") || urlString.startsWith("https://");
     }
 }

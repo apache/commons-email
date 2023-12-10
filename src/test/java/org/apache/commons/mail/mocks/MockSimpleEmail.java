@@ -21,19 +21,17 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.mail.SimpleEmail;
 
 /**
- * Extension of SimpleEmail Class
- * (used to allow testing only)
+ * Extension of SimpleEmail Class (used to allow testing only)
  *
  * @since 1.0
  */
-public class MockSimpleEmail extends SimpleEmail
-{
+public class MockSimpleEmail extends SimpleEmail {
     /**
      * Retrieve the message content
+     * 
      * @return Message Content
      */
-    public String getMsg()
-    {
+    public String getMsg() {
         return (String) this.content;
     }
 
@@ -41,8 +39,7 @@ public class MockSimpleEmail extends SimpleEmail
      * @return fromAddress
      */
     @Override
-    public InternetAddress getFromAddress()
-    {
+    public InternetAddress getFromAddress() {
         return this.fromAddress;
     }
 

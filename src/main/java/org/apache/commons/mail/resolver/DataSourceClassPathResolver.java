@@ -29,16 +29,14 @@ import java.net.URL;
  *
  * @since 1.3
  */
-public class DataSourceClassPathResolver extends DataSourceBaseResolver
-{
+public class DataSourceClassPathResolver extends DataSourceBaseResolver {
     /** the base string of the resource relative to the classpath when resolving relative paths */
     private final String classPathBase;
 
     /**
      * Constructs a new instance.
      */
-    public DataSourceClassPathResolver()
-    {
+    public DataSourceClassPathResolver() {
         this.classPathBase = "/";
     }
 
@@ -47,8 +45,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
      *
      * @param classPathBase a base class path
      */
-    public DataSourceClassPathResolver(final String classPathBase)
-    {
+    public DataSourceClassPathResolver(final String classPathBase) {
         this.classPathBase = classPathBase.endsWith("/") ? classPathBase : classPathBase + "/";
     }
 
@@ -56,10 +53,9 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
      * Constructs a new instance.
      *
      * @param classPathBase a base class path
-     * @param lenient shall we ignore resources not found or throw an exception?
+     * @param lenient       shall we ignore resources not found or throw an exception?
      */
-    public DataSourceClassPathResolver(final String classPathBase, final boolean lenient)
-    {
+    public DataSourceClassPathResolver(final String classPathBase, final boolean lenient) {
         super(lenient);
         this.classPathBase = classPathBase.endsWith("/") ? classPathBase : classPathBase + "/";
     }
@@ -69,15 +65,13 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
      *
      * @return the classPathBase
      */
-    public String getClassPathBase()
-    {
+    public String getClassPathBase() {
         return classPathBase;
     }
 
     /** {@inheritDoc} */
     @Override
-    public DataSource resolve(final String resourceLocation) throws IOException
-    {
+    public DataSource resolve(final String resourceLocation) throws IOException {
         return resolve(resourceLocation, isLenient());
     }
 
@@ -125,8 +119,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
      * @return {@link #getClassPathBase()} + {@code resourceLocation}
      * @see #getClassPathBase()
      */
-    private String getResourceName(final String resourceLocation)
-    {
+    private String getResourceName(final String resourceLocation) {
         return (getClassPathBase() + resourceLocation).replace("//", "/");
     }
 }
