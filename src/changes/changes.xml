@@ -79,7 +79,7 @@
         Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.
       </action>
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">
-        Bump commons-parent from 50 to 64, #118, #128.
+        Bump commons-parent from 50 to 65, #118, #128.
       </action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18.
