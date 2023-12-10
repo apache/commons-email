@@ -22,6 +22,7 @@ import javax.mail.util.ByteArrayDataSource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Creates a {@code DataSource} based on an class path.
@@ -82,35 +83,35 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
 
     /** {@inheritDoc} */
     @Override
-    public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException
-    {
-        try
-        {
-            if (!isCid(resourceLocation) && !isHttpUrl(resourceLocation))
-            {
+    public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
+        try {
+            if (!isCid(resourceLocation) && !isHttpUrl(resourceLocation)) {
                 final String mimeType = FileTypeMap.getDefaultFileTypeMap().getContentType(resourceLocation);
                 final String resourceName = getResourceName(resourceLocation);
-                try (InputStream is = DataSourceClassPathResolver.class.getResourceAsStream(resourceName)){
-                    if (is == null) {
-                        if (isLenient)
-                        {
+                try (InputStream inputStream = DataSourceClassPathResolver.class.getResourceAsStream(resourceName)) {
+                    if (inputStream == null) {
+                        if (isLenient) {
                             return null;
                         }
                         throw new IOException("The following class path resource was not found : " + resourceLocation);
                     }
-                    final ByteArrayDataSource ds = new ByteArrayDataSource(is, mimeType);
+                    final ByteArrayDataSource ds = new ByteArrayDataSource(inputStream, mimeType);
                     // EMAIL-125: set the name of the DataSource to the normalized resource URL
                     // similar to other DataSource implementations, e.g. FileDataSource, URLDataSource
-                    ds.setName(DataSourceClassPathResolver.class.getResource(resourceName).toString());
+                    final URL resource = DataSourceClassPathResolver.class.getResource(resourceName);
+                    if (resource != null) {
+                        ds.setName(resource.toString());
+                    } else if (isLenient) {
+                        return null;
+                    } else {
+                        throw new IOException("The following class path resource was not found : " + resourceName);
+                    }
                     return ds;
                 }
             }
             return null;
-        }
-        catch (final IOException e)
-        {
-            if (isLenient)
-            {
+        } catch (final IOException e) {
+            if (isLenient) {
                 return null;
             }
             throw e;
