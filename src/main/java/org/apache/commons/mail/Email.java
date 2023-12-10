@@ -1917,7 +1917,7 @@ public abstract class Email
         {
             throw new IllegalArgumentException("name can not be null or empty");
         }
-        if (value == null || EmailUtils.isEmpty(value))
+        if (EmailUtils.isEmpty(value))
         {
             throw new IllegalArgumentException("value can not be null or empty");
         }
