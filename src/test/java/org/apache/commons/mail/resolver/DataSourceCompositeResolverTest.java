@@ -22,8 +22,6 @@ import static org.junit.Assert.*;
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.function.Executable;
-
 import java.io.IOException;
 import java.net.URL;
 
