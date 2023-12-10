@@ -42,6 +42,7 @@
         Update conversion code #153.
       </action>
       <action type="fix" dev="sgoeschl" due-to="Alexander Lehmann">Email.setBounceAddress no longer accepts invalid email addresses.</action>
+      <action type="fix" dev="sgoeschl" due-to="Amir Behnam, Michael Osipov">Throw more specific exceptions in MimeMessageParser #11.</action>
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
