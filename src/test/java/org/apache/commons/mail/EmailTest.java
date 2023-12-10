@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -152,7 +153,7 @@ public class EmailTest extends AbstractEmailTest
         email.setCharset(set.name());
         assertEquals(set.name(), email.getCharset());
 
-        set = Charset.forName("UTF-8");
+        set = StandardCharsets.UTF_8;
         email.setCharset(set.name());
         assertEquals(set.name(), email.getCharset());
     }

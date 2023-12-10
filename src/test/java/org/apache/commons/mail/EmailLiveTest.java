@@ -74,7 +74,7 @@ public class EmailLiveTest extends AbstractEmailTest
         final URLDataSource dataSource = new URLDataSource(url);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         IOUtils.copy(dataSource.getInputStream(), baos);
-        return new String(baos.toByteArray(), "UTF-8");
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**

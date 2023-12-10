@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 
 import javax.mail.internet.InternetAddress;
 
@@ -201,7 +202,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++)
         {
 
-            final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", "UTF-8");
+            final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", StandardCharsets.UTF_8.name());
 
             // N.B. validate() doesn't check addresses containing quotes or '['
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
@@ -232,7 +233,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest
         // test valid 'quoted' Email addresses
         try
         {
-            validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe", "UTF-8"), (Object[]) null);
+            validateMethod.invoke(new InternetAddress(VALID_QUOTED_EMAIL, "Joe", StandardCharsets.UTF_8.name()), (Object[]) null);
         }
         catch (final Exception ex)
         {
