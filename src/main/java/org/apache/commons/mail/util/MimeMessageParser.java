@@ -75,13 +75,13 @@ public class MimeMessageParser
     /**
      * Constructs an instance with the MimeMessage to be extracted.
      *
-     * @param message the message to parse
+     * @param mimeMessage the message to parse
      */
-    public MimeMessageParser(final MimeMessage message)
+    public MimeMessageParser(final MimeMessage mimeMessage)
     {
-        attachmentList = new ArrayList<>();
-        cidMap = new HashMap<>();
-        this.mimeMessage = message;
+        this.attachmentList = new ArrayList<>();
+        this.cidMap = new HashMap<>();
+        this.mimeMessage = mimeMessage;
         this.isMultiPart = false;
     }
 
@@ -247,8 +247,7 @@ public class MimeMessageParser
 
         try
         {
-            final ContentType ct = new ContentType(part.getDataHandler().getContentType());
-            return ct.match(mimeType);
+            return new ContentType(part.getDataHandler().getContentType()).match(mimeType);
         }
         catch (final ParseException ex)
         {
