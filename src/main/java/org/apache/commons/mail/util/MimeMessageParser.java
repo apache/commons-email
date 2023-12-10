@@ -16,11 +16,7 @@
  */
 package org.apache.commons.mail.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -44,7 +39,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimePart;
 import javax.mail.internet.MimeUtility;
 import javax.mail.internet.ParseException;
-import javax.mail.util.ByteArrayDataSource;
+
+import org.apache.commons.mail.InputStreamDataSource;
 
 /**
  * Parses a MimeMessage and stores the individual parts such a plain text,
@@ -264,21 +260,14 @@ public class MimeMessageParser
      * @throws MessagingException creating the DataSource failed
      * @throws IOException        error getting InputStream or unsupported encoding
      */
+    @SuppressWarnings("resource") // Caller closes InputStream
     protected DataSource createDataSource(final Multipart parent, final MimePart part)
         throws MessagingException, IOException
     {
-        final DataHandler dataHandler = part.getDataHandler();
-        final DataSource dataSource = dataHandler.getDataSource();
+        final DataSource dataSource = part.getDataHandler().getDataSource();
         final String contentType = getBaseMimeType(dataSource.getContentType());
-        byte[] content;
-        try (InputStream inputStream = dataSource.getInputStream())
-        {
-            content = this.getContent(inputStream);
-        }
-        final ByteArrayDataSource result = new ByteArrayDataSource(content, contentType);
         final String dataSourceName = getDataSourceName(part, dataSource);
-        result.setName(dataSourceName);
-        return result;
+        return new InputStreamDataSource(dataSource.getInputStream(), contentType, dataSourceName);
     }
 
     /** @return Returns the mimeMessage. */
@@ -408,29 +397,6 @@ public class MimeMessageParser
         }
 
         return result;
-    }
-
-    /**
-     * Read the content of the input stream.
-     *
-     * @param is the input stream to process
-     * @return the content of the input stream
-     * @throws IOException reading the input stream failed
-     */
-    private byte[] getContent(final InputStream is)
-        throws IOException
-    {
-        final ByteArrayOutputStream os = new ByteArrayOutputStream();
-        final BufferedInputStream isReader = new BufferedInputStream(is);
-        try (BufferedOutputStream osWriter = new BufferedOutputStream(os)) {
-            int ch;
-            while ((ch = isReader.read()) != -1)
-            {
-                osWriter.write(ch);
-            }
-            osWriter.flush();
-            return os.toByteArray();
-        }
     }
 
     /**

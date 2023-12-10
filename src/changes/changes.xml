@@ -54,6 +54,7 @@
       </action>
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.</action>
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Add org.apache.commons.mail.InputStreamDataSource.</action>
+      <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Don't waste memory in MimeMessageParser#createDataSource().</action>
       <!-- UPDATE -->
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
         Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102.
