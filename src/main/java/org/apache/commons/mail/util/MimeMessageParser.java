@@ -104,7 +104,7 @@ public class MimeMessageParser
      */
     public List<Address> getTo() throws MessagingException
     {
-        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
+        final Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
     }
 
@@ -112,9 +112,9 @@ public class MimeMessageParser
      * @return the 'cc' recipients of the message
      * @throws MessagingException determining the recipients failed
      */
-    public List<javax.mail.Address> getCc() throws MessagingException
+    public List<Address> getCc() throws MessagingException
     {
-        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
+        final Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
     }
 
@@ -122,9 +122,9 @@ public class MimeMessageParser
      * @return the 'bcc' recipients of the message
      * @throws MessagingException determining the recipients failed
      */
-    public List<javax.mail.Address> getBcc() throws MessagingException
+    public List<Address> getBcc() throws MessagingException
     {
-        final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
+        final Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
     }
 
@@ -134,7 +134,7 @@ public class MimeMessageParser
      */
     public String getFrom() throws MessagingException
     {
-        final javax.mail.Address[] addresses = this.mimeMessage.getFrom();
+        final Address[] addresses = this.mimeMessage.getFrom();
         if (addresses == null || addresses.length == 0)
         {
             return null;
@@ -148,7 +148,7 @@ public class MimeMessageParser
      */
     public String getReplyTo() throws MessagingException
     {
-        final javax.mail.Address[] addresses = this.mimeMessage.getReplyTo();
+        final Address[] addresses = this.mimeMessage.getReplyTo();
         if (addresses == null || addresses.length == 0)
         {
             return null;
