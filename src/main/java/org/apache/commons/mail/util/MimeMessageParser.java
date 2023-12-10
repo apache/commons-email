@@ -88,9 +88,10 @@ public class MimeMessageParser
      * Does the actual extraction.
      *
      * @return this instance
-     * @throws Exception parsing the mime message failed
+     * @throws MessagingException parsing the mime message failed
+     * @throws IOException parsing the mime message failed
      */
-    public MimeMessageParser parse() throws Exception
+    public MimeMessageParser parse() throws MessagingException, IOException
     {
         this.parse(null, mimeMessage);
         return this;
@@ -98,9 +99,9 @@ public class MimeMessageParser
 
     /**
      * @return the 'to' recipients of the message
-     * @throws Exception determining the recipients failed
+     * @throws MessagingException determining the recipients failed
      */
-    public List<javax.mail.Address> getTo() throws Exception
+    public List<javax.mail.Address> getTo() throws MessagingException
     {
         final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.TO);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
@@ -108,9 +109,9 @@ public class MimeMessageParser
 
     /**
      * @return the 'cc' recipients of the message
-     * @throws Exception determining the recipients failed
+     * @throws MessagingException determining the recipients failed
      */
-    public List<javax.mail.Address> getCc() throws Exception
+    public List<javax.mail.Address> getCc() throws MessagingException
     {
         final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.CC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
@@ -118,9 +119,9 @@ public class MimeMessageParser
 
     /**
      * @return the 'bcc' recipients of the message
-     * @throws Exception determining the recipients failed
+     * @throws MessagingException determining the recipients failed
      */
-    public List<javax.mail.Address> getBcc() throws Exception
+    public List<javax.mail.Address> getBcc() throws MessagingException
     {
         final javax.mail.Address[] recipients = this.mimeMessage.getRecipients(Message.RecipientType.BCC);
         return recipients != null ? Arrays.asList(recipients) : new ArrayList<>();
@@ -128,9 +129,9 @@ public class MimeMessageParser
 
     /**
      * @return the 'from' field of the message
-     * @throws Exception parsing the mime message failed
+     * @throws MessagingException parsing the mime message failed
      */
-    public String getFrom() throws Exception
+    public String getFrom() throws MessagingException
     {
         final javax.mail.Address[] addresses = this.mimeMessage.getFrom();
         if (addresses == null || addresses.length == 0)
@@ -142,9 +143,9 @@ public class MimeMessageParser
 
     /**
      * @return the 'replyTo' address of the email
-     * @throws Exception parsing the mime message failed
+     * @throws MessagingException parsing the mime message failed
      */
-    public String getReplyTo() throws Exception
+    public String getReplyTo() throws MessagingException
     {
         final javax.mail.Address[] addresses = this.mimeMessage.getReplyTo();
         if (addresses == null || addresses.length == 0)
@@ -156,9 +157,9 @@ public class MimeMessageParser
 
     /**
      * @return the mail subject
-     * @throws Exception parsing the mime message failed
+     * @throws MessagingException parsing the mime message failed
      */
-    public String getSubject() throws Exception
+    public String getSubject() throws MessagingException
     {
         return this.mimeMessage.getSubject();
     }
@@ -236,10 +237,9 @@ public class MimeMessageParser
      * @param mimeType the mime type to check
      * @return {@code true} if the MimePart matches the given mime type, {@code false} otherwise
      * @throws MessagingException parsing the MimeMessage failed
-     * @throws IOException        parsing the MimeMessage failed
      */
     private boolean isMimeType(final MimePart part, final String mimeType)
-        throws MessagingException, IOException
+        throws MessagingException
     {
         // Do not use part.isMimeType(String) as it is broken for MimeBodyPart
         // and does not really check the actual content type.
@@ -262,7 +262,7 @@ public class MimeMessageParser
      * @param part   the current part to be processed
      * @return the DataSource
      * @throws MessagingException creating the DataSource failed
-     * @throws IOException        creating the DataSource failed
+     * @throws IOException        error getting InputStream or unsupported encoding
      */
     protected DataSource createDataSource(final Multipart parent, final MimePart part)
         throws MessagingException, IOException
