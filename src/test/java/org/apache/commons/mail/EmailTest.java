@@ -147,9 +147,7 @@ public class EmailTest extends AbstractEmailTest
     @Test
     public void testGetSetCharset()
     {
-        // test ASCII and UTF-8 charsets; since every JVM is required
-        // to support these, testing them should always succeed.
-        Charset set = Charset.forName("US-ASCII");
+        Charset set = StandardCharsets.US_ASCII;
         email.setCharset(set.name());
         assertEquals(set.name(), email.getCharset());
 
