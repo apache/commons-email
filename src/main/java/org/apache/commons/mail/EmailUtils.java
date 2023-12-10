@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
+import java.util.Objects;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -130,25 +131,6 @@ final class EmailUtils
     static boolean isNotEmpty(final String str)
     {
         return str != null && !str.isEmpty();
-    }
-
-    /**
-     * Validate an argument, throwing {@code IllegalArgumentException}
-     * if the argument is {@code null}.
-     * <p>
-     * Copied from Commons Lang v2.1, svn 201930
-     * <p>
-     *
-     * @param object the object to check is not {@code null}
-     * @param message the exception message you would like to see if the object is {@code null}
-     * @throws IllegalArgumentException if the object is {@code null}
-     */
-    static void notNull(final Object object, final String message)
-    {
-        if (object == null)
-        {
-            throw new IllegalArgumentException(message);
-        }
     }
 
     /**

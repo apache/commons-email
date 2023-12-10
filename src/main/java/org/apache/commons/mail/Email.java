@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -559,15 +560,15 @@ public abstract class Email
      * is supplied the implementation assumes that you have set a
      * authenticator and will use the existing mail session (as expected).
      *
-     * @param aSession mail session to be used
-     * @throws IllegalArgumentException if the session is {@code null}
+     * @param session mail session to be used
+     * @throws NullPointerException if {@code aSession} is {@code null}
      * @since 1.0
      */
-    public void setMailSession(final Session aSession)
+    public void setMailSession(final Session session)
     {
-        EmailUtils.notNull(aSession, "no mail session supplied");
+        Objects.requireNonNull(session, "no mail session supplied");
 
-        final Properties sessionProperties = aSession.getProperties();
+        final Properties sessionProperties = session.getProperties();
         final String auth = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_AUTH);
 
         if ("true".equalsIgnoreCase(auth))
@@ -585,12 +586,12 @@ public abstract class Email
             else
             {
                 // assume that the given mail session contains a working authenticator
-                this.session = aSession;
+                this.session = session;
             }
         }
         else
         {
-            this.session = aSession;
+            this.session = session;
         }
     }
 
@@ -1454,7 +1455,8 @@ public abstract class Email
     public String sendMimeMessage()
        throws EmailException
     {
-        EmailUtils.notNull(this.message, "MimeMessage has not been created yet");
+        final Object object = this.message;
+        Objects.requireNonNull(object, "MimeMessage has not been created yet");
 
         try
         {
