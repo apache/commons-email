@@ -34,7 +34,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
     private final String classPathBase;
 
     /**
-     * Constructor
+     * Constructs a new instance.
      */
     public DataSourceClassPathResolver()
     {
@@ -42,7 +42,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param classPathBase a base class path
      */
@@ -52,7 +52,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param classPathBase a base class path
      * @param lenient shall we ignore resources not found or throw an exception?
