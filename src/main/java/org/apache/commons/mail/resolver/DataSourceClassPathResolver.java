@@ -64,6 +64,8 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver
     }
 
     /**
+     * Gets the class path base.
+     *
      * @return the classPathBase
      */
     public String getClassPathBase()
