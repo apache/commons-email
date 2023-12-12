@@ -46,6 +46,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Email.setMailSession(Session) throws the more precise exception NullPointerException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in DataSourceClassPathResolver.resolve(String, boolean).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Complete half-baked test DataSourceUrlResolverTest.testResolvingHttpNonLenient().</action>
+      <action issue="EMAIL-206" type="fix" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Use SharedByteArrayInputStream for memory usage #157.</action>
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">
         Add github/codeql-action #75.
