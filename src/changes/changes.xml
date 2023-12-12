@@ -26,21 +26,11 @@
   <body>
     <release version="1.6.0" date="YYYY-MM-DD" description="Feature release (Java 8 or above).">
       <!-- FIX -->
-      <action issue="EMAIL-190" type="fix" due-to="sgoeschl">
-        Fix broken JDK 9 build by updating "easymock" and other dependencies.
-      </action>
-      <action type="fix" dev="ggregory" due-to="John Patrick, Gary Gregory">
-        Use JUnit 5 APIs #106, #108, #109, #114.
-      </action>     
-      <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">
-        [StepSecurity] ci: Harden GitHub Actions #149.
-      </action>
-      <action dev="ggregory" type="fix" due-to="Lee Jaeheon, sebbASF">
-        Better use of JUnit APIs #158.
-      </action>
-      <action issue="EMAIL-205" dev="ggregory" type="fix" due-to="Dimitrios Efthymiou, Alex Herbert">
-        Update conversion code #153.
-      </action>
+      <action issue="EMAIL-190" type="fix" due-to="sgoeschl">Fix broken JDK 9 build by updating "easymock" and other dependencies.</action>
+      <action type="fix" dev="ggregory" due-to="John Patrick, Gary Gregory">Use JUnit 5 APIs #106, #108, #109, #114.</action>     
+      <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">[StepSecurity] ci: Harden GitHub Actions #149.</action>
+      <action dev="ggregory" type="fix" due-to="Lee Jaeheon, sebbASF">Better use of JUnit APIs #158.</action>
+      <action issue="EMAIL-205" dev="ggregory" type="fix" due-to="Dimitrios Efthymiou, Alex Herbert">Update conversion code #153.</action>
       <action type="fix" dev="ggregory" due-to="Alexander Lehmann">Email.setBounceAddress no longer accepts invalid email addresses.</action>
       <action type="fix" dev="ggregory" due-to="Amir Behnam, Michael Osipov">Throw more specific exceptions in MimeMessageParser #11.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Email.setMailSession(Session) throws the more precise exception NullPointerException.</action>
