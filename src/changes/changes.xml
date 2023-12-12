@@ -38,73 +38,31 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Complete half-baked test DataSourceUrlResolverTest.testResolvingHttpNonLenient().</action>
       <action issue="EMAIL-206" type="fix" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Use SharedByteArrayInputStream for memory usage #157.</action>
       <!-- ADD -->
-      <action type="add" due-to="Dependabot" dev="ggregory">
-        Add github/codeql-action #75.
-      </action>
-      <action type="add" due-to="Gary Gregory" dev="ggregory">
-        Add Maven plugin JapiCmp and remove Clirr.
-      </action>
+      <action type="add" due-to="Dependabot" dev="ggregory">Add github/codeql-action #75.</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add Maven plugin JapiCmp and remove Clirr.</action>
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.</action>
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Add org.apache.commons.mail.InputStreamDataSource.</action>
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Don't waste memory in MimeMessageParser#createDataSource().</action>
       <!-- UPDATE -->
-      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102.
-      </action>
-      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump actions/checkout from 1 to 3.2.0, #25 #33, #67, #99, #117.
-      </action>
-      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump actions/setup-java from 1.4.0 to v3.6.0 #30, #74, #103.
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110
-      </action>
-      <action issue="EMAIL-177" type="update" due-to="Gary Gregory">
-        Bump from Java 6 to 7.
-      </action>
-      <action type="update" due-to="Gary Gregory">
-        Bump from Java 7 to 8.
-      </action>
-      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte, Dependabot, Gary Gregory">
-        Bump javax.mail:1.6.1 to jakarta.mail:1.6.7.
-      </action>
-      <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">
-        Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.
-      </action>
-      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">
-        Bump commons-parent from 50 to 65, #118, #128.
-      </action>
-      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18.
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump spotbugs from 4.0.6 to 4.7.2 #40.
-      </action>
-      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">
-        Bump junit from 4.13 to 4.13.2 #32.
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump commons-release-plugin from 1.0 to 1.7 #23
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94.
-      </action>
-      <action type="update" due-to="Gary Gregory">
-        Bump tests commons-io:commons-io 2.6 to 2.15.1.
-      </action>
-      <action type="update" due-to="Gary Gregory" dev="ggregory">
-        Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17.
-      </action>
-      <action type="update" due-to="Gary Gregory" dev="ggregory">
-        Bump org.easymock:easymock from 4.2 to 5.2.0, #107, #164.
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump commons-release-plugin from 1.7 to 1.8.1 #73, #184.
-      </action>
-      <action type="update" due-to="Dependabot" dev="ggregory">
-        Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87.
-      </action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/checkout from 1 to 3.2.0, #25 #33, #67, #99, #117.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/setup-java from 1.4.0 to v3.6.0 #30, #74, #103.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110.</action>
+      <action issue="EMAIL-177" type="update" due-to="Gary Gregory">Bump from Java 6 to 7.</action>
+      <action type="update" due-to="Gary Gregory">Bump from Java 7 to 8.</action>
+      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte, Dependabot, Gary Gregory">Bump javax.mail:1.6.1 to jakarta.mail:1.6.7.</action>
+      <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.</action>
+      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">Bump commons-parent from 50 to 65, #118, #128.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump spotbugs from 4.0.6 to 4.7.2 #40.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump junit from 4.13 to 4.13.2 #32.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-release-plugin from 1.0 to 1.7 #23.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94.</action>
+      <action type="update" due-to="Gary Gregory">Bump tests commons-io:commons-io 2.6 to 2.15.1.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.easymock:easymock from 4.2 to 5.2.0, #107, #164.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-release-plugin from 1.7 to 1.8.1 #73, #184.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87.</action>
     </release>
     <release version="1.5" date="2017-08-01">
       <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
