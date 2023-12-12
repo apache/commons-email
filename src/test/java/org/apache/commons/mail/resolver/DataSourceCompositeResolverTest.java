@@ -16,14 +16,16 @@
  */
 package org.apache.commons.mail.resolver;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.apache.commons.mail.DataSourceResolver;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.IOException;
 import java.net.URL;
+
+import org.apache.commons.mail.DataSourceResolver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for DateSourceResolver.
@@ -35,7 +37,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     private DataSourceResolver[] dataSourceResolvers;
     private DataSourceResolver[] dataSourceResolversMissing;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         final DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("https://www.apache.org"), false);
         final DataSourceUrlResolver urlResolverMissing = new DataSourceUrlResolver(new URL("https://does.not.exist"), false);

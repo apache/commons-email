@@ -16,10 +16,11 @@
  */
 package org.apache.commons.mail.mocks;
 
-import org.apache.commons.mail.ImageHtmlEmail;
-
 import java.io.IOException;
+
 import javax.mail.MessagingException;
+
+import org.apache.commons.mail.ImageHtmlEmail;
 
 /**
  * Extension of the ImageHtmlEmail Class (used to allow testing only)
@@ -27,7 +28,7 @@ import javax.mail.MessagingException;
 public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
     /**
      * Retrieve the message content
-     * 
+     *
      * @return Message Content
      */
     public String getMsg() {
@@ -40,7 +41,7 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
 
     /**
      * Retrieve the html msg
-     * 
+     *
      * @return Message Content
      */
     public String getHtmlMsg() {

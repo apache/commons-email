@@ -56,7 +56,7 @@ import javax.mail.internet.MimeMultipart;
  *
  * <p>
  * It is also possible to embed URLs, files, or arbitrary {@code DataSource}s directly into the body of the mail:
- * 
+ *
  * <pre>
  * HtmlEmail he = new HtmlEmail();
  * File img = new File("my/image.gif");
@@ -505,7 +505,7 @@ public class HtmlEmail extends MultiPartEmail {
 
     /**
      * Private bean class that encapsulates data about URL contents that are embedded in the final email.
-     * 
+     *
      * @since 1.1
      */
     private static final class InlineImage {
@@ -518,7 +518,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         /**
          * Creates an InlineImage object to represent the specified content ID and {@code MimeBodyPart}.
-         * 
+         *
          * @param cid        the generated content ID
          * @param dataSource the {@code DataSource} that represents the content
          * @param mbp        the {@code MimeBodyPart} that contains the encoded data
@@ -531,7 +531,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         /**
          * Returns the unique content ID of this InlineImage.
-         * 
+         *
          * @return the unique content ID of this InlineImage
          */
         public String getCid() {
@@ -540,7 +540,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         /**
          * Returns the {@code DataSource} that represents the encoded content.
-         * 
+         *
          * @return the {@code DataSource} representing the encoded content
          */
         public DataSource getDataSource() {
@@ -549,7 +549,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         /**
          * Returns the {@code MimeBodyPart} that contains the encoded InlineImage data.
-         * 
+         *
          * @return the {@code MimeBodyPart} containing the encoded InlineImage data
          */
         public MimeBodyPart getMbp() {
@@ -560,7 +560,7 @@ public class HtmlEmail extends MultiPartEmail {
         // is stored as a entry in a Map.
         /**
          * {@inheritDoc}
-         * 
+         *
          * @return true if the other object is also an InlineImage with the same cid.
          */
         @Override
@@ -579,7 +579,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         /**
          * {@inheritDoc}
-         * 
+         *
          * @return the cid hashCode.
          */
         @Override

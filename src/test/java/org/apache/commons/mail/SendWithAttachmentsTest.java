@@ -24,8 +24,8 @@ import javax.mail.internet.MimeUtility;
 
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case verifying bugzilla issue 30973 is fixed.
@@ -35,7 +35,7 @@ import org.junit.Test;
 public class SendWithAttachmentsTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
-    @Before
+    @BeforeEach
     public void setUpSendWithAttachmentsTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();

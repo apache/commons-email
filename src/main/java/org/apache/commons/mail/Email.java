@@ -258,7 +258,7 @@ public abstract class Email {
 
     /**
      * Does server require TLS encryption for authentication?
-     * 
+     *
      * @deprecated since 1.3, use setStartTLSEnabled() instead
      */
     @Deprecated
@@ -266,7 +266,7 @@ public abstract class Email {
 
     /**
      * Does the current transport use SSL/TLS encryption upon connection?
-     * 
+     *
      * @deprecated since 1.3, use setSSLOnConnect() instead
      */
     @Deprecated

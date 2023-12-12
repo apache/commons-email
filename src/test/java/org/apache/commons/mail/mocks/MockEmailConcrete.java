@@ -33,7 +33,7 @@ public class MockEmailConcrete extends Email {
 
     /**
      * Not Implemented, should be implemented in subclasses of Email
-     * 
+     *
      * @param msg The email message
      * @return Email msg.
      */
@@ -46,7 +46,7 @@ public class MockEmailConcrete extends Email {
 
     /**
      * Retrieve the current debug setting
-     * 
+     *
      * @return debug
      */
     public boolean isDebug() {
@@ -55,7 +55,7 @@ public class MockEmailConcrete extends Email {
 
     /**
      * Retrieve the current authentication setting
-     * 
+     *
      * @return Authenticator Authenticator
      */
     public Authenticator getAuthenticator() {

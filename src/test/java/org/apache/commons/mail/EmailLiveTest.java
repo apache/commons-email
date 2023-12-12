@@ -33,8 +33,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.resolver.DataSourceUrlResolver;
 import org.apache.commons.mail.settings.EmailConfiguration;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This are regression test sending REAL email to REAL mail servers using REAL recipients.
@@ -43,7 +43,7 @@ import org.junit.Test;
  * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
 public class EmailLiveTest extends AbstractEmailTest {
-    @Before
+    @BeforeEach
     public void setUpLiveTest() {
         // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
         System.setProperty("mail.mime.charset", "utf-8");

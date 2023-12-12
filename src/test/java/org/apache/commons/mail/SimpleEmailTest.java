@@ -16,26 +16,26 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 
 import org.apache.commons.mail.mocks.MockSimpleEmail;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for SimpleEmailTest
- * 
+ *
  * @since 1.0
  */
 public class SimpleEmailTest extends AbstractEmailTest {
     private MockSimpleEmail email;
 
-    @Before
+    @BeforeEach
     public void setUpSimpleEmailTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockSimpleEmail();
@@ -102,7 +102,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testDefaultMimeCharset() throws EmailException, IOException {
         /*
          * disabling this test as it is dependent on execution order. MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is

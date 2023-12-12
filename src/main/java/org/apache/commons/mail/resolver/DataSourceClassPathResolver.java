@@ -16,13 +16,13 @@
  */
 package org.apache.commons.mail.resolver;
 
-import javax.activation.DataSource;
-import javax.activation.FileTypeMap;
-import javax.mail.util.ByteArrayDataSource;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import javax.activation.DataSource;
+import javax.activation.FileTypeMap;
+import javax.mail.util.ByteArrayDataSource;
 
 /**
  * Creates a {@code DataSource} based on an class path.

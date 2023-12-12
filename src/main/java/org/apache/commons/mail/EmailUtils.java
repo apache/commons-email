@@ -131,7 +131,7 @@ final class EmailUtils {
      * <p>
      * Copied from Commons Lang v2.1, svn 201930
      * </p>
-     * 
+     *
      * @param count the length of random string to create
      * @return the random string
      */

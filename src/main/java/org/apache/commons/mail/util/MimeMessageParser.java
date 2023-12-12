@@ -188,7 +188,7 @@ public class MimeMessageParser {
 
     /**
      * Strips the content id of any whitespace and angle brackets.
-     * 
+     *
      * @param contentId the string to strip
      * @return a stripped version of the content id
      */

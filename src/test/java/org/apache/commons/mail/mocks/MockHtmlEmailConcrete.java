@@ -17,6 +17,7 @@
 package org.apache.commons.mail.mocks;
 
 import java.io.IOException;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 
@@ -28,9 +29,10 @@ import org.apache.commons.mail.HtmlEmail;
  * @since 1.0
  */
 public class MockHtmlEmailConcrete extends HtmlEmail {
+
     /**
      * Retrieve the message content
-     * 
+     *
      * @return Message Content
      */
     public String getMsg() {
@@ -43,7 +45,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
 
     /**
      * Retrieve the text msg
-     * 
+     *
      * @return Message Content
      */
     public String getTextMsg() {
@@ -52,7 +54,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
 
     /**
      * Retrieve the html msg
-     * 
+     *
      * @return Message Content
      */
     public String getHtmlMsg() {

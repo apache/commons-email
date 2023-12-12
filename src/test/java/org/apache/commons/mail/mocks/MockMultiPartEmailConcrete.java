@@ -32,7 +32,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail {
 
     /**
      * Retrieve the message content
-     * 
+     *
      * @return Message Content
      */
     public String getMsg() {

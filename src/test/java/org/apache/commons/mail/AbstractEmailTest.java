@@ -17,8 +17,10 @@
 package org.apache.commons.mail;
 
 import static org.easymock.EasyMock.expect;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.powermock.api.easymock.PowerMock.createMock;
 import static org.powermock.api.easymock.PowerMock.replay;
 
@@ -39,8 +41,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.settings.EmailConfiguration;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
@@ -98,7 +100,7 @@ public abstract class AbstractEmailTest {
     /** counter for creating a file name */
     private static int fileNameCounter;
 
-    @Before
+    @BeforeEach
     public void setUpAbstractEmailTest() {
         emailOutputDir = new File("target/test-emails");
         if (!emailOutputDir.exists()) {
@@ -106,12 +108,12 @@ public abstract class AbstractEmailTest {
         }
     }
 
-    @After
+    @AfterEach
     public void tearDownEmailTest() {
         // stop the fake email server (if started)
         if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
             this.fakeMailServer.stop();
-            assertTrue("Mail server didn't stop", isMailServerStopped(fakeMailServer));
+            assertTrue(isMailServerStopped(fakeMailServer), "Mail server didn't stop");
         }
 
         this.fakeMailServer = null;
@@ -119,7 +121,7 @@ public abstract class AbstractEmailTest {
 
     /**
      * Gets the mail server port.
-     * 
+     *
      * @return the port the server is running on.
      */
     protected int getMailServerPort() {
@@ -146,7 +148,7 @@ public abstract class AbstractEmailTest {
      */
     public String getMessageAsString(final int intMsgNo) {
         final List<?> receivedMessages = fakeMailServer.getMessages();
-        assertTrue("mail server didn't get enough messages", receivedMessages.size() >= intMsgNo);
+        assertTrue(receivedMessages.size() >= intMsgNo, "mail server didn't get enough messages");
 
         final WiserMessage emailMessage = (WiserMessage) receivedMessages.get(intMsgNo);
 
@@ -173,7 +175,7 @@ public abstract class AbstractEmailTest {
             this.fakeMailServer.setPort(getMailServerPort());
             this.fakeMailServer.start();
 
-            assertFalse("fake mail server didn't start", isMailServerStopped(fakeMailServer));
+            assertFalse(isMailServerStopped(fakeMailServer), "fake mail server didn't start");
 
             final Date dtStartWait = new Date();
             while (isMailServerStopped(fakeMailServer)) {
@@ -192,7 +194,7 @@ public abstract class AbstractEmailTest {
 
     /**
      * Validate the message was sent properly
-     * 
+     *
      * @param mailServer     reference to the fake mail server
      * @param strSubject     expected subject
      * @param fromAdd        expected from address
@@ -205,7 +207,7 @@ public abstract class AbstractEmailTest {
      */
     protected WiserMessage validateSend(final Wiser mailServer, final String strSubject, final InternetAddress fromAdd, final List<InternetAddress> toAdd,
             final List<InternetAddress> ccAdd, final List<InternetAddress> bccAdd, final boolean boolSaveToFile) throws IOException {
-        assertTrue("mail server doesn't contain expected message", mailServer.getMessages().size() == 1);
+        assertTrue(mailServer.getMessages().size() == 1, "mail server doesn't contain expected message");
         final WiserMessage emailMessage = mailServer.getMessages().get(0);
 
         if (boolSaveToFile) {
@@ -223,22 +225,22 @@ public abstract class AbstractEmailTest {
             final MimeMessage mimeMessage = emailMessage.getMimeMessage();
 
             // test subject
-            assertEquals("got wrong subject from mail", strSubject, mimeMessage.getHeader("Subject", null));
+            assertEquals(strSubject, mimeMessage.getHeader("Subject", null), "got wrong subject from mail");
 
             // test from address
-            assertEquals("got wrong From: address from mail", fromAdd.toString(), mimeMessage.getHeader("From", null));
+            assertEquals(fromAdd.toString(), mimeMessage.getHeader("From", null), "got wrong From: address from mail");
 
             // test to address
-            assertTrue("got wrong To: address from mail", toAdd.toString().contains(mimeMessage.getHeader("To", null)));
+            assertTrue(toAdd.toString().contains(mimeMessage.getHeader("To", null)), "got wrong To: address from mail");
 
             // test cc address
             if (!ccAdd.isEmpty()) {
-                assertTrue("got wrong Cc: address from mail", ccAdd.toString().contains(mimeMessage.getHeader("Cc", null)));
+                assertTrue(ccAdd.toString().contains(mimeMessage.getHeader("Cc", null)), "got wrong Cc: address from mail");
             }
 
             // test bcc address
             if (!bccAdd.isEmpty()) {
-                assertTrue("got wrong Bcc: address from mail", bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)));
+                assertTrue(bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)), "got wrong Bcc: address from mail");
             }
         } catch (final MessagingException me) {
             final IllegalStateException ise = new IllegalStateException("caught MessagingException in validateSend()");
@@ -251,7 +253,7 @@ public abstract class AbstractEmailTest {
 
     /**
      * Validate the message was sent properly
-     * 
+     *
      * @param mailServer     reference to the fake mail server
      * @param strSubject     expected subject
      * @param content        the expected message content
@@ -276,12 +278,12 @@ public abstract class AbstractEmailTest {
         // and -- (front and end)
         final String emailMessageBody = getMessageBody(emailMessage);
         final String strMessageBody = emailMessageBody.substring(AbstractEmailTest.BODY_START_PAD, emailMessageBody.length() - AbstractEmailTest.BODY_END_PAD);
-        assertTrue("didn't find expected content type in message body", strMessageBody.contains(strSentContent));
+        assertTrue(strMessageBody.contains(strSentContent), "didn't find expected content type in message body");
     }
 
     /**
      * Validate the message was sent properly
-     * 
+     *
      * @param mailServer     reference to the fake mail server
      * @param strSubject     expected subject
      * @param strMessage     the expected message as a string
@@ -299,7 +301,8 @@ public abstract class AbstractEmailTest {
         final WiserMessage emailMessage = this.validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, true);
 
         // test message content
-        assertThat("didn't find expected message content in message body", getMessageBody(emailMessage), containsString(strMessage));
+        // assertThat("didn't find expected message content in message body", getMessageBody(emailMessage), containsString(strMessage));
+        assertTrue(getMessageBody(emailMessage).contains(strMessage));
     }
 
     /**

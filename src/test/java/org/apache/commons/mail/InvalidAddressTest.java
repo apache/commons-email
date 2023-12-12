@@ -16,11 +16,11 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.mail.mocks.MockEmailConcrete;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for invalid Addresses in Email Class
@@ -43,7 +43,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
 
     private MockEmailConcrete email;
 
-    @Before
+    @BeforeEach
     public void setUpInvalidAddressTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockEmailConcrete();

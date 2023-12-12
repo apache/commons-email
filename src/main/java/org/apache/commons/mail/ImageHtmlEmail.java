@@ -16,12 +16,13 @@
  */
 package org.apache.commons.mail;
 
-import javax.activation.DataSource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.activation.DataSource;
 
 /**
  * <p>

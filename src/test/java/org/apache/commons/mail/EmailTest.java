@@ -16,8 +16,13 @@
  */
 package org.apache.commons.mail;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -41,8 +46,8 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.ParseException;
 
 import org.apache.commons.mail.mocks.MockEmailConcrete;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for Email Class
@@ -56,7 +61,7 @@ public class EmailTest extends AbstractEmailTest {
     /** mock for testing */
     private MockEmailConcrete email;
 
-    @Before
+    @BeforeEach
     public void setUpEmailTest() {
         // reusable objects to be used across multiple tests
         email = new MockEmailConcrete();
@@ -1015,7 +1020,7 @@ public class EmailTest extends AbstractEmailTest {
      *
      *
      * Case 1: Setting a default charset results in adding that charset info to to the content type of a text/based content object.
-     * 
+     *
      * @throws Exception on any error
      */
     @Test
@@ -1036,7 +1041,7 @@ public class EmailTest extends AbstractEmailTest {
 
     /**
      * Case 2: A default charset is overridden by an explicitly specified charset in setContent().
-     * 
+     *
      * @throws Exception on any error
      */
     @Test
@@ -1057,7 +1062,7 @@ public class EmailTest extends AbstractEmailTest {
 
     /**
      * Case 3: A non-text content object ignores a default charset entirely.
-     * 
+     *
      * @throws Exception on any error
      */
     @Test

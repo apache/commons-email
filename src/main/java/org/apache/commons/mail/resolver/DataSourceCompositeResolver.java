@@ -16,10 +16,11 @@
  */
 package org.apache.commons.mail.resolver;
 
-import org.apache.commons.mail.DataSourceResolver;
+import java.io.IOException;
 
 import javax.activation.DataSource;
-import java.io.IOException;
+
+import org.apache.commons.mail.DataSourceResolver;
 
 /**
  * A composite data source resolver. It allows to resolve data sources coming from multiple locations such as the classpath, the file system or an URL.

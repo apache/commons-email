@@ -140,7 +140,7 @@ public class MultiPartEmail extends Email {
 
     /**
      * Initialize the multipart email.
-     * 
+     *
      * @since 1.0
      */
     protected void init() {

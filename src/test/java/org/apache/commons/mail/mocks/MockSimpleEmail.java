@@ -28,7 +28,7 @@ import org.apache.commons.mail.SimpleEmail;
 public class MockSimpleEmail extends SimpleEmail {
     /**
      * Retrieve the message content
-     * 
+     *
      * @return Message Content
      */
     public String getMsg() {

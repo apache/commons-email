@@ -54,7 +54,7 @@ public class ByteArrayDataSource implements DataSource {
 
     /**
      * The name associated with this data source. By default, the name is an empty string, similar to javax.mail.util.ByteArrayDataSource.
-     * 
+     *
      * @since 1.3.1
      */
     private String name = "";

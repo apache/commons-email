@@ -247,11 +247,26 @@
             <artifactId>jakarta.mail</artifactId>
             <version>1.6.7</version>
         </dependency>
+<!--        <dependency>-->
+<!--          <groupId>org.junit.platform</groupId>-->
+<!--          <artifactId>junit-platform-runner</artifactId>-->
+<!--          <scope>test</scope>-->
+<!--        </dependency>-->
+        <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter</artifactId>
+          <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
+<!--        <dependency>-->
+<!--          <groupId>org.junit.vintage</groupId>-->
+<!--          <artifactId>junit-vintage-engine</artifactId>-->
+<!--          <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
@@ -306,6 +321,7 @@
         <commons.jira.id>EMAIL</commons.jira.id>
         <commons.jira.pid>12310474</commons.jira.pid>
         <commons.release.version>1.6.0</commons.release.version>
+        <commons.release.next>1.6.1</commons.release.next>
         <commons.release.desc>(Java 8 or above)</commons.release.desc>
         <commons.rc.version>RC1</commons.rc.version>
         <commons.bc.version>1.5</commons.bc.version>

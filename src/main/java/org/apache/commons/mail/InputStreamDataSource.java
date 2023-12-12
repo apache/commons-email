@@ -28,7 +28,7 @@ import javax.activation.DataSource;
  * <p>
  * Copied from <a href="https://cxf.apache.org/">Apache CXF</a> and modified.
  * </p>
- * 
+ *
  * @since 1.6.0
  */
 public final class InputStreamDataSource implements DataSource {
