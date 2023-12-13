@@ -303,10 +303,8 @@
         <commons.release.desc>(Java 8 or above)</commons.release.desc>
         <commons.rc.version>RC1</commons.rc.version>
         <commons.bc.version>1.5</commons.bc.version>
-
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
-
         <mockito-core.version>4.11.0</mockito-core.version>
     </properties>
 
@@ -478,7 +476,7 @@
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs-maven-plugin</artifactId>
               <configuration>
-                <!-- <excludeFilterFile>${basedir}/spotbugs-exclude-filter.xml</excludeFilterFile>  -->
+                  <excludeFilterFile>${basedir}/src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
               </configuration>
             </plugin>
         </plugins>
