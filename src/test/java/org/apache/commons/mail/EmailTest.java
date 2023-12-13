@@ -16,7 +16,6 @@
  */
 package org.apache.commons.mail;
 
-<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -25,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-=======
->>>>>>> 8f7edb1 (fully migrated to junit5)
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
@@ -51,11 +48,6 @@ import javax.mail.internet.ParseException;
 import org.apache.commons.mail.mocks.MockEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
-=======
-
-import static org.junit.jupiter.api.Assertions.*;
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 /**
  * JUnit test case for Email Class
@@ -70,12 +62,8 @@ public class EmailTest extends AbstractEmailTest {
     private MockEmailConcrete email;
 
     @BeforeEach
-<<<<<<< HEAD
-    public void setUpEmailTest() {
-=======
     public void setUpEmailTest()
     {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         // reusable objects to be used across multiple tests
         email = new MockEmailConcrete();
     }

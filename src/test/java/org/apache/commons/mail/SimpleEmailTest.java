@@ -16,12 +16,9 @@
  */
 package org.apache.commons.mail;
 
-<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-=======
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 import java.io.IOException;
 
@@ -29,11 +26,7 @@ import org.apache.commons.mail.mocks.MockSimpleEmail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
-=======
 
-import static org.junit.jupiter.api.Assertions.*;
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 /**
  * JUnit test case for SimpleEmailTest
@@ -44,12 +37,8 @@ public class SimpleEmailTest extends AbstractEmailTest {
     private MockSimpleEmail email;
 
     @BeforeEach
-<<<<<<< HEAD
-    public void setUpSimpleEmailTest() {
-=======
     public void setUpSimpleEmailTest()
     {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         // reusable objects to be used across multiple tests
         this.email = new MockSimpleEmail();
     }
@@ -109,12 +98,8 @@ public class SimpleEmailTest extends AbstractEmailTest {
 
     @Test
     @Disabled
-<<<<<<< HEAD
-    public void testDefaultMimeCharset() throws EmailException, IOException {
-=======
     public void testDefaultMimeCharset() throws EmailException, IOException
     {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         /*
          * disabling this test as it is dependent on execution order. MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is
          * not defined, reverts to the default Java charset which is basically the system default file encoding.

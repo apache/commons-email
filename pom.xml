@@ -307,7 +307,7 @@
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
         
-        <mockito-core.version>5.8.0</mockito-core.version>
+        <mockito-core.version>4.11.0</mockito-core.version>
     </properties>
 
     <build>

@@ -16,23 +16,13 @@
  */
 package org.apache.commons.mail;
 
-<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URL;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-=======
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.net.URL;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 /**
  * JUnit test case for EmailAttachment Class.
@@ -43,12 +33,8 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     private EmailAttachment attachment;
 
     @BeforeEach
-<<<<<<< HEAD
-    public void setUpAttachmentTest() {
-=======
     public void setUpAttachmentTest()
     {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         attachment = new EmailAttachment();
     }
 

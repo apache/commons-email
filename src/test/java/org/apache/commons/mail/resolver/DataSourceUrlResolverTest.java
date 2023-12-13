@@ -16,13 +16,6 @@
  */
 package org.apache.commons.mail.resolver;
 
-<<<<<<< HEAD
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-=======
->>>>>>> 8f7edb1 (fully migrated to junit5)
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +24,7 @@ import org.apache.commons.mail.DataSourceResolver;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * JUnit test case for DataSourceUrlResolver.

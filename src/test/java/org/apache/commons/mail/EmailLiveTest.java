@@ -37,27 +37,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
-<<<<<<< HEAD
- * This are regression test sending REAL email to REAL mail servers using REAL recipients.
-=======
- * These are regression test sending REAL email to REAL mail
- * servers using REAL recipients.
->>>>>>> 8f7edb1 (fully migrated to junit5)
+ * These are regression test sending REAL email to REAL mail servers using REAL recipients.
  *
  * The intention is to field-test certain aspects of email using a variety of mail clients since I'm not a mockist (see
  * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
-<<<<<<< HEAD
 public class EmailLiveTest extends AbstractEmailTest {
-    @BeforeEach
-    public void setUpLiveTest() {
-=======
-public class EmailLiveTest extends AbstractEmailTest
-{
+
     @BeforeEach
     public void setUpLiveTest()
     {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
         System.setProperty("mail.mime.charset", "utf-8");
 

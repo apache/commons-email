@@ -16,23 +16,16 @@
  */
 package org.apache.commons.mail.resolver;
 
-<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-=======
->>>>>>> 8f7edb1 (fully migrated to junit5)
 import java.io.IOException;
 
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
-=======
 
-import static org.junit.jupiter.api.Assertions.*;
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 /**
  * JUnit test case for DataSourceClassPathResolver.

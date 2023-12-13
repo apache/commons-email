@@ -16,26 +16,16 @@
  */
 package org.apache.commons.mail.resolver;
 
-<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-=======
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 import java.io.IOException;
 import java.net.URL;
 
-<<<<<<< HEAD
-import org.apache.commons.mail.DataSourceResolver;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-=======
-import static org.junit.jupiter.api.Assertions.*;
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 /**
  * JUnit test case for DateSourceResolver.
@@ -48,12 +38,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     private DataSourceResolver[] dataSourceResolversMissing;
 
     @BeforeEach
-<<<<<<< HEAD
     public void setUp() throws Exception {
-=======
-    public void setUp() throws Exception
-    {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         final DataSourceUrlResolver urlResolver = new DataSourceUrlResolver(new URL("https://www.apache.org"), false);
         final DataSourceUrlResolver urlResolverMissing = new DataSourceUrlResolver(new URL("https://does.not.exist"), false);
         final DataSourceClassPathResolver classPathResolver = new DataSourceClassPathResolver("/images", false);

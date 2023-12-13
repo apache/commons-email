@@ -16,13 +16,9 @@
  */
 package org.apache.commons.mail;
 
-<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-=======
-import static org.junit.jupiter.api.Assertions.*;
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
 import java.io.File;
 import java.io.IOException;
@@ -37,42 +33,18 @@ import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
-<<<<<<< HEAD
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-=======
-import org.junit.jupiter.api.Test;
->>>>>>> 8f7edb1 (fully migrated to junit5)
 
-/**
- * JUnit test case for MultiPartEmail Class.
- *
- * @since 1.0
- */
-<<<<<<< HEAD
-@Disabled("TODO ASAP before 1.6.0, get running or coexist with JUnit 5.")
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ MockMultiPartEmailConcrete.class, URLDataSource.class })
-public class MultiPartEmailTest extends AbstractEmailTest {
-=======
 public class MultiPartEmailTest extends AbstractEmailTest
 {
->>>>>>> 8f7edb1 (fully migrated to junit5)
     /** */
     private MockMultiPartEmailConcrete email;
     /** File to used to test file attachments (Must be valid) */
     private File testFile;
 
     @BeforeEach
-<<<<<<< HEAD
-    public void setUpMultiPartEmailTest() throws Exception {
-=======
     public void setUpMultiPartEmailTest() throws Exception
     {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         // reusable objects to be used across multiple tests
         this.email = new MockMultiPartEmailConcrete();
         testFile = File.createTempFile("testfile", ".txt");

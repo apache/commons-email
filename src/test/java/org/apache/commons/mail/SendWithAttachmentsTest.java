@@ -36,12 +36,8 @@ public class SendWithAttachmentsTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
     @BeforeEach
-<<<<<<< HEAD
-    public void setUpSendWithAttachmentsTest() {
-=======
     public void setUpSendWithAttachmentsTest()
     {
->>>>>>> 8f7edb1 (fully migrated to junit5)
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
     }
