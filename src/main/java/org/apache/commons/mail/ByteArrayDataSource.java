@@ -97,10 +97,8 @@ public class ByteArrayDataSource implements DataSource {
      */
     public ByteArrayDataSource(final String data, final String aType) throws IOException {
         this.type = aType;
-
         try {
             baos = new ByteArrayOutputStream();
-
             // Assumption that the string contains only ASCII characters!
             // Else just pass in a charset into this constructor and use it in getBytes().
             baos.write(data.getBytes(StandardCharsets.ISO_8859_1));
@@ -124,7 +122,6 @@ public class ByteArrayDataSource implements DataSource {
     private void byteArrayDataSource(final InputStream aIs) throws IOException {
         BufferedInputStream bis = null;
         BufferedOutputStream osWriter = null;
-
         try {
             int length = 0;
             final byte[] buffer = new byte[ByteArrayDataSource.BUFFER_SIZE];
@@ -139,7 +136,6 @@ public class ByteArrayDataSource implements DataSource {
             }
             osWriter.flush();
             osWriter.close();
-
         } finally {
             if (bis != null) {
                 bis.close();
