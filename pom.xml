@@ -247,11 +247,6 @@
             <artifactId>jakarta.mail</artifactId>
             <version>1.6.7</version>
         </dependency>
-<!--        <dependency>-->
-<!--          <groupId>org.junit.platform</groupId>-->
-<!--          <artifactId>junit-platform-runner</artifactId>-->
-<!--          <scope>test</scope>-->
-<!--        </dependency>-->
         <dependency>
           <groupId>org.junit.jupiter</groupId>
           <artifactId>junit-jupiter</artifactId>
@@ -262,11 +257,6 @@
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--          <groupId>org.junit.vintage</groupId>-->
-<!--          <artifactId>junit-vintage-engine</artifactId>-->
-<!--          <scope>test</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
@@ -292,21 +282,9 @@
             </exclusions>
     	</dependency>
         <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-easymock</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>${easymock.version}</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -329,9 +307,8 @@
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
         
-        <powermock.version>2.0.9</powermock.version>
-        <easymock.version>5.2.0</easymock.version>
-    </properties> 
+        <mockito-core.version>5.8.0</mockito-core.version>
+    </properties>
 
     <build>
         <defaultGoal>clean verify apache-rat:check checkstyle:check japicmp:cmp pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>

@@ -16,6 +16,7 @@
  */
 package org.apache.commons.mail;
 
+<<<<<<< HEAD
 import static org.easymock.EasyMock.expect;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,6 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.powermock.api.easymock.PowerMock.createMock;
 import static org.powermock.api.easymock.PowerMock.replay;
+=======
+import static org.junit.jupiter.api.Assertions.*;
+>>>>>>> 8f7edb1 (fully migrated to junit5)
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -43,6 +47,10 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+<<<<<<< HEAD
+=======
+import org.mockito.Mockito;
+>>>>>>> 8f7edb1 (fully migrated to junit5)
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
@@ -101,7 +109,12 @@ public abstract class AbstractEmailTest {
     private static int fileNameCounter;
 
     @BeforeEach
+<<<<<<< HEAD
     public void setUpAbstractEmailTest() {
+=======
+    public void setUpAbstractEmailTest()
+    {
+>>>>>>> 8f7edb1 (fully migrated to junit5)
         emailOutputDir = new File("target/test-emails");
         if (!emailOutputDir.exists()) {
             emailOutputDir.mkdirs();
@@ -109,9 +122,17 @@ public abstract class AbstractEmailTest {
     }
 
     @AfterEach
+<<<<<<< HEAD
     public void tearDownEmailTest() {
         // stop the fake email server (if started)
         if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
+=======
+    public void tearDownEmailTest()
+    {
+        //stop the fake email server (if started)
+        if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer))
+        {
+>>>>>>> 8f7edb1 (fully migrated to junit5)
             this.fakeMailServer.stop();
             assertTrue(isMailServerStopped(fakeMailServer), "Mail server didn't stop");
         }
@@ -205,9 +226,23 @@ public abstract class AbstractEmailTest {
      * @return WiserMessage email to check
      * @throws IOException Exception
      */
+<<<<<<< HEAD
     protected WiserMessage validateSend(final Wiser mailServer, final String strSubject, final InternetAddress fromAdd, final List<InternetAddress> toAdd,
             final List<InternetAddress> ccAdd, final List<InternetAddress> bccAdd, final boolean boolSaveToFile) throws IOException {
         assertTrue(mailServer.getMessages().size() == 1, "mail server doesn't contain expected message");
+=======
+    protected WiserMessage validateSend(
+        final Wiser mailServer,
+        final String strSubject,
+        final InternetAddress fromAdd,
+        final List<InternetAddress> toAdd,
+        final List<InternetAddress> ccAdd,
+        final List<InternetAddress> bccAdd,
+        final boolean boolSaveToFile)
+        throws IOException
+    {
+        assertEquals(1, mailServer.getMessages().size(), "mail server doesn't contain expected message");
+>>>>>>> 8f7edb1 (fully migrated to junit5)
         final WiserMessage emailMessage = mailServer.getMessages().get(0);
 
         if (boolSaveToFile) {
@@ -225,6 +260,7 @@ public abstract class AbstractEmailTest {
             final MimeMessage mimeMessage = emailMessage.getMimeMessage();
 
             // test subject
+<<<<<<< HEAD
             assertEquals(strSubject, mimeMessage.getHeader("Subject", null), "got wrong subject from mail");
 
             // test from address
@@ -241,6 +277,30 @@ public abstract class AbstractEmailTest {
             // test bcc address
             if (!bccAdd.isEmpty()) {
                 assertTrue(bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)), "got wrong Bcc: address from mail");
+=======
+            assertEquals(strSubject, mimeMessage.getHeader("Subject", null),
+                    "got wrong subject from mail");
+
+            //test from address
+            assertEquals(fromAdd.toString(), mimeMessage.getHeader("From", null),
+                    "got wrong From: address from mail");
+
+            //test to address
+            assertTrue(toAdd.toString().contains(mimeMessage.getHeader("To", null)), "got wrong To: address from mail");
+
+            //test cc address
+            if (!ccAdd.isEmpty())
+            {
+                assertTrue(ccAdd.toString().contains(mimeMessage.getHeader("Cc", null)),
+                        "got wrong Cc: address from mail");
+            }
+
+            //test bcc address
+            if (!bccAdd.isEmpty())
+            {
+                assertTrue(bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)),
+                        "got wrong Bcc: address from mail");
+>>>>>>> 8f7edb1 (fully migrated to junit5)
             }
         } catch (final MessagingException me) {
             final IllegalStateException ise = new IllegalStateException("caught MessagingException in validateSend()");
@@ -277,7 +337,14 @@ public abstract class AbstractEmailTest {
         // get received email content (chop off the auto-added \n
         // and -- (front and end)
         final String emailMessageBody = getMessageBody(emailMessage);
+<<<<<<< HEAD
         final String strMessageBody = emailMessageBody.substring(AbstractEmailTest.BODY_START_PAD, emailMessageBody.length() - AbstractEmailTest.BODY_END_PAD);
+=======
+        final String strMessageBody =
+            emailMessageBody.substring(AbstractEmailTest.BODY_START_PAD,
+                                       emailMessageBody.length()
+                                       - AbstractEmailTest.BODY_END_PAD);
+>>>>>>> 8f7edb1 (fully migrated to junit5)
         assertTrue(strMessageBody.contains(strSentContent), "didn't find expected content type in message body");
     }
 
@@ -301,8 +368,13 @@ public abstract class AbstractEmailTest {
         final WiserMessage emailMessage = this.validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, true);
 
         // test message content
+<<<<<<< HEAD
         // assertThat("didn't find expected message content in message body", getMessageBody(emailMessage), containsString(strMessage));
         assertTrue(getMessageBody(emailMessage).contains(strMessage));
+=======
+        assertTrue(getMessageBody(emailMessage).contains(strMessage),
+                "didn't find expected message content in message body");
+>>>>>>> 8f7edb1 (fully migrated to junit5)
     }
 
     /**
@@ -409,10 +481,9 @@ public abstract class AbstractEmailTest {
      * @return an invalid URL
      */
     protected URL createInvalidURL() throws Exception {
-        final URL url = createMock(URL.class);
-        expect(url.openStream()).andThrow(new IOException());
-        replay(url);
-
+        URL url = new URL("http://example.invalid");
+        url = Mockito.spy(url);
+        Mockito.doThrow(new IOException("Mocked IOException")).when(url).openStream();
         return url;
     }
 }

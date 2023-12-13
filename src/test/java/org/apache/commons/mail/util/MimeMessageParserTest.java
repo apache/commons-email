@@ -16,11 +16,14 @@
  */
 package org.apache.commons.mail.util;
 
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+=======
+>>>>>>> 8f7edb1 (fully migrated to junit5)
 
 import java.io.File;
 import java.util.List;
@@ -32,6 +35,11 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.junit.jupiter.api.Test;
+<<<<<<< HEAD
+=======
+
+import static org.junit.jupiter.api.Assertions.*;
+>>>>>>> 8f7edb1 (fully migrated to junit5)
 
 /**
  * Testing the MimeMessageParser.
