@@ -33,20 +33,8 @@ import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-/**
- * JUnit test case for MultiPartEmail Class.
- *
- * @since 1.0
- */
-@Disabled("TODO ASAP before 1.6.0, get running or coexist with JUnit 5.")
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ MockMultiPartEmailConcrete.class, URLDataSource.class })
 public class MultiPartEmailTest extends AbstractEmailTest {
     /** */
     private MockMultiPartEmailConcrete email;

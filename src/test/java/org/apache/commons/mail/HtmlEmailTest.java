@@ -16,12 +16,6 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,26 +28,21 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.mail.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.apache.commons.mail.util.MimeMessageParser;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for HtmlEmail Class.
  *
  * @since 1.0
  */
-@Disabled("TODO ASAP before 1.6.0, get running or coexist with JUnit 5.")
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ MockHtmlEmailConcrete.class })
 public class HtmlEmailTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
-    @Before
+    @BeforeEach
     public void setUpHtmlEmailTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
@@ -134,7 +123,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // if we embed the same URL under a different name, is the content ID
         // unique?
         final String newCid = this.email.embed(new URL(this.strTestURL), "Test name 2");
-        assertFalse(strEmbed.equals(newCid));
+        assertNotEquals(strEmbed, newCid);
         // Test Exceptions
 
         // Does an invalid URL throw an exception?
@@ -163,18 +152,21 @@ public class HtmlEmailTest extends AbstractEmailTest {
         file.deleteOnExit();
         final String strEmbed = this.email.embed(file);
         assertNotNull(strEmbed);
-        assertEquals("generated CID has wrong length", HtmlEmail.CID_LENGTH, strEmbed.length());
+
+        assertEquals(HtmlEmail.CID_LENGTH, strEmbed.length(), "generated CID has wrong length");
 
         // if we embed the same file again, do we get the same content ID
         // back?
-        final String testCid = this.email.embed(file);
-        assertEquals("didn't get same CID after embedding same file twice", strEmbed, testCid);
+        final String testCid =
+            this.email.embed(file);
+        assertEquals(strEmbed, testCid, "didn't get same CID after embedding same file twice");
 
         // if we embed a new file, is the content ID unique?
         final File otherFile = File.createTempFile("testEmbedFile2", "txt");
         otherFile.deleteOnExit();
         final String newCid = this.email.embed(otherFile);
-        assertFalse("didn't get unique CID from embedding new file", strEmbed.equals(newCid));
+
+        assertNotEquals(strEmbed, newCid, "didn't get unique CID from embedding new file");
     }
 
     @Test
@@ -186,7 +178,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         final URL fileUrl = tmpFile.toURI().toURL();
         final String urlCid = this.email.embed(fileUrl, "urlName");
 
-        assertFalse("file and URL cids should be different even for same resource", fileCid.equals(urlCid));
+        assertNotEquals(fileCid, urlCid, "file and URL cids should be different even for same resource");
     }
 
     @Test
@@ -209,7 +201,8 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // does embedding the same datasource under the same name return
         // the original cid?
         final String sameCid = this.email.embed(dataSource, "testname");
-        assertEquals("didn't get same CID for embedding same datasource twice", cid, sameCid);
+
+        assertEquals(cid, sameCid, "didn't get same CID for embedding same datasource twice");
 
         // does embedding another datasource under the same name fail?
         final File anotherFile = File.createTempFile("testEmbedDataSource2", "txt");
@@ -230,7 +223,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     public void testSend() throws EmailException, IOException {
         final EmailAttachment attachment = new EmailAttachment();
 
-        /** File to used to test file attachments (Must be valid) */
+        /* File to used to test file attachments (Must be valid) */
         final File testFile = File.createTempFile("commons-email-testfile", ".txt");
         testFile.deleteOnExit();
         // Test Success
@@ -244,7 +237,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         this.email.setFrom(this.strTestMailFrom);
         this.email.addTo(this.strTestMailTo);
 
-        /** File to used to test file attachmetns (Must be valid) */
+        /* File to used to test file attachments (Must be valid) */
         attachment.setName("Test Attachment");
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());
@@ -360,8 +353,9 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    @Ignore
-    public void testSendWithDefaultCharset() throws Exception {
+    @Disabled
+    public void testSendWithDefaultCharset() throws Exception
+    {
         // Test is disabled as its result is dependent on the execution order:
         // the mail.mime.charset property is normally cached by the MimeUtility
         // class, thus setting it to another value while running the tests
@@ -515,15 +509,15 @@ public class HtmlEmailTest extends AbstractEmailTest {
         final String testCid = "Test CID";
         final String encodedCid = EmailUtils.encodeUrl(testCid);
 
-        // if we embed a new file, do we get the content ID we specified back?
-        final String strEmbed = this.email.embed(file, testCid);
-        assertNotNull(strEmbed);
-        assertEquals("didn't get same CID when embedding with a specified CID", encodedCid, strEmbed);
+         // if we embed a new file, do we get the content ID we specified back?
+         final String strEmbed = this.email.embed(file, testCid);
+         assertNotNull(strEmbed);
+         assertEquals(encodedCid, strEmbed, "didn't get same CID when embedding with a specified CID");
 
-        // if we embed the same file again, do we get the same content ID
-        // back?
-        final String returnedCid = this.email.embed(file);
-        assertEquals("didn't get same CID after embedding same file twice", encodedCid, returnedCid);
+         // if we embed the same file again, do we get the same content ID
+         // back?
+         final String returnedCid = this.email.embed(file);
+         assertEquals(encodedCid, returnedCid, "didn't get same CID after embedding same file twice");
     }
 
     @Test
@@ -546,10 +540,10 @@ public class HtmlEmailTest extends AbstractEmailTest {
         mmp.parse();
 
         final List<?> attachments = mmp.getAttachmentList();
-        assertEquals("Attachment size", 1, attachments.size());
+        assertEquals(1, attachments.size(), "Attachment size");
 
         final DataSource ds = (DataSource) attachments.get(0);
-        assertEquals("Content type", contentType, ds.getContentType());
+        assertEquals(contentType, ds.getContentType(), "Content type");
     }
 
     private HtmlEmail createDefaultHtmlEmail() throws EmailException {

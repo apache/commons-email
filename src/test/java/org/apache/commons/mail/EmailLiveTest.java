@@ -37,7 +37,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * This are regression test sending REAL email to REAL mail servers using REAL recipients.
+ * These are regression test sending REAL email to REAL mail servers using REAL recipients.
  *
  * The intention is to field-test certain aspects of email using a variety of mail clients since I'm not a mockist (see
  * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).

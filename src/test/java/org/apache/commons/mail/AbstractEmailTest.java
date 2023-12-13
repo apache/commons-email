@@ -16,13 +16,10 @@
  */
 package org.apache.commons.mail;
 
-import static org.easymock.EasyMock.expect;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.powermock.api.easymock.PowerMock.createMock;
-import static org.powermock.api.easymock.PowerMock.replay;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -43,6 +40,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mockito;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
@@ -301,8 +299,8 @@ public abstract class AbstractEmailTest {
         final WiserMessage emailMessage = this.validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, true);
 
         // test message content
-        // assertThat("didn't find expected message content in message body", getMessageBody(emailMessage), containsString(strMessage));
-        assertTrue(getMessageBody(emailMessage).contains(strMessage));
+        assertTrue(getMessageBody(emailMessage).contains(strMessage),
+                "didn't find expected message content in message body");
     }
 
     /**
@@ -409,10 +407,9 @@ public abstract class AbstractEmailTest {
      * @return an invalid URL
      */
     protected URL createInvalidURL() throws Exception {
-        final URL url = createMock(URL.class);
-        expect(url.openStream()).andThrow(new IOException());
-        replay(url);
-
+        URL url = new URL("http://example.invalid");
+        url = Mockito.spy(url);
+        Mockito.doThrow(new IOException("Mocked IOException")).when(url).openStream();
         return url;
     }
 }
