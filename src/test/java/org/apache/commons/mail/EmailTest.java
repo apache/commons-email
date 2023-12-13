@@ -62,8 +62,7 @@ public class EmailTest extends AbstractEmailTest {
     private MockEmailConcrete email;
 
     @BeforeEach
-    public void setUpEmailTest()
-    {
+    public void setUpEmailTest() {
         // reusable objects to be used across multiple tests
         email = new MockEmailConcrete();
     }
