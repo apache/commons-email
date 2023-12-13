@@ -32,28 +32,6 @@ import org.apache.commons.mail.EmailException;
 public class MockEmailConcrete extends Email {
 
     /**
-     * Not Implemented, should be implemented in subclasses of Email
-     *
-     * @param msg The email message
-     * @return Email msg.
-     */
-    @Override
-    public Email setMsg(final String msg) {
-        // This abstract method should be tested in the concrete
-        // implementation classes only.
-        return null;
-    }
-
-    /**
-     * Retrieve the current debug setting
-     *
-     * @return debug
-     */
-    public boolean isDebug() {
-        return this.debug;
-    }
-
-    /**
      * Retrieve the current authentication setting
      *
      * @return Authenticator Authenticator
@@ -72,15 +50,22 @@ public class MockEmailConcrete extends Email {
     /**
      * @return content
      */
-    public Object getContentObject() {
-        return this.content;
+    public MimeMultipart getContentMimeMultipart() {
+        return this.emailBody;
     }
 
     /**
      * @return content
      */
-    public MimeMultipart getContentMimeMultipart() {
-        return this.emailBody;
+    public Object getContentObject() {
+        return this.content;
+    }
+
+    /**
+     * @return contentType
+     */
+    public String getContentType() {
+        return contentType;
     }
 
     /**
@@ -127,10 +112,20 @@ public class MockEmailConcrete extends Email {
     }
 
     /**
-     * @return contentType
+     * @return Session
+     * @throws EmailException EmailException
      */
-    public String getContentType() {
-        return contentType;
+    public Session getSession() throws EmailException {
+        return this.getMailSession();
+    }
+
+    /**
+     * Retrieve the current debug setting
+     *
+     * @return debug
+     */
+    public boolean isDebug() {
+        return this.debug;
     }
 
     /**
@@ -141,11 +136,16 @@ public class MockEmailConcrete extends Email {
     }
 
     /**
-     * @return Session
-     * @throws EmailException EmailException
+     * Not Implemented, should be implemented in subclasses of Email
+     *
+     * @param msg The email message
+     * @return Email msg.
      */
-    public Session getSession() throws EmailException {
-        return this.getMailSession();
+    @Override
+    public Email setMsg(final String msg) {
+        // This abstract method should be tested in the concrete
+        // implementation classes only.
+        return null;
     }
 
 }

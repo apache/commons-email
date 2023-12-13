@@ -51,15 +51,6 @@ public class EmailException extends Exception {
     }
 
     /**
-     * Constructs a new {@code EmailException} with specified nested {@code Throwable} root cause.
-     *
-     * @param rootCause the exception or error that caused this exception to be thrown.
-     */
-    public EmailException(final Throwable rootCause) {
-        super(rootCause);
-    }
-
-    /**
      * Constructs a new {@code EmailException} with specified detail message and nested {@code Throwable} root cause.
      *
      * @param msg       the error message.
@@ -67,6 +58,15 @@ public class EmailException extends Exception {
      */
     public EmailException(final String msg, final Throwable rootCause) {
         super(msg, rootCause);
+    }
+
+    /**
+     * Constructs a new {@code EmailException} with specified nested {@code Throwable} root cause.
+     *
+     * @param rootCause the exception or error that caused this exception to be thrown.
+     */
+    public EmailException(final Throwable rootCause) {
+        super(rootCause);
     }
 
     /**

@@ -27,20 +27,20 @@ import org.apache.commons.mail.SimpleEmail;
  */
 public class MockSimpleEmail extends SimpleEmail {
     /**
+     * @return fromAddress
+     */
+    @Override
+    public InternetAddress getFromAddress() {
+        return this.fromAddress;
+    }
+
+    /**
      * Retrieve the message content
      *
      * @return Message Content
      */
     public String getMsg() {
         return (String) this.content;
-    }
-
-    /**
-     * @return fromAddress
-     */
-    @Override
-    public InternetAddress getFromAddress() {
-        return this.fromAddress;
     }
 
 }

@@ -53,6 +53,33 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     }
 
     /**
+     * Create an URL based on a base URL and a resource location suitable for loading the resource.
+     *
+     * @param resourceLocation a resource location
+     * @return the corresponding URL
+     * @throws java.net.MalformedURLException creating the URL failed
+     */
+    protected URL createUrl(final String resourceLocation) throws MalformedURLException {
+        // if we get an non-existing base url than the resource can
+        // be directly used to create an URL
+        if (baseUrl == null) {
+            return new URL(resourceLocation);
+        }
+
+        // if we get an non-existing location what we shall do?
+        if (resourceLocation == null || resourceLocation.isEmpty()) {
+            throw new IllegalArgumentException("No resource defined");
+        }
+
+        // if we get a stand-alone resource than ignore the base url
+        if (isFileUrl(resourceLocation) || isHttpUrl(resourceLocation)) {
+            return new URL(resourceLocation);
+        }
+
+        return new URL(getBaseUrl(), resourceLocation.replace("&amp;", "&"));
+    }
+
+    /**
      * Gets the base URL used for resolving relative resource locations.
      *
      * @return the baseUrl
@@ -86,32 +113,5 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
             }
             throw e;
         }
-    }
-
-    /**
-     * Create an URL based on a base URL and a resource location suitable for loading the resource.
-     *
-     * @param resourceLocation a resource location
-     * @return the corresponding URL
-     * @throws java.net.MalformedURLException creating the URL failed
-     */
-    protected URL createUrl(final String resourceLocation) throws MalformedURLException {
-        // if we get an non-existing base url than the resource can
-        // be directly used to create an URL
-        if (baseUrl == null) {
-            return new URL(resourceLocation);
-        }
-
-        // if we get an non-existing location what we shall do?
-        if (resourceLocation == null || resourceLocation.isEmpty()) {
-            throw new IllegalArgumentException("No resource defined");
-        }
-
-        // if we get a stand-alone resource than ignore the base url
-        if (isFileUrl(resourceLocation) || isHttpUrl(resourceLocation)) {
-            return new URL(resourceLocation);
-        }
-
-        return new URL(getBaseUrl(), resourceLocation.replace("&amp;", "&"));
     }
 }

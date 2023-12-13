@@ -52,6 +52,15 @@ public class IDNEmailAddressConverterTest {
     }
 
     @Test
+    public void testInternetAddressToAsciiConversion() throws Exception {
+        final InternetAddress address = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
+        assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(address));
+
+        final InternetAddress addressWithPersonalName = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS), GERMAN_IDN_EMAIL_NAME);
+        assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(addressWithPersonalName));
+    }
+
+    @Test
     public void testMultipleIDNEmailAddressToAsciiConversion() {
         assertEquals("noreply@xn--dmin-moa0i.example", idnEmailConverter.toASCII(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS)));
     }
@@ -59,15 +68,6 @@ public class IDNEmailAddressConverterTest {
     @Test
     public void testNonIDNEmailAddressToAsciiConversion() {
         assertEquals("me@home.com", idnEmailConverter.toASCII("me@home.com"));
-    }
-
-    @Test
-    public void testInternetAddressToAsciiConversion() throws Exception {
-        final InternetAddress address = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
-        assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(address));
-
-        final InternetAddress addressWithPersonalName = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS), GERMAN_IDN_EMAIL_NAME);
-        assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(addressWithPersonalName));
     }
 
     @Test

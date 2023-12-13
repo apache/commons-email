@@ -310,439 +310,68 @@ public abstract class Email {
     private Session session;
 
     /**
-     * Setting to true will enable the display of debug information.
-     *
-     * @param d A boolean.
-     * @since 1.0
-     */
-    public void setDebug(final boolean d) {
-        this.debug = d;
-    }
-
-    /**
-     * Sets the userName and password if authentication is needed. If this method is not used, no authentication will be performed.
-     * <p>
-     * This method will create a new instance of {@code DefaultAuthenticator} using the supplied parameters.
-     *
-     * @param userName User name for the SMTP server
-     * @param password password for the SMTP server
-     * @see DefaultAuthenticator
-     * @see #setAuthenticator
-     * @since 1.0
-     */
-    public void setAuthentication(final String userName, final String password) {
-        this.setAuthenticator(new DefaultAuthenticator(userName, password));
-    }
-
-    /**
-     * Sets the {@code Authenticator} to be used when authentication is requested from the mail server.
-     * <p>
-     * This method should be used when your outgoing mail server requires authentication. Your mail server must also support RFC2554.
-     *
-     * @param newAuthenticator the {@code Authenticator} object.
-     * @see Authenticator
-     * @since 1.0
-     */
-    public void setAuthenticator(final Authenticator newAuthenticator) {
-        this.authenticator = newAuthenticator;
-    }
-
-    /**
-     * Sets the charset of the message. Please note that you should set the charset before adding the message content.
-     *
-     * @param newCharset A String.
-     * @throws java.nio.charset.IllegalCharsetNameException if the charset name is invalid
-     * @throws java.nio.charset.UnsupportedCharsetException if no support for the named charset exists in the current JVM
-     * @since 1.0
-     */
-    public void setCharset(final String newCharset) {
-        final Charset set = Charset.forName(newCharset);
-        this.charset = set.name();
-    }
-
-    /**
-     * Sets the emailBody to a MimeMultiPart
-     *
-     * @param aMimeMultipart aMimeMultipart
-     * @since 1.0
-     */
-    public void setContent(final MimeMultipart aMimeMultipart) {
-        this.emailBody = aMimeMultipart;
-    }
-
-    /**
-     * Sets the content and contentType.
-     *
-     * @param aObject      aObject
-     * @param aContentType aContentType
-     * @since 1.0
-     */
-    public void setContent(final Object aObject, final String aContentType) {
-        this.content = aObject;
-        this.updateContentType(aContentType);
-    }
-
-    /**
-     * Update the contentType.
-     *
-     * @param aContentType aContentType
-     * @since 1.2
-     */
-    public void updateContentType(final String aContentType) {
-        if (EmailUtils.isEmpty(aContentType)) {
-            this.contentType = null;
-        } else {
-            // set the content type
-            this.contentType = aContentType;
-
-            // set the charset if the input was properly formed
-            final String strMarker = "; charset=";
-            int charsetPos = aContentType.toLowerCase().indexOf(strMarker);
-
-            if (charsetPos != -1) {
-                // find the next space (after the marker)
-                charsetPos += strMarker.length();
-                final int intCharsetEnd = aContentType.toLowerCase().indexOf(" ", charsetPos);
-
-                if (intCharsetEnd != -1) {
-                    this.charset = aContentType.substring(charsetPos, intCharsetEnd);
-                } else {
-                    this.charset = aContentType.substring(charsetPos);
-                }
-            } else {
-                // use the default charset, if one exists, for messages
-                // whose content-type is some form of text.
-                if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset)) {
-                    final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
-                    contentTypeBuf.append(strMarker);
-                    contentTypeBuf.append(this.charset);
-                    this.contentType = contentTypeBuf.toString();
-                }
-            }
-        }
-    }
-
-    /**
-     * Sets the hostname of the outgoing mail server.
-     *
-     * @param aHostName aHostName
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.0
-     */
-    public void setHostName(final String aHostName) {
-        checkSessionAlreadyInitialized();
-        this.hostName = aHostName;
-    }
-
-    /**
-     * Sets or disable the STARTTLS encryption. Please see EMAIL-105 for the reasons of deprecation.
-     *
-     * @deprecated since 1.3, use setStartTLSEnabled() instead
-     * @param withTLS true if STARTTLS requested, false otherwise
-     * @since 1.1
-     */
-    @Deprecated
-    public void setTLS(final boolean withTLS) {
-        setStartTLSEnabled(withTLS);
-    }
-
-    /**
-     * Sets or disable the STARTTLS encryption.
-     *
-     * @param startTlsEnabled true if STARTTLS requested, false otherwise
-     * @return An Email.
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.3
-     */
-    public Email setStartTLSEnabled(final boolean startTlsEnabled) {
-        checkSessionAlreadyInitialized();
-        this.startTlsEnabled = startTlsEnabled;
-        this.tls = startTlsEnabled;
-        return this;
-    }
-
-    /**
-     * Sets or disable the required STARTTLS encryption.
-     * <p>
-     * Defaults to {@link #smtpPort}; can be overridden by using {@link #setSmtpPort(int)}
-     *
-     * @param startTlsRequired true if STARTTLS requested, false otherwise
-     * @return An Email.
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.3
-     */
-    public Email setStartTLSRequired(final boolean startTlsRequired) {
-        checkSessionAlreadyInitialized();
-        this.startTlsRequired = startTlsRequired;
-        return this;
-    }
-
-    /**
-     * Sets the non-SSL port number of the outgoing mail server.
-     *
-     * @param aPortNumber aPortNumber
-     * @throws IllegalArgumentException if the port number is &lt; 1
-     * @throws IllegalStateException    if the mail session is already initialized
-     * @since 1.0
-     * @see #setSslSmtpPort(String)
-     */
-    public void setSmtpPort(final int aPortNumber) {
-        checkSessionAlreadyInitialized();
-
-        if (aPortNumber < 1) {
-            throw new IllegalArgumentException("Cannot connect to a port number that is less than 1 ( " + aPortNumber + " )");
-        }
-
-        this.smtpPort = Integer.toString(aPortNumber);
-    }
-
-    /**
-     * Supply a mail Session object to use. Please note that passing a user name and password (in the case of mail authentication) will create a new mail
-     * session with a DefaultAuthenticator. This is a convenience but might come unexpected.
-     *
-     * If mail authentication is used but NO username and password is supplied the implementation assumes that you have set a authenticator and will use the
-     * existing mail session (as expected).
-     *
-     * @param session mail session to be used
-     * @throws NullPointerException if {@code aSession} is {@code null}
-     * @since 1.0
-     */
-    public void setMailSession(final Session session) {
-        Objects.requireNonNull(session, "no mail session supplied");
-
-        final Properties sessionProperties = session.getProperties();
-        final String auth = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_AUTH);
-
-        if ("true".equalsIgnoreCase(auth)) {
-            final String userName = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_USER);
-            final String password = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_PASSWORD);
-
-            if (EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password)) {
-                // only create a new mail session with an authenticator if
-                // authentication is required and no user name is given
-                this.authenticator = new DefaultAuthenticator(userName, password);
-                this.session = Session.getInstance(sessionProperties, this.authenticator);
-            } else {
-                // assume that the given mail session contains a working authenticator
-                this.session = session;
-            }
-        } else {
-            this.session = session;
-        }
-    }
-
-    /**
-     * Supply a mail Session object from a JNDI directory.
-     *
-     * @param jndiName name of JNDI resource (javax.mail.Session type), resource if searched in java:comp/env if name does not start with "java:"
-     * @throws IllegalArgumentException if the JNDI name is null or empty
-     * @throws NamingException          if the resource cannot be retrieved from JNDI directory
-     * @since 1.1
-     */
-    public void setMailSessionFromJNDI(final String jndiName) throws NamingException {
-        if (EmailUtils.isEmpty(jndiName)) {
-            throw new IllegalArgumentException("JNDI name missing");
-        }
-        Context ctx = null;
-        if (jndiName.startsWith("java:")) {
-            ctx = new InitialContext();
-        } else {
-            ctx = (Context) new InitialContext().lookup("java:comp/env");
-
-        }
-        this.setMailSession((Session) ctx.lookup(jndiName));
-    }
-
-    /**
-     * Determines the mail session used when sending this Email, creating the Session if necessary. When a mail session is already initialized setting the
-     * session related properties will cause an IllegalStateException.
-     *
-     * @return A Session.
-     * @throws EmailException if the host name was not set
-     * @since 1.0
-     */
-    public Session getMailSession() throws EmailException {
-        if (this.session == null) {
-            final Properties properties = new Properties(System.getProperties());
-            properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, EmailConstants.SMTP);
-
-            if (EmailUtils.isEmpty(this.hostName)) {
-                this.hostName = properties.getProperty(EmailConstants.MAIL_HOST);
-            }
-
-            if (EmailUtils.isEmpty(this.hostName)) {
-                throw new EmailException("Cannot find valid hostname for mail session");
-            }
-
-            properties.setProperty(EmailConstants.MAIL_PORT, this.smtpPort);
-            properties.setProperty(EmailConstants.MAIL_HOST, this.hostName);
-            properties.setProperty(EmailConstants.MAIL_DEBUG, String.valueOf(this.debug));
-
-            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_ENABLE, isStartTLSEnabled() ? "true" : "false");
-            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_REQUIRED, isStartTLSRequired() ? "true" : "false");
-
-            properties.setProperty(EmailConstants.MAIL_SMTP_SEND_PARTIAL, isSendPartial() ? "true" : "false");
-            properties.setProperty(EmailConstants.MAIL_SMTPS_SEND_PARTIAL, isSendPartial() ? "true" : "false");
-
-            if (this.authenticator != null) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
-            }
-
-            if (isSSLOnConnect()) {
-                properties.setProperty(EmailConstants.MAIL_PORT, this.sslSmtpPort);
-                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
-                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
-                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
-            }
-
-            if ((isSSLOnConnect() || isStartTLSEnabled()) && isSSLCheckServerIdentity()) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
-            }
-
-            if (this.bounceAddress != null) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_FROM, this.bounceAddress);
-            }
-
-            if (this.socketTimeout > 0) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));
-            }
-
-            if (this.socketConnectionTimeout > 0) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_CONNECTIONTIMEOUT, Integer.toString(this.socketConnectionTimeout));
-            }
-
-            // changed this (back) to getInstance due to security exceptions
-            // caused when testing using maven
-            this.session = Session.getInstance(properties, this.authenticator);
-        }
-        return this.session;
-    }
-
-    /**
-     * Sets the FROM field of the email to use the specified address. The email address will also be used as the personal name. The name will be encoded by the
-     * charset of {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if
-     * it contains non-ASCII characters; otherwise, it is used as is.
+     * Add a blind BCC recipient to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
+     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
+     * contains non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
+     * @throws EmailException Indicates an invalid email address
      * @since 1.0
      */
-    public Email setFrom(final String email) throws EmailException {
-        return setFrom(email, null);
+    public Email addBcc(final String email) throws EmailException {
+        return this.addBcc(email, null);
     }
 
     /**
-     * Sets the FROM field of the email to use the specified address and the specified personal name. The name will be encoded by the charset of
+     * Add an array of blind BCC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset
+     * of {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
+     *
+     * @param emails A String array.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address
+     * @since 1.3
+     */
+    public Email addBcc(final String... emails) throws EmailException {
+        if (emails == null || emails.length == 0) {
+            throw new EmailException("Address List provided was invalid");
+        }
+
+        for (final String email : emails) {
+            addBcc(email, null);
+        }
+
+        return this;
+    }
+
+    /**
+     * Add a blind BCC recipient to the email using the specified address and the specified personal name. The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
      * contains non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @param name  A String.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
+     * @throws EmailException Indicates an invalid email address
      * @since 1.0
      */
-    public Email setFrom(final String email, final String name) throws EmailException {
-        return setFrom(email, name, this.charset);
+    public Email addBcc(final String email, final String name) throws EmailException {
+        return addBcc(email, name, this.charset);
     }
 
     /**
-     * Sets the FROM field of the email to use the specified address, personal name, and charset encoding for the name.
+     * Add a blind BCC recipient to the email using the specified address, personal name, and charset encoding for the name.
      *
      * @param email   A String.
      * @param name    A String.
      * @param charset The charset to encode the name with.
      * @return An Email.
-     * @throws EmailException Indicates an invalid email address or charset.
+     * @throws EmailException Indicates an invalid email address
      * @since 1.1
      */
-    public Email setFrom(final String email, final String name, final String charset) throws EmailException {
-        this.fromAddress = createInternetAddress(email, name, charset);
-        return this;
-    }
-
-    /**
-     * Add a recipient TO to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
-     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
-     *
-     * @param email A String.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
-     * @since 1.0
-     */
-    public Email addTo(final String email) throws EmailException {
-        return addTo(email, null);
-    }
-
-    /**
-     * Add a list of TO recipients to the email. The email addresses will also be used as the personal names. The names will be encoded by the charset of
-     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
-     *
-     * @param emails A String array.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
-     * @since 1.3
-     */
-    public Email addTo(final String... emails) throws EmailException {
-        if (emails == null || emails.length == 0) {
-            throw new EmailException("Address List provided was invalid");
-        }
-
-        for (final String email : emails) {
-            addTo(email, null);
-        }
-
-        return this;
-    }
-
-    /**
-     * Add a recipient TO to the email using the specified address and the specified personal name. The name will be encoded by the charset of
-     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
-     *
-     * @param email A String.
-     * @param name  A String.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
-     * @since 1.0
-     */
-    public Email addTo(final String email, final String name) throws EmailException {
-        return addTo(email, name, this.charset);
-    }
-
-    /**
-     * Add a recipient TO to the email using the specified address, personal name, and charset encoding for the name.
-     *
-     * @param email   A String.
-     * @param name    A String.
-     * @param charset The charset to encode the name with.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address or charset.
-     * @since 1.1
-     */
-    public Email addTo(final String email, final String name, final String charset) throws EmailException {
-        this.toList.add(createInternetAddress(email, name, charset));
-        return this;
-    }
-
-    /**
-     * Sets a list of "TO" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
-     *
-     * @param aCollection collection of {@code InternetAddress} objects.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
-     * @see javax.mail.internet.InternetAddress
-     * @since 1.0
-     */
-    public Email setTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
-            throw new EmailException("Address List provided was invalid");
-        }
-
-        this.toList = new ArrayList<>(aCollection);
+    public Email addBcc(final String email, final String name, final String charset) throws EmailException {
+        this.bccList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
@@ -813,105 +442,22 @@ public abstract class Email {
     }
 
     /**
-     * Sets a list of "CC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
+     * Adds a header ( name, value ) to the headers Map.
      *
-     * @param aCollection collection of {@code InternetAddress} objects.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address.
-     * @see javax.mail.internet.InternetAddress
+     * @param name  A String with the name.
+     * @param value A String with the value.
      * @since 1.0
+     * @throws IllegalArgumentException if either {@code name} or {@code value} is null or empty
      */
-    public Email setCc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
-            throw new EmailException("Address List provided was invalid");
+    public void addHeader(final String name, final String value) {
+        if (EmailUtils.isEmpty(name)) {
+            throw new IllegalArgumentException("name can not be null or empty");
+        }
+        if (EmailUtils.isEmpty(value)) {
+            throw new IllegalArgumentException("value can not be null or empty");
         }
 
-        this.ccList = new ArrayList<>(aCollection);
-        return this;
-    }
-
-    /**
-     * Add a blind BCC recipient to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
-     *
-     * @param email A String.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address
-     * @since 1.0
-     */
-    public Email addBcc(final String email) throws EmailException {
-        return this.addBcc(email, null);
-    }
-
-    /**
-     * Add an array of blind BCC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset
-     * of {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
-     *
-     * @param emails A String array.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address
-     * @since 1.3
-     */
-    public Email addBcc(final String... emails) throws EmailException {
-        if (emails == null || emails.length == 0) {
-            throw new EmailException("Address List provided was invalid");
-        }
-
-        for (final String email : emails) {
-            addBcc(email, null);
-        }
-
-        return this;
-    }
-
-    /**
-     * Add a blind BCC recipient to the email using the specified address and the specified personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
-     *
-     * @param email A String.
-     * @param name  A String.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address
-     * @since 1.0
-     */
-    public Email addBcc(final String email, final String name) throws EmailException {
-        return addBcc(email, name, this.charset);
-    }
-
-    /**
-     * Add a blind BCC recipient to the email using the specified address, personal name, and charset encoding for the name.
-     *
-     * @param email   A String.
-     * @param name    A String.
-     * @param charset The charset to encode the name with.
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address
-     * @since 1.1
-     */
-    public Email addBcc(final String email, final String name, final String charset) throws EmailException {
-        this.bccList.add(createInternetAddress(email, name, charset));
-        return this;
-    }
-
-    /**
-     * Sets a list of "BCC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
-     *
-     * @param aCollection collection of {@code InternetAddress} objects
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address
-     * @see javax.mail.internet.InternetAddress
-     * @since 1.0
-     */
-    public Email setBcc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
-            throw new EmailException("Address List provided was invalid");
-        }
-
-        this.bccList = new ArrayList<>(aCollection);
-        return this;
+        this.headers.put(name, value);
     }
 
     /**
@@ -959,138 +505,70 @@ public abstract class Email {
     }
 
     /**
-     * Sets a list of reply to addresses. All elements in the specified {@code Collection} are expected to be of type
-     * {@code java.mail.internet.InternetAddress}.
-     *
-     * @param aCollection collection of {@code InternetAddress} objects
-     * @return An Email.
-     * @throws EmailException Indicates an invalid email address
-     * @see javax.mail.internet.InternetAddress
-     * @since 1.1
-     */
-    public Email setReplyTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
-            throw new EmailException("Address List provided was invalid");
-        }
-
-        this.replyList = new ArrayList<>(aCollection);
-        return this;
-    }
-
-    /**
-     * Used to specify the mail headers. Example:
-     *
-     * X-Mailer: Sendmail, X-Priority: 1( highest ) or 2( high ) 3( normal ) 4( low ) and 5( lowest ) Disposition-Notification-To: user@domain.net
-     *
-     * @param map A Map.
-     * @throws IllegalArgumentException if either of the provided header / value is null or empty
-     * @since 1.0
-     */
-    public void setHeaders(final Map<String, String> map) {
-        this.headers.clear();
-
-        for (final Map.Entry<String, String> entry : map.entrySet()) {
-            addHeader(entry.getKey(), entry.getValue());
-        }
-    }
-
-    /**
-     * Adds a header ( name, value ) to the headers Map.
-     *
-     * @param name  A String with the name.
-     * @param value A String with the value.
-     * @since 1.0
-     * @throws IllegalArgumentException if either {@code name} or {@code value} is null or empty
-     */
-    public void addHeader(final String name, final String value) {
-        if (EmailUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("name can not be null or empty");
-        }
-        if (EmailUtils.isEmpty(value)) {
-            throw new IllegalArgumentException("value can not be null or empty");
-        }
-
-        this.headers.put(name, value);
-    }
-
-    /**
-     * Gets the specified header.
-     *
-     * @param header A string with the header.
-     * @return The value of the header, or null if no such header.
-     * @since 1.5
-     */
-    public String getHeader(final String header) {
-        return this.headers.get(header);
-    }
-
-    /**
-     * Gets all headers on an Email.
-     *
-     * @return a Map of all headers.
-     * @since 1.5
-     */
-    public Map<String, String> getHeaders() {
-        return this.headers;
-    }
-
-    /**
-     * Sets the email subject. Replaces end-of-line characters with spaces.
-     *
-     * @param aSubject A String.
-     * @return An Email.
-     * @since 1.0
-     */
-    public Email setSubject(final String aSubject) {
-        this.subject = EmailUtils.replaceEndOfLineCharactersWithSpaces(aSubject);
-        return this;
-    }
-
-    /**
-     * Gets the "bounce address" of this email.
-     *
-     * @return the bounce address as string
-     * @since 1.4
-     */
-    public String getBounceAddress() {
-        return this.bounceAddress;
-    }
-
-    /**
-     * Sets the "bounce address" - the address to which undeliverable messages will be returned. If this value is never set, then the message will be sent to
-     * the address specified with the System property "mail.smtp.from", or if that value is not set, then to the "from" address.
+     * Add a recipient TO to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
+     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
-     * @throws IllegalStateException if the mail session is already initialized
+     * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public Email setBounceAddress(final String email) {
-        checkSessionAlreadyInitialized();
+    public Email addTo(final String email) throws EmailException {
+        return addTo(email, null);
+    }
 
-        if (email != null && !email.isEmpty()) {
-            try {
-                this.bounceAddress = createInternetAddress(email, null, this.charset).getAddress();
-            } catch (final EmailException e) {
-                // Can't throw 'EmailException' to keep backward-compatibility
-                throw new IllegalArgumentException("Failed to set the bounce address : " + email, e);
-            }
-        } else {
-            this.bounceAddress = email;
+    /**
+     * Add a list of TO recipients to the email. The email addresses will also be used as the personal names. The names will be encoded by the charset of
+     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
+     *
+     * @param emails A String array.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
+     * @since 1.3
+     */
+    public Email addTo(final String... emails) throws EmailException {
+        if (emails == null || emails.length == 0) {
+            throw new EmailException("Address List provided was invalid");
+        }
+
+        for (final String email : emails) {
+            addTo(email, null);
         }
 
         return this;
     }
 
     /**
-     * Define the content of the mail. It should be overridden by the subclasses.
+     * Add a recipient TO to the email using the specified address and the specified personal name. The name will be encoded by the charset of
+     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
+     * non-ASCII characters; otherwise, it is used as is.
      *
-     * @param msg A String.
+     * @param email A String.
+     * @param name  A String.
      * @return An Email.
-     * @throws EmailException generic exception.
+     * @throws EmailException Indicates an invalid email address.
      * @since 1.0
      */
-    public abstract Email setMsg(String msg) throws EmailException;
+    public Email addTo(final String email, final String name) throws EmailException {
+        return addTo(email, name, this.charset);
+    }
+
+    /**
+     * Add a recipient TO to the email using the specified address, personal name, and charset encoding for the name.
+     *
+     * @param email   A String.
+     * @param name    A String.
+     * @param charset The charset to encode the name with.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address or charset.
+     * @since 1.1
+     */
+    public Email addTo(final String email, final String name, final String charset) throws EmailException {
+        this.toList.add(createInternetAddress(email, name, charset));
+        return this;
+    }
 
     /**
      * Does the work of actually building the MimeMessage. Please note that a user rarely calls this method directly and only if he/she is interested in the
@@ -1189,397 +667,14 @@ public abstract class Email {
     }
 
     /**
-     * Sends the previously created MimeMessage to the SMTP server.
+     * When a mail session is already initialized setting the session properties has no effect. In order to flag the problem throw an IllegalStateException.
      *
-     * @return the message id of the underlying MimeMessage
-     * @throws IllegalArgumentException if the MimeMessage has not been created
-     * @throws EmailException           the sending failed
+     * @throws IllegalStateException when the mail session is already initialized
      */
-    public String sendMimeMessage() throws EmailException {
-        final Object object = this.message;
-        Objects.requireNonNull(object, "MimeMessage has not been created yet");
-
-        try {
-            Transport.send(this.message);
-            return this.message.getMessageID();
-        } catch (final Throwable t) {
-            final String msg = "Sending the email to the following server failed : " + this.getHostName() + ":" + this.getSmtpPort();
-
-            throw new EmailException(msg, t);
-        }
-    }
-
-    /**
-     * Returns the internal MimeMessage. Please note that the MimeMessage is built by the buildMimeMessage() method.
-     *
-     * @return the MimeMessage
-     */
-    public MimeMessage getMimeMessage() {
-        return this.message;
-    }
-
-    /**
-     * Sends the email. Internally we build a MimeMessage which is afterwards sent to the SMTP server.
-     *
-     * @return the message id of the underlying MimeMessage
-     * @throws IllegalStateException if the MimeMessage was already built, that is, {@link #buildMimeMessage()} was already called
-     * @throws EmailException        the sending failed
-     */
-    public String send() throws EmailException {
-        this.buildMimeMessage();
-        return this.sendMimeMessage();
-    }
-
-    /**
-     * Sets the sent date for the email. The sent date will default to the current date if not explicitly set.
-     *
-     * @param date Date to use as the sent date on the email
-     * @since 1.0
-     */
-    public void setSentDate(final Date date) {
-        if (date != null) {
-            // create a separate instance to keep findbugs happy
-            this.sentDate = new Date(date.getTime());
-        }
-    }
-
-    /**
-     * Gets the sent date for the email.
-     *
-     * @return date to be used as the sent date for the email
-     * @since 1.0
-     */
-    public Date getSentDate() {
-        if (this.sentDate == null) {
-            return new Date();
-        }
-        return new Date(this.sentDate.getTime());
-    }
-
-    /**
-     * Gets the subject of the email.
-     *
-     * @return email subject
-     */
-    public String getSubject() {
-        return this.subject;
-    }
-
-    /**
-     * Gets the sender of the email.
-     *
-     * @return from address
-     */
-    public InternetAddress getFromAddress() {
-        return this.fromAddress;
-    }
-
-    /**
-     * Gets the host name of the SMTP server,
-     *
-     * @return host name
-     */
-    public String getHostName() {
+    private void checkSessionAlreadyInitialized() {
         if (this.session != null) {
-            return this.session.getProperty(EmailConstants.MAIL_HOST);
+            throw new IllegalStateException("The mail session is already initialized");
         }
-        if (EmailUtils.isNotEmpty(this.hostName)) {
-            return this.hostName;
-        }
-        return null;
-    }
-
-    /**
-     * Gets the listening port of the SMTP server.
-     *
-     * @return SMTP port
-     */
-    public String getSmtpPort() {
-        if (this.session != null) {
-            return this.session.getProperty(EmailConstants.MAIL_PORT);
-        }
-        if (EmailUtils.isNotEmpty(this.smtpPort)) {
-            return this.smtpPort;
-        }
-        return null;
-    }
-
-    /**
-     * Gets whether the client is configured to require STARTTLS.
-     *
-     * @return true if using STARTTLS for authentication, false otherwise
-     * @since 1.3
-     */
-    public boolean isStartTLSRequired() {
-        return this.startTlsRequired;
-    }
-
-    /**
-     * Gets whether the client is configured to try to enable STARTTLS.
-     *
-     * @return true if using STARTTLS for authentication, false otherwise
-     * @since 1.3
-     */
-    public boolean isStartTLSEnabled() {
-        return this.startTlsEnabled || tls;
-    }
-
-    /**
-     * Gets whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
-     *
-     * @deprecated since 1.3, use isStartTLSEnabled() instead
-     * @return true if using STARTTLS for authentication, false otherwise
-     * @since 1.1
-     */
-    @Deprecated
-    public boolean isTLS() {
-        return isStartTLSEnabled();
-    }
-
-    /**
-     * Utility to copy List of known InternetAddress objects into an array.
-     *
-     * @param list A List.
-     * @return An InternetAddress[].
-     * @since 1.0
-     */
-    protected InternetAddress[] toInternetAddressArray(final List<InternetAddress> list) {
-        return list.toArray(EMPTY_INTERNET_ADDRESS_ARRAY);
-    }
-
-    /**
-     * Sets details regarding "pop3 before SMTP" authentication.
-     *
-     * @param newPopBeforeSmtp Whether or not to log into pop3 server before sending mail.
-     * @param newPopHost       The pop3 host to use.
-     * @param newPopUsername   The pop3 username.
-     * @param newPopPassword   The pop3 password.
-     * @since 1.0
-     */
-    public void setPopBeforeSmtp(final boolean newPopBeforeSmtp, final String newPopHost, final String newPopUsername, final String newPopPassword) {
-        this.popBeforeSmtp = newPopBeforeSmtp;
-        this.popHost = newPopHost;
-        this.popUsername = newPopUsername;
-        this.popPassword = newPopPassword;
-    }
-
-    /**
-     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
-     *
-     * @deprecated since 1.3, use isSSLOnConnect() instead
-     * @return true if SSL enabled for the transport
-     */
-    @Deprecated
-    public boolean isSSL() {
-        return isSSLOnConnect();
-    }
-
-    /**
-     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
-     *
-     * @return true if SSL enabled for the transport
-     * @since 1.3
-     */
-    public boolean isSSLOnConnect() {
-        return sslOnConnect || ssl;
-    }
-
-    /**
-     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
-     *
-     * @deprecated since 1.3, use setSSLOnConnect() instead
-     * @param ssl whether to enable the SSL transport
-     */
-    @Deprecated
-    public void setSSL(final boolean ssl) {
-        setSSLOnConnect(ssl);
-    }
-
-    /**
-     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). Takes precedence over
-     * {@link #setStartTLSRequired(boolean)}
-     * <p>
-     * Defaults to {@link #sslSmtpPort}; can be overridden by using {@link #setSslSmtpPort(String)}
-     *
-     * @param ssl whether to enable the SSL transport
-     * @return An Email.
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.3
-     */
-    public Email setSSLOnConnect(final boolean ssl) {
-        checkSessionAlreadyInitialized();
-        this.sslOnConnect = ssl;
-        this.ssl = ssl;
-        return this;
-    }
-
-    /**
-     * Is the server identity checked as specified by RFC 2595
-     *
-     * @return true if the server identity is checked
-     * @since 1.3
-     */
-    public boolean isSSLCheckServerIdentity() {
-        return sslCheckServerIdentity;
-    }
-
-    /**
-     * Sets whether the server identity is checked as specified by RFC 2595
-     *
-     * @param sslCheckServerIdentity whether to enable server identity check
-     * @return An Email.
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.3
-     */
-    public Email setSSLCheckServerIdentity(final boolean sslCheckServerIdentity) {
-        checkSessionAlreadyInitialized();
-        this.sslCheckServerIdentity = sslCheckServerIdentity;
-        return this;
-    }
-
-    /**
-     * Returns the current SSL port used by the SMTP transport.
-     *
-     * @return the current SSL port used by the SMTP transport
-     */
-    public String getSslSmtpPort() {
-        if (this.session != null) {
-            return this.session.getProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT);
-        }
-        if (EmailUtils.isNotEmpty(this.sslSmtpPort)) {
-            return this.sslSmtpPort;
-        }
-        return null;
-    }
-
-    /**
-     * Sets the SSL port to use for the SMTP transport. Defaults to the standard port, 465.
-     *
-     * @param sslSmtpPort the SSL port to use for the SMTP transport
-     * @throws IllegalStateException if the mail session is already initialized
-     * @see #setSmtpPort(int)
-     */
-    public void setSslSmtpPort(final String sslSmtpPort) {
-        checkSessionAlreadyInitialized();
-        this.sslSmtpPort = sslSmtpPort;
-    }
-
-    /**
-     * If partial sending of email enabled.
-     *
-     * @return true if sending partial email is enabled
-     * @since 1.3.2
-     */
-    public boolean isSendPartial() {
-        return sendPartial;
-    }
-
-    /**
-     * Sets whether the email is partially send in case of invalid addresses.
-     * <p>
-     * In case the mail server rejects an address as invalid, the call to {@link #send()} may throw a {@link javax.mail.SendFailedException}, even if partial
-     * send mode is enabled (emails to valid addresses will be transmitted). In case the email server does not reject invalid addresses immediately, but return
-     * a bounce message, no exception will be thrown by the {@link #send()} method.
-     *
-     * @param sendPartial whether to enable partial send mode
-     * @return An Email.
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.3.2
-     */
-    public Email setSendPartial(final boolean sendPartial) {
-        checkSessionAlreadyInitialized();
-        this.sendPartial = sendPartial;
-        return this;
-    }
-
-    /**
-     * Gets the list of "To" addresses.
-     *
-     * @return List addresses
-     */
-    public List<InternetAddress> getToAddresses() {
-        return this.toList;
-    }
-
-    /**
-     * Gets the list of "CC" addresses.
-     *
-     * @return List addresses
-     */
-    public List<InternetAddress> getCcAddresses() {
-        return this.ccList;
-    }
-
-    /**
-     * Gets the list of "Bcc" addresses.
-     *
-     * @return List addresses
-     */
-    public List<InternetAddress> getBccAddresses() {
-        return this.bccList;
-    }
-
-    /**
-     * Gets the list of "Reply-To" addresses.
-     *
-     * @return List addresses
-     */
-    public List<InternetAddress> getReplyToAddresses() {
-        return this.replyList;
-    }
-
-    /**
-     * Gets the socket connection timeout value in milliseconds.
-     *
-     * @return the timeout in milliseconds.
-     * @since 1.2
-     */
-    public int getSocketConnectionTimeout() {
-        return this.socketConnectionTimeout;
-    }
-
-    /**
-     * Sets the socket connection timeout value in milliseconds. Default is a 60 second timeout.
-     *
-     * @param socketConnectionTimeout the connection timeout
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
-     */
-    public void setSocketConnectionTimeout(final int socketConnectionTimeout) {
-        checkSessionAlreadyInitialized();
-        this.socketConnectionTimeout = socketConnectionTimeout;
-    }
-
-    /**
-     * Gets the socket I/O timeout value in milliseconds.
-     *
-     * @return the socket I/O timeout
-     * @since 1.2
-     */
-    public int getSocketTimeout() {
-        return this.socketTimeout;
-    }
-
-    /**
-     * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
-     *
-     * @param socketTimeout the socket I/O timeout
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
-     */
-    public void setSocketTimeout(final int socketTimeout) {
-        checkSessionAlreadyInitialized();
-        this.socketTimeout = socketTimeout;
-    }
-
-    /**
-     * Factory method to create a customized MimeMessage which can be implemented by a derived class, e.g. to set the message id.
-     *
-     * @param aSession mail session to be used
-     * @return the newly created message
-     */
-    protected MimeMessage createMimeMessage(final Session aSession) {
-        return new MimeMessage(aSession);
     }
 
     /**
@@ -1643,13 +738,918 @@ public abstract class Email {
     }
 
     /**
-     * When a mail session is already initialized setting the session properties has no effect. In order to flag the problem throw an IllegalStateException.
+     * Factory method to create a customized MimeMessage which can be implemented by a derived class, e.g. to set the message id.
      *
-     * @throws IllegalStateException when the mail session is already initialized
+     * @param aSession mail session to be used
+     * @return the newly created message
      */
-    private void checkSessionAlreadyInitialized() {
+    protected MimeMessage createMimeMessage(final Session aSession) {
+        return new MimeMessage(aSession);
+    }
+
+    /**
+     * Gets the list of "Bcc" addresses.
+     *
+     * @return List addresses
+     */
+    public List<InternetAddress> getBccAddresses() {
+        return this.bccList;
+    }
+
+    /**
+     * Gets the "bounce address" of this email.
+     *
+     * @return the bounce address as string
+     * @since 1.4
+     */
+    public String getBounceAddress() {
+        return this.bounceAddress;
+    }
+
+    /**
+     * Gets the list of "CC" addresses.
+     *
+     * @return List addresses
+     */
+    public List<InternetAddress> getCcAddresses() {
+        return this.ccList;
+    }
+
+    /**
+     * Gets the sender of the email.
+     *
+     * @return from address
+     */
+    public InternetAddress getFromAddress() {
+        return this.fromAddress;
+    }
+
+    /**
+     * Gets the specified header.
+     *
+     * @param header A string with the header.
+     * @return The value of the header, or null if no such header.
+     * @since 1.5
+     */
+    public String getHeader(final String header) {
+        return this.headers.get(header);
+    }
+
+    /**
+     * Gets all headers on an Email.
+     *
+     * @return a Map of all headers.
+     * @since 1.5
+     */
+    public Map<String, String> getHeaders() {
+        return this.headers;
+    }
+
+    /**
+     * Gets the host name of the SMTP server,
+     *
+     * @return host name
+     */
+    public String getHostName() {
         if (this.session != null) {
-            throw new IllegalStateException("The mail session is already initialized");
+            return this.session.getProperty(EmailConstants.MAIL_HOST);
+        }
+        if (EmailUtils.isNotEmpty(this.hostName)) {
+            return this.hostName;
+        }
+        return null;
+    }
+
+    /**
+     * Determines the mail session used when sending this Email, creating the Session if necessary. When a mail session is already initialized setting the
+     * session related properties will cause an IllegalStateException.
+     *
+     * @return A Session.
+     * @throws EmailException if the host name was not set
+     * @since 1.0
+     */
+    public Session getMailSession() throws EmailException {
+        if (this.session == null) {
+            final Properties properties = new Properties(System.getProperties());
+            properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, EmailConstants.SMTP);
+
+            if (EmailUtils.isEmpty(this.hostName)) {
+                this.hostName = properties.getProperty(EmailConstants.MAIL_HOST);
+            }
+
+            if (EmailUtils.isEmpty(this.hostName)) {
+                throw new EmailException("Cannot find valid hostname for mail session");
+            }
+
+            properties.setProperty(EmailConstants.MAIL_PORT, this.smtpPort);
+            properties.setProperty(EmailConstants.MAIL_HOST, this.hostName);
+            properties.setProperty(EmailConstants.MAIL_DEBUG, String.valueOf(this.debug));
+
+            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_ENABLE, isStartTLSEnabled() ? "true" : "false");
+            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_REQUIRED, isStartTLSRequired() ? "true" : "false");
+
+            properties.setProperty(EmailConstants.MAIL_SMTP_SEND_PARTIAL, isSendPartial() ? "true" : "false");
+            properties.setProperty(EmailConstants.MAIL_SMTPS_SEND_PARTIAL, isSendPartial() ? "true" : "false");
+
+            if (this.authenticator != null) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
+            }
+
+            if (isSSLOnConnect()) {
+                properties.setProperty(EmailConstants.MAIL_PORT, this.sslSmtpPort);
+                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
+                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
+                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
+            }
+
+            if ((isSSLOnConnect() || isStartTLSEnabled()) && isSSLCheckServerIdentity()) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
+            }
+
+            if (this.bounceAddress != null) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_FROM, this.bounceAddress);
+            }
+
+            if (this.socketTimeout > 0) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));
+            }
+
+            if (this.socketConnectionTimeout > 0) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_CONNECTIONTIMEOUT, Integer.toString(this.socketConnectionTimeout));
+            }
+
+            // changed this (back) to getInstance due to security exceptions
+            // caused when testing using maven
+            this.session = Session.getInstance(properties, this.authenticator);
+        }
+        return this.session;
+    }
+
+    /**
+     * Returns the internal MimeMessage. Please note that the MimeMessage is built by the buildMimeMessage() method.
+     *
+     * @return the MimeMessage
+     */
+    public MimeMessage getMimeMessage() {
+        return this.message;
+    }
+
+    /**
+     * Gets the list of "Reply-To" addresses.
+     *
+     * @return List addresses
+     */
+    public List<InternetAddress> getReplyToAddresses() {
+        return this.replyList;
+    }
+
+    /**
+     * Gets the sent date for the email.
+     *
+     * @return date to be used as the sent date for the email
+     * @since 1.0
+     */
+    public Date getSentDate() {
+        if (this.sentDate == null) {
+            return new Date();
+        }
+        return new Date(this.sentDate.getTime());
+    }
+
+    /**
+     * Gets the listening port of the SMTP server.
+     *
+     * @return SMTP port
+     */
+    public String getSmtpPort() {
+        if (this.session != null) {
+            return this.session.getProperty(EmailConstants.MAIL_PORT);
+        }
+        if (EmailUtils.isNotEmpty(this.smtpPort)) {
+            return this.smtpPort;
+        }
+        return null;
+    }
+
+    /**
+     * Gets the socket connection timeout value in milliseconds.
+     *
+     * @return the timeout in milliseconds.
+     * @since 1.2
+     */
+    public int getSocketConnectionTimeout() {
+        return this.socketConnectionTimeout;
+    }
+
+    /**
+     * Gets the socket I/O timeout value in milliseconds.
+     *
+     * @return the socket I/O timeout
+     * @since 1.2
+     */
+    public int getSocketTimeout() {
+        return this.socketTimeout;
+    }
+
+    /**
+     * Returns the current SSL port used by the SMTP transport.
+     *
+     * @return the current SSL port used by the SMTP transport
+     */
+    public String getSslSmtpPort() {
+        if (this.session != null) {
+            return this.session.getProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT);
+        }
+        if (EmailUtils.isNotEmpty(this.sslSmtpPort)) {
+            return this.sslSmtpPort;
+        }
+        return null;
+    }
+
+    /**
+     * Gets the subject of the email.
+     *
+     * @return email subject
+     */
+    public String getSubject() {
+        return this.subject;
+    }
+
+    /**
+     * Gets the list of "To" addresses.
+     *
+     * @return List addresses
+     */
+    public List<InternetAddress> getToAddresses() {
+        return this.toList;
+    }
+
+    /**
+     * If partial sending of email enabled.
+     *
+     * @return true if sending partial email is enabled
+     * @since 1.3.2
+     */
+    public boolean isSendPartial() {
+        return sendPartial;
+    }
+
+    /**
+     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
+     *
+     * @deprecated since 1.3, use isSSLOnConnect() instead
+     * @return true if SSL enabled for the transport
+     */
+    @Deprecated
+    public boolean isSSL() {
+        return isSSLOnConnect();
+    }
+
+    /**
+     * Is the server identity checked as specified by RFC 2595
+     *
+     * @return true if the server identity is checked
+     * @since 1.3
+     */
+    public boolean isSSLCheckServerIdentity() {
+        return sslCheckServerIdentity;
+    }
+
+    /**
+     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
+     *
+     * @return true if SSL enabled for the transport
+     * @since 1.3
+     */
+    public boolean isSSLOnConnect() {
+        return sslOnConnect || ssl;
+    }
+
+    /**
+     * Gets whether the client is configured to try to enable STARTTLS.
+     *
+     * @return true if using STARTTLS for authentication, false otherwise
+     * @since 1.3
+     */
+    public boolean isStartTLSEnabled() {
+        return this.startTlsEnabled || tls;
+    }
+
+    /**
+     * Gets whether the client is configured to require STARTTLS.
+     *
+     * @return true if using STARTTLS for authentication, false otherwise
+     * @since 1.3
+     */
+    public boolean isStartTLSRequired() {
+        return this.startTlsRequired;
+    }
+
+    /**
+     * Gets whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
+     *
+     * @deprecated since 1.3, use isStartTLSEnabled() instead
+     * @return true if using STARTTLS for authentication, false otherwise
+     * @since 1.1
+     */
+    @Deprecated
+    public boolean isTLS() {
+        return isStartTLSEnabled();
+    }
+
+    /**
+     * Sends the email. Internally we build a MimeMessage which is afterwards sent to the SMTP server.
+     *
+     * @return the message id of the underlying MimeMessage
+     * @throws IllegalStateException if the MimeMessage was already built, that is, {@link #buildMimeMessage()} was already called
+     * @throws EmailException        the sending failed
+     */
+    public String send() throws EmailException {
+        this.buildMimeMessage();
+        return this.sendMimeMessage();
+    }
+
+    /**
+     * Sends the previously created MimeMessage to the SMTP server.
+     *
+     * @return the message id of the underlying MimeMessage
+     * @throws IllegalArgumentException if the MimeMessage has not been created
+     * @throws EmailException           the sending failed
+     */
+    public String sendMimeMessage() throws EmailException {
+        final Object object = this.message;
+        Objects.requireNonNull(object, "MimeMessage has not been created yet");
+
+        try {
+            Transport.send(this.message);
+            return this.message.getMessageID();
+        } catch (final Throwable t) {
+            final String msg = "Sending the email to the following server failed : " + this.getHostName() + ":" + this.getSmtpPort();
+
+            throw new EmailException(msg, t);
+        }
+    }
+
+    /**
+     * Sets the userName and password if authentication is needed. If this method is not used, no authentication will be performed.
+     * <p>
+     * This method will create a new instance of {@code DefaultAuthenticator} using the supplied parameters.
+     *
+     * @param userName User name for the SMTP server
+     * @param password password for the SMTP server
+     * @see DefaultAuthenticator
+     * @see #setAuthenticator
+     * @since 1.0
+     */
+    public void setAuthentication(final String userName, final String password) {
+        this.setAuthenticator(new DefaultAuthenticator(userName, password));
+    }
+
+    /**
+     * Sets the {@code Authenticator} to be used when authentication is requested from the mail server.
+     * <p>
+     * This method should be used when your outgoing mail server requires authentication. Your mail server must also support RFC2554.
+     *
+     * @param newAuthenticator the {@code Authenticator} object.
+     * @see Authenticator
+     * @since 1.0
+     */
+    public void setAuthenticator(final Authenticator newAuthenticator) {
+        this.authenticator = newAuthenticator;
+    }
+
+    /**
+     * Sets a list of "BCC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
+     *
+     * @param aCollection collection of {@code InternetAddress} objects
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address
+     * @see javax.mail.internet.InternetAddress
+     * @since 1.0
+     */
+    public Email setBcc(final Collection<InternetAddress> aCollection) throws EmailException {
+        if (aCollection == null || aCollection.isEmpty()) {
+            throw new EmailException("Address List provided was invalid");
+        }
+
+        this.bccList = new ArrayList<>(aCollection);
+        return this;
+    }
+
+    /**
+     * Sets the "bounce address" - the address to which undeliverable messages will be returned. If this value is never set, then the message will be sent to
+     * the address specified with the System property "mail.smtp.from", or if that value is not set, then to the "from" address.
+     *
+     * @param email A String.
+     * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.0
+     */
+    public Email setBounceAddress(final String email) {
+        checkSessionAlreadyInitialized();
+
+        if (email != null && !email.isEmpty()) {
+            try {
+                this.bounceAddress = createInternetAddress(email, null, this.charset).getAddress();
+            } catch (final EmailException e) {
+                // Can't throw 'EmailException' to keep backward-compatibility
+                throw new IllegalArgumentException("Failed to set the bounce address : " + email, e);
+            }
+        } else {
+            this.bounceAddress = email;
+        }
+
+        return this;
+    }
+
+    /**
+     * Sets a list of "CC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
+     *
+     * @param aCollection collection of {@code InternetAddress} objects.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
+     * @see javax.mail.internet.InternetAddress
+     * @since 1.0
+     */
+    public Email setCc(final Collection<InternetAddress> aCollection) throws EmailException {
+        if (aCollection == null || aCollection.isEmpty()) {
+            throw new EmailException("Address List provided was invalid");
+        }
+
+        this.ccList = new ArrayList<>(aCollection);
+        return this;
+    }
+
+    /**
+     * Sets the charset of the message. Please note that you should set the charset before adding the message content.
+     *
+     * @param newCharset A String.
+     * @throws java.nio.charset.IllegalCharsetNameException if the charset name is invalid
+     * @throws java.nio.charset.UnsupportedCharsetException if no support for the named charset exists in the current JVM
+     * @since 1.0
+     */
+    public void setCharset(final String newCharset) {
+        final Charset set = Charset.forName(newCharset);
+        this.charset = set.name();
+    }
+
+    /**
+     * Sets the emailBody to a MimeMultiPart
+     *
+     * @param aMimeMultipart aMimeMultipart
+     * @since 1.0
+     */
+    public void setContent(final MimeMultipart aMimeMultipart) {
+        this.emailBody = aMimeMultipart;
+    }
+
+    /**
+     * Sets the content and contentType.
+     *
+     * @param aObject      aObject
+     * @param aContentType aContentType
+     * @since 1.0
+     */
+    public void setContent(final Object aObject, final String aContentType) {
+        this.content = aObject;
+        this.updateContentType(aContentType);
+    }
+
+    /**
+     * Setting to true will enable the display of debug information.
+     *
+     * @param d A boolean.
+     * @since 1.0
+     */
+    public void setDebug(final boolean d) {
+        this.debug = d;
+    }
+
+    /**
+     * Sets the FROM field of the email to use the specified address. The email address will also be used as the personal name. The name will be encoded by the
+     * charset of {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if
+     * it contains non-ASCII characters; otherwise, it is used as is.
+     *
+     * @param email A String.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
+     * @since 1.0
+     */
+    public Email setFrom(final String email) throws EmailException {
+        return setFrom(email, null);
+    }
+
+    /**
+     * Sets the FROM field of the email to use the specified address and the specified personal name. The name will be encoded by the charset of
+     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
+     * contains non-ASCII characters; otherwise, it is used as is.
+     *
+     * @param email A String.
+     * @param name  A String.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
+     * @since 1.0
+     */
+    public Email setFrom(final String email, final String name) throws EmailException {
+        return setFrom(email, name, this.charset);
+    }
+
+    /**
+     * Sets the FROM field of the email to use the specified address, personal name, and charset encoding for the name.
+     *
+     * @param email   A String.
+     * @param name    A String.
+     * @param charset The charset to encode the name with.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address or charset.
+     * @since 1.1
+     */
+    public Email setFrom(final String email, final String name, final String charset) throws EmailException {
+        this.fromAddress = createInternetAddress(email, name, charset);
+        return this;
+    }
+
+    /**
+     * Used to specify the mail headers. Example:
+     *
+     * X-Mailer: Sendmail, X-Priority: 1( highest ) or 2( high ) 3( normal ) 4( low ) and 5( lowest ) Disposition-Notification-To: user@domain.net
+     *
+     * @param map A Map.
+     * @throws IllegalArgumentException if either of the provided header / value is null or empty
+     * @since 1.0
+     */
+    public void setHeaders(final Map<String, String> map) {
+        this.headers.clear();
+
+        for (final Map.Entry<String, String> entry : map.entrySet()) {
+            addHeader(entry.getKey(), entry.getValue());
+        }
+    }
+
+    /**
+     * Sets the hostname of the outgoing mail server.
+     *
+     * @param aHostName aHostName
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.0
+     */
+    public void setHostName(final String aHostName) {
+        checkSessionAlreadyInitialized();
+        this.hostName = aHostName;
+    }
+
+    /**
+     * Supply a mail Session object to use. Please note that passing a user name and password (in the case of mail authentication) will create a new mail
+     * session with a DefaultAuthenticator. This is a convenience but might come unexpected.
+     *
+     * If mail authentication is used but NO username and password is supplied the implementation assumes that you have set a authenticator and will use the
+     * existing mail session (as expected).
+     *
+     * @param session mail session to be used
+     * @throws NullPointerException if {@code aSession} is {@code null}
+     * @since 1.0
+     */
+    public void setMailSession(final Session session) {
+        Objects.requireNonNull(session, "no mail session supplied");
+
+        final Properties sessionProperties = session.getProperties();
+        final String auth = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_AUTH);
+
+        if ("true".equalsIgnoreCase(auth)) {
+            final String userName = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_USER);
+            final String password = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_PASSWORD);
+
+            if (EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password)) {
+                // only create a new mail session with an authenticator if
+                // authentication is required and no user name is given
+                this.authenticator = new DefaultAuthenticator(userName, password);
+                this.session = Session.getInstance(sessionProperties, this.authenticator);
+            } else {
+                // assume that the given mail session contains a working authenticator
+                this.session = session;
+            }
+        } else {
+            this.session = session;
+        }
+    }
+
+    /**
+     * Supply a mail Session object from a JNDI directory.
+     *
+     * @param jndiName name of JNDI resource (javax.mail.Session type), resource if searched in java:comp/env if name does not start with "java:"
+     * @throws IllegalArgumentException if the JNDI name is null or empty
+     * @throws NamingException          if the resource cannot be retrieved from JNDI directory
+     * @since 1.1
+     */
+    public void setMailSessionFromJNDI(final String jndiName) throws NamingException {
+        if (EmailUtils.isEmpty(jndiName)) {
+            throw new IllegalArgumentException("JNDI name missing");
+        }
+        Context ctx = null;
+        if (jndiName.startsWith("java:")) {
+            ctx = new InitialContext();
+        } else {
+            ctx = (Context) new InitialContext().lookup("java:comp/env");
+
+        }
+        this.setMailSession((Session) ctx.lookup(jndiName));
+    }
+
+    /**
+     * Define the content of the mail. It should be overridden by the subclasses.
+     *
+     * @param msg A String.
+     * @return An Email.
+     * @throws EmailException generic exception.
+     * @since 1.0
+     */
+    public abstract Email setMsg(String msg) throws EmailException;
+
+    /**
+     * Sets details regarding "pop3 before SMTP" authentication.
+     *
+     * @param newPopBeforeSmtp Whether or not to log into pop3 server before sending mail.
+     * @param newPopHost       The pop3 host to use.
+     * @param newPopUsername   The pop3 username.
+     * @param newPopPassword   The pop3 password.
+     * @since 1.0
+     */
+    public void setPopBeforeSmtp(final boolean newPopBeforeSmtp, final String newPopHost, final String newPopUsername, final String newPopPassword) {
+        this.popBeforeSmtp = newPopBeforeSmtp;
+        this.popHost = newPopHost;
+        this.popUsername = newPopUsername;
+        this.popPassword = newPopPassword;
+    }
+
+    /**
+     * Sets a list of reply to addresses. All elements in the specified {@code Collection} are expected to be of type
+     * {@code java.mail.internet.InternetAddress}.
+     *
+     * @param aCollection collection of {@code InternetAddress} objects
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address
+     * @see javax.mail.internet.InternetAddress
+     * @since 1.1
+     */
+    public Email setReplyTo(final Collection<InternetAddress> aCollection) throws EmailException {
+        if (aCollection == null || aCollection.isEmpty()) {
+            throw new EmailException("Address List provided was invalid");
+        }
+
+        this.replyList = new ArrayList<>(aCollection);
+        return this;
+    }
+
+    /**
+     * Sets whether the email is partially send in case of invalid addresses.
+     * <p>
+     * In case the mail server rejects an address as invalid, the call to {@link #send()} may throw a {@link javax.mail.SendFailedException}, even if partial
+     * send mode is enabled (emails to valid addresses will be transmitted). In case the email server does not reject invalid addresses immediately, but return
+     * a bounce message, no exception will be thrown by the {@link #send()} method.
+     *
+     * @param sendPartial whether to enable partial send mode
+     * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.3.2
+     */
+    public Email setSendPartial(final boolean sendPartial) {
+        checkSessionAlreadyInitialized();
+        this.sendPartial = sendPartial;
+        return this;
+    }
+
+    /**
+     * Sets the sent date for the email. The sent date will default to the current date if not explicitly set.
+     *
+     * @param date Date to use as the sent date on the email
+     * @since 1.0
+     */
+    public void setSentDate(final Date date) {
+        if (date != null) {
+            // create a separate instance to keep findbugs happy
+            this.sentDate = new Date(date.getTime());
+        }
+    }
+
+    /**
+     * Sets the non-SSL port number of the outgoing mail server.
+     *
+     * @param aPortNumber aPortNumber
+     * @throws IllegalArgumentException if the port number is &lt; 1
+     * @throws IllegalStateException    if the mail session is already initialized
+     * @since 1.0
+     * @see #setSslSmtpPort(String)
+     */
+    public void setSmtpPort(final int aPortNumber) {
+        checkSessionAlreadyInitialized();
+
+        if (aPortNumber < 1) {
+            throw new IllegalArgumentException("Cannot connect to a port number that is less than 1 ( " + aPortNumber + " )");
+        }
+
+        this.smtpPort = Integer.toString(aPortNumber);
+    }
+
+    /**
+     * Sets the socket connection timeout value in milliseconds. Default is a 60 second timeout.
+     *
+     * @param socketConnectionTimeout the connection timeout
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.2
+     */
+    public void setSocketConnectionTimeout(final int socketConnectionTimeout) {
+        checkSessionAlreadyInitialized();
+        this.socketConnectionTimeout = socketConnectionTimeout;
+    }
+
+    /**
+     * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
+     *
+     * @param socketTimeout the socket I/O timeout
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.2
+     */
+    public void setSocketTimeout(final int socketTimeout) {
+        checkSessionAlreadyInitialized();
+        this.socketTimeout = socketTimeout;
+    }
+
+    /**
+     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
+     *
+     * @deprecated since 1.3, use setSSLOnConnect() instead
+     * @param ssl whether to enable the SSL transport
+     */
+    @Deprecated
+    public void setSSL(final boolean ssl) {
+        setSSLOnConnect(ssl);
+    }
+
+    /**
+     * Sets whether the server identity is checked as specified by RFC 2595
+     *
+     * @param sslCheckServerIdentity whether to enable server identity check
+     * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.3
+     */
+    public Email setSSLCheckServerIdentity(final boolean sslCheckServerIdentity) {
+        checkSessionAlreadyInitialized();
+        this.sslCheckServerIdentity = sslCheckServerIdentity;
+        return this;
+    }
+
+    /**
+     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). Takes precedence over
+     * {@link #setStartTLSRequired(boolean)}
+     * <p>
+     * Defaults to {@link #sslSmtpPort}; can be overridden by using {@link #setSslSmtpPort(String)}
+     *
+     * @param ssl whether to enable the SSL transport
+     * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.3
+     */
+    public Email setSSLOnConnect(final boolean ssl) {
+        checkSessionAlreadyInitialized();
+        this.sslOnConnect = ssl;
+        this.ssl = ssl;
+        return this;
+    }
+
+    /**
+     * Sets the SSL port to use for the SMTP transport. Defaults to the standard port, 465.
+     *
+     * @param sslSmtpPort the SSL port to use for the SMTP transport
+     * @throws IllegalStateException if the mail session is already initialized
+     * @see #setSmtpPort(int)
+     */
+    public void setSslSmtpPort(final String sslSmtpPort) {
+        checkSessionAlreadyInitialized();
+        this.sslSmtpPort = sslSmtpPort;
+    }
+
+    /**
+     * Sets or disable the STARTTLS encryption.
+     *
+     * @param startTlsEnabled true if STARTTLS requested, false otherwise
+     * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.3
+     */
+    public Email setStartTLSEnabled(final boolean startTlsEnabled) {
+        checkSessionAlreadyInitialized();
+        this.startTlsEnabled = startTlsEnabled;
+        this.tls = startTlsEnabled;
+        return this;
+    }
+
+    /**
+     * Sets or disable the required STARTTLS encryption.
+     * <p>
+     * Defaults to {@link #smtpPort}; can be overridden by using {@link #setSmtpPort(int)}
+     *
+     * @param startTlsRequired true if STARTTLS requested, false otherwise
+     * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.3
+     */
+    public Email setStartTLSRequired(final boolean startTlsRequired) {
+        checkSessionAlreadyInitialized();
+        this.startTlsRequired = startTlsRequired;
+        return this;
+    }
+
+    /**
+     * Sets the email subject. Replaces end-of-line characters with spaces.
+     *
+     * @param aSubject A String.
+     * @return An Email.
+     * @since 1.0
+     */
+    public Email setSubject(final String aSubject) {
+        this.subject = EmailUtils.replaceEndOfLineCharactersWithSpaces(aSubject);
+        return this;
+    }
+
+    /**
+     * Sets or disable the STARTTLS encryption. Please see EMAIL-105 for the reasons of deprecation.
+     *
+     * @deprecated since 1.3, use setStartTLSEnabled() instead
+     * @param withTLS true if STARTTLS requested, false otherwise
+     * @since 1.1
+     */
+    @Deprecated
+    public void setTLS(final boolean withTLS) {
+        setStartTLSEnabled(withTLS);
+    }
+
+    /**
+     * Sets a list of "TO" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
+     *
+     * @param aCollection collection of {@code InternetAddress} objects.
+     * @return An Email.
+     * @throws EmailException Indicates an invalid email address.
+     * @see javax.mail.internet.InternetAddress
+     * @since 1.0
+     */
+    public Email setTo(final Collection<InternetAddress> aCollection) throws EmailException {
+        if (aCollection == null || aCollection.isEmpty()) {
+            throw new EmailException("Address List provided was invalid");
+        }
+
+        this.toList = new ArrayList<>(aCollection);
+        return this;
+    }
+
+    /**
+     * Utility to copy List of known InternetAddress objects into an array.
+     *
+     * @param list A List.
+     * @return An InternetAddress[].
+     * @since 1.0
+     */
+    protected InternetAddress[] toInternetAddressArray(final List<InternetAddress> list) {
+        return list.toArray(EMPTY_INTERNET_ADDRESS_ARRAY);
+    }
+
+    /**
+     * Update the contentType.
+     *
+     * @param aContentType aContentType
+     * @since 1.2
+     */
+    public void updateContentType(final String aContentType) {
+        if (EmailUtils.isEmpty(aContentType)) {
+            this.contentType = null;
+        } else {
+            // set the content type
+            this.contentType = aContentType;
+
+            // set the charset if the input was properly formed
+            final String strMarker = "; charset=";
+            int charsetPos = aContentType.toLowerCase().indexOf(strMarker);
+
+            if (charsetPos != -1) {
+                // find the next space (after the marker)
+                charsetPos += strMarker.length();
+                final int intCharsetEnd = aContentType.toLowerCase().indexOf(" ", charsetPos);
+
+                if (intCharsetEnd != -1) {
+                    this.charset = aContentType.substring(charsetPos, intCharsetEnd);
+                } else {
+                    this.charset = aContentType.substring(charsetPos);
+                }
+            } else {
+                // use the default charset, if one exists, for messages
+                // whose content-type is some form of text.
+                if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset)) {
+                    final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
+                    contentTypeBuf.append(strMarker);
+                    contentTypeBuf.append(this.charset);
+                    this.contentType = contentTypeBuf.toString();
+                }
+            }
         }
     }
 }

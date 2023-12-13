@@ -180,16 +180,6 @@ public class ByteArrayDataSource implements DataSource {
     }
 
     /**
-     * Sets the name for this DataSource.
-     *
-     * @param name The name.
-     * @since 1.3.1
-     */
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    /**
      * Gets the name.
      *
      * @return A String.
@@ -210,5 +200,15 @@ public class ByteArrayDataSource implements DataSource {
     public OutputStream getOutputStream() {
         baos = new ByteArrayOutputStream();
         return baos;
+    }
+
+    /**
+     * Sets the name for this DataSource.
+     *
+     * @param name The name.
+     * @since 1.3.1
+     */
+    public void setName(final String name) {
+        this.name = name;
     }
 }

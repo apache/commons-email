@@ -36,12 +36,6 @@ import javax.mail.internet.MimeMessage;
  */
 public final class MimeMessageUtils {
     /**
-     * Instances should NOT be constructed in standard programming.
-     */
-    private MimeMessageUtils() {
-    }
-
-    /**
      * Creates a MimeMessage.
      *
      * @param session the mail session
@@ -122,5 +116,11 @@ public final class MimeMessageUtils {
             mimeMessage.writeTo(fos);
             fos.flush();
         }
+    }
+
+    /**
+     * Instances should NOT be constructed in standard programming.
+     */
+    private MimeMessageUtils() {
     }
 }

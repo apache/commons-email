@@ -27,6 +27,15 @@ import org.apache.commons.mail.ImageHtmlEmail;
  */
 public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
     /**
+     * Retrieve the html msg
+     *
+     * @return Message Content
+     */
+    public String getHtmlMsg() {
+        return this.html;
+    }
+
+    /**
      * Retrieve the message content
      *
      * @return Message Content
@@ -37,14 +46,5 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
         } catch (final IOException | MessagingException msgE) {
             return null;
         }
-    }
-
-    /**
-     * Retrieve the html msg
-     *
-     * @return Message Content
-     */
-    public String getHtmlMsg() {
-        return this.html;
     }
 }

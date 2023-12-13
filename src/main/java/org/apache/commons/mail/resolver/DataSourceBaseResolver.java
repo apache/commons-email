@@ -44,15 +44,6 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
     }
 
     /**
-     * Shall we ignore resources not found or throw an exception?
-     *
-     * @return the lenient flag
-     */
-    public boolean isLenient() {
-        return lenient;
-    }
-
-    /**
      * Is this a content id?
      *
      * @param resourceLocation the resource location
@@ -80,5 +71,14 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
      */
     protected boolean isHttpUrl(final String urlString) {
         return urlString.startsWith("http://") || urlString.startsWith("https://");
+    }
+
+    /**
+     * Shall we ignore resources not found or throw an exception?
+     *
+     * @return the lenient flag
+     */
+    public boolean isLenient() {
+        return lenient;
     }
 }

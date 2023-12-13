@@ -49,91 +49,35 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testSetMsg() throws EmailException {
-        // Test Success
+    public void testAddPart() throws Exception {
 
-        // without charset set
-        for (final String validChar : testCharsValid) {
-            this.email.setMsg(validChar);
-            assertEquals(validChar, this.email.getMsg());
-        }
+        // setup
+        this.email = new MockMultiPartEmailConcrete();
+        final String strMessage = "hello";
+        final String strContentType = "text/plain";
 
-        // with charset set
-        this.email.setCharset(EmailConstants.US_ASCII);
-        for (final String validChar : testCharsValid) {
-            this.email.setMsg(validChar);
-            assertEquals(validChar, this.email.getMsg());
-        }
-        // Test Exceptions
-        for (final String invalidChar : testCharsNotValid) {
-            try {
-                this.email.setMsg(invalidChar);
-                fail("Should have thrown an exception");
-            } catch (final EmailException e) {
-                assertTrue(true);
-            }
-        }
+        // add part
+        this.email.addPart(strMessage, strContentType);
+
+        // validate
+        assertEquals(strContentType, this.email.getContainer().getBodyPart(0).getContentType());
+        assertEquals(strMessage, this.email.getContainer().getBodyPart(0).getDataHandler().getContent());
+
     }
 
-    /**
-     * @throws EmailException when a bad address or attachment is used
-     * @throws IOException    when sending fails
-     */
     @Test
-    public void testSend() throws EmailException, IOException {
-        // Test Success
-        this.getMailServer();
+    public void testAddPart2() throws Exception {
 
-        final String strSubject = "Test Multipart Send Subject";
+        // setup
+        this.email = new MockMultiPartEmailConcrete();
+        final String strSubtype = "subtype/abc123";
 
-        final EmailAttachment attachment = new EmailAttachment();
-        attachment.setPath(testFile.getAbsolutePath());
-        attachment.setDisposition(EmailAttachment.ATTACHMENT);
-        attachment.setName("Test_Attachment");
-        attachment.setDescription("Test Attachment Desc");
+        // add part
+        this.email.addPart(new MimeMultipart(strSubtype));
 
-        final MockMultiPartEmailConcrete testEmail = new MockMultiPartEmailConcrete();
-        testEmail.setHostName(this.strTestMailServer);
-        testEmail.setSmtpPort(this.getMailServerPort());
-        testEmail.setFrom(this.strTestMailFrom);
-        testEmail.addTo(this.strTestMailTo);
-        testEmail.attach(attachment);
-        testEmail.setSubType("subType");
+        // validate
+        assertTrue(this.email.getContainer().getBodyPart(0).getDataHandler().getContentType().contains(strSubtype));
 
-        if (EmailUtils.isNotEmpty(this.strTestUser) && EmailUtils.isNotEmpty(this.strTestPasswd)) {
-            testEmail.setAuthentication(this.strTestUser, this.strTestPasswd);
-        }
-
-        testEmail.setSubject(strSubject);
-
-        testEmail.setMsg("Test Message");
-
-        final Map<String, String> ht = new HashMap<>();
-        ht.put("X-Priority", "2");
-        ht.put("Disposition-Notification-To", this.strTestMailFrom);
-        ht.put("X-Mailer", "Sendmail");
-
-        testEmail.setHeaders(ht);
-
-        testEmail.send();
-
-        this.fakeMailServer.stop();
-        // validate message
-        validateSend(this.fakeMailServer, strSubject, testEmail.getMsg(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
-                testEmail.getBccAddresses(), true);
-
-        // validate attachment
-        validateSend(this.fakeMailServer, strSubject, attachment.getName(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
-                testEmail.getBccAddresses(), false);
-        // Test Exceptions
-        try {
-            this.getMailServer();
-
-            this.email.send();
-            fail("Should have thrown an exception");
-        } catch (final EmailException e) {
-            this.fakeMailServer.stop();
-        }
     }
 
     @Test
@@ -234,42 +178,19 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         assertTrue(tmpFile.delete());
     }
 
-    @Test
-    public void testAddPart() throws Exception {
-
-        // setup
-        this.email = new MockMultiPartEmailConcrete();
-        final String strMessage = "hello";
-        final String strContentType = "text/plain";
-
-        // add part
-        this.email.addPart(strMessage, strContentType);
-
-        // validate
-        assertEquals(strContentType, this.email.getContainer().getBodyPart(0).getContentType());
-        assertEquals(strMessage, this.email.getContainer().getBodyPart(0).getDataHandler().getContent());
-
-    }
-
-    @Test
-    public void testAddPart2() throws Exception {
-
-        // setup
-        this.email = new MockMultiPartEmailConcrete();
-        final String strSubtype = "subtype/abc123";
-
-        // add part
-        this.email.addPart(new MimeMultipart(strSubtype));
-
-        // validate
-        assertTrue(this.email.getContainer().getBodyPart(0).getDataHandler().getContentType().contains(strSubtype));
-
-    }
-
     /** TODO implement test for GetContainer */
     @Test
     public void testGetContainer() {
         assertTrue(true);
+    }
+
+    /** test get/set sub type */
+    @Test
+    public void testGetSetSubType() {
+        for (final String validChar : testCharsValid) {
+            this.email.setSubType(validChar);
+            assertEquals(validChar, this.email.getSubType());
+        }
     }
 
     /** init called twice should fail */
@@ -285,12 +206,91 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         }
     }
 
-    /** test get/set sub type */
+    /**
+     * @throws EmailException when a bad address or attachment is used
+     * @throws IOException    when sending fails
+     */
     @Test
-    public void testGetSetSubType() {
+    public void testSend() throws EmailException, IOException {
+        // Test Success
+        this.getMailServer();
+
+        final String strSubject = "Test Multipart Send Subject";
+
+        final EmailAttachment attachment = new EmailAttachment();
+        attachment.setPath(testFile.getAbsolutePath());
+        attachment.setDisposition(EmailAttachment.ATTACHMENT);
+        attachment.setName("Test_Attachment");
+        attachment.setDescription("Test Attachment Desc");
+
+        final MockMultiPartEmailConcrete testEmail = new MockMultiPartEmailConcrete();
+        testEmail.setHostName(this.strTestMailServer);
+        testEmail.setSmtpPort(this.getMailServerPort());
+        testEmail.setFrom(this.strTestMailFrom);
+        testEmail.addTo(this.strTestMailTo);
+        testEmail.attach(attachment);
+        testEmail.setSubType("subType");
+
+        if (EmailUtils.isNotEmpty(this.strTestUser) && EmailUtils.isNotEmpty(this.strTestPasswd)) {
+            testEmail.setAuthentication(this.strTestUser, this.strTestPasswd);
+        }
+
+        testEmail.setSubject(strSubject);
+
+        testEmail.setMsg("Test Message");
+
+        final Map<String, String> ht = new HashMap<>();
+        ht.put("X-Priority", "2");
+        ht.put("Disposition-Notification-To", this.strTestMailFrom);
+        ht.put("X-Mailer", "Sendmail");
+
+        testEmail.setHeaders(ht);
+
+        testEmail.send();
+
+        this.fakeMailServer.stop();
+        // validate message
+        validateSend(this.fakeMailServer, strSubject, testEmail.getMsg(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
+                testEmail.getBccAddresses(), true);
+
+        // validate attachment
+        validateSend(this.fakeMailServer, strSubject, attachment.getName(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
+                testEmail.getBccAddresses(), false);
+        // Test Exceptions
+        try {
+            this.getMailServer();
+
+            this.email.send();
+            fail("Should have thrown an exception");
+        } catch (final EmailException e) {
+            this.fakeMailServer.stop();
+        }
+    }
+
+    @Test
+    public void testSetMsg() throws EmailException {
+        // Test Success
+
+        // without charset set
         for (final String validChar : testCharsValid) {
-            this.email.setSubType(validChar);
-            assertEquals(validChar, this.email.getSubType());
+            this.email.setMsg(validChar);
+            assertEquals(validChar, this.email.getMsg());
+        }
+
+        // with charset set
+        this.email.setCharset(EmailConstants.US_ASCII);
+        for (final String validChar : testCharsValid) {
+            this.email.setMsg(validChar);
+            assertEquals(validChar, this.email.getMsg());
+        }
+        // Test Exceptions
+        for (final String invalidChar : testCharsNotValid) {
+            try {
+                this.email.setMsg(invalidChar);
+                fail("Should have thrown an exception");
+            } catch (final EmailException e) {
+                assertTrue(true);
+            }
         }
     }
 }

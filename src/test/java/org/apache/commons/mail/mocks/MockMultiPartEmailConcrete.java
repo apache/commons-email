@@ -31,6 +31,14 @@ import org.apache.commons.mail.MultiPartEmail;
 public class MockMultiPartEmailConcrete extends MultiPartEmail {
 
     /**
+     * @return fromAddress
+     */
+    @Override
+    public InternetAddress getFromAddress() {
+        return this.fromAddress;
+    }
+
+    /**
      * Retrieve the message content
      *
      * @return Message Content
@@ -47,14 +55,6 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail {
      */
     public void initTest() {
         this.init();
-    }
-
-    /**
-     * @return fromAddress
-     */
-    @Override
-    public InternetAddress getFromAddress() {
-        return this.fromAddress;
     }
 
 }

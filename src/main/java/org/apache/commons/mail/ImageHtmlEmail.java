@@ -64,24 +64,6 @@ public class ImageHtmlEmail extends HtmlEmail {
     private DataSourceResolver dataSourceResolver;
 
     /**
-     * Gets the data source resolver.
-     *
-     * @return the resolver
-     */
-    public DataSourceResolver getDataSourceResolver() {
-        return dataSourceResolver;
-    }
-
-    /**
-     * Sets the data source resolver.
-     *
-     * @param dataSourceResolver the resolver
-     */
-    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver) {
-        this.dataSourceResolver = dataSourceResolver;
-    }
-
-    /**
      * Does the work of actually building the MimeMessage.
      *
      * @see org.apache.commons.mail.HtmlEmail#buildMimeMessage()
@@ -98,6 +80,15 @@ public class ImageHtmlEmail extends HtmlEmail {
         } catch (final IOException e) {
             throw new EmailException("Building the MimeMessage failed", e);
         }
+    }
+
+    /**
+     * Gets the data source resolver.
+     *
+     * @return the resolver
+     */
+    public DataSourceResolver getDataSourceResolver() {
+        return dataSourceResolver;
     }
 
     /**
@@ -167,5 +158,14 @@ public class ImageHtmlEmail extends HtmlEmail {
         dataSourceCache.clear();
 
         return stringBuffer.toString();
+    }
+
+    /**
+     * Sets the data source resolver.
+     *
+     * @param dataSourceResolver the resolver
+     */
+    public void setDataSourceResolver(final DataSourceResolver dataSourceResolver) {
+        this.dataSourceResolver = dataSourceResolver;
     }
 }

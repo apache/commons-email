@@ -43,35 +43,6 @@ import org.junit.jupiter.api.Test;
  * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
 public class EmailLiveTest extends AbstractEmailTest {
-    @BeforeEach
-    public void setUpLiveTest() {
-        // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
-        System.setProperty("mail.mime.charset", "utf-8");
-
-        // enforce encoding of non-ASCII characters (violating the MIME specification - see
-        // http://java.sun.com/products/javamail/javadocs/javax/mail/internet/package-summary.html
-        System.setProperty("mail.mime.encodefilename", "true");
-    }
-
-    protected Email send(final Email email) throws EmailException {
-
-        if (EmailConfiguration.MAIL_FORCE_SEND) {
-            email.send();
-        } else {
-            email.buildMimeMessage();
-        }
-
-        return email;
-    }
-
-    protected String getFromUrl(final URL url) throws Exception {
-
-        final URLDataSource dataSource = new URLDataSource(url);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        IOUtils.copy(dataSource.getInputStream(), baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
-    }
-
     /**
      * Factory method to create a pre-configured email instance.
      *
@@ -102,18 +73,62 @@ public class EmailLiveTest extends AbstractEmailTest {
         return email;
     }
 
+    protected String getFromUrl(final URL url) throws Exception {
+
+        final URLDataSource dataSource = new URLDataSource(url);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        IOUtils.copy(dataSource.getInputStream(), baos);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+    }
+
+    protected Email send(final Email email) throws EmailException {
+
+        if (EmailConfiguration.MAIL_FORCE_SEND) {
+            email.send();
+        } else {
+            email.buildMimeMessage();
+        }
+
+        return email;
+    }
+
+    @BeforeEach
+    public void setUpLiveTest() {
+        // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
+        System.setProperty("mail.mime.charset", "utf-8");
+
+        // enforce encoding of non-ASCII characters (violating the MIME specification - see
+        // http://java.sun.com/products/javamail/javadocs/javax/mail/internet/package-summary.html
+        System.setProperty("mail.mime.encodefilename", "true");
+    }
+
     /**
-     * A sanity check that a simple email also works in reality.
+     * This test checks the correct character encoding when sending non-ASCII content using SimpleEmail.
+     *
+     * https://issues.apache.org/jira/browse/EMAIL-79
      *
      * @throws Exception the test failed
      */
     @Test
-    public void testSimpleEmail() throws Exception {
-        final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
-        email.setSubject("TestSimpleMail");
-        email.setMsg("This is a test mail ... :-)");
+    public void testCorrectCharacterEncoding() throws Exception {
+        // U+03B1 : GREEK SMALL LETTER ALPHA
+        // U+03B2 : GREEK SMALL LETTER BETA
+        // U+03B3 : GREEK SMALL LETTER GAMMA
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/simplemail.eml"), send(email).getMimeMessage());
+        final String subject = "[email] 5.Test: Subject with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
+        final String textMsg = "My test body with three greek UTF-8 characters : \u03B1\u03B2\u03B3\n";
+        final String attachmentName = "\u03B1\u03B2\u03B3.txt";
+
+        // make sure to set the charset before adding the message content
+        final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
+        email.setSubject(subject);
+        email.setMsg(textMsg);
+
+        // create a proper UTF-8 sequence for the text attachment (matching our default charset)
+        final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes(StandardCharsets.UTF_8), "text/plain");
+        email.attach(attachment, attachmentName, "Attachment in Greek");
+
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
     }
 
     /**
@@ -129,21 +144,6 @@ public class EmailLiveTest extends AbstractEmailTest {
         email.addHeader("X-TestHeader", "This is a very long header value which should be folded into two lines, hopefully");
 
         EmailUtils.writeMimeMessage(new File("./target/test-emails/foldedheader.eml"), send(email).getMimeMessage());
-    }
-
-    /**
-     * A sanity check that a simple email also works in reality.
-     *
-     * @throws Exception the test failed
-     */
-    @Test
-    public void testMultiPartEmail() throws Exception {
-        final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
-        email.setSubject("TestMultiPartMail");
-        email.setMsg("This is a test mail ... :-)");
-        email.attach(new File("./src/test/resources/attachments/logo.pdf"));
-
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
     }
 
     /**
@@ -226,35 +226,6 @@ public class EmailLiveTest extends AbstractEmailTest {
     }
 
     /**
-     * This test checks the correct character encoding when sending non-ASCII content using SimpleEmail.
-     *
-     * https://issues.apache.org/jira/browse/EMAIL-79
-     *
-     * @throws Exception the test failed
-     */
-    @Test
-    public void testCorrectCharacterEncoding() throws Exception {
-        // U+03B1 : GREEK SMALL LETTER ALPHA
-        // U+03B2 : GREEK SMALL LETTER BETA
-        // U+03B3 : GREEK SMALL LETTER GAMMA
-
-        final String subject = "[email] 5.Test: Subject with three greek UTF-8 characters : \u03B1\u03B2\u03B3";
-        final String textMsg = "My test body with three greek UTF-8 characters : \u03B1\u03B2\u03B3\n";
-        final String attachmentName = "\u03B1\u03B2\u03B3.txt";
-
-        // make sure to set the charset before adding the message content
-        final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
-        email.setSubject(subject);
-        email.setMsg(textMsg);
-
-        // create a proper UTF-8 sequence for the text attachment (matching our default charset)
-        final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes(StandardCharsets.UTF_8), "text/plain");
-        email.attach(attachment, attachmentName, "Attachment in Greek");
-
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
-    }
-
-    /**
      * Test sending a image HTML mail bases on a local HTML page and local image.
      *
      * @throws Exception the test failed
@@ -294,6 +265,41 @@ public class EmailLiveTest extends AbstractEmailTest {
 
             EmailUtils.writeMimeMessage(new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
         }
+    }
+
+    /**
+     * A sanity check that a simple email also works in reality.
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    public void testMultiPartEmail() throws Exception {
+        final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
+        email.setSubject("TestMultiPartMail");
+        email.setMsg("This is a test mail ... :-)");
+        email.attach(new File("./src/test/resources/attachments/logo.pdf"));
+
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
+    }
+
+    /**
+     * Testing if we are able to send a partial email with an invalid address.
+     *
+     * https://issues.apache.org/jira/browse/EMAIL-132
+     *
+     * @throws Exception the test failed.
+     */
+    @Test
+    public void testPartialSend() throws Exception {
+        final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
+        email.addTo(EmailConfiguration.TEST_TO);
+        email.addTo("nobody@is.invalid");
+        email.setSubject("TestPartialMail");
+        email.setMsg("This is a test mail ... :-)");
+
+        email.setSendPartial(true);
+
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/partialmail.eml"), send(email).getMimeMessage());
     }
 
     /**
@@ -337,23 +343,17 @@ public class EmailLiveTest extends AbstractEmailTest {
     }
 
     /**
-     * Testing if we are able to send a partial email with an invalid address.
+     * A sanity check that a simple email also works in reality.
      *
-     * https://issues.apache.org/jira/browse/EMAIL-132
-     *
-     * @throws Exception the test failed.
+     * @throws Exception the test failed
      */
     @Test
-    public void testPartialSend() throws Exception {
+    public void testSimpleEmail() throws Exception {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
-        email.addTo(EmailConfiguration.TEST_TO);
-        email.addTo("nobody@is.invalid");
-        email.setSubject("TestPartialMail");
+        email.setSubject("TestSimpleMail");
         email.setMsg("This is a test mail ... :-)");
 
-        email.setSendPartial(true);
-
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/partialmail.eml"), send(email).getMimeMessage());
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/simplemail.eml"), send(email).getMimeMessage());
     }
 
 }

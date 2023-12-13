@@ -32,6 +32,42 @@ import javax.mail.internet.InternetAddress;
  */
 public class IDNEmailAddressConverter {
     /**
+     * Null-safe wrapper for {@link String#indexOf} to find the '@' character.
+     *
+     * @param value String value.
+     * @return index of first '@' character or {@code -1}
+     */
+    private int findAtSymbolIndex(final String value) {
+        if (value == null) {
+            return -1;
+        }
+
+        return value.indexOf('@');
+    }
+
+    /**
+     * Extracts the domain part of the email address.
+     *
+     * @param email email address.
+     * @param idx   index of '@' character.
+     * @return domain part of email
+     */
+    private String getDomainPart(final String email, final int idx) {
+        return email.substring(idx + 1);
+    }
+
+    /**
+     * Extracts the local part of the email address.
+     *
+     * @param email email address.
+     * @param idx   index of '@' character.
+     * @return local part of email
+     */
+    private String getLocalPart(final String email, final int idx) {
+        return email.substring(0, idx);
+    }
+
+    /**
      * Convert an email address to its ASCII representation using "Punycode".
      *
      * @param email email address.
@@ -71,41 +107,5 @@ public class IDNEmailAddressConverter {
         }
 
         return getLocalPart(email, idx) + '@' + IDN.toUnicode(getDomainPart(email, idx));
-    }
-
-    /**
-     * Extracts the local part of the email address.
-     *
-     * @param email email address.
-     * @param idx   index of '@' character.
-     * @return local part of email
-     */
-    private String getLocalPart(final String email, final int idx) {
-        return email.substring(0, idx);
-    }
-
-    /**
-     * Extracts the domain part of the email address.
-     *
-     * @param email email address.
-     * @param idx   index of '@' character.
-     * @return domain part of email
-     */
-    private String getDomainPart(final String email, final int idx) {
-        return email.substring(idx + 1);
-    }
-
-    /**
-     * Null-safe wrapper for {@link String#indexOf} to find the '@' character.
-     *
-     * @param value String value.
-     * @return index of first '@' character or {@code -1}
-     */
-    private int findAtSymbolIndex(final String value) {
-        if (value == null) {
-            return -1;
-        }
-
-        return value.indexOf('@');
     }
 }

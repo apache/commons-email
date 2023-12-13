@@ -69,6 +69,17 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver {
         return classPathBase;
     }
 
+    /**
+     * Returns the resource name for a given resource location.
+     *
+     * @param resourceLocation the resource location
+     * @return {@link #getClassPathBase()} + {@code resourceLocation}
+     * @see #getClassPathBase()
+     */
+    private String getResourceName(final String resourceLocation) {
+        return (getClassPathBase() + resourceLocation).replace("//", "/");
+    }
+
     /** {@inheritDoc} */
     @Override
     public DataSource resolve(final String resourceLocation) throws IOException {
@@ -110,16 +121,5 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver {
             }
             throw e;
         }
-    }
-
-    /**
-     * Returns the resource name for a given resource location.
-     *
-     * @param resourceLocation the resource location
-     * @return {@link #getClassPathBase()} + {@code resourceLocation}
-     * @see #getClassPathBase()
-     */
-    private String getResourceName(final String resourceLocation) {
-        return (getClassPathBase() + resourceLocation).replace("//", "/");
     }
 }

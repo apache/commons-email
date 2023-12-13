@@ -92,9 +92,31 @@ final class EmailUtils {
     }
 
     /**
-     * Constructs a new {@code EmailException} with no detail message.
+     * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
+     *
+     * @param input the input string to be URL encoded
+     * @return a URL encoded string
+     * @see <a href="http://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
-    private EmailUtils() {
+    static String encodeUrl(final String input) {
+        if (input == null) {
+            return null;
+        }
+
+        final StringBuilder builder = new StringBuilder();
+        for (final byte c : input.getBytes(StandardCharsets.US_ASCII)) {
+            final int b = c & 0xff;
+            if (SAFE_URL.get(b)) {
+                builder.append((char) b);
+            } else {
+                builder.append(ESCAPE_CHAR);
+                final char hex1 = Character.toUpperCase(Character.forDigit(b >> 4 & 0xF, RADIX));
+                final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
+                builder.append(hex1);
+                builder.append(hex2);
+            }
+        }
+        return builder.toString();
     }
 
     /**
@@ -121,22 +143,6 @@ final class EmailUtils {
      */
     static boolean isNotEmpty(final String str) {
         return str != null && !str.isEmpty();
-    }
-
-    /**
-     * Creates a random string whose length is the number of characters specified.
-     * <p>
-     * Characters will be chosen from the set of alphabetic characters.
-     * </p>
-     * <p>
-     * Copied from Commons Lang v2.1, svn 201930
-     * </p>
-     *
-     * @param count the length of random string to create
-     * @return the random string
-     */
-    static String randomAlphabetic(final int count) {
-        return random(count, 0, 0, true, false, null, RANDOM);
     }
 
     /**
@@ -211,6 +217,22 @@ final class EmailUtils {
     }
 
     /**
+     * Creates a random string whose length is the number of characters specified.
+     * <p>
+     * Characters will be chosen from the set of alphabetic characters.
+     * </p>
+     * <p>
+     * Copied from Commons Lang v2.1, svn 201930
+     * </p>
+     *
+     * @param count the length of random string to create
+     * @return the random string
+     */
+    static String randomAlphabetic(final int count) {
+        return random(count, 0, 0, true, false, null, RANDOM);
+    }
+
+    /**
      * Replaces end-of-line characters with spaces.
      *
      * @param input the input string to be scanned.
@@ -218,34 +240,6 @@ final class EmailUtils {
      */
     static String replaceEndOfLineCharactersWithSpaces(final String input) {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
-    }
-
-    /**
-     * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
-     *
-     * @param input the input string to be URL encoded
-     * @return a URL encoded string
-     * @see <a href="http://tools.ietf.org/html/rfc2392">RFC 2392</a>
-     */
-    static String encodeUrl(final String input) {
-        if (input == null) {
-            return null;
-        }
-
-        final StringBuilder builder = new StringBuilder();
-        for (final byte c : input.getBytes(StandardCharsets.US_ASCII)) {
-            final int b = c & 0xff;
-            if (SAFE_URL.get(b)) {
-                builder.append((char) b);
-            } else {
-                builder.append(ESCAPE_CHAR);
-                final char hex1 = Character.toUpperCase(Character.forDigit(b >> 4 & 0xF, RADIX));
-                final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, RADIX));
-                builder.append(hex1);
-                builder.append(hex2);
-            }
-        }
-        return builder.toString();
     }
 
     /**
@@ -258,5 +252,11 @@ final class EmailUtils {
      */
     static void writeMimeMessage(final File resultFile, final MimeMessage mimeMessage) throws IOException, MessagingException {
         MimeMessageUtils.writeMimeMessage(mimeMessage, resultFile);
+    }
+
+    /**
+     * Constructs a new {@code EmailException} with no detail message.
+     */
+    private EmailUtils() {
     }
 }

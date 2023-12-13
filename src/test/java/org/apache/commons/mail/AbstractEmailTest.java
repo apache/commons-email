@@ -62,6 +62,9 @@ public abstract class AbstractEmailTest {
     /** default port */
     private static int mailServerPort = 2500;
 
+    /** counter for creating a file name */
+    private static int fileNameCounter;
+
     /** The fake Wiser email server */
     protected Wiser fakeMailServer;
 
@@ -95,70 +98,18 @@ public abstract class AbstractEmailTest {
     /** Where to save email output **/
     private File emailOutputDir;
 
-    /** counter for creating a file name */
-    private static int fileNameCounter;
-
-    @BeforeEach
-    public void setUpAbstractEmailTest() {
-        emailOutputDir = new File("target/test-emails");
-        if (!emailOutputDir.exists()) {
-            emailOutputDir.mkdirs();
-        }
-    }
-
-    @AfterEach
-    public void tearDownEmailTest() {
-        // stop the fake email server (if started)
-        if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
-            this.fakeMailServer.stop();
-            assertTrue(isMailServerStopped(fakeMailServer), "Mail server didn't stop");
-        }
-
-        this.fakeMailServer = null;
-    }
-
     /**
-     * Gets the mail server port.
+     * Create a mocked URL object which always throws an IOException when the openStream() method is called.
+     * <p>
+     * Several ISPs do resolve invalid URLs like {@code http://example.invalid} to some error page causing tests to fail otherwise.
      *
-     * @return the port the server is running on.
+     * @return an invalid URL
      */
-    protected int getMailServerPort() {
-        return mailServerPort;
-    }
-
-    /**
-     * Safe a mail to a file using a more or less unique file name.
-     *
-     * @param email email
-     * @throws IOException        writing the email failed
-     * @throws MessagingException writing the email failed
-     */
-    protected void saveEmailToFile(final WiserMessage email) throws IOException, MessagingException {
-        final int currCounter = fileNameCounter++ % 10;
-        final String emailFileName = "email" + new Date().getTime() + "-" + currCounter + ".eml";
-        final File emailFile = new File(emailOutputDir, emailFileName);
-        EmailUtils.writeMimeMessage(emailFile, email.getMimeMessage());
-    }
-
-    /**
-     * @param intMsgNo the message to retrieve
-     * @return message as string
-     */
-    public String getMessageAsString(final int intMsgNo) {
-        final List<?> receivedMessages = fakeMailServer.getMessages();
-        assertTrue(receivedMessages.size() >= intMsgNo, "mail server didn't get enough messages");
-
-        final WiserMessage emailMessage = (WiserMessage) receivedMessages.get(intMsgNo);
-
-        if (emailMessage != null) {
-            try {
-                return serializeEmailMessage(emailMessage);
-            } catch (final Exception e) {
-                // ignore, since the test will fail on an empty string return
-            }
-        }
-        fail("Message not found");
-        return "";
+    protected URL createInvalidURL() throws Exception {
+        URL url = new URL("http://example.invalid");
+        url = Mockito.spy(url);
+        Mockito.doThrow(new IOException("Mocked IOException")).when(url).openStream();
+        return url;
     }
 
     /**
@@ -188,6 +139,165 @@ public abstract class AbstractEmailTest {
                 }
             }
         }
+    }
+
+    /**
+     * Gets the mail server port.
+     *
+     * @return the port the server is running on.
+     */
+    protected int getMailServerPort() {
+        return mailServerPort;
+    }
+
+    /**
+     * @param intMsgNo the message to retrieve
+     * @return message as string
+     */
+    public String getMessageAsString(final int intMsgNo) {
+        final List<?> receivedMessages = fakeMailServer.getMessages();
+        assertTrue(receivedMessages.size() >= intMsgNo, "mail server didn't get enough messages");
+
+        final WiserMessage emailMessage = (WiserMessage) receivedMessages.get(intMsgNo);
+
+        if (emailMessage != null) {
+            try {
+                return serializeEmailMessage(emailMessage);
+            } catch (final Exception e) {
+                // ignore, since the test will fail on an empty string return
+            }
+        }
+        fail("Message not found");
+        return "";
+    }
+
+    /**
+     * Returns a string representation of the message body. If the message body cannot be read, an empty string is returned.
+     *
+     * @param wiserMessage The wiser message from which to extract the message body
+     * @return The string representation of the message body
+     * @throws IOException Thrown while serializing the body from {@link DataHandler#writeTo(java.io.OutputStream)}.
+     * @since 1.1
+     */
+    private String getMessageBody(final WiserMessage wiserMessage) throws IOException {
+        if (wiserMessage == null) {
+            return "";
+        }
+
+        byte[] messageBody = null;
+
+        try {
+            final MimeMessage message = wiserMessage.getMimeMessage();
+            messageBody = getMessageBodyBytes(message);
+        } catch (final MessagingException me) {
+            // Thrown while getting the body content from
+            // {@link MimeMessage#getDataHandler()}
+            final IllegalStateException ise = new IllegalStateException("couldn't process MimeMessage from WiserMessage in getMessageBody()");
+            ise.initCause(me);
+            throw ise;
+        }
+
+        return messageBody != null ? new String(messageBody).intern() : "";
+    }
+
+    /**
+     * Gets the byte making up the body of the message.
+     *
+     * @param mimeMessage The mime message from which to extract the body.
+     * @return A byte array representing the message body
+     * @throws IOException        Thrown while serializing the body from {@link DataHandler#writeTo(java.io.OutputStream)}.
+     * @throws MessagingException Thrown while getting the body content from {@link MimeMessage#getDataHandler()}
+     * @since 1.1
+     */
+    private byte[] getMessageBodyBytes(final MimeMessage mimeMessage) throws IOException, MessagingException {
+        final DataHandler dataHandler = mimeMessage.getDataHandler();
+        final ByteArrayOutputStream byteArrayOutStream = new ByteArrayOutputStream();
+        final BufferedOutputStream buffOs = new BufferedOutputStream(byteArrayOutStream);
+        dataHandler.writeTo(buffOs);
+        buffOs.flush();
+
+        return byteArrayOutStream.toByteArray();
+    }
+
+    /**
+     * Checks if an email server is running at the address stored in the {@code fakeMailServer}.
+     *
+     * @param fakeMailServer The server from which the address is picked up.
+     * @return {@code true} if the server claims to be running
+     * @since 1.1
+     */
+    protected boolean isMailServerStopped(final Wiser fakeMailServer) {
+        return !fakeMailServer.getServer().isRunning();
+    }
+
+    /**
+     * Safe a mail to a file using a more or less unique file name.
+     *
+     * @param email email
+     * @throws IOException        writing the email failed
+     * @throws MessagingException writing the email failed
+     */
+    protected void saveEmailToFile(final WiserMessage email) throws IOException, MessagingException {
+        final int currCounter = fileNameCounter++ % 10;
+        final String emailFileName = "email" + new Date().getTime() + "-" + currCounter + ".eml";
+        final File emailFile = new File(emailOutputDir, emailFileName);
+        EmailUtils.writeMimeMessage(emailFile, email.getMimeMessage());
+    }
+
+    /**
+     * Serializes the {@link MimeMessage} from the {@code WiserMessage} passed in. The headers are serialized first followed by the message body.
+     *
+     * @param wiserMessage The {@code WiserMessage} to serialize.
+     * @return The string format of the message.
+     * @throws MessagingException
+     * @throws IOException        Thrown while serializing the body from {@link DataHandler#writeTo(java.io.OutputStream)}.
+     * @throws MessagingException Thrown while getting the body content from {@link MimeMessage#getDataHandler()}
+     * @since 1.1
+     */
+    private String serializeEmailMessage(final WiserMessage wiserMessage) throws MessagingException, IOException {
+        if (wiserMessage == null) {
+            return "";
+        }
+
+        final StringBuilder serializedEmail = new StringBuilder();
+        final MimeMessage message = wiserMessage.getMimeMessage();
+
+        // Serialize the headers
+        for (final Enumeration<?> headers = message.getAllHeaders(); headers.hasMoreElements();) {
+            final Header header = (Header) headers.nextElement();
+            serializedEmail.append(header.getName());
+            serializedEmail.append(": ");
+            serializedEmail.append(header.getValue());
+            serializedEmail.append(LINE_SEPARATOR);
+        }
+
+        // Serialize the body
+        final byte[] messageBody = getMessageBodyBytes(message);
+
+        serializedEmail.append(LINE_SEPARATOR);
+        serializedEmail.append(messageBody);
+        serializedEmail.append(LINE_SEPARATOR);
+
+        return serializedEmail.toString();
+    }
+
+    @BeforeEach
+    public void setUpAbstractEmailTest() {
+        emailOutputDir = new File("target/test-emails");
+        if (!emailOutputDir.exists()) {
+            emailOutputDir.mkdirs();
+        }
+    }
+
+    @AfterEach
+    public void tearDownEmailTest() {
+        // stop the fake email server (if started)
+        if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
+            this.fakeMailServer.stop();
+            assertTrue(isMailServerStopped(fakeMailServer), "Mail server didn't stop");
+        }
+
+        this.fakeMailServer = null;
     }
 
     /**
@@ -300,115 +410,5 @@ public abstract class AbstractEmailTest {
 
         // test message content
         assertTrue(getMessageBody(emailMessage).contains(strMessage), "didn't find expected message content in message body");
-    }
-
-    /**
-     * Serializes the {@link MimeMessage} from the {@code WiserMessage} passed in. The headers are serialized first followed by the message body.
-     *
-     * @param wiserMessage The {@code WiserMessage} to serialize.
-     * @return The string format of the message.
-     * @throws MessagingException
-     * @throws IOException        Thrown while serializing the body from {@link DataHandler#writeTo(java.io.OutputStream)}.
-     * @throws MessagingException Thrown while getting the body content from {@link MimeMessage#getDataHandler()}
-     * @since 1.1
-     */
-    private String serializeEmailMessage(final WiserMessage wiserMessage) throws MessagingException, IOException {
-        if (wiserMessage == null) {
-            return "";
-        }
-
-        final StringBuilder serializedEmail = new StringBuilder();
-        final MimeMessage message = wiserMessage.getMimeMessage();
-
-        // Serialize the headers
-        for (final Enumeration<?> headers = message.getAllHeaders(); headers.hasMoreElements();) {
-            final Header header = (Header) headers.nextElement();
-            serializedEmail.append(header.getName());
-            serializedEmail.append(": ");
-            serializedEmail.append(header.getValue());
-            serializedEmail.append(LINE_SEPARATOR);
-        }
-
-        // Serialize the body
-        final byte[] messageBody = getMessageBodyBytes(message);
-
-        serializedEmail.append(LINE_SEPARATOR);
-        serializedEmail.append(messageBody);
-        serializedEmail.append(LINE_SEPARATOR);
-
-        return serializedEmail.toString();
-    }
-
-    /**
-     * Returns a string representation of the message body. If the message body cannot be read, an empty string is returned.
-     *
-     * @param wiserMessage The wiser message from which to extract the message body
-     * @return The string representation of the message body
-     * @throws IOException Thrown while serializing the body from {@link DataHandler#writeTo(java.io.OutputStream)}.
-     * @since 1.1
-     */
-    private String getMessageBody(final WiserMessage wiserMessage) throws IOException {
-        if (wiserMessage == null) {
-            return "";
-        }
-
-        byte[] messageBody = null;
-
-        try {
-            final MimeMessage message = wiserMessage.getMimeMessage();
-            messageBody = getMessageBodyBytes(message);
-        } catch (final MessagingException me) {
-            // Thrown while getting the body content from
-            // {@link MimeMessage#getDataHandler()}
-            final IllegalStateException ise = new IllegalStateException("couldn't process MimeMessage from WiserMessage in getMessageBody()");
-            ise.initCause(me);
-            throw ise;
-        }
-
-        return messageBody != null ? new String(messageBody).intern() : "";
-    }
-
-    /**
-     * Gets the byte making up the body of the message.
-     *
-     * @param mimeMessage The mime message from which to extract the body.
-     * @return A byte array representing the message body
-     * @throws IOException        Thrown while serializing the body from {@link DataHandler#writeTo(java.io.OutputStream)}.
-     * @throws MessagingException Thrown while getting the body content from {@link MimeMessage#getDataHandler()}
-     * @since 1.1
-     */
-    private byte[] getMessageBodyBytes(final MimeMessage mimeMessage) throws IOException, MessagingException {
-        final DataHandler dataHandler = mimeMessage.getDataHandler();
-        final ByteArrayOutputStream byteArrayOutStream = new ByteArrayOutputStream();
-        final BufferedOutputStream buffOs = new BufferedOutputStream(byteArrayOutStream);
-        dataHandler.writeTo(buffOs);
-        buffOs.flush();
-
-        return byteArrayOutStream.toByteArray();
-    }
-
-    /**
-     * Checks if an email server is running at the address stored in the {@code fakeMailServer}.
-     *
-     * @param fakeMailServer The server from which the address is picked up.
-     * @return {@code true} if the server claims to be running
-     * @since 1.1
-     */
-    protected boolean isMailServerStopped(final Wiser fakeMailServer) {
-        return !fakeMailServer.getServer().isRunning();
-    }
-
-    /**
-     * Create a mocked URL object which always throws an IOException when the openStream() method is called.
-     * <p>
-     * Several ISPs do resolve invalid URLs like {@code http://example.invalid} to some error page causing tests to fail otherwise.
-     *
-     * @return an invalid URL
-     */
-    protected URL createInvalidURL() throws Exception {
-        URL url = new URL("http://example.invalid");
-        url = Mockito.spy(url);
-        Mockito.doThrow(new IOException("Mocked IOException")).when(url).openStream();
-        return url;
     }
 }

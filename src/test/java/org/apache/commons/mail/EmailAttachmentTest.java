@@ -45,6 +45,14 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     }
 
     @Test
+    public void testGetSetDisposition() {
+        for (final String validChar : testCharsValid) {
+            attachment.setDisposition(validChar);
+            assertEquals(validChar, attachment.getDisposition());
+        }
+    }
+
+    @Test
     public void testGetSetName() {
         for (final String validChar : testCharsValid) {
             attachment.setName(validChar);
@@ -68,14 +76,6 @@ public class EmailAttachmentTest extends AbstractEmailTest {
             final URL testURL = new URL(urlString);
             attachment.setURL(testURL);
             assertEquals(testURL, attachment.getURL());
-        }
-    }
-
-    @Test
-    public void testGetSetDisposition() {
-        for (final String validChar : testCharsValid) {
-            attachment.setDisposition(validChar);
-            assertEquals(validChar, attachment.getDisposition());
         }
     }
 

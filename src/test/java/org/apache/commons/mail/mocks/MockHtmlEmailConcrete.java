@@ -31,6 +31,23 @@ import org.apache.commons.mail.HtmlEmail;
 public class MockHtmlEmailConcrete extends HtmlEmail {
 
     /**
+     * @return fromAddress
+     */
+    @Override
+    public InternetAddress getFromAddress() {
+        return this.fromAddress;
+    }
+
+    /**
+     * Retrieve the html msg
+     *
+     * @return Message Content
+     */
+    public String getHtmlMsg() {
+        return this.html;
+    }
+
+    /**
      * Retrieve the message content
      *
      * @return Message Content
@@ -50,23 +67,6 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
      */
     public String getTextMsg() {
         return this.text;
-    }
-
-    /**
-     * Retrieve the html msg
-     *
-     * @return Message Content
-     */
-    public String getHtmlMsg() {
-        return this.html;
-    }
-
-    /**
-     * @return fromAddress
-     */
-    @Override
-    public InternetAddress getFromAddress() {
-        return this.fromAddress;
     }
 
 }

@@ -47,6 +47,21 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
+    public void testExternalModification() throws Exception {
+        final DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
+
+        final DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();
+
+        // modify an element in the returned array
+        arr[0] = null;
+
+        final DataSourceResolver[] arr2 = dataSourceResolver.getDataSourceResolvers();
+
+        // assert that the external modification is not propagated to the internal array
+        assertNotNull(arr2[0]);
+    }
+
+    @Test
     public void testResolvingFilesLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
@@ -62,21 +77,6 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolversMissing, false);
 
         assertThrows(IOException.class, () -> dataSourceResolver.resolve("./image/does-not-exist.gif"));
-    }
-
-    @Test
-    public void testExternalModification() throws Exception {
-        final DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
-
-        final DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();
-
-        // modify an element in the returned array
-        arr[0] = null;
-
-        final DataSourceResolver[] arr2 = dataSourceResolver.getDataSourceResolvers();
-
-        // assert that the external modification is not propagated to the internal array
-        assertNotNull(arr2[0]);
     }
 
 }

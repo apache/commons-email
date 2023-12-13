@@ -50,31 +50,15 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testSetInvalidFrom() throws Exception {
-        // Test setting invalid 'from' addresses
+    public void testAddInvalidBcc() throws Exception {
+        // Test adding invalid 'Bcc' addresses
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
             try {
-                // set from
-                email.setFrom(ARR_INVALID_EMAILS[i]);
+                // add bcc
+                email.addBcc(ARR_INVALID_EMAILS[i], "Joe");
 
                 // Expected an exception to be thrown
-                fail("setFrom " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            } catch (final EmailException ignore) {
-                // Expected Result
-            }
-        }
-    }
-
-    @Test
-    public void testAddInvalidTo() throws Exception {
-        // Test adding invalid 'to' addresses
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
-            try {
-                // Add To
-                email.addTo(ARR_INVALID_EMAILS[i], "Joe");
-
-                // Expected an exception to be thrown
-                fail("addTo " + i + " passed: " + ARR_INVALID_EMAILS[i]);
+                fail("addBcc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             } catch (final EmailException ignore) {
                 // Expected Result
             }
@@ -98,15 +82,31 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddInvalidBcc() throws Exception {
-        // Test adding invalid 'Bcc' addresses
+    public void testAddInvalidTo() throws Exception {
+        // Test adding invalid 'to' addresses
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
             try {
-                // add bcc
-                email.addBcc(ARR_INVALID_EMAILS[i], "Joe");
+                // Add To
+                email.addTo(ARR_INVALID_EMAILS[i], "Joe");
 
                 // Expected an exception to be thrown
-                fail("addBcc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
+                fail("addTo " + i + " passed: " + ARR_INVALID_EMAILS[i]);
+            } catch (final EmailException ignore) {
+                // Expected Result
+            }
+        }
+    }
+
+    @Test
+    public void testSetInvalidFrom() throws Exception {
+        // Test setting invalid 'from' addresses
+        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
+            try {
+                // set from
+                email.setFrom(ARR_INVALID_EMAILS[i]);
+
+                // Expected an exception to be thrown
+                fail("setFrom " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             } catch (final EmailException ignore) {
                 // Expected Result
             }

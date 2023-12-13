@@ -56,6 +56,16 @@ public class EmailAttachment {
     }
 
     /**
+     * Gets the disposition.
+     *
+     * @return A String.
+     * @since 1.0
+     */
+    public String getDisposition() {
+        return disposition;
+    }
+
+    /**
      * Gets the name.
      *
      * @return A String.
@@ -86,16 +96,6 @@ public class EmailAttachment {
     }
 
     /**
-     * Gets the disposition.
-     *
-     * @return A String.
-     * @since 1.0
-     */
-    public String getDisposition() {
-        return disposition;
-    }
-
-    /**
      * Sets the description.
      *
      * @param desc A String.
@@ -103,6 +103,16 @@ public class EmailAttachment {
      */
     public void setDescription(final String desc) {
         this.description = desc;
+    }
+
+    /**
+     * Sets the disposition.
+     *
+     * @param aDisposition A String.
+     * @since 1.0
+     */
+    public void setDisposition(final String aDisposition) {
+        this.disposition = aDisposition;
     }
 
     /**
@@ -136,15 +146,5 @@ public class EmailAttachment {
      */
     public void setURL(final URL aUrl) {
         this.url = aUrl;
-    }
-
-    /**
-     * Sets the disposition.
-     *
-     * @param aDisposition A String.
-     * @since 1.0
-     */
-    public void setDisposition(final String aDisposition) {
-        this.disposition = aDisposition;
     }
 }

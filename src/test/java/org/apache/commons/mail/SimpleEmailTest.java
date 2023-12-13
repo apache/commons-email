@@ -42,6 +42,47 @@ public class SimpleEmailTest extends AbstractEmailTest {
     }
 
     @Test
+    @Disabled
+    public void testDefaultMimeCharset() throws EmailException, IOException {
+        /*
+         * disabling this test as it is dependent on execution order. MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is
+         * not defined, reverts to the default Java charset which is basically the system default file encoding.
+         */
+        System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "utf-8");
+        // Test Success
+        this.getMailServer();
+
+        this.email = new MockSimpleEmail();
+        this.email.setHostName(this.strTestMailServer);
+        this.email.setSmtpPort(this.getMailServerPort());
+        this.email.setFrom(this.strTestMailFrom);
+        this.email.addTo(this.strTestMailTo);
+
+        if (this.strTestUser != null && this.strTestPasswd != null) {
+            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        }
+
+        final String strSubject = "Test Msg Subject";
+        final String strMessage = "Test Msg Body ä"; // add non-ascii character, otherwise us-ascii will be used
+
+        this.email.setSubject(strSubject);
+        this.email.setMsg(strMessage);
+
+        this.email.send();
+
+        this.fakeMailServer.stop();
+
+        validateSend(this.fakeMailServer, strSubject, this.email.getMsg().substring(0, 13), // only check the start, the ä will be encoded
+                this.email.getFromAddress(), this.email.getToAddresses(), this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+
+        final String message = getMessageAsString(0);
+        // check that the charset has been correctly set
+        assertTrue(message.toLowerCase().contains("content-type: text/plain; charset=utf-8"));
+
+        System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
+    }
+
+    @Test
     public void testGetSetMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
@@ -92,46 +133,5 @@ public class SimpleEmailTest extends AbstractEmailTest {
         this.fakeMailServer.stop();
         validateSend(this.fakeMailServer, strSubject, this.email.getMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
                 this.email.getCcAddresses(), this.email.getBccAddresses(), true);
-    }
-
-    @Test
-    @Disabled
-    public void testDefaultMimeCharset() throws EmailException, IOException {
-        /*
-         * disabling this test as it is dependent on execution order. MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is
-         * not defined, reverts to the default Java charset which is basically the system default file encoding.
-         */
-        System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "utf-8");
-        // Test Success
-        this.getMailServer();
-
-        this.email = new MockSimpleEmail();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
-
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
-        }
-
-        final String strSubject = "Test Msg Subject";
-        final String strMessage = "Test Msg Body ä"; // add non-ascii character, otherwise us-ascii will be used
-
-        this.email.setSubject(strSubject);
-        this.email.setMsg(strMessage);
-
-        this.email.send();
-
-        this.fakeMailServer.stop();
-
-        validateSend(this.fakeMailServer, strSubject, this.email.getMsg().substring(0, 13), // only check the start, the ä will be encoded
-                this.email.getFromAddress(), this.email.getToAddresses(), this.email.getCcAddresses(), this.email.getBccAddresses(), true);
-
-        final String message = getMessageAsString(0);
-        // check that the charset has been correctly set
-        assertTrue(message.toLowerCase().contains("content-type: text/plain; charset=utf-8"));
-
-        System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
     }
 }

@@ -37,154 +37,6 @@ import org.junit.jupiter.api.Test;
  * Testing the MimeMessageParser.
  */
 public class MimeMessageParserTest {
-    @Test
-    public void testParseSimpleEmail() throws Exception {
-        final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
-
-        mimeMessageParser.parse();
-
-        assertEquals("Test HTML Send #1 Subject (wo charset)", mimeMessageParser.getSubject());
-        assertNotNull(mimeMessageParser.getMimeMessage());
-        assertTrue(mimeMessageParser.isMultipart());
-        assertFalse(mimeMessageParser.hasHtmlContent());
-        assertTrue(mimeMessageParser.hasPlainContent());
-        assertNotNull(mimeMessageParser.getPlainContent());
-        assertNull(mimeMessageParser.getHtmlContent());
-        assertEquals(1, mimeMessageParser.getTo().size());
-        assertTrue(mimeMessageParser.getCc().isEmpty());
-        assertTrue(mimeMessageParser.getBcc().isEmpty());
-        assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
-        assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
-        assertFalse(mimeMessageParser.hasAttachments());
-    }
-
-    @Test
-    public void testParseSimpleReplyEmail() throws Exception {
-        final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple-reply.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
-
-        mimeMessageParser.parse();
-
-        assertEquals("Re: java.lang.NoClassDefFoundError: org/bouncycastle/asn1/pkcs/PrivateKeyInfo", mimeMessageParser.getSubject());
-        assertNotNull(mimeMessageParser.getMimeMessage());
-        assertFalse(mimeMessageParser.isMultipart());
-        assertFalse(mimeMessageParser.hasHtmlContent());
-        assertTrue(mimeMessageParser.hasPlainContent());
-        assertNotNull(mimeMessageParser.getPlainContent());
-        assertNull(mimeMessageParser.getHtmlContent());
-        assertEquals(1, mimeMessageParser.getTo().size());
-        assertTrue(mimeMessageParser.getCc().isEmpty());
-        assertTrue(mimeMessageParser.getBcc().isEmpty());
-        assertEquals("coheigea@apache.org", mimeMessageParser.getFrom());
-        assertEquals("dev@ws.apache.org", mimeMessageParser.getReplyTo());
-        assertFalse(mimeMessageParser.hasAttachments());
-    }
-
-    @Test
-    public void testParseHtmlEmailWithAttachments() throws Exception {
-        DataSource dataSource;
-        final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
-
-        mimeMessageParser.parse();
-
-        assertEquals("Test", mimeMessageParser.getSubject());
-        assertNotNull(mimeMessageParser.getMimeMessage());
-        assertTrue(mimeMessageParser.isMultipart());
-        assertTrue(mimeMessageParser.hasHtmlContent());
-        assertTrue(mimeMessageParser.hasPlainContent());
-        assertNotNull(mimeMessageParser.getPlainContent());
-        assertNotNull(mimeMessageParser.getHtmlContent());
-        assertEquals(1, mimeMessageParser.getTo().size());
-        assertTrue(mimeMessageParser.getCc().isEmpty());
-        assertTrue(mimeMessageParser.getBcc().isEmpty());
-        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
-        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
-        assertTrue(mimeMessageParser.hasAttachments());
-        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertEquals(2, attachmentList.size());
-
-        dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
-        assertNotNull(dataSource);
-        assertEquals("image/jpeg", dataSource.getContentType());
-
-        dataSource = mimeMessageParser.findAttachmentByName("it20one.pdf");
-        assertNotNull(dataSource);
-        assertEquals("application/pdf", dataSource.getContentType());
-    }
-
-    @Test
-    public void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception {
-        DataSource dataSource;
-        final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-encoded-filename.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
-
-        mimeMessageParser.parse();
-
-        assertEquals("Test HTML Send #1 Subject (w charset)", mimeMessageParser.getSubject());
-        assertNotNull(mimeMessageParser.getMimeMessage());
-        assertTrue(mimeMessageParser.isMultipart());
-        assertTrue(mimeMessageParser.hasHtmlContent());
-        assertTrue(mimeMessageParser.hasPlainContent());
-        assertNotNull(mimeMessageParser.getPlainContent());
-        assertNotNull(mimeMessageParser.getHtmlContent());
-        assertEquals(1, mimeMessageParser.getTo().size());
-        assertTrue(mimeMessageParser.getCc().isEmpty());
-        assertTrue(mimeMessageParser.getBcc().isEmpty());
-        assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
-        assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
-        assertTrue(mimeMessageParser.hasAttachments());
-        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertEquals(1, attachmentList.size());
-
-        dataSource = mimeMessageParser.getAttachmentList().get(0);
-        assertNotNull(dataSource);
-        assertEquals("text/plain", dataSource.getContentType());
-        assertEquals("Test Attachment - a>ä, o>ö, u>ü, au>äu", dataSource.getName());
-    }
-
-    /**
-     * This test parses an "email read notification" where the resulting data source has no name. Originally the missing name caused a NPE in
-     * MimeUtility.decodeText().
-     *
-     * @throws Exception the test failed
-     */
-    @Test
-    public void testParseMultipartReport() throws Exception {
-        DataSource dataSource;
-        final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-report.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
-
-        mimeMessageParser.parse();
-
-        assertEquals("Gelesen: ", mimeMessageParser.getSubject());
-        assertNotNull(mimeMessageParser.getMimeMessage());
-        assertTrue(mimeMessageParser.isMultipart());
-        assertTrue(mimeMessageParser.hasHtmlContent());
-        assertFalse(mimeMessageParser.hasPlainContent());
-        assertNull(mimeMessageParser.getPlainContent());
-        assertNotNull(mimeMessageParser.getHtmlContent());
-        assertEquals(1, mimeMessageParser.getTo().size());
-        assertTrue(mimeMessageParser.getCc().isEmpty());
-        assertTrue(mimeMessageParser.getBcc().isEmpty());
-        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
-        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
-        assertTrue(mimeMessageParser.hasAttachments());
-        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertEquals(1, attachmentList.size());
-
-        dataSource = (DataSource) attachmentList.get(0);
-        assertNotNull(dataSource);
-        assertNull(dataSource.getName());
-        assertEquals("message/disposition-notification", dataSource.getContentType());
-    }
-
     /**
      * This test parses a SAP generated email which only contains a PDF but no email text.
      *
@@ -218,31 +70,6 @@ public class MimeMessageParserTest {
         dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
         assertNotNull(dataSource);
         assertEquals("application/pdf", dataSource.getContentType());
-    }
-
-    /**
-     * This test parses an eml file published with issue EMAIL-110. This eml file has a corrupted attachment but should not create an OutOfMemoryException.
-     *
-     * @throws Exception the test failed
-     */
-    @Test
-    public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception {
-        final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/outofmemory-no-header-seperation.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
-
-        mimeMessageParser.parse();
-
-        assertEquals("A corrupt Attachment", mimeMessageParser.getSubject());
-        assertNotNull(mimeMessageParser.getMimeMessage());
-        assertTrue(mimeMessageParser.isMultipart());
-        assertFalse(mimeMessageParser.hasHtmlContent());
-        assertFalse(mimeMessageParser.hasPlainContent());
-        assertNull(mimeMessageParser.getPlainContent());
-        assertNull(mimeMessageParser.getHtmlContent());
-        assertEquals(1, mimeMessageParser.getTo().size());
-        assertEquals(mimeMessageParser.getCc().size(), 0);
-        assertEquals(mimeMessageParser.getBcc().size(), 0);
     }
 
     /**
@@ -315,39 +142,39 @@ public class MimeMessageParserTest {
         assertEquals("text/plain", dataSource.getContentType());
     }
 
-    /**
-     * This test parses an email which contains an html attachment with content-disposition: attachment.
-     *
-     * @throws Exception the test failed
-     */
     @Test
-    public void testParseHtmlEmailWithHtmlAttachment() throws Exception {
-        DataSource dataSource;
+    public void testParseCreatedHtmlEmailWithMixedContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-content-disposition.eml"));
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
+        final HtmlEmail email = new HtmlEmail();
+
+        email.setMailSession(session);
+
+        email.setFrom("test_from@apache.org");
+        email.setSubject("Test Subject");
+        email.addTo("test_to@apache.org");
+        email.setTextMsg("My test message");
+        email.setHtmlMsg("<p>My HTML message</p>");
+
+        email.buildMimeMessage();
+        final MimeMessage msg = email.getMimeMessage();
+
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(msg);
         mimeMessageParser.parse();
 
-        assertEquals("test", mimeMessageParser.getSubject());
+        assertEquals("Test Subject", mimeMessageParser.getSubject());
         assertNotNull(mimeMessageParser.getMimeMessage());
         assertTrue(mimeMessageParser.isMultipart());
-        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasHtmlContent());
         assertTrue(mimeMessageParser.hasPlainContent());
         assertNotNull(mimeMessageParser.getPlainContent());
-        assertNull(mimeMessageParser.getHtmlContent());
+        assertNotNull(mimeMessageParser.getHtmlContent());
         assertEquals(1, mimeMessageParser.getTo().size());
         assertTrue(mimeMessageParser.getCc().isEmpty());
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
         assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
-        assertTrue(mimeMessageParser.hasAttachments());
-        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
-        assertEquals(1, attachmentList.size());
-
-        dataSource = mimeMessageParser.findAttachmentByName("test.html");
-        assertNotNull(dataSource);
-        assertEquals("text/html", dataSource.getContentType());
+        assertFalse(mimeMessageParser.hasAttachments());
     }
 
     @Test
@@ -418,26 +245,15 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseCreatedHtmlEmailWithMixedContent() throws Exception {
+    public void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception {
+        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-encoded-filename.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
-        final HtmlEmail email = new HtmlEmail();
-
-        email.setMailSession(session);
-
-        email.setFrom("test_from@apache.org");
-        email.setSubject("Test Subject");
-        email.addTo("test_to@apache.org");
-        email.setTextMsg("My test message");
-        email.setHtmlMsg("<p>My HTML message</p>");
-
-        email.buildMimeMessage();
-        final MimeMessage msg = email.getMimeMessage();
-
-        final MimeMessageParser mimeMessageParser = new MimeMessageParser(msg);
         mimeMessageParser.parse();
 
-        assertEquals("Test Subject", mimeMessageParser.getSubject());
+        assertEquals("Test HTML Send #1 Subject (w charset)", mimeMessageParser.getSubject());
         assertNotNull(mimeMessageParser.getMimeMessage());
         assertTrue(mimeMessageParser.isMultipart());
         assertTrue(mimeMessageParser.hasHtmlContent());
@@ -449,7 +265,83 @@ public class MimeMessageParserTest {
         assertTrue(mimeMessageParser.getBcc().isEmpty());
         assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
         assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
-        assertFalse(mimeMessageParser.hasAttachments());
+        assertTrue(mimeMessageParser.hasAttachments());
+        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
+        assertEquals(1, attachmentList.size());
+
+        dataSource = mimeMessageParser.getAttachmentList().get(0);
+        assertNotNull(dataSource);
+        assertEquals("text/plain", dataSource.getContentType());
+        assertEquals("Test Attachment - a>ä, o>ö, u>ü, au>äu", dataSource.getName());
+    }
+
+    @Test
+    public void testParseHtmlEmailWithAttachments() throws Exception {
+        DataSource dataSource;
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Test", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertTrue(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasPlainContent());
+        assertNotNull(mimeMessageParser.getPlainContent());
+        assertNotNull(mimeMessageParser.getHtmlContent());
+        assertEquals(1, mimeMessageParser.getTo().size());
+        assertTrue(mimeMessageParser.getCc().isEmpty());
+        assertTrue(mimeMessageParser.getBcc().isEmpty());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
+        assertEquals(2, attachmentList.size());
+
+        dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
+        assertNotNull(dataSource);
+        assertEquals("image/jpeg", dataSource.getContentType());
+
+        dataSource = mimeMessageParser.findAttachmentByName("it20one.pdf");
+        assertNotNull(dataSource);
+        assertEquals("application/pdf", dataSource.getContentType());
+    }
+
+    /**
+     * This test parses an email which contains an html attachment with content-disposition: attachment.
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    public void testParseHtmlEmailWithHtmlAttachment() throws Exception {
+        DataSource dataSource;
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-content-disposition.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("test", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasPlainContent());
+        assertNotNull(mimeMessageParser.getPlainContent());
+        assertNull(mimeMessageParser.getHtmlContent());
+        assertEquals(1, mimeMessageParser.getTo().size());
+        assertTrue(mimeMessageParser.getCc().isEmpty());
+        assertTrue(mimeMessageParser.getBcc().isEmpty());
+        assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
+        assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
+        assertEquals(1, attachmentList.size());
+
+        dataSource = mimeMessageParser.findAttachmentByName("test.html");
+        assertNotNull(dataSource);
+        assertEquals("text/html", dataSource.getContentType());
     }
 
     @Test
@@ -478,6 +370,114 @@ public class MimeMessageParserTest {
         final DataSource ds = mimeMessageParser.findAttachmentByCid("part1.01080006.06060206@it20one.at");
         assertNotNull(ds);
         assertEquals(ds, mimeMessageParser.getAttachmentList().get(0));
+    }
+
+    /**
+     * This test parses an "email read notification" where the resulting data source has no name. Originally the missing name caused a NPE in
+     * MimeUtility.decodeText().
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    public void testParseMultipartReport() throws Exception {
+        DataSource dataSource;
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-report.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Gelesen: ", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertTrue(mimeMessageParser.hasHtmlContent());
+        assertFalse(mimeMessageParser.hasPlainContent());
+        assertNull(mimeMessageParser.getPlainContent());
+        assertNotNull(mimeMessageParser.getHtmlContent());
+        assertEquals(1, mimeMessageParser.getTo().size());
+        assertTrue(mimeMessageParser.getCc().isEmpty());
+        assertTrue(mimeMessageParser.getBcc().isEmpty());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getFrom());
+        assertEquals("siegfried.goeschl@it20one.at", mimeMessageParser.getReplyTo());
+        assertTrue(mimeMessageParser.hasAttachments());
+        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
+        assertEquals(1, attachmentList.size());
+
+        dataSource = (DataSource) attachmentList.get(0);
+        assertNotNull(dataSource);
+        assertNull(dataSource.getName());
+        assertEquals("message/disposition-notification", dataSource.getContentType());
+    }
+
+    /**
+     * This test parses an eml file published with issue EMAIL-110. This eml file has a corrupted attachment but should not create an OutOfMemoryException.
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception {
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/outofmemory-no-header-seperation.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("A corrupt Attachment", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertFalse(mimeMessageParser.hasPlainContent());
+        assertNull(mimeMessageParser.getPlainContent());
+        assertNull(mimeMessageParser.getHtmlContent());
+        assertEquals(1, mimeMessageParser.getTo().size());
+        assertEquals(mimeMessageParser.getCc().size(), 0);
+        assertEquals(mimeMessageParser.getBcc().size(), 0);
+    }
+
+    @Test
+    public void testParseSimpleEmail() throws Exception {
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Test HTML Send #1 Subject (wo charset)", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertTrue(mimeMessageParser.isMultipart());
+        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasPlainContent());
+        assertNotNull(mimeMessageParser.getPlainContent());
+        assertNull(mimeMessageParser.getHtmlContent());
+        assertEquals(1, mimeMessageParser.getTo().size());
+        assertTrue(mimeMessageParser.getCc().isEmpty());
+        assertTrue(mimeMessageParser.getBcc().isEmpty());
+        assertEquals("test_from@apache.org", mimeMessageParser.getFrom());
+        assertEquals("test_from@apache.org", mimeMessageParser.getReplyTo());
+        assertFalse(mimeMessageParser.hasAttachments());
+    }
+
+    @Test
+    public void testParseSimpleReplyEmail() throws Exception {
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple-reply.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertEquals("Re: java.lang.NoClassDefFoundError: org/bouncycastle/asn1/pkcs/PrivateKeyInfo", mimeMessageParser.getSubject());
+        assertNotNull(mimeMessageParser.getMimeMessage());
+        assertFalse(mimeMessageParser.isMultipart());
+        assertFalse(mimeMessageParser.hasHtmlContent());
+        assertTrue(mimeMessageParser.hasPlainContent());
+        assertNotNull(mimeMessageParser.getPlainContent());
+        assertNull(mimeMessageParser.getHtmlContent());
+        assertEquals(1, mimeMessageParser.getTo().size());
+        assertTrue(mimeMessageParser.getCc().isEmpty());
+        assertTrue(mimeMessageParser.getBcc().isEmpty());
+        assertEquals("coheigea@apache.org", mimeMessageParser.getFrom());
+        assertEquals("dev@ws.apache.org", mimeMessageParser.getReplyTo());
+        assertFalse(mimeMessageParser.hasAttachments());
     }
 
 }
