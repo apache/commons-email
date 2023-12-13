@@ -43,6 +43,7 @@ import javax.activation.DataSource;
  */
 @Deprecated
 public class ByteArrayDataSource implements DataSource {
+
     /** Define the buffer size. */
     public static final int BUFFER_SIZE = 512;
 

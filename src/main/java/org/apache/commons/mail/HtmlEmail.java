@@ -40,23 +40,23 @@ import javax.mail.internet.MimeMultipart;
  *
  * <p>
  * This class is used to send HTML formatted email. A text message can also be set for HTML unaware email clients, such as text-based email clients.
- *
+ * </p>
  * <p>
  * This class also inherits from {@link MultiPartEmail}, so it is easy to add attachments to the email.
- *
+ * </p>
  * <p>
  * To send an email in HTML, one should create a {@code HtmlEmail}, then use the {@link #setFrom(String)}, {@link #addTo(String)} etc. methods. The HTML content
  * can be set with the {@link #setHtmlMsg(String)} method. The alternative text content can be set with {@link #setTextMsg(String)}.
- *
+ * </p>
  * <p>
  * Either the text or HTML can be omitted, in which case the "main" part of the multipart becomes whichever is supplied rather than a
  * {@code multipart/alternative}.
- *
+ * </p>
  * <h2>Embedding Images and Media</h2>
  *
  * <p>
  * It is also possible to embed URLs, files, or arbitrary {@code DataSource}s directly into the body of the mail:
- *
+ * </p>
  * <pre>
  * HtmlEmail he = new HtmlEmail();
  * File img = new File("my/image.gif");
@@ -69,22 +69,24 @@ import javax.mail.internet.MimeMultipart;
  * he.setHtmlMsg(msg.toString());
  * // code to set the other email fields (not shown)
  * </pre>
- *
  * <p>
  * Embedded entities are tracked by their name, which for {@code File}s is the file name itself and for {@code URL}s is the canonical path. It is an error to
  * bind the same name to more than one entity, and this class will attempt to validate that for {@code File}s and {@code URL}s. When embedding a
  * {@code DataSource}, the code uses the {@code equals()} method defined on the {@code DataSource}s to make the determination.
+ * </p>
  *
  * @since 1.0
  */
 public class HtmlEmail extends MultiPartEmail {
+
     /**
      * Private bean class that encapsulates data about URL contents that are embedded in the final email.
      *
      * @since 1.1
      */
     private static final class InlineImage {
-        /** content id. */
+
+        /** Content id. */
         private final String cid;
         /** {@code DataSource} for the content. */
         private final DataSource dataSource;
@@ -119,10 +121,7 @@ public class HtmlEmail extends MultiPartEmail {
             if (!(obj instanceof InlineImage)) {
                 return false;
             }
-
-            final InlineImage that = (InlineImage) obj;
-
-            return this.cid.equals(that.cid);
+            return this.cid.equals(((InlineImage) obj).cid);
         }
 
         /**
@@ -165,6 +164,7 @@ public class HtmlEmail extends MultiPartEmail {
 
     /** Definition of the length of generated CID's. */
     public static final int CID_LENGTH = 10;
+
     /** prefix for default HTML mail. */
     private static final String HTML_MESSAGE_START = "<html><body><pre>";
 
@@ -308,15 +308,15 @@ public class HtmlEmail extends MultiPartEmail {
     public String embed(final DataSource dataSource, final String name) throws EmailException {
         // check if the DataSource has already been attached;
         // if so, return the cached CID value.
-        final InlineImage ii = inlineEmbeds.get(name);
-        if (ii != null) {
+        final InlineImage inlineImage = inlineEmbeds.get(name);
+        if (inlineImage != null) {
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
-            if (dataSource.equals(ii.getDataSource())) {
-                return ii.getCid();
+            if (dataSource.equals(inlineImage.getDataSource())) {
+                return inlineImage.getCid();
             }
-            throw new EmailException(
-                    "embedded DataSource '" + name + "' is already bound to name " + ii.getDataSource().toString() + "; existing names cannot be rebound");
+            throw new EmailException("embedded DataSource '" + name + "' is already bound to name " + inlineImage.getDataSource().toString()
+                    + "; existing names cannot be rebound");
         }
 
         final String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
@@ -337,21 +337,16 @@ public class HtmlEmail extends MultiPartEmail {
         if (EmailUtils.isEmpty(name)) {
             throw new EmailException("name cannot be null or empty");
         }
-
         final MimeBodyPart mbp = new MimeBodyPart();
-
         try {
             // URL encode the cid according to RFC 2392
             final String encodedCid = EmailUtils.encodeUrl(cid);
-
             mbp.setDataHandler(new DataHandler(dataSource));
             mbp.setFileName(name);
             mbp.setDisposition(EmailAttachment.INLINE);
             mbp.setContentID("<" + encodedCid + ">");
-
-            final InlineImage ii = new InlineImage(encodedCid, dataSource, mbp);
-            this.inlineEmbeds.put(name, ii);
-
+            final InlineImage inlineImage = new InlineImage(encodedCid, dataSource, mbp);
+            this.inlineEmbeds.put(name, inlineImage);
             return encodedCid;
         } catch (final MessagingException uee) {
             throw new EmailException(uee);
@@ -369,8 +364,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.1
      */
     public String embed(final File file) throws EmailException {
-        final String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase(Locale.ENGLISH);
-        return embed(file, cid);
+        return embed(file, EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase(Locale.ENGLISH));
     }
 
     /**
@@ -408,9 +402,9 @@ public class HtmlEmail extends MultiPartEmail {
 
         // check if a FileDataSource for this name has already been attached;
         // if so, return the cached CID value.
-        final InlineImage ii = inlineEmbeds.get(file.getName());
-        if (ii != null) {
-            final FileDataSource fileDataSource = (FileDataSource) ii.getDataSource();
+        final InlineImage inlineImage = inlineEmbeds.get(file.getName());
+        if (inlineImage != null) {
+            final FileDataSource fileDataSource = (FileDataSource) inlineImage.getDataSource();
             // make sure the supplied file has the same canonical path
             // as the one already associated with this name.
             String existingFilePath = null;
@@ -420,7 +414,7 @@ public class HtmlEmail extends MultiPartEmail {
                 throw new EmailException("couldn't get canonical path for file " + fileDataSource.getFile().getName() + "which has already been embedded", ioe);
             }
             if (filePath.equals(existingFilePath)) {
-                return ii.getCid();
+                return inlineImage.getCid();
             }
             throw new EmailException(
                     "embedded name '" + file.getName() + "' is already bound to file " + existingFilePath + "; existing names cannot be rebound");
@@ -492,30 +486,30 @@ public class HtmlEmail extends MultiPartEmail {
 
         // check if a URLDataSource for this name has already been attached;
         // if so, return the cached CID value.
-        final InlineImage ii = inlineEmbeds.get(name);
-        if (ii != null) {
-            final URLDataSource urlDataSource = (URLDataSource) ii.getDataSource();
+        final InlineImage inlineImage = inlineEmbeds.get(name);
+        if (inlineImage != null) {
+            final URLDataSource urlDataSource = (URLDataSource) inlineImage.getDataSource();
             // make sure the supplied URL points to the same thing
             // as the one already associated with this name.
             // NOTE: Comparing URLs with URL.equals() is a blocking operation
             // in the case of a network failure therefore we use
             // url.toExternalForm().equals() here.
             if (url.toExternalForm().equals(urlDataSource.getURL().toExternalForm())) {
-                return ii.getCid();
+                return inlineImage.getCid();
             }
             throw new EmailException("embedded name '" + name + "' is already bound to URL " + urlDataSource.getURL() + "; existing names cannot be rebound");
         }
 
         // verify that the URL is valid
-        InputStream is = null;
+        InputStream inputStream = null;
         try {
-            is = url.openStream();
+            inputStream = url.openStream();
         } catch (final IOException e) {
             throw new EmailException("Invalid URL", e);
         } finally {
             try {
-                if (is != null) {
-                    is.close();
+                if (inputStream != null) {
+                    inputStream.close();
                 }
             } catch (final IOException ioe) // NOPMD
             {
@@ -537,7 +531,6 @@ public class HtmlEmail extends MultiPartEmail {
         if (EmailUtils.isEmpty(aHtml)) {
             throw new EmailException("Invalid message supplied");
         }
-
         this.html = aHtml;
         return this;
     }
@@ -559,15 +552,10 @@ public class HtmlEmail extends MultiPartEmail {
         if (EmailUtils.isEmpty(msg)) {
             throw new EmailException("Invalid message supplied");
         }
-
         setTextMsg(msg);
-
         final StringBuilder htmlMsgBuf = new StringBuilder(msg.length() + HTML_MESSAGE_START.length() + HTML_MESSAGE_END.length());
-
         htmlMsgBuf.append(HTML_MESSAGE_START).append(msg).append(HTML_MESSAGE_END);
-
         setHtmlMsg(htmlMsgBuf.toString());
-
         return this;
     }
 
@@ -583,7 +571,6 @@ public class HtmlEmail extends MultiPartEmail {
         if (EmailUtils.isEmpty(aText)) {
             throw new EmailException("Invalid message supplied");
         }
-
         this.text = aText;
         return this;
     }

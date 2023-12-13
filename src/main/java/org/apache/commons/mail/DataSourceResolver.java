@@ -26,6 +26,7 @@ import javax.activation.DataSource;
  * @since 1.3
  */
 public interface DataSourceResolver {
+
     /**
      * Resolves the given resource location to a {@code DataSource}.
      *

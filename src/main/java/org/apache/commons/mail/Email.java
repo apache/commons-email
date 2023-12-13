@@ -52,6 +52,7 @@ import org.apache.commons.mail.util.IDNEmailAddressConverter;
  * @since 1.0
  */
 public abstract class Email {
+
     private static final InternetAddress[] EMPTY_INTERNET_ADDRESS_ARRAY = {};
 
     /** @deprecated since 1.3, use {@link EmailConstants#SENDER_EMAIL} instead */
@@ -169,6 +170,10 @@ public abstract class Email {
     /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_TIMEOUT} instead */
     @Deprecated
     public static final String MAIL_SMTP_TIMEOUT = EmailConstants.MAIL_SMTP_TIMEOUT;
+
+    private static boolean isEmpty(final Collection<?> collection) {
+        return collection == null || collection.isEmpty();
+    }
 
     /** The email message to send. */
     protected MimeMessage message;
@@ -403,11 +408,9 @@ public abstract class Email {
         if (isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
-
         for (final String email : emails) {
             addCc(email, null);
         }
-
         return this;
     }
 
@@ -456,7 +459,6 @@ public abstract class Email {
         if (EmailUtils.isEmpty(value)) {
             throw new IllegalArgumentException("value can not be null or empty");
         }
-
         this.headers.put(name, value);
     }
 
@@ -532,11 +534,9 @@ public abstract class Email {
         if (isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
-
         for (final String email : emails) {
             addTo(email, null);
         }
-
         return this;
     }
 
@@ -690,7 +690,6 @@ public abstract class Email {
         if (EmailUtils.isEmpty(value)) {
             throw new IllegalArgumentException("value can not be null or empty");
         }
-
         try {
             return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value, this.charset, null));
         } catch (final UnsupportedEncodingException e) {
@@ -709,10 +708,8 @@ public abstract class Email {
      */
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName) throws EmailException {
         InternetAddress address;
-
         try {
             address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
-
             // check name input
             if (EmailUtils.isNotEmpty(name)) {
                 // check charset input.
@@ -725,7 +722,6 @@ public abstract class Email {
                     address.setPersonal(name, set.name());
                 }
             }
-
             // run sanity check on new InternetAddress object; if this fails
             // it will throw AddressException.
             address.validate();
@@ -1079,16 +1075,12 @@ public abstract class Email {
      * @throws EmailException           the sending failed
      */
     public String sendMimeMessage() throws EmailException {
-        final Object object = this.message;
-        Objects.requireNonNull(object, "MimeMessage has not been created yet");
-
+        Objects.requireNonNull(message, "MimeMessage has not been created yet");
         try {
-            Transport.send(this.message);
+            Transport.send(message);
             return this.message.getMessageID();
         } catch (final Throwable t) {
-            final String msg = "Sending the email to the following server failed : " + this.getHostName() + ":" + this.getSmtpPort();
-
-            throw new EmailException(msg, t);
+            throw new EmailException("Sending the email to the following server failed : " + this.getHostName() + ":" + this.getSmtpPort(), t);
         }
     }
 
@@ -1130,10 +1122,9 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setBcc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
+        if (isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
-
         this.bccList = new ArrayList<>(aCollection);
         return this;
     }
@@ -1149,7 +1140,6 @@ public abstract class Email {
      */
     public Email setBounceAddress(final String email) {
         checkSessionAlreadyInitialized();
-
         if (email != null && !email.isEmpty()) {
             try {
                 this.bounceAddress = createInternetAddress(email, null, this.charset).getAddress();
@@ -1174,10 +1164,9 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setCc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
+        if (isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
-
         this.ccList = new ArrayList<>(aCollection);
         return this;
     }
@@ -1282,7 +1271,6 @@ public abstract class Email {
      */
     public void setHeaders(final Map<String, String> map) {
         this.headers.clear();
-
         for (final Map.Entry<String, String> entry : map.entrySet()) {
             addHeader(entry.getKey(), entry.getValue());
         }
@@ -1394,10 +1382,9 @@ public abstract class Email {
      * @since 1.1
      */
     public Email setReplyTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
+        if (isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
-
         this.replyList = new ArrayList<>(aCollection);
         return this;
     }
@@ -1444,11 +1431,9 @@ public abstract class Email {
      */
     public void setSmtpPort(final int aPortNumber) {
         checkSessionAlreadyInitialized();
-
         if (aPortNumber < 1) {
             throw new IllegalArgumentException("Cannot connect to a port number that is less than 1 ( " + aPortNumber + " )");
         }
-
         this.smtpPort = Integer.toString(aPortNumber);
     }
 
@@ -1596,10 +1581,9 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (aCollection == null || aCollection.isEmpty()) {
+        if (isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
-
         this.toList = new ArrayList<>(aCollection);
         return this;
     }

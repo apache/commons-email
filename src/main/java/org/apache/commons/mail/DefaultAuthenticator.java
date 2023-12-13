@@ -25,6 +25,7 @@ import javax.mail.PasswordAuthentication;
  * @since 1.0
  */
 public class DefaultAuthenticator extends Authenticator {
+
     /** Stores the login information for authentication. */
     private final PasswordAuthentication authentication;
 
