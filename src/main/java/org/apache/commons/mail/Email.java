@@ -619,10 +619,8 @@ public abstract class Email {
 
             if (this.fromAddress != null) {
                 this.message.setFrom(this.fromAddress);
-            } else {
-                if (session.getProperty(EmailConstants.MAIL_SMTP_FROM) == null && session.getProperty(EmailConstants.MAIL_FROM) == null) {
-                    throw new EmailException("From address required");
-                }
+            } else if (session.getProperty(EmailConstants.MAIL_SMTP_FROM) == null && session.getProperty(EmailConstants.MAIL_FROM) == null) {
+                throw new EmailException("From address required");
             }
 
             if (this.toList.size() + this.ccList.size() + this.bccList.size() == 0) {
@@ -1640,15 +1638,13 @@ public abstract class Email {
                 } else {
                     this.charset = aContentType.substring(charsetPos);
                 }
-            } else {
-                // use the default charset, if one exists, for messages
-                // whose content-type is some form of text.
-                if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset)) {
-                    final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
-                    contentTypeBuf.append(strMarker);
-                    contentTypeBuf.append(this.charset);
-                    this.contentType = contentTypeBuf.toString();
-                }
+            } else // use the default charset, if one exists, for messages
+            // whose content-type is some form of text.
+            if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset)) {
+                final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
+                contentTypeBuf.append(strMarker);
+                contentTypeBuf.append(this.charset);
+                this.contentType = contentTypeBuf.toString();
             }
         }
     }

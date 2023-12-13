@@ -319,29 +319,25 @@ public class MimeMessageParser {
     protected void parse(final Multipart parent, final MimePart part) throws MessagingException, IOException {
         if (isMimeType(part, "text/plain") && plainContent == null && !Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition())) {
             plainContent = (String) part.getContent();
-        } else {
-            if (isMimeType(part, "text/html") && htmlContent == null && !Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition())) {
-                htmlContent = (String) part.getContent();
-            } else {
-                if (isMimeType(part, "multipart/*")) {
-                    this.isMultiPart = true;
-                    final Multipart mp = (Multipart) part.getContent();
-                    final int count = mp.getCount();
+        } else if (isMimeType(part, "text/html") && htmlContent == null && !Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition())) {
+            htmlContent = (String) part.getContent();
+        } else if (isMimeType(part, "multipart/*")) {
+            this.isMultiPart = true;
+            final Multipart mp = (Multipart) part.getContent();
+            final int count = mp.getCount();
 
-                    // iterate over all MimeBodyPart
+            // iterate over all MimeBodyPart
 
-                    for (int i = 0; i < count; i++) {
-                        parse(mp, (MimeBodyPart) mp.getBodyPart(i));
-                    }
-                } else {
-                    final String cid = stripContentId(part.getContentID());
-                    final DataSource ds = createDataSource(parent, part);
-                    if (cid != null) {
-                        this.cidMap.put(cid, ds);
-                    }
-                    this.attachmentList.add(ds);
-                }
+            for (int i = 0; i < count; i++) {
+                parse(mp, (MimeBodyPart) mp.getBodyPart(i));
             }
+        } else {
+            final String cid = stripContentId(part.getContentID());
+            final DataSource ds = createDataSource(parent, part);
+            if (cid != null) {
+                this.cidMap.put(cid, ds);
+            }
+            this.attachmentList.add(ds);
         }
     }
 

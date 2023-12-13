@@ -88,10 +88,8 @@ public class DataSourceFileResolver extends DataSourceBaseResolver {
 
             if (file.exists()) {
                 result = new FileDataSource(file);
-            } else {
-                if (!isLenient) {
-                    throw new IOException("Cant resolve the following file resource :" + file.getAbsolutePath());
-                }
+            } else if (!isLenient) {
+                throw new IOException("Cant resolve the following file resource :" + file.getAbsolutePath());
             }
         }
 
