@@ -43,7 +43,7 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/commons-email</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-email</developerConnection>
         <url>https://gitbox.apache.org/repos/asf/commons-email</url>
-    </scm> 
+    </scm>
 
     <developers>
         <developer>
@@ -138,7 +138,7 @@
         <developer>
             <name>Siegfried Goeschl</name>
             <id>sgoeschl</id>
-            <email>sgoeschl@apache.org</email>            
+            <email>sgoeschl@apache.org</email>
             <roles>
               <role>Java Developer</role>
             </roles>
@@ -150,14 +150,14 @@
             <email>tn@apache.org</email>
             <organization>The Apache Software Foundation</organization>
             <roles />
-        </developer>        
+        </developer>
         <developer>
             <id>ggregory</id>
             <name>Gary Gregory</name>
             <email>ggregory at apache.org</email>
             <url>https://www.garygregory.com</url>
             <organization>The Apache Software Foundation</organization>
-            <organizationUrl>https://www.apache.org/</organizationUrl>      
+            <organizationUrl>https://www.apache.org/</organizationUrl>
             <roles>
               <role>PMC Member</role>
             </roles>
@@ -167,14 +167,14 @@
             </properties>
         </developer>
     </developers>
-    <contributors>    
+    <contributors>
         <contributor>
             <name>Bindul Bhowmik</name>
         </contributor>
         <contributor>
             <name>Colin Chalmers</name>
             <email>colin.chalmers@maxware.nl</email>
-        </contributor> 
+        </contributor>
         <contributor>
             <name>Frank Y. Kim</name>
             <email>frank.kim@clearink.com</email>
@@ -306,7 +306,7 @@
 
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
-        
+
         <mockito-core.version>4.11.0</mockito-core.version>
     </properties>
 
@@ -349,7 +349,7 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
-            </plugin>            
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -431,9 +431,9 @@
         <id>apache.website</id>
         <name>Apache Website</name>
         <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/email/</url>
-      </site>    
+      </site>
     </distributionManagement>
-    
+
     <reporting>
         <plugins>
             <!-- generate the changes report from changes.xml -->
@@ -450,7 +450,7 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin> 
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -474,7 +474,7 @@
                         <exclude>src/test/resources/eml/**</exclude>
                     </excludes>
                 </configuration>
-            </plugin>            
+            </plugin>
             <plugin>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs-maven-plugin</artifactId>
@@ -538,7 +538,17 @@
           </plugins>
         </build>
       </profile>
-          
+      <profile>
+        <id>java21</id>
+          <!-- For testing with Powermock. -->
+          <activation>
+              <jdk>[21,)</jdk>
+          </activation>
+          <properties>
+            <mockito-core.version>5.8.0</mockito-core.version>
+          </properties>
+      </profile>
+
         <profile>
             <id>rc</id>
             <distributionManagement>
@@ -549,7 +559,7 @@
                     <url>${commons.deployment.protocol}://people.apache.org/www/people.apache.org/builds/commons/${commons.componentid}/${commons.release.version}/${commons.rc.version}/site</url>
                 </site>
             </distributionManagement>
-        </profile>        
+        </profile>
     </profiles>
-    
+
 </project>
