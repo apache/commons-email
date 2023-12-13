@@ -102,10 +102,6 @@ public class EmailLiveTest extends AbstractEmailTest {
         return email;
     }
 
-    // ======================================================================
-    // Start of Tests
-    // ======================================================================
-
     /**
      * A sanity check that a simple email also works in reality.
      *

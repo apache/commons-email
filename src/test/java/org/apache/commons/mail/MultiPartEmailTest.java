@@ -62,9 +62,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetMsg() throws EmailException {
-        // ====================================================================
         // Test Success
-        // ====================================================================
 
         // without charset set
         for (final String validChar : testCharsValid) {
@@ -78,10 +76,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
             this.email.setMsg(validChar);
             assertEquals(validChar, this.email.getMsg());
         }
-
-        // ====================================================================
         // Test Exceptions
-        // ====================================================================
         for (final String invalidChar : testCharsNotValid) {
             try {
                 this.email.setMsg(invalidChar);
@@ -98,9 +93,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
      */
     @Test
     public void testSend() throws EmailException, IOException {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         this.getMailServer();
 
         final String strSubject = "Test Multipart Send Subject";
@@ -144,10 +137,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         // validate attachment
         validateSend(this.fakeMailServer, strSubject, attachment.getName(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
                 testEmail.getBccAddresses(), false);
-
-        // ====================================================================
         // Test Exceptions
-        // ====================================================================
         try {
             this.getMailServer();
 
@@ -161,35 +151,23 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     @Test
     public void testAttach() throws Exception {
         EmailAttachment attachment;
-
-        // ====================================================================
         // Test Success - EmailAttachment
-        // ====================================================================
         attachment = new EmailAttachment();
         attachment.setName("Test Attachment");
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());
         this.email.attach(attachment);
         assertTrue(this.email.isBoolHasAttachments());
-
-        // ====================================================================
         // Test Success - URL
-        // ====================================================================
         attachment = new EmailAttachment();
         attachment.setName("Test Attachment");
         attachment.setDescription("Test Attachment Desc");
         attachment.setURL(new URL(this.strTestURL));
         this.email.attach(attachment);
-
-        // ====================================================================
         // Test Success - File
-        // ====================================================================
         this.email.attach(testFile);
         assertTrue(this.email.isBoolHasAttachments());
-
-        // ====================================================================
         // Test Exceptions
-        // ====================================================================
         // null attachment
         try {
             this.email.attach((EmailAttachment) null);
@@ -225,9 +203,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
      */
     @Test
     public void testAttach2() throws MalformedURLException, EmailException {
-        // ====================================================================
         // Test Success - URL
-        // ====================================================================
         this.email.attach(new URL(this.strTestURL), "Test Attachment", "Test Attachment Desc");
 
         // bad name
@@ -236,14 +212,9 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
     @Test
     public void testAttach3() throws Exception {
-        // ====================================================================
         // Test Success - URL
-        // ====================================================================
         this.email.attach(new URLDataSource(new URL(this.strTestURL)), "Test Attachment", "Test Attachment Desc");
-
-        // ====================================================================
         // Test Exceptions
-        // ====================================================================
         // null datasource
         try {
             final URLDataSource urlDs = null;
@@ -265,11 +236,8 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
     @Test
     public void testAttachFileLocking() throws Exception {
-
-        // ====================================================================
         // EMAIL-120: attaching a FileDataSource may result in a locked file
         // resource on windows systems
-        // ====================================================================
 
         final File tmpFile = File.createTempFile("attachment", ".eml");
 

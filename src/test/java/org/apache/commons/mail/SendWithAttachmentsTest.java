@@ -92,10 +92,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest {
 
         /** File to used to test file attachments (Must be valid) */
         final File testFile = File.createTempFile("commons-email-testfile", ".txt");
-
-        // ====================================================================
         // Test Success
-        // ====================================================================
         this.getMailServer();
 
         final String strSubject = "Test HTML Send #1 Subject (w charset)";

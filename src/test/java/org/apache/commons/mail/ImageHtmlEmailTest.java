@@ -61,10 +61,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // reusable objects to be used across multiple tests
         email = new MockImageHtmlEmailConcrete();
     }
-
-    // ======================================================================
     // Start of Tests
-    // ======================================================================
 
     @Test
     public void testSendHtml() throws Exception {

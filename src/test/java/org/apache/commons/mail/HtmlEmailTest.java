@@ -61,17 +61,12 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     public void testGetSetTextMsg() throws EmailException {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         for (final String validChar : testCharsValid) {
             this.email.setTextMsg(validChar);
             assertEquals(validChar, this.email.getTextMsg());
         }
-
-        // ====================================================================
         // Test Exception
-        // ====================================================================
         for (final String invalidChar : this.testCharsNotValid) {
             try {
                 this.email.setTextMsg(invalidChar);
@@ -85,17 +80,12 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     public void testGetSetHtmlMsg() throws EmailException {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         for (final String validChar : testCharsValid) {
             this.email.setHtmlMsg(validChar);
             assertEquals(validChar, this.email.getHtmlMsg());
         }
-
-        // ====================================================================
         // Test Exception
-        // ====================================================================
         for (final String invalidChar : this.testCharsNotValid) {
             try {
                 this.email.setHtmlMsg(invalidChar);
@@ -109,19 +99,14 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     public void testGetSetMsg() throws EmailException {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         for (final String validChar : testCharsValid) {
             this.email.setMsg(validChar);
             assertEquals(validChar, this.email.getTextMsg());
 
             assertTrue(this.email.getHtmlMsg().contains(validChar));
         }
-
-        // ====================================================================
         // Test Exception
-        // ====================================================================
         for (final String invalidChar : this.testCharsNotValid) {
             try {
                 this.email.setMsg(invalidChar);
@@ -135,9 +120,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     public void testEmbedUrl() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
 
         final String strEmbed = this.email.embed(new URL(this.strTestURL), "Test name");
         assertNotNull(strEmbed);
@@ -152,10 +135,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // unique?
         final String newCid = this.email.embed(new URL(this.strTestURL), "Test name 2");
         assertFalse(strEmbed.equals(newCid));
-
-        // ====================================================================
         // Test Exceptions
-        // ====================================================================
 
         // Does an invalid URL throw an exception?
         try {
@@ -177,9 +157,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     public void testEmbedFile() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
 
         final File file = File.createTempFile("testEmbedFile", "txt");
         file.deleteOnExit();
@@ -255,10 +233,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         /** File to used to test file attachments (Must be valid) */
         final File testFile = File.createTempFile("commons-email-testfile", ".txt");
         testFile.deleteOnExit();
-
-        // ====================================================================
         // Test Success
-        // ====================================================================
         this.getMailServer();
 
         String strSubject = "Test HTML Send #1 Subject (w charset)";
@@ -327,9 +302,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     public void testSend2() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
 
         this.getMailServer();
 
@@ -393,10 +366,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // the mail.mime.charset property is normally cached by the MimeUtility
         // class, thus setting it to another value while running the tests
         // might not have the expected result.
-
-        // ====================================================================
         // Test Success
-        // ====================================================================
 
         System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "iso-8859-15");
 
@@ -540,9 +510,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
      */
     @Test
     public void testEmbedFileWithCID() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
 
         final File file = File.createTempFile("testEmbedFile", "txt");
         file.deleteOnExit();

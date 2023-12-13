@@ -160,7 +160,6 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetContentObject() {
-        // ====================================================================
         // test (string object and valid content type)
         String testObject = "test string object";
         String testContentType = " ; charset=" + EmailConstants.US_ASCII;
@@ -169,7 +168,6 @@ public class EmailTest extends AbstractEmailTest {
         assertEquals(testObject, email.getContentObject());
         assertEquals(testContentType, email.getContentType());
 
-        // ====================================================================
         // test (null string object and valid content type)
         testObject = null;
         testContentType = " ; charset=" + EmailConstants.US_ASCII + " some more here";
@@ -178,7 +176,6 @@ public class EmailTest extends AbstractEmailTest {
         assertEquals(testObject, email.getContentObject());
         assertEquals(testContentType, email.getContentType());
 
-        // ====================================================================
         // test (string object and null content type)
         testObject = "test string object";
         testContentType = null;
@@ -187,7 +184,6 @@ public class EmailTest extends AbstractEmailTest {
         assertEquals(testObject, email.getContentObject());
         assertEquals(testContentType, email.getContentType());
 
-        // ====================================================================
         // test (string object and invalid content type)
         testObject = "test string object";
         testContentType = " something incorrect ";
@@ -231,10 +227,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetFrom() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com", "me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org", "joe.doe@apache.org"));
@@ -252,9 +245,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetFromWithEncoding() throws Exception {
-        // ====================================================================
         // Test Success (with charset set)
-        // ====================================================================
         final String testValidEmail = "me@home.com";
 
         final InternetAddress inetExpected = new InternetAddress("me@home.com", "me@home.com", EmailConstants.ISO_8859_1);
@@ -269,9 +260,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetFrom2() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final String[] testEmailNames = { "Name1", "", null };
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
@@ -295,10 +284,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddTo() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -315,10 +301,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddToArray() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -334,9 +317,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddToWithEncoding() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final String testCharset = EmailConstants.ISO_8859_1;
         final String[] testEmailNames = { "Name1", "", null };
 
@@ -357,12 +338,8 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddTo2() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final String[] testEmailNames = { "Name1", "", null };
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com", "Name1"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -385,9 +362,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetTo() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final List<InternetAddress> testEmailValid2 = new ArrayList<>();
         testEmailValid2.add(new InternetAddress("me@home.com", "Name1"));
         testEmailValid2.add(new InternetAddress("joe.doe@apache.org", "joe.doe@apache.org"));
@@ -412,10 +387,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddCc() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -432,10 +404,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddCcArray() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -451,9 +420,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddCcWithEncoding() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final String testCharset = EmailConstants.ISO_8859_1;
         final String[] testEmailNames = { "Name1", "", null };
 
@@ -474,10 +441,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddCc2() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final String[] testEmailNames = { "Name1", "", null };
 
         final List<InternetAddress> arrExpected = new ArrayList<>();
@@ -502,9 +466,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetCc() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final List<InternetAddress> testEmailValid2 = new ArrayList<>();
         testEmailValid2.add(new InternetAddress("Name1 <me@home.com>"));
         testEmailValid2.add(new InternetAddress("\"joe.doe@apache.org\" <joe.doe@apache.org>"));
@@ -526,10 +488,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddBcc() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -546,10 +505,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddBccArray() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -565,9 +521,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddBccWithEncoding() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final String testCharset = EmailConstants.ISO_8859_1;
         final String[] testEmailNames = { "Name1", "", null };
 
@@ -588,10 +542,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddBcc2() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final String[] testEmailNames = { "Name1", "", null };
 
         final List<InternetAddress> arrExpected = new ArrayList<>();
@@ -616,9 +567,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSetBcc() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final List<InternetAddress> testInetEmailValid = new ArrayList<>();
         testInetEmailValid.add(new InternetAddress("me@home.com", "Name1"));
         testInetEmailValid.add(new InternetAddress("joe.doe@apache.org", "joe.doe@apache.org"));
@@ -640,10 +589,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddReplyTo() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final List<InternetAddress> arrExpected = new ArrayList<>();
         arrExpected.add(new InternetAddress("me@home.com"));
         arrExpected.add(new InternetAddress("joe.doe@apache.org"));
@@ -660,9 +606,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddReplyToWithEncoding() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final String testCharset = EmailConstants.ISO_8859_1;
         final String[] testEmailNames = { "Name1", "", null };
 
@@ -683,10 +627,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddReplyTo2() throws Exception {
-        // ====================================================================
         // Test Success
-        // ====================================================================
-
         final String[] testEmailNames = { "Name1", "", null };
 
         final List<InternetAddress> arrExpected = new ArrayList<>();
@@ -711,9 +652,7 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testAddHeader() {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         final Map<String, String> headers = new HashMap<>();
         headers.put("X-Priority", "1");
         headers.put("Disposition-Notification-To", "me@home.com");

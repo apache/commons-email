@@ -43,17 +43,12 @@ public class SimpleEmailTest extends AbstractEmailTest {
 
     @Test
     public void testGetSetMsg() throws EmailException {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         for (final String validChar : testCharsValid) {
             this.email.setMsg(validChar);
             assertEquals(validChar, this.email.getMsg());
         }
-
-        // ====================================================================
         // Test Exception
-        // ====================================================================
         for (final String invalidChar : this.testCharsNotValid) {
             try {
                 this.email.setMsg(invalidChar);
@@ -71,9 +66,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
      */
     @Test
     public void testSend() throws EmailException, IOException {
-        // ====================================================================
         // Test Success
-        // ====================================================================
         this.getMailServer();
 
         this.email = new MockSimpleEmail();
@@ -109,10 +102,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
          * not defined, reverts to the default Java charset which is basically the system default file encoding.
          */
         System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "utf-8");
-
-        // ====================================================================
         // Test Success
-        // ====================================================================
         this.getMailServer();
 
         this.email = new MockSimpleEmail();

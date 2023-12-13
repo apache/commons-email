@@ -51,9 +51,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
 
     @Test
     public void testSetInvalidFrom() throws Exception {
-        // ====================================================================
         // Test setting invalid 'from' addresses
-        // ====================================================================
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
             try {
                 // set from
@@ -69,9 +67,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
 
     @Test
     public void testAddInvalidTo() throws Exception {
-        // ====================================================================
         // Test adding invalid 'to' addresses
-        // ====================================================================
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
             try {
                 // Add To
@@ -87,9 +83,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
 
     @Test
     public void testAddInvalidCc() throws Exception {
-        // ====================================================================
         // Test adding invalid 'cc' addresses
-        // ====================================================================
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
             try {
                 // add cc
@@ -105,9 +99,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
 
     @Test
     public void testAddInvalidBcc() throws Exception {
-        // ====================================================================
         // Test adding invalid 'Bcc' addresses
-        // ====================================================================
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
             try {
                 // add bcc

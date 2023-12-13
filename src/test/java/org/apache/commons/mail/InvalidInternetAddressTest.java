@@ -66,9 +66,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
 
     @Test
     public void testStrictConstructor() throws Exception {
-        // ====================================================================
         // Prove InternetAddress constructor is throwing exception.
-        // ====================================================================
 
         // test Invalid Email addresses
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
@@ -101,11 +99,8 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
         if (validateMethod == null) {
             return;
         }
-
-        // ====================================================================
         // Prove InternetAddress constructor isn't throwing exception and
         // the validate() method is
-        // ====================================================================
 
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
 
@@ -141,11 +136,8 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
         if (validateMethod == null) {
             return;
         }
-
-        // ====================================================================
         // Prove InternetAddress constructor isn't throwing exception and
         // the validate() method is
-        // ====================================================================
 
         for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
 
