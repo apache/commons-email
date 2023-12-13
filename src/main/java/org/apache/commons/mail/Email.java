@@ -334,7 +334,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addBcc(final String... emails) throws EmailException {
-        if (emails == null || emails.length == 0) {
+        if (isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
 
@@ -400,7 +400,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addCc(final String... emails) throws EmailException {
-        if (emails == null || emails.length == 0) {
+        if (isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
 
@@ -529,7 +529,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addTo(final String... emails) throws EmailException {
-        if (emails == null || emails.length == 0) {
+        if (isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
 
@@ -980,6 +980,10 @@ public abstract class Email {
      */
     public List<InternetAddress> getToAddresses() {
         return this.toList;
+    }
+
+    private boolean isEmpty(final String[] array) {
+        return array == null || array.length == 0;
     }
 
     /**
