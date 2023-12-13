@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.mail.util.SharedByteArrayInputStream;
 import java.nio.charset.Charset;
 
 /**
@@ -53,7 +54,7 @@ public final class MimeMessageUtils
     public static MimeMessage createMimeMessage(final Session session, final byte[] source)
         throws MessagingException, IOException
     {
-        try (ByteArrayInputStream is = new ByteArrayInputStream(source))
+        try (ByteArrayInputStream is = new SharedByteArrayInputStream(source))
         {
             return new MimeMessage(session, is);
         }
@@ -108,7 +109,7 @@ public final class MimeMessageUtils
         try
         {
             final byte[] byteSource = source.getBytes(Charset.defaultCharset());
-            is = new ByteArrayInputStream(byteSource);
+            is = new SharedByteArrayInputStream(byteSource);
             return createMimeMessage(session, is);
         }
         finally
