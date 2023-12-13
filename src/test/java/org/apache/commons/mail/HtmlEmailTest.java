@@ -157,8 +157,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
         // if we embed the same file again, do we get the same content ID
         // back?
-        final String testCid =
-            this.email.embed(file);
+        final String testCid = this.email.embed(file);
         assertEquals(strEmbed, testCid, "didn't get same CID after embedding same file twice");
 
         // if we embed a new file, is the content ID unique?
@@ -354,8 +353,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     @Disabled
-    public void testSendWithDefaultCharset() throws Exception
-    {
+    public void testSendWithDefaultCharset() throws Exception {
         // Test is disabled as its result is dependent on the execution order:
         // the mail.mime.charset property is normally cached by the MimeUtility
         // class, thus setting it to another value while running the tests
@@ -509,15 +507,15 @@ public class HtmlEmailTest extends AbstractEmailTest {
         final String testCid = "Test CID";
         final String encodedCid = EmailUtils.encodeUrl(testCid);
 
-         // if we embed a new file, do we get the content ID we specified back?
-         final String strEmbed = this.email.embed(file, testCid);
-         assertNotNull(strEmbed);
-         assertEquals(encodedCid, strEmbed, "didn't get same CID when embedding with a specified CID");
+        // if we embed a new file, do we get the content ID we specified back?
+        final String strEmbed = this.email.embed(file, testCid);
+        assertNotNull(strEmbed);
+        assertEquals(encodedCid, strEmbed, "didn't get same CID when embedding with a specified CID");
 
-         // if we embed the same file again, do we get the same content ID
-         // back?
-         final String returnedCid = this.email.embed(file);
-         assertEquals(encodedCid, returnedCid, "didn't get same CID after embedding same file twice");
+        // if we embed the same file again, do we get the same content ID
+        // back?
+        final String returnedCid = this.email.embed(file);
+        assertEquals(encodedCid, returnedCid, "didn't get same CID after embedding same file twice");
     }
 
     @Test

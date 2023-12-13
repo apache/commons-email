@@ -299,8 +299,7 @@ public abstract class AbstractEmailTest {
         final WiserMessage emailMessage = this.validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, true);
 
         // test message content
-        assertTrue(getMessageBody(emailMessage).contains(strMessage),
-                "didn't find expected message content in message body");
+        assertTrue(getMessageBody(emailMessage).contains(strMessage), "didn't find expected message content in message body");
     }
 
     /**

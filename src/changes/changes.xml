@@ -37,6 +37,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in DataSourceClassPathResolver.resolve(String, boolean).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Complete half-baked test DataSourceUrlResolverTest.testResolvingHttpNonLenient().</action>
       <action issue="EMAIL-206" type="fix" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Use SharedByteArrayInputStream for memory usage #157.</action>
+      <action dev="ggregory" type="fix" due-to="Loki-Afro, Gary Gregory">Migrate to JUnit 5 #186.</action>
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">Add github/codeql-action #75.</action>
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add Maven plugin JapiCmp and remove Clirr.</action>
