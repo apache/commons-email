@@ -35,16 +35,14 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class MultiPartEmailTest extends AbstractEmailTest
-{
+public class MultiPartEmailTest extends AbstractEmailTest {
     /** */
     private MockMultiPartEmailConcrete email;
     /** File to used to test file attachments (Must be valid) */
     private File testFile;
 
     @BeforeEach
-    public void setUpMultiPartEmailTest() throws Exception
-    {
+    public void setUpMultiPartEmailTest() throws Exception {
         // reusable objects to be used across multiple tests
         this.email = new MockMultiPartEmailConcrete();
         testFile = File.createTempFile("testfile", ".txt");

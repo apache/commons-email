@@ -16,21 +16,16 @@
  */
 package org.apache.commons.mail;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 
 import javax.mail.internet.InternetAddress;
 
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case demonstrating InternetAddress validation.
@@ -61,14 +56,10 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
      * Setup for a test
      */
     @BeforeEach
-    public void setUpInvalidInternetAddressTest()
-    {
-        try
-        {
+    public void setUpInvalidInternetAddressTest() {
+        try {
             validateMethod = InternetAddress.class.getMethod("validate");
-        }
-        catch (final Exception e)
-        {
+        } catch (final Exception e) {
             assertEquals(NoSuchMethodException.class, e.getClass(), "Got wrong Exception when looking for validate()");
         }
     }

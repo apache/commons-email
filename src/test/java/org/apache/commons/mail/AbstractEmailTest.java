@@ -16,7 +16,10 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -96,8 +99,7 @@ public abstract class AbstractEmailTest {
     private static int fileNameCounter;
 
     @BeforeEach
-    public void setUpAbstractEmailTest()
-    {
+    public void setUpAbstractEmailTest() {
         emailOutputDir = new File("target/test-emails");
         if (!emailOutputDir.exists()) {
             emailOutputDir.mkdirs();
@@ -105,11 +107,9 @@ public abstract class AbstractEmailTest {
     }
 
     @AfterEach
-    public void tearDownEmailTest()
-    {
-        //stop the fake email server (if started)
-        if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer))
-        {
+    public void tearDownEmailTest() {
+        // stop the fake email server (if started)
+        if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
             this.fakeMailServer.stop();
             assertTrue(isMailServerStopped(fakeMailServer), "Mail server didn't stop");
         }
@@ -239,29 +239,6 @@ public abstract class AbstractEmailTest {
             // test bcc address
             if (!bccAdd.isEmpty()) {
                 assertTrue(bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)), "got wrong Bcc: address from mail");
-            }
-            assertEquals(strSubject, mimeMessage.getHeader("Subject", null),
-                    "got wrong subject from mail");
-
-            //test from address
-            assertEquals(fromAdd.toString(), mimeMessage.getHeader("From", null),
-                    "got wrong From: address from mail");
-
-            //test to address
-            assertTrue(toAdd.toString().contains(mimeMessage.getHeader("To", null)), "got wrong To: address from mail");
-
-            //test cc address
-            if (!ccAdd.isEmpty())
-            {
-                assertTrue(ccAdd.toString().contains(mimeMessage.getHeader("Cc", null)),
-                        "got wrong Cc: address from mail");
-            }
-
-            //test bcc address
-            if (!bccAdd.isEmpty())
-            {
-                assertTrue(bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)),
-                        "got wrong Bcc: address from mail");
             }
         } catch (final MessagingException me) {
             final IllegalStateException ise = new IllegalStateException("caught MessagingException in validateSend()");

@@ -36,8 +36,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
     @BeforeEach
-    public void setUpSendWithAttachmentsTest()
-    {
+    public void setUpSendWithAttachmentsTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
     }

@@ -43,8 +43,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
     @BeforeEach
-    public void setUpHtmlEmailTest()
-    {
+    public void setUpHtmlEmailTest() {
         // reusable objects to be used across multiple tests
         this.email = new MockHtmlEmailConcrete();
     }

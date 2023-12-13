@@ -41,18 +41,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.activation.DataSource;
-import javax.mail.internet.MimeMessage;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail.mocks.MockImageHtmlEmailConcrete;
-import org.apache.commons.mail.resolver.DataSourceClassPathResolver;
-import org.apache.commons.mail.resolver.DataSourceCompositeResolver;
-import org.apache.commons.mail.resolver.DataSourceUrlResolver;
-import org.apache.commons.mail.util.MimeMessageParser;
-import org.apache.commons.mail.util.MimeMessageUtils;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ImageHtmlEmailTest extends HtmlEmailTest {

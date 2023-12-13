@@ -26,7 +26,6 @@ import java.io.IOException;
 import org.apache.commons.mail.DataSourceResolver;
 import org.junit.jupiter.api.Test;
 
-
 /**
  * JUnit test case for DataSourceClassPathResolver.
  *

@@ -23,7 +23,6 @@ import javax.mail.PasswordAuthentication;
 
 import org.junit.jupiter.api.Test;
 
-
 /**
  * JUnit test case for DefaultAuthenticator Class.
  *

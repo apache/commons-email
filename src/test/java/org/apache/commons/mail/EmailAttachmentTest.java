@@ -23,7 +23,6 @@ import java.net.URL;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 /**
  * JUnit test case for EmailAttachment Class.
  *
@@ -33,8 +32,7 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     private EmailAttachment attachment;
 
     @BeforeEach
-    public void setUpAttachmentTest()
-    {
+    public void setUpAttachmentTest() {
         attachment = new EmailAttachment();
     }
 

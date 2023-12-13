@@ -43,10 +43,8 @@ import org.junit.jupiter.api.Test;
  * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
 public class EmailLiveTest extends AbstractEmailTest {
-
     @BeforeEach
-    public void setUpLiveTest()
-    {
+    public void setUpLiveTest() {
         // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
         System.setProperty("mail.mime.charset", "utf-8");
 
