@@ -44,6 +44,7 @@ import org.apache.commons.mail.util.MimeMessageUtils;
  * @since 1.0
  */
 final class EmailUtils {
+
     /**
      * Random object used by random method. This has to be not local to the random method so as to not return the same value in the same millisecond.
      */
@@ -104,7 +105,6 @@ final class EmailUtils {
         if (input == null) {
             return null;
         }
-
         final StringBuilder builder = new StringBuilder();
         for (final byte c : input.getBytes(StandardCharsets.US_ASCII)) {
             final int b = c & 0xff;

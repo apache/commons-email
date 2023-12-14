@@ -88,8 +88,10 @@ public class HtmlEmail extends MultiPartEmail {
 
         /** Content id. */
         private final String cid;
+
         /** {@code DataSource} for the content. */
         private final DataSource dataSource;
+
         /** the {@code MimeBodyPart} that contains the encoded data. */
         private final MimeBodyPart mbp;
 
@@ -345,8 +347,7 @@ public class HtmlEmail extends MultiPartEmail {
             mbp.setFileName(name);
             mbp.setDisposition(EmailAttachment.INLINE);
             mbp.setContentID("<" + encodedCid + ">");
-            final InlineImage inlineImage = new InlineImage(encodedCid, dataSource, mbp);
-            this.inlineEmbeds.put(name, inlineImage);
+            this.inlineEmbeds.put(name, new InlineImage(encodedCid, dataSource, mbp));
             return encodedCid;
         } catch (final MessagingException uee) {
             throw new EmailException(uee);

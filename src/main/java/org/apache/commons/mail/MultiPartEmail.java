@@ -58,7 +58,7 @@ public class MultiPartEmail extends Email {
     private boolean initialized;
 
     /** Indicates if attachments have been added to the message. */
-    private boolean boolHasAttachments;
+    private boolean hasAttachments;
 
     /**
      * Add a new part to the email.
@@ -121,26 +121,26 @@ public class MultiPartEmail extends Email {
     /**
      * Attach a file specified as a DataSource interface.
      *
-     * @param ds          A DataSource interface for the file.
+     * @param dataSource          A DataSource interface for the file.
      * @param name        The name field for the attachment.
      * @param description A description for the attachment.
      * @return A MultiPartEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0
      */
-    public MultiPartEmail attach(final DataSource ds, final String name, final String description) throws EmailException {
-        if (ds == null) {
+    public MultiPartEmail attach(final DataSource dataSource, final String name, final String description) throws EmailException {
+        if (dataSource == null) {
             throw new EmailException("Invalid Datasource");
         }
         // verify that the DataSource is valid
-        try (InputStream is = ds.getInputStream()) {
-            if (is == null) {
+        try (InputStream inputStream = dataSource.getInputStream()) {
+            if (inputStream == null) {
                 throw new EmailException("Invalid Datasource");
             }
         } catch (final IOException e) {
             throw new EmailException("Invalid Datasource", e);
         }
-        return attach(ds, name, description, EmailAttachment.ATTACHMENT);
+        return attach(dataSource, name, description, EmailAttachment.ATTACHMENT);
     }
 
     /**
@@ -158,20 +158,18 @@ public class MultiPartEmail extends Email {
         if (EmailUtils.isEmpty(name)) {
             name = ds.getName();
         }
-        final BodyPart bodyPart = createBodyPart();
         try {
+            final BodyPart bodyPart = createBodyPart();
             bodyPart.setDisposition(disposition);
             bodyPart.setFileName(MimeUtility.encodeText(name));
             bodyPart.setDescription(description);
             bodyPart.setDataHandler(new DataHandler(ds));
-
             getContainer().addBodyPart(bodyPart);
         } catch (final UnsupportedEncodingException | MessagingException me) {
             // in case the file name could not be encoded
             throw new EmailException(me);
         }
         setBoolHasAttachments(true);
-
         return this;
     }
 
@@ -221,15 +219,11 @@ public class MultiPartEmail extends Email {
      */
     public MultiPartEmail attach(final File file) throws EmailException {
         final String fileName = file.getAbsolutePath();
-
         try {
             if (!file.exists()) {
                 throw new IOException("\"" + fileName + "\" does not exist");
             }
-
-            final FileDataSource fds = new FileDataSource(file);
-
-            return attach(fds, file.getName(), null, EmailAttachment.ATTACHMENT);
+            return attach(new FileDataSource(file), file.getName(), null, EmailAttachment.ATTACHMENT);
         } catch (final IOException e) {
             throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
         }
@@ -267,7 +261,6 @@ public class MultiPartEmail extends Email {
         } catch (final IOException e) {
             throw new EmailException("Invalid URL set:" + url, e);
         }
-
         return attach(new URLDataSource(url), name, description, disposition);
     }
 
@@ -286,7 +279,7 @@ public class MultiPartEmail extends Email {
                 // the content for the main body part was actually set. If not,
                 // an IOException will be thrown during super.send().
 
-                final BodyPart body = this.getPrimaryBodyPart();
+                final BodyPart body = getPrimaryBodyPart();
                 try {
                     body.getContent();
                 } catch (final IOException e) // NOPMD
@@ -350,13 +343,11 @@ public class MultiPartEmail extends Email {
         if (!initialized) {
             init();
         }
-
         // Add the first body part to the message. The fist body part must be
         if (this.primaryBodyPart == null) {
             primaryBodyPart = createBodyPart();
             getContainer().addBodyPart(primaryBodyPart, 0);
         }
-
         return primaryBodyPart;
     }
 
@@ -379,10 +370,8 @@ public class MultiPartEmail extends Email {
         if (initialized) {
             throw new IllegalStateException("Already initialized");
         }
-
         container = createMimeMultipart();
         super.setContent(container);
-
         initialized = true;
     }
 
@@ -393,7 +382,7 @@ public class MultiPartEmail extends Email {
      * @since 1.0
      */
     public boolean isBoolHasAttachments() {
-        return boolHasAttachments;
+        return hasAttachments;
     }
 
     /**
@@ -408,20 +397,20 @@ public class MultiPartEmail extends Email {
     /**
      * Sets whether there are attachments.
      *
-     * @param b the attachments flag
+     * @param hasAttachments the attachments flag
      * @since 1.0
      */
-    public void setBoolHasAttachments(final boolean b) {
-        boolHasAttachments = b;
+    public void setBoolHasAttachments(final boolean hasAttachments) {
+        this.hasAttachments = hasAttachments;
     }
 
     /**
      * Sets the initialized status of this object.
      *
-     * @param b the initialized status flag
+     * @param initialized the initialized status flag
      */
-    protected void setInitialized(final boolean b) {
-        initialized = b;
+    protected void setInitialized(final boolean initialized) {
+        this.initialized = initialized;
     }
 
     /**
@@ -440,7 +429,6 @@ public class MultiPartEmail extends Email {
         }
         try {
             final BodyPart primary = getPrimaryBodyPart();
-
             if (primary instanceof MimePart && EmailUtils.isNotEmpty(charset)) {
                 ((MimePart) primary).setText(msg, charset);
             } else {

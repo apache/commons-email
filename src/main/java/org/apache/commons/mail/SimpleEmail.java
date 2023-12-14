@@ -17,11 +17,12 @@
 package org.apache.commons.mail;
 
 /**
- * This class is used to send simple internet email messages without attachments.
+ * This class is used to send simple Internet email messages without attachments.
  *
  * @since 1.0
  */
 public class SimpleEmail extends Email {
+
     /**
      * Sets the content of the mail.
      *
@@ -35,7 +36,6 @@ public class SimpleEmail extends Email {
         if (EmailUtils.isEmpty(msg)) {
             throw new EmailException("Invalid message supplied");
         }
-
         setContent(msg, EmailConstants.TEXT_PLAIN);
         return this;
     }

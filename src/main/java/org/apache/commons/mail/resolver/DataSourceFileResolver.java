@@ -32,14 +32,14 @@ public class DataSourceFileResolver extends DataSourceBaseResolver {
     private final File baseDir;
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      */
     public DataSourceFileResolver() {
         baseDir = new File(".");
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param baseDir the base directory of the resource when resolving relative paths
      */
@@ -48,7 +48,7 @@ public class DataSourceFileResolver extends DataSourceBaseResolver {
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param baseDir the base directory of the resource when resolving relative paths
      * @param lenient shall we ignore resources not found or complain with an exception

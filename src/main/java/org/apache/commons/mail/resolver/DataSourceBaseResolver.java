@@ -24,18 +24,19 @@ import org.apache.commons.mail.DataSourceResolver;
  * @since 1.3
  */
 public abstract class DataSourceBaseResolver implements DataSourceResolver {
+
     /** shall we ignore resources not found or complain with an exception */
     private final boolean lenient;
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      */
     public DataSourceBaseResolver() {
         this.lenient = false;
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param lenient shall we ignore resources not found or throw an exception?
      */

@@ -32,7 +32,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     private final DataSourceResolver[] dataSourceResolvers;
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param dataSourceResolvers a list of resolvers being used
      */
@@ -41,7 +41,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param dataSourceResolvers a list of resolvers being used
      * @param isLenient           shall we ignore resources not found or throw an exception?

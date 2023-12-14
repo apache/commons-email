@@ -17,6 +17,7 @@
 package org.apache.commons.mail.util;
 
 import java.net.IDN;
+import java.util.function.Function;
 
 import javax.mail.internet.InternetAddress;
 
@@ -31,6 +32,7 @@ import javax.mail.internet.InternetAddress;
  * @since 1.5
  */
 public class IDNEmailAddressConverter {
+
     /**
      * Null-safe wrapper for {@link String#indexOf} to find the '@' character.
      *
@@ -38,11 +40,7 @@ public class IDNEmailAddressConverter {
      * @return index of first '@' character or {@code -1}
      */
     private int findAtSymbolIndex(final String value) {
-        if (value == null) {
-            return -1;
-        }
-
-        return value.indexOf('@');
+        return value == null ? -1 : value.indexOf('@');
     }
 
     /**
@@ -68,23 +66,21 @@ public class IDNEmailAddressConverter {
     }
 
     /**
-     * Convert an email address to its ASCII representation using "Punycode".
+     * Converts an email address to its ASCII representation using "Punycode".
      *
      * @param email email address.
      * @return The ASCII representation
      */
     public String toASCII(final String email) {
         final int idx = findAtSymbolIndex(email);
-
         if (idx < 0) {
             return email;
         }
-
         return getLocalPart(email, idx) + '@' + IDN.toASCII(getDomainPart(email, idx));
     }
 
     /**
-     * Convert the address part of an InternetAddress to its Unicode representation.
+     * Converts the address part of an InternetAddress to its Unicode representation.
      *
      * @param address email address.
      * @return The Unicode representation
@@ -94,18 +90,24 @@ public class IDNEmailAddressConverter {
     }
 
     /**
-     * Convert an "Punycode" email address to its Unicode representation.
+     * Converts an "Punycode" email address to its Unicode representation.
      *
      * @param email email address.
      * @return The Unicode representation
      */
     String toUnicode(final String email) {
         final int idx = findAtSymbolIndex(email);
-
         if (idx < 0) {
             return email;
         }
-
         return getLocalPart(email, idx) + '@' + IDN.toUnicode(getDomainPart(email, idx));
+    }
+    
+    private String toString(final String email, Function<String, String> converter) {
+        final int idx = findAtSymbolIndex(email);
+        if (idx < 0) {
+            return email;
+        }
+        return getLocalPart(email, idx) + '@' + converter.apply((getDomainPart(email, idx)));
     }
 }

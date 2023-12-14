@@ -33,7 +33,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     private final URL baseUrl;
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param baseUrl the base URL used for resolving relative resource locations
      */
@@ -42,7 +42,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param baseUrl the base URL used for resolving relative resource locations
      * @param lenient shall we ignore resources not found or complain with an exception

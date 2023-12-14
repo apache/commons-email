@@ -32,6 +32,7 @@ import java.nio.charset.Charset;
  * @since 1.0
  */
 public class EmailException extends Exception {
+
     /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
 
@@ -87,7 +88,6 @@ public class EmailException extends Exception {
         synchronized (out) {
             final PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, Charset.defaultCharset()), false);
             printStackTrace(pw);
-
             // Flush the PrintWriter before it's GC'ed.
             pw.flush();
         }
