@@ -46,6 +46,7 @@
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Add org.apache.commons.mail.InputStreamDataSource.</action>
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Don't waste memory in MimeMessageParser#createDataSource().</action>
       <!-- UPDATE -->
+      <action type="update" due-to="Dependabot" dev="sebb">Bump org.slf4j:slf4j-jdk14 from 1.7.7 to 2.0.9 #165.</action>
       <action type="update" due-to="Dependabot" dev="sebb">Bump mockito-core from 4.11.0 to 5.8.0 #187.</action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102.</action>
       <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/checkout from 1 to 3.2.0, #25 #33, #67, #99, #117.</action>
