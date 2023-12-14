@@ -92,7 +92,7 @@ public class HtmlEmail extends MultiPartEmail {
         /** {@code DataSource} for the content. */
         private final DataSource dataSource;
 
-        /** the {@code MimeBodyPart} that contains the encoded data. */
+        /** The {@code MimeBodyPart} that contains the encoded data. */
         private final MimeBodyPart mbp;
 
         /**

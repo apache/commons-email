@@ -55,7 +55,7 @@ public class MimeMessageParser {
     /** Plain mail content from MimeMessage */
     private String plainContent;
 
-    /** Html mail content from MimeMessage */
+    /** HTML mail content from MimeMessage */
     private String htmlContent;
 
     /** List of attachments of MimeMessage */
@@ -104,6 +104,7 @@ public class MimeMessageParser {
      * Find an attachment using its content-id.
      * <p>
      * The content-id must be stripped of any angle brackets, i.e. "part1" instead of "&lt;part1&gt;".
+     * </p>
      *
      * @param cid the content-id of the attachment
      * @return the corresponding datasource or null if nothing was found
@@ -168,6 +169,7 @@ public class MimeMessageParser {
      * Returns a collection of all content-ids in the parsed message.
      * <p>
      * The content-ids are stripped of any angle brackets, i.e. "part1" instead of "&lt;part1&gt;".
+     * </p>
      *
      * @return the collection of content ids.
      * @since 1.3.4
@@ -204,7 +206,7 @@ public class MimeMessageParser {
      */
     public String getFrom() throws MessagingException {
         final Address[] addresses = mimeMessage.getFrom();
-        if (addresses == null || addresses.length == 0) {
+        if (isEmpty(addresses)) {
             return null;
         }
         return ((InternetAddress) addresses[0]).getAddress();
@@ -231,7 +233,7 @@ public class MimeMessageParser {
      */
     public String getReplyTo() throws MessagingException {
         final Address[] addresses = mimeMessage.getReplyTo();
-        if (addresses == null || addresses.length == 0) {
+        if (isEmpty(addresses)) {
             return null;
         }
         return ((InternetAddress) addresses[0]).getAddress();
@@ -266,6 +268,10 @@ public class MimeMessageParser {
     /** @return true if a plain content is available */
     public boolean hasPlainContent() {
         return plainContent != null;
+    }
+
+    private boolean isEmpty(final Object[] array) {
+        return array == null || array.length == 0;
     }
 
     /**

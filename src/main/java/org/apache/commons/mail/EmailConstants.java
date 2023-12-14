@@ -99,7 +99,7 @@ public final class EmailConstants {
     /** Specifies the default transport protocol */
     public static final String MAIL_TRANSPORT_PROTOCOL = "mail.transport.protocol";
 
-    /** the value to use SMTP as transport protocol */
+    /** The value to use SMTP as transport protocol */
     public static final String SMTP = "smtp";
 
     /** defines the text/html content type */

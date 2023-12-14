@@ -35,6 +35,7 @@ import javax.mail.internet.MimeMessage;
  * @since 1.3
  */
 public final class MimeMessageUtils {
+
     /**
      * Creates a MimeMessage.
      *

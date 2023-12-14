@@ -248,13 +248,13 @@ public abstract class Email {
      */
     protected boolean popBeforeSmtp;
 
-    /** the host name of the pop3 server. */
+    /** The host name of the pop3 server. */
     protected String popHost;
 
-    /** the user name to log into the pop3 server. */
+    /** The user name to log into the pop3 server. */
     protected String popUsername;
 
-    /** the password to log into the pop3 server. */
+    /** The password to log into the pop3 server. */
     protected String popPassword;
 
     /**

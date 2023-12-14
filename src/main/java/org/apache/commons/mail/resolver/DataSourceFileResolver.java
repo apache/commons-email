@@ -28,7 +28,7 @@ import javax.activation.FileDataSource;
  * @since 1.3
  */
 public class DataSourceFileResolver extends DataSourceBaseResolver {
-    /** the base directory of the resource when resolving relative paths */
+    /** The base directory of the resource when resolving relative paths */
     private final File baseDir;
 
     /**

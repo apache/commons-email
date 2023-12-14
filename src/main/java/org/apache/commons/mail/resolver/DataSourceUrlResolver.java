@@ -29,7 +29,8 @@ import javax.activation.URLDataSource;
  * @since 1.3
  */
 public class DataSourceUrlResolver extends DataSourceBaseResolver {
-    /** the base url of the resource when resolving relative paths */
+
+    /** The base url of the resource when resolving relative paths */
     private final URL baseUrl;
 
     /**
@@ -65,17 +66,14 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
         if (baseUrl == null) {
             return new URL(resourceLocation);
         }
-
         // if we get an non-existing location what we shall do?
         if (resourceLocation == null || resourceLocation.isEmpty()) {
             throw new IllegalArgumentException("No resource defined");
         }
-
         // if we get a stand-alone resource than ignore the base url
         if (isFileUrl(resourceLocation) || isHttpUrl(resourceLocation)) {
             return new URL(resourceLocation);
         }
-
         return new URL(getBaseUrl(), resourceLocation.replace("&amp;", "&"));
     }
 
@@ -98,14 +96,11 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     @Override
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
         DataSource result = null;
-
         try {
             if (!isCid(resourceLocation)) {
-                final URL url = createUrl(resourceLocation);
-                result = new URLDataSource(url);
+                result = new URLDataSource(createUrl(resourceLocation));
                 result.getInputStream();
             }
-
             return result;
         } catch (final IOException e) {
             if (isLenient) {
