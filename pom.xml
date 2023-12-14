@@ -305,7 +305,7 @@
         <commons.bc.version>1.5</commons.bc.version>
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
-        <mockito-core.version>4.11.0</mockito-core.version>
+        <mockito-core.version>5.8.0</mockito-core.version>
     </properties>
 
     <build>
@@ -536,13 +536,12 @@
         </build>
       </profile>
       <profile>
-        <id>java21</id>
-          <!-- For testing with Powermock. -->
+        <id>java8</id>
           <activation>
-              <jdk>[21,)</jdk>
+              <jdk>[1.8,11)</jdk>
           </activation>
           <properties>
-            <mockito-core.version>5.8.0</mockito-core.version>
+            <mockito-core.version>4.11.0</mockito-core.version>
           </properties>
       </profile>
 
