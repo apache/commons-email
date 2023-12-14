@@ -184,7 +184,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         assertTrue(true);
     }
 
-    /** test get/set sub type */
+    /** Test get/set sub type */
     @Test
     public void testGetSetSubType() {
         for (final String validChar : testCharsValid) {
@@ -193,7 +193,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         }
     }
 
-    /** init called twice should fail */
+    /** Init called twice should fail */
     @Test
     public void testInit() {
         // call the init function twice to trigger the IllegalStateException

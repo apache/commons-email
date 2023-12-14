@@ -48,19 +48,19 @@ public class ImageHtmlEmail extends HtmlEmail {
     /** Regexp for extracting {@code <img>} tags */
     public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
-    /** regexp for extracting {@code <script>} tags */
+    /** Regexp for extracting {@code <script>} tags */
     public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
 
     // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
 
-    /** pattern for extracting <img> tags */
+    /** Pattern for extracting <img> tags */
     private static final Pattern IMG_PATTERN = Pattern.compile(REGEX_IMG_SRC);
 
-    /** pattern for extracting <script> tags */
+    /** Pattern for extracting <script> tags */
     private static final Pattern SCRIPT_PATTERN = Pattern.compile(REGEX_SCRIPT_SRC);
 
-    /** resolve the images and script resources to a DataSource */
+    /** Resolve the images and script resources to a DataSource */
     private DataSourceResolver dataSourceResolver;
 
     /**

@@ -167,10 +167,10 @@ public class HtmlEmail extends MultiPartEmail {
     /** Definition of the length of generated CID's. */
     public static final int CID_LENGTH = 10;
 
-    /** prefix for default HTML mail. */
+    /** Prefix for default HTML mail. */
     private static final String HTML_MESSAGE_START = "<html><body><pre>";
 
-    /** suffix for default HTML mail. */
+    /** Suffix for default HTML mail. */
     private static final String HTML_MESSAGE_END = "</pre></body></html>";
 
     /**

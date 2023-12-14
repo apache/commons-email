@@ -63,16 +63,16 @@ public final class EmailConstants {
 
     // Charset constants
 
-    /** charset constant for koi8-r */
+    /** Charset constant for koi8-r */
     public static final String KOI8_R = "koi8-r";
 
-    /** charset constant for iso-8859-1 */
+    /** Charset constant for iso-8859-1 */
     public static final String ISO_8859_1 = "iso-8859-1";
 
-    /** charset constant for us-ascii */
+    /** Charset constant for us-ascii */
     public static final String US_ASCII = "us-ascii";
 
-    /** charset constant for utf-8 */
+    /** Charset constant for utf-8 */
     public static final String UTF_8 = "utf-8";
 
     /** The debug mode to be used. */
@@ -102,13 +102,13 @@ public final class EmailConstants {
     /** The value to use SMTP as transport protocol */
     public static final String SMTP = "smtp";
 
-    /** defines the text/html content type */
+    /** Defines the text/html content type */
     public static final String TEXT_HTML = "text/html";
 
-    /** defines the html subtype */
+    /** Defines the html subtype */
     public static final String TEXT_SUBTYPE_HTML = "html";
 
-    /** defines the text/plain content type */
+    /** Defines the text/plain content type */
     public static final String TEXT_PLAIN = "text/plain";
 
     /////////////////////////////////////////////////////////////////////////

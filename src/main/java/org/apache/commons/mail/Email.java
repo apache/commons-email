@@ -273,10 +273,10 @@ public abstract class Email {
     @Deprecated
     protected boolean ssl;
 
-    /** socket I/O timeout value in milliseconds. */
+    /** Socket I/O timeout value in milliseconds. */
     protected int socketTimeout = EmailConstants.SOCKET_TIMEOUT_MS;
 
-    /** socket connection timeout value in milliseconds. */
+    /** Socket connection timeout value in milliseconds. */
     protected int socketConnectionTimeout = EmailConstants.SOCKET_TIMEOUT_MS;
 
     /**
@@ -291,7 +291,7 @@ public abstract class Email {
      */
     private boolean startTlsRequired;
 
-    /** does the current transport use SSL/TLS encryption upon connection? */
+    /** Does the current transport use SSL/TLS encryption upon connection? */
     private boolean sslOnConnect;
 
     /**

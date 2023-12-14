@@ -59,10 +59,10 @@ public abstract class AbstractEmailTest {
     /** Line separator in email messages */
     private static final String LINE_SEPARATOR = "\r\n";
 
-    /** default port */
+    /** Default port */
     private static int mailServerPort = 2500;
 
-    /** counter for creating a file name */
+    /** Counter for creating a file name */
     private static int fileNameCounter;
 
     /** The fake Wiser email server */

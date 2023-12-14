@@ -58,7 +58,7 @@ public class EmailTest extends AbstractEmailTest {
 
     private static final String[] VALID_EMAILS = { "me@home.com", "joe.doe@apache.org", "someone_here@work-address.com.au" };
 
-    /** mock for testing */
+    /** Mock for testing */
     private MockEmailConcrete email;
 
     @BeforeEach

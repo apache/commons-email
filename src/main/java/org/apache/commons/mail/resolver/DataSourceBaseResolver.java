@@ -25,7 +25,7 @@ import org.apache.commons.mail.DataSourceResolver;
  */
 public abstract class DataSourceBaseResolver implements DataSourceResolver {
 
-    /** shall we ignore resources not found or complain with an exception */
+    /** Shall we ignore resources not found or complain with an exception */
     private final boolean lenient;
 
     /**
