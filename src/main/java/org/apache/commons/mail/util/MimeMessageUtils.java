@@ -87,16 +87,9 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed
      */
     public static MimeMessage createMimeMessage(final Session session, final String source) throws MessagingException, IOException {
-        ByteArrayInputStream is = null;
-
-        try {
-            final byte[] byteSource = source.getBytes(Charset.defaultCharset());
-            is = new SharedByteArrayInputStream(byteSource);
-            return createMimeMessage(session, is);
-        } finally {
-            if (is != null) {
-                is.close();
-            }
+        final byte[] byteSource = source.getBytes(Charset.defaultCharset());
+        try (ByteArrayInputStream inputStream = new SharedByteArrayInputStream(byteSource)) {
+            return createMimeMessage(session, inputStream);
         }
     }
 
