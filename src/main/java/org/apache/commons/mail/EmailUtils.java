@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -117,6 +119,18 @@ final class EmailUtils {
             }
         }
         return builder.toString();
+    }
+
+    static boolean isEmpty(final Collection<?> collection) {
+        return collection == null || collection.isEmpty();
+    }
+
+    static boolean isEmpty(final Map<?, ?> map) {
+        return map == null || map.isEmpty();
+    }
+
+    static boolean isEmpty(final Object[] array) {
+        return array == null || array.length == 0;
     }
 
     /**

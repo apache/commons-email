@@ -171,10 +171,6 @@ public abstract class Email {
     @Deprecated
     public static final String MAIL_SMTP_TIMEOUT = EmailConstants.MAIL_SMTP_TIMEOUT;
 
-    private static boolean isEmpty(final Collection<?> collection) {
-        return collection == null || collection.isEmpty();
-    }
-
     /** The email message to send. */
     protected MimeMessage message;
 
@@ -339,14 +335,12 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addBcc(final String... emails) throws EmailException {
-        if (isEmpty(emails)) {
+        if (EmailUtils.isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
-
         for (final String email : emails) {
             addBcc(email, null);
         }
-
         return this;
     }
 
@@ -405,7 +399,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addCc(final String... emails) throws EmailException {
-        if (isEmpty(emails)) {
+        if (EmailUtils.isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
         for (final String email : emails) {
@@ -531,7 +525,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addTo(final String... emails) throws EmailException {
-        if (isEmpty(emails)) {
+        if (EmailUtils.isEmpty(emails)) {
             throw new EmailException("Address List provided was invalid");
         }
         for (final String email : emails) {
@@ -627,23 +621,23 @@ public abstract class Email {
                 throw new EmailException("At least one receiver address required");
             }
 
-            if (!this.toList.isEmpty()) {
+            if (!EmailUtils.isEmpty(toList)) {
                 this.message.setRecipients(Message.RecipientType.TO, this.toInternetAddressArray(this.toList));
             }
 
-            if (!this.ccList.isEmpty()) {
+            if (!EmailUtils.isEmpty(ccList)) {
                 this.message.setRecipients(Message.RecipientType.CC, this.toInternetAddressArray(this.ccList));
             }
 
-            if (!this.bccList.isEmpty()) {
+            if (!EmailUtils.isEmpty(bccList)) {
                 this.message.setRecipients(Message.RecipientType.BCC, this.toInternetAddressArray(this.bccList));
             }
 
-            if (!this.replyList.isEmpty()) {
+            if (!EmailUtils.isEmpty(replyList)) {
                 this.message.setReplyTo(this.toInternetAddressArray(this.replyList));
             }
 
-            if (!this.headers.isEmpty()) {
+            if (!EmailUtils.isEmpty(headers)) {
                 for (final Map.Entry<String, String> entry : this.headers.entrySet()) {
                     final String foldedValue = createFoldedHeaderValue(entry.getKey(), entry.getValue());
                     this.message.addHeader(entry.getKey(), foldedValue);
@@ -978,10 +972,6 @@ public abstract class Email {
         return this.toList;
     }
 
-    private boolean isEmpty(final String[] array) {
-        return array == null || array.length == 0;
-    }
-
     /**
      * If partial sending of email enabled.
      *
@@ -1122,7 +1112,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setBcc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (isEmpty(aCollection)) {
+        if (EmailUtils.isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
         this.bccList = new ArrayList<>(aCollection);
@@ -1140,7 +1130,7 @@ public abstract class Email {
      */
     public Email setBounceAddress(final String email) {
         checkSessionAlreadyInitialized();
-        if (email != null && !email.isEmpty()) {
+        if (!EmailUtils.isEmpty(email)) {
             try {
                 this.bounceAddress = createInternetAddress(email, null, this.charset).getAddress();
             } catch (final EmailException e) {
@@ -1164,7 +1154,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setCc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (isEmpty(aCollection)) {
+        if (EmailUtils.isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
         this.ccList = new ArrayList<>(aCollection);
@@ -1382,7 +1372,7 @@ public abstract class Email {
      * @since 1.1
      */
     public Email setReplyTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (isEmpty(aCollection)) {
+        if (EmailUtils.isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
         this.replyList = new ArrayList<>(aCollection);
@@ -1581,7 +1571,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (isEmpty(aCollection)) {
+        if (EmailUtils.isEmpty(aCollection)) {
             throw new EmailException("Address List provided was invalid");
         }
         this.toList = new ArrayList<>(aCollection);

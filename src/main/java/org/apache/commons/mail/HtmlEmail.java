@@ -205,7 +205,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         // determine how to form multiparts of email
 
-        if (EmailUtils.isNotEmpty(this.html) && !this.inlineEmbeds.isEmpty()) {
+        if (EmailUtils.isNotEmpty(this.html) && !EmailUtils.isEmpty(inlineEmbeds)) {
             // If HTML body and embeds are used, create a related container and add it to the root container
             bodyEmbedsContainer = new MimeMultipart("related");
             bodyContainer = bodyEmbedsContainer;
@@ -227,7 +227,7 @@ public class HtmlEmail extends MultiPartEmail {
             // inline images, the root container should have mimetype
             // "multipart/alternative".
             // reference: http://tools.ietf.org/html/rfc2046#section-5.1.4
-            if (!this.inlineEmbeds.isEmpty() || isBoolHasAttachments()) {
+            if (!EmailUtils.isEmpty(inlineEmbeds) || isBoolHasAttachments()) {
                 // If both HTML and TEXT bodies are provided, create an alternative
                 // container and add it to the root container
                 bodyContainer = new MimeMultipart("alternative");
