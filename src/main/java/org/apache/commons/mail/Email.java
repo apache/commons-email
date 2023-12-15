@@ -48,6 +48,7 @@ import org.apache.commons.mail.util.IDNEmailAddressConverter;
  * The base class for all email messages. This class sets the sender's email &amp; name, receiver's email &amp; name, subject, and the sent date.
  * <p>
  * Subclasses are responsible for setting the message body.
+ * </p>
  *
  * @since 1.0
  */
@@ -311,7 +312,7 @@ public abstract class Email {
     private Session session;
 
     /**
-     * Add a blind BCC recipient to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
+     * Adds a blind BCC recipient to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
      * contains non-ASCII characters; otherwise, it is used as is.
      *
@@ -325,7 +326,7 @@ public abstract class Email {
     }
 
     /**
-     * Add an array of blind BCC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset
+     * Adds an array of blind BCC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset
      * of {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -345,7 +346,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a blind BCC recipient to the email using the specified address and the specified personal name. The name will be encoded by the charset of
+     * Adds a blind BCC recipient to the email using the specified address and the specified personal name. The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
      * contains non-ASCII characters; otherwise, it is used as is.
      *
@@ -360,7 +361,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a blind BCC recipient to the email using the specified address, personal name, and charset encoding for the name.
+     * Adds a blind BCC recipient to the email using the specified address, personal name, and charset encoding for the name.
      *
      * @param email   A String.
      * @param name    A String.
@@ -375,7 +376,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a recipient CC to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
+     * Adds a recipient CC to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
      * contains non-ASCII characters; otherwise, it is used as is.
      *
@@ -389,7 +390,7 @@ public abstract class Email {
     }
 
     /**
-     * Add an array of CC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset of
+     * Adds an array of CC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset of
      * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -409,7 +410,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a recipient CC to the email using the specified address and the specified personal name. The name will be encoded by the charset of
+     * Adds a recipient CC to the email using the specified address and the specified personal name. The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
      * contains non-ASCII characters; otherwise, it is used as is.
      *
@@ -424,7 +425,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a recipient CC to the email using the specified address, personal name, and charset encoding for the name.
+     * Adds a recipient CC to the email using the specified address, personal name, and charset encoding for the name.
      *
      * @param email   A String.
      * @param name    A String.
@@ -457,7 +458,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a reply to address to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
+     * Adds a reply to address to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
      * contains non-ASCII characters; otherwise, it is used as is.
      *
@@ -471,7 +472,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a reply to address to the email using the specified address and the specified personal name. The name will be encoded by the charset of
+     * Adds a reply to address to the email using the specified address and the specified personal name. The name will be encoded by the charset of
      * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
      * contains non-ASCII characters; otherwise, it is used as is.
      *
@@ -486,7 +487,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a reply to address to the email using the specified address, personal name, and charset encoding for the name.
+     * Adds a reply to address to the email using the specified address, personal name, and charset encoding for the name.
      *
      * @param email   A String.
      * @param name    A String.
@@ -501,7 +502,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a recipient TO to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
+     * Adds a recipient TO to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
      * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -515,7 +516,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a list of TO recipients to the email. The email addresses will also be used as the personal names. The names will be encoded by the charset of
+     * Adds a list of TO recipients to the email. The email addresses will also be used as the personal names. The names will be encoded by the charset of
      * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -535,7 +536,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a recipient TO to the email using the specified address and the specified personal name. The name will be encoded by the charset of
+     * Adds a recipient TO to the email using the specified address and the specified personal name. The name will be encoded by the charset of
      * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
      * non-ASCII characters; otherwise, it is used as is.
      *
@@ -550,7 +551,7 @@ public abstract class Email {
     }
 
     /**
-     * Add a recipient TO to the email using the specified address, personal name, and charset encoding for the name.
+     * Adds a recipient TO to the email using the specified address, personal name, and charset encoding for the name.
      *
      * @param email   A String.
      * @param name    A String.
@@ -565,8 +566,8 @@ public abstract class Email {
     }
 
     /**
-     * Does the work of actually building the MimeMessage. Please note that a user rarely calls this method directly and only if he/she is interested in the
-     * sending the underlying MimeMessage without commons-email.
+     * Builds the MimeMessage. Please note that a user rarely calls this method directly and only if he/she is interested in the sending the underlying
+     * MimeMessage without commons-email.
      *
      * @throws IllegalStateException if the MimeMessage was already built
      * @throws EmailException        if there was an error.
@@ -670,7 +671,7 @@ public abstract class Email {
     }
 
     /**
-     * Create a folded header value containing 76 character chunks.
+     * Creates a folded header value containing 76 character chunks.
      *
      * @param name  the name of the header
      * @param value the value of the header
@@ -692,7 +693,7 @@ public abstract class Email {
     }
 
     /**
-     * Creates a InternetAddress.
+     * Creates an InternetAddress.
      *
      * @param email       An email address.
      * @param name        A name.
@@ -726,7 +727,7 @@ public abstract class Email {
     }
 
     /**
-     * Factory method to create a customized MimeMessage which can be implemented by a derived class, e.g. to set the message id.
+     * Creates a customized MimeMessage which can be implemented by a derived class, e.g. to set the message id.
      *
      * @param aSession mail session to be used
      * @return the newly created message
@@ -809,8 +810,8 @@ public abstract class Email {
     }
 
     /**
-     * Determines the mail session used when sending this Email, creating the Session if necessary. When a mail session is already initialized setting the
-     * session related properties will cause an IllegalStateException.
+     * Gets the mail session used when sending this Email, creating the Session if necessary. When a mail session is already initialized setting the session
+     * related properties will cause an IllegalStateException.
      *
      * @return A Session.
      * @throws EmailException if the host name was not set
@@ -874,7 +875,7 @@ public abstract class Email {
     }
 
     /**
-     * Returns the internal MimeMessage. Please note that the MimeMessage is built by the buildMimeMessage() method.
+     * Gets the internal MimeMessage. Please note that the MimeMessage is built by the buildMimeMessage() method.
      *
      * @return the MimeMessage
      */
@@ -940,7 +941,7 @@ public abstract class Email {
     }
 
     /**
-     * Returns the current SSL port used by the SMTP transport.
+     * Gets the current SSL port used by the SMTP transport.
      *
      * @return the current SSL port used by the SMTP transport
      */
@@ -973,9 +974,9 @@ public abstract class Email {
     }
 
     /**
-     * If partial sending of email enabled.
+     * Tests whether partial sending of email is enabled.
      *
-     * @return true if sending partial email is enabled
+     * @return true if sending partial email is enabled.
      * @since 1.3.2
      */
     public boolean isSendPartial() {
@@ -983,10 +984,10 @@ public abstract class Email {
     }
 
     /**
-     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
+     * Tests whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
      *
-     * @deprecated since 1.3, use isSSLOnConnect() instead
-     * @return true if SSL enabled for the transport
+     * @deprecated since 1.3, use {@link #isSSLOnConnect()} instead.
+     * @return true if SSL enabled for the transport.
      */
     @Deprecated
     public boolean isSSL() {
@@ -994,9 +995,9 @@ public abstract class Email {
     }
 
     /**
-     * Is the server identity checked as specified by RFC 2595
+     * Tests whether the server identity checked as specified by RFC 2595
      *
-     * @return true if the server identity is checked
+     * @return true if the server identity is checked.
      * @since 1.3
      */
     public boolean isSSLCheckServerIdentity() {
@@ -1004,9 +1005,9 @@ public abstract class Email {
     }
 
     /**
-     * Returns whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
+     * Tests whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS).
      *
-     * @return true if SSL enabled for the transport
+     * @return true if SSL enabled for the transport.
      * @since 1.3
      */
     public boolean isSSLOnConnect() {
@@ -1014,9 +1015,9 @@ public abstract class Email {
     }
 
     /**
-     * Gets whether the client is configured to try to enable STARTTLS.
+     * Tests whether the client is configured to try to enable STARTTLS.
      *
-     * @return true if using STARTTLS for authentication, false otherwise
+     * @return true if using STARTTLS for authentication, false otherwise.
      * @since 1.3
      */
     public boolean isStartTLSEnabled() {
@@ -1024,9 +1025,9 @@ public abstract class Email {
     }
 
     /**
-     * Gets whether the client is configured to require STARTTLS.
+     * Tests whether the client is configured to require STARTTLS.
      *
-     * @return true if using STARTTLS for authentication, false otherwise
+     * @return true if using STARTTLS for authentication, false otherwise.
      * @since 1.3
      */
     public boolean isStartTLSRequired() {
@@ -1034,10 +1035,10 @@ public abstract class Email {
     }
 
     /**
-     * Gets whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
+     * Tests whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
      *
-     * @deprecated since 1.3, use isStartTLSEnabled() instead
-     * @return true if using STARTTLS for authentication, false otherwise
+     * @deprecated since 1.3, use {@link #isStartTLSEnabled()} instead.
+     * @return true if using STARTTLS for authentication, false otherwise.
      * @since 1.1
      */
     @Deprecated
@@ -1078,6 +1079,7 @@ public abstract class Email {
      * Sets the userName and password if authentication is needed. If this method is not used, no authentication will be performed.
      * <p>
      * This method will create a new instance of {@code DefaultAuthenticator} using the supplied parameters.
+     * </p>
      *
      * @param userName User name for the SMTP server
      * @param password password for the SMTP server
@@ -1093,6 +1095,7 @@ public abstract class Email {
      * Sets the {@code Authenticator} to be used when authentication is requested from the mail server.
      * <p>
      * This method should be used when your outgoing mail server requires authentication. Your mail server must also support RFC2554.
+     * </p>
      *
      * @param newAuthenticator the {@code Authenticator} object.
      * @see Authenticator
@@ -1197,7 +1200,7 @@ public abstract class Email {
     }
 
     /**
-     * Setting to true will enable the display of debug information.
+     * Sets the display of debug information.
      *
      * @param d A boolean.
      * @since 1.0
@@ -1251,7 +1254,7 @@ public abstract class Email {
     }
 
     /**
-     * Used to specify the mail headers. Example:
+     * Sets the mail headers. Example:
      *
      * X-Mailer: Sendmail, X-Priority: 1( highest ) or 2( high ) 3( normal ) 4( low ) and 5( lowest ) Disposition-Notification-To: user@domain.net
      *
@@ -1279,8 +1282,8 @@ public abstract class Email {
     }
 
     /**
-     * Supply a mail Session object to use. Please note that passing a user name and password (in the case of mail authentication) will create a new mail
-     * session with a DefaultAuthenticator. This is a convenience but might come unexpected.
+     * Sets a mail Session object to use. Please note that passing a user name and password (in the case of mail authentication) will create a new mail session
+     * with a DefaultAuthenticator. This is a convenience but might come unexpected.
      *
      * If mail authentication is used but NO username and password is supplied the implementation assumes that you have set a authenticator and will use the
      * existing mail session (as expected).
@@ -1314,7 +1317,7 @@ public abstract class Email {
     }
 
     /**
-     * Supply a mail Session object from a JNDI directory.
+     * Sets a mail Session object from a JNDI directory.
      *
      * @param jndiName name of JNDI resource (javax.mail.Session type), resource if searched in java:comp/env if name does not start with "java:"
      * @throws IllegalArgumentException if the JNDI name is null or empty
@@ -1336,7 +1339,7 @@ public abstract class Email {
     }
 
     /**
-     * Define the content of the mail. It should be overridden by the subclasses.
+     * Sets the content of the mail. It should be overridden by the subclasses.
      *
      * @param msg A String.
      * @return An Email.
@@ -1385,6 +1388,7 @@ public abstract class Email {
      * In case the mail server rejects an address as invalid, the call to {@link #send()} may throw a {@link javax.mail.SendFailedException}, even if partial
      * send mode is enabled (emails to valid addresses will be transmitted). In case the email server does not reject invalid addresses immediately, but return
      * a bounce message, no exception will be thrown by the {@link #send()} method.
+     * </p>
      *
      * @param sendPartial whether to enable partial send mode
      * @return An Email.
@@ -1481,6 +1485,7 @@ public abstract class Email {
      * {@link #setStartTLSRequired(boolean)}
      * <p>
      * Defaults to {@link #sslSmtpPort}; can be overridden by using {@link #setSslSmtpPort(String)}
+     * </p>
      *
      * @param ssl whether to enable the SSL transport
      * @return An Email.
@@ -1525,6 +1530,7 @@ public abstract class Email {
      * Sets or disable the required STARTTLS encryption.
      * <p>
      * Defaults to {@link #smtpPort}; can be overridden by using {@link #setSmtpPort(int)}
+     * </p>
      *
      * @param startTlsRequired true if STARTTLS requested, false otherwise
      * @return An Email.
@@ -1579,7 +1585,7 @@ public abstract class Email {
     }
 
     /**
-     * Utility to copy List of known InternetAddress objects into an array.
+     * Converts to copy List of known InternetAddress objects into an array.
      *
      * @param list A List.
      * @return An InternetAddress[].
@@ -1590,35 +1596,32 @@ public abstract class Email {
     }
 
     /**
-     * Update the contentType.
+     * Updates the contentType.
      *
-     * @param aContentType aContentType
+     * @param contentType aContentType
      * @since 1.2
      */
-    public void updateContentType(final String aContentType) {
-        if (EmailUtils.isEmpty(aContentType)) {
+    public void updateContentType(final String contentType) {
+        if (EmailUtils.isEmpty(contentType)) {
             this.contentType = null;
         } else {
             // set the content type
-            this.contentType = aContentType;
-
+            this.contentType = contentType;
             // set the charset if the input was properly formed
             final String strMarker = "; charset=";
-            int charsetPos = aContentType.toLowerCase().indexOf(strMarker);
-
+            int charsetPos = contentType.toLowerCase().indexOf(strMarker);
             if (charsetPos != -1) {
                 // find the next space (after the marker)
                 charsetPos += strMarker.length();
-                final int intCharsetEnd = aContentType.toLowerCase().indexOf(" ", charsetPos);
-
+                final int intCharsetEnd = contentType.toLowerCase().indexOf(" ", charsetPos);
                 if (intCharsetEnd != -1) {
-                    this.charset = aContentType.substring(charsetPos, intCharsetEnd);
+                    this.charset = contentType.substring(charsetPos, intCharsetEnd);
                 } else {
-                    this.charset = aContentType.substring(charsetPos);
+                    this.charset = contentType.substring(charsetPos);
                 }
-            } else // use the default charset, if one exists, for messages
-            // whose content-type is some form of text.
-            if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset)) {
+            } else if (this.contentType.startsWith("text/") && EmailUtils.isNotEmpty(this.charset)) {
+                // use the default charset, if one exists, for messages
+                // whose content-type is some form of text.
                 final StringBuilder contentTypeBuf = new StringBuilder(this.contentType);
                 contentTypeBuf.append(strMarker);
                 contentTypeBuf.append(this.charset);
