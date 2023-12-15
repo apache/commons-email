@@ -59,6 +59,13 @@ public class EmailException extends Exception {
         return check(() -> EmailUtils.isEmpty(value), value, message);
     }
 
+    static <T> T checkNonNull(final T test, final Supplier<String> message) throws EmailException {
+        if (test == null) {
+            throw new EmailException(message.get());
+        }
+        return test;
+    }
+
     /**
      * Constructs a new {@code EmailException} with no detail message.
      */

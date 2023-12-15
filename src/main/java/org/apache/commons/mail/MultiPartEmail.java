@@ -130,16 +130,12 @@ public class MultiPartEmail extends Email {
      * @since 1.0
      */
     public MultiPartEmail attach(final DataSource dataSource, final String name, final String description) throws EmailException {
-        if (dataSource == null) {
-            throw new EmailException("Invalid Datasource");
-        }
+        EmailException.checkNonNull(dataSource, () -> "Invalid Datasource.");
         // verify that the DataSource is valid
         try (InputStream inputStream = dataSource.getInputStream()) {
-            if (inputStream == null) {
-                throw new EmailException("Invalid Datasource");
-            }
+            EmailException.checkNonNull(inputStream, () -> "Invalid Datasource.");
         } catch (final IOException e) {
-            throw new EmailException("Invalid Datasource", e);
+            throw new EmailException("Invalid Datasource.", e);
         }
         return attach(dataSource, name, description, EmailAttachment.ATTACHMENT);
     }
@@ -183,14 +179,9 @@ public class MultiPartEmail extends Email {
      * @since 1.0
      */
     public MultiPartEmail attach(final EmailAttachment attachment) throws EmailException {
+        EmailException.checkNonNull(attachment, () -> "Invalid attachment.");
         MultiPartEmail result = null;
-
-        if (attachment == null) {
-            throw new EmailException("Invalid attachment supplied");
-        }
-
         final URL url = attachment.getURL();
-
         if (url == null) {
             String fileName = null;
             try {
@@ -206,7 +197,6 @@ public class MultiPartEmail extends Email {
         } else {
             result = attach(url, attachment.getName(), attachment.getDescription(), attachment.getDisposition());
         }
-
         return result;
     }
 
@@ -441,11 +431,11 @@ public class MultiPartEmail extends Email {
     /**
      * Sets the MIME subtype of the email.
      *
-     * @param aSubType MIME subtype of the email
+     * @param subType MIME subtype of the email
      * @since 1.0
      */
-    public void setSubType(final String aSubType) {
-        this.subType = aSubType;
+    public void setSubType(final String subType) {
+        this.subType = subType;
     }
 
 }
