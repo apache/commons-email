@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail;
 
+import java.time.Duration;
+
 /**
  * Constants used by Email classes.
  *
@@ -148,10 +150,6 @@ public final class EmailConstants {
      */
     public static final String MAIL_SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
 
-    /////////////////////////////////////////////////////////////////////////
-    // since 1.2
-    /////////////////////////////////////////////////////////////////////////
-
     /**
      * Socket connection timeout value in milliseconds. Default is infinite timeout.
      *
@@ -166,16 +164,21 @@ public final class EmailConstants {
      */
     public static final String MAIL_SMTP_TIMEOUT = "mail.smtp.timeout";
 
-    /////////////////////////////////////////////////////////////////////////
-    // since 1.3
-    /////////////////////////////////////////////////////////////////////////
+    /**
+     * Default socket timeout.
+     *
+     * @since 1.6.0
+     */
+    public static final Duration SOCKET_TIMEOUT = Duration.ofMinutes(1);
 
     /**
      * Default socket timeout.
      *
      * @since 1.3
+     * @deprecated Use {@link #SOCKET_TIMEOUT}.
      */
-    public static final int SOCKET_TIMEOUT_MS = 60000;
+    @Deprecated
+    public static final int SOCKET_TIMEOUT_MS = 60_000;
 
     /**
      * If true, requires the use of the STARTTLS command. If the server doesn't support the STARTTLS command, the connection will fail.

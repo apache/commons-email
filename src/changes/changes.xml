@@ -45,6 +45,9 @@
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.</action>
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Add org.apache.commons.mail.InputStreamDataSource.</action>
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Don't waste memory in MimeMessageParser#createDataSource().</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add EmailConstants.SOCKET_TIMEOUT and deprecate SOCKET_TIMEOUT_MS.</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add Email.setSocketConnectionTimeout(Duration) and deprecate setSocketConnectionTimeout(int).</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add Email.setSocketTimeout(Duration) and deprecate setSocketTimeout(int).</action>
       <!-- UPDATE -->
       <action type="update" due-to="Dependabot" dev="sebb">Bump org.slf4j:slf4j-jdk14 from 1.7.7 to 2.0.9 #165.</action>
       <action type="update" due-to="Dependabot" dev="sebb">Bump mockito-core from 4.11.0 to 5.8.0 #187.</action>

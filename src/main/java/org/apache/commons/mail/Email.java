@@ -18,6 +18,7 @@ package org.apache.commons.mail;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -274,11 +275,21 @@ public abstract class Email {
     @Deprecated
     protected boolean ssl;
 
-    /** Socket I/O timeout value in milliseconds. */
-    protected int socketTimeout = EmailConstants.SOCKET_TIMEOUT_MS;
+    /**
+     * Socket I/O timeout value in milliseconds.
+     *
+     * @deprecated Use {@link #getSocketTimeout()} and {@link #setSocketTimeout(Duration)}.
+     */
+    @Deprecated
+    protected int socketTimeout = Math.toIntExact(EmailConstants.SOCKET_TIMEOUT.toMillis());
 
-    /** Socket connection timeout value in milliseconds. */
-    protected int socketConnectionTimeout = EmailConstants.SOCKET_TIMEOUT_MS;
+    /**
+     * Socket connection timeout value in milliseconds.
+     *
+     * @deprecated Use {@link #getSocketConnectionTimeout()} and {@link #setSocketConnectionTimeout(Duration)}.
+     */
+    @Deprecated
+    protected int socketConnectionTimeout = Math.toIntExact(EmailConstants.SOCKET_TIMEOUT.toMillis());
 
     /**
      * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection before issuing any
@@ -868,7 +879,7 @@ public abstract class Email {
             }
 
             // changed this (back) to getInstance due to security exceptions
-            // caused when testing using maven
+            // caused when testing using Maven
             this.session = Session.getInstance(properties, this.authenticator);
         }
         return this.session;
@@ -1190,7 +1201,7 @@ public abstract class Email {
     /**
      * Sets the content and contentType.
      *
-     * @param aObject      aObject
+     * @param aObject     aObject
      * @param contentType aContentType
      * @since 1.0
      */
@@ -1436,8 +1447,22 @@ public abstract class Email {
      *
      * @param socketConnectionTimeout the connection timeout
      * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
+     * @since 1.6.0
      */
+    public void setSocketConnectionTimeout(final Duration socketConnectionTimeout) {
+        checkSessionAlreadyInitialized();
+        this.socketConnectionTimeout = Math.toIntExact(socketConnectionTimeout.toMillis());
+    }
+
+    /**
+     * Sets the socket connection timeout value in milliseconds. Default is a 60 second timeout.
+     *
+     * @param socketConnectionTimeout the connection timeout
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.2
+     * @deprecated Use {@link #setSocketConnectionTimeout(Duration)}.
+     */
+    @Deprecated
     public void setSocketConnectionTimeout(final int socketConnectionTimeout) {
         checkSessionAlreadyInitialized();
         this.socketConnectionTimeout = socketConnectionTimeout;
@@ -1448,8 +1473,22 @@ public abstract class Email {
      *
      * @param socketTimeout the socket I/O timeout
      * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
+     * @since 1.6.0
      */
+    public void setSocketTimeout(final Duration socketTimeout) {
+        checkSessionAlreadyInitialized();
+        this.socketTimeout = Math.toIntExact(socketTimeout.toMillis());
+    }
+
+    /**
+     * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
+     *
+     * @param socketTimeout the socket I/O timeout
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 1.2
+     * @deprecated Use {@link #setSocketTimeout(Duration)}.
+     */
+    @Deprecated
     public void setSocketTimeout(final int socketTimeout) {
         checkSessionAlreadyInitialized();
         this.socketTimeout = socketTimeout;

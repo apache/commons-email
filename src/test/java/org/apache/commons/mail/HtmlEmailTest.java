@@ -40,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 1.0
  */
 public class HtmlEmailTest extends AbstractEmailTest {
+
     private MockHtmlEmailConcrete email;
 
     private void assertCorrectContentType(final String picture, final String contentType) throws Exception {

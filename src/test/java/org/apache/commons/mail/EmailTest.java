@@ -28,6 +28,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -1045,6 +1046,26 @@ public class EmailTest extends AbstractEmailTest {
     @Test
     public void testSetToNull() {
         assertThrows(EmailException.class, () -> email.setTo(null));
+    }
+
+    @Test
+    public void testSocketConnectionTimeout() {
+        assertEquals(EmailConstants.SOCKET_TIMEOUT_MS, email.getSocketConnectionTimeout());
+        assertEquals(EmailConstants.SOCKET_TIMEOUT.toMillis(), email.getSocketConnectionTimeout());
+        email.setSocketConnectionTimeout(1234);
+        assertEquals(1234, email.getSocketConnectionTimeout());
+        email.setSocketConnectionTimeout(Duration.ofMillis(5678));
+        assertEquals(5678, email.getSocketConnectionTimeout());
+    }
+
+    @Test
+    public void testSocketTimeout() {
+        assertEquals(EmailConstants.SOCKET_TIMEOUT_MS, email.getSocketTimeout());
+        assertEquals(EmailConstants.SOCKET_TIMEOUT.toMillis(), email.getSocketTimeout());
+        email.setSocketTimeout(1234);
+        assertEquals(1234, email.getSocketTimeout());
+        email.setSocketTimeout(Duration.ofMillis(5678));
+        assertEquals(5678, email.getSocketTimeout());
     }
 
     @Test
