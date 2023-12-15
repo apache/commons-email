@@ -16,6 +16,7 @@
  */
 package org.apache.commons.mail;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 /**
@@ -70,13 +71,13 @@ public final class EmailConstants {
     public static final String KOI8_R = "koi8-r";
 
     /** Charset constant for iso-8859-1 */
-    public static final String ISO_8859_1 = "iso-8859-1";
+    public static final String ISO_8859_1 = StandardCharsets.ISO_8859_1.name();
 
     /** Charset constant for us-ascii */
-    public static final String US_ASCII = "us-ascii";
+    public static final String US_ASCII = StandardCharsets.US_ASCII.name();
 
     /** Charset constant for utf-8 */
-    public static final String UTF_8 = "utf-8";
+    public static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     /** The debug mode to be used. */
     public static final String MAIL_DEBUG = "mail.debug";
