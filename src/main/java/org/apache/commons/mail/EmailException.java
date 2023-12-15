@@ -26,8 +26,10 @@ import java.nio.charset.Charset;
  * Exception thrown when a checked error occurs in commons-email.
  * <p>
  * Adapted from FunctorException in Commons Collections.
+ * </p>
  * <p>
- * Emulation support for nested exceptions has been removed in {@code Email 1.3}, supported by JDK &ge; 1.4.
+ * Emulation support for nested exceptions has been removed in {@code Email 1.3}, supported by JDK 1.4 and above.
+ * </p>
  *
  * @since 1.0
  */

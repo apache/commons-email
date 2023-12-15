@@ -19,11 +19,12 @@ package org.apache.commons.mail;
 import java.net.URL;
 
 /**
- * This class models an email attachment. Used by MultiPartEmail.
+ * This class models an email attachment. Used by {@link MultiPartEmail}.
  *
  * @since 1.0
  */
 public class EmailAttachment {
+
     /** Definition of the part being an attachment. */
     public static final String ATTACHMENT = javax.mail.Part.ATTACHMENT;
 

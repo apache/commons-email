@@ -32,11 +32,9 @@ import org.apache.commons.mail.util.MimeMessageUtils;
 
 /**
  * Utility methods used by commons-email.
- *
  * <p>
  * These methods are copied from other commons components (commons-lang) to avoid creating a dependency for such a small component.
  * </p>
- *
  * <p>
  * This is a package scoped class, and should not be used directly by users.
  * </p>
@@ -137,7 +135,7 @@ final class EmailUtils {
      * Checks if a String is empty ("") or null.
      * <p>
      * Copied from Commons Lang v2.1, svn 240418
-     * <p>
+     * </p>
      *
      * @param str the String to check, may be null
      * @return {@code true} if the String is empty or null
@@ -150,7 +148,7 @@ final class EmailUtils {
      * Checks if a String is not empty ("") and not null.
      * <p>
      * Copied from Commons Lang v2.1, svn 240418
-     * <p>
+     * </p>
      *
      * @param str the String to check, may be null
      * @return {@code true} if the String is not empty and not null
@@ -161,16 +159,13 @@ final class EmailUtils {
 
     /**
      * Creates a random string based on a variety of options, using supplied source of randomness.
-     *
      * <p>
      * If start and end are both {@code 0}, start and end are set to {@code ' '} and {@code 'z'}, the ASCII printable characters, will be used, unless letters
      * and numbers are both {@code false}, in which case, start and end are set to {@code 0} and {@code Integer.MAX_VALUE}.
      * </p>
-     *
      * <p>
      * If set is not {@code null}, characters between start and end are chosen.
      * </p>
-     *
      * <p>
      * This method accepts a user-supplied {@link Random} instance to use as a source of randomness. By seeding a single {@link Random} instance with a fixed
      * seed and using it for each call, the same random sequence of strings can be generated repeatedly and predictably.

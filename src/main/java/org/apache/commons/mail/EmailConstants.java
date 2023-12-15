@@ -25,6 +25,7 @@ package org.apache.commons.mail;
  * @since 1.3
  */
 public final class EmailConstants {
+
     /** @deprecated since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String SENDER_EMAIL = "sender.email";
