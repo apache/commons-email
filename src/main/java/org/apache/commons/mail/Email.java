@@ -845,11 +845,11 @@ public abstract class Email {
             properties.setProperty(EmailConstants.MAIL_HOST, this.hostName);
             properties.setProperty(EmailConstants.MAIL_DEBUG, String.valueOf(this.debug));
 
-            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_ENABLE, isStartTLSEnabled() ? "true" : "false");
-            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_REQUIRED, isStartTLSRequired() ? "true" : "false");
+            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_ENABLE, Boolean.toString(isStartTLSEnabled()));
+            properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_REQUIRED, Boolean.toString(isStartTLSRequired()));
 
-            properties.setProperty(EmailConstants.MAIL_SMTP_SEND_PARTIAL, isSendPartial() ? "true" : "false");
-            properties.setProperty(EmailConstants.MAIL_SMTPS_SEND_PARTIAL, isSendPartial() ? "true" : "false");
+            properties.setProperty(EmailConstants.MAIL_SMTP_SEND_PARTIAL, Boolean.toString(isSendPartial()));
+            properties.setProperty(EmailConstants.MAIL_SMTPS_SEND_PARTIAL, Boolean.toString(isSendPartial()));
 
             if (this.authenticator != null) {
                 properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
