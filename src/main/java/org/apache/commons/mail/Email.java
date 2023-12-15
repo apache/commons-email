@@ -1309,7 +1309,7 @@ public abstract class Email {
         final Properties sessionProperties = session.getProperties();
         final String auth = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_AUTH);
 
-        if ("true".equalsIgnoreCase(auth)) {
+        if (Boolean.parseBoolean(auth)) {
             final String userName = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_USER);
             final String password = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_PASSWORD);
 
