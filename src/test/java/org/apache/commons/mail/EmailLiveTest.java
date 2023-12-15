@@ -18,6 +18,7 @@ package org.apache.commons.mail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -65,37 +66,32 @@ public class EmailLiveTest extends AbstractEmailTest {
         email.setCharset(EmailConfiguration.MAIL_CHARSET);
         email.setFrom(EmailConfiguration.TEST_FROM);
         email.addTo(EmailConfiguration.TEST_TO);
-
-        if (EmailConfiguration.TEST_USER != null) {
-            email.setAuthenticator(new DefaultAuthenticator(EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD));
-        }
-
+        email.setAuthenticator(new DefaultAuthenticator(EmailConfiguration.TEST_USER, EmailConfiguration.TEST_PASSWD));
         return email;
     }
 
     protected String getFromUrl(final URL url) throws Exception {
-
         final URLDataSource dataSource = new URLDataSource(url);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        IOUtils.copy(dataSource.getInputStream(), baos);
+        try (InputStream inputStream = dataSource.getInputStream()) {
+            IOUtils.copy(inputStream, baos);
+        }
         return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     protected Email send(final Email email) throws EmailException {
-
         if (EmailConfiguration.MAIL_FORCE_SEND) {
             email.send();
         } else {
             email.buildMimeMessage();
         }
-
         return email;
     }
 
     @BeforeEach
     public void setUpLiveTest() {
         // enforce a default charset UTF-8 otherwise non-ASCII attachment names will not work
-        System.setProperty("mail.mime.charset", "utf-8");
+        System.setProperty("mail.mime.charset", StandardCharsets.UTF_8.name());
 
         // enforce encoding of non-ASCII characters (violating the MIME specification - see
         // http://java.sun.com/products/javamail/javadocs/javax/mail/internet/package-summary.html
