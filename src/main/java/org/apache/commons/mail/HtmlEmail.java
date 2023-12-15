@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -97,14 +98,14 @@ public class HtmlEmail extends MultiPartEmail {
         /**
          * Creates an InlineImage object to represent the specified content ID and {@code MimeBodyPart}.
          *
-         * @param cid        the generated content ID
-         * @param dataSource the {@code DataSource} that represents the content
-         * @param mimeBodyPart        the {@code MimeBodyPart} that contains the encoded data
+         * @param cid        the generated content ID, not null.
+         * @param dataSource the {@code DataSource} that represents the content, not null.
+         * @param mimeBodyPart        the {@code MimeBodyPart} that contains the encoded data, not null.
          */
         private InlineImage(final String cid, final DataSource dataSource, final MimeBodyPart mimeBodyPart) {
-            this.cid = cid;
-            this.dataSource = dataSource;
-            this.mimeBodyPart = mimeBodyPart;
+            this.cid = Objects.requireNonNull(cid, "cid");
+            this.dataSource = Objects.requireNonNull(dataSource, "dataSource");
+            this.mimeBodyPart = Objects.requireNonNull(mimeBodyPart, "mimeBodyPart");
         }
 
         /**
