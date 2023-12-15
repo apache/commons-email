@@ -92,23 +92,21 @@ public class HtmlEmail extends MultiPartEmail {
         private final DataSource dataSource;
 
         /** The {@code MimeBodyPart} that contains the encoded data. */
-        private final MimeBodyPart mbp;
+        private final MimeBodyPart mimeBodyPart;
 
         /**
          * Creates an InlineImage object to represent the specified content ID and {@code MimeBodyPart}.
          *
          * @param cid        the generated content ID
          * @param dataSource the {@code DataSource} that represents the content
-         * @param mbp        the {@code MimeBodyPart} that contains the encoded data
+         * @param mimeBodyPart        the {@code MimeBodyPart} that contains the encoded data
          */
-        public InlineImage(final String cid, final DataSource dataSource, final MimeBodyPart mbp) {
+        private InlineImage(final String cid, final DataSource dataSource, final MimeBodyPart mimeBodyPart) {
             this.cid = cid;
             this.dataSource = dataSource;
-            this.mbp = mbp;
+            this.mimeBodyPart = mimeBodyPart;
         }
 
-        // equals()/hashCode() implementations, since this class
-        // is stored as a entry in a Map.
         /**
          * {@inheritDoc}
          *
@@ -130,7 +128,7 @@ public class HtmlEmail extends MultiPartEmail {
          *
          * @return the unique content ID of this InlineImage
          */
-        public String getCid() {
+        private String getCid() {
             return cid;
         }
 
@@ -139,7 +137,7 @@ public class HtmlEmail extends MultiPartEmail {
          *
          * @return the {@code DataSource} representing the encoded content
          */
-        public DataSource getDataSource() {
+        private DataSource getDataSource() {
             return dataSource;
         }
 
@@ -148,8 +146,8 @@ public class HtmlEmail extends MultiPartEmail {
          *
          * @return the {@code MimeBodyPart} containing the encoded InlineImage data
          */
-        public MimeBodyPart getMbp() {
-            return mbp;
+        private MimeBodyPart getMimeBodyPart() {
+            return mimeBodyPart;
         }
 
         /**
@@ -265,7 +263,7 @@ public class HtmlEmail extends MultiPartEmail {
             }
 
             for (final InlineImage image : this.inlineEmbeds.values()) {
-                bodyEmbedsContainer.addBodyPart(image.getMbp());
+                bodyEmbedsContainer.addBodyPart(image.getMimeBodyPart());
             }
         }
 
