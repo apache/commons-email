@@ -424,10 +424,7 @@ public class MultiPartEmail extends Email {
      */
     @Override
     public Email setMsg(final String msg) throws EmailException {
-        // throw exception on null message
-        if (EmailUtils.isEmpty(msg)) {
-            throw new EmailException("Invalid message supplied");
-        }
+        EmailException.checkNonEmpty(msg, () -> "Invalid message.");
         try {
             final BodyPart primary = getPrimaryBodyPart();
             if (primary instanceof MimePart && EmailUtils.isNotEmpty(charset)) {

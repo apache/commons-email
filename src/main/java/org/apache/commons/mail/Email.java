@@ -347,9 +347,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addBcc(final String... emails) throws EmailException {
-        if (EmailUtils.isEmpty(emails)) {
-            throw new EmailException("Address List provided was invalid");
-        }
+        EmailException.checkNonEmpty(emails, () -> "BCC list invalid.");
         for (final String email : emails) {
             addBcc(email, null);
         }
@@ -411,9 +409,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addCc(final String... emails) throws EmailException {
-        if (EmailUtils.isEmpty(emails)) {
-            throw new EmailException("Address List provided was invalid");
-        }
+        EmailException.checkNonEmpty(emails, () -> "CC list invalid.");
         for (final String email : emails) {
             addCc(email, null);
         }
@@ -537,9 +533,7 @@ public abstract class Email {
      * @since 1.3
      */
     public Email addTo(final String... emails) throws EmailException {
-        if (EmailUtils.isEmpty(emails)) {
-            throw new EmailException("Address List provided was invalid");
-        }
+        EmailException.checkNonEmpty(emails, () -> "To list invalid.");
         for (final String email : emails) {
             addTo(email, null);
         }
@@ -837,9 +831,7 @@ public abstract class Email {
                 this.hostName = properties.getProperty(EmailConstants.MAIL_HOST);
             }
 
-            if (EmailUtils.isEmpty(this.hostName)) {
-                throw new EmailException("Cannot find valid hostname for mail session");
-            }
+            EmailException.checkNonEmpty(hostName, () -> "Cannot find valid hostname for mail session");
 
             properties.setProperty(EmailConstants.MAIL_PORT, this.smtpPort);
             properties.setProperty(EmailConstants.MAIL_HOST, this.hostName);
@@ -1126,9 +1118,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setBcc(final Collection<InternetAddress> collection) throws EmailException {
-        if (EmailUtils.isEmpty(collection)) {
-            throw new EmailException("Address List provided was invalid");
-        }
+        EmailException.checkNonEmpty(collection, () -> "BCC list invalid");
         this.bccList = new ArrayList<>(collection);
         return this;
     }
@@ -1168,9 +1158,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setCc(final Collection<InternetAddress> collection) throws EmailException {
-        if (EmailUtils.isEmpty(collection)) {
-            throw new EmailException("Address List provided was invalid");
-        }
+        EmailException.checkNonEmpty(collection, () -> "CC list invalid");
         this.ccList = new ArrayList<>(collection);
         return this;
     }
@@ -1201,12 +1189,12 @@ public abstract class Email {
     /**
      * Sets the content and contentType.
      *
-     * @param aObject     aObject
-     * @param contentType aContentType
+     * @param content     content.
+     * @param contentType content type.
      * @since 1.0
      */
-    public void setContent(final Object aObject, final String contentType) {
-        this.content = aObject;
+    public void setContent(final Object content, final String contentType) {
+        this.content = content;
         this.updateContentType(contentType);
     }
 
@@ -1386,9 +1374,7 @@ public abstract class Email {
      * @since 1.1
      */
     public Email setReplyTo(final Collection<InternetAddress> collection) throws EmailException {
-        if (EmailUtils.isEmpty(collection)) {
-            throw new EmailException("Address List provided was invalid");
-        }
+        EmailException.checkNonEmpty(collection, () -> "Reply to list invalid");
         this.replyList = new ArrayList<>(collection);
         return this;
     }
@@ -1616,9 +1602,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setTo(final Collection<InternetAddress> collection) throws EmailException {
-        if (EmailUtils.isEmpty(collection)) {
-            throw new EmailException("Address List provided was invalid");
-        }
+        EmailException.checkNonEmpty(collection, () -> "To list invalid");
         this.toList = new ArrayList<>(collection);
         return this;
     }

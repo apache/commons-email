@@ -325,9 +325,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.1
      */
     public String embed(final DataSource dataSource, final String name, final String cid) throws EmailException {
-        if (EmailUtils.isEmpty(name)) {
-            throw new EmailException("name cannot be null or empty");
-        }
+        EmailException.checkNonEmpty(name, () -> "Name cannot be null or empty");
         final MimeBodyPart mbp = new MimeBodyPart();
         try {
             // URL encode the cid according to RFC 2392
@@ -378,9 +376,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.1
      */
     public String embed(final File file, final String cid) throws EmailException {
-        if (EmailUtils.isEmpty(file.getName())) {
-            throw new EmailException("file name cannot be null or empty");
-        }
+        EmailException.checkNonEmpty(file.getName(), () -> "File name cannot be null or empty");
 
         // verify that the File can provide a canonical path
         String filePath = null;
@@ -471,9 +467,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.0
      */
     public String embed(final URL url, final String name) throws EmailException {
-        if (EmailUtils.isEmpty(name)) {
-            throw new EmailException("name cannot be null or empty");
-        }
+        EmailException.checkNonEmpty(name, () -> "Name cannot be null or empty");
         // check if a URLDataSource for this name has already been attached;
         // if so, return the cached CID value.
         final InlineImage inlineImage = inlineEmbeds.get(name);
@@ -508,10 +502,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.0
      */
     public HtmlEmail setHtmlMsg(final String html) throws EmailException {
-        if (EmailUtils.isEmpty(html)) {
-            throw new EmailException("Invalid message supplied");
-        }
-        this.html = html;
+        this.html = EmailException.checkNonEmpty(html, () -> "Invalid message.");
         return this;
     }
 
@@ -530,9 +521,6 @@ public class HtmlEmail extends MultiPartEmail {
      */
     @Override
     public Email setMsg(final String msg) throws EmailException {
-        if (EmailUtils.isEmpty(msg)) {
-            throw new EmailException("Invalid message supplied");
-        }
         setTextMsg(msg);
         final StringBuilder htmlMsgBuf = new StringBuilder(msg.length() + HTML_MESSAGE_START.length() + HTML_MESSAGE_END.length());
         htmlMsgBuf.append(HTML_MESSAGE_START).append(msg).append(HTML_MESSAGE_END);
@@ -549,10 +537,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.0
      */
     public HtmlEmail setTextMsg(final String text) throws EmailException {
-        if (EmailUtils.isEmpty(text)) {
-            throw new EmailException("Invalid message supplied");
-        }
-        this.text = text;
+        this.text = EmailException.checkNonEmpty(text, () -> "Invalid message.");
         return this;
     }
 }

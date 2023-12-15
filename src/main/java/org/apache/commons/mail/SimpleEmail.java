@@ -33,9 +33,7 @@ public class SimpleEmail extends Email {
      */
     @Override
     public Email setMsg(final String msg) throws EmailException {
-        if (EmailUtils.isEmpty(msg)) {
-            throw new EmailException("Invalid message supplied");
-        }
+        EmailException.checkNonEmpty(msg, () -> "Invalid message.");
         setContent(msg, EmailConstants.TEXT_PLAIN);
         return this;
     }

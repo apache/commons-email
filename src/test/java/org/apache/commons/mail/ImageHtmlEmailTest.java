@@ -245,7 +245,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
             email.setHtmlMsg(null);
             fail("Should fail here!");
         } catch (final EmailException e) {
-            assertTrue(e.getMessage().contains("Invalid message supplied"), e.getMessage());
+            assertTrue(e.getMessage().contains("Invalid message."), e.getMessage());
         }
     }
 
@@ -261,7 +261,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
             email.setHtmlMsg("");
             fail("Should fail here!");
         } catch (final EmailException e) {
-            assertTrue(e.getMessage().contains("Invalid message supplied"), e.getMessage());
+            assertTrue(e.getMessage().contains("Invalid message."), e.getMessage());
         }
 
     }
@@ -419,7 +419,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testSendHTMLAutoMultipleFiles.eml"));
 
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
-        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"), mimeMessageParser.getHtmlContent());
         assertEquals(3, mimeMessageParser.getAttachmentList().size());
     }
 

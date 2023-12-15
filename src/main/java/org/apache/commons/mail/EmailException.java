@@ -21,6 +21,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
+import java.util.Collection;
+import java.util.function.Supplier;
 
 /**
  * Exception thrown when a checked error occurs in commons-email.
@@ -37,6 +39,25 @@ public class EmailException extends Exception {
 
     /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
+
+    static <T> T check(final Supplier<Boolean> test, final T subject, final Supplier<String> message) throws EmailException {
+        if (test.get()) {
+            throw new EmailException(message.get());
+        }
+        return subject;
+    }
+
+    static <T> Collection<T> checkNonEmpty(final Collection<T> value, final Supplier<String> message) throws EmailException {
+        return check(() -> EmailUtils.isEmpty(value), value, message);
+    }
+
+    static String checkNonEmpty(final String value, final Supplier<String> message) throws EmailException {
+        return check(() -> EmailUtils.isEmpty(value), value, message);
+    }
+
+    static <T> T[] checkNonEmpty(final T[] value, final Supplier<String> message) throws EmailException {
+        return check(() -> EmailUtils.isEmpty(value), value, message);
+    }
 
     /**
      * Constructs a new {@code EmailException} with no detail message.
