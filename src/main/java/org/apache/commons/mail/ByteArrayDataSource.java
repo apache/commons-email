@@ -62,7 +62,7 @@ public class ByteArrayDataSource implements DataSource {
     /**
      * Constructs a new instance from a byte array.
      *
-     * @param data  A byte[].
+     * @param data        A byte[].
      * @param contentType A String.
      * @throws IOException IOException
      * @since 1.0
@@ -77,7 +77,7 @@ public class ByteArrayDataSource implements DataSource {
     /**
      * Constructs a new instance from an input stream.
      *
-     * @param inputStream   An InputStream.
+     * @param inputStream An InputStream.
      * @param contentType A String.
      * @throws IOException IOException
      * @since 1.0
@@ -90,7 +90,7 @@ public class ByteArrayDataSource implements DataSource {
     /**
      * Constructs a new instance from a String. N.B. assumes the data string can be converted using the charset iso-8859-1.
      *
-     * @param data  A String.
+     * @param data        A String.
      * @param contentType A String.
      * @throws IOException IOException
      * @since 1.0

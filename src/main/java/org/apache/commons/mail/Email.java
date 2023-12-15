@@ -1108,17 +1108,17 @@ public abstract class Email {
     /**
      * Sets a list of "BCC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
      *
-     * @param aCollection collection of {@code InternetAddress} objects
+     * @param collection collection of {@code InternetAddress} objects
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setBcc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (EmailUtils.isEmpty(aCollection)) {
+    public Email setBcc(final Collection<InternetAddress> collection) throws EmailException {
+        if (EmailUtils.isEmpty(collection)) {
             throw new EmailException("Address List provided was invalid");
         }
-        this.bccList = new ArrayList<>(aCollection);
+        this.bccList = new ArrayList<>(collection);
         return this;
     }
 
@@ -1150,63 +1150,63 @@ public abstract class Email {
     /**
      * Sets a list of "CC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
      *
-     * @param aCollection collection of {@code InternetAddress} objects.
+     * @param collection collection of {@code InternetAddress} objects.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setCc(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (EmailUtils.isEmpty(aCollection)) {
+    public Email setCc(final Collection<InternetAddress> collection) throws EmailException {
+        if (EmailUtils.isEmpty(collection)) {
             throw new EmailException("Address List provided was invalid");
         }
-        this.ccList = new ArrayList<>(aCollection);
+        this.ccList = new ArrayList<>(collection);
         return this;
     }
 
     /**
      * Sets the charset of the message. Please note that you should set the charset before adding the message content.
      *
-     * @param newCharset A String.
+     * @param charset A String.
      * @throws java.nio.charset.IllegalCharsetNameException if the charset name is invalid
      * @throws java.nio.charset.UnsupportedCharsetException if no support for the named charset exists in the current JVM
      * @since 1.0
      */
-    public void setCharset(final String newCharset) {
-        final Charset set = Charset.forName(newCharset);
+    public void setCharset(final String charset) {
+        final Charset set = Charset.forName(charset);
         this.charset = set.name();
     }
 
     /**
      * Sets the emailBody to a MimeMultiPart
      *
-     * @param aMimeMultipart aMimeMultipart
+     * @param mimeMultipart aMimeMultipart
      * @since 1.0
      */
-    public void setContent(final MimeMultipart aMimeMultipart) {
-        this.emailBody = aMimeMultipart;
+    public void setContent(final MimeMultipart mimeMultipart) {
+        this.emailBody = mimeMultipart;
     }
 
     /**
      * Sets the content and contentType.
      *
      * @param aObject      aObject
-     * @param aContentType aContentType
+     * @param contentType aContentType
      * @since 1.0
      */
-    public void setContent(final Object aObject, final String aContentType) {
+    public void setContent(final Object aObject, final String contentType) {
         this.content = aObject;
-        this.updateContentType(aContentType);
+        this.updateContentType(contentType);
     }
 
     /**
      * Sets the display of debug information.
      *
-     * @param d A boolean.
+     * @param debug A boolean.
      * @since 1.0
      */
-    public void setDebug(final boolean d) {
-        this.debug = d;
+    public void setDebug(final boolean debug) {
+        this.debug = debug;
     }
 
     /**
@@ -1368,17 +1368,17 @@ public abstract class Email {
      * Sets a list of reply to addresses. All elements in the specified {@code Collection} are expected to be of type
      * {@code java.mail.internet.InternetAddress}.
      *
-     * @param aCollection collection of {@code InternetAddress} objects
+     * @param collection collection of {@code InternetAddress} objects
      * @return An Email.
      * @throws EmailException Indicates an invalid email address
      * @see javax.mail.internet.InternetAddress
      * @since 1.1
      */
-    public Email setReplyTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (EmailUtils.isEmpty(aCollection)) {
+    public Email setReplyTo(final Collection<InternetAddress> collection) throws EmailException {
+        if (EmailUtils.isEmpty(collection)) {
             throw new EmailException("Address List provided was invalid");
         }
-        this.replyList = new ArrayList<>(aCollection);
+        this.replyList = new ArrayList<>(collection);
         return this;
     }
 
@@ -1570,17 +1570,17 @@ public abstract class Email {
     /**
      * Sets a list of "TO" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
      *
-     * @param aCollection collection of {@code InternetAddress} objects.
+     * @param collection collection of {@code InternetAddress} objects.
      * @return An Email.
      * @throws EmailException Indicates an invalid email address.
      * @see javax.mail.internet.InternetAddress
      * @since 1.0
      */
-    public Email setTo(final Collection<InternetAddress> aCollection) throws EmailException {
-        if (EmailUtils.isEmpty(aCollection)) {
+    public Email setTo(final Collection<InternetAddress> collection) throws EmailException {
+        if (EmailUtils.isEmpty(collection)) {
             throw new EmailException("Address List provided was invalid");
         }
-        this.toList = new ArrayList<>(aCollection);
+        this.toList = new ArrayList<>(collection);
         return this;
     }
 

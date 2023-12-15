@@ -17,7 +17,7 @@
 package org.apache.commons.mail;
 
 /**
- * This class is used to send simple Internet email messages without attachments.
+ * Sends simple Internet email messages without attachments.
  *
  * @since 1.0
  */

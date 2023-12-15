@@ -55,7 +55,7 @@ import javax.mail.internet.MimeMultipart;
  * <p>
  * It is also possible to embed URLs, files, or arbitrary {@code DataSource}s directly into the body of the mail:
  * </p>
- * 
+ *
  * <pre>
  * HtmlEmail he = new HtmlEmail();
  * File img = new File("my/image.gif");
@@ -503,7 +503,7 @@ public class HtmlEmail extends MultiPartEmail {
         try (InputStream inputStream = url.openStream()) {
             // Make sure we can read.
             inputStream.read();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new EmailException("Invalid URL", e);
         }
         return embed(new URLDataSource(url), name);

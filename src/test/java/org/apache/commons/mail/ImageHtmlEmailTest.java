@@ -58,6 +58,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         }
 
     }
+
     private static final boolean TEST_IS_LENIENT = true;
     private static final URL TEST_IMAGE_URL = ImageHtmlEmailTest.class.getResource("/images/asf_logo_wide.gif");
     private static final File TEST_IMAGE_DIR = new File(TEST_IMAGE_URL.getPath()).getParentFile();
