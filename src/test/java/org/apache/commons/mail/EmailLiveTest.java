@@ -316,29 +316,28 @@ public class EmailLiveTest extends AbstractEmailTest {
 
         // we need to instantiate an email to provide the mail session - a bit ugly
         final Session session = create(SimpleEmail.class).getMailSession();
-        final Transport transport = session.getTransport();
+        try (Transport transport = session.getTransport()) {
 
-        // simulate creating a bunch of emails using an existing mail session
-        for (int i = 0; i < 3; i++) {
-            final SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
-            personalizedEmail.setMailSession(session);
-            personalizedEmail.setSubject("Personalized Test Mail Nr. " + i);
-            personalizedEmail.setMsg("This is a personalized test mail ... :-)");
-            personalizedEmail.buildMimeMessage();
-            emails.add(personalizedEmail);
-        }
-
-        // send the list of emails using a single 'Transport' instance.
-        if (EmailConfiguration.MAIL_FORCE_SEND) {
-            transport.connect();
-
-            for (final SimpleEmail personalizedEmail : emails) {
-                final MimeMessage mimeMessage = personalizedEmail.getMimeMessage();
-                Transport.send(mimeMessage);
-                System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());
+            // simulate creating a bunch of emails using an existing mail session
+            for (int i = 0; i < 3; i++) {
+                final SimpleEmail personalizedEmail = (SimpleEmail) create(SimpleEmail.class);
+                personalizedEmail.setMailSession(session);
+                personalizedEmail.setSubject("Personalized Test Mail Nr. " + i);
+                personalizedEmail.setMsg("This is a personalized test mail ... :-)");
+                personalizedEmail.buildMimeMessage();
+                emails.add(personalizedEmail);
             }
 
-            transport.close();
+            // send the list of emails using a single 'Transport' instance.
+            if (EmailConfiguration.MAIL_FORCE_SEND) {
+                transport.connect();
+
+                for (final SimpleEmail personalizedEmail : emails) {
+                    final MimeMessage mimeMessage = personalizedEmail.getMimeMessage();
+                    Transport.send(mimeMessage);
+                    System.out.println("Successfully sent the following email : " + mimeMessage.getMessageID());
+                }
+            }
         }
     }
 
