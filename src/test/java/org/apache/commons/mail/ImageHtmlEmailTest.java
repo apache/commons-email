@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,7 +73,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         try (final InputStream stream = url.openStream()) {
             final StringBuilder html = new StringBuilder();
             try {
-                final List<String> lines = IOUtils.readLines(stream);
+                final List<String> lines = IOUtils.readLines(stream, StandardCharsets.UTF_8);
                 for (final String line : lines) {
                     html.append(line).append("\n");
                 }
