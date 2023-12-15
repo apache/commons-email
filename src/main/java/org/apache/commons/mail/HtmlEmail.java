@@ -108,20 +108,16 @@ public class HtmlEmail extends MultiPartEmail {
             this.mimeBodyPart = Objects.requireNonNull(mimeBodyPart, "mimeBodyPart");
         }
 
-        /**
-         * {@inheritDoc}
-         *
-         * @return true if the other object is also an InlineImage with the same cid.
-         */
         @Override
-        public boolean equals(final Object obj) {
+        public boolean equals(Object obj) {
             if (this == obj) {
                 return true;
             }
             if (!(obj instanceof InlineImage)) {
                 return false;
             }
-            return this.cid.equals(((InlineImage) obj).cid);
+            InlineImage other = (InlineImage) obj;
+            return Objects.equals(cid, other.cid);
         }
 
         /**
@@ -151,14 +147,9 @@ public class HtmlEmail extends MultiPartEmail {
             return mimeBodyPart;
         }
 
-        /**
-         * {@inheritDoc}
-         *
-         * @return the cid hashCode.
-         */
         @Override
         public int hashCode() {
-            return cid.hashCode();
+            return Objects.hash(cid);
         }
     }
 
