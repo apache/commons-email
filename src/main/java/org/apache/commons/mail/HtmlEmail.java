@@ -500,19 +500,11 @@ public class HtmlEmail extends MultiPartEmail {
             throw new EmailException("embedded name '" + name + "' is already bound to URL " + urlDataSource.getURL() + "; existing names cannot be rebound");
         }
         // verify that the URL is valid
-        InputStream inputStream = null;
-        try {
-            inputStream = url.openStream();
-        } catch (final IOException e) {
+        try (InputStream inputStream = url.openStream()) {
+            // Make sure we can read.
+            inputStream.read();
+        } catch (IOException e) {
             throw new EmailException("Invalid URL", e);
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (final IOException ioe) // NOPMD
-            {
-                /* sigh */ }
         }
         return embed(new URLDataSource(url), name);
     }
