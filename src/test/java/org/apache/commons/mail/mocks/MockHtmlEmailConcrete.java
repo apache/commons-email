@@ -35,7 +35,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
      */
     @Override
     public InternetAddress getFromAddress() {
-        return this.fromAddress;
+        return fromAddress;
     }
 
     /**
@@ -44,7 +44,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
      * @return Message Content
      */
     public String getHtmlMsg() {
-        return this.html;
+        return html;
     }
 
     /**
@@ -54,7 +54,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
      */
     public String getMsg() {
         try {
-            return this.getPrimaryBodyPart().getContent().toString();
+            return getPrimaryBodyPart().getContent().toString();
         } catch (final IOException | MessagingException msgE) {
             return null;
         }
@@ -66,7 +66,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
      * @return Message Content
      */
     public String getTextMsg() {
-        return this.text;
+        return text;
     }
 
 }

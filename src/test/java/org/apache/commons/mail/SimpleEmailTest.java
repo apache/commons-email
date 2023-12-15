@@ -38,7 +38,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
     @BeforeEach
     public void setUpSimpleEmailTest() {
         // reusable objects to be used across multiple tests
-        this.email = new MockSimpleEmail();
+        email = new MockSimpleEmail();
     }
 
     @Test
@@ -50,30 +50,30 @@ public class SimpleEmailTest extends AbstractEmailTest {
          */
         System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "utf-8");
         // Test Success
-        this.getMailServer();
+        getMailServer();
 
-        this.email = new MockSimpleEmail();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
+        email = new MockSimpleEmail();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         final String strSubject = "Test Msg Subject";
         final String strMessage = "Test Msg Body ä"; // add non-ascii character, otherwise us-ascii will be used
 
-        this.email.setSubject(strSubject);
-        this.email.setMsg(strMessage);
+        email.setSubject(strSubject);
+        email.setMsg(strMessage);
 
-        this.email.send();
+        email.send();
 
-        this.fakeMailServer.stop();
+        fakeMailServer.stop();
 
-        validateSend(this.fakeMailServer, strSubject, this.email.getMsg().substring(0, 13), // only check the start, the ä will be encoded
-                this.email.getFromAddress(), this.email.getToAddresses(), this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        validateSend(fakeMailServer, strSubject, email.getMsg().substring(0, 13), // only check the start, the ä will be encoded
+                email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(), email.getBccAddresses(), true);
 
         final String message = getMessageAsString(0);
         // check that the charset has been correctly set
@@ -86,13 +86,13 @@ public class SimpleEmailTest extends AbstractEmailTest {
     public void testGetSetMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
-            this.email.setMsg(validChar);
-            assertEquals(validChar, this.email.getMsg());
+            email.setMsg(validChar);
+            assertEquals(validChar, email.getMsg());
         }
         // Test Exception
-        for (final String invalidChar : this.testCharsNotValid) {
+        for (final String invalidChar : testCharsNotValid) {
             try {
-                this.email.setMsg(invalidChar);
+                email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
             } catch (final EmailException e) {
                 assertTrue(true);
@@ -108,30 +108,30 @@ public class SimpleEmailTest extends AbstractEmailTest {
     @Test
     public void testSend() throws EmailException, IOException {
         // Test Success
-        this.getMailServer();
+        getMailServer();
 
-        this.email = new MockSimpleEmail();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
+        email = new MockSimpleEmail();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         final String strSubject = "Test Msg Subject";
         final String strMessage = "Test Msg Body";
 
-        this.email.setCharset(EmailConstants.ISO_8859_1);
-        this.email.setSubject(strSubject);
+        email.setCharset(EmailConstants.ISO_8859_1);
+        email.setSubject(strSubject);
 
-        this.email.setMsg(strMessage);
+        email.setMsg(strMessage);
 
-        this.email.send();
+        email.send();
 
-        this.fakeMailServer.stop();
-        validateSend(this.fakeMailServer, strSubject, this.email.getMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        fakeMailServer.stop();
+        validateSend(fakeMailServer, strSubject, email.getMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), true);
     }
 }

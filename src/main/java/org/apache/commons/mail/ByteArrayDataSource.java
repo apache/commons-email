@@ -70,7 +70,7 @@ public class ByteArrayDataSource implements DataSource {
     public ByteArrayDataSource(final byte[] data, final String contentType) throws IOException {
         this.contentType = contentType;
         try (ByteArrayInputStream bis = new ByteArrayInputStream(data)) {
-            this.read(bis);
+            read(bis);
         }
     }
 

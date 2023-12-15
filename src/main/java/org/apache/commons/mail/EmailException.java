@@ -22,6 +22,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.Collection;
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 /**
@@ -39,6 +40,14 @@ public class EmailException extends Exception {
 
     /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
+
+    static <V> V call(final Callable<V> callable) throws EmailException {
+        try {
+            return callable.call();
+        } catch (final Exception e) {
+            throw new EmailException(e);
+        }
+    }
 
     static <T> T check(final Supplier<Boolean> test, final T subject, final Supplier<String> message) throws EmailException {
         if (test.get()) {

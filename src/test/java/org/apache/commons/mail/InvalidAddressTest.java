@@ -46,7 +46,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     @BeforeEach
     public void setUpInvalidAddressTest() {
         // reusable objects to be used across multiple tests
-        this.email = new MockEmailConcrete();
+        email = new MockEmailConcrete();
     }
 
     @Test

@@ -98,9 +98,9 @@ public class HtmlEmail extends MultiPartEmail {
         /**
          * Creates an InlineImage object to represent the specified content ID and {@code MimeBodyPart}.
          *
-         * @param cid        the generated content ID, not null.
-         * @param dataSource the {@code DataSource} that represents the content, not null.
-         * @param mimeBodyPart        the {@code MimeBodyPart} that contains the encoded data, not null.
+         * @param cid          the generated content ID, not null.
+         * @param dataSource   the {@code DataSource} that represents the content, not null.
+         * @param mimeBodyPart the {@code MimeBodyPart} that contains the encoded data, not null.
          */
         private InlineImage(final String cid, final DataSource dataSource, final MimeBodyPart mimeBodyPart) {
             this.cid = Objects.requireNonNull(cid, "cid");
@@ -109,14 +109,14 @@ public class HtmlEmail extends MultiPartEmail {
         }
 
         @Override
-        public boolean equals(Object obj) {
+        public boolean equals(final Object obj) {
             if (this == obj) {
                 return true;
             }
             if (!(obj instanceof InlineImage)) {
                 return false;
             }
-            InlineImage other = (InlineImage) obj;
+            final InlineImage other = (InlineImage) obj;
             return Objects.equals(cid, other.cid);
         }
 
@@ -186,7 +186,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @throws MessagingException MessagingException
      */
     private void build() throws MessagingException, EmailException {
-        final MimeMultipart rootContainer = this.getContainer();
+        final MimeMultipart rootContainer = getContainer();
         MimeMultipart bodyEmbedsContainer = rootContainer;
         MimeMultipart bodyContainer = rootContainer;
         MimeBodyPart msgHtml = null;
@@ -196,14 +196,14 @@ public class HtmlEmail extends MultiPartEmail {
 
         // determine how to form multiparts of email
 
-        if (EmailUtils.isNotEmpty(this.html) && !EmailUtils.isEmpty(inlineEmbeds)) {
+        if (EmailUtils.isNotEmpty(html) && !EmailUtils.isEmpty(inlineEmbeds)) {
             // If HTML body and embeds are used, create a related container and add it to the root container
             bodyEmbedsContainer = new MimeMultipart("related");
             bodyContainer = bodyEmbedsContainer;
-            this.addPart(bodyEmbedsContainer, 0);
+            addPart(bodyEmbedsContainer, 0);
 
             // If TEXT body was specified, create a alternative container and add it to the embeds container
-            if (EmailUtils.isNotEmpty(this.text)) {
+            if (EmailUtils.isNotEmpty(text)) {
                 bodyContainer = new MimeMultipart("alternative");
                 final BodyPart bodyPart = createBodyPart();
                 try {
@@ -213,7 +213,7 @@ public class HtmlEmail extends MultiPartEmail {
                     throw new EmailException(me);
                 }
             }
-        } else if (EmailUtils.isNotEmpty(this.text) && EmailUtils.isNotEmpty(this.html)) {
+        } else if (EmailUtils.isNotEmpty(text) && EmailUtils.isNotEmpty(html)) {
             // EMAIL-142: if we have both an HTML and TEXT body, but no attachments or
             // inline images, the root container should have mimetype
             // "multipart/alternative".
@@ -230,13 +230,13 @@ public class HtmlEmail extends MultiPartEmail {
             }
         }
 
-        if (EmailUtils.isNotEmpty(this.html)) {
+        if (EmailUtils.isNotEmpty(html)) {
             msgHtml = new MimeBodyPart();
             bodyContainer.addBodyPart(msgHtml, 0);
 
             // EMAIL-104: call explicitly setText to use default mime charset
             // (property "mail.mime.charset") in case none has been set
-            msgHtml.setText(this.html, this.charset, EmailConstants.TEXT_SUBTYPE_HTML);
+            msgHtml.setText(html, charset, EmailConstants.TEXT_SUBTYPE_HTML);
 
             // EMAIL-147: work-around for buggy JavaMail implementations;
             // in case setText(...) does not set the correct content type,
@@ -244,28 +244,28 @@ public class HtmlEmail extends MultiPartEmail {
             final String contentType = msgHtml.getContentType();
             if (contentType == null || !contentType.equals(EmailConstants.TEXT_HTML)) {
                 // apply default charset if one has been set
-                if (EmailUtils.isNotEmpty(this.charset)) {
-                    msgHtml.setContent(this.html, EmailConstants.TEXT_HTML + "; charset=" + this.charset);
+                if (EmailUtils.isNotEmpty(charset)) {
+                    msgHtml.setContent(html, EmailConstants.TEXT_HTML + "; charset=" + charset);
                 } else {
                     // unfortunately, MimeUtility.getDefaultMIMECharset() is package private
                     // and thus can not be used to set the default system charset in case
                     // no charset has been provided by the user
-                    msgHtml.setContent(this.html, EmailConstants.TEXT_HTML);
+                    msgHtml.setContent(html, EmailConstants.TEXT_HTML);
                 }
             }
 
-            for (final InlineImage image : this.inlineEmbeds.values()) {
+            for (final InlineImage image : inlineEmbeds.values()) {
                 bodyEmbedsContainer.addBodyPart(image.getMimeBodyPart());
             }
         }
 
-        if (EmailUtils.isNotEmpty(this.text)) {
+        if (EmailUtils.isNotEmpty(text)) {
             msgText = new MimeBodyPart();
             bodyContainer.addBodyPart(msgText, 0);
 
             // EMAIL-104: call explicitly setText to use default mime charset
             // (property "mail.mime.charset") in case none has been set
-            msgText.setText(this.text, this.charset);
+            msgText.setText(text, charset);
         }
     }
 

@@ -32,7 +32,7 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
      * @return Message Content
      */
     public String getHtmlMsg() {
-        return this.html;
+        return html;
     }
 
     /**
@@ -42,7 +42,7 @@ public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
      */
     public String getMsg() {
         try {
-            return this.getPrimaryBodyPart().getContent().toString();
+            return getPrimaryBodyPart().getContent().toString();
         } catch (final IOException | MessagingException msgE) {
             return null;
         }

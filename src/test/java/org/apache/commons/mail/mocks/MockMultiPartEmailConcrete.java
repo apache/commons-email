@@ -35,7 +35,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail {
      */
     @Override
     public InternetAddress getFromAddress() {
-        return this.fromAddress;
+        return fromAddress;
     }
 
     /**
@@ -45,7 +45,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail {
      */
     public String getMsg() {
         try {
-            return this.getPrimaryBodyPart().getContent().toString();
+            return getPrimaryBodyPart().getContent().toString();
         } catch (final IOException | MessagingException msgE) {
             return null;
         }
@@ -54,7 +54,7 @@ public class MockMultiPartEmailConcrete extends MultiPartEmail {
     /**
      */
     public void initTest() {
-        this.init();
+        init();
     }
 
 }

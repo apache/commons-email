@@ -48,6 +48,6 @@ public class DefaultAuthenticator extends Authenticator {
      */
     @Override
     protected PasswordAuthentication getPasswordAuthentication() {
-        return this.authentication;
+        return authentication;
     }
 }

@@ -64,8 +64,8 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     private HtmlEmail createDefaultHtmlEmail() throws EmailException {
         final HtmlEmail htmlEmail = new HtmlEmail();
-        htmlEmail.setHostName(this.strTestMailServer);
-        htmlEmail.setSmtpPort(this.getMailServerPort());
+        htmlEmail.setHostName(strTestMailServer);
+        htmlEmail.setSmtpPort(getMailServerPort());
         htmlEmail.setFrom("a@b.com");
         htmlEmail.addTo("c@d.com");
         return htmlEmail;
@@ -74,7 +74,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     @BeforeEach
     public void setUpHtmlEmailTest() {
         // reusable objects to be used across multiple tests
-        this.email = new MockHtmlEmailConcrete();
+        email = new MockHtmlEmailConcrete();
     }
 
     /**
@@ -87,33 +87,33 @@ public class HtmlEmailTest extends AbstractEmailTest {
                 + "<a href=\"http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip\">"
                 + "http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip" + "</a><br><br>Customer satisfaction is very important for us.";
 
-        this.getMailServer();
+        getMailServer();
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
-        this.email.setCharset(EmailConstants.ISO_8859_1);
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setCharset(EmailConstants.ISO_8859_1);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         final String strSubject = "A dot (\".\") is appended to some ULRs of a HTML mail.";
-        this.email.setSubject(strSubject);
-        this.email.setHtmlMsg(htmlMsg);
+        email.setSubject(strSubject);
+        email.setHtmlMsg(htmlMsg);
 
-        this.email.send();
-        this.fakeMailServer.stop();
+        email.send();
+        fakeMailServer.stop();
 
         // validate html message
-        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
+        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), false);
 
         // make sure that no double dots show up
-        assertTrue(this.email.getHtmlMsg().contains("3DTZC268X93337.zip"));
-        assertFalse(this.email.getHtmlMsg().contains("3DTZC268X93337..zip"));
+        assertTrue(email.getHtmlMsg().contains("3DTZC268X93337.zip"));
+        assertFalse(email.getHtmlMsg().contains("3DTZC268X93337..zip"));
     }
 
     /**
@@ -124,26 +124,26 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
         final String htmlMsg = "<b>Hello World</b>";
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
-        this.email.setCharset(EmailConstants.ISO_8859_1);
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setCharset(EmailConstants.ISO_8859_1);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         final String strSubject = "testCallingBuildMimeMessageBeforeSent";
-        this.email.setSubject(strSubject);
-        this.email.setHtmlMsg(htmlMsg);
+        email.setSubject(strSubject);
+        email.setHtmlMsg(htmlMsg);
 
         // this should NOT be called when sending a message
-        this.email.buildMimeMessage();
+        email.buildMimeMessage();
 
         try {
-            this.email.send();
+            email.send();
         } catch (final IllegalStateException e) {
             return;
         }
@@ -159,18 +159,18 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
         // does embedding a datasource without a name fail?
         try {
-            this.email.embed(dataSource, "");
+            email.embed(dataSource, "");
             fail("embedding with an empty string for a name should fail");
         } catch (final EmailException e) {
             // expected
         }
 
         // properly embed the datasource
-        final String cid = this.email.embed(dataSource, "testname");
+        final String cid = email.embed(dataSource, "testname");
 
         // does embedding the same datasource under the same name return
         // the original cid?
-        final String sameCid = this.email.embed(dataSource, "testname");
+        final String sameCid = email.embed(dataSource, "testname");
 
         assertEquals(cid, sameCid, "didn't get same CID for embedding same datasource twice");
 
@@ -179,7 +179,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         anotherFile.deleteOnExit();
         final FileDataSource anotherDS = new FileDataSource(anotherFile);
         try {
-            this.email.embed(anotherDS, "testname");
+            email.embed(anotherDS, "testname");
         } catch (final EmailException e) {
             // expected
         }
@@ -191,20 +191,20 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
         final File file = File.createTempFile("testEmbedFile", "txt");
         file.deleteOnExit();
-        final String strEmbed = this.email.embed(file);
+        final String strEmbed = email.embed(file);
         assertNotNull(strEmbed);
 
         assertEquals(HtmlEmail.CID_LENGTH, strEmbed.length(), "generated CID has wrong length");
 
         // if we embed the same file again, do we get the same content ID
         // back?
-        final String testCid = this.email.embed(file);
+        final String testCid = email.embed(file);
         assertEquals(strEmbed, testCid, "didn't get same CID after embedding same file twice");
 
         // if we embed a new file, is the content ID unique?
         final File otherFile = File.createTempFile("testEmbedFile2", "txt");
         otherFile.deleteOnExit();
-        final String newCid = this.email.embed(otherFile);
+        final String newCid = email.embed(otherFile);
 
         assertNotEquals(strEmbed, newCid, "didn't get unique CID from embedding new file");
     }
@@ -227,13 +227,13 @@ public class HtmlEmailTest extends AbstractEmailTest {
         final String encodedCid = EmailUtils.encodeUrl(testCid);
 
         // if we embed a new file, do we get the content ID we specified back?
-        final String strEmbed = this.email.embed(file, testCid);
+        final String strEmbed = email.embed(file, testCid);
         assertNotNull(strEmbed);
         assertEquals(encodedCid, strEmbed, "didn't get same CID when embedding with a specified CID");
 
         // if we embed the same file again, do we get the same content ID
         // back?
-        final String returnedCid = this.email.embed(file);
+        final String returnedCid = email.embed(file);
         assertEquals(encodedCid, returnedCid, "didn't get same CID after embedding same file twice");
     }
 
@@ -241,24 +241,24 @@ public class HtmlEmailTest extends AbstractEmailTest {
     public void testEmbedUrl() throws Exception {
         // Test Success
 
-        final String strEmbed = this.email.embed(new URL(this.strTestURL), "Test name");
+        final String strEmbed = email.embed(new URL(strTestURL), "Test name");
         assertNotNull(strEmbed);
         assertEquals(HtmlEmail.CID_LENGTH, strEmbed.length());
 
         // if we embed the same name again, do we get the same content ID
         // back?
-        final String testCid = this.email.embed(new URL(this.strTestURL), "Test name");
+        final String testCid = email.embed(new URL(strTestURL), "Test name");
         assertEquals(strEmbed, testCid);
 
         // if we embed the same URL under a different name, is the content ID
         // unique?
-        final String newCid = this.email.embed(new URL(this.strTestURL), "Test name 2");
+        final String newCid = email.embed(new URL(strTestURL), "Test name 2");
         assertNotEquals(strEmbed, newCid);
         // Test Exceptions
 
         // Does an invalid URL throw an exception?
         try {
-            this.email.embed(createInvalidURL(), "Bad URL");
+            email.embed(createInvalidURL(), "Bad URL");
             fail("Should have thrown an exception");
         } catch (final EmailException e) {
             // expected
@@ -267,7 +267,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // if we try to embed a different URL under a previously used name,
         // does it complain?
         try {
-            this.email.embed(new URL("http://www.google.com"), "Test name");
+            email.embed(new URL("http://www.google.com"), "Test name");
             fail("shouldn't be able to use an existing name with a different URL!");
         } catch (final EmailException e) {
             // expected
@@ -278,10 +278,10 @@ public class HtmlEmailTest extends AbstractEmailTest {
     public void testEmbedUrlAndFile() throws Exception {
         final File tmpFile = File.createTempFile("testfile", "txt");
         tmpFile.deleteOnExit();
-        final String fileCid = this.email.embed(tmpFile);
+        final String fileCid = email.embed(tmpFile);
 
         final URL fileUrl = tmpFile.toURI().toURL();
-        final String urlCid = this.email.embed(fileUrl, "urlName");
+        final String urlCid = email.embed(fileUrl, "urlName");
 
         assertNotEquals(fileCid, urlCid, "file and URL cids should be different even for same resource");
     }
@@ -290,13 +290,13 @@ public class HtmlEmailTest extends AbstractEmailTest {
     public void testGetSetHtmlMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
-            this.email.setHtmlMsg(validChar);
-            assertEquals(validChar, this.email.getHtmlMsg());
+            email.setHtmlMsg(validChar);
+            assertEquals(validChar, email.getHtmlMsg());
         }
         // Test Exception
-        for (final String invalidChar : this.testCharsNotValid) {
+        for (final String invalidChar : testCharsNotValid) {
             try {
-                this.email.setHtmlMsg(invalidChar);
+                email.setHtmlMsg(invalidChar);
                 fail("Should have thrown an exception");
             } catch (final EmailException e) {
                 assertTrue(true);
@@ -309,15 +309,15 @@ public class HtmlEmailTest extends AbstractEmailTest {
     public void testGetSetMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
-            this.email.setMsg(validChar);
-            assertEquals(validChar, this.email.getTextMsg());
+            email.setMsg(validChar);
+            assertEquals(validChar, email.getTextMsg());
 
-            assertTrue(this.email.getHtmlMsg().contains(validChar));
+            assertTrue(email.getHtmlMsg().contains(validChar));
         }
         // Test Exception
-        for (final String invalidChar : this.testCharsNotValid) {
+        for (final String invalidChar : testCharsNotValid) {
             try {
-                this.email.setMsg(invalidChar);
+                email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
             } catch (final EmailException e) {
                 assertTrue(true);
@@ -330,13 +330,13 @@ public class HtmlEmailTest extends AbstractEmailTest {
     public void testGetSetTextMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
-            this.email.setTextMsg(validChar);
-            assertEquals(validChar, this.email.getTextMsg());
+            email.setTextMsg(validChar);
+            assertEquals(validChar, email.getTextMsg());
         }
         // Test Exception
-        for (final String invalidChar : this.testCharsNotValid) {
+        for (final String invalidChar : testCharsNotValid) {
             try {
-                this.email.setTextMsg(invalidChar);
+                email.setTextMsg(invalidChar);
                 fail("Should have thrown an exception");
             } catch (final EmailException e) {
                 assertTrue(true);
@@ -364,128 +364,128 @@ public class HtmlEmailTest extends AbstractEmailTest {
         final File testFile = File.createTempFile("commons-email-testfile", ".txt");
         testFile.deleteOnExit();
         // Test Success
-        this.getMailServer();
+        getMailServer();
 
         String strSubject = "Test HTML Send #1 Subject (w charset)";
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
 
         /* File to used to test file attachments (Must be valid) */
         attachment.setName("Test Attachment");
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());
-        this.email.attach(attachment);
+        email.attach(attachment);
 
-        // this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        // email.setAuthentication(strTestUser, strTestPasswd);
 
-        this.email.setCharset(EmailConstants.ISO_8859_1);
-        this.email.setSubject(strSubject);
+        email.setCharset(EmailConstants.ISO_8859_1);
+        email.setSubject(strSubject);
 
         final URL url = new URL(EmailConfiguration.TEST_URL);
-        final String cid = this.email.embed(url, "Apache Logo");
+        final String cid = email.embed(url, "Apache Logo");
 
         final String strHtmlMsg = "<html>The Apache logo - <img src=\"cid:" + cid + "\"><html>";
 
-        this.email.setHtmlMsg(strHtmlMsg);
-        this.email.setTextMsg("Your email client does not support HTML emails");
+        email.setHtmlMsg(strHtmlMsg);
+        email.setTextMsg("Your email client does not support HTML emails");
 
-        this.email.send();
-        this.fakeMailServer.stop();
+        email.send();
+        fakeMailServer.stop();
         // validate txt message
-        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
+        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), false);
 
         // validate attachment
-        validateSend(this.fakeMailServer, strSubject, attachment.getName(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
+        validateSend(fakeMailServer, strSubject, attachment.getName(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), false);
 
-        this.getMailServer();
+        getMailServer();
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         strSubject = "Test HTML Send #1 Subject (wo charset)";
-        this.email.setSubject(strSubject);
-        this.email.setTextMsg("Test message");
+        email.setSubject(strSubject);
+        email.setTextMsg("Test message");
 
-        this.email.send();
-        this.fakeMailServer.stop();
+        email.send();
+        fakeMailServer.stop();
         // validate txt message
-        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), true);
     }
 
     @Test
     public void testSend2() throws Exception {
         // Test Success
 
-        this.getMailServer();
+        getMailServer();
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         String strSubject = "Test HTML Send #2 Subject (wo charset)";
-        this.email.setSubject(strSubject);
-        this.email.setMsg("Test txt msg");
+        email.setSubject(strSubject);
+        email.setMsg("Test txt msg");
 
-        this.email.send();
-        this.fakeMailServer.stop();
+        email.send();
+        fakeMailServer.stop();
         // validate txt message
-        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
+        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), false);
 
-        this.getMailServer();
+        getMailServer();
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.addTo(this.strTestMailTo);
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setFrom(strTestMailFrom);
+        email.setSmtpPort(getMailServerPort());
+        email.addTo(strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         strSubject = "Test HTML Send #2 Subject (w charset)";
-        this.email.setCharset(EmailConstants.ISO_8859_1);
-        this.email.setSubject(strSubject);
-        this.email.setMsg("Test txt msg");
+        email.setCharset(EmailConstants.ISO_8859_1);
+        email.setSubject(strSubject);
+        email.setMsg("Test txt msg");
 
-        this.email.send();
-        this.fakeMailServer.stop();
+        email.send();
+        fakeMailServer.stop();
         // validate txt message
-        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(this.fakeMailServer, strSubject, this.email.getHtmlMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), false);
+        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), false);
 
     }
 
@@ -500,27 +500,27 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
         System.setProperty(EmailConstants.MAIL_MIME_CHARSET, "iso-8859-15");
 
-        this.getMailServer();
+        getMailServer();
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
 
-        if (this.strTestUser != null && this.strTestPasswd != null) {
-            this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (strTestUser != null && strTestPasswd != null) {
+            email.setAuthentication(strTestUser, strTestPasswd);
         }
 
         final String strSubject = "Test HTML Send Subject (w default charset)";
-        this.email.setSubject(strSubject);
-        this.email.setMsg("Test txt msg ä"); // add non-ascii character, otherwise us-ascii will be used
+        email.setSubject(strSubject);
+        email.setMsg("Test txt msg ä"); // add non-ascii character, otherwise us-ascii will be used
 
-        this.email.send();
-        this.fakeMailServer.stop();
+        email.send();
+        fakeMailServer.stop();
         // validate charset
-        validateSend(this.fakeMailServer, strSubject, "charset=iso-8859-15", this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        validateSend(fakeMailServer, strSubject, "charset=iso-8859-15", email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), true);
 
         System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
 
@@ -531,26 +531,26 @@ public class HtmlEmailTest extends AbstractEmailTest {
      */
     @Test
     public void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException {
-        this.getMailServer();
+        getMailServer();
 
         final String strSubject = "testSendWithPlainTextButNoHtmlContent";
 
-        this.email = new MockHtmlEmailConcrete();
-        this.email.setHostName(this.strTestMailServer);
-        this.email.setSmtpPort(this.getMailServerPort());
-        this.email.setFrom(this.strTestMailFrom);
-        this.email.addTo(this.strTestMailTo);
-        this.email.setAuthentication(this.strTestUser, this.strTestPasswd);
-        this.email.setCharset(EmailConstants.ISO_8859_1);
-        this.email.setSubject(strSubject);
-        this.email.setMsg("This is a plain text content : <b><&npsb;></html></b>");
+        email = new MockHtmlEmailConcrete();
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setAuthentication(strTestUser, strTestPasswd);
+        email.setCharset(EmailConstants.ISO_8859_1);
+        email.setSubject(strSubject);
+        email.setMsg("This is a plain text content : <b><&npsb;></html></b>");
 
-        this.email.send();
+        email.send();
 
-        this.fakeMailServer.stop();
+        fakeMailServer.stop();
 
         // validate text message
-        validateSend(this.fakeMailServer, strSubject, this.email.getTextMsg(), this.email.getFromAddress(), this.email.getToAddresses(),
-                this.email.getCcAddresses(), this.email.getBccAddresses(), true);
+        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+                email.getBccAddresses(), true);
     }
 }

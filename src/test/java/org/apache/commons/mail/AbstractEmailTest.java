@@ -119,19 +119,19 @@ public abstract class AbstractEmailTest {
      * changing the state of the server.
      */
     public void getMailServer() {
-        if (this.fakeMailServer == null || isMailServerStopped(fakeMailServer)) {
+        if (fakeMailServer == null || isMailServerStopped(fakeMailServer)) {
             mailServerPort++;
 
-            this.fakeMailServer = new Wiser();
-            this.fakeMailServer.setPort(getMailServerPort());
-            this.fakeMailServer.start();
+            fakeMailServer = new Wiser();
+            fakeMailServer.setPort(getMailServerPort());
+            fakeMailServer.start();
 
             assertFalse(isMailServerStopped(fakeMailServer), "fake mail server didn't start");
 
             final Date dtStartWait = new Date();
             while (isMailServerStopped(fakeMailServer)) {
                 // test for connected
-                if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
+                if (fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
                     break;
                 }
 
@@ -294,12 +294,12 @@ public abstract class AbstractEmailTest {
     @AfterEach
     public void tearDownEmailTest() {
         // stop the fake email server (if started)
-        if (this.fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
-            this.fakeMailServer.stop();
+        if (fakeMailServer != null && !isMailServerStopped(fakeMailServer)) {
+            fakeMailServer.stop();
             assertTrue(isMailServerStopped(fakeMailServer), "Mail server didn't stop");
         }
 
-        this.fakeMailServer = null;
+        fakeMailServer = null;
     }
 
     /**
@@ -322,7 +322,7 @@ public abstract class AbstractEmailTest {
 
         if (boolSaveToFile) {
             try {
-                this.saveEmailToFile(emailMessage);
+                saveEmailToFile(emailMessage);
             } catch (final MessagingException me) {
                 final IllegalStateException ise = new IllegalStateException("caught MessagingException during saving the email");
                 ise.initCause(me);
@@ -378,7 +378,7 @@ public abstract class AbstractEmailTest {
             final List<InternetAddress> toAdd, final List<InternetAddress> ccAdd, final List<InternetAddress> bccAdd, final boolean boolSaveToFile)
             throws IOException {
         // test other properties
-        final WiserMessage emailMessage = this.validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, boolSaveToFile);
+        final WiserMessage emailMessage = validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, boolSaveToFile);
 
         // test message content
 
@@ -408,7 +408,7 @@ public abstract class AbstractEmailTest {
             final List<InternetAddress> toAdd, final List<InternetAddress> ccAdd, final List<InternetAddress> bccAdd, final boolean boolSaveToFile)
             throws IOException {
         // test other properties
-        final WiserMessage emailMessage = this.validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, true);
+        final WiserMessage emailMessage = validateSend(mailServer, strSubject, fromAdd, toAdd, ccAdd, bccAdd, true);
 
         // test message content
         assertTrue(getMessageBody(emailMessage).contains(strMessage), "didn't find expected message content in message body");

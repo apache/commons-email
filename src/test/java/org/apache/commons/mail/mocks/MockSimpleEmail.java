@@ -31,7 +31,7 @@ public class MockSimpleEmail extends SimpleEmail {
      */
     @Override
     public InternetAddress getFromAddress() {
-        return this.fromAddress;
+        return fromAddress;
     }
 
     /**
@@ -40,7 +40,7 @@ public class MockSimpleEmail extends SimpleEmail {
      * @return Message Content
      */
     public String getMsg() {
-        return (String) this.content;
+        return (String) content;
     }
 
 }

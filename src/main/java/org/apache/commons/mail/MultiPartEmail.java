@@ -335,7 +335,7 @@ public class MultiPartEmail extends Email {
             init();
         }
         // Add the first body part to the message. The fist body part must be
-        if (this.primaryBodyPart == null) {
+        if (primaryBodyPart == null) {
             primaryBodyPart = createBodyPart();
             getContainer().addBodyPart(primaryBodyPart, 0);
         }

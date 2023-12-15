@@ -44,7 +44,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     @BeforeEach
     public void setUpMultiPartEmailTest() throws Exception {
         // reusable objects to be used across multiple tests
-        this.email = new MockMultiPartEmailConcrete();
+        email = new MockMultiPartEmailConcrete();
         testFile = File.createTempFile("testfile", ".txt");
     }
 
@@ -52,16 +52,16 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     public void testAddPart() throws Exception {
 
         // setup
-        this.email = new MockMultiPartEmailConcrete();
+        email = new MockMultiPartEmailConcrete();
         final String strMessage = "hello";
         final String strContentType = "text/plain";
 
         // add part
-        this.email.addPart(strMessage, strContentType);
+        email.addPart(strMessage, strContentType);
 
         // validate
-        assertEquals(strContentType, this.email.getContainer().getBodyPart(0).getContentType());
-        assertEquals(strMessage, this.email.getContainer().getBodyPart(0).getDataHandler().getContent());
+        assertEquals(strContentType, email.getContainer().getBodyPart(0).getContentType());
+        assertEquals(strMessage, email.getContainer().getBodyPart(0).getDataHandler().getContent());
 
     }
 
@@ -69,14 +69,14 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     public void testAddPart2() throws Exception {
 
         // setup
-        this.email = new MockMultiPartEmailConcrete();
+        email = new MockMultiPartEmailConcrete();
         final String strSubtype = "subtype/abc123";
 
         // add part
-        this.email.addPart(new MimeMultipart(strSubtype));
+        email.addPart(new MimeMultipart(strSubtype));
 
         // validate
-        assertTrue(this.email.getContainer().getBodyPart(0).getDataHandler().getContentType().contains(strSubtype));
+        assertTrue(email.getContainer().getBodyPart(0).getDataHandler().getContentType().contains(strSubtype));
 
     }
 
@@ -88,21 +88,21 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         attachment.setName("Test Attachment");
         attachment.setDescription("Test Attachment Desc");
         attachment.setPath(testFile.getAbsolutePath());
-        this.email.attach(attachment);
-        assertTrue(this.email.isBoolHasAttachments());
+        email.attach(attachment);
+        assertTrue(email.isBoolHasAttachments());
         // Test Success - URL
         attachment = new EmailAttachment();
         attachment.setName("Test Attachment");
         attachment.setDescription("Test Attachment Desc");
-        attachment.setURL(new URL(this.strTestURL));
-        this.email.attach(attachment);
+        attachment.setURL(new URL(strTestURL));
+        email.attach(attachment);
         // Test Success - File
-        this.email.attach(testFile);
-        assertTrue(this.email.isBoolHasAttachments());
+        email.attach(testFile);
+        assertTrue(email.isBoolHasAttachments());
         // Test Exceptions
         // null attachment
         try {
-            this.email.attach((EmailAttachment) null);
+            email.attach((EmailAttachment) null);
             fail("Should have thrown an exception");
         } catch (final EmailException e) {
             assertTrue(true);
@@ -112,7 +112,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         attachment = new EmailAttachment();
         try {
             attachment.setURL(createInvalidURL());
-            this.email.attach(attachment);
+            email.attach(attachment);
             fail("Should have thrown an exception");
         } catch (final EmailException e) {
             assertTrue(true);
@@ -122,7 +122,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         attachment = new EmailAttachment();
         try {
             attachment.setPath("");
-            this.email.attach(attachment);
+            email.attach(attachment);
             fail("Should have thrown an exception");
         } catch (final EmailException e) {
             assertTrue(true);
@@ -136,21 +136,21 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     @Test
     public void testAttach2() throws MalformedURLException, EmailException {
         // Test Success - URL
-        this.email.attach(new URL(this.strTestURL), "Test Attachment", "Test Attachment Desc");
+        email.attach(new URL(strTestURL), "Test Attachment", "Test Attachment Desc");
 
         // bad name
-        this.email.attach(new URL(this.strTestURL), null, "Test Attachment Desc");
+        email.attach(new URL(strTestURL), null, "Test Attachment Desc");
     }
 
     @Test
     public void testAttach3() throws Exception {
         // Test Success - URL
-        this.email.attach(new URLDataSource(new URL(this.strTestURL)), "Test Attachment", "Test Attachment Desc");
+        email.attach(new URLDataSource(new URL(strTestURL)), "Test Attachment", "Test Attachment Desc");
         // Test Exceptions
         // null datasource
         try {
             final URLDataSource urlDs = null;
-            this.email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
+            email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
             fail("Should have thrown an exception");
         } catch (final EmailException e) {
             assertTrue(true);
@@ -159,7 +159,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         // invalid datasource
         try {
             final URLDataSource urlDs = new URLDataSource(createInvalidURL());
-            this.email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
+            email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
             fail("Should have thrown an exception");
         } catch (final EmailException e) {
             assertTrue(true);
@@ -173,7 +173,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
         final File tmpFile = File.createTempFile("attachment", ".eml");
 
-        this.email.attach(new FileDataSource(tmpFile), "Test Attachment", "Test Attachment Desc");
+        email.attach(new FileDataSource(tmpFile), "Test Attachment", "Test Attachment Desc");
 
         assertTrue(tmpFile.delete());
     }
@@ -188,8 +188,8 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     @Test
     public void testGetSetSubType() {
         for (final String validChar : testCharsValid) {
-            this.email.setSubType(validChar);
-            assertEquals(validChar, this.email.getSubType());
+            email.setSubType(validChar);
+            assertEquals(validChar, email.getSubType());
         }
     }
 
@@ -198,8 +198,8 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     public void testInit() {
         // call the init function twice to trigger the IllegalStateException
         try {
-            this.email.init();
-            this.email.init();
+            email.init();
+            email.init();
             fail("Should have thrown an exception");
         } catch (final IllegalStateException e) {
             assertTrue(true);
@@ -213,7 +213,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     @Test
     public void testSend() throws EmailException, IOException {
         // Test Success
-        this.getMailServer();
+        getMailServer();
 
         final String strSubject = "Test Multipart Send Subject";
 
@@ -224,15 +224,15 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         attachment.setDescription("Test Attachment Desc");
 
         final MockMultiPartEmailConcrete testEmail = new MockMultiPartEmailConcrete();
-        testEmail.setHostName(this.strTestMailServer);
-        testEmail.setSmtpPort(this.getMailServerPort());
-        testEmail.setFrom(this.strTestMailFrom);
-        testEmail.addTo(this.strTestMailTo);
+        testEmail.setHostName(strTestMailServer);
+        testEmail.setSmtpPort(getMailServerPort());
+        testEmail.setFrom(strTestMailFrom);
+        testEmail.addTo(strTestMailTo);
         testEmail.attach(attachment);
         testEmail.setSubType("subType");
 
-        if (EmailUtils.isNotEmpty(this.strTestUser) && EmailUtils.isNotEmpty(this.strTestPasswd)) {
-            testEmail.setAuthentication(this.strTestUser, this.strTestPasswd);
+        if (EmailUtils.isNotEmpty(strTestUser) && EmailUtils.isNotEmpty(strTestPasswd)) {
+            testEmail.setAuthentication(strTestUser, strTestPasswd);
         }
 
         testEmail.setSubject(strSubject);
@@ -241,29 +241,29 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
         final Map<String, String> ht = new HashMap<>();
         ht.put("X-Priority", "2");
-        ht.put("Disposition-Notification-To", this.strTestMailFrom);
+        ht.put("Disposition-Notification-To", strTestMailFrom);
         ht.put("X-Mailer", "Sendmail");
 
         testEmail.setHeaders(ht);
 
         testEmail.send();
 
-        this.fakeMailServer.stop();
+        fakeMailServer.stop();
         // validate message
-        validateSend(this.fakeMailServer, strSubject, testEmail.getMsg(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, testEmail.getMsg(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
                 testEmail.getBccAddresses(), true);
 
         // validate attachment
-        validateSend(this.fakeMailServer, strSubject, attachment.getName(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, attachment.getName(), testEmail.getFromAddress(), testEmail.getToAddresses(), testEmail.getCcAddresses(),
                 testEmail.getBccAddresses(), false);
         // Test Exceptions
         try {
-            this.getMailServer();
+            getMailServer();
 
-            this.email.send();
+            email.send();
             fail("Should have thrown an exception");
         } catch (final EmailException e) {
-            this.fakeMailServer.stop();
+            fakeMailServer.stop();
         }
     }
 
@@ -273,20 +273,20 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
         // without charset set
         for (final String validChar : testCharsValid) {
-            this.email.setMsg(validChar);
-            assertEquals(validChar, this.email.getMsg());
+            email.setMsg(validChar);
+            assertEquals(validChar, email.getMsg());
         }
 
         // with charset set
-        this.email.setCharset(EmailConstants.US_ASCII);
+        email.setCharset(EmailConstants.US_ASCII);
         for (final String validChar : testCharsValid) {
-            this.email.setMsg(validChar);
-            assertEquals(validChar, this.email.getMsg());
+            email.setMsg(validChar);
+            assertEquals(validChar, email.getMsg());
         }
         // Test Exceptions
         for (final String invalidChar : testCharsNotValid) {
             try {
-                this.email.setMsg(invalidChar);
+                email.setMsg(invalidChar);
                 fail("Should have thrown an exception");
             } catch (final EmailException e) {
                 assertTrue(true);

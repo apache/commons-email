@@ -37,28 +37,28 @@ public class MockEmailConcrete extends Email {
      * @return Authenticator Authenticator
      */
     public Authenticator getAuthenticator() {
-        return this.authenticator;
+        return authenticator;
     }
 
     /**
      * @return charset
      */
     public String getCharset() {
-        return this.charset;
+        return charset;
     }
 
     /**
      * @return content
      */
     public MimeMultipart getContentMimeMultipart() {
-        return this.emailBody;
+        return emailBody;
     }
 
     /**
      * @return content
      */
     public Object getContentObject() {
-        return this.content;
+        return content;
     }
 
     /**
@@ -72,7 +72,7 @@ public class MockEmailConcrete extends Email {
      * @return emailBody
      */
     public MimeMultipart getEmailBody() {
-        return this.emailBody;
+        return emailBody;
     }
 
     /**
@@ -80,35 +80,35 @@ public class MockEmailConcrete extends Email {
      */
     @Override
     public String getHostName() {
-        return this.hostName;
+        return hostName;
     }
 
     /**
      * @return message
      */
     public MimeMessage getMessage() {
-        return this.message;
+        return message;
     }
 
     /**
      * @return popHost
      */
     public String getPopHost() {
-        return this.popHost;
+        return popHost;
     }
 
     /**
      * @return popPassword
      */
     public String getPopPassword() {
-        return this.popPassword;
+        return popPassword;
     }
 
     /**
      * @return popUsername
      */
     public String getPopUsername() {
-        return this.popUsername;
+        return popUsername;
     }
 
     /**
@@ -116,7 +116,7 @@ public class MockEmailConcrete extends Email {
      * @throws EmailException EmailException
      */
     public Session getSession() throws EmailException {
-        return this.getMailSession();
+        return getMailSession();
     }
 
     /**
@@ -125,7 +125,7 @@ public class MockEmailConcrete extends Email {
      * @return debug
      */
     public boolean isDebug() {
-        return this.debug;
+        return debug;
     }
 
     /**

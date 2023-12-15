@@ -333,7 +333,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email addBcc(final String email) throws EmailException {
-        return this.addBcc(email, null);
+        return addBcc(email, null);
     }
 
     /**
@@ -366,7 +366,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email addBcc(final String email, final String name) throws EmailException {
-        return addBcc(email, name, this.charset);
+        return addBcc(email, name, charset);
     }
 
     /**
@@ -380,7 +380,7 @@ public abstract class Email {
      * @since 1.1
      */
     public Email addBcc(final String email, final String name, final String charset) throws EmailException {
-        this.bccList.add(createInternetAddress(email, name, charset));
+        bccList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
@@ -395,7 +395,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email addCc(final String email) throws EmailException {
-        return this.addCc(email, null);
+        return addCc(email, null);
     }
 
     /**
@@ -428,7 +428,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email addCc(final String email, final String name) throws EmailException {
-        return addCc(email, name, this.charset);
+        return addCc(email, name, charset);
     }
 
     /**
@@ -442,7 +442,7 @@ public abstract class Email {
      * @since 1.1
      */
     public Email addCc(final String email, final String name, final String charset) throws EmailException {
-        this.ccList.add(createInternetAddress(email, name, charset));
+        ccList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
@@ -461,7 +461,7 @@ public abstract class Email {
         if (EmailUtils.isEmpty(value)) {
             throw new IllegalArgumentException("value can not be null or empty");
         }
-        this.headers.put(name, value);
+        headers.put(name, value);
     }
 
     /**
@@ -475,7 +475,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email addReplyTo(final String email) throws EmailException {
-        return this.addReplyTo(email, null);
+        return addReplyTo(email, null);
     }
 
     /**
@@ -490,7 +490,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email addReplyTo(final String email, final String name) throws EmailException {
-        return addReplyTo(email, name, this.charset);
+        return addReplyTo(email, name, charset);
     }
 
     /**
@@ -504,7 +504,7 @@ public abstract class Email {
      * @since 1.1
      */
     public Email addReplyTo(final String email, final String name, final String charset) throws EmailException {
-        this.replyList.add(createInternetAddress(email, name, charset));
+        replyList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
@@ -552,7 +552,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email addTo(final String email, final String name) throws EmailException {
-        return addTo(email, name, this.charset);
+        return addTo(email, name, charset);
     }
 
     /**
@@ -566,7 +566,7 @@ public abstract class Email {
      * @since 1.1
      */
     public Email addTo(final String email, final String name, final String charset) throws EmailException {
-        this.toList.add(createInternetAddress(email, name, charset));
+        toList.add(createInternetAddress(email, name, charset));
         return this;
     }
 
@@ -579,85 +579,85 @@ public abstract class Email {
      * @since 1.0
      */
     public void buildMimeMessage() throws EmailException {
-        if (this.message != null) {
+        if (message != null) {
             // [EMAIL-95] we assume that an email is not reused therefore invoking
             // buildMimeMessage() more than once is illegal.
             throw new IllegalStateException("The MimeMessage is already built.");
         }
 
         try {
-            this.message = this.createMimeMessage(this.getMailSession());
+            message = createMimeMessage(getMailSession());
 
-            if (EmailUtils.isNotEmpty(this.subject)) {
-                if (EmailUtils.isNotEmpty(this.charset)) {
-                    this.message.setSubject(this.subject, this.charset);
+            if (EmailUtils.isNotEmpty(subject)) {
+                if (EmailUtils.isNotEmpty(charset)) {
+                    message.setSubject(subject, charset);
                 } else {
-                    this.message.setSubject(this.subject);
+                    message.setSubject(subject);
                 }
             }
 
             // update content type (and encoding)
-            this.updateContentType(this.contentType);
+            updateContentType(contentType);
 
-            if (this.content != null) {
-                if (EmailConstants.TEXT_PLAIN.equalsIgnoreCase(this.contentType) && this.content instanceof String) {
+            if (content != null) {
+                if (EmailConstants.TEXT_PLAIN.equalsIgnoreCase(contentType) && content instanceof String) {
                     // EMAIL-104: call explicitly setText to use default mime charset
                     // (property "mail.mime.charset") in case none has been set
-                    this.message.setText(this.content.toString(), this.charset);
+                    message.setText(content.toString(), charset);
                 } else {
-                    this.message.setContent(this.content, this.contentType);
+                    message.setContent(content, contentType);
                 }
-            } else if (this.emailBody != null) {
-                if (this.contentType == null) {
-                    this.message.setContent(this.emailBody);
+            } else if (emailBody != null) {
+                if (contentType == null) {
+                    message.setContent(emailBody);
                 } else {
-                    this.message.setContent(this.emailBody, this.contentType);
+                    message.setContent(emailBody, contentType);
                 }
             } else {
-                this.message.setText("");
+                message.setText("");
             }
 
-            if (this.fromAddress != null) {
-                this.message.setFrom(this.fromAddress);
+            if (fromAddress != null) {
+                message.setFrom(fromAddress);
             } else if (session.getProperty(EmailConstants.MAIL_SMTP_FROM) == null && session.getProperty(EmailConstants.MAIL_FROM) == null) {
                 throw new EmailException("From address required");
             }
 
-            if (this.toList.size() + this.ccList.size() + this.bccList.size() == 0) {
+            if (toList.size() + ccList.size() + bccList.size() == 0) {
                 throw new EmailException("At least one receiver address required");
             }
 
             if (!EmailUtils.isEmpty(toList)) {
-                this.message.setRecipients(Message.RecipientType.TO, this.toInternetAddressArray(this.toList));
+                message.setRecipients(Message.RecipientType.TO, toInternetAddressArray(toList));
             }
 
             if (!EmailUtils.isEmpty(ccList)) {
-                this.message.setRecipients(Message.RecipientType.CC, this.toInternetAddressArray(this.ccList));
+                message.setRecipients(Message.RecipientType.CC, toInternetAddressArray(ccList));
             }
 
             if (!EmailUtils.isEmpty(bccList)) {
-                this.message.setRecipients(Message.RecipientType.BCC, this.toInternetAddressArray(this.bccList));
+                message.setRecipients(Message.RecipientType.BCC, toInternetAddressArray(bccList));
             }
 
             if (!EmailUtils.isEmpty(replyList)) {
-                this.message.setReplyTo(this.toInternetAddressArray(this.replyList));
+                message.setReplyTo(toInternetAddressArray(replyList));
             }
 
             if (!EmailUtils.isEmpty(headers)) {
-                for (final Map.Entry<String, String> entry : this.headers.entrySet()) {
+                for (final Map.Entry<String, String> entry : headers.entrySet()) {
                     final String foldedValue = createFoldedHeaderValue(entry.getKey(), entry.getValue());
-                    this.message.addHeader(entry.getKey(), foldedValue);
+                    message.addHeader(entry.getKey(), foldedValue);
                 }
             }
 
-            if (this.message.getSentDate() == null) {
-                this.message.setSentDate(getSentDate());
+            if (message.getSentDate() == null) {
+                message.setSentDate(getSentDate());
             }
 
-            if (this.popBeforeSmtp) {
+            if (popBeforeSmtp) {
                 // TODO Why is this not a Store leak? When to close?
                 final Store store = session.getStore("pop3");
-                store.connect(this.popHost, this.popUsername, this.popPassword);
+                store.connect(popHost, popUsername, popPassword);
             }
         } catch (final MessagingException me) {
             throw new EmailException(me);
@@ -670,7 +670,7 @@ public abstract class Email {
      * @throws IllegalStateException when the mail session is already initialized
      */
     private void checkSessionAlreadyInitialized() {
-        if (this.session != null) {
+        if (session != null) {
             throw new IllegalStateException("The mail session is already initialized");
         }
     }
@@ -691,7 +691,7 @@ public abstract class Email {
             throw new IllegalArgumentException("value can not be null or empty");
         }
         try {
-            return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value, this.charset, null));
+            return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value, charset, null));
         } catch (final UnsupportedEncodingException e) {
             return value;
         }
@@ -747,7 +747,7 @@ public abstract class Email {
      * @return List addresses
      */
     public List<InternetAddress> getBccAddresses() {
-        return this.bccList;
+        return bccList;
     }
 
     /**
@@ -757,7 +757,7 @@ public abstract class Email {
      * @since 1.4
      */
     public String getBounceAddress() {
-        return this.bounceAddress;
+        return bounceAddress;
     }
 
     /**
@@ -766,7 +766,7 @@ public abstract class Email {
      * @return List addresses
      */
     public List<InternetAddress> getCcAddresses() {
-        return this.ccList;
+        return ccList;
     }
 
     /**
@@ -775,7 +775,7 @@ public abstract class Email {
      * @return from address
      */
     public InternetAddress getFromAddress() {
-        return this.fromAddress;
+        return fromAddress;
     }
 
     /**
@@ -786,7 +786,7 @@ public abstract class Email {
      * @since 1.5
      */
     public String getHeader(final String header) {
-        return this.headers.get(header);
+        return headers.get(header);
     }
 
     /**
@@ -796,7 +796,7 @@ public abstract class Email {
      * @since 1.5
      */
     public Map<String, String> getHeaders() {
-        return this.headers;
+        return headers;
     }
 
     /**
@@ -805,11 +805,11 @@ public abstract class Email {
      * @return host name
      */
     public String getHostName() {
-        if (this.session != null) {
-            return this.session.getProperty(EmailConstants.MAIL_HOST);
+        if (session != null) {
+            return session.getProperty(EmailConstants.MAIL_HOST);
         }
-        if (EmailUtils.isNotEmpty(this.hostName)) {
-            return this.hostName;
+        if (EmailUtils.isNotEmpty(hostName)) {
+            return hostName;
         }
         return null;
     }
@@ -823,19 +823,19 @@ public abstract class Email {
      * @since 1.0
      */
     public Session getMailSession() throws EmailException {
-        if (this.session == null) {
+        if (session == null) {
             final Properties properties = new Properties(System.getProperties());
             properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, EmailConstants.SMTP);
 
-            if (EmailUtils.isEmpty(this.hostName)) {
-                this.hostName = properties.getProperty(EmailConstants.MAIL_HOST);
+            if (EmailUtils.isEmpty(hostName)) {
+                hostName = properties.getProperty(EmailConstants.MAIL_HOST);
             }
 
             EmailException.checkNonEmpty(hostName, () -> "Cannot find valid hostname for mail session");
 
-            properties.setProperty(EmailConstants.MAIL_PORT, this.smtpPort);
-            properties.setProperty(EmailConstants.MAIL_HOST, this.hostName);
-            properties.setProperty(EmailConstants.MAIL_DEBUG, String.valueOf(this.debug));
+            properties.setProperty(EmailConstants.MAIL_PORT, smtpPort);
+            properties.setProperty(EmailConstants.MAIL_HOST, hostName);
+            properties.setProperty(EmailConstants.MAIL_DEBUG, String.valueOf(debug));
 
             properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_ENABLE, Boolean.toString(isStartTLSEnabled()));
             properties.setProperty(EmailConstants.MAIL_TRANSPORT_STARTTLS_REQUIRED, Boolean.toString(isStartTLSRequired()));
@@ -843,13 +843,13 @@ public abstract class Email {
             properties.setProperty(EmailConstants.MAIL_SMTP_SEND_PARTIAL, Boolean.toString(isSendPartial()));
             properties.setProperty(EmailConstants.MAIL_SMTPS_SEND_PARTIAL, Boolean.toString(isSendPartial()));
 
-            if (this.authenticator != null) {
+            if (authenticator != null) {
                 properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
             }
 
             if (isSSLOnConnect()) {
-                properties.setProperty(EmailConstants.MAIL_PORT, this.sslSmtpPort);
-                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT, this.sslSmtpPort);
+                properties.setProperty(EmailConstants.MAIL_PORT, sslSmtpPort);
+                properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT, sslSmtpPort);
                 properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_CLASS, "javax.net.ssl.SSLSocketFactory");
                 properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
             }
@@ -858,23 +858,23 @@ public abstract class Email {
                 properties.setProperty(EmailConstants.MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
             }
 
-            if (this.bounceAddress != null) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_FROM, this.bounceAddress);
+            if (bounceAddress != null) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_FROM, bounceAddress);
             }
 
-            if (this.socketTimeout > 0) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_TIMEOUT, Integer.toString(this.socketTimeout));
+            if (socketTimeout > 0) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_TIMEOUT, Integer.toString(socketTimeout));
             }
 
-            if (this.socketConnectionTimeout > 0) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_CONNECTIONTIMEOUT, Integer.toString(this.socketConnectionTimeout));
+            if (socketConnectionTimeout > 0) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_CONNECTIONTIMEOUT, Integer.toString(socketConnectionTimeout));
             }
 
             // changed this (back) to getInstance due to security exceptions
             // caused when testing using Maven
-            this.session = Session.getInstance(properties, this.authenticator);
+            session = Session.getInstance(properties, authenticator);
         }
-        return this.session;
+        return session;
     }
 
     /**
@@ -883,7 +883,7 @@ public abstract class Email {
      * @return the MimeMessage
      */
     public MimeMessage getMimeMessage() {
-        return this.message;
+        return message;
     }
 
     /**
@@ -892,7 +892,7 @@ public abstract class Email {
      * @return List addresses
      */
     public List<InternetAddress> getReplyToAddresses() {
-        return this.replyList;
+        return replyList;
     }
 
     /**
@@ -902,10 +902,10 @@ public abstract class Email {
      * @since 1.0
      */
     public Date getSentDate() {
-        if (this.sentDate == null) {
+        if (sentDate == null) {
             return new Date();
         }
-        return new Date(this.sentDate.getTime());
+        return new Date(sentDate.getTime());
     }
 
     /**
@@ -914,11 +914,11 @@ public abstract class Email {
      * @return SMTP port
      */
     public String getSmtpPort() {
-        if (this.session != null) {
-            return this.session.getProperty(EmailConstants.MAIL_PORT);
+        if (session != null) {
+            return session.getProperty(EmailConstants.MAIL_PORT);
         }
-        if (EmailUtils.isNotEmpty(this.smtpPort)) {
-            return this.smtpPort;
+        if (EmailUtils.isNotEmpty(smtpPort)) {
+            return smtpPort;
         }
         return null;
     }
@@ -930,7 +930,7 @@ public abstract class Email {
      * @since 1.2
      */
     public int getSocketConnectionTimeout() {
-        return this.socketConnectionTimeout;
+        return socketConnectionTimeout;
     }
 
     /**
@@ -940,7 +940,7 @@ public abstract class Email {
      * @since 1.2
      */
     public int getSocketTimeout() {
-        return this.socketTimeout;
+        return socketTimeout;
     }
 
     /**
@@ -949,11 +949,11 @@ public abstract class Email {
      * @return the current SSL port used by the SMTP transport
      */
     public String getSslSmtpPort() {
-        if (this.session != null) {
-            return this.session.getProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT);
+        if (session != null) {
+            return session.getProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT);
         }
-        if (EmailUtils.isNotEmpty(this.sslSmtpPort)) {
-            return this.sslSmtpPort;
+        if (EmailUtils.isNotEmpty(sslSmtpPort)) {
+            return sslSmtpPort;
         }
         return null;
     }
@@ -964,7 +964,7 @@ public abstract class Email {
      * @return email subject
      */
     public String getSubject() {
-        return this.subject;
+        return subject;
     }
 
     /**
@@ -973,7 +973,7 @@ public abstract class Email {
      * @return List addresses
      */
     public List<InternetAddress> getToAddresses() {
-        return this.toList;
+        return toList;
     }
 
     /**
@@ -1024,7 +1024,7 @@ public abstract class Email {
      * @since 1.3
      */
     public boolean isStartTLSEnabled() {
-        return this.startTlsEnabled || tls;
+        return startTlsEnabled || tls;
     }
 
     /**
@@ -1034,7 +1034,7 @@ public abstract class Email {
      * @since 1.3
      */
     public boolean isStartTLSRequired() {
-        return this.startTlsRequired;
+        return startTlsRequired;
     }
 
     /**
@@ -1057,8 +1057,8 @@ public abstract class Email {
      * @throws EmailException        the sending failed
      */
     public String send() throws EmailException {
-        this.buildMimeMessage();
-        return this.sendMimeMessage();
+        buildMimeMessage();
+        return sendMimeMessage();
     }
 
     /**
@@ -1072,9 +1072,9 @@ public abstract class Email {
         Objects.requireNonNull(message, "MimeMessage has not been created yet");
         try {
             Transport.send(message);
-            return this.message.getMessageID();
+            return message.getMessageID();
         } catch (final Throwable t) {
-            throw new EmailException("Sending the email to the following server failed : " + this.getHostName() + ":" + this.getSmtpPort(), t);
+            throw new EmailException("Sending the email to the following server failed : " + this.getHostName() + ":" + getSmtpPort(), t);
         }
     }
 
@@ -1100,12 +1100,12 @@ public abstract class Email {
      * This method should be used when your outgoing mail server requires authentication. Your mail server must also support RFC2554.
      * </p>
      *
-     * @param newAuthenticator the {@code Authenticator} object.
+     * @param authenticator the {@code Authenticator} object.
      * @see Authenticator
      * @since 1.0
      */
-    public void setAuthenticator(final Authenticator newAuthenticator) {
-        this.authenticator = newAuthenticator;
+    public void setAuthenticator(final Authenticator authenticator) {
+        this.authenticator = authenticator;
     }
 
     /**
@@ -1119,7 +1119,7 @@ public abstract class Email {
      */
     public Email setBcc(final Collection<InternetAddress> collection) throws EmailException {
         EmailException.checkNonEmpty(collection, () -> "BCC list invalid");
-        this.bccList = new ArrayList<>(collection);
+        bccList = new ArrayList<>(collection);
         return this;
     }
 
@@ -1136,13 +1136,13 @@ public abstract class Email {
         checkSessionAlreadyInitialized();
         if (!EmailUtils.isEmpty(email)) {
             try {
-                this.bounceAddress = createInternetAddress(email, null, this.charset).getAddress();
+                bounceAddress = createInternetAddress(email, null, charset).getAddress();
             } catch (final EmailException e) {
                 // Can't throw 'EmailException' to keep backward-compatibility
                 throw new IllegalArgumentException("Failed to set the bounce address : " + email, e);
             }
         } else {
-            this.bounceAddress = email;
+            bounceAddress = email;
         }
 
         return this;
@@ -1159,7 +1159,7 @@ public abstract class Email {
      */
     public Email setCc(final Collection<InternetAddress> collection) throws EmailException {
         EmailException.checkNonEmpty(collection, () -> "CC list invalid");
-        this.ccList = new ArrayList<>(collection);
+        ccList = new ArrayList<>(collection);
         return this;
     }
 
@@ -1195,7 +1195,7 @@ public abstract class Email {
      */
     public void setContent(final Object content, final String contentType) {
         this.content = content;
-        this.updateContentType(contentType);
+        updateContentType(contentType);
     }
 
     /**
@@ -1234,7 +1234,7 @@ public abstract class Email {
      * @since 1.0
      */
     public Email setFrom(final String email, final String name) throws EmailException {
-        return setFrom(email, name, this.charset);
+        return setFrom(email, name, charset);
     }
 
     /**
@@ -1248,7 +1248,7 @@ public abstract class Email {
      * @since 1.1
      */
     public Email setFrom(final String email, final String name, final String charset) throws EmailException {
-        this.fromAddress = createInternetAddress(email, name, charset);
+        fromAddress = createInternetAddress(email, name, charset);
         return this;
     }
 
@@ -1262,7 +1262,7 @@ public abstract class Email {
      * @since 1.0
      */
     public void setHeaders(final Map<String, String> map) {
-        this.headers.clear();
+        headers.clear();
         for (final Map.Entry<String, String> entry : map.entrySet()) {
             addHeader(entry.getKey(), entry.getValue());
         }
@@ -1271,13 +1271,13 @@ public abstract class Email {
     /**
      * Sets the hostname of the outgoing mail server.
      *
-     * @param aHostName aHostName
+     * @param hostName aHostName
      * @throws IllegalStateException if the mail session is already initialized
      * @since 1.0
      */
-    public void setHostName(final String aHostName) {
+    public void setHostName(final String hostName) {
         checkSessionAlreadyInitialized();
-        this.hostName = aHostName;
+        this.hostName = hostName;
     }
 
     /**
@@ -1304,8 +1304,8 @@ public abstract class Email {
             if (EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password)) {
                 // only create a new mail session with an authenticator if
                 // authentication is required and no user name is given
-                this.authenticator = new DefaultAuthenticator(userName, password);
-                this.session = Session.getInstance(sessionProperties, this.authenticator);
+                authenticator = new DefaultAuthenticator(userName, password);
+                this.session = Session.getInstance(sessionProperties, authenticator);
             } else {
                 // assume that the given mail session contains a working authenticator
                 this.session = session;
@@ -1334,7 +1334,7 @@ public abstract class Email {
             ctx = (Context) new InitialContext().lookup("java:comp/env");
 
         }
-        this.setMailSession((Session) ctx.lookup(jndiName));
+        setMailSession((Session) ctx.lookup(jndiName));
     }
 
     /**
@@ -1350,17 +1350,17 @@ public abstract class Email {
     /**
      * Sets details regarding "pop3 before SMTP" authentication.
      *
-     * @param newPopBeforeSmtp Whether or not to log into pop3 server before sending mail.
-     * @param newPopHost       The pop3 host to use.
-     * @param newPopUsername   The pop3 username.
-     * @param newPopPassword   The pop3 password.
+     * @param popBeforeSmtp Whether or not to log into pop3 server before sending mail.
+     * @param popHost       The pop3 host to use.
+     * @param popUsername   The pop3 username.
+     * @param popPassword   The pop3 password.
      * @since 1.0
      */
-    public void setPopBeforeSmtp(final boolean newPopBeforeSmtp, final String newPopHost, final String newPopUsername, final String newPopPassword) {
-        this.popBeforeSmtp = newPopBeforeSmtp;
-        this.popHost = newPopHost;
-        this.popUsername = newPopUsername;
-        this.popPassword = newPopPassword;
+    public void setPopBeforeSmtp(final boolean popBeforeSmtp, final String popHost, final String popUsername, final String popPassword) {
+        this.popBeforeSmtp = popBeforeSmtp;
+        this.popHost = popHost;
+        this.popUsername = popUsername;
+        this.popPassword = popPassword;
     }
 
     /**
@@ -1375,7 +1375,7 @@ public abstract class Email {
      */
     public Email setReplyTo(final Collection<InternetAddress> collection) throws EmailException {
         EmailException.checkNonEmpty(collection, () -> "Reply to list invalid");
-        this.replyList = new ArrayList<>(collection);
+        replyList = new ArrayList<>(collection);
         return this;
     }
 
@@ -1407,25 +1407,25 @@ public abstract class Email {
     public void setSentDate(final Date date) {
         if (date != null) {
             // create a separate instance to keep findbugs happy
-            this.sentDate = new Date(date.getTime());
+            sentDate = new Date(date.getTime());
         }
     }
 
     /**
      * Sets the non-SSL port number of the outgoing mail server.
      *
-     * @param aPortNumber aPortNumber
+     * @param portNumber aPortNumber
      * @throws IllegalArgumentException if the port number is &lt; 1
      * @throws IllegalStateException    if the mail session is already initialized
      * @since 1.0
      * @see #setSslSmtpPort(String)
      */
-    public void setSmtpPort(final int aPortNumber) {
+    public void setSmtpPort(final int portNumber) {
         checkSessionAlreadyInitialized();
-        if (aPortNumber < 1) {
-            throw new IllegalArgumentException("Cannot connect to a port number that is less than 1 ( " + aPortNumber + " )");
+        if (portNumber < 1) {
+            throw new IllegalArgumentException("Cannot connect to a port number that is less than 1 ( " + portNumber + " )");
         }
-        this.smtpPort = Integer.toString(aPortNumber);
+        this.smtpPort = Integer.toString(portNumber);
     }
 
     /**
