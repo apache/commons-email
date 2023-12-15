@@ -502,16 +502,16 @@ public class HtmlEmail extends MultiPartEmail {
     /**
      * Sets the HTML content.
      *
-     * @param aHtml A String.
+     * @param html A String.
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0
      */
-    public HtmlEmail setHtmlMsg(final String aHtml) throws EmailException {
-        if (EmailUtils.isEmpty(aHtml)) {
+    public HtmlEmail setHtmlMsg(final String html) throws EmailException {
+        if (EmailUtils.isEmpty(html)) {
             throw new EmailException("Invalid message supplied");
         }
-        this.html = aHtml;
+        this.html = html;
         return this;
     }
 
@@ -543,16 +543,16 @@ public class HtmlEmail extends MultiPartEmail {
     /**
      * Sets the text content.
      *
-     * @param aText A String.
+     * @param text A String.
      * @return An HtmlEmail.
      * @throws EmailException see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0
      */
-    public HtmlEmail setTextMsg(final String aText) throws EmailException {
-        if (EmailUtils.isEmpty(aText)) {
+    public HtmlEmail setTextMsg(final String text) throws EmailException {
+        if (EmailUtils.isEmpty(text)) {
             throw new EmailException("Invalid message supplied");
         }
-        this.text = aText;
+        this.text = text;
         return this;
     }
 }
