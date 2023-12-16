@@ -149,7 +149,7 @@ public class MultiPartEmail extends Email {
     /**
      * Attaches a file specified as a DataSource interface.
      *
-     * @param ds          A DataSource interface for the file.
+     * @param dataSource  A DataSource interface for the file.
      * @param name        The name field for the attachment.
      * @param description A description for the attachment.
      * @param disposition Either mixed or inline.
@@ -157,16 +157,16 @@ public class MultiPartEmail extends Email {
      * @throws EmailException see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0
      */
-    public MultiPartEmail attach(final DataSource ds, String name, final String description, final String disposition) throws EmailException {
+    public MultiPartEmail attach(final DataSource dataSource, String name, final String description, final String disposition) throws EmailException {
         if (EmailUtils.isEmpty(name)) {
-            name = ds.getName();
+            name = dataSource.getName();
         }
         try {
             final BodyPart bodyPart = createBodyPart();
             bodyPart.setDisposition(disposition);
             bodyPart.setFileName(MimeUtility.encodeText(name));
             bodyPart.setDescription(description);
-            bodyPart.setDataHandler(new DataHandler(ds));
+            bodyPart.setDataHandler(new DataHandler(dataSource));
             getContainer().addBodyPart(bodyPart);
         } catch (final UnsupportedEncodingException | MessagingException me) {
             // in case the file name could not be encoded
