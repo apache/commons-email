@@ -16,7 +16,9 @@
  */
 package org.apache.commons.mail;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.stream.IntStream;
 
 import org.apache.commons.mail.mocks.MockEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,18 +30,41 @@ import org.junit.jupiter.api.Test;
  * @since 1.0
  */
 public class InvalidAddressTest extends AbstractEmailTest {
-    /** */
-    private static final String[] ARR_INVALID_EMAILS = { "local name@domain.com", "local(name@domain.com", "local)name@domain.com", "local<name@domain.com",
-            "local>name@domain.com", "local,name@domain.com", "local;name@domain.com", "local:name@domain.com", "local[name@domain.com",
+
+    // @formatter:off
+    private static final String[] ARR_INVALID_EMAILS = {
+            "local name@domain.com",
+            "local(name@domain.com",
+            "local)name@domain.com",
+            "local<name@domain.com",
+            "local>name@domain.com",
+            "local,name@domain.com",
+            "local;name@domain.com",
+            "local:name@domain.com",
+            "local[name@domain.com",
             "local]name@domain.com",
             // "local\\name@domain.com", is considered valid for mail-1.4.1
-            "local\"name@domain.com", "local\tname@domain.com", "local\nname@domain.com", "local\rname@domain.com", "local.name@domain com",
-            "local.name@domain(com", "local.name@domain)com", "local.name@domain<com", "local.name@domain>com", "local.name@domain,com",
-            "local.name@domain;com", "local.name@domain:com",
-
+            "local\"name@domain.com",
+            "local\tname@domain.com",
+            "local\nname@domain.com",
+            "local\rname@domain.com",
+            "local.name@domain com",
+            "local.name@domain(com",
+            "local.name@domain)com",
+            "local.name@domain<com",
+            "local.name@domain>com",
+            "local.name@domain,com",
+            "local.name@domain;com",
+            "local.name@domain:com",
             // "local.name@domain[com",
-            "local.name@domain]com", "local.name@domain\\com", "local.name@domain\tcom", "local.name@domain\ncom", "local.name@domain\rcom", "local.name@",
+            "local.name@domain]com",
+            "local.name@domain\\com",
+            "local.name@domain\tcom",
+            "local.name@domain\ncom",
+            "local.name@domain\rcom",
+            "local.name@",
             "@domain.com" };
+    // @formatter:on
 
     private MockEmailConcrete email;
 
@@ -51,65 +76,41 @@ public class InvalidAddressTest extends AbstractEmailTest {
 
     @Test
     public void testAddInvalidBcc() throws Exception {
-        // Test adding invalid 'Bcc' addresses
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
-            try {
-                // add bcc
-                email.addBcc(ARR_INVALID_EMAILS[i], "Joe");
-
-                // Expected an exception to be thrown
-                fail("addBcc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            } catch (final EmailException ignore) {
-                // Expected Result
-            }
-        }
+        // Test adding invalid 'BCC' addresses
+        // @formatter:off
+        IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
+                () -> email.addBcc(ARR_INVALID_EMAILS[i], "Joe"),
+                () -> "addBcc " + i + " passed: " + ARR_INVALID_EMAILS[i]));
+        // @formatter:on
     }
 
     @Test
     public void testAddInvalidCc() throws Exception {
-        // Test adding invalid 'cc' addresses
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
-            try {
-                // add cc
-                email.addCc(ARR_INVALID_EMAILS[i], "Joe");
-
-                // Expected an exception to be thrown
-                fail("addCc " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            } catch (final EmailException ignore) {
-                // Expected Result
-            }
-        }
+        // Test adding invalid 'CC' addresses
+        // @formatter:off
+        IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
+                () -> email.addCc(ARR_INVALID_EMAILS[i], "Joe"),
+                () -> "addCc " + i + " passed: " + ARR_INVALID_EMAILS[i]));
+        // @formatter:on
     }
 
     @Test
     public void testAddInvalidTo() throws Exception {
         // Test adding invalid 'to' addresses
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
-            try {
-                // Add To
-                email.addTo(ARR_INVALID_EMAILS[i], "Joe");
-
-                // Expected an exception to be thrown
-                fail("addTo " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            } catch (final EmailException ignore) {
-                // Expected Result
-            }
-        }
+        // @formatter:off
+        IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
+                () -> email.addTo(ARR_INVALID_EMAILS[i], "Joe"),
+                () -> "addTo " + i + " passed: " + ARR_INVALID_EMAILS[i]));
+        // @formatter:on
     }
 
     @Test
     public void testSetInvalidFrom() throws Exception {
         // Test setting invalid 'from' addresses
-        for (int i = 0; i < ARR_INVALID_EMAILS.length; i++) {
-            try {
-                // set from
-                email.setFrom(ARR_INVALID_EMAILS[i]);
-
-                // Expected an exception to be thrown
-                fail("setFrom " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-            } catch (final EmailException ignore) {
-                // Expected Result
-            }
-        }
+        // @formatter:off
+        IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
+                () -> email.setFrom(ARR_INVALID_EMAILS[i], "Joe"),
+                () -> "setFrom " + i + " passed: " + ARR_INVALID_EMAILS[i]));
+        // @formatter:on
     }
 }

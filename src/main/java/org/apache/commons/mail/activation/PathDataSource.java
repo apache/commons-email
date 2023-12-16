@@ -108,8 +108,7 @@ public class PathDataSource implements DataSource {
      */
     @Override
     public String getName() {
-        final Path fileName = path.getFileName();
-        return fileName != null ? fileName.toString() : null;
+        return Objects.toString(path.getFileName(), null);
     }
 
     /**

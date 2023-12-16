@@ -17,8 +17,8 @@
 package org.apache.commons.mail;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -243,13 +243,9 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // Create the email message
         final ImageHtmlEmail email = new ImageHtmlEmail();
 
-        // set the html message
-        try {
-            email.setHtmlMsg(null);
-            fail("Should fail here!");
-        } catch (final EmailException e) {
-            assertTrue(e.getMessage().contains("Invalid message."), e.getMessage());
-        }
+        // set the HTML message
+        final EmailException e = assertThrows(EmailException.class, () -> email.setHtmlMsg(null));
+        assertTrue(e.getMessage().contains("Invalid message."), e.getMessage());
     }
 
     @Test
@@ -259,13 +255,9 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // Create the email message
         final ImageHtmlEmail email = new ImageHtmlEmail();
 
-        // set the html message
-        try {
-            email.setHtmlMsg("");
-            fail("Should fail here!");
-        } catch (final EmailException e) {
-            assertTrue(e.getMessage().contains("Invalid message."), e.getMessage());
-        }
+        // set the HTML message
+        final EmailException e = assertThrows(EmailException.class, () -> email.setHtmlMsg(""));
+        assertTrue(e.getMessage().contains("Invalid message."), e.getMessage());
 
     }
 

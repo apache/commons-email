@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -147,13 +147,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // this should NOT be called when sending a message
         email.buildMimeMessage();
 
-        try {
-            email.send();
-        } catch (final IllegalStateException e) {
-            return;
-        }
-
-        fail("Expecting an exception when calling buildMimeMessage() before send() ...");
+        assertThrows(IllegalStateException.class, email::send);
     }
 
     @Test
@@ -163,12 +157,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         final FileDataSource dataSource = new FileDataSource(tmpFile);
 
         // does embedding a datasource without a name fail?
-        try {
-            email.embed(dataSource, "");
-            fail("embedding with an empty string for a name should fail");
-        } catch (final EmailException e) {
-            // expected
-        }
+        assertThrows(EmailException.class, () -> email.embed(dataSource, ""));
 
         // properly embed the datasource
         final String cid = email.embed(dataSource, "testname");
@@ -183,11 +172,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         final File anotherFile = File.createTempFile("testEmbedDataSource2", "txt");
         anotherFile.deleteOnExit();
         final FileDataSource anotherDS = new FileDataSource(anotherFile);
-        try {
-            email.embed(anotherDS, "testname");
-        } catch (final EmailException e) {
-            // expected
-        }
+        assertThrows(EmailException.class, () -> email.embed(anotherDS, "testname"));
     }
 
     @Test
@@ -262,21 +247,11 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // Test Exceptions
 
         // Does an invalid URL throw an exception?
-        try {
-            email.embed(createInvalidURL(), "Bad URL");
-            fail("Should have thrown an exception");
-        } catch (final EmailException e) {
-            // expected
-        }
+        assertThrows(EmailException.class, () -> email.embed(createInvalidURL(), "Bad URL"));
 
         // if we try to embed a different URL under a previously used name,
         // does it complain?
-        try {
-            email.embed(new URL("http://www.google.com"), "Test name");
-            fail("shouldn't be able to use an existing name with a different URL!");
-        } catch (final EmailException e) {
-            // expected
-        }
+        assertThrows(EmailException.class, () -> email.embed(new URL("http://www.google.com"), "Test name"));
     }
 
     @Test
@@ -300,12 +275,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
-            try {
-                email.setHtmlMsg(invalidChar);
-                fail("Should have thrown an exception");
-            } catch (final EmailException e) {
-                assertTrue(true);
-            }
+            assertThrows(EmailException.class, () -> email.setHtmlMsg(invalidChar));
         }
 
     }
@@ -321,12 +291,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
-            try {
-                email.setMsg(invalidChar);
-                fail("Should have thrown an exception");
-            } catch (final EmailException e) {
-                assertTrue(true);
-            }
+            assertThrows(EmailException.class, () -> email.setMsg(invalidChar));
         }
 
     }
@@ -340,12 +305,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
-            try {
-                email.setTextMsg(invalidChar);
-                fail("Should have thrown an exception");
-            } catch (final EmailException e) {
-                assertTrue(true);
-            }
+            assertThrows(EmailException.class, () -> email.setTextMsg(invalidChar));
         }
 
     }

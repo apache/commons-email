@@ -291,6 +291,12 @@ public abstract class AbstractEmailTest {
         }
     }
 
+    protected void stopServer() {
+        if (fakeMailServer != null) {
+            fakeMailServer.stop();
+        }
+    }
+
     @AfterEach
     public void tearDownEmailTest() {
         // stop the fake email server (if started)

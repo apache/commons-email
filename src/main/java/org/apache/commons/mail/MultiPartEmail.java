@@ -24,6 +24,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.util.Objects;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -241,7 +242,7 @@ public class MultiPartEmail extends Email {
             if (!Files.exists(file)) {
                 throw new IOException("\"" + fileName + "\" does not exist");
             }
-            return attach(new PathDataSource(file, FileTypeMap.getDefaultFileTypeMap(), options), file.getFileName().toString(), null,
+            return attach(new PathDataSource(file, FileTypeMap.getDefaultFileTypeMap(), options), Objects.toString(file.getFileName(), null), null,
                     EmailAttachment.ATTACHMENT);
         } catch (final IOException e) {
             throw new EmailException("Cannot attach file \"" + fileName + "\"", e);

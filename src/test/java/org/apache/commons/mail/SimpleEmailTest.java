@@ -17,8 +17,8 @@
 package org.apache.commons.mail;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -92,12 +92,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
-            try {
-                email.setMsg(invalidChar);
-                fail("Should have thrown an exception");
-            } catch (final EmailException e) {
-                assertTrue(true);
-            }
+            assertThrows(EmailException.class, () -> email.setMsg(invalidChar));
         }
 
     }

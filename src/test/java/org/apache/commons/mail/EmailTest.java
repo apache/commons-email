@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -689,14 +688,13 @@ public class EmailTest extends AbstractEmailTest {
         email.addTo(strTestMailTo);
         email.setAuthentication(null, null);
 
-        assertThrows(EmailException.class, () -> email.send());
+        assertThrows(EmailException.class, email::send);
     }
 
     @Test
     public void testSendBadHostName() {
-        try {
+        final EmailException e = assertThrows(EmailException.class, () -> {
             getMailServer();
-
             email = new MockEmailConcrete();
             email.setSubject("Test Email #1 Subject");
             email.setHostName("bad.host.com");
@@ -705,20 +703,16 @@ public class EmailTest extends AbstractEmailTest {
             email.addCc("me@home.com");
             email.addBcc("me@home.com");
             email.addReplyTo("me@home.com");
-
             email.setContent("test string object", " ; charset=" + EmailConstants.US_ASCII);
-
             email.send();
-            fail("Should have thrown an exception");
-        } catch (final EmailException e) {
-            assertTrue(e.getCause() instanceof ParseException);
-            fakeMailServer.stop();
-        }
+        });
+        assertTrue(e.getCause() instanceof ParseException);
+        stopServer();
     }
 
     @Test
     public void testSendCorrectSmtpPortContainedInException() {
-        try {
+        final EmailException e = assertThrows(EmailException.class, () -> {
             getMailServer();
 
             email = new MockEmailConcrete();
@@ -728,11 +722,9 @@ public class EmailTest extends AbstractEmailTest {
             email.addTo(strTestMailTo);
             email.setAuthentication(null, null);
             email.send();
-            fail("Should have thrown an exception");
-        } catch (final EmailException e) {
-            assertTrue(e.getMessage().contains("bad.host.com:465"));
-            fakeMailServer.stop();
-        }
+        });
+        assertTrue(e.getMessage().contains("bad.host.com:465"));
+        stopServer();
     }
 
     @Test
@@ -744,7 +736,7 @@ public class EmailTest extends AbstractEmailTest {
         email.setSmtpPort(getMailServerPort());
         email.setFrom("me@home.com");
 
-        assertThrows(EmailException.class, () -> email.send());
+        assertThrows(EmailException.class, email::send);
     }
 
     @Test
@@ -756,7 +748,7 @@ public class EmailTest extends AbstractEmailTest {
         email.setSmtpPort(getMailServerPort());
         email.addTo("me@home.com");
 
-        assertThrows(EmailException.class, () -> email.send());
+        assertThrows(EmailException.class, email::send);
     }
 
     @Test
@@ -778,7 +770,7 @@ public class EmailTest extends AbstractEmailTest {
 
         email = new MockEmailConcrete();
 
-        assertThrows(EmailException.class, () -> email.send());
+        assertThrows(EmailException.class, email::send);
     }
 
     @Test
