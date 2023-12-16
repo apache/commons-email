@@ -46,8 +46,8 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed
      */
     public static MimeMessage createMimeMessage(final Session session, final byte[] source) throws MessagingException, IOException {
-        try (ByteArrayInputStream is = new ByteArrayInputStream(source)) {
-            return new MimeMessage(session, is);
+        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(source)) {
+            return new MimeMessage(session, inputStream);
         }
     }
 
@@ -61,8 +61,8 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed
      */
     public static MimeMessage createMimeMessage(final Session session, final File source) throws MessagingException, IOException {
-        try (FileInputStream is = new FileInputStream(source)) {
-            return createMimeMessage(session, is);
+        try (FileInputStream inputStream = new FileInputStream(source)) {
+            return createMimeMessage(session, inputStream);
         }
     }
 
@@ -106,9 +106,9 @@ public final class MimeMessageUtils {
         if (!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs()) {
             throw new IOException("Failed to create the following parent directories: " + resultFile.getParentFile());
         }
-        try (FileOutputStream fos = new FileOutputStream(resultFile)) {
-            mimeMessage.writeTo(fos);
-            fos.flush();
+        try (FileOutputStream outputStream = new FileOutputStream(resultFile)) {
+            mimeMessage.writeTo(outputStream);
+            outputStream.flush();
         }
     }
 
