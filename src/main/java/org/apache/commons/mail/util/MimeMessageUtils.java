@@ -91,7 +91,7 @@ public final class MimeMessageUtils {
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
      */
-    public static MimeMessage createMimeMessage(final Session session, final Path source, OpenOption... options) throws MessagingException, IOException {
+    public static MimeMessage createMimeMessage(final Session session, final Path source, final OpenOption... options) throws MessagingException, IOException {
         try (InputStream inputStream = Files.newInputStream(source, options)) {
             return createMimeMessage(session, inputStream);
         }

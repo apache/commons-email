@@ -65,7 +65,7 @@ public class PathDataSource implements DataSource {
      *
      * @param path    the path, non-null.
      * @param typeMap the type map, non-null.
-     * @param options Options for opening streams.
+     * @param options options for opening file streams.
      */
     public PathDataSource(final Path path, final FileTypeMap typeMap, final OpenOption... options) {
         this.path = Objects.requireNonNull(path, "path");

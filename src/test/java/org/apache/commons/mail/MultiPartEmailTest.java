@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,16 +37,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MultiPartEmailTest extends AbstractEmailTest {
+
     /** */
     private MockMultiPartEmailConcrete email;
+
     /** File to used to test file attachments (Must be valid) */
     private File testFile;
+
+    /** File to used to test file attachments (Must be valid) */
+    private Path testPath;
 
     @BeforeEach
     public void setUpMultiPartEmailTest() throws Exception {
         // reusable objects to be used across multiple tests
         email = new MockMultiPartEmailConcrete();
         testFile = File.createTempFile("testfile", ".txt");
+        testPath = testFile.toPath();
     }
 
     @Test
@@ -80,8 +87,45 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
     }
 
+    /**
+     * @throws MalformedURLException when a bad attachment URL is used
+     * @throws EmailException        when a bad address or attachment is used
+     */
     @Test
-    public void testAttach() throws Exception {
+    public void testAttach2() throws MalformedURLException, EmailException {
+        // Test Success - URL
+        email.attach(new URL(strTestURL), "Test Attachment", "Test Attachment Desc");
+
+        // bad name
+        email.attach(new URL(strTestURL), null, "Test Attachment Desc");
+    }
+
+    @Test
+    public void testAttach3() throws Exception {
+        // Test Success - URL
+        email.attach(new URLDataSource(new URL(strTestURL)), "Test Attachment", "Test Attachment Desc");
+        // Test Exceptions
+        // null datasource
+        try {
+            final URLDataSource urlDs = null;
+            email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
+            fail("Should have thrown an exception");
+        } catch (final EmailException e) {
+            assertTrue(true);
+        }
+
+        // invalid datasource
+        try {
+            final URLDataSource urlDs = new URLDataSource(createInvalidURL());
+            email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
+            fail("Should have thrown an exception");
+        } catch (final EmailException e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testAttachFile() throws Exception {
         EmailAttachment attachment;
         // Test Success - EmailAttachment
         attachment = new EmailAttachment();
@@ -129,43 +173,6 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         }
     }
 
-    /**
-     * @throws MalformedURLException when a bad attachment URL is used
-     * @throws EmailException        when a bad address or attachment is used
-     */
-    @Test
-    public void testAttach2() throws MalformedURLException, EmailException {
-        // Test Success - URL
-        email.attach(new URL(strTestURL), "Test Attachment", "Test Attachment Desc");
-
-        // bad name
-        email.attach(new URL(strTestURL), null, "Test Attachment Desc");
-    }
-
-    @Test
-    public void testAttach3() throws Exception {
-        // Test Success - URL
-        email.attach(new URLDataSource(new URL(strTestURL)), "Test Attachment", "Test Attachment Desc");
-        // Test Exceptions
-        // null datasource
-        try {
-            final URLDataSource urlDs = null;
-            email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
-            fail("Should have thrown an exception");
-        } catch (final EmailException e) {
-            assertTrue(true);
-        }
-
-        // invalid datasource
-        try {
-            final URLDataSource urlDs = new URLDataSource(createInvalidURL());
-            email.attach(urlDs, "Test Attachment", "Test Attachment Desc");
-            fail("Should have thrown an exception");
-        } catch (final EmailException e) {
-            assertTrue(true);
-        }
-    }
-
     @Test
     public void testAttachFileLocking() throws Exception {
         // EMAIL-120: attaching a FileDataSource may result in a locked file
@@ -176,6 +183,55 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         email.attach(new FileDataSource(tmpFile), "Test Attachment", "Test Attachment Desc");
 
         assertTrue(tmpFile.delete());
+    }
+
+    @Test
+    public void testAttachPath() throws Exception {
+        EmailAttachment attachment;
+        // Test Success - EmailAttachment
+        attachment = new EmailAttachment();
+        attachment.setName("Test Attachment");
+        attachment.setDescription("Test Attachment Desc");
+        attachment.setPath(testPath.toAbsolutePath().toString());
+        email.attach(attachment);
+        assertTrue(email.isBoolHasAttachments());
+        // Test Success - URL
+        attachment = new EmailAttachment();
+        attachment.setName("Test Attachment");
+        attachment.setDescription("Test Attachment Desc");
+        attachment.setURL(new URL(strTestURL));
+        email.attach(attachment);
+        // Test Success - File
+        email.attach(testPath);
+        assertTrue(email.isBoolHasAttachments());
+        // Test Exceptions
+        // null attachment
+        try {
+            email.attach((EmailAttachment) null);
+            fail("Should have thrown an exception");
+        } catch (final EmailException e) {
+            assertTrue(true);
+        }
+
+        // bad url
+        attachment = new EmailAttachment();
+        try {
+            attachment.setURL(createInvalidURL());
+            email.attach(attachment);
+            fail("Should have thrown an exception");
+        } catch (final EmailException e) {
+            assertTrue(true);
+        }
+
+        // bad file
+        attachment = new EmailAttachment();
+        try {
+            attachment.setPath("");
+            email.attach(attachment);
+            fail("Should have thrown an exception");
+        } catch (final EmailException e) {
+            assertTrue(true);
+        }
     }
 
     /** TODO implement test for GetContainer */

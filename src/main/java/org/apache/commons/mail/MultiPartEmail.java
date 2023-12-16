@@ -21,10 +21,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.activation.FileTypeMap;
 import javax.activation.URLDataSource;
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -32,6 +36,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
 import javax.mail.internet.MimeUtility;
+
+import org.apache.commons.mail.activation.PathDataSource;
 
 /**
  * A multipart email.
@@ -215,6 +221,28 @@ public class MultiPartEmail extends Email {
                 throw new IOException("\"" + fileName + "\" does not exist");
             }
             return attach(new FileDataSource(file), file.getName(), null, EmailAttachment.ATTACHMENT);
+        } catch (final IOException e) {
+            throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
+        }
+    }
+
+    /**
+     * Attaches a path.
+     *
+     * @param file    A file attachment.
+     * @param options options for opening file streams.
+     * @return A MultiPartEmail.
+     * @throws EmailException see javax.mail.internet.MimeBodyPart for definitions
+     * @since 1.6.0
+     */
+    public MultiPartEmail attach(final Path file, final OpenOption... options) throws EmailException {
+        final Path fileName = file.toAbsolutePath();
+        try {
+            if (!Files.exists(file)) {
+                throw new IOException("\"" + fileName + "\" does not exist");
+            }
+            return attach(new PathDataSource(file, FileTypeMap.getDefaultFileTypeMap(), options), file.getFileName().toString(), null,
+                    EmailAttachment.ATTACHMENT);
         } catch (final IOException e) {
             throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
         }

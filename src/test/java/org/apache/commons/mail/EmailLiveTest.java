@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -269,11 +270,26 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testMultiPartEmail() throws Exception {
+    public void testMultiPartEmailFile() throws Exception {
         final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject("TestMultiPartMail");
         email.setMsg("This is a test mail ... :-)");
         email.attach(new File("./src/test/resources/attachments/logo.pdf"));
+
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
+    }
+
+    /**
+     * A sanity check that a simple email also works in reality.
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    public void testMultiPartEmailPath() throws Exception {
+        final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
+        email.setSubject("TestMultiPartMail");
+        email.setMsg("This is a test mail ... :-)");
+        email.attach(Paths.get("./src/test/resources/attachments/logo.pdf"));
 
         EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
     }

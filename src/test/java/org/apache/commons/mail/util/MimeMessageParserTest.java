@@ -68,7 +68,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        DataSource dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
+        final DataSource dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
         assertNotNull(dataSource);
         assertEquals("application/pdf", dataSource.getContentType());
     }
@@ -102,7 +102,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
+        final DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
         assertNotNull(dataSource);
         assertEquals("text/plain", dataSource.getContentType());
     }
@@ -136,7 +136,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
+        final DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
         assertNotNull(dataSource);
         assertEquals("text/plain", dataSource.getContentType());
     }
@@ -261,7 +261,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        DataSource dataSource = mimeMessageParser.getAttachmentList().get(0);
+        final DataSource dataSource = mimeMessageParser.getAttachmentList().get(0);
         assertNotNull(dataSource);
         assertEquals("text/plain", dataSource.getContentType());
         assertEquals("Test Attachment - a>ä, o>ö, u>ü, au>äu", dataSource.getName());
@@ -329,7 +329,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        DataSource dataSource = mimeMessageParser.findAttachmentByName("test.html");
+        final DataSource dataSource = mimeMessageParser.findAttachmentByName("test.html");
         assertNotNull(dataSource);
         assertEquals("text/html", dataSource.getContentType());
     }
@@ -392,7 +392,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        DataSource dataSource = (DataSource) attachmentList.get(0);
+        final DataSource dataSource = (DataSource) attachmentList.get(0);
         assertNotNull(dataSource);
         assertNull(dataSource.getName());
         assertEquals("message/disposition-notification", dataSource.getContentType());
