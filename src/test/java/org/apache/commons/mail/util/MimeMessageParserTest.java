@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
@@ -34,9 +35,10 @@ import org.apache.commons.mail.HtmlEmail;
 import org.junit.jupiter.api.Test;
 
 /**
- * Testing the MimeMessageParser.
+ * Tests {@link MimeMessageParser}.
  */
 public class MimeMessageParserTest {
+
     /**
      * This test parses a SAP generated email which only contains a PDF but no email text.
      *
@@ -44,9 +46,8 @@ public class MimeMessageParserTest {
      */
     @Test
     public void testAttachmentOnly() throws Exception {
-        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
-        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/attachment-only.eml"));
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, Paths.get("./src/test/resources/eml/attachment-only.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
 
         mimeMessageParser.parse();
@@ -67,7 +68,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
+        DataSource dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
         assertNotNull(dataSource);
         assertEquals("application/pdf", dataSource.getContentType());
     }
@@ -79,7 +80,6 @@ public class MimeMessageParserTest {
      */
     @Test
     public void testMultipartTextAttachment() throws Exception {
-        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -102,7 +102,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        dataSource = mimeMessageParser.findAttachmentByName("test.txt");
+        DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
         assertNotNull(dataSource);
         assertEquals("text/plain", dataSource.getContentType());
     }
@@ -114,7 +114,6 @@ public class MimeMessageParserTest {
      */
     @Test
     public void testMultipartTextAttachmentOnly() throws Exception {
-        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment-only.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -137,7 +136,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        dataSource = mimeMessageParser.findAttachmentByName("test.txt");
+        DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
         assertNotNull(dataSource);
         assertEquals("text/plain", dataSource.getContentType());
     }
@@ -145,11 +144,9 @@ public class MimeMessageParserTest {
     @Test
     public void testParseCreatedHtmlEmailWithMixedContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
-
         final HtmlEmail email = new HtmlEmail();
 
         email.setMailSession(session);
-
         email.setFrom("test_from@apache.org");
         email.setSubject("Test Subject");
         email.addTo("test_to@apache.org");
@@ -184,11 +181,9 @@ public class MimeMessageParserTest {
         final HtmlEmail email = new HtmlEmail();
 
         email.setMailSession(session);
-
         email.setFrom("test_from@apache.org");
         email.setSubject("Test Subject");
         email.addTo("test_to@apache.org");
-
         email.buildMimeMessage();
         final MimeMessage msg = email.getMimeMessage();
 
@@ -215,9 +210,7 @@ public class MimeMessageParserTest {
         final Session session = Session.getDefaultInstance(new Properties());
 
         final HtmlEmail email = new HtmlEmail();
-
         email.setMailSession(session);
-
         email.setFrom("test_from@apache.org");
         email.setSubject("Test Subject");
         email.addTo("test_to@apache.org");
@@ -246,7 +239,6 @@ public class MimeMessageParserTest {
 
     @Test
     public void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception {
-        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-encoded-filename.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -269,7 +261,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        dataSource = mimeMessageParser.getAttachmentList().get(0);
+        DataSource dataSource = mimeMessageParser.getAttachmentList().get(0);
         assertNotNull(dataSource);
         assertEquals("text/plain", dataSource.getContentType());
         assertEquals("Test Attachment - a>ä, o>ö, u>ü, au>äu", dataSource.getName());
@@ -277,7 +269,6 @@ public class MimeMessageParserTest {
 
     @Test
     public void testParseHtmlEmailWithAttachments() throws Exception {
-        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -300,7 +291,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(2, attachmentList.size());
 
-        dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
+        DataSource dataSource = mimeMessageParser.findAttachmentByName("Wasserlilien.jpg");
         assertNotNull(dataSource);
         assertEquals("image/jpeg", dataSource.getContentType());
 
@@ -316,7 +307,6 @@ public class MimeMessageParserTest {
      */
     @Test
     public void testParseHtmlEmailWithHtmlAttachment() throws Exception {
-        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-content-disposition.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -339,7 +329,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        dataSource = mimeMessageParser.findAttachmentByName("test.html");
+        DataSource dataSource = mimeMessageParser.findAttachmentByName("test.html");
         assertNotNull(dataSource);
         assertEquals("text/html", dataSource.getContentType());
     }
@@ -380,7 +370,6 @@ public class MimeMessageParserTest {
      */
     @Test
     public void testParseMultipartReport() throws Exception {
-        DataSource dataSource;
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-report.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -403,7 +392,7 @@ public class MimeMessageParserTest {
         final List<?> attachmentList = mimeMessageParser.getAttachmentList();
         assertEquals(1, attachmentList.size());
 
-        dataSource = (DataSource) attachmentList.get(0);
+        DataSource dataSource = (DataSource) attachmentList.get(0);
         assertNotNull(dataSource);
         assertNull(dataSource.getName());
         assertEquals("message/disposition-notification", dataSource.getContentType());
