@@ -46,7 +46,6 @@ public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest {
     public void testResolveStrict() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("."), false);
         assertNotNull(dataSourceResolver.resolve("./src/test/resources/images/asf_logo_wide.gif"));
-
         assertThrows(IOException.class, () -> dataSourceResolver.resolve("asf_logo_wide.gif"));
     }
 
