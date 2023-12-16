@@ -27,6 +27,7 @@ import java.util.Objects;
 
 import javax.activation.DataSource;
 import javax.activation.FileTypeMap;
+import javax.activation.MimetypesFileTypeMap;
 
 /**
  * Implements a simple DataSource object that encapsulates a Path. It provides data typing services via a FileTypeMap object.
@@ -75,13 +76,13 @@ public class PathDataSource implements DataSource {
 
     /**
      * Gets the MIME type of the data as a String. This method uses the currently installed FileTypeMap. If there is no FileTypeMap explicitly set, the
-     * FileDataSource will call the <code>getDefaultFileTypeMap</code> method on FileTypeMap to acquire a default FileTypeMap.
+     * FileDataSource will call the {@link FileTypeMap#getDefaultFileTypeMap} method to acquire a default FileTypeMap.
      * <p>
-     * By default, the FileTypeMap used will be a MimetypesFileTypeMap.
+     * By default, the {@link FileTypeMap} used will be a {@link MimetypesFileTypeMap}.
      * </p>
      *
      * @return the MIME Type
-     * @see javax.activation.FileTypeMap#getDefaultFileTypeMap
+     * @see FileTypeMap#getDefaultFileTypeMap
      */
     @Override
     public String getContentType() {
@@ -100,14 +101,15 @@ public class PathDataSource implements DataSource {
     }
 
     /**
-     * Gets the <i>name</i> of this object. The FileDataSource will return the file name of the object.
+     * Gets the <em>name</em> of this object. The FileDataSource will return the file name of the object.
      *
-     * @return the name of the object.
+     * @return the name of the object or null.
      * @see javax.activation.DataSource
      */
     @Override
     public String getName() {
-        return path.getFileName().toString();
+        final Path fileName = path.getFileName();
+        return fileName != null ? fileName.toString() : null;
     }
 
     /**
@@ -122,7 +124,7 @@ public class PathDataSource implements DataSource {
     }
 
     /**
-     * Gets the File object that corresponds to this FileDataSource.
+     * Gets the File object that corresponds to this PathDataSource.
      *
      * @return the File object for the file represented by this object.
      */
