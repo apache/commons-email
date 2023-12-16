@@ -50,6 +50,8 @@
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add EmailConstants.SOCKET_TIMEOUT and deprecate SOCKET_TIMEOUT_MS.</action>
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add Email.setSocketConnectionTimeout(Duration) and deprecate setSocketConnectionTimeout(int).</action>
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add Email.setSocketTimeout(Duration) and deprecate setSocketTimeout(int).</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add PathDataSource.</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add DataSourcePathResolver.</action>
       <!-- UPDATE -->
       <action type="update" due-to="Dependabot" dev="sebb">Bump org.slf4j:slf4j-jdk14 from 1.7.7 to 2.0.9 #165.</action>
       <action type="update" due-to="Dependabot" dev="sebb">Bump mockito-core from 4.11.0 to 5.8.0 #187.</action>
