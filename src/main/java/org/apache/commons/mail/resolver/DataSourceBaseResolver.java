@@ -19,13 +19,13 @@ package org.apache.commons.mail.resolver;
 import org.apache.commons.mail.DataSourceResolver;
 
 /**
- * Base class for various resolvers.
+ * Abstract class for resolvers.
  *
  * @since 1.3
  */
 public abstract class DataSourceBaseResolver implements DataSourceResolver {
 
-    /** Shall we ignore resources not found or complain with an exception */
+    /** Whether to ignore resources not found or complain with an exception. */
     private final boolean lenient;
 
     /**
@@ -45,39 +45,39 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
     }
 
     /**
-     * Is this a content id?
+     * Tests whether the argument is a content id.
      *
-     * @param resourceLocation the resource location
-     * @return true if it is a CID
+     * @param resourceLocation the resource location to test.
+     * @return true if it is a CID.
      */
     protected boolean isCid(final String resourceLocation) {
         return resourceLocation.startsWith("cid:");
     }
 
     /**
-     * Is this a file URL?
+     * Tests whether this a file URL.
      *
-     * @param urlString the URL string
-     * @return true if it is a file URL
+     * @param urlString the URL string.
+     * @return true if it is a file URL.
      */
     protected boolean isFileUrl(final String urlString) {
         return urlString.startsWith("file:/");
     }
 
     /**
-     * Is this a HTTP/HTTPS URL?
+     * Tests whether this a HTTP or HTTPS URL.
      *
-     * @param urlString the URL string
-     * @return true if it is a HTTP/HTTPS URL
+     * @param urlString the URL string to test.
+     * @return true if it is a HTTP or HTTPS URL.
      */
     protected boolean isHttpUrl(final String urlString) {
         return urlString.startsWith("http://") || urlString.startsWith("https://");
     }
 
     /**
-     * Shall we ignore resources not found or throw an exception?
+     * Tests whether to ignore resources not found or throw an exception.
      *
-     * @return the lenient flag
+     * @return the lenient flag.
      */
     public boolean isLenient() {
         return lenient;
