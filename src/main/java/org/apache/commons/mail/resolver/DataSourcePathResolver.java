@@ -18,10 +18,12 @@ package org.apache.commons.mail.resolver;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.activation.DataSource;
+import javax.activation.FileTypeMap;
 
 import org.apache.commons.mail.activation.PathDataSource;
 
@@ -34,12 +36,13 @@ public final class DataSourcePathResolver extends DataSourceBaseResolver {
 
     /** The base directory of the resource when resolving relative paths */
     private final Path baseDir;
+    private final OpenOption[] options;
 
     /**
      * Constructs a new instance.
      */
     public DataSourcePathResolver() {
-        baseDir = Paths.get(".");
+        this(Paths.get("."));
     }
 
     /**
@@ -48,7 +51,7 @@ public final class DataSourcePathResolver extends DataSourceBaseResolver {
      * @param baseDir the base directory of the resource when resolving relative paths
      */
     public DataSourcePathResolver(final Path baseDir) {
-        this.baseDir = baseDir;
+        this(baseDir, false);
     }
 
     /**
@@ -56,10 +59,12 @@ public final class DataSourcePathResolver extends DataSourceBaseResolver {
      *
      * @param baseDir the base directory of the resource when resolving relative paths
      * @param lenient shall we ignore resources not found or complain with an exception
+     * @param options options for opening streams.
      */
-    public DataSourcePathResolver(final Path baseDir, final boolean lenient) {
+    public DataSourcePathResolver(final Path baseDir, final boolean lenient, final OpenOption... options) {
         super(lenient);
         this.baseDir = baseDir;
+        this.options = options;
     }
 
     /**
@@ -91,7 +96,7 @@ public final class DataSourcePathResolver extends DataSourceBaseResolver {
             }
 
             if (Files.exists(file)) {
-                result = new PathDataSource(file);
+                result = new PathDataSource(file, FileTypeMap.getDefaultFileTypeMap(), options);
             } else if (!isLenient) {
                 throw new IOException("Cant resolve the following file resource :" + file.toAbsolutePath());
             }

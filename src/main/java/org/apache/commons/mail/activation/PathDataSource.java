@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -40,6 +41,7 @@ public class PathDataSource implements DataSource {
 
     private final Path path;
     private final FileTypeMap typeMap;
+    private final OpenOption[] options;
 
     /**
      * Creates a new instance from a Path.
@@ -63,10 +65,12 @@ public class PathDataSource implements DataSource {
      *
      * @param path    the path, non-null.
      * @param typeMap the type map, non-null.
+     * @param options Options for opening streams.
      */
-    public PathDataSource(final Path path, final FileTypeMap typeMap) {
+    public PathDataSource(final Path path, final FileTypeMap typeMap, final OpenOption... options) {
         this.path = Objects.requireNonNull(path, "path");
         this.typeMap = Objects.requireNonNull(typeMap, "typeMap");
+        this.options = options;
     }
 
     /**
@@ -92,7 +96,7 @@ public class PathDataSource implements DataSource {
      */
     @Override
     public InputStream getInputStream() throws IOException {
-        return Files.newInputStream(path);
+        return Files.newInputStream(path, options);
     }
 
     /**
@@ -114,7 +118,7 @@ public class PathDataSource implements DataSource {
      */
     @Override
     public OutputStream getOutputStream() throws IOException {
-        return Files.newOutputStream(path);
+        return Files.newOutputStream(path, options);
     }
 
     /**
