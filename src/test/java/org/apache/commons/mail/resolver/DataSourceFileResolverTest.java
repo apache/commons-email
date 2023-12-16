@@ -29,13 +29,11 @@ import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for DateSourceResolver.
- *
- * @since 1.3
  */
 public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest {
 
     @Test
-    public void testResolvingFileLenient() throws Exception {
+    public void testResolveLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("./src/test/resources"), true);
         assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length);
         assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length);
@@ -45,7 +43,7 @@ public class DataSourceFileResolverTest extends AbstractDataSourceResolverTest {
     }
 
     @Test
-    public void testResolvingFileNonLenient() throws Exception {
+    public void testResolveStrict() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceFileResolver(new File("."), false);
         assertNotNull(dataSourceResolver.resolve("./src/test/resources/images/asf_logo_wide.gif"));
 
