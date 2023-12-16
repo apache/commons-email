@@ -19,6 +19,7 @@ package org.apache.commons.mail.mocks;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
+
 import org.apache.commons.mail.MultiPartEmail;
 
 /**
