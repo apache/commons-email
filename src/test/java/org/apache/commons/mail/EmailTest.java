@@ -604,11 +604,11 @@ public class EmailTest extends AbstractEmailTest {
     public void testGetSetCharset() {
         Charset set = StandardCharsets.US_ASCII;
         email.setCharset(set.name());
-        assertEquals(set.name(), email.getCharset());
+        assertEquals(set.name(), email.getCharsetName());
 
         set = StandardCharsets.UTF_8;
         email.setCharset(set.name());
-        assertEquals(set.name(), email.getCharset());
+        assertEquals(set.name(), email.getCharsetName());
     }
 
     @Test
@@ -767,7 +767,7 @@ public class EmailTest extends AbstractEmailTest {
         email.setHostName(strTestMailServer);
         email.setSmtpPort(getMailServerPort());
         email.addTo("me@home.com");
-        email.getSession().getProperties().setProperty(EmailConstants.MAIL_FROM, "me@home.com");
+        email.getMailSession().getProperties().setProperty(EmailConstants.MAIL_FROM, "me@home.com");
 
         email.send();
     }
@@ -830,7 +830,7 @@ public class EmailTest extends AbstractEmailTest {
         final MimeMultipart part = new MimeMultipart();
         email.setContent(part);
 
-        assertEquals(part, email.getContentMimeMultipart());
+        assertEquals(part, email.getEmailBody());
     }
 
     @Test
@@ -838,13 +838,13 @@ public class EmailTest extends AbstractEmailTest {
         final MimeMultipart part = new MimeMultipart("abc123");
         email.setContent(part);
 
-        assertEquals(part, email.getContentMimeMultipart());
+        assertEquals(part, email.getEmailBody());
     }
 
     @Test
     public void testSetContentNull() throws Exception {
         email.setContent(null);
-        assertNull(email.getContentMimeMultipart());
+        assertNull(email.getEmailBody());
     }
 
     @Test
@@ -854,7 +854,7 @@ public class EmailTest extends AbstractEmailTest {
         String testContentType = " ; charset=" + EmailConstants.US_ASCII;
 
         email.setContent(testObject, testContentType);
-        assertEquals(testObject, email.getContentObject());
+        assertEquals(testObject, email.getContent());
         assertEquals(testContentType, email.getContentType());
 
         // test (null string object and valid content type)
@@ -862,7 +862,7 @@ public class EmailTest extends AbstractEmailTest {
         testContentType = " ; charset=" + EmailConstants.US_ASCII + " some more here";
 
         email.setContent(testObject, testContentType);
-        assertEquals(testObject, email.getContentObject());
+        assertEquals(testObject, email.getContent());
         assertEquals(testContentType, email.getContentType());
 
         // test (string object and null content type)
@@ -870,7 +870,7 @@ public class EmailTest extends AbstractEmailTest {
         testContentType = null;
 
         email.setContent(testObject, testContentType);
-        assertEquals(testObject, email.getContentObject());
+        assertEquals(testObject, email.getContent());
         assertEquals(testContentType, email.getContentType());
 
         // test (string object and invalid content type)
@@ -878,7 +878,7 @@ public class EmailTest extends AbstractEmailTest {
         testContentType = " something incorrect ";
 
         email.setContent(testObject, testContentType);
-        assertEquals(testObject, email.getContentObject());
+        assertEquals(testObject, email.getContent());
         assertEquals(testContentType, email.getContentType());
     }
 
@@ -992,7 +992,7 @@ public class EmailTest extends AbstractEmailTest {
         // retrieve and verify
         assertEquals(boolPopBeforeSmtp, email.isPopBeforeSmtp());
         assertEquals(strHost, email.getPopHost());
-        assertEquals(strUsername, email.getPopUsername());
+        assertEquals(strUsername, email.getPopUserName());
         assertEquals(strPassword, email.getPopPassword());
     }
 

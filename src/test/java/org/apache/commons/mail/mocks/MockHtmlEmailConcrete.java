@@ -19,7 +19,6 @@ package org.apache.commons.mail.mocks;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.mail.HtmlEmail;
 
@@ -29,23 +28,6 @@ import org.apache.commons.mail.HtmlEmail;
  * @since 1.0
  */
 public class MockHtmlEmailConcrete extends HtmlEmail {
-
-    /**
-     * @return fromAddress
-     */
-    @Override
-    public InternetAddress getFromAddress() {
-        return fromAddress;
-    }
-
-    /**
-     * Retrieve the html msg
-     *
-     * @return Message Content
-     */
-    public String getHtmlMsg() {
-        return html;
-    }
 
     /**
      * Retrieve the message content
@@ -58,15 +40,6 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
         } catch (final IOException | MessagingException msgE) {
             return null;
         }
-    }
-
-    /**
-     * Retrieve the text msg
-     *
-     * @return Message Content
-     */
-    public String getTextMsg() {
-        return text;
     }
 
 }

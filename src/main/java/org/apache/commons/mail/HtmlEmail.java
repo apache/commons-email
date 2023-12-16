@@ -164,10 +164,18 @@ public class HtmlEmail extends MultiPartEmail {
 
     /**
      * Text part of the message. This will be used as alternative text if the email client does not support HTML messages.
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected String text;
 
-    /** HTML part of the message. */
+    /**
+     * HTML part of the message.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected String html;
 
     /**
@@ -178,7 +186,10 @@ public class HtmlEmail extends MultiPartEmail {
 
     /**
      * Embedded images Map&lt;String, InlineImage&gt; where the key is the user-defined image name.
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected Map<String, InlineImage> inlineEmbeds = new HashMap<>();
 
     /**
@@ -236,7 +247,7 @@ public class HtmlEmail extends MultiPartEmail {
 
             // EMAIL-104: call explicitly setText to use default mime charset
             // (property "mail.mime.charset") in case none has been set
-            msgHtml.setText(html, charset, EmailConstants.TEXT_SUBTYPE_HTML);
+            msgHtml.setText(html, getCharsetName(), EmailConstants.TEXT_SUBTYPE_HTML);
 
             // EMAIL-147: work-around for buggy JavaMail implementations;
             // in case setText(...) does not set the correct content type,
@@ -244,8 +255,8 @@ public class HtmlEmail extends MultiPartEmail {
             final String contentType = msgHtml.getContentType();
             if (contentType == null || !contentType.equals(EmailConstants.TEXT_HTML)) {
                 // apply default charset if one has been set
-                if (EmailUtils.isNotEmpty(charset)) {
-                    msgHtml.setContent(html, EmailConstants.TEXT_HTML + "; charset=" + charset);
+                if (EmailUtils.isNotEmpty(getCharsetName())) {
+                    msgHtml.setContent(html, EmailConstants.TEXT_HTML + "; charset=" + getCharsetName());
                 } else {
                     // unfortunately, MimeUtility.getDefaultMIMECharset() is package private
                     // and thus can not be used to set the default system charset in case
@@ -265,7 +276,7 @@ public class HtmlEmail extends MultiPartEmail {
 
             // EMAIL-104: call explicitly setText to use default mime charset
             // (property "mail.mime.charset") in case none has been set
-            msgText.setText(text, charset);
+            msgText.setText(text, getCharsetName());
         }
     }
 
@@ -491,6 +502,26 @@ public class HtmlEmail extends MultiPartEmail {
             throw new EmailException("Invalid URL", e);
         }
         return embed(new URLDataSource(url), name);
+    }
+
+    /**
+     * Gets the HTML content.
+     *
+     * @return the HTML content.
+     * @since 1.6.0
+     */
+    public String getHtml() {
+        return html;
+    }
+
+    /**
+     * Gets the message text.
+     *
+     * @return the message text.
+     * @since 1.6.0
+     */
+    public String getText() {
+        return text;
     }
 
     /**

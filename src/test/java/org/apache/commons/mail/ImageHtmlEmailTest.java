@@ -116,7 +116,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
     }
 
@@ -335,7 +335,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
     }
 
@@ -488,7 +488,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
     }
 }

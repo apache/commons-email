@@ -173,90 +173,191 @@ public abstract class Email {
     @Deprecated
     public static final String MAIL_SMTP_TIMEOUT = EmailConstants.MAIL_SMTP_TIMEOUT;
 
-    /** The email message to send. */
+    /**
+     * The email message to send.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected MimeMessage message;
 
-    /** The charset to use for this message. */
+    /**
+     * The charset to use for this message.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected String charset;
 
-    /** The Address of the sending party, mandatory. */
+    /**
+     * The Address of the sending party, mandatory.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected InternetAddress fromAddress;
 
-    /** The Subject. */
+    /**
+     * The Subject.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected String subject;
 
-    /** An attachment. */
+    /**
+     * An attachment.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected MimeMultipart emailBody;
 
-    /** The content. */
+    /**
+     * The content.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected Object content;
 
-    /** The content type. */
+    /**
+     * The content type.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected String contentType;
 
-    /** Set session debugging on or off. */
+    /**
+     * Set session debugging on or off.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected boolean debug;
 
-    /** Sent date. */
+    /**
+     * Sent date.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected Date sentDate;
 
     /**
      * Instance of an {@code Authenticator} object that will be used when authentication is requested from the mail server.
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected Authenticator authenticator;
 
     /**
      * The hostname of the mail server with which to connect. If null will try to get property from system.properties. If still null, quit.
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected String hostName;
 
     /**
      * The port number of the mail server to connect to. Defaults to the standard port ( 25 ).
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected String smtpPort = "25";
 
     /**
      * The port number of the SSL enabled SMTP server; defaults to the standard port, 465.
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected String sslSmtpPort = "465";
 
-    /** List of "to" email addresses. */
+    /**
+     * List of "to" email addresses.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected List<InternetAddress> toList = new ArrayList<>();
 
-    /** List of "cc" email addresses. */
+    /**
+     * List of "cc" email addresses.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected List<InternetAddress> ccList = new ArrayList<>();
 
-    /** List of "bcc" email addresses. */
+    /**
+     * List of "bcc" email addresses.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected List<InternetAddress> bccList = new ArrayList<>();
 
-    /** List of "replyTo" email addresses. */
+    /**
+     * List of "replyTo" email addresses.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected List<InternetAddress> replyList = new ArrayList<>();
 
     /**
      * Address to which undeliverable mail should be sent. Because this is handled by JavaMail as a String property in the mail session, this property is of
      * type {@code String} rather than {@code InternetAddress}.
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected String bounceAddress;
 
     /**
      * Used to specify the mail headers. Example:
      *
      * X-Mailer: Sendmail, X-Priority: 1( highest ) or 2( high ) 3( normal ) 4( low ) and 5( lowest ) Disposition-Notification-To: user@domain.net
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected Map<String, String> headers = new HashMap<>();
 
     /**
-     * Used to determine whether to use pop3 before SMTP, and if so the settings.
+     * Whether to use POP3 before SMTP, and if so the settings.
+     *
+     * @deprecated Use getters and getters.
      */
+    @Deprecated
     protected boolean popBeforeSmtp;
 
-    /** The host name of the pop3 server. */
+    /**
+     * The host name of the POP3 server.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected String popHost;
 
-    /** The user name to log into the pop3 server. */
+    /**
+     * The user name to log into the POP3 server.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected String popUsername;
 
-    /** The password to log into the pop3 server. */
+    /**
+     * The password to log into the POP3 server.
+     *
+     * @deprecated Use getters and getters.
+     */
+    @Deprecated
     protected String popPassword;
 
     /**
@@ -303,7 +404,9 @@ public abstract class Email {
      */
     private boolean startTlsRequired;
 
-    /** Does the current transport use SSL/TLS encryption upon connection? */
+    /**
+     * Does the current transport use SSL/TLS encryption upon connection?
+     */
     private boolean sslOnConnect;
 
     /**
@@ -319,7 +422,9 @@ public abstract class Email {
      */
     private boolean sendPartial;
 
-    /** The Session to mail with. */
+    /**
+     * The Session to mail with.
+     */
     private Session session;
 
     /**
@@ -742,6 +847,16 @@ public abstract class Email {
     }
 
     /**
+     * Gets the authenticator.
+     *
+     * @return the authenticator.
+     * @since 1.6.0
+     */
+    public Authenticator getAuthenticator() {
+        return authenticator;
+    }
+
+    /**
      * Gets the list of "Bcc" addresses.
      *
      * @return List addresses
@@ -767,6 +882,46 @@ public abstract class Email {
      */
     public List<InternetAddress> getCcAddresses() {
         return ccList;
+    }
+
+    /**
+     * Gets the Charset.
+     *
+     * @return the Charset.
+     * @since 1.6.0
+     */
+    public String getCharsetName() {
+        return charset;
+    }
+
+    /**
+     * Gets the content.
+     *
+     * @return the content.
+     * @since 1.6.0
+     */
+    public Object getContent() {
+        return content;
+    }
+
+    /**
+     * Gets the content type.
+     *
+     * @return the content type.
+     * @since 1.6.0
+     */
+    public String getContentType() {
+        return contentType;
+    }
+
+    /**
+     * Gets the email body.
+     *
+     * @return the email body.
+     * @since 1.6.0
+     */
+    public MimeMultipart getEmailBody() {
+        return emailBody;
     }
 
     /**
@@ -878,12 +1033,52 @@ public abstract class Email {
     }
 
     /**
+     * Gets the message.
+     *
+     * @return the message.
+     * @since 1.6.0
+     */
+    public MimeMessage getMessage() {
+        return message;
+    }
+
+    /**
      * Gets the internal MimeMessage. Please note that the MimeMessage is built by the buildMimeMessage() method.
      *
      * @return the MimeMessage
      */
     public MimeMessage getMimeMessage() {
         return message;
+    }
+
+    /**
+     * Gets the POP3 host.
+     *
+     * @return the POP3 host.
+     * @since 1.6.0
+     */
+    public String getPopHost() {
+        return popHost;
+    }
+
+    /**
+     * Gets the POP3 password.
+     *
+     * @return the POP3 password.
+     * @since 1.6.0
+     */
+    public String getPopPassword() {
+        return popPassword;
+    }
+
+    /**
+     * Gets the POP3 user name.
+     *
+     * @return the POP3 user name.
+     * @since 1.6.0
+     */
+    public String getPopUserName() {
+        return popUsername;
     }
 
     /**
@@ -977,6 +1172,26 @@ public abstract class Email {
     }
 
     /**
+     * Tests whether debug is on.
+     *
+     * @return whether debug is on.
+     * @since 1.6.0
+     */
+    public boolean isDebug() {
+        return debug;
+    }
+
+    /**
+     * Tests whether to use POP3 before SMTP, and if so the settings.
+     *
+     * @return whether to use POP3 before SMTP, and if so the settings.
+     * @since 1.6.0
+     */
+    public boolean isPopBeforeSmtp() {
+        return popBeforeSmtp;
+    }
+
+    /**
      * Tests whether partial sending of email is enabled.
      *
      * @return true if sending partial email is enabled.
@@ -989,8 +1204,8 @@ public abstract class Email {
     /**
      * Tests whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
      *
-     * @deprecated since 1.3, use {@link #isSSLOnConnect()} instead.
      * @return true if SSL enabled for the transport.
+     * @deprecated since 1.3, use {@link #isSSLOnConnect()} instead.
      */
     @Deprecated
     public boolean isSSL() {
@@ -1187,6 +1402,18 @@ public abstract class Email {
     }
 
     /**
+     * Sets the content.
+     *
+     * @param content the content.
+     * @return this.
+     * @since 1.6.0
+     */
+    public Email setContent(final Object content) {
+        this.content = content;
+        return this;
+    }
+
+    /**
      * Sets the content and contentType.
      *
      * @param content     content.
@@ -1196,6 +1423,18 @@ public abstract class Email {
     public void setContent(final Object content, final String contentType) {
         this.content = content;
         updateContentType(contentType);
+    }
+
+    /**
+     * Sets the content type.
+     *
+     * @param contentType the content type.
+     * @return this.
+     * @since 1.6.0
+     */
+    public Email setContentType(final String contentType) {
+        this.contentType = contentType;
+        return this;
     }
 
     /**
@@ -1253,6 +1492,19 @@ public abstract class Email {
     }
 
     /**
+     * Sets the From address.
+     *
+     * @param fromAddress the From address.
+     * @return this.
+     * @since 1.6.0
+     */
+    public Email setFromAddress(final InternetAddress fromAddress) {
+        this.fromAddress = fromAddress;
+        return this;
+
+    }
+
+    /**
      * Sets the mail headers. Example:
      *
      * X-Mailer: Sendmail, X-Priority: 1( highest ) or 2( high ) 3( normal ) 4( low ) and 5( lowest ) Disposition-Notification-To: user@domain.net
@@ -1284,7 +1536,7 @@ public abstract class Email {
      * Sets a mail Session object to use. Please note that passing a user name and password (in the case of mail authentication) will create a new mail session
      * with a DefaultAuthenticator. This is a convenience but might come unexpected.
      *
-     * If mail authentication is used but NO username and password is supplied the implementation assumes that you have set a authenticator and will use the
+     * If mail authentication is used but NO user name and password is supplied the implementation assumes that you have set a authenticator and will use the
      * existing mail session (as expected).
      *
      * @param session mail session to be used
@@ -1338,6 +1590,15 @@ public abstract class Email {
     }
 
     /**
+     * Sets the MIME message.
+     *
+     * @param message the MIME message.
+     */
+    public void setMessage(final MimeMessage message) {
+        this.message = message;
+    }
+
+    /**
      * Sets the content of the mail. It should be overridden by the subclasses.
      *
      * @param msg A String.
@@ -1348,19 +1609,71 @@ public abstract class Email {
     public abstract Email setMsg(String msg) throws EmailException;
 
     /**
-     * Sets details regarding "pop3 before SMTP" authentication.
+     * Sets whether to use POP3 before SMTP, and if so the settings.
      *
-     * @param popBeforeSmtp Whether or not to log into pop3 server before sending mail.
-     * @param popHost       The pop3 host to use.
-     * @param popUsername   The pop3 username.
-     * @param popPassword   The pop3 password.
+     * @param popBeforeSmtp whether to use POP3 before SMTP, and if so the settings.
+     * @return this.
+     * @since 1.6.0
+     */
+    public Email setPopBeforeSmtp(final boolean popBeforeSmtp) {
+        this.popBeforeSmtp = popBeforeSmtp;
+        return this;
+
+    }
+
+    /**
+     * Sets details regarding "POP3 before SMTP" authentication.
+     *
+     * @param popBeforeSmtp Whether or not to log into POP3 server before sending mail.
+     * @param popHost       The POP3 host to use.
+     * @param popUserName   The POP3 user name.
+     * @param popPassword   The POP3 password.
      * @since 1.0
      */
-    public void setPopBeforeSmtp(final boolean popBeforeSmtp, final String popHost, final String popUsername, final String popPassword) {
+    public void setPopBeforeSmtp(final boolean popBeforeSmtp, final String popHost, final String popUserName, final String popPassword) {
         this.popBeforeSmtp = popBeforeSmtp;
         this.popHost = popHost;
-        this.popUsername = popUsername;
+        this.popUsername = popUserName;
         this.popPassword = popPassword;
+    }
+
+    /**
+     * Sets the POP3 host.
+     *
+     * @param popHost The POP3 host.
+     * @return this.
+     * @since 1.6.0
+     */
+    public Email setPopHost(final String popHost) {
+        this.popHost = popHost;
+        return this;
+
+    }
+
+    /**
+     * Sets the POP3 password.
+     *
+     * @param popPassword the POP3 password.
+     * @return this.
+     * @since 1.6.0
+     */
+    public Email setPopPassword(final String popPassword) {
+        this.popPassword = popPassword;
+        return this;
+
+    }
+
+    /**
+     * Sets the POP3 user name.
+     *
+     * @param popUserName the POP3 user name.
+     * @return this.
+     * @since 1.6.0
+     */
+    public Email setPopUsername(final String popUserName) {
+        this.popUsername = popUserName;
+        return this;
+
     }
 
     /**
@@ -1483,8 +1796,8 @@ public abstract class Email {
     /**
      * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
      *
-     * @deprecated since 1.3, use setSSLOnConnect() instead
      * @param ssl whether to enable the SSL transport
+     * @deprecated since 1.3, use {@link #setSSLOnConnect(boolean)} instead.
      */
     @Deprecated
     public void setSSL(final boolean ssl) {
@@ -1583,9 +1896,9 @@ public abstract class Email {
     /**
      * Sets or disable the STARTTLS encryption. Please see EMAIL-105 for the reasons of deprecation.
      *
-     * @deprecated since 1.3, use setStartTLSEnabled() instead
      * @param withTLS true if STARTTLS requested, false otherwise
      * @since 1.1
+     * @deprecated since 1.3, use {@link #setStartTLSEnabled(boolean)} instead.
      */
     @Deprecated
     public void setTLS(final boolean withTLS) {

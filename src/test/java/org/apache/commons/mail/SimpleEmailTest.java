@@ -73,7 +73,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
 
         fakeMailServer.stop();
 
-        validateSend(fakeMailServer, strSubject, email.getMsg().substring(0, 13), // only check the start, the ä will be encoded
+        validateSend(fakeMailServer, strSubject, email.getContentAsString().substring(0, 13), // only check the start, the ä will be encoded
                 email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(), email.getBccAddresses(), true);
 
         final String message = getMessageAsString(0);
@@ -88,7 +88,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setMsg(validChar);
-            assertEquals(validChar, email.getMsg());
+            assertEquals(validChar, email.getContentAsString());
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
@@ -132,7 +132,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
         email.send();
 
         fakeMailServer.stop();
-        validateSend(fakeMailServer, strSubject, email.getMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getContentAsString(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
     }
 }

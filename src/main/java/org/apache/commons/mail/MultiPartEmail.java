@@ -417,8 +417,8 @@ public class MultiPartEmail extends Email {
         EmailException.checkNonEmpty(msg, () -> "Invalid message.");
         try {
             final BodyPart primary = getPrimaryBodyPart();
-            if (primary instanceof MimePart && EmailUtils.isNotEmpty(charset)) {
-                ((MimePart) primary).setText(msg, charset);
+            if (primary instanceof MimePart && EmailUtils.isNotEmpty(getCharsetName())) {
+                ((MimePart) primary).setText(msg, getCharsetName());
             } else {
                 primary.setText(msg);
             }

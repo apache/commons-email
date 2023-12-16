@@ -73,7 +73,7 @@ public class ImageHtmlEmail extends HtmlEmail {
     public void buildMimeMessage() throws EmailException {
         try {
             // embed all the matching image and script resources within the email
-            String temp = replacePattern(super.html, IMG_PATTERN);
+            String temp = replacePattern(getHtml(), IMG_PATTERN);
             temp = replacePattern(temp, SCRIPT_PATTERN);
             setHtmlMsg(temp);
             super.buildMimeMessage();

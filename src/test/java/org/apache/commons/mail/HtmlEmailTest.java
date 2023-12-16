@@ -108,12 +108,12 @@ public class HtmlEmailTest extends AbstractEmailTest {
         fakeMailServer.stop();
 
         // validate html message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), false);
 
         // make sure that no double dots show up
-        assertTrue(email.getHtmlMsg().contains("3DTZC268X93337.zip"));
-        assertFalse(email.getHtmlMsg().contains("3DTZC268X93337..zip"));
+        assertTrue(email.getHtml().contains("3DTZC268X93337.zip"));
+        assertFalse(email.getHtml().contains("3DTZC268X93337..zip"));
     }
 
     /**
@@ -291,7 +291,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setHtmlMsg(validChar);
-            assertEquals(validChar, email.getHtmlMsg());
+            assertEquals(validChar, email.getHtml());
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
@@ -310,9 +310,9 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setMsg(validChar);
-            assertEquals(validChar, email.getTextMsg());
+            assertEquals(validChar, email.getText());
 
-            assertTrue(email.getHtmlMsg().contains(validChar));
+            assertTrue(email.getHtml().contains(validChar));
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
@@ -331,7 +331,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setTextMsg(validChar);
-            assertEquals(validChar, email.getTextMsg());
+            assertEquals(validChar, email.getText());
         }
         // Test Exception
         for (final String invalidChar : testCharsNotValid) {
@@ -396,11 +396,11 @@ public class HtmlEmailTest extends AbstractEmailTest {
         email.send();
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getText(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), false);
 
         // validate attachment
@@ -426,7 +426,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         email.send();
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getText(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
     }
 
@@ -453,11 +453,11 @@ public class HtmlEmailTest extends AbstractEmailTest {
         email.send();
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getText(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), false);
 
         getMailServer();
@@ -480,11 +480,11 @@ public class HtmlEmailTest extends AbstractEmailTest {
         email.send();
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getText(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), false);
 
     }
@@ -550,7 +550,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
         fakeMailServer.stop();
 
         // validate text message
-        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getText(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
     }
 }

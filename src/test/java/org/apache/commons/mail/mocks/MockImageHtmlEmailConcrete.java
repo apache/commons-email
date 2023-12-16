@@ -26,14 +26,6 @@ import org.apache.commons.mail.ImageHtmlEmail;
  * Extension of the ImageHtmlEmail Class (used to allow testing only)
  */
 public class MockImageHtmlEmailConcrete extends ImageHtmlEmail {
-    /**
-     * Retrieve the html msg
-     *
-     * @return Message Content
-     */
-    public String getHtmlMsg() {
-        return html;
-    }
 
     /**
      * Retrieve the message content

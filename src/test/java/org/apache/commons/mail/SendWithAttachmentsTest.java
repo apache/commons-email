@@ -74,11 +74,11 @@ public class SendWithAttachmentsTest extends AbstractEmailTest {
         fakeMailServer.stop();
 
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getText(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), false);
     }
 
@@ -124,11 +124,11 @@ public class SendWithAttachmentsTest extends AbstractEmailTest {
         email.send();
         fakeMailServer.stop();
         // validate txt message
-        validateSend(fakeMailServer, strSubject, email.getTextMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getText(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
 
         // validate html message
-        validateSend(fakeMailServer, strSubject, email.getHtmlMsg(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
+        validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), false);
 
         // validate attachment

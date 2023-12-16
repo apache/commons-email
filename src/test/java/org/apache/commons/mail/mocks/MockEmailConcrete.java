@@ -16,13 +16,7 @@
  */
 package org.apache.commons.mail.mocks;
 
-import javax.mail.Authenticator;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-
 import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
 
 /**
  * Concrete Implementation on the Abstract Email Class (used to allow testing only). Supplies getters for methods that normally only have setters.
@@ -32,120 +26,16 @@ import org.apache.commons.mail.EmailException;
 public class MockEmailConcrete extends Email {
 
     /**
-     * Retrieve the current authentication setting
+     * No-op for testing.
      *
-     * @return Authenticator Authenticator
-     */
-    public Authenticator getAuthenticator() {
-        return authenticator;
-    }
-
-    /**
-     * @return charset
-     */
-    public String getCharset() {
-        return charset;
-    }
-
-    /**
-     * @return content
-     */
-    public MimeMultipart getContentMimeMultipart() {
-        return emailBody;
-    }
-
-    /**
-     * @return content
-     */
-    public Object getContentObject() {
-        return content;
-    }
-
-    /**
-     * @return contentType
-     */
-    public String getContentType() {
-        return contentType;
-    }
-
-    /**
-     * @return emailBody
-     */
-    public MimeMultipart getEmailBody() {
-        return emailBody;
-    }
-
-    /**
-     * @return hostName
-     */
-    @Override
-    public String getHostName() {
-        return hostName;
-    }
-
-    /**
-     * @return message
-     */
-    public MimeMessage getMessage() {
-        return message;
-    }
-
-    /**
-     * @return popHost
-     */
-    public String getPopHost() {
-        return popHost;
-    }
-
-    /**
-     * @return popPassword
-     */
-    public String getPopPassword() {
-        return popPassword;
-    }
-
-    /**
-     * @return popUsername
-     */
-    public String getPopUsername() {
-        return popUsername;
-    }
-
-    /**
-     * @return Session
-     * @throws EmailException EmailException
-     */
-    public Session getSession() throws EmailException {
-        return getMailSession();
-    }
-
-    /**
-     * Retrieve the current debug setting
-     *
-     * @return debug
-     */
-    public boolean isDebug() {
-        return debug;
-    }
-
-    /**
-     * @return popBeforeSmtp
-     */
-    public boolean isPopBeforeSmtp() {
-        return popBeforeSmtp;
-    }
-
-    /**
-     * Not Implemented, should be implemented in subclasses of Email
-     *
-     * @param msg The email message
+     * @param msg The email message.
      * @return Email msg.
      */
     @Override
     public Email setMsg(final String msg) {
         // This abstract method should be tested in the concrete
         // implementation classes only.
-        return null;
+        return this;
     }
 
 }

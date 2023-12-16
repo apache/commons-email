@@ -19,8 +19,6 @@ package org.apache.commons.mail.mocks;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-
 import org.apache.commons.mail.MultiPartEmail;
 
 /**
@@ -29,14 +27,6 @@ import org.apache.commons.mail.MultiPartEmail;
  * @since 1.0
  */
 public class MockMultiPartEmailConcrete extends MultiPartEmail {
-
-    /**
-     * @return fromAddress
-     */
-    @Override
-    public InternetAddress getFromAddress() {
-        return fromAddress;
-    }
 
     /**
      * Retrieve the message content

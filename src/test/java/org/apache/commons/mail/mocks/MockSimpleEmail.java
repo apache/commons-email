@@ -16,8 +16,6 @@
  */
 package org.apache.commons.mail.mocks;
 
-import javax.mail.internet.InternetAddress;
-
 import org.apache.commons.mail.SimpleEmail;
 
 /**
@@ -26,20 +24,13 @@ import org.apache.commons.mail.SimpleEmail;
  * @since 1.0
  */
 public class MockSimpleEmail extends SimpleEmail {
-    /**
-     * @return fromAddress
-     */
-    @Override
-    public InternetAddress getFromAddress() {
-        return fromAddress;
-    }
 
     /**
      * Retrieve the message content
      *
      * @return Message Content
      */
-    public String getMsg() {
+    public String getContentAsString() {
         return (String) content;
     }
 
