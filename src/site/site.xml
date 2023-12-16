@@ -16,29 +16,26 @@
  limitations under the License.
 -->
 <project name="Commons Email">
-    <bannerRight>
-        <name>Commons Email</name>
-        <src>/images/email-logo-white.png</src>
-        <href>/index.html</href>
-    </bannerRight>
+  <bannerRight>
+    <name>Commons Email</name>
+    <src>/images/email-logo-white.png</src>
+    <href>/index.html</href>
+  </bannerRight>
 
-    <body>
-        <menu name="Email">
-            <item name="Overview"                      href="/index.html"/>
-            <item name="Download"                      href="https://commons.apache.org/email/download_email.cgi"/>
-            <item name="User guide"                    href="/userguide.html"/>
-            <item name="Security Reports"              href="/security-reports.html"/>
-            <item name="Latest API docs (development)" href="/apidocs/index.html"/>
-            <item name="Javadoc (1.5 release)"         href="/javadocs/api-release/index.html"/>
-            <item name="Javadoc (1.4 release)"         href="/javadocs/api-1.4/index.html"/>
-            <item name="Javadoc (1.3.3 release)"       href="/javadocs/api-1.3.3/index.html"/>
-            <item name="Javadoc (1.2 release)"         href="/javadocs/api-1.2/index.html"/>
-        </menu>
-    
-        <menu name="Development">
-            <item name="Building"                href="/building.html"/>
-        </menu>
+  <body>
+    <menu name="Email">
+      <item name="Overview" href="/index.html" />
+      <item name="Download" href="https://commons.apache.org/email/download_email.cgi" />
+      <item name="User guide" href="/userguide.html" />
+      <item name="Security Reports" href="/security-reports.html" />
+      <item name="Javadoc" href="/apidocs/index.html" />
+      <item name="Javadoc Archive" href="https://javadoc.io/doc/org.apache.commons/commons-email/latest/index.html" />
+    </menu>
 
-    </body>
+    <menu name="Development">
+      <item name="Building" href="/building.html" />
+    </menu>
+
+  </body>
 
 </project>

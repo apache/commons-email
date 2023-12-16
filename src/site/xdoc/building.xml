@@ -16,47 +16,50 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <document>
- <properties>
-  <title>Building</title>
-  <author email="dev@commons.apache.org">Commons Documentation Team</author>
- </properties>
-<body>
-<!-- ================================================== -->
-<section name="Overview">
-<p>
-  Commons Email uses <a href="http://maven.apache.org">Maven 2.0</a>
-</p>
-</section>
-<!-- ================================================== -->
-<section name="Maven Goals">
-  <p>
-    To build a jar file, change into Email's root directory and run "mvn package".
-    The result will be in the "target" subdirectory.
-  </p>
-  <p>
-    To build the Javadocs, run "mvn javadoc:javadoc".
-    The result will be in "target/docs/apidocs".
-  </p>
-  <p>
-    To build the full website, run "mvn site".
-    The result will be in "target/site".
-    You must be using JDK 5 or higher to successfully complete this target.
-  </p>
-</section>
-<!-- ================================================== -->
-<section name="Development">
-  <p>
-    Commons Email may be used on any JRE from 1.5 onwards.
-  </p>
-  <p>
-    Commons Email requires <a href="http://code.google.com/p/subethasmtp/">SubEtha SMTP</a>
-    for its unit tests. <br />
-  </p>
-  <p>
-    This jar will be automatically installed to your local Maven 2 repository
-    if you build using Maven.
-  </p>
-</section>
-<!-- ================================================== -->
-</body>
+  <properties>
+    <title>Building</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+  <body>
+    <section name="Overview">
+      <p>
+        Commons Email uses
+        <a href="http://maven.apache.org">Maven</a>.
+      </p>
+    </section>
+    <section name="Maven Goals">
+      <p>
+        To build a jar and verify all files, change into Email's root directory and run <code>mvn</code>.
+        The result will be in the "target" subdirectory.
+      </p>
+      <p>
+        To only build the jar file, change into Email's root directory and run <code>mvn clean package</code>.
+        The result will be in the "target" subdirectory.
+      </p>
+      <p>
+        To only build the Javadocs, run "mvn clean javadoc:javadoc".
+        The result will be in "target/docs/apidocs".
+      </p>
+      <p>
+        To build the full website, run "mvn clean verify site".
+        The result will be in "target/site".
+        You must be using JDK 5 or higher to successfully complete this target.
+      </p>
+    </section>
+    <section name="Development">
+      <p>
+        Commons Email requires Java 8.
+      </p>
+      <p>
+        Commons Email requires
+        <a href="http://code.google.com/p/subethasmtp/">SubEtha SMTP</a>
+        for its unit tests.
+        <br />
+      </p>
+      <p>
+        This jar will be automatically installed to your local Maven repository
+        if you build using <code>mvn clean install</code>.
+      </p>
+    </section>
+  </body>
 </document>
