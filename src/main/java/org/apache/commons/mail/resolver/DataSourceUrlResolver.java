@@ -17,6 +17,7 @@
 package org.apache.commons.mail.resolver;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -99,7 +100,10 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
         try {
             if (!isCid(resourceLocation)) {
                 result = new URLDataSource(createUrl(resourceLocation));
-                result.getInputStream();
+                // validate we can read.
+                try (InputStream inputStream = result.getInputStream()) {
+                    inputStream.read();
+                }
             }
             return result;
         } catch (final IOException e) {

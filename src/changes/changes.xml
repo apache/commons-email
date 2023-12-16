@@ -40,6 +40,7 @@
       <action dev="ggregory" type="fix" due-to="Loki-Afro, Gary Gregory">Migrate to JUnit 5 #186.</action>
       <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.</action>
       <action dev="ggregory" type="fix" due-to="Loki-Afro, Gary Gregory">Add missing getters and setters in EMail and subclasses; deprecate access to protected instance variables.</action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">DataSourceUrlResolver.resolve(String, boolean) leaks InputStreams.</action>
       <!-- ADD -->
       <action type="add" due-to="Dependabot" dev="ggregory">Add github/codeql-action #75.</action>
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add Maven plugin JapiCmp and remove Clirr.</action>
