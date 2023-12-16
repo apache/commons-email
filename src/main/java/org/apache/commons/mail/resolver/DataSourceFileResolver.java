@@ -23,11 +23,12 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 
 /**
- * Creates a {@code DataSource} based on an URL. The implementation also resolves file resources.
+ * Creates a {@code DataSource} based on a File. The implementation also resolves file resources.
  *
  * @since 1.3
  */
 public class DataSourceFileResolver extends DataSourceBaseResolver {
+
     /** The base directory of the resource when resolving relative paths */
     private final File baseDir;
 
