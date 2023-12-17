@@ -25,16 +25,16 @@ import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.util.Objects;
 
-import javax.activation.DataSource;
-import javax.activation.FileTypeMap;
-import javax.activation.MimetypesFileTypeMap;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileTypeMap;
+import jakarta.activation.MimetypesFileTypeMap;
 
 /**
  * A JavaBeans Activation Framework {@link DataSource} that encapsulates a {@link Path}. It provides data typing services via a {@link FileTypeMap} object.
  *
- * @see javax.activation.DataSource
- * @see javax.activation.FileTypeMap
- * @see javax.activation.MimetypesFileTypeMap
+ * @see jakarta.activation.DataSource
+ * @see jakarta.activation.FileTypeMap
+ * @see jakarta.activation.MimetypesFileTypeMap
  *
  * @since 1.6.0
  */
@@ -104,7 +104,7 @@ public final class PathDataSource implements DataSource {
      * Gets the <em>name</em> of this object. The FileDataSource will return the file name of the object.
      *
      * @return the name of the object or null.
-     * @see javax.activation.DataSource
+     * @see jakarta.activation.DataSource
      */
     @Override
     public String getName() {

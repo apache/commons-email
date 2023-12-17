@@ -26,7 +26,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
-import javax.activation.DataSource;
+import jakarta.activation.DataSource;
 
 /**
  * A typed DataSource for InputStream, byte array, and String.
@@ -35,7 +35,7 @@ import javax.activation.DataSource;
  * </p>
  *
  * @since 1.0
- * @deprecated since 1.4, use {@link javax.mail.util.ByteArrayDataSource} instead
+ * @deprecated since 1.4, use {@link jakarta.mail.util.ByteArrayDataSource} instead
  */
 @Deprecated
 public class ByteArrayDataSource implements DataSource {

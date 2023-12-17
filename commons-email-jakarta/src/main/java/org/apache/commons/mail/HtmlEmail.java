@@ -27,14 +27,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.activation.URLDataSource;
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMultipart;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.activation.URLDataSource;
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMultipart;
 
 /**
  * An HTML multipart email.
@@ -357,7 +357,7 @@ public class HtmlEmail extends MultiPartEmail {
      *
      * @param file The {@code File} object to embed
      * @return A String with the Content-ID of the file.
-     * @throws EmailException when the supplied {@code File} cannot be used; also see {@link javax.mail.internet.MimeBodyPart} for definitions
+     * @throws EmailException when the supplied {@code File} cannot be used; also see {@link jakarta.mail.internet.MimeBodyPart} for definitions
      *
      * @see #embed(File, String)
      * @since 1.1
@@ -383,7 +383,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @param cid  the Content-ID to use for the embedded {@code File}
      * @return A String with the Content-ID of the file.
      * @throws EmailException when the supplied {@code File} cannot be used or if the file has already been embedded; also see
-     *                        {@link javax.mail.internet.MimeBodyPart} for definitions
+     *                        {@link jakarta.mail.internet.MimeBodyPart} for definitions
      * @since 1.1
      */
     public String embed(final File file, final String cid) throws EmailException {
@@ -437,7 +437,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @param urlString String representation of the URL.
      * @param name      The name that will be set in the file name header field.
      * @return A String with the Content-ID of the URL.
-     * @throws EmailException when URL supplied is invalid or if {@code name} is null or empty; also see {@link javax.mail.internet.MimeBodyPart} for
+     * @throws EmailException when URL supplied is invalid or if {@code name} is null or empty; also see {@link jakarta.mail.internet.MimeBodyPart} for
      *                        definitions
      *
      * @see #embed(URL, String)
@@ -473,7 +473,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @param url  The URL of the file.
      * @param name The name that will be set in the file name header field.
      * @return A String with the Content-ID of the file.
-     * @throws EmailException when URL supplied is invalid or if {@code name} is null or empty; also see {@link javax.mail.internet.MimeBodyPart} for
+     * @throws EmailException when URL supplied is invalid or if {@code name} is null or empty; also see {@link jakarta.mail.internet.MimeBodyPart} for
      *                        definitions
      * @since 1.0
      */

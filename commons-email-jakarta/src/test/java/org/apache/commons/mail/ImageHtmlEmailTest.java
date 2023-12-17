@@ -31,8 +31,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.activation.DataSource;
-import javax.mail.internet.MimeMessage;
+import jakarta.activation.DataSource;
+import jakarta.mail.internet.MimeMessage;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -55,7 +55,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
         @Override
         public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
-            final javax.mail.util.ByteArrayDataSource ds = (javax.mail.util.ByteArrayDataSource) super.resolve(resourceLocation, isLenient);
+            final jakarta.mail.util.ByteArrayDataSource ds = (jakarta.mail.util.ByteArrayDataSource) super.resolve(resourceLocation, isLenient);
             ds.setName(null);
             return ds;
         }

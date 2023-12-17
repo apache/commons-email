@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import javax.activation.DataSource;
-import javax.activation.FileTypeMap;
-import javax.mail.util.ByteArrayDataSource;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileTypeMap;
+import jakarta.mail.util.ByteArrayDataSource;
 
 /**
  * Creates a {@code DataSource} based on an class path.

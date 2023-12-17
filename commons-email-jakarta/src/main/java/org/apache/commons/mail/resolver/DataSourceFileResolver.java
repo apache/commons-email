@@ -19,8 +19,8 @@ package org.apache.commons.mail.resolver;
 import java.io.File;
 import java.io.IOException;
 
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
 
 /**
  * Creates a {@code DataSource} based on a File. The implementation also resolves file resources.

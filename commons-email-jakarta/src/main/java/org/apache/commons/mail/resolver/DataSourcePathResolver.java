@@ -22,8 +22,8 @@ import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.activation.DataSource;
-import javax.activation.FileTypeMap;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileTypeMap;
 
 import org.apache.commons.mail.activation.PathDataSource;
 

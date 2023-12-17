@@ -18,7 +18,7 @@ package org.apache.commons.mail;
 
 import java.io.IOException;
 
-import javax.activation.DataSource;
+import jakarta.activation.DataSource;
 
 /**
  * Creates a {@code DataSource} based on an URL.

@@ -19,7 +19,7 @@ package org.apache.commons.mail.util;
 import java.net.IDN;
 import java.util.function.Function;
 
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.internet.InternetAddress;
 
 /**
  * Converts email addresses containing International Domain Names into an ASCII representation suitable for sending an email.

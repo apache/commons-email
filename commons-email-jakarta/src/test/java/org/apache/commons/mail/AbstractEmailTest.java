@@ -30,12 +30,12 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.activation.DataHandler;
-import javax.mail.Header;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.activation.DataHandler;
+import jakarta.mail.Header;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.settings.EmailConfiguration;
 import org.junit.jupiter.api.AfterEach;
@@ -122,8 +122,7 @@ public abstract class AbstractEmailTest {
         if (fakeMailServer == null || isMailServerStopped(fakeMailServer)) {
             mailServerPort++;
 
-            fakeMailServer = new Wiser();
-            fakeMailServer.setPort(getMailServerPort());
+            fakeMailServer = Wiser.port(getMailServerPort());
             fakeMailServer.start();
 
             assertFalse(isMailServerStopped(fakeMailServer), "fake mail server didn't start");
