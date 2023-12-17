@@ -35,7 +35,7 @@ public final class InputStreamDataSource implements DataSource {
 
     private final String contentType;
     private final InputStream inputStream;
-    private String name;
+    private final String name;
 
     /**
      * Constructs a new instance.
@@ -44,8 +44,7 @@ public final class InputStreamDataSource implements DataSource {
      * @param contentType A content type.
      */
     public InputStreamDataSource(final InputStream inputStream, final String contentType) {
-        this.inputStream = inputStream;
-        this.contentType = contentType;
+        this(inputStream, contentType, null);
     }
 
     /**
