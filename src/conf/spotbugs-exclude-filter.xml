@@ -32,13 +32,6 @@
     <Bug pattern="CT_CONSTRUCTOR_THROW" />
   </Match>
 
-  <!--  printStackTrace is supposed to use the default character encoding  -->
-  <Match>
-    <Class name="org.apache.commons.mail.EmailException" />
-    <Method name="printStackTrace" params="java.io.PrintStream" returns="void" />
-    <Bug pattern="DM_DEFAULT_ENCODING" />
-  </Match>
-
   <!-- TODO Can any of these be done without breaking binary compatibility? -->
   <Match>
     <Class name="~.*" />
