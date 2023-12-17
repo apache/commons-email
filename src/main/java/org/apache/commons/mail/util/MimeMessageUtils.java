@@ -22,7 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
@@ -107,7 +107,8 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final String source) throws MessagingException, IOException {
-        return createMimeMessage(session, source.getBytes(Charset.defaultCharset()));
+        // RFC1341: https://www.w3.org/Protocols/rfc1341/7_1_Text.html
+        return createMimeMessage(session, source.getBytes(StandardCharsets.US_ASCII));
     }
 
     /**
