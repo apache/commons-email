@@ -24,7 +24,7 @@
   </properties>
 
   <body>
-    <release version="1.6.0" date="YYYY-MM-DD" description="Feature release (Java 8 or above).">
+    <release version="1.6.0" date="2023-12-17" description="Feature release (Java 8 or above).">
       <!-- FIX -->
       <action issue="EMAIL-190" type="fix" due-to="sgoeschl">Fix broken JDK 9 build by updating "easymock" and other dependencies.</action>
       <action type="fix" dev="ggregory" due-to="John Patrick, Gary Gregory">Use JUnit 5 APIs #106, #108, #109, #114.</action>     
