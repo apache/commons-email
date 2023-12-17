@@ -26,12 +26,12 @@ import org.apache.commons.mail.SimpleEmail;
 public class MockSimpleEmail extends SimpleEmail {
 
     /**
-     * Retrieve the message content
+     * Retrieve the message content as a String.
      *
      * @return Message Content
      */
     public String getContentAsString() {
-        return (String) content;
+        return (String) getContent();
     }
 
 }

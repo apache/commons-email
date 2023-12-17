@@ -319,7 +319,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.setDataSourceResolver(new DataSourceUrlResolver(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
 
         final File file = File.createTempFile("emailtest", ".tst");
-        FileUtils.writeStringToFile(file, "just some silly data that we won't be able to display anyway");
+        FileUtils.writeStringToFile(file, "just some silly data that we won't be able to display anyway", StandardCharsets.UTF_8);
 
         // set the html message
         email.setHtmlMsg("<html><body><img src=\"" + file.getAbsolutePath() + "\"/></body></html>");
