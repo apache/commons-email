@@ -121,8 +121,7 @@ public class MimeMessageParser {
      * @return the corresponding datasource or null if nothing was found
      */
     public DataSource findAttachmentByName(final String name) {
-        for (final DataSource element : getAttachmentList()) {
-            final DataSource dataSource = element;
+        for (final DataSource dataSource : getAttachmentList()) {
             if (name.equalsIgnoreCase(dataSource.getName())) {
                 return dataSource;
             }
