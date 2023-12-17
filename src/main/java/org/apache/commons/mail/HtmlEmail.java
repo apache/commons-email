@@ -220,8 +220,8 @@ public class HtmlEmail extends MultiPartEmail {
                 try {
                     bodyPart.setContent(bodyContainer);
                     bodyEmbedsContainer.addBodyPart(bodyPart, 0);
-                } catch (final MessagingException me) {
-                    throw new EmailException(me);
+                } catch (final MessagingException e) {
+                    throw new EmailException(e);
                 }
             }
         } else if (EmailUtils.isNotEmpty(text) && EmailUtils.isNotEmpty(html)) {
@@ -291,8 +291,8 @@ public class HtmlEmail extends MultiPartEmail {
     public void buildMimeMessage() throws EmailException {
         try {
             build();
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
         super.buildMimeMessage();
     }
@@ -347,8 +347,8 @@ public class HtmlEmail extends MultiPartEmail {
             mbp.setContentID("<" + encodedCid + ">");
             this.inlineEmbeds.put(name, new InlineImage(encodedCid, dataSource, mbp));
             return encodedCid;
-        } catch (final MessagingException uee) {
-            throw new EmailException(uee);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
     }
 
@@ -393,8 +393,8 @@ public class HtmlEmail extends MultiPartEmail {
         String filePath = null;
         try {
             filePath = file.getCanonicalPath();
-        } catch (final IOException ioe) {
-            throw new EmailException("couldn't get canonical path for " + file.getName(), ioe);
+        } catch (final IOException e) {
+            throw new EmailException("couldn't get canonical path for " + file.getName(), e);
         }
 
         // check if a FileDataSource for this name has already been attached;
@@ -407,8 +407,8 @@ public class HtmlEmail extends MultiPartEmail {
             String existingFilePath = null;
             try {
                 existingFilePath = fileDataSource.getFile().getCanonicalPath();
-            } catch (final IOException ioe) {
-                throw new EmailException("couldn't get canonical path for file " + fileDataSource.getFile().getName() + "which has already been embedded", ioe);
+            } catch (final IOException e) {
+                throw new EmailException("couldn't get canonical path for file " + fileDataSource.getFile().getName() + "which has already been embedded", e);
             }
             if (filePath.equals(existingFilePath)) {
                 return inlineImage.getCid();

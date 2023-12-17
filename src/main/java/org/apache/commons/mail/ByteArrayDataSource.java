@@ -104,7 +104,7 @@ public class ByteArrayDataSource implements DataSource {
             outputStream.write(data.getBytes(StandardCharsets.ISO_8859_1));
             outputStream.flush();
             outputStream.close();
-        } catch (final UnsupportedEncodingException uex) {
+        } catch (final UnsupportedEncodingException e) {
             throw new IOException("The Character Encoding is not supported.");
         } finally {
             outputStream.close();

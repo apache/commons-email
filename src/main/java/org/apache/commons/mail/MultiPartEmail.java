@@ -79,8 +79,8 @@ public class MultiPartEmail extends Email {
     public Email addPart(final MimeMultipart multipart) throws EmailException {
         try {
             return addPart(multipart, getContainer().getCount());
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
     }
 
@@ -98,8 +98,8 @@ public class MultiPartEmail extends Email {
         try {
             bodyPart.setContent(multipart);
             getContainer().addBodyPart(bodyPart, index);
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
 
         return this;
@@ -119,8 +119,8 @@ public class MultiPartEmail extends Email {
         try {
             bodyPart.setContent(partContent, partContentType);
             getContainer().addBodyPart(bodyPart);
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
 
         return this;
@@ -169,9 +169,9 @@ public class MultiPartEmail extends Email {
             bodyPart.setDescription(description);
             bodyPart.setDataHandler(new DataHandler(dataSource));
             getContainer().addBodyPart(bodyPart);
-        } catch (final UnsupportedEncodingException | MessagingException me) {
+        } catch (final UnsupportedEncodingException | MessagingException e) {
             // in case the file name could not be encoded
-            throw new EmailException(me);
+            throw new EmailException(e);
         }
         setBoolHasAttachments(true);
         return this;
@@ -316,8 +316,8 @@ public class MultiPartEmail extends Email {
             }
 
             super.buildMimeMessage();
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
     }
 
@@ -451,8 +451,8 @@ public class MultiPartEmail extends Email {
             } else {
                 primary.setText(msg);
             }
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
         return this;
     }

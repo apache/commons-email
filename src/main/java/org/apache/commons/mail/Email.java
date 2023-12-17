@@ -764,8 +764,8 @@ public abstract class Email {
                 final Store store = session.getStore("pop3");
                 store.connect(popHost, popUsername, popPassword);
             }
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
     }
 

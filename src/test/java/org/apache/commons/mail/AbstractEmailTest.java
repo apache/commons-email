@@ -191,12 +191,12 @@ public abstract class AbstractEmailTest {
         try {
             final MimeMessage message = wiserMessage.getMimeMessage();
             messageBody = getMessageBodyBytes(message);
-        } catch (final MessagingException me) {
+        } catch (final MessagingException e) {
             // Thrown while getting the body content from
             // {@link MimeMessage#getDataHandler()}
-            final IllegalStateException ise = new IllegalStateException("couldn't process MimeMessage from WiserMessage in getMessageBody()");
-            ise.initCause(me);
-            throw ise;
+            final IllegalStateException rethrow = new IllegalStateException("couldn't process MimeMessage from WiserMessage in getMessageBody()");
+            rethrow.initCause(e);
+            throw rethrow;
         }
 
         return messageBody != null ? new String(messageBody).intern() : "";
@@ -329,10 +329,10 @@ public abstract class AbstractEmailTest {
         if (boolSaveToFile) {
             try {
                 saveEmailToFile(emailMessage);
-            } catch (final MessagingException me) {
-                final IllegalStateException ise = new IllegalStateException("caught MessagingException during saving the email");
-                ise.initCause(me);
-                throw ise;
+            } catch (final MessagingException e) {
+                final IllegalStateException rethrow = new IllegalStateException("caught MessagingException during saving the email");
+                rethrow.initCause(e);
+                throw rethrow;
             }
         }
 
@@ -358,10 +358,10 @@ public abstract class AbstractEmailTest {
             if (!bccAdd.isEmpty()) {
                 assertTrue(bccAdd.toString().contains(mimeMessage.getHeader("Bcc", null)), "got wrong Bcc: address from mail");
             }
-        } catch (final MessagingException me) {
-            final IllegalStateException ise = new IllegalStateException("caught MessagingException in validateSend()");
-            ise.initCause(me);
-            throw ise;
+        } catch (final MessagingException e) {
+            final IllegalStateException rethrow = new IllegalStateException("caught MessagingException in validateSend()");
+            rethrow.initCause(e);
+            throw rethrow;
         }
 
         return emailMessage;
