@@ -97,8 +97,8 @@ public class ByteArrayDataSource implements DataSource {
      */
     public ByteArrayDataSource(final String data, final String contentType) throws IOException {
         this.contentType = contentType;
+        this.outputStream = new ByteArrayOutputStream();
         try {
-            outputStream = new ByteArrayOutputStream();
             // Assumption that the string contains only ASCII characters!
             // Else just pass in a charset into this constructor and use it in getBytes().
             outputStream.write(data.getBytes(StandardCharsets.ISO_8859_1));
@@ -107,9 +107,7 @@ public class ByteArrayDataSource implements DataSource {
         } catch (final UnsupportedEncodingException uex) {
             throw new IOException("The Character Encoding is not supported.");
         } finally {
-            if (outputStream != null) {
-                outputStream.close();
-            }
+            outputStream.close();
         }
     }
 
