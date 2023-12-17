@@ -33,6 +33,10 @@ import javax.activation.DataSource;
  */
 public final class InputStreamDataSource implements DataSource {
 
+    /**
+     * Default content type documented in {@link DataSource#getContentType()}.
+     */
+    private static final String DEFAULT_CONTENT_TYPE = "application/octet-stream";
     private final String contentType;
     private final InputStream inputStream;
     private final String name;
@@ -56,7 +60,7 @@ public final class InputStreamDataSource implements DataSource {
      */
     public InputStreamDataSource(final InputStream inputStream, final String contentType, final String name) {
         this.inputStream = inputStream;
-        this.contentType = contentType;
+        this.contentType = contentType != null ? contentType : DEFAULT_CONTENT_TYPE;
         this.name = name;
     }
 

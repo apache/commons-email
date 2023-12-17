@@ -46,7 +46,7 @@ import javax.naming.NamingException;
 import org.apache.commons.mail.util.IDNEmailAddressConverter;
 
 /**
- * The base class for all email messages. This class sets the sender's email &amp; name, receiver's email &amp; name, subject, and the sent date.
+ * The abstract class for all email messages. This class sets the sender's email, name, receiver's email, name, subject, and send date.
  * <p>
  * Subclasses are responsible for setting the message body.
  * </p>
@@ -429,8 +429,8 @@ public abstract class Email {
 
     /**
      * Adds a blind BCC recipient to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -443,8 +443,8 @@ public abstract class Email {
 
     /**
      * Adds an array of blind BCC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset
-     * of {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
+     * of {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII
+     * characters; otherwise, it is used as is.
      *
      * @param emails A String array.
      * @return An Email.
@@ -461,8 +461,8 @@ public abstract class Email {
 
     /**
      * Adds a blind BCC recipient to the email using the specified address and the specified personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @param name  A String.
@@ -491,8 +491,8 @@ public abstract class Email {
 
     /**
      * Adds a recipient CC to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -505,8 +505,8 @@ public abstract class Email {
 
     /**
      * Adds an array of CC recipients to the email. The email addresses will also be used as the personal name. The names will be encoded by the charset of
-     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param emails A String array.
      * @return An Email.
@@ -523,8 +523,8 @@ public abstract class Email {
 
     /**
      * Adds a recipient CC to the email using the specified address and the specified personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @param name  A String.
@@ -571,8 +571,8 @@ public abstract class Email {
 
     /**
      * Adds a reply to address to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -585,8 +585,8 @@ public abstract class Email {
 
     /**
      * Adds a reply to address to the email using the specified address and the specified personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @param name  A String.
@@ -615,8 +615,8 @@ public abstract class Email {
 
     /**
      * Adds a recipient TO to the email. The email address will also be used as the personal name. The name will be encoded by the charset of
-     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -629,8 +629,8 @@ public abstract class Email {
 
     /**
      * Adds a list of TO recipients to the email. The email addresses will also be used as the personal names. The names will be encoded by the charset of
-     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param emails A String array.
      * @return An Email.
@@ -647,8 +647,8 @@ public abstract class Email {
 
     /**
      * Adds a recipient TO to the email using the specified address and the specified personal name. The name will be encoded by the charset of
-     * {@link #setCharset(String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains
-     * non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @param name  A String.
@@ -764,8 +764,8 @@ public abstract class Email {
                 final Store store = session.getStore("pop3");
                 store.connect(popHost, popUsername, popPassword);
             }
-        } catch (final MessagingException me) {
-            throw new EmailException(me);
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
         }
     }
 
@@ -812,9 +812,8 @@ public abstract class Email {
      * @throws EmailException Thrown when the supplied address, name or charset were invalid.
      */
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName) throws EmailException {
-        InternetAddress address;
         try {
-            address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            final InternetAddress address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
             // check name input
             if (EmailUtils.isNotEmpty(name)) {
                 // check charset input.
@@ -830,10 +829,10 @@ public abstract class Email {
             // run sanity check on new InternetAddress object; if this fails
             // it will throw AddressException.
             address.validate();
+            return address;
         } catch (final AddressException | UnsupportedEncodingException e) {
             throw new EmailException(e);
         }
-        return address;
     }
 
     /**
@@ -1449,8 +1448,8 @@ public abstract class Email {
 
     /**
      * Sets the FROM field of the email to use the specified address. The email address will also be used as the personal name. The name will be encoded by the
-     * charset of {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if
-     * it contains non-ASCII characters; otherwise, it is used as is.
+     * charset of {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII
+     * characters; otherwise, it is used as is.
      *
      * @param email A String.
      * @return An Email.
@@ -1463,8 +1462,8 @@ public abstract class Email {
 
     /**
      * Sets the FROM field of the email to use the specified address and the specified personal name. The name will be encoded by the charset of
-     * {@link #setCharset(java.lang.String) setCharset()}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it
-     * contains non-ASCII characters; otherwise, it is used as is.
+     * {@link #setCharset(String)}. If it is not set, it will be encoded using the Java platform's default charset (UTF-16) if it contains non-ASCII characters;
+     * otherwise, it is used as is.
      *
      * @param email A String.
      * @param name  A String.

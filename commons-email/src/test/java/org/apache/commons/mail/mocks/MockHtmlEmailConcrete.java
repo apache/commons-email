@@ -37,7 +37,7 @@ public class MockHtmlEmailConcrete extends HtmlEmail {
     public String getMsg() {
         try {
             return getPrimaryBodyPart().getContent().toString();
-        } catch (final IOException | MessagingException msgE) {
+        } catch (final IOException | MessagingException e) {
             return null;
         }
     }
