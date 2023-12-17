@@ -130,9 +130,9 @@ public class MimeMessageParser {
     }
 
     /**
-     * Gets the attachement list.
+     * Gets the attachment list.
      *
-     * @return Returns the attachmentList.
+     * @return Returns the attachment list.
      */
     public List<DataSource> getAttachmentList() {
         return attachmentList;
