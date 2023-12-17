@@ -1330,7 +1330,7 @@ public abstract class Email {
     }
 
     /**
-     * Sets a list of "BCC" addresses. All elements in the specified {@code Collection} are expected to be of type {@link java.mail.internet.InternetAddress}.
+     * Sets a list of "BCC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
      *
      * @param collection collection of {@code InternetAddress} objects
      * @return An Email.
@@ -1370,7 +1370,7 @@ public abstract class Email {
     }
 
     /**
-     * Sets a list of "CC" addresses. All elements in the specified {@code Collection} are expected to be of type {@link java.mail.internet.InternetAddress}.
+     * Sets a list of "CC" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
      *
      * @param collection collection of {@code InternetAddress} objects.
      * @return An Email.
@@ -1684,7 +1684,7 @@ public abstract class Email {
 
     /**
      * Sets a list of reply to addresses. All elements in the specified {@code Collection} are expected to be of type
-     * {@link java.mail.internet.InternetAddress}.
+     * {@code java.mail.internet.InternetAddress}.
      *
      * @param collection collection of {@code InternetAddress} objects
      * @return An Email.
@@ -1912,7 +1912,7 @@ public abstract class Email {
     }
 
     /**
-     * Sets a list of "TO" addresses. All elements in the specified {@code Collection} are expected to be of type {@link java.mail.internet.InternetAddress}.
+     * Sets a list of "TO" addresses. All elements in the specified {@code Collection} are expected to be of type {@code java.mail.internet.InternetAddress}.
      *
      * @param collection collection of {@code InternetAddress} objects.
      * @return An Email.
