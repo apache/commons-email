@@ -38,7 +38,7 @@ import javax.activation.MimetypesFileTypeMap;
  *
  * @since 1.6.0
  */
-public class PathDataSource implements DataSource {
+public final class PathDataSource implements DataSource {
 
     private final Path path;
     private final FileTypeMap typeMap;
