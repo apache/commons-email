@@ -263,15 +263,19 @@ public class MimeMessageParser {
     }
 
     /**
-     * @return the mail subject
-     * @throws MessagingException parsing the mime message failed
+     * Gets the MIME message subject.
+     *
+     * @return the MIME message subject.
+     * @throws MessagingException parsing the mime message failed.
      */
     public String getSubject() throws MessagingException {
         return mimeMessage.getSubject();
     }
 
     /**
-     * @return the 'to' recipients of the message
+     * Gets the MIME message 'to' list.
+     *
+     * @return the 'to' recipients of the message.
      * @throws MessagingException determining the recipients failed
      */
     public List<Address> getTo() throws MessagingException {
