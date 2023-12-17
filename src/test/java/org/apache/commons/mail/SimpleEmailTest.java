@@ -34,6 +34,7 @@ import org.junit.jupiter.api.Test;
  * @since 1.0
  */
 public class SimpleEmailTest extends AbstractEmailTest {
+
     private MockSimpleEmail email;
 
     @BeforeEach
