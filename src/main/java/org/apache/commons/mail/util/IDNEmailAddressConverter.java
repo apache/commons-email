@@ -34,6 +34,13 @@ import javax.mail.internet.InternetAddress;
 public class IDNEmailAddressConverter {
 
     /**
+     * Constructs a new instance.
+     */
+    public IDNEmailAddressConverter() {
+        // empty
+    }
+
+    /**
      * Extracts the domain part of the email address.
      *
      * @param email email address.

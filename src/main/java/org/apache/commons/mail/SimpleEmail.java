@@ -24,6 +24,13 @@ package org.apache.commons.mail;
 public class SimpleEmail extends Email {
 
     /**
+     * Constructs a new instance.
+     */
+    public SimpleEmail() {
+        // empty
+    }
+
+    /**
      * Sets the content of the mail.
      *
      * @param msg A String.

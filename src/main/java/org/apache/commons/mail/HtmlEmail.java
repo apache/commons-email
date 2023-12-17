@@ -193,6 +193,13 @@ public class HtmlEmail extends MultiPartEmail {
     protected Map<String, InlineImage> inlineEmbeds = new HashMap<>();
 
     /**
+     * Constructs a new instance.
+     */
+    public HtmlEmail() {
+        // empty
+    }
+
+    /**
      * @throws EmailException     EmailException
      * @throws MessagingException MessagingException
      */

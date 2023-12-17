@@ -69,6 +69,13 @@ public class MultiPartEmail extends Email {
     private boolean hasAttachments;
 
     /**
+     * Constructs a new instance.
+     */
+    public MultiPartEmail() {
+        // empty
+    }
+
+    /**
      * Adds a new part to the email.
      *
      * @param multipart The MimeMultipart.
