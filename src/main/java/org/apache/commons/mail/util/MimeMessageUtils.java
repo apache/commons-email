@@ -33,7 +33,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.util.SharedByteArrayInputStream;
 
 /**
- * Static helper methods.
+ * Creates {@link MimeMessage} instances and other helper methods.
  *
  * @since 1.3
  */
