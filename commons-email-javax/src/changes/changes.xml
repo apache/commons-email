@@ -1,0 +1,481 @@
+<?xml version="1.0"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Apache Commons Email Release Notes</title>
+    <author email="epugh@STOPSPAMopensourceconnections.com">Eric Pugh</author>
+  </properties>
+
+  <body>
+    <release version="1.6.0" date="YYYY-MM-DD" description="Feature release (Java 8 or above).">
+      <!-- FIX -->
+      <action issue="EMAIL-190" type="fix" due-to="sgoeschl">Fix broken JDK 9 build by updating "easymock" and other dependencies.</action>
+      <action type="fix" dev="ggregory" due-to="John Patrick, Gary Gregory">Use JUnit 5 APIs #106, #108, #109, #114.</action>     
+      <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">[StepSecurity] ci: Harden GitHub Actions #149.</action>
+      <action dev="ggregory" type="fix" due-to="Lee Jaeheon, sebbASF">Better use of JUnit APIs #158.</action>
+      <action issue="EMAIL-205" dev="ggregory" type="fix" due-to="Dimitrios Efthymiou, Alex Herbert">Update conversion code #153.</action>
+      <action type="fix" dev="ggregory" due-to="Alexander Lehmann">Email.setBounceAddress no longer accepts invalid email addresses.</action>
+      <action type="fix" dev="ggregory" due-to="Amir Behnam, Michael Osipov">Throw more specific exceptions in MimeMessageParser #11.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Email.setMailSession(Session) throws the more precise exception NullPointerException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in DataSourceClassPathResolver.resolve(String, boolean).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Complete half-baked test DataSourceUrlResolverTest.testResolvingHttpNonLenient().</action>
+      <action issue="EMAIL-206" type="fix" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Use SharedByteArrayInputStream for memory usage #157.</action>
+      <action dev="ggregory" type="fix" due-to="Loki-Afro, Gary Gregory">Migrate to JUnit 5 #186.</action>
+      <action issue="EMAIL-174" type="fix" due-to="Vegard Stuen">Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses.</action>
+      <action dev="ggregory" type="fix" due-to="Loki-Afro, Gary Gregory">Add missing getters and setters in EMail and subclasses; deprecate access to protected instance variables.</action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">DataSourceUrlResolver.resolve(String, boolean) leaks InputStreams.</action>
+      <!-- ADD -->
+      <action type="add" due-to="Dependabot" dev="ggregory">Add github/codeql-action #75.</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add Maven plugin JapiCmp and remove Clirr.</action>
+      <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.</action>
+      <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Add InputStreamDataSource.</action>
+      <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Don't waste memory in MimeMessageParser#createDataSource().</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add EmailConstants.SOCKET_TIMEOUT and deprecate SOCKET_TIMEOUT_MS.</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add Email.setSocketConnectionTimeout(Duration) and deprecate setSocketConnectionTimeout(int).</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add Email.setSocketTimeout(Duration) and deprecate setSocketTimeout(int).</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add PathDataSource.</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add DataSourcePathResolver.</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add MimeMessageUtils.createMimeMessage(Session, Path, OpenOption...).</action>
+      <action type="add" due-to="Gary Gregory" dev="ggregory">Add MultiPartEmail.attach(Path, OpenOption...).</action>
+      <!-- UPDATE -->
+      <action type="update" due-to="Dependabot" dev="sebb">Bump org.slf4j:slf4j-jdk14 from 1.7.7 to 2.0.9 #165.</action>
+      <action type="update" due-to="Dependabot" dev="sebb">Bump mockito-core from 4.11.0 to 5.8.0 #187.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/checkout from 1 to 3.2.0, #25 #33, #67, #99, #117.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump actions/setup-java from 1.4.0 to v3.6.0 #30, #74, #103.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110.</action>
+      <action issue="EMAIL-177" type="update" due-to="Gary Gregory">Bump from Java 6 to 7.</action>
+      <action type="update" due-to="Gary Gregory">Bump from Java 7 to 8.</action>
+      <action issue="EMAIL-183" type="update" due-to="Lukas Petrovicky, gitmotte, Dependabot, Gary Gregory">Bump javax.mail:1.6.1 to jakarta.mail:1.6.7.</action>
+      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">Bump commons-parent from 50 to 65, #118, #128.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump spotbugs from 4.0.6 to 4.7.2 #40.</action>
+      <action type="update" due-to="Dependabot, Gary Gregory" dev="ggregory">Bump junit from 4.13 to 4.13.2 #32.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-release-plugin from 1.0 to 1.7 #23.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94.</action>
+      <action type="update" due-to="Gary Gregory">Bump tests commons-io:commons-io 2.6 to 2.15.1.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.easymock:easymock from 4.2 to 5.2.0, #107, #164.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-release-plugin from 1.7 to 1.8.1 #73, #184.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87.</action>
+    </release>
+    <release version="1.5" date="2017-08-01">
+      <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
+      <action dev="kinow" type="fix" issue="EMAIL-172" due-to="Thomas Grainger">
+        Grammar error in comment
+      </action>
+      <action dev="sebb" type="fix" issue="EMAIL-169">
+        MimeMessageUtils.writeMimeMessage writes stacktrace
+      </action>
+      <action dev="sebb" type="fix" issue="EMAIL-167" due-to="Lucian Burja">
+        DataSourceClassPathResolver doesn't close InputStream when resolving resources
+      </action>
+      <action dev="sgoeschl" type="update" issue="EMAIL-165" date="2017-01-02">
+        Upgrade to javax.mail-1.5.6
+      </action>
+      <action dev="sgoeschl" type="update" issue="EMAIL-161" date="2016-02-01">
+        Remove "javax.activation" dependency since it is included in JDK 1.6 and update to javax.mail-1.5.5
+      </action>
+      <action dev="sgoeschl" type="add" issue="EMAIL-160" date="2016-02-01">
+        Add Support for International Domain Names. This change requires JDK 1.6+.
+      </action>
+      <action dev="ggregory" type="add" issue="EMAIL-154" date="2015-07-26" due-to="Ken Geis, Balachandran Sivakumar">
+        Add Email#getHeader(String) and Email#getHeaders() methods.
+      </action>
+      <action dev="ggregory" type="fix">
+        CVE-2017-9801 - stripped all line-breaks from subjects in
+        order to prevent SMTP header injection.
+      </action>
+    </release>
+    <release version="1.4" date="2015-05-23">
+      <action dev="tn" type="fix" issue="EMAIL-149" date="2015-03-10" due-to="Richard DiCroce">
+        "Email" threw an "EmailException" when trying to send the email if neither a from
+        nor bounce address was specified, although a "mail.from" property was set in the
+        mail session.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-151" date="2015-03-10" due-to="Andreas Kohn">
+        "ImageHtmlEmail" failed to embed attachments if their data source name was null.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-147" date="2014-12-26" due-to="Can Eskikaya">
+        Html emails did not have the correct content-type set when using the Apache Geronimo
+        JavaMail implementation v1.8.x.
+      </action>
+      <action dev="tn" type="add" issue="EMAIL-146" date="2014-12-01" due-to="Alexander Lehmann">
+        Added getter for the bounce address of an email to class Email.
+      </action>
+      <action dev="ggregory" type="update" issue="EMAIL-144" date="2014-10-15">
+        Update Oracle JavaMail dependency from 1.4.5 to 1.5.2.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-142" date="2014-10-02" due-to="Marcin Tomiak">
+        An "HtmlEmail" with both, an html and plain text content but no attachments or embedded
+        images will now be created with mimetype "multipart/alternative" instead of "multipart/mixed".
+      </action>
+      <action dev="tn" type="add" issue="EMAIL-141" date="2014-09-14" due-to="Stephen Kruger">
+        Added support for mapping of content-ids to DataSource in "MimeMessageParser".
+      </action>
+    </release>
+    <release version="1.3.3" date="2014-07-12">
+      <action dev="tn" type="fix" issue="EMAIL-140" date="2014-07-01" due-to="Gary Gregory">
+        Fix test execution errors with Java 8.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-138" date="2014-05-06" due-to="qed">
+        The filename of an attachment was not properly encoded in case it contained
+        non-ascii characters.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-137" date="2014-04-30" due-to="Alex Kogan">
+        MimeMessageParser did not correctly parse MimeMessage objects created by
+        calling HtmlEmail.buildMimeMessage() and HtmlEmail.getMimeMessage().
+      </action>
+      <action dev="ggregory" type="fix" issue="EMAIL-136" date="2014-02-01" due-to="Ville Skyttä">
+        Fix Javadoc 1.8 errors.
+      </action>
+    </release>
+    <release version="1.3.2" date="2013-10-23">
+      <action dev="tn" type="update" issue="EMAIL-135" date="2013-10-15" due-to="Andreas Kohn">
+        Change visibility of DataSourceUrlResourceResolver.createUrl(String) to protected so
+        that sub-classes can override it.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-104" date="2013-10-15" due-to="Hiroshi Ikeda">
+        Support default mime charset property "mail.mime.charset" when adding text content
+        to instances of either SimpleEmail or HtmlEmail.
+      </action>
+      <action dev="tn" type="add" issue="EMAIL-132" date="2013-10-10" due-to="Allen Xudong Cheng">
+        Added support for sending partial emails in case of invalid addresses.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-131" date="2013-09-14" due-to="Raju Y">
+        The MimeMessageParser will now correctly parse MIME multi-parts of type "text/plain"
+        and "text/html" with a content disposition header of "attachment". The parts will
+        be added to the list of attachments even if there is no other text or html content.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-127" date="2013-07-01" due-to="Dominik Stadler">
+        Special characters in the body of an HTML email could lead to an exception when the
+        mime message was built.
+      </action>
+    </release>
+    <release version="1.3.1" date="2013-03-04">
+      <action dev="tn" type="fix" issue="EMAIL-125" date="2013-02-22" due-to="Jean-Marc">
+        DataSourceClassPathResolver will now correctly set the DataSource name for resolved
+        resources. Additionally, it is now possible to set the name for a ByteArrayDataSource.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-124" date="2013-02-21" due-to="Stefan Schueffler">
+        Header values are not folded twice anymore. The actual encoding and folding is
+        now only performed in Email.buildMimeMessage().
+      </action>
+    </release>
+    <release version="1.3" date="2013-01-10">
+      <action dev="tn" type="fix" issue="EMAIL-101" date="2012-12-09" due-to="Andrew Starodub">
+        Use the provided Content-ID in HtmlEmail#embed(File, String) instead of creating
+        a random one. The used and returned Content-ID will be URL encoded (see RFC 2392).
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-122" date="2012-12-08" due-to="sebb">
+        Upgraded source and binary compatibility to JDK 1.5. Additionally the public/protected
+        methods and fields have been properly generified.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-103" date="2012-12-08" due-to="David Rees">
+        Do not set the personal name of an address to the email address unless it is
+        explicitly specified (affects TO, CC, BCC and FROM addresses).
+      </action>
+      <action dev="tn" type="add" issue="EMAIL-114" date="2012-12-02" due-to="Gokul Nanthakumar C">
+        Added new methods addTo(String[]), addCc(String[]) and addBcc(String[]) to Email.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-117" date="2012-12-02" due-to="sebb">
+        Removed emulation support for nested exceptions in EmailException.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-116" date="2012-11-10" due-to="sebb">
+        Prevent external modification of internal array in DataSourceCompositeResolver.
+      </action>
+      <action dev="tn" type="fix" issue="EMAIL-120" date="2012-11-07" due-to="Mike Bell">
+        Close temporary input stream in MultiPartEmail#attach(DataSource, String, String)
+        to prevent locking of file resources on windows systems.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-105" date="2012-02-04" due-to="Siegfried Goeschl">
+        The patch actually broke sending emails over a secured connection - disabled the
+        "MAIL_SMTP_SSL_CHECKSERVERIDENTITY" and "MAIL_SMTP_SSL_ENABLE" activation. Tested
+        the functionality using GMail, GMX and Office365 so the code is at least working for
+        a couple of existing SMTP servers. Also added 'sslCheckServerIdentity' including
+        setter and getter. Also added a chapter regarding "Security" to the user manual.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-113" date="2012-02-19" due-to="Peter Kofler">
+        Maven Site fails with error in Checkstyle configuration.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-112" date="2012-02-19" due-to="Peter Kofler">
+        DataSourceFileResolverTest fails under IBM JDK 1.4 and 1.6 running on Windows.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-111" date="2012-02-18" due-to="Florian Pirchner">
+        Update the current trunk to be binary compatible with the commons-email-1.2 release.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-110" date="2012-02-18" due-to="Thomas Pummer">
+        Added unit test to ensure that parsing the broken mime message does not cause an OutOfMemoryException.
+      </action>
+      <action dev="sgoeschl" type="add" issue="EMAIL-108" date="2011-11-10" due-to="Elisabeth Kasimir, Alexander Kasimir">
+        ImageHtmlEmail should support class path resources.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-107" date="2011-09-06" due-to="Claus Polanka, Michael Jakl">
+        Added mime.types to META-INF - the definition is actually found in activation.jar
+        but did not work.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-106" date="2011-09-06" due-to="Bruno Harbulot">
+        STARTTLS can be used even without authenticator.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-105" date="2011-09-06" due-to="Bruno Harbulot">
+        Clarified the meaning of setTLS() which actually sends a "STARTTLS" command from the
+        client to the SMTP server. Please note that some "protected" variables were renamed
+        which could break existing code.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-102" date="2010-12-16" due-to="Okan Özeren">
+        Fixed HtmlEmail embed toLowerCase bug with Turkish locale.
+      </action>
+      <action dev="sgoeschl" type="add" date="2010-12-16">
+        Added a MultiPartEmail.attach(File) method since attaching a file is a simple and common.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-101" date="2010-11-08" due-to="Andrew Starodub">
+        Specified Content-ID is now used when embedding a File object in an HtmlEmail.
+      </action>
+      <action dev="niallp" type="fix" date="2010-11-08">
+        Restore Java 1.4 compatibility.
+      </action>
+      <action dev="sgoeschl" type="add" date="2010-11-01">
+        Added MimeMessageParser and MimeMessageUtils.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-96" date="2010-10-27">
+        Throwing an IllegalStateException when setting mail session properties for an already
+        created mail session because the settings would be ignored. Please note that this
+        change could potentially break existing (but invalid) code.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-98" date="2010-10-23" due-to="Mario Daepp">
+        Encoding and folding of headers is now done by commons-email.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-100" date="2010-10-15" due-to="David Parks">
+        The default connection timeout is set to a reasonable default value of 60 seconds.
+      </action>
+      <action dev="sgoeschl" type="fix" date="2010-10-15">
+        Moving the various constants from 'EMail' to 'EmailConstants'
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-76" date="2010-10-15" due-to="Yu Kobayashi">
+        All setters are returning "this" to simplify building an email.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-92" date="2010-06-08" due-to="Dominik Stadler">
+        Adding ImageHtmlEmail to create HTML emails with embedded images either
+        downloaded from HTTP or from the local file system.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-95" date="2010-05-13">
+       Calling buildMimeMessage() before invoking send() caused
+       duplicated mime parts for HtmlEmail. The implementation now enforces
+       that an email can be only used once and throw an exception when
+       multiple invocations of buildMimeMessage() are detected.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-91" date="2010-05-13" due-to="Kevin Lester">
+        Incorrect SMTP Port number shown in error message when an email fails
+        to send due to a blocked port and SSL is used.
+      </action>        
+    </release>
+    <release version="1.2" date="2009-10-26">
+      <action dev="sgoeschl" type="update" date="2009-06-26">
+        Changing groupId from "commons-email" to "org.apache.commons" 
+        because the 1.1 release was already using "org.apache.commons"
+      </action>    
+      <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
+        Using "http://example.invalid" for a bad url - ".invalid" is reserved
+        and not intended to be installed as a top-level domain in the global 
+        Domain Name System (DNS) of the Internet.
+      </action>    
+      <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
+        Made BaseEmailTestCase abstract and fixed a few coding issues.
+      </action>    
+      <action dev="sgoeschl" type="fix" issue="EMAIL-87" date="2009-06-16" due-to="sebb">
+        HtmlEmail invokes java.net.URL.equals(Object), which blocks to do domain name resolution. This
+        is avoided by using "url.toExternalForm().equals()" instead of "url.equals()".
+      </action>
+      <action dev="sgoeschl" type="add" issue="EMAIL-75" date="2009-04-05" due-to="Yu Kobayashi">
+        Email.setFrom and Email.addTo are using Email.charset to properly encode the name.
+      </action>
+      <action dev="sgoeschl" type="add" issue="EMAIL-79" date="2009-04-05" due-to="Edvin Syse, Corey Scott">
+        SimpleEmail#setMsg() with UTF-8 content honors correct charset in header and
+        does encode the content correctly now.
+      </action>
+      <action dev="sgoeschl" type="add" issue="EMAIL-84" date="2009-02-22" due-to="Claudio Miranda">
+        Created additional methods to support timeouts.
+      </action>
+      <action dev="sgoeschl" type="add" issue="EMAIL-74" date="2009-02-22" due-to="Jim McCabe, Corey Scott">
+        Create an overridable method in Email.java to create the MimeMessage instance.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-71" date="2009-02-22" due-to="Teemu Lang, Corey Scott">
+        If setHostName() has not been called, getHostName() tries to return
+        this.session.getProperty(MAIL_HOST). If mail session has not been
+        created yet, this will throw a NullPointerException. Now getHostName()
+        checks that this.session is not null before trying to access it.
+      </action>
+      <action dev="sgoeschl" type="add" issue="EMAIL-81" date="2009-02-22" due-to="Travis Reader, Corey Scott">
+        Add getTo and getReplyTo to Email class.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-78" date="2009-02-08" due-to="Aaron Digulla, Corey Scott">
+        Provide better diagnostics when attaching  documents fail.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-70" date="2008-12-29" due-to="F. Andy Seidl">
+        When mail authentication is required and no username/password is supplied
+        than the provided mail session is used. If a username/password is found
+        the implementation creates a new mail session and a DefaultAuthenticator
+        as convinence implementation.
+      </action>
+      <action dev="sgoeschl" type="fix" issue="EMAIL-65" date="2008-12-29" due-to="Kenneth Gendron">
+        Using Kenneth's implementation of HtmlEmail.buildMimeMessage() to fix a
+        couple of HtmlEmail layout issues. Also thanks to Martin Lau and Morten
+        Hattesen for providing in-depth analysis of the problem
+      </action>
+      <action dev="sgoeschl" type="fix">
+        During regression tests write out the generated MimeMessage instead of
+        WiserEmail.toString().
+      </action>
+    </release>
+    <release version="1.1" date="2007-09-27">
+      <action dev="bspeakmon" type="add" issue="EMAIL-35" due-to="Brandon Wolfe">
+        Support embedding of raw DataSource attachments in HtmlEmail.
+      </action>
+      <action dev="bspeakmon" type="update" issue="EMAIL-64" due-to="Ben Speakmon">
+        Use wiser instead of dumbster for test cases. Original patch supplied by Bindul Bhowmik.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-62" due-to="Ben Speakmon">
+        Build patches to enforce source 1.4 and target 1.4 when compiling.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-52" due-to="Andrew Liles">
+        Identical Inline images should share same BodyPart.
+        Fixed by EMAIL-50.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-28" due-to="Phil Bretherton">
+        Problems with HTML emails with attachments and embedded images.
+        Fixed by EMAIL-50.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-50" due-to="Andrew Liles">
+        HTML Emails with images don't display in Outlook 2000.
+        Fix from Ben Speakmon.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-54" due-to="Piero Ottuzzi">
+        Use JDK1.4 and java.nio.Charset instead of keeping our own.
+        Fix from Ben Speakmon.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-14" due-to="locka">
+        not support content charset gb2312.
+        Fixed by EMAIL-54.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-25" due-to="James Huang">
+        Address char-set can not be individually set.
+        Fixed by EMAIL-54.
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-1" due-to="James Mc Millan">
+        setCharset() in Email does not set the charset for the message content.
+        Fix provided by Ben Speakmon.
+      </action>
+      <action dev="scolebourne" type="fix" >
+        Enhance website
+      </action>
+      <action dev="dion" type="add" issue="EMAIL-45" due-to="Dave Cherkassky">
+        Added Email.setReplyTo(Collection)
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-37" due-to="Piero Ottuzzi">
+        If you provide a mailSession in tomcat you cannot send email using
+        commons-email: the problem is mainly caused by typos or missing constant
+        declaration.
+      </action>
+      <action dev="dion" type="add" issue="EMAIL-48">
+        Added TLS helper methods on Email
+        and Added setMailSessionFromJNDI(String) helper method
+      </action>
+      <action dev="dion" type="fix" issue="EMAIL-7" due-to="Nuno Ponte">
+        Added HtmlEmail.embed(String,String) as a wrapper to embed(URL,String)
+      </action>
+    </release>
+    <release version="1.0" date="2005-09-27"/>
+    <release version="1.0-rc8" date="2005-09-07">
+      <action dev="henning" type="fix">
+        Make sure that the unit tests don't fail under JDK 1.3.x with 
+        java.net.BindException: Address already in use
+      </action>
+      <action dev="henning" type="update" due-to="Niall Pemberton" issue="EMAIL-49">
+        Replace our usage of address.validate() with simpler code that allows
+        commons-email to work with javamail 1.2 / J2EE 1.3 environment. Added an
+        unit test which verifies the behavior.
+      </action>
+      <action dev="henning" type="update" due-to="Niall Pemberton" issue="EMAIL-58">
+        Add an unit test to check for invalid addresses.
+      </action>
+      <action dev="henning" type="update" due-to="Stephen Colebourne" issue="EMAIL-12">
+        Remove dependencies to commons-lang, allowing commons-email to exist without
+        any external dependencies in an J2EE 1.4+ environment.
+      </action>
+    </release>
+    <release version="1.0-rc6-SNAPSHOT" date="in Subversion">
+      <action dev="epugh" type="update" due-to="Troy Poppe" issue="EMAIL-51">
+        Improve MultiPartEmail to ease extending it.
+      </action>
+      <action dev="sgoeschl" type="update">
+        Refactoring the code to seperate creation of a MimeMessage and sending it.
+      </action>
+      <action dev="dion" type="update">Add serialVersionUID to EmailException</action>
+      <action dev="dion" type="update">Use Dumbster 1.6 compiled with jdk13 for testing</action>
+      <action dev="dion" type="fix" issue="EMAIL-24" due-to="Eric Spiegelberg">
+        Refactor Hashtable usage to Map
+      </action>
+      <action dev="epugh" type="add" due-to="Mark Lowe" issue="EMAIL-42">
+        Email throws EmailException wrapping underlying JavaMail exception
+      </action>
+      <action dev="epugh" type="add" due-to="Corey Scott" issue="EMAIL-32">
+        Change port for dumbster from 25 to 2500 to use unreserved port.
+      </action>
+      <action dev="epugh" type="add" due-to="Corey Scott" issue="EMAIL-3">
+        Add back in ByteArrayDataSource.
+      </action>
+      <action dev="epugh" type="remove">
+        Removed deprecated MailMessage and ByteArrayDataSource.
+      </action>
+      <action dev="epugh" type="add">
+        Output test emails to /target/test-emails as .txt files for manual
+        review.
+      </action>
+      <action dev="epugh" type="add" due-to="Mark Lowe" issue="EMAIL-19">
+        Inline attatchment encoding was incorrect.
+      </action>
+      <action dev="epugh" type="add">
+        Integrate our own checkstyle config instead of using Turbine style only.
+      </action>
+      <action dev="epugh" type="add" due-to="Joe Germuska" issue="EMAIL-55">
+        Clone the System.getProperties() call instead of putting random properties
+        into it.
+      </action>
+      <action dev="epugh" type="add" issue="EMAIL-8">
+        Can't supply a javax.mail.Session to Commons Email component
+      </action>
+      <action dev="epugh" type="add" issue="EMAIL-23" due-to="Corey Scott">
+        HTML email with plain text alternative and attachments
+      </action>
+      <action dev="epugh" type="add" issue="EMAIL-33" due-to="Corey Scott">
+        Integrate use of Dumbster to supply a fake SMTP server.
+      </action>
+      <action dev="epugh" type="add" due-to="Corey Scott">
+        Lots of new unit tests and cleanup of code.
+      </action>
+      <action dev="epugh" type="update">
+        Update dependencies to latest available.
+      </action>
+      <action dev="germuska" type="add" issue="EMAIL-55">
+        Support the delivery of bounced messages to an address other than "from".
+      </action>
+    </release>
+  </body>
+</document>
