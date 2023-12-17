@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -249,6 +250,10 @@ final class EmailUtils {
      */
     static String replaceEndOfLineCharactersWithSpaces(final String input) {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
+    }
+
+    static String toLower(final String value) {
+        return value.toLowerCase(Locale.ROOT);
     }
 
     /**

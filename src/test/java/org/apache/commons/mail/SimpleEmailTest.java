@@ -79,7 +79,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
 
         final String message = getMessageAsString(0);
         // check that the charset has been correctly set
-        assertTrue(message.toLowerCase().contains("content-type: text/plain; charset=utf-8"));
+        assertTrue(EmailUtils.toLower(message).contains("content-type: text/plain; charset=utf-8"));
 
         System.clearProperty(EmailConstants.MAIL_MIME_CHARSET);
     }
