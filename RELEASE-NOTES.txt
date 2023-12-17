@@ -79,3 +79,322 @@ Enjoy!
 -Apache Commons Net team
 
 -----------------------------------------------------------------------------
+
+                         Commons Email Package
+                              Version 1.5
+                             Release Notes
+
+INTRODUCTION:
+-------------
+
+Commons Email aims to provide a API for sending email. It builds on the JavaMail
+API with the aim of presenting a simplified API which is easy for developers who
+are not mail experts to use. It is a compact component with a small number of
+classes.
+
+The Commons Email website is the source for the most recent information,
+downloads, reports, and bug status:
+
+http://commons.apache.org/email/
+
+This is a major release which adds some new features and fixes several bugs
+present in the 1.4.0 release. All current users are encouraged to upgrade.
+
+CHANGES FROM 1.4:
+-----------------
+
+== Compatibility ==
+
+* Java 6 or later is required.
+
+* JavaMail dependency has been upgraded to version 1.5.6,
+  as a consequence, the maven dependency has changed to:
+
+  <dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.5.6</version>
+  </dependency>
+
+== New Features ==
+
+* Add Support for International Domain Names. This change requires JDK 1.6+.
+Issue: EMAIL-160
+
+* Add Email#getHeader(String) and Email#getHeaders() methods.
+Issue: EMAIL-154. Thanks to Ken Geis, Balachandran Sivakumar
+
+== Updates ==
+
+* Update Oracle JavaMail dependency from 1.5.2 to 1.5.6.
+  Issue: EMAIL-165.
+
+* Remove "javax.activation" dependency since it is included in JDK 1.6
+  Issue: EMAIL-161.
+
+== Fixed Bugs ==
+
+* DataSourceClassPathResolver doesn't close InputStream when resolving resources
+Issue: EMAIL-167. Thanks to Lucian Burja.
+
+CHANGES FROM 1.3.3:
+-----------------
+
+== Compatibility ==
+
+* Java 5 or later is required (unchanged since 1.3).
+
+* JavaMail dependency has been upgraded to version 1.5.2,
+  as a consequence, the maven dependency has changed to:
+
+  <dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.5.2</version>
+  </dependency>
+
+== New Features ==
+
+* Added getter for the bounce address of an email to class Email.
+  Issue: EMAIL-146. Thanks to Alexander Lehmann.
+
+* Added support for mapping of content-ids to DataSource in "MimeMessageParser".
+  Issue: EMAIL-141. Thanks to Stephen Kruger.
+
+== Updates ==
+
+* Update Oracle JavaMail dependency from 1.4.5 to 1.5.2.
+  Issue: EMAIL-144.
+
+== Fixed Bugs ==
+
+* "Email" threw an "EmailException" when trying to send the email if neither a from
+  nor bounce address was specified, although a "mail.from" property was set in the mail session.
+  Issue: EMAIL-149. Thanks to Richard DiCroce.
+
+* "ImageHtmlEmail" failed to embed attachments if their data source name was null.
+  Issue: EMAIL-151. Thanks to Andreas Kohn.
+
+* Html emails did not have the correct content-type set when using the Apache Geronimo
+  JavaMail implementation v1.8.x.
+  Issue: EMAIL-147. Thanks to Can Eskikaya.
+
+* An "HtmlEmail" with both, an html and plain text content but no attachments or embedded
+  images will now be created with mimetype "multipart/alternative" instead of "multipart/mixed".
+  Issue: EMAIL-142. Thanks to Marcin Tomiak.
+
+
+CHANGES FROM 1.3.2:
+-----------------
+
+== Compatibility ==
+
+* Java 5 or later is required (unchanged since 1.3).
+
+== Fixed Bugs ==
+
+* The filename of an attachment was not properly encoded in case it contained
+  non-ascii characters.
+  Issue: EMAIL-138. Thanks to qed.
+
+* MimeMessageParser did not correctly parse MimeMessage objects created by
+  calling HtmlEmail.buildMimeMessage() and HtmlEmail.getMimeMessage().
+  Issue: EMAIL-137. Thanks to Alex Kogan.  
+
+* Fix Javadoc 1.8 errors.
+  Issue: EMAIL-136. Thanks to Ville Skyttä.
+
+
+CHANGES FROM 1.3.1:
+-----------------
+
+== Compatibility ==
+
+* Java 5 or later is required (unchanged since 1.3).
+
+== Fixed Bugs ==
+
+* Change visibility of DataSourceUrlResourceResolver.createUrl(String) to protected so
+  that sub-classes can override it.
+  Issue: EMAIL-135. Thanks to Andreas Kohn.
+
+* Support default mime charset property "mail.mime.charset" when adding text content
+  to instances of either SimpleEmail or HtmlEmail.
+  Issue: EMAIL-104. Thanks to Hiroshi Ikeda.
+
+* Added support for sending partial emails in case of invalid addresses.
+  Issue: EMAIL-132. Thanks to Allen Xudong Cheng.
+
+* The MimeMessageParser will now correctly parse MIME multi-parts of type "text/plain"
+  and "text/html" with a content disposition header of "attachment". The parts will
+  be added to the list of attachments even if there is no other text or html content.
+  Issue: EMAIL-131. Thanks to Raju Y.
+
+* Special characters in the body of an HTML email could lead to an exception when the
+  mime message was built.
+  Issue: EMAIL-127. Thanks to Dominik Stadler.
+
+
+CHANGES FROM 1.3:
+-----------------
+
+== Compatibility ==
+
+* Java 5 or later is required (unchanged since 1.3).
+
+== Fixed Bugs ==
+
+* DataSourceClassPathResolver will now correctly set the DataSource name for resolved
+  resources. Additionally, it is now possible to set the name for a ByteArrayDataSource.
+  Issue: EMAIL-125. Thanks to Jean-Marc.
+
+* Header values are not folded twice anymore. The actual encoding and folding is
+  now only performed in Email.buildMimeMessage().
+  Issue: EMAIL-124. Thanks to Stefan Schueffler.
+
+
+CHANGES FROM 1.2:
+-----------------
+
+== Compatibility ==
+
+* Java 5 or later is now required.
+
+== New Features ==
+
+* Added new methods addTo(String[]), addCc(String[]) and addBcc(String[]) to Email.
+  Issue: EMAIL-114. Thanks to Gokul Nanthakumar C. 
+
+* HtmlmageEmail should support class path resources  
+  Issue: EMAIL-108. Thanks to Elisabeth Kasimir, Alexander Kasimir. 
+
+* Added a MultiPartEmail.attach(File) method since attaching a file is a simple and common. 
+
+* Added MimeMessageParser and MimeMessageUtils. 
+
+== Fixed Bugs ==
+
+* Use the provided Content-ID in HtmlEmail#embed(File, String) instead of creating
+  a random one. The used and returned Content-ID will be URL encoded (see RFC 2392).
+  Issue: EMAIL-101. Thanks to Andrew Starodub.
+
+* Upgraded source and binary compatibility to JDK 1.5. Additionally the public/protected
+  methods and fields have been properly generified.
+  Issue: EMAIL-122. Thanks to sebb.
+
+* Do not set the personal name of an address to the email address unless it is
+  explicitly specified (affects TO, CC, BCC and FROM addresses).
+  Issue: EMAIL-103. Thanks to David Rees.
+
+* Removed emulation support for nested exceptions in EmailException.
+  Issue: EMAIL-117. Thanks to sebb.
+
+* Prevent external modification of internal array in DataSourceCompositeResolver.
+  Issue: EMAIL-116. Thanks to sebb.
+ 
+* Close temporary input stream in MultiPartEmail#attach(DataSource, String, String)
+  to prevent locking of file resources on windows systems.
+  Issue: EMAIL-120. Thanks to Mike Bell.
+
+* The patch actually broke sending emails over a secured connection - disabled the
+  "MAIL_SMTP_SSL_CHECKSERVERIDENTITY" and "MAIL_SMTP_SSL_ENABLE" activation. Tested
+  the functionality using GMail, GMX and Office365 so the code is at least working for
+  a couple of existing SMTP servers. Also added 'sslCheckServerIdentity' including
+  setter and getter. Also added a chapter regarding "Security" to the user manual.
+  Issue: EMAIL-105. Thanks to Siegfried Goeschl.
+
+* Maven Site fails with error in Checkstyle configuration.
+  Issue: EMAIL-113. Thanks to Peter Kofler.
+ 
+* DataSourceFileResolverTest fails under IBM JDK 1.4 and 1.6 running on Windows.
+  Issue: EMAIL-112. Thanks to Peter Kofler.
+ 
+* Update the current trunk to be binary compatible with the commons-email-1.2 release.
+  Issue: EMAIL-111. Thanks to Florian Pirchner.
+ 
+* Added unit test to ensure that parsing the broken mime message does not cause an OutOfMemoryException.
+  Issue: EMAIL-110. Thanks to Thomas Pummer. 
+
+* Added mime.types to META-INF - the definition is actually found in activation.jar
+  but did not work.  Issue: EMAIL-107. Thanks to Claus Polanka, Michael Jakl. 
+
+* STARTTLS can be used even without authenticator.
+  Issue: EMAIL-106. Thanks to Bruno Harbulot. 
+
+* Clarified the meaning of setTLS() which actually sends a "STARTTLS" command from the
+  client to the SMTP server. Please note that some "protected" variables were renamed
+  which could break existing code.
+  Issue: EMAIL-105. Thanks to Bruno Harbulot. 
+
+* Fixed HtmlEmail embed toLowerCase bug with Turkish locale.
+  Issue: EMAIL-102. Thanks to Okan Özeren. 
+
+* Specified Content-ID is now used when embedding a File object in an HtmlEmail.  
+  Issue: EMAIL-101. Thanks to Andrew Starodub. 
+
+* Throwing an IllegalStateException when setting mail session properties for an already
+  created mail session because the settings would be ignored. Please note that this
+  change could potentially break existing (but invalid) code.  Issue: EMAIL-96. 
+
+* Encoding and folding of headers is now done by commons-email.
+  Issue: EMAIL-98. Thanks to Mario Daepp. 
+
+* The default connection timeout is set to a reasonable default value of 60 seconds.
+  Issue: EMAIL-100. Thanks to David Parks. 
+
+* Moving the various constants from 'EMail' to 'EmailConstants' 
+
+* All setters are returning "this" to simplify building an email.
+  Issue: EMAIL-76. Thanks to Yu Kobayashi. 
+
+* Adding ImageHtmlEmail to create HTML emails with embedded images either
+  downloaded from HTTP or from the local file system.
+  Issue: EMAIL-92. Thanks to Dominik Stadler. 
+
+* Calling buildMimeMessage() before invoking send() caused
+  duplicated mime parts for HtmlEmail. The implementation now enforces
+  that an email can be only used once and throw an exception when
+  multiple invocations of buildMimeMessage() are detected.
+  Issue: EMAIL-95. 
+
+* Incorrect SMTP Port number shown in error message when an email fails
+  to send due to a blocked port and SSL is used.
+  Issue: EMAIL-91. Thanks to Kevin Lester. 
+
+
+REQUIREMENTS:
+
+J2SE environments
+-----------------
+
+Commons Email requires JavaMail 1.5.2 or later. The reference implementation
+is available at:
+
+https://java.net/projects/javamail/pages/Home
+
+However, the Apache Geronimo project (http://geronimo.apache.org)
+provides a J2EE-certified implementation of the JavaMail 1.4
+specification licensed under the Apache Software License.  
+
+Commons Email also requires the JavaBeans Activation Framework unless
+you are running on Java SE 6 or later. The Oracle implementation is available
+at:
+
+http://www.oracle.com/technetwork/java/javase/downloads/index-135046.html
+
+Apache Geronimo likewise provides an implementation under the Apache
+Software License.
+
+Commons Email has been tested with JDK 1.6 and 1.7.
+
+J2EE environments
+-----------------
+
+Commons Email is compatible with all certified Java Enterprise Edition
+5 implementations; no further dependencies are required. 
+
+Java 2 Enterprise Edition 1.4 users must ensure that the versions of
+JavaMail and JAF indicated above are available to their applications;
+the J2EE 1.4 specification only requires earlier versions.
+
+Earlier versions of J2EE are not supported.
