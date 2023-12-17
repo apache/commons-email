@@ -56,4 +56,21 @@
     </Or>
   </Match>
 
+  <!-- False positives in Java 11+ 
+    Error:  Load of known null value in org.apache.commons.mail.resolver.DataSourceClassPathResolver.resolve(String, boolean)
+     [org.apache.commons.mail.resolver.DataSourceClassPathResolver]
+     At DataSourceClassPathResolver.java:[line 115] NP_LOAD_OF_KNOWN_NULL_VALUE
+    Error:  Redundant nullcheck of inputStream which is known to be null in org.apache.commons.mail.resolver.DataSourceClassPathResolver.resolve(String, boolean)
+     [org.apache.commons.mail.resolver.DataSourceClassPathResolver]
+     Redundant null check at DataSourceClassPathResolver.java:[line 115] RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE
+  -->
+  <Match>
+    <Class name="org.apache.commons.mail.resolver.DataSourceClassPathResolver" />
+    <Method name="resolve" params="java.lang.String, boolean" returns="javax.activation.DataSource"/>
+    <Or>
+      <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE" />
+      <Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE" />
+    </Or>
+  </Match>
+
 </FindBugsFilter>
