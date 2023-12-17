@@ -30,7 +30,7 @@ import javax.activation.FileTypeMap;
 import javax.activation.MimetypesFileTypeMap;
 
 /**
- * Implements a simple DataSource object that encapsulates a Path. It provides data typing services via a FileTypeMap object.
+ * A JavaBeans Activation Framework {@link DataSource} that encapsulates a {@link Path}. It provides data typing services via a {@link FileTypeMap} object.
  *
  * @see javax.activation.DataSource
  * @see javax.activation.FileTypeMap

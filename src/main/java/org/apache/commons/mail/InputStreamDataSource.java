@@ -24,7 +24,7 @@ import java.io.OutputStream;
 import javax.activation.DataSource;
 
 /**
- * An Activation {@link DataSource} specialized for {@link InputStream}.
+ * A JavaBeans Activation Framework {@link DataSource} specialized for {@link InputStream}.
  * <p>
  * Copied from <a href="https://cxf.apache.org/">Apache CXF</a> and modified.
  * </p>

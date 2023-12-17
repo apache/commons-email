@@ -28,7 +28,7 @@ import javax.activation.FileTypeMap;
 import org.apache.commons.mail.activation.PathDataSource;
 
 /**
- * Creates a {@code DataSource} based on a Path. The implementation also resolves file resources.
+ * Creates a {@link DataSource} based on a {@link Path}. The implementation also resolves file resources.
  *
  * @since 1.6.0
  */
