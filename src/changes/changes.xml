@@ -45,7 +45,7 @@
       <action type="add" due-to="Dependabot" dev="ggregory">Add github/codeql-action #75.</action>
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add Maven plugin JapiCmp and remove Clirr.</action>
       <action issue="EMAIL-176" type="add" dev="pschumacher">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.</action>
-      <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Add org.apache.commons.mail.InputStreamDataSource.</action>
+      <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Add InputStreamDataSource.</action>
       <action issue="EMAIL-207" type="add" dev="ggregory" due-to="Lee Jaeheon, Gary Gregory">Don't waste memory in MimeMessageParser#createDataSource().</action>
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add EmailConstants.SOCKET_TIMEOUT and deprecate SOCKET_TIMEOUT_MS.</action>
       <action type="add" due-to="Gary Gregory" dev="ggregory">Add Email.setSocketConnectionTimeout(Duration) and deprecate setSocketConnectionTimeout(int).</action>

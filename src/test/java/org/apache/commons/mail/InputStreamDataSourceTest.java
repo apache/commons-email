@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.mail.activation.InputStreamDataSource;
 import org.junit.jupiter.api.Test;
 
 /**

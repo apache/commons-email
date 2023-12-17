@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.commons.mail;
+package org.apache.commons.mail.activation;
 
 import java.io.IOException;
 import java.io.InputStream;

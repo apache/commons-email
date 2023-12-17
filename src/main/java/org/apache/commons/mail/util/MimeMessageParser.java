@@ -40,7 +40,7 @@ import javax.mail.internet.MimePart;
 import javax.mail.internet.MimeUtility;
 import javax.mail.internet.ParseException;
 
-import org.apache.commons.mail.InputStreamDataSource;
+import org.apache.commons.mail.activation.InputStreamDataSource;
 
 /**
  * Parses a MimeMessage and stores the individual parts such a plain text, HTML text and attachments.
