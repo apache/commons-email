@@ -251,6 +251,8 @@
     </contributors>
 
     <properties>
+        <commons.parent.dir>${basedir}</commons.parent.dir>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -336,8 +338,8 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptors>
-                        <descriptor>${basedir}/src/assembly/bin.xml</descriptor>
-                        <descriptor>${basedir}/src/assembly/src.xml</descriptor>
+                        <descriptor>src/assembly/bin.xml</descriptor>
+                        <descriptor>src/assembly/src.xml</descriptor>
                     </descriptors>
                     <tarLongFileMode>gnu</tarLongFileMode>
                 </configuration>
@@ -378,8 +380,8 @@
             <artifactId>apache-rat-plugin</artifactId>
             <configuration>
               <excludes>
-                <exclude>${basedir}/src/test/resources/eml/**</exclude>
-                <exclude>${basedir}/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
+                <exclude>src/test/resources/eml/**</exclude>
+                <exclude>src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
               </excludes>
             </configuration>
           </plugin>
@@ -418,14 +420,14 @@
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-maven-plugin</artifactId>
             <configuration>
-              <excludeFilterFile>${basedir}/src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
+              <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
             </configuration>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-checkstyle-plugin</artifactId>
             <configuration>
-              <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+              <configLocation>src/conf/checkstyle.xml</configLocation>
               <enableRulesSummary>false</enableRulesSummary>
             </configuration>
           </plugin>
@@ -461,7 +463,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
-                    <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+                    <configLocation>src/conf/checkstyle.xml</configLocation>
                     <enableRulesSummary>false</enableRulesSummary>
                 </configuration>
             </plugin>
@@ -485,7 +487,7 @@
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs-maven-plugin</artifactId>
               <configuration>
-                  <excludeFilterFile>${basedir}/src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
+                  <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
               </configuration>
             </plugin>
         </plugins>
