@@ -16,13 +16,13 @@
  */
 package org.apache.commons.mail.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
@@ -33,7 +33,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.util.SharedByteArrayInputStream;
 
 /**
- * Static helper methods.
+ * Creates {@link MimeMessage} instances and other helper methods.
  *
  * @since 1.3
  */
@@ -49,7 +49,7 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final byte[] source) throws MessagingException, IOException {
-        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(source)) {
+        try (InputStream inputStream = new SharedByteArrayInputStream(source)) {
             return new MimeMessage(session, inputStream);
         }
     }
@@ -64,7 +64,7 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final File source) throws MessagingException, IOException {
-        try (FileInputStream inputStream = new FileInputStream(source)) {
+        try (InputStream inputStream = new FileInputStream(source)) {
             return createMimeMessage(session, inputStream);
         }
     }
@@ -107,10 +107,8 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final String source) throws MessagingException, IOException {
-        final byte[] byteSource = source.getBytes(Charset.defaultCharset());
-        try (ByteArrayInputStream inputStream = new SharedByteArrayInputStream(byteSource)) {
-            return createMimeMessage(session, inputStream);
-        }
+        // RFC1341: https://www.w3.org/Protocols/rfc1341/7_1_Text.html
+        return createMimeMessage(session, source.getBytes(StandardCharsets.US_ASCII));
     }
 
     /**
@@ -125,7 +123,7 @@ public final class MimeMessageUtils {
         if (!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs()) {
             throw new IOException("Failed to create the following parent directories: " + resultFile.getParentFile());
         }
-        try (FileOutputStream outputStream = new FileOutputStream(resultFile)) {
+        try (OutputStream outputStream = new FileOutputStream(resultFile)) {
             mimeMessage.writeTo(outputStream);
             outputStream.flush();
         }
