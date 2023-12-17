@@ -37,7 +37,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver {
      * Constructs a new instance.
      */
     public DataSourceClassPathResolver() {
-        this.classPathBase = "/";
+        this("/");
     }
 
     /**
@@ -46,7 +46,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver {
      * @param classPathBase a base class path
      */
     public DataSourceClassPathResolver(final String classPathBase) {
-        this.classPathBase = classPathBase.endsWith("/") ? classPathBase : classPathBase + "/";
+        this(classPathBase, false);
     }
 
     /**
