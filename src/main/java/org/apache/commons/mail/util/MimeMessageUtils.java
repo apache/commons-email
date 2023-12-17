@@ -16,12 +16,12 @@
  */
 package org.apache.commons.mail.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
@@ -49,7 +49,7 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final byte[] source) throws MessagingException, IOException {
-        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(source)) {
+        try (InputStream inputStream = new SharedByteArrayInputStream(source)) {
             return new MimeMessage(session, inputStream);
         }
     }
@@ -64,7 +64,7 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final File source) throws MessagingException, IOException {
-        try (FileInputStream inputStream = new FileInputStream(source)) {
+        try (InputStream inputStream = new FileInputStream(source)) {
             return createMimeMessage(session, inputStream);
         }
     }
@@ -107,10 +107,7 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final String source) throws MessagingException, IOException {
-        final byte[] byteSource = source.getBytes(Charset.defaultCharset());
-        try (ByteArrayInputStream inputStream = new SharedByteArrayInputStream(byteSource)) {
-            return createMimeMessage(session, inputStream);
-        }
+        return createMimeMessage(session, source.getBytes(Charset.defaultCharset()));
     }
 
     /**
@@ -125,7 +122,7 @@ public final class MimeMessageUtils {
         if (!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs()) {
             throw new IOException("Failed to create the following parent directories: " + resultFile.getParentFile());
         }
-        try (FileOutputStream outputStream = new FileOutputStream(resultFile)) {
+        try (OutputStream outputStream = new FileOutputStream(resultFile)) {
             mimeMessage.writeTo(outputStream);
             outputStream.flush();
         }
