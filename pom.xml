@@ -16,20 +16,27 @@
    limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-parent</artifactId>
       <version>65</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>commons-email</artifactId>
+
+    <artifactId>commons-email-parent</artifactId>
     <version>1.6.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>Apache Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
     <description>
         Apache Commons Email provides an API for sending email, simplifying the JavaMail API.
     </description>
+
+    <modules>
+        <module>commons-email</module>
+    </modules>
 
     <url>https://commons.apache.org/proper/commons-email/</url>
 
@@ -240,54 +247,6 @@
         </contributor>
     </contributors>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>jakarta.mail</artifactId>
-            <version>1.6.7</version>
-        </dependency>
-        <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter</artifactId>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>2.0.9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.15.1</version>
-            <scope>test</scope>
-        </dependency>
-    	<dependency>
-    		<groupId>org.subethamail</groupId>
-    		<artifactId>subethasmtp</artifactId>
-    		<version>3.1.7</version>
-    		<scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.mail</groupId>
-                    <artifactId>mail</artifactId>
-                </exclusion>
-            </exclusions>
-    	</dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito-core.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -306,6 +265,54 @@
         <commons.encoding>UTF-8</commons.encoding>
         <mockito-core.version>5.8.0</mockito-core.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>1.6.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>2.0.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.15.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.subethamail</groupId>
+            <artifactId>subethasmtp</artifactId>
+            <version>3.1.7</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <defaultGoal>clean verify apache-rat:check checkstyle:check japicmp:cmp pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>
@@ -326,8 +333,8 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptors>
-                        <descriptor>src/assembly/bin.xml</descriptor>
-                        <descriptor>src/assembly/src.xml</descriptor>
+                        <descriptor>${basedir}/src/assembly/bin.xml</descriptor>
+                        <descriptor>${basedir}/src/assembly/src.xml</descriptor>
                     </descriptors>
                     <tarLongFileMode>gnu</tarLongFileMode>
                 </configuration>
@@ -368,8 +375,8 @@
             <artifactId>apache-rat-plugin</artifactId>
             <configuration>
               <excludes>
-                <exclude>src/test/resources/eml/**</exclude>
-                <exclude>src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
+                <exclude>${basedir}/src/test/resources/eml/**</exclude>
+                <exclude>${basedir}/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
               </excludes>
             </configuration>
           </plugin>
@@ -467,7 +474,7 @@
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>src/test/resources/eml/**</exclude>
+                        <exclude>${basedir}/src/test/resources/eml/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
