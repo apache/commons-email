@@ -28,6 +28,7 @@ import org.apache.commons.mail.DataSourceResolver;
  * @since 1.3
  */
 public class DataSourceCompositeResolver extends DataSourceBaseResolver {
+
     /** The list of resolvers */
     private final DataSourceResolver[] dataSourceResolvers;
 
@@ -65,7 +66,6 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     @Override
     public DataSource resolve(final String resourceLocation) throws IOException {
         final DataSource result = resolve(resourceLocation, true);
-
         if (isLenient() || result != null) {
             return result;
         }
@@ -76,15 +76,13 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     /** {@inheritDoc} */
     @Override
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
-        for (int i = 0; i < getDataSourceResolvers().length; i++) {
-            final DataSourceResolver dataSourceResolver = getDataSourceResolvers()[i];
+        for (int i = 0; i < dataSourceResolvers.length; i++) {
+            final DataSourceResolver dataSourceResolver = dataSourceResolvers[i];
             final DataSource dataSource = dataSourceResolver.resolve(resourceLocation, isLenient);
-
             if (dataSource != null) {
                 return dataSource;
             }
         }
-
         if (isLenient) {
             return null;
         }
