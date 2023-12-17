@@ -146,10 +146,7 @@ public class MimeMessageParser {
      */
     private String getBaseMimeType(final String fullMimeType) {
         final int pos = fullMimeType.indexOf(';');
-        if (pos >= 0) {
-            return fullMimeType.substring(0, pos);
-        }
-        return fullMimeType;
+        return pos < 0 ? fullMimeType : fullMimeType.substring(0, pos);
     }
 
     /**
