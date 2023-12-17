@@ -193,10 +193,10 @@ public class MimeMessageParser {
      */
     protected String getDataSourceName(final Part part, final DataSource dataSource) throws MessagingException, UnsupportedEncodingException {
         String result = dataSource.getName();
-        if (result == null || result.isEmpty()) {
+        if (isEmpty(result)) {
             result = part.getFileName();
         }
-        if (result != null && !result.isEmpty()) {
+        if (!isEmpty(result)) {
             result = MimeUtility.decodeText(result);
         } else {
             result = null;
@@ -308,6 +308,10 @@ public class MimeMessageParser {
 
     private boolean isEmpty(final Object[] array) {
         return array == null || array.length == 0;
+    }
+
+    private boolean isEmpty(final String result) {
+        return result == null || result.isEmpty();
     }
 
     /**
