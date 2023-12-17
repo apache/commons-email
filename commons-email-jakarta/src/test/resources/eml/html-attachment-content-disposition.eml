@@ -1,0 +1,26 @@
+Return-Path: <test_from@apache.org>
+Message-ID: <blabla@gmail.com>
+Date: Sat, 14 Sep 2013 21:02:30 +0200
+From: test_from@apache.org
+MIME-Version: 1.0
+To: test_to@apache.org
+Subject: test
+Content-Type: multipart/mixed;
+ boundary="------------060402020304050501030801"
+
+This is a multi-part message in MIME format.
+--------------060402020304050501030801
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+
+--------------060402020304050501030801
+Content-Type: text/html;
+ name="test.html"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="test.html"
+
+test
+
+--------------060402020304050501030801--

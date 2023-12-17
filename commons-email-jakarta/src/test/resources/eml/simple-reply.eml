@@ -1,0 +1,98 @@
+From - Thu Aug 18 14:02:58 2011
+X-Account-Key: account4
+X-UIDL: 01GJtU-1Qxq2b3ZyQ-0066uc
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+Return-Path: <dev-return-11881-apmail-sgoeschl=apache.org@ws.apache.org>
+Delivered-To: GMX delivery to sgoeschl@gmx.at
+Received: (qmail invoked by alias); 18 Aug 2011 11:14:20 -0000
+Received: from hermes.apache.org (HELO mail.apache.org) [140.211.11.3]
+  by mx0.gmx.net (mx001) with SMTP; 18 Aug 2011 13:14:20 +0200
+Received: (qmail 9342 invoked by uid 99); 18 Aug 2011 11:14:12 -0000
+Received: from minotaur.apache.org (HELO minotaur.apache.org) (140.211.11.9)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Thu, 18 Aug 2011 11:14:12 +0000
+Received: by minotaur.apache.org (Postfix)
+	id 42DAF8298; Thu, 18 Aug 2011 11:14:11 +0000 (UTC)
+Delivered-To: sgoeschl@minotaur.apache.org
+Received: from mail.apache.org (hermes.apache.org [140.211.11.3])
+	by minotaur.apache.org (Postfix) with SMTP id 091BD828C
+	for <sgoeschl@minotaur.apache.org>; Thu, 18 Aug 2011 11:14:10 +0000 (UTC)
+Received: (qmail 8207 invoked by uid 500); 18 Aug 2011 11:13:40 -0000
+Delivered-To: apmail-sgoeschl@apache.org
+Received: (qmail 7829 invoked by uid 500); 18 Aug 2011 11:13:25 -0000
+Mailing-List: contact dev-help@ws.apache.org; run by ezmlm
+Precedence: bulk
+List-Help: <mailto:dev-help@ws.apache.org>
+List-Unsubscribe: <mailto:dev-unsubscribe@ws.apache.org>
+List-Post: <mailto:dev@ws.apache.org>
+List-Id: <dev.ws.apache.org>
+Reply-To: dev@ws.apache.org
+Delivered-To: mailing list dev@ws.apache.org
+Received: (qmail 7789 invoked by uid 99); 18 Aug 2011 11:13:21 -0000
+Received: from minotaur.apache.org (HELO minotaur.apache.org) (140.211.11.9)
+    by apache.org (qpsmtpd/0.29) with ESMTP; Thu, 18 Aug 2011 11:13:21 +0000
+Received: from localhost (HELO mail-qw0-f49.google.com) (127.0.0.1)
+  (smtp-auth username coheigea, mechanism plain)
+  by minotaur.apache.org (qpsmtpd/0.29) with ESMTP; Thu, 18 Aug 2011 11:13:19 +0000
+Received: by qwi2 with SMTP id 2so1860671qwi.22
+        for <dev@ws.apache.org>; Thu, 18 Aug 2011 04:13:18 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.224.187.83 with SMTP id cv19mr530954qab.8.1313665998387; Thu,
+ 18 Aug 2011 04:13:18 -0700 (PDT)
+Reply-To: coheigea@apache.org
+Received: by 10.229.225.7 with HTTP; Thu, 18 Aug 2011 04:13:18 -0700 (PDT)
+In-Reply-To: <32284689.post@talk.nabble.com>
+References: <32284689.post@talk.nabble.com>
+Date: Thu, 18 Aug 2011 12:13:18 +0100
+Message-ID: <CAB8XdGCekcZe0=MUxJ3QL0Zgs=yVDTkr4AGhd2xMuEyrEKioig@mail.gmail.com>
+Subject: Re: java.lang.NoClassDefFoundError: org/bouncycastle/asn1/pkcs/PrivateKeyInfo
+From: Colm O hEigeartaigh <coheigea@apache.org>
+To: dev@ws.apache.org
+Content-Type: text/plain; charset=ISO-8859-1
+X-GMX-Antivirus: 0 (no virus found)
+X-GMX-Antispam: -2 (not scanned, spam filter disabled);
+ Detail=5D7Q89H36p4L00VTXC6D4q0N+AH0PUCnKGJbGgJLbSXk30NezpdxUg==V1;
+
+BouncyCastle is optional. If you turn on debug level logging do you
+see any error messages about installing the BouncyCastle provider?
+What does your crypto.properties look like?
+
+Colm.
+
+On Thu, Aug 18, 2011 at 4:40 AM, jaybytez <jaybytez@yahoo.com> wrote:
+>
+> Does WSS4J 1.6* have a dependency on a bouncycastle library?
+>
+> The reason I ask is that we are running CXF 2.4.1 web services on a WLS 11
+> RHEL 5.5 machine with JDK 1.6.24 and in one environment my web services with
+> digital signatures (via WSS4J) they work and then in my other environment it
+> throws the following exception:
+>
+> java.lang.NoClassDefFoundError: org/bouncycastle/asn1/pkcs/PrivateKeyInfo
+>
+> Thanks...jay
+> --
+> View this message in context: http://old.nabble.com/java.lang.NoClassDefFoundError%3A-org-bouncycastle-asn1-pkcs-PrivateKeyInfo-tp32284689p32284689.html
+> Sent from the WSS4J mailing list archive at Nabble.com.
+>
+>
+> ---------------------------------------------------------------------
+> To unsubscribe, e-mail: dev-unsubscribe@ws.apache.org
+> For additional commands, e-mail: dev-help@ws.apache.org
+>
+>
+
+
+
+-- 
+Colm O hEigeartaigh
+
+http://coheigea.blogspot.com/
+Talend - http://www.talend.com
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@ws.apache.org
+For additional commands, e-mail: dev-help@ws.apache.org
+
+
