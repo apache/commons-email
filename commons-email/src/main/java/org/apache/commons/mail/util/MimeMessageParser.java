@@ -49,22 +49,22 @@ import org.apache.commons.mail.activation.InputStreamDataSource;
  */
 public class MimeMessageParser {
 
-    /** The MimeMessage to convert */
+    /** The MimeMessage to convert. */
     private final MimeMessage mimeMessage;
 
-    /** Plain mail content from MimeMessage */
+    /** Plain mail content from MimeMessage. */
     private String plainContent;
 
-    /** HTML mail content from MimeMessage */
+    /** HTML mail content from MimeMessage. */
     private String htmlContent;
 
-    /** List of attachments of MimeMessage */
+    /** List of attachments of MimeMessage. */
     private final List<DataSource> attachmentList;
 
-    /** Attachments stored by their content-id */
+    /** Attachments stored by their content-id. */
     private final Map<String, DataSource> cidMap;
 
-    /** Is this a Multipart email */
+    /** Is this a Multipart email. */
     private boolean isMultiPart;
 
     /**
@@ -130,15 +130,19 @@ public class MimeMessageParser {
         return null;
     }
 
-    /** @return Returns the attachmentList. */
+    /**
+     * Gets the attachement list.
+     *
+     * @return Returns the attachmentList.
+     */
     public List<DataSource> getAttachmentList() {
         return attachmentList;
     }
 
     /**
-     * Parses the mimeType.
+     * Gets the MIME type.
      *
-     * @param fullMimeType the mime type from the mail api
+     * @param fullMimeType the mime type from the mail API
      * @return the real mime type
      */
     private String getBaseMimeType(final String fullMimeType) {
@@ -150,7 +154,9 @@ public class MimeMessageParser {
     }
 
     /**
-     * @return the 'bcc' recipients of the message
+     * Gets the BCC Address list.
+     *
+     * @return the 'BCC' recipients of the message
      * @throws MessagingException determining the recipients failed
      */
     public List<Address> getBcc() throws MessagingException {
@@ -158,7 +164,9 @@ public class MimeMessageParser {
     }
 
     /**
-     * @return the 'cc' recipients of the message
+     * Gets the CC Address list.
+     *
+     * @return the 'CC' recipients of the message
      * @throws MessagingException determining the recipients failed
      */
     public List<Address> getCc() throws MessagingException {
@@ -201,7 +209,9 @@ public class MimeMessageParser {
     }
 
     /**
-     * @return the 'from' field of the message
+     * Gets the FROM field.
+     *
+     * @return the FROM field of the message
      * @throws MessagingException parsing the mime message failed
      */
     public String getFrom() throws MessagingException {
@@ -212,22 +222,36 @@ public class MimeMessageParser {
         return ((InternetAddress) addresses[0]).getAddress();
     }
 
-    /** @return Returns the htmlContent if any */
+    /**
+     * Gets the htmlContent if any.
+     *
+     * @return Returns the htmlContent if any
+     */
     public String getHtmlContent() {
         return htmlContent;
     }
 
-    /** @return Returns the mimeMessage. */
+    /**
+     * Gets the MimeMessage.
+     *
+     * @return Returns the mimeMessage.
+     */
     public MimeMessage getMimeMessage() {
         return mimeMessage;
     }
 
-    /** @return Returns the plainContent if any */
+    /**
+     * Gets the plain content if any.
+     *
+     * @return Returns the plainContent if any
+     */
     public String getPlainContent() {
         return plainContent;
     }
 
     /**
+     * Gets the 'replyTo' address of the email.
+     *
      * @return the 'replyTo' address of the email
      * @throws MessagingException parsing the mime message failed
      */
@@ -255,17 +279,29 @@ public class MimeMessageParser {
         return asList(mimeMessage.getRecipients(Message.RecipientType.TO));
     }
 
-    /** @return true if attachments are available */
+    /**
+     * Tests if attachments are present.
+     *
+     * @return true if attachments are present.
+     */
     public boolean hasAttachments() {
         return !attachmentList.isEmpty();
     }
 
-    /** @return true if HTML content is available */
+    /**
+     * Tests is HTML content is present.
+     *
+     * @return true if HTML content is present.
+     */
     public boolean hasHtmlContent() {
         return htmlContent != null;
     }
 
-    /** @return true if a plain content is available */
+    /**
+     * Tests is plain content is present.
+     *
+     * @return true if a plain content is present.
+     */
     public boolean hasPlainContent() {
         return plainContent != null;
     }
@@ -275,7 +311,7 @@ public class MimeMessageParser {
     }
 
     /**
-     * Checks whether the MimePart contains an object of the given mime type.
+     * Tests whether the MimePart contains an object of the given mime type.
      *
      * @param part     the current MimePart
      * @param mimeType the mime type to check
@@ -292,7 +328,11 @@ public class MimeMessageParser {
         }
     }
 
-    /** @return Returns the isMultiPart. */
+    /**
+     * Tests whether this is multipart.
+     *
+     * @return Returns the isMultiPart.
+     */
     public boolean isMultipart() {
         return isMultiPart;
     }
