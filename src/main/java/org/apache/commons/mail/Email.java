@@ -812,9 +812,8 @@ public abstract class Email {
      * @throws EmailException Thrown when the supplied address, name or charset were invalid.
      */
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName) throws EmailException {
-        InternetAddress address;
         try {
-            address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            final InternetAddress address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
             // check name input
             if (EmailUtils.isNotEmpty(name)) {
                 // check charset input.
@@ -830,10 +829,10 @@ public abstract class Email {
             // run sanity check on new InternetAddress object; if this fails
             // it will throw AddressException.
             address.validate();
+            return address;
         } catch (final AddressException | UnsupportedEncodingException e) {
             throw new EmailException(e);
         }
-        return address;
     }
 
     /**
