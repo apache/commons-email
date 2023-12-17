@@ -367,19 +367,19 @@ public class MimeMessageParser {
             htmlContent = (String) part.getContent();
         } else if (isMimeType(part, "multipart/*")) {
             isMultiPart = true;
-            final Multipart mp = (Multipart) part.getContent();
-            final int count = mp.getCount();
+            final Multipart multipart = (Multipart) part.getContent();
+            final int count = multipart.getCount();
             // iterate over all MimeBodyPart
             for (int i = 0; i < count; i++) {
-                parse(mp, (MimeBodyPart) mp.getBodyPart(i));
+                parse(multipart, (MimeBodyPart) multipart.getBodyPart(i));
             }
         } else {
             final String cid = stripContentId(part.getContentID());
-            final DataSource ds = createDataSource(parent, part);
+            final DataSource dataSource = createDataSource(parent, part);
             if (cid != null) {
-                cidMap.put(cid, ds);
+                cidMap.put(cid, dataSource);
             }
-            attachmentList.add(ds);
+            attachmentList.add(dataSource);
         }
     }
 
