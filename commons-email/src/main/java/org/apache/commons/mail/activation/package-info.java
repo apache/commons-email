@@ -16,6 +16,6 @@
  */
 
 /**
- * Contains activation classes.
+ * Contains JavaBeans Activation Framework implementations.
  */
 package org.apache.commons.mail.activation;

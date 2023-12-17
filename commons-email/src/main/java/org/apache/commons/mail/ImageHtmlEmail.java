@@ -64,6 +64,13 @@ public class ImageHtmlEmail extends HtmlEmail {
     private DataSourceResolver dataSourceResolver;
 
     /**
+     * Constructs a new instance.
+     */
+    public ImageHtmlEmail() {
+        // empty
+    }
+
+    /**
      * Does the work of actually building the MimeMessage.
      *
      * @see org.apache.commons.mail.HtmlEmail#buildMimeMessage()

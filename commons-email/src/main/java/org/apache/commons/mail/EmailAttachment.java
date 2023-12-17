@@ -47,6 +47,13 @@ public class EmailAttachment {
     private String disposition = EmailAttachment.ATTACHMENT;
 
     /**
+     * Constructs a new instance.
+     */
+    public EmailAttachment() {
+        // empty
+    }
+
+    /**
      * Gets the description.
      *
      * @return A String.

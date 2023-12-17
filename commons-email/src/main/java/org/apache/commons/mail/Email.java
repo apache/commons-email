@@ -174,6 +174,13 @@ public abstract class Email {
     public static final String MAIL_SMTP_TIMEOUT = EmailConstants.MAIL_SMTP_TIMEOUT;
 
     /**
+     * Constructs a new instance.
+     */
+    public Email() {
+        // empty
+    }
+
+    /**
      * The email message to send.
      *
      * @deprecated Use getters and getters.
