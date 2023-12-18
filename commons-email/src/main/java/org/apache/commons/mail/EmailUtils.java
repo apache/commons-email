@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -134,7 +135,7 @@ final class EmailUtils {
     /**
      * Checks if a String is empty ("") or null.
      * <p>
-     * Copied from Commons Lang v2.1, svn 240418
+     * Copied from Commons Lang 2.1, svn 240418
      * </p>
      *
      * @param str the String to check, may be null
@@ -147,7 +148,7 @@ final class EmailUtils {
     /**
      * Checks if a String is not empty ("") and not null.
      * <p>
-     * Copied from Commons Lang v2.1, svn 240418
+     * Copied from Commons Lang 2.1, svn 240418
      * </p>
      *
      * @param str the String to check, may be null
@@ -171,7 +172,7 @@ final class EmailUtils {
      * seed and using it for each call, the same random sequence of strings can be generated repeatedly and predictably.
      * </p>
      * <p>
-     * Copied from Commons Lang v2.1, svn 201930
+     * Copied from Commons Lang 2.1, svn 201930
      * </p>
      *
      * @param count   the length of random string to create
@@ -231,7 +232,7 @@ final class EmailUtils {
      * Characters will be chosen from the set of alphabetic characters.
      * </p>
      * <p>
-     * Copied from Commons Lang v2.1, svn 201930
+     * Copied from Commons Lang 2.1, svn 201930
      * </p>
      *
      * @param count the length of random string to create
@@ -249,6 +250,10 @@ final class EmailUtils {
      */
     static String replaceEndOfLineCharactersWithSpaces(final String input) {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
+    }
+
+    static String toLower(final String value) {
+        return value.toLowerCase(Locale.ROOT);
     }
 
     /**

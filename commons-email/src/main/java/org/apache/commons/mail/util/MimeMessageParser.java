@@ -121,8 +121,7 @@ public class MimeMessageParser {
      * @return the corresponding datasource or null if nothing was found
      */
     public DataSource findAttachmentByName(final String name) {
-        for (final DataSource element : getAttachmentList()) {
-            final DataSource dataSource = element;
+        for (final DataSource dataSource : getAttachmentList()) {
             if (name.equalsIgnoreCase(dataSource.getName())) {
                 return dataSource;
             }
@@ -131,9 +130,9 @@ public class MimeMessageParser {
     }
 
     /**
-     * Gets the attachement list.
+     * Gets the attachment list.
      *
-     * @return Returns the attachmentList.
+     * @return Returns the attachment list.
      */
     public List<DataSource> getAttachmentList() {
         return attachmentList;
@@ -147,10 +146,7 @@ public class MimeMessageParser {
      */
     private String getBaseMimeType(final String fullMimeType) {
         final int pos = fullMimeType.indexOf(';');
-        if (pos >= 0) {
-            return fullMimeType.substring(0, pos);
-        }
-        return fullMimeType;
+        return pos < 0 ? fullMimeType : fullMimeType.substring(0, pos);
     }
 
     /**
@@ -197,10 +193,10 @@ public class MimeMessageParser {
      */
     protected String getDataSourceName(final Part part, final DataSource dataSource) throws MessagingException, UnsupportedEncodingException {
         String result = dataSource.getName();
-        if (result == null || result.isEmpty()) {
+        if (isEmpty(result)) {
             result = part.getFileName();
         }
-        if (result != null && !result.isEmpty()) {
+        if (!isEmpty(result)) {
             result = MimeUtility.decodeText(result);
         } else {
             result = null;
@@ -264,15 +260,19 @@ public class MimeMessageParser {
     }
 
     /**
-     * @return the mail subject
-     * @throws MessagingException parsing the mime message failed
+     * Gets the MIME message subject.
+     *
+     * @return the MIME message subject.
+     * @throws MessagingException parsing the mime message failed.
      */
     public String getSubject() throws MessagingException {
         return mimeMessage.getSubject();
     }
 
     /**
-     * @return the 'to' recipients of the message
+     * Gets the MIME message 'to' list.
+     *
+     * @return the 'to' recipients of the message.
      * @throws MessagingException determining the recipients failed
      */
     public List<Address> getTo() throws MessagingException {
@@ -308,6 +308,10 @@ public class MimeMessageParser {
 
     private boolean isEmpty(final Object[] array) {
         return array == null || array.length == 0;
+    }
+
+    private boolean isEmpty(final String result) {
+        return result == null || result.isEmpty();
     }
 
     /**
@@ -364,19 +368,19 @@ public class MimeMessageParser {
             htmlContent = (String) part.getContent();
         } else if (isMimeType(part, "multipart/*")) {
             isMultiPart = true;
-            final Multipart mp = (Multipart) part.getContent();
-            final int count = mp.getCount();
+            final Multipart multipart = (Multipart) part.getContent();
+            final int count = multipart.getCount();
             // iterate over all MimeBodyPart
             for (int i = 0; i < count; i++) {
-                parse(mp, (MimeBodyPart) mp.getBodyPart(i));
+                parse(multipart, (MimeBodyPart) multipart.getBodyPart(i));
             }
         } else {
             final String cid = stripContentId(part.getContentID());
-            final DataSource ds = createDataSource(parent, part);
+            final DataSource dataSource = createDataSource(parent, part);
             if (cid != null) {
-                cidMap.put(cid, ds);
+                cidMap.put(cid, dataSource);
             }
-            attachmentList.add(ds);
+            attachmentList.add(dataSource);
         }
     }
 

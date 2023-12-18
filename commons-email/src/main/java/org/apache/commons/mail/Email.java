@@ -1951,11 +1951,11 @@ public abstract class Email {
             this.contentType = contentType;
             // set the charset if the input was properly formed
             final String strMarker = "; charset=";
-            int charsetPos = contentType.toLowerCase().indexOf(strMarker);
+            int charsetPos = EmailUtils.toLower(contentType).indexOf(strMarker);
             if (charsetPos != -1) {
                 // find the next space (after the marker)
                 charsetPos += strMarker.length();
-                final int intCharsetEnd = contentType.toLowerCase().indexOf(" ", charsetPos);
+                final int intCharsetEnd = EmailUtils.toLower(contentType).indexOf(" ", charsetPos);
                 if (intCharsetEnd != -1) {
                     this.charset = contentType.substring(charsetPos, intCharsetEnd);
                 } else {

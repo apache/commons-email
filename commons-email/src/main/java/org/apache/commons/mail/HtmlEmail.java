@@ -23,7 +23,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -328,7 +327,7 @@ public class HtmlEmail extends MultiPartEmail {
                     + "; existing names cannot be rebound");
         }
 
-        final String cid = EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase();
+        final String cid = EmailUtils.toLower(EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH));
         return embed(dataSource, name, cid);
     }
 
@@ -370,7 +369,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.1
      */
     public String embed(final File file) throws EmailException {
-        return embed(file, EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH).toLowerCase(Locale.ENGLISH));
+        return embed(file, EmailUtils.toLower(EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH)));
     }
 
     /**

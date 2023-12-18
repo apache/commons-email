@@ -1,5 +1,87 @@
-                          Apache Commons Email
-                              Version 1.5.1
+Apache Commons Email 1.6.0
+RELEASE NOTES
+
+The Apache Commons Email team is pleased to announce the release of Apache Commons Email 1.6.0.
+
+Apache Commons Email provides an API for sending email, simplifying the JavaMail API.
+
+
+Feature release (Java 8 or above).
+
+For complete information on Apache Commons Email, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons Email website:
+
+https://commons.apache.org/proper/commons-email/
+
+Download page: https://commons.apache.org/proper/commons-email/download_net.cgi
+
+Changes in this version include:
+===============================
+
+New features:
+o             Add github/codeql-action #75. Thanks to Dependabot.
+o             Add Maven plugin JapiCmp and remove Clirr. Thanks to Gary Gregory.
+o EMAIL-176:  Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
+o EMAIL-207:  Add InputStreamDataSource. Thanks to Lee Jaeheon, Gary Gregory.
+o EMAIL-207:  Don't waste memory in MimeMessageParser#createDataSource(). Thanks to Lee Jaeheon, Gary Gregory.
+o             Add EmailConstants.SOCKET_TIMEOUT and deprecate SOCKET_TIMEOUT_MS. Thanks to Gary Gregory.
+o             Add Email.setSocketConnectionTimeout(Duration) and deprecate setSocketConnectionTimeout(int). Thanks to Gary Gregory.
+o             Add Email.setSocketTimeout(Duration) and deprecate setSocketTimeout(int). Thanks to Gary Gregory.
+o             Add PathDataSource. Thanks to Gary Gregory.
+o             Add DataSourcePathResolver. Thanks to Gary Gregory.
+o             Add MimeMessageUtils.createMimeMessage(Session, Path, OpenOption...). Thanks to Gary Gregory.
+o             Add MultiPartEmail.attach(Path, OpenOption...). Thanks to Gary Gregory.
+
+Fixed Bugs:
+o EMAIL-190:  Fix broken JDK 9 build by updating "easymock" and other dependencies. Thanks to sgoeschl.
+o             Use JUnit 5 APIs #106, #108, #109, #114. Thanks to John Patrick, Gary Gregory.
+o             [StepSecurity] ci: Harden GitHub Actions #149. Thanks to step-security-bot, Gary Gregory.
+o             Better use of JUnit APIs #158. Thanks to Lee Jaeheon, sebbASF.
+o EMAIL-205:  Update conversion code #153. Thanks to Dimitrios Efthymiou, Alex Herbert.
+o             Email.setBounceAddress no longer accepts invalid email addresses. Thanks to Alexander Lehmann.
+o             Throw more specific exceptions in MimeMessageParser #11. Thanks to Amir Behnam, Michael Osipov.
+o             Email.setMailSession(Session) throws the more precise exception NullPointerException. Thanks to Gary Gregory.
+o             Avoid possible NullPointerException in DataSourceClassPathResolver.resolve(String, boolean). Thanks to Gary Gregory.
+o             Complete half-baked test DataSourceUrlResolverTest.testResolvingHttpNonLenient(). Thanks to Gary Gregory.
+o EMAIL-206:  Use SharedByteArrayInputStream for memory usage #157. Thanks to Lee Jaeheon, Gary Gregory.
+o             Migrate to JUnit 5 #186. Thanks to Loki-Afro, Gary Gregory.
+o EMAIL-174:  Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses. Thanks to Vegard Stuen.
+o             Add missing getters and setters in EMail and subclasses; deprecate access to protected instance variables. Thanks to Loki-Afro, Gary Gregory.
+o             DataSourceUrlResolver.resolve(String, boolean) leaks InputStreams. Thanks to Gary Gregory.
+o             Use US-ASCII in MimeMessageUtils.createMimeMessage(Session, String). Thanks to Gary Gregory.
+
+Changes:
+o             Bump org.slf4j:slf4j-jdk14 from 1.7.7 to 2.0.9 #165. Thanks to Dependabot.
+o             Bump mockito-core from 4.11.0 to 5.8.0 #187. Thanks to Dependabot.
+o             Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102. Thanks to Dependabot, Gary Gregory.
+o             Bump actions/checkout from 1 to 3.2.0, #25 #33, #67, #99, #117. Thanks to Dependabot, Gary Gregory.
+o             Bump actions/setup-java from 1.4.0 to v3.6.0 #30, #74, #103. Thanks to Dependabot, Gary Gregory.
+o             Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110. Thanks to Dependabot.
+o EMAIL-177:  Bump from Java 6 to 7. Thanks to Gary Gregory.
+o             Bump from Java 7 to 8. Thanks to Gary Gregory.
+o EMAIL-183:  Bump javax.mail:1.6.1 to jakarta.mail:1.6.7. Thanks to Lukas Petrovicky, gitmotte, Dependabot, Gary Gregory.
+o             Bump commons-parent from 50 to 65, #118, #128. Thanks to Gary Gregory, Dependabot.
+o             Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18. Thanks to Dependabot, Gary Gregory.
+o             Bump spotbugs from 4.0.6 to 4.7.2 #40. Thanks to Dependabot.
+o             Bump junit from 4.13 to 4.13.2 #32. Thanks to Dependabot, Gary Gregory.
+o             Bump commons-release-plugin from 1.0 to 1.7 #23. Thanks to Dependabot.
+o             Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94. Thanks to Dependabot.
+o             Bump tests commons-io:commons-io 2.6 to 2.15.1. Thanks to Gary Gregory.
+o             Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17. Thanks to Gary Gregory.
+o             Bump org.easymock:easymock from 4.2 to 5.2.0, #107, #164. Thanks to Gary Gregory.
+o             Bump commons-release-plugin from 1.7 to 1.8.1 #73, #184. Thanks to Dependabot.
+o             Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87. Thanks to Dependabot.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-email/changes-report.html
+
+Enjoy!
+-Apache Commons Net team
+
+-----------------------------------------------------------------------------
+
+                         Commons Email Package
+                              Version 1.5
                              Release Notes
 
 INTRODUCTION:
@@ -13,20 +95,10 @@ classes.
 The Commons Email website is the source for the most recent information,
 downloads, reports, and bug status:
 
-https://commons.apache.org/email/
+http://commons.apache.org/email/
 
-This is a major and security bugfix release which adds some new
-features and fixes several bugs present in the 1.4 release. All
-current users are encouraged to upgrade.
-
-For the security bugfix see
-https://commons.apache.org/proper/commons-email/security-reports.html#Fixed_in_Apache_Commons_Email_1.5
-
-CHANGES FROM 1.5:
-
-* Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
-* Improved Email.setBounceAddress by no longer accepting invalid email addresses.
-
+This is a major release which adds some new features and fixes several bugs
+present in the 1.4.0 release. All current users are encouraged to upgrade.
 
 CHANGES FROM 1.4:
 -----------------
@@ -64,9 +136,6 @@ Issue: EMAIL-154. Thanks to Ken Geis, Balachandran Sivakumar
 
 * DataSourceClassPathResolver doesn't close InputStream when resolving resources
 Issue: EMAIL-167. Thanks to Lucian Burja.
-
-* CVE-2017-9801 - stripped all line-breaks from subjects in order to
-  prevent SMTP header injection.
 
 CHANGES FROM 1.3.3:
 -----------------
