@@ -76,8 +76,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     /** {@inheritDoc} */
     @Override
     public DataSource resolve(final String resourceLocation, final boolean isLenient) throws IOException {
-        for (int i = 0; i < dataSourceResolvers.length; i++) {
-            final DataSourceResolver dataSourceResolver = dataSourceResolvers[i];
+        for (final DataSourceResolver dataSourceResolver : dataSourceResolvers) {
             final DataSource dataSource = dataSourceResolver.resolve(resourceLocation, isLenient);
             if (dataSource != null) {
                 return dataSource;

@@ -34,8 +34,14 @@ import org.apache.commons.mail.activation.PathDataSource;
  */
 public final class DataSourcePathResolver extends DataSourceBaseResolver {
 
-    /** The base directory of the resource when resolving relative paths */
+    /**
+     * The base directory of the resource when resolving relative paths.
+     */
     private final Path baseDir;
+
+    /**
+     * NIO options to open the data source.
+     */
     private final OpenOption[] options;
 
     /**

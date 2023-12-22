@@ -24,6 +24,10 @@
   </properties>
 
   <body>
+    <release version="1.6.1" date="202Y-MM-DD" description="Feature release (Java 8 or above).">
+      <!-- FIX -->
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Checkstyle configuration.</action>
+    </release>
     <release version="1.6.0" date="2023-12-17" description="Feature release (Java 8 or above).">
       <!-- FIX -->
       <action issue="EMAIL-190" type="fix" due-to="sgoeschl">Fix broken JDK 9 build by updating "easymock" and other dependencies.</action>

@@ -309,6 +309,19 @@
 
     <build>
         <defaultGoal>clean verify apache-rat:check checkstyle:check japicmp:cmp pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>
+        <pluginManagement>
+			<plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <configuration>
+                        <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+                        <enableRulesSummary>false</enableRulesSummary>
+                        <violationSeverity>warning</violationSeverity>
+                    </configuration>
+                </plugin>
+			</plugins>
+		</pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -414,10 +427,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-checkstyle-plugin</artifactId>
-            <configuration>
-              <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
-              <enableRulesSummary>false</enableRulesSummary>
-            </configuration>
           </plugin>
       </plugins>
     </build>
@@ -450,10 +459,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
-                    <enableRulesSummary>false</enableRulesSummary>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
