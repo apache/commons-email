@@ -1089,27 +1089,27 @@ private void setupAndSendEmail() throws EmailException {
     }
 
     @Test
-    public void testSendCorrectSmtpPortContainedInException()
-    {
-        try
-        {
-            getMailServer();
-
-            email = new MockEmailConcrete();
-            email.setHostName("bad.host.com");
-            email.setSSLOnConnect(true);
-            email.setFrom(strTestMailFrom);
-            email.addTo(strTestMailTo);
-            email.setAuthentication(null, null);
-            email.send();
-            fail("Should have thrown an exception");
-        }
-        catch (final EmailException e)
-        {
-            assertTrue(e.getMessage().contains("bad.host.com:465"));
-            fakeMailServer.stop();
-        }
+    public void testSendCorrectSmtpPortContainedInException() {
+    try {
+        getMailServer();
+        setupAndSendEmailWithSSL();
+        fail("Should have thrown an exception");
+    } catch (final EmailException e) {
+        assertTrue(e.getMessage().contains("bad.host.com:465"));
+        fakeMailServer.stop();
     }
+}
+
+private void setupAndSendEmailWithSSL() throws EmailException {
+    email = new MockEmailConcrete();
+    email.setHostName("bad.host.com");
+    email.setSSLOnConnect(true);
+    email.setFrom(strTestMailFrom);
+    email.addTo(strTestMailTo);
+    email.setAuthentication(null, null);
+    email.send();
+}
+
 
     @Test
     public void testGetSetSentDate()
