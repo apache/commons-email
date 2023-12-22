@@ -23,7 +23,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-email</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1-SNAPSHOT</version>
     <name>Apache Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
