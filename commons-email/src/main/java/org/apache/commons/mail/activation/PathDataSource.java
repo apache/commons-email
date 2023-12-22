@@ -40,8 +40,19 @@ import javax.activation.MimetypesFileTypeMap;
  */
 public final class PathDataSource implements DataSource {
 
+    /**
+     * The source.
+     */
     private final Path path;
+
+    /**
+     * Defaults to {@link FileTypeMap#getDefaultFileTypeMap()}.
+     */
     private final FileTypeMap typeMap;
+
+    /**
+     * NIO options to open the source Path.
+     */
     private final OpenOption[] options;
 
     /**

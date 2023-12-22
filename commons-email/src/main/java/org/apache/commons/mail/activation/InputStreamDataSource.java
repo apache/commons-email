@@ -37,8 +37,20 @@ public final class InputStreamDataSource implements DataSource {
      * Default content type documented in {@link DataSource#getContentType()}.
      */
     private static final String DEFAULT_CONTENT_TYPE = "application/octet-stream";
+
+    /**
+     * The MIME content type.
+     */
     private final String contentType;
+
+    /**
+     * The source.
+     */
     private final InputStream inputStream;
+
+    /**
+     * The optional name.
+     */
     private final String name;
 
     /**

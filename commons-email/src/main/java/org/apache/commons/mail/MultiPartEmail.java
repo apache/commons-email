@@ -309,8 +309,7 @@ public class MultiPartEmail extends Email {
                 final BodyPart body = getPrimaryBodyPart();
                 try {
                     body.getContent();
-                } catch (final IOException e) // NOPMD
-                {
+                } catch (final IOException e) { // NOPMD
                     // do nothing here.
                     // content will be set to an empty string as a result.
                     // (Should this really be rethrown as an email exception?)
