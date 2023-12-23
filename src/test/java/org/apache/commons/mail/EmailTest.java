@@ -412,7 +412,7 @@ public class EmailTest extends AbstractEmailTest {
         email.addTo("c@d.com");
         email.setSubject("test mail");
 
-        email.setCharset("ISO-8859-1");
+        email.setCharset(StandardCharsets.ISO_8859_1.name());
         final File png = new File("./target/test-classes/images/logos/maven-feather.png");
         email.setContent(png, "image/png");
         email.buildMimeMessage();
@@ -438,7 +438,7 @@ public class EmailTest extends AbstractEmailTest {
         email.addTo("c@d.com");
         email.setSubject("test mail");
 
-        email.setCharset("ISO-8859-1");
+        email.setCharset(StandardCharsets.ISO_8859_1.name());
         email.setContent("test content", "text/plain");
         email.buildMimeMessage();
         final MimeMessage msg = email.getMimeMessage();
@@ -459,7 +459,7 @@ public class EmailTest extends AbstractEmailTest {
         email.addTo("c@d.com");
         email.setSubject("test mail");
 
-        email.setCharset("ISO-8859-1");
+        email.setCharset(StandardCharsets.ISO_8859_1.name());
         email.setContent("test content", "text/plain; charset=US-ASCII");
         email.buildMimeMessage();
         final MimeMessage msg = email.getMimeMessage();
@@ -480,7 +480,7 @@ public class EmailTest extends AbstractEmailTest {
         email.addTo("c@d.com");
         email.setSubject("test mail");
 
-        email.setCharset("ISO-8859-1");
+        email.setCharset(StandardCharsets.ISO_8859_1.name());
         email.setContent("test content", "application/octet-stream");
         email.buildMimeMessage();
         final MimeMessage msg = email.getMimeMessage();
