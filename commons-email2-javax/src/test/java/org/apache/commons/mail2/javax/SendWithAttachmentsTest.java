@@ -22,6 +22,7 @@ import java.net.URL;
 
 import javax.mail.internet.MimeUtility;
 
+import org.apache.commons.mail2.core.EmailConstants;
 import org.apache.commons.mail2.core.EmailException;
 import org.apache.commons.mail2.javax.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail2.javax.settings.EmailConfiguration;

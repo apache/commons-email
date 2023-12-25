@@ -16,6 +16,7 @@
  */
 package org.apache.commons.mail2.jakarta;
 
+import org.apache.commons.mail2.core.EmailConstants;
 import org.apache.commons.mail2.core.EmailException;
 
 /**

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.commons.mail2.core.EmailConstants;
 import org.apache.commons.mail2.core.EmailException;
 import org.apache.commons.mail2.core.EmailUtils;
 import org.apache.commons.mail2.jakarta.mocks.MockHtmlEmailConcrete;

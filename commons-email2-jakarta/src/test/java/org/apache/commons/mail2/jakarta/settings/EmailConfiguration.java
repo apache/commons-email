@@ -16,7 +16,7 @@
  */
 package org.apache.commons.mail2.jakarta.settings;
 
-import org.apache.commons.mail2.jakarta.EmailConstants;
+import org.apache.commons.mail2.core.EmailConstants;
 
 /**
  * This class contains hard-coded configuration settings for the JUnit tests.

@@ -32,6 +32,7 @@ import javax.activation.FileDataSource;
 import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
 
+import org.apache.commons.mail2.core.EmailConstants;
 import org.apache.commons.mail2.core.EmailException;
 import org.apache.commons.mail2.core.EmailUtils;
 import org.apache.commons.mail2.javax.mocks.MockMultiPartEmailConcrete;
