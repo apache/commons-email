@@ -249,6 +249,7 @@
     <module>commons-email2-core</module>
     <module>commons-email2-jakarta</module>
     <module>commons-email2-javax</module>
+    <module>commons-email2-bom</module>
   </modules>
 
   <profiles>
