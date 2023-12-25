@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!--
+  This file contains some false positive bugs detected by findbugs. Their
+  false positive nature has been analyzed individually and they have been
+  put here to instruct findbugs it must ignore them.
+-->
+<FindBugsFilter
+    xmlns="https://github.com/spotbugs/filter/3.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+
+  <!-- https://github.com/spotbugs/spotbugs/issues/2710 -->
+  <Match>
+    <Class name="~.*" />
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+  </Match>
+
+  <!-- TODO Can any of these be done without breaking binary compatibility? -->
+  <Match>
+    <Class name="~.*" />
+    <Or>
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+    </Or>
+  </Match>
+
+  <!-- False positives in Java 11+ 
+    Error:  Load of known null value in org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver.resolve(String, boolean)
+     [org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver]
+     At DataSourceClassPathResolver.java:[line 115] NP_LOAD_OF_KNOWN_NULL_VALUE
+    Error:  Redundant nullcheck of inputStream which is known to be null in org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver.resolve(String, boolean)
+     [org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver]
+     Redundant null check at DataSourceClassPathResolver.java:[line 115] RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE
+  -->
+  <Match>
+    <Class name="org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver" />
+    <Method name="resolve" params="java.lang.String, boolean" returns="javax.activation.DataSource"/>
+    <Or>
+      <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE" />
+      <Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE" />
+    </Or>
+  </Match>
+
+</FindBugsFilter>
