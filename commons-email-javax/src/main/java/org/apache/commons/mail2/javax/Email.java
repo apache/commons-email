@@ -60,122 +60,6 @@ public abstract class Email {
      */
     private static final InternetAddress[] EMPTY_INTERNET_ADDRESS_ARRAY = {};
 
-    /** @deprecated since 1.3, use {@link EmailConstants#SENDER_EMAIL} instead */
-    @Deprecated
-    public static final String SENDER_EMAIL = EmailConstants.SENDER_EMAIL;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#SENDER_NAME} instead */
-    @Deprecated
-    public static final String SENDER_NAME = EmailConstants.SENDER_NAME;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#RECEIVER_EMAIL} instead */
-    @Deprecated
-    public static final String RECEIVER_EMAIL = EmailConstants.RECEIVER_EMAIL;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#RECEIVER_NAME} instead */
-    @Deprecated
-    public static final String RECEIVER_NAME = EmailConstants.RECEIVER_NAME;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#EMAIL_SUBJECT} instead */
-    @Deprecated
-    public static final String EMAIL_SUBJECT = EmailConstants.EMAIL_SUBJECT;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#EMAIL_BODY} instead */
-    @Deprecated
-    public static final String EMAIL_BODY = EmailConstants.EMAIL_BODY;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#CONTENT_TYPE} instead */
-    @Deprecated
-    public static final String CONTENT_TYPE = EmailConstants.CONTENT_TYPE;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#ATTACHMENTS} instead */
-    @Deprecated
-    public static final String ATTACHMENTS = EmailConstants.ATTACHMENTS;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#FILE_SERVER} instead */
-    @Deprecated
-    public static final String FILE_SERVER = EmailConstants.FILE_SERVER;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#KOI8_R} instead */
-    @Deprecated
-    public static final String KOI8_R = EmailConstants.KOI8_R;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#ISO_8859_1} instead */
-    @Deprecated
-    public static final String ISO_8859_1 = EmailConstants.ISO_8859_1;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#US_ASCII} instead */
-    @Deprecated
-    public static final String US_ASCII = EmailConstants.US_ASCII;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_DEBUG} instead */
-    @Deprecated
-    public static final String MAIL_DEBUG = EmailConstants.MAIL_DEBUG;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_HOST} instead */
-    @Deprecated
-    public static final String MAIL_HOST = EmailConstants.MAIL_HOST;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_PORT} instead */
-    @Deprecated
-    public static final String MAIL_PORT = EmailConstants.MAIL_PORT;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_FROM} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_FROM = EmailConstants.MAIL_SMTP_FROM;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_AUTH} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_AUTH = EmailConstants.MAIL_SMTP_AUTH;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_USER} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_USER = EmailConstants.MAIL_SMTP_USER;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_PASSWORD} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_PASSWORD = EmailConstants.MAIL_SMTP_PASSWORD;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_TRANSPORT_PROTOCOL} instead */
-    @Deprecated
-    public static final String MAIL_TRANSPORT_PROTOCOL = EmailConstants.MAIL_TRANSPORT_PROTOCOL;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#SMTP} instead */
-    @Deprecated
-    public static final String SMTP = EmailConstants.SMTP;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#TEXT_HTML} instead */
-    @Deprecated
-    public static final String TEXT_HTML = EmailConstants.TEXT_HTML;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#TEXT_PLAIN} instead */
-    @Deprecated
-    public static final String TEXT_PLAIN = EmailConstants.TEXT_PLAIN;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_TRANSPORT_TLS} instead */
-    @Deprecated
-    public static final String MAIL_TRANSPORT_TLS = EmailConstants.MAIL_TRANSPORT_TLS;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_FALLBACK} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_SOCKET_FACTORY_FALLBACK = EmailConstants.MAIL_SMTP_SOCKET_FACTORY_FALLBACK;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_CLASS} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_SOCKET_FACTORY_CLASS = EmailConstants.MAIL_SMTP_SOCKET_FACTORY_CLASS;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_PORT} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_SOCKET_FACTORY_PORT = EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_CONNECTIONTIMEOUT} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_CONNECTIONTIMEOUT = EmailConstants.MAIL_SMTP_CONNECTIONTIMEOUT;
-
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_TIMEOUT} instead */
-    @Deprecated
-    public static final String MAIL_SMTP_TIMEOUT = EmailConstants.MAIL_SMTP_TIMEOUT;
-
     /**
      * Constructs a new instance.
      */
@@ -185,222 +69,141 @@ public abstract class Email {
 
     /**
      * The email message to send.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected MimeMessage message;
+    private MimeMessage message;
 
     /**
      * The charset to use for this message.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String charset;
+    private String charset;
 
     /**
      * The Address of the sending party, mandatory.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected InternetAddress fromAddress;
+    private InternetAddress fromAddress;
 
     /**
      * The Subject.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String subject;
+    private String subject;
 
     /**
      * An attachment.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected MimeMultipart emailBody;
+    private MimeMultipart emailBody;
 
     /**
      * The content.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected Object content;
+    private Object content;
 
     /**
      * The content type.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String contentType;
+    private String contentType;
 
     /**
      * Set session debugging on or off.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected boolean debug;
+    private boolean debug;
 
     /**
      * Sent date.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected Date sentDate;
+    private Date sentDate;
 
     /**
      * Instance of an {@code Authenticator} object that will be used when authentication is requested from the mail server.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected Authenticator authenticator;
+    private Authenticator authenticator;
 
     /**
      * The hostname of the mail server with which to connect. If null will try to get property from system.properties. If still null, quit.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String hostName;
+    private String hostName;
 
     /**
      * The port number of the mail server to connect to. Defaults to the standard port ( 25 ).
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String smtpPort = "25";
+    private String smtpPort = "25";
 
     /**
      * The port number of the SSL enabled SMTP server; defaults to the standard port, 465.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String sslSmtpPort = "465";
+    private String sslSmtpPort = "465";
 
     /**
      * List of "to" email addresses.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected List<InternetAddress> toList = new ArrayList<>();
+    private List<InternetAddress> toList = new ArrayList<>();
 
     /**
      * List of "cc" email addresses.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected List<InternetAddress> ccList = new ArrayList<>();
+    private List<InternetAddress> ccList = new ArrayList<>();
 
     /**
      * List of "bcc" email addresses.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected List<InternetAddress> bccList = new ArrayList<>();
+    private List<InternetAddress> bccList = new ArrayList<>();
 
     /**
      * List of "replyTo" email addresses.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected List<InternetAddress> replyList = new ArrayList<>();
+    private List<InternetAddress> replyList = new ArrayList<>();
 
     /**
      * Address to which undeliverable mail should be sent. Because this is handled by JavaMail as a String property in the mail session, this property is of
      * type {@code String} rather than {@code InternetAddress}.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String bounceAddress;
+    private String bounceAddress;
 
     /**
      * Used to specify the mail headers. Example:
      *
      * X-Mailer: Sendmail, X-Priority: 1( highest ) or 2( high ) 3( normal ) 4( low ) and 5( lowest ) Disposition-Notification-To: user@domain.net
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected Map<String, String> headers = new HashMap<>();
+    private Map<String, String> headers = new HashMap<>();
 
     /**
      * Whether to use POP3 before SMTP, and if so the settings.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected boolean popBeforeSmtp;
+    private boolean popBeforeSmtp;
 
     /**
      * The host name of the POP3 server.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String popHost;
+    private String popHost;
 
     /**
      * The user name to log into the POP3 server.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String popUsername;
+    private String popUsername;
 
     /**
      * The password to log into the POP3 server.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String popPassword;
+    private String popPassword;
 
     /**
      * Does server require TLS encryption for authentication?
-     *
-     * @deprecated since 1.3, use setStartTLSEnabled() instead
      */
-    @Deprecated
-    protected boolean tls;
+    private boolean tls;
 
     /**
      * Does the current transport use SSL/TLS encryption upon connection?
-     *
-     * @deprecated since 1.3, use setSSLOnConnect() instead
      */
-    @Deprecated
-    protected boolean ssl;
+    private boolean ssl;
 
     /**
      * Socket I/O timeout value in milliseconds.
-     *
-     * @deprecated Use {@link #getSocketTimeout()} and {@link #setSocketTimeout(Duration)}.
      */
-    @Deprecated
-    protected int socketTimeout = Math.toIntExact(EmailConstants.SOCKET_TIMEOUT.toMillis());
+    private int socketTimeout = Math.toIntExact(EmailConstants.SOCKET_TIMEOUT.toMillis());
 
     /**
      * Socket connection timeout value in milliseconds.
-     *
-     * @deprecated Use {@link #getSocketConnectionTimeout()} and {@link #setSocketConnectionTimeout(Duration)}.
      */
-    @Deprecated
-    protected int socketConnectionTimeout = Math.toIntExact(EmailConstants.SOCKET_TIMEOUT.toMillis());
+    private int socketConnectionTimeout = Math.toIntExact(EmailConstants.SOCKET_TIMEOUT.toMillis());
 
     /**
      * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection before issuing any
@@ -1211,17 +1014,6 @@ public abstract class Email {
     }
 
     /**
-     * Tests whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
-     *
-     * @return true if SSL enabled for the transport.
-     * @deprecated since 1.3, use {@link #isSSLOnConnect()} instead.
-     */
-    @Deprecated
-    public boolean isSSL() {
-        return isSSLOnConnect();
-    }
-
-    /**
      * Tests whether the server identity checked as specified by RFC 2595
      *
      * @return true if the server identity is checked.
@@ -1259,18 +1051,6 @@ public abstract class Email {
      */
     public boolean isStartTLSRequired() {
         return startTlsRequired;
-    }
-
-    /**
-     * Tests whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
-     *
-     * @deprecated since 1.3, use {@link #isStartTLSEnabled()} instead.
-     * @return true if using STARTTLS for authentication, false otherwise.
-     * @since 1.1
-     */
-    @Deprecated
-    public boolean isTLS() {
-        return isStartTLSEnabled();
     }
 
     /**
@@ -1763,20 +1543,6 @@ public abstract class Email {
     }
 
     /**
-     * Sets the socket connection timeout value in milliseconds. Default is a 60 second timeout.
-     *
-     * @param socketConnectionTimeout the connection timeout
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
-     * @deprecated Use {@link #setSocketConnectionTimeout(Duration)}.
-     */
-    @Deprecated
-    public void setSocketConnectionTimeout(final int socketConnectionTimeout) {
-        checkSessionAlreadyInitialized();
-        this.socketConnectionTimeout = socketConnectionTimeout;
-    }
-
-    /**
      * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
      *
      * @param socketTimeout the socket I/O timeout
@@ -1786,31 +1552,6 @@ public abstract class Email {
     public void setSocketTimeout(final Duration socketTimeout) {
         checkSessionAlreadyInitialized();
         this.socketTimeout = Math.toIntExact(socketTimeout.toMillis());
-    }
-
-    /**
-     * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
-     *
-     * @param socketTimeout the socket I/O timeout
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
-     * @deprecated Use {@link #setSocketTimeout(Duration)}.
-     */
-    @Deprecated
-    public void setSocketTimeout(final int socketTimeout) {
-        checkSessionAlreadyInitialized();
-        this.socketTimeout = socketTimeout;
-    }
-
-    /**
-     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
-     *
-     * @param ssl whether to enable the SSL transport
-     * @deprecated since 1.3, use {@link #setSSLOnConnect(boolean)} instead.
-     */
-    @Deprecated
-    public void setSSL(final boolean ssl) {
-        setSSLOnConnect(ssl);
     }
 
     /**
@@ -1900,18 +1641,6 @@ public abstract class Email {
     public Email setSubject(final String aSubject) {
         this.subject = EmailUtils.replaceEndOfLineCharactersWithSpaces(aSubject);
         return this;
-    }
-
-    /**
-     * Sets or disable the STARTTLS encryption. Please see EMAIL-105 for the reasons of deprecation.
-     *
-     * @param withTLS true if STARTTLS requested, false otherwise
-     * @since 1.1
-     * @deprecated since 1.3, use {@link #setStartTLSEnabled(boolean)} instead.
-     */
-    @Deprecated
-    public void setTLS(final boolean withTLS) {
-        setStartTLSEnabled(withTLS);
     }
 
     /**

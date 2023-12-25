@@ -32,11 +32,6 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.commons.mail2.javax.EmailAttachment;
-import org.apache.commons.mail2.javax.EmailConstants;
-import org.apache.commons.mail2.javax.EmailException;
-import org.apache.commons.mail2.javax.EmailUtils;
-import org.apache.commons.mail2.javax.HtmlEmail;
 import org.apache.commons.mail2.javax.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail2.javax.settings.EmailConfiguration;
 import org.apache.commons.mail2.javax.util.MimeMessageParser;

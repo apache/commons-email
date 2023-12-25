@@ -22,9 +22,6 @@ import java.net.URL;
 
 import javax.mail.internet.MimeUtility;
 
-import org.apache.commons.mail2.javax.EmailAttachment;
-import org.apache.commons.mail2.javax.EmailConstants;
-import org.apache.commons.mail2.javax.EmailException;
 import org.apache.commons.mail2.javax.mocks.MockHtmlEmailConcrete;
 import org.apache.commons.mail2.javax.settings.EmailConfiguration;
 import org.junit.jupiter.api.BeforeEach;

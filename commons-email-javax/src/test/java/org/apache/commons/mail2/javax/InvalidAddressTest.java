@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.stream.IntStream;
 
-import org.apache.commons.mail2.javax.EmailException;
 import org.apache.commons.mail2.javax.mocks.MockEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

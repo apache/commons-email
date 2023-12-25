@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.IOException;
 
 import org.apache.commons.mail2.javax.DataSourceResolver;
-import org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver;
 import org.junit.jupiter.api.Test;
 
 /**

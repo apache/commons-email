@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import org.apache.commons.mail2.javax.DataSourceResolver;
-import org.apache.commons.mail2.javax.resolver.DataSourcePathResolver;
 import org.junit.jupiter.api.Test;
 
 /**

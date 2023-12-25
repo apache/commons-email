@@ -32,10 +32,6 @@ import javax.activation.FileDataSource;
 import javax.activation.URLDataSource;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.commons.mail2.javax.EmailAttachment;
-import org.apache.commons.mail2.javax.EmailConstants;
-import org.apache.commons.mail2.javax.EmailException;
-import org.apache.commons.mail2.javax.EmailUtils;
 import org.apache.commons.mail2.javax.mocks.MockMultiPartEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

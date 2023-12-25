@@ -23,9 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.mail2.javax.EmailConstants;
-import org.apache.commons.mail2.javax.EmailException;
-import org.apache.commons.mail2.javax.EmailUtils;
 import org.apache.commons.mail2.javax.mocks.MockSimpleEmail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

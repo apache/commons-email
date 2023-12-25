@@ -17,19 +17,8 @@
 
 package org.apache.commons.mail2.javax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.time.Duration;
-
-import org.apache.commons.mail2.javax.EmailConstants;
-import org.junit.jupiter.api.Test;
-
 public class EmailConstantsTest {
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void test_SOCKET_TIMEOUT() {
-        assertEquals(EmailConstants.SOCKET_TIMEOUT, Duration.ofMillis(EmailConstants.SOCKET_TIMEOUT_MS));
-    }
+    // empty for now
 
 }

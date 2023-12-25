@@ -45,9 +45,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.ParseException;
 
-import org.apache.commons.mail2.javax.DefaultAuthenticator;
-import org.apache.commons.mail2.javax.EmailConstants;
-import org.apache.commons.mail2.javax.EmailException;
 import org.apache.commons.mail2.javax.mocks.MockEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -1045,20 +1042,14 @@ public class EmailTest extends AbstractEmailTest {
 
     @Test
     public void testSocketConnectionTimeout() {
-        assertEquals(EmailConstants.SOCKET_TIMEOUT_MS, email.getSocketConnectionTimeout());
         assertEquals(EmailConstants.SOCKET_TIMEOUT.toMillis(), email.getSocketConnectionTimeout());
-        email.setSocketConnectionTimeout(1234);
-        assertEquals(1234, email.getSocketConnectionTimeout());
         email.setSocketConnectionTimeout(Duration.ofMillis(5678));
         assertEquals(5678, email.getSocketConnectionTimeout());
     }
 
     @Test
     public void testSocketTimeout() {
-        assertEquals(EmailConstants.SOCKET_TIMEOUT_MS, email.getSocketTimeout());
         assertEquals(EmailConstants.SOCKET_TIMEOUT.toMillis(), email.getSocketTimeout());
-        email.setSocketTimeout(1234);
-        assertEquals(1234, email.getSocketTimeout());
         email.setSocketTimeout(Duration.ofMillis(5678));
         assertEquals(5678, email.getSocketTimeout());
     }

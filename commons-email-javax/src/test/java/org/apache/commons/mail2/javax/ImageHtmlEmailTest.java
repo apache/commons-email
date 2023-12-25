@@ -36,9 +36,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail2.javax.DataSourceResolver;
-import org.apache.commons.mail2.javax.EmailException;
-import org.apache.commons.mail2.javax.ImageHtmlEmail;
 import org.apache.commons.mail2.javax.mocks.MockImageHtmlEmailConcrete;
 import org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver;
 import org.apache.commons.mail2.javax.resolver.DataSourceCompositeResolver;

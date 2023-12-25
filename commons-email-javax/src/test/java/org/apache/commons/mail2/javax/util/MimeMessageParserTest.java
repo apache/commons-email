@@ -32,8 +32,6 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.mail2.javax.HtmlEmail;
-import org.apache.commons.mail2.javax.util.MimeMessageParser;
-import org.apache.commons.mail2.javax.util.MimeMessageUtils;
 import org.junit.jupiter.api.Test;
 
 /**

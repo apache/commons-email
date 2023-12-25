@@ -19,7 +19,6 @@ package org.apache.commons.mail2.javax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.apache.commons.mail2.javax.EmailUtils;
 import org.junit.jupiter.api.Test;
 
 /**

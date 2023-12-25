@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.mail.PasswordAuthentication;
 
-import org.apache.commons.mail2.javax.DefaultAuthenticator;
 import org.junit.jupiter.api.Test;
 
 /**

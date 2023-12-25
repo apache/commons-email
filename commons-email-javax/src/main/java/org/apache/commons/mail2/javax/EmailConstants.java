@@ -29,41 +29,9 @@ import java.time.Duration;
  */
 public final class EmailConstants {
 
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String SENDER_EMAIL = "sender.email";
+    
 
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String SENDER_NAME = "sender.name";
-
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String RECEIVER_EMAIL = "receiver.email";
-
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String RECEIVER_NAME = "receiver.name";
-
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String EMAIL_SUBJECT = "email.subject";
-
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String EMAIL_BODY = "email.body";
-
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String CONTENT_TYPE = "content.type";
-
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String ATTACHMENTS = "attachments";
-
-    /** @deprecated since 1.3, not in use since 1.0 */
-    @Deprecated
-    public static final String FILE_SERVER = "file.server";
+    
 
     // Charset constants
 
@@ -119,10 +87,6 @@ public final class EmailConstants {
     // since 1.1
     /////////////////////////////////////////////////////////////////////////
 
-    /** @deprecated since 1.3 */
-    @Deprecated
-    public static final String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
-
     /**
      * Indicates if the STARTTLS command shall be used to initiate a TLS-secured connection.
      *
@@ -171,15 +135,6 @@ public final class EmailConstants {
      * @since 1.6.0
      */
     public static final Duration SOCKET_TIMEOUT = Duration.ofMinutes(1);
-
-    /**
-     * Default socket timeout.
-     *
-     * @since 1.3
-     * @deprecated Use {@link #SOCKET_TIMEOUT}.
-     */
-    @Deprecated
-    public static final int SOCKET_TIMEOUT_MS = 60_000;
 
     /**
      * If true, requires the use of the STARTTLS command. If the server doesn't support the STARTTLS command, the connection will fail.

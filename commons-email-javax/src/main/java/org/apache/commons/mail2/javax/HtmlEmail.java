@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -163,33 +162,18 @@ public class HtmlEmail extends MultiPartEmail {
 
     /**
      * Text part of the message. This will be used as alternative text if the email client does not support HTML messages.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String text;
+    private String text;
 
     /**
      * HTML part of the message.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected String html;
-
-    /**
-     * @deprecated As of commons-email 1.1, no longer used. Inline embedded objects are now stored in {@link #inlineEmbeds}.
-     */
-    @Deprecated
-    protected List<InlineImage> inlineImages;
+    private String html;
 
     /**
      * Embedded images Map&lt;String, InlineImage&gt; where the key is the user-defined image name.
-     *
-     * @deprecated Use getters and getters.
      */
-    @Deprecated
-    protected Map<String, InlineImage> inlineEmbeds = new HashMap<>();
+    private Map<String, InlineImage> inlineEmbeds = new HashMap<>();
 
     /**
      * Constructs a new instance.

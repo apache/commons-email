@@ -24,9 +24,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.apache.commons.mail2.javax.DataSourceResolver;
-import org.apache.commons.mail2.javax.resolver.DataSourceClassPathResolver;
-import org.apache.commons.mail2.javax.resolver.DataSourceCompositeResolver;
-import org.apache.commons.mail2.javax.resolver.DataSourceUrlResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

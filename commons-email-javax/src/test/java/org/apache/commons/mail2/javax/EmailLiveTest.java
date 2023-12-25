@@ -33,15 +33,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.mail2.javax.DefaultAuthenticator;
-import org.apache.commons.mail2.javax.Email;
-import org.apache.commons.mail2.javax.EmailAttachment;
-import org.apache.commons.mail2.javax.EmailException;
-import org.apache.commons.mail2.javax.EmailUtils;
-import org.apache.commons.mail2.javax.HtmlEmail;
-import org.apache.commons.mail2.javax.ImageHtmlEmail;
-import org.apache.commons.mail2.javax.MultiPartEmail;
-import org.apache.commons.mail2.javax.SimpleEmail;
 import org.apache.commons.mail2.javax.resolver.DataSourceUrlResolver;
 import org.apache.commons.mail2.javax.settings.EmailConfiguration;
 import org.junit.jupiter.api.BeforeEach;

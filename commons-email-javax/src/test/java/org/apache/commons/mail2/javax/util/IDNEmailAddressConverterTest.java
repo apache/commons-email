@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.mail.internet.InternetAddress;
 
-import org.apache.commons.mail2.javax.util.IDNEmailAddressConverter;
 import org.junit.jupiter.api.Test;
 
 public class IDNEmailAddressConverterTest {
