@@ -93,6 +93,16 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.apache.rat</groupId>
+          <artifactId>apache-rat-plugin</artifactId>
+          <configuration>
+            <excludes>
+              <exclude>src/test/resources/eml/**</exclude>
+              <exclude>src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <configuration>
@@ -144,12 +154,6 @@
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>src/test/resources/eml/**</exclude>
-            <exclude>src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
-          </excludes>
-        </configuration>
       </plugin>
       <!-- Declaration place matters must be after gpg. -->
       <plugin>
@@ -207,16 +211,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
-        <configuration>
-          <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>changes-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -227,15 +221,6 @@
         <artifactId>maven-pmd-plugin</artifactId>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.rat</groupId>
-        <artifactId>apache-rat-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>src/test/resources/eml/**</exclude>
-          </excludes>
         </configuration>
       </plugin>
       <plugin>
@@ -250,6 +235,7 @@
     <module>commons-email2-jakarta</module>
     <module>commons-email2-javax</module>
     <module>commons-email2-bom</module>
+    <module>commons-email2-distribution</module>
   </modules>
 
   <profiles>
