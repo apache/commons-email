@@ -20,7 +20,6 @@
           xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <properties>
     <title>Apache Commons Email Release Notes</title>
-    <author email="epugh@STOPSPAMopensourceconnections.com">Eric Pugh</author>
   </properties>
 
   <body>
