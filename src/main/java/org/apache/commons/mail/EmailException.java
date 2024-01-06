@@ -37,6 +37,8 @@ public class EmailException
 {
     /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
+    private final Object lock = new Object();
+    private final Object printLock = new Object();
 
     /**
      * Constructs a new {@code EmailException} with no
@@ -97,13 +99,10 @@ public class EmailException
      * @param out  the {@code PrintStream} to use for output
      */
     @Override
-    public void printStackTrace(final PrintStream out)
-    {
-        synchronized (out)
-        {
+    public void printStackTrace(final PrintStream out) {
+        synchronized (lock) {
             final PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, Charset.defaultCharset()), false);
             printStackTrace(pw);
-
             // Flush the PrintWriter before it's GC'ed.
             pw.flush();
         }
@@ -115,10 +114,9 @@ public class EmailException
      * @param out  the {@code PrintWriter} to use for output
      */
     @Override
-    public void printStackTrace(final PrintWriter out)
-    {
-        synchronized (out)
-        {
+    public void printStackTrace(final PrintWriter out) {
+
+        synchronized (printLock) {
             super.printStackTrace(out);
         }
     }
