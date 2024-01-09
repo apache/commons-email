@@ -302,9 +302,18 @@
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.13.1</version> <!-- use the latest version -->
+			<version>1.15.3</version> <!-- use the latest version -->
 		</dependency>
-
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.36</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.36</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -326,7 +335,8 @@
         
         <powermock.version>2.0.9</powermock.version>
         <easymock.version>5.2.0</easymock.version>
-    </properties> 
+    </properties>
+
 
     <build>
         <defaultGoal>clean verify apache-rat:check japicmp:cmp pmd:check pmd:cpd-check spotbugs:check javadoc:javadoc</defaultGoal>
@@ -432,8 +442,62 @@
               <excludeFilterFile>${basedir}/src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
             </configuration>
           </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>1.15.3</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.pitest</groupId>
+                            <artifactId>pitest-junit5-plugin</artifactId>
+                            <version>1.2.1</version>
+                        </dependency>
+                    </dependencies>
+       <configuration>
+                <targetClasses>
+                    <!-- Specify the classes/packages you want to mutate -->
+                    <targetClass>org.apache.commons.mail.*</targetClass>
+                </targetClasses>
+                <targetTests>
+                    <!-- Specify test classes/packages for mutation testing -->
+                    <targetTest>org.apache.commons.mail.*Test</targetTest>
+                </targetTests>
+        </configuration>
+
+        <executions>
+            <execution>
+                <id>pitest</id>
+                <goals>
+                    <goal>mutationCoverage</goal>
+                </goals>
+            </execution>
+        </executions>
+                </plugin>
         </plugins>
+
     </build>
+
+
 
     <distributionManagement>
       <site>
@@ -449,6 +513,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
+                <version>2.12.1</version>
                 <configuration>
                     <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
                 </configuration>
@@ -463,6 +528,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
                 <configuration>
                     <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
                     <enableRulesSummary>false</enableRulesSummary>
@@ -471,6 +537,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.21.2</version>
                 <configuration>
                     <targetJdk>${maven.compiler.target}</targetJdk>
                 </configuration>
@@ -530,28 +597,28 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-surefire-plugin</artifactId>
-              <configuration>
-                <argLine>
-                  --illegal-access=permit
-                  --add-opens java.base/java.lang=ALL-UNNAMED
-                  --add-opens java.base/java.net=ALL-UNNAMED
-                  --add-opens java.base/java.io=ALL-UNNAMED
-                  --add-opens java.base/java.util=ALL-UNNAMED
-                  --add-opens java.base/java.util.regex=ALL-UNNAMED
-                  --add-opens java.base/java.nio.charset=ALL-UNNAMED
-                  --add-opens java.base/sun.nio.cs=ALL-UNNAMED
-                  --add-opens java.logging/java.util.logging=ALL-UNNAMED
-                </argLine>
-              </configuration>
-            </plugin>
-          </plugins>
-        </build>
-      </profile>
-          
-        <profile>
-            <id>rc</id>
-            <distributionManagement>
-                <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
+                <!--<configuration>
+                  <argLine>
+                    -illegal-access=permit
+                    -add-opens java.base/java.lang=ALL-UNNAMED
+                    -add-opens java.base/java.net=ALL-UNNAMED
+                    -add-opens java.base/java.io=ALL-UNNAMED
+                    -add-opens java.base/java.util=ALL-UNNAMED
+                    -add-opens java.base/java.util.regex=ALL-UNNAMED
+                    -add-opens java.base/java.nio.charset=ALL-UNNAMED
+                    -add-opens java.base/sun.nio.cs=ALL-UNNAMED
+                    -add-opens java.logging/java.util.logging=ALL-UNNAMED
+                  </argLine>
+                </configuration>-->
+              </plugin>
+            </plugins>
+          </build>
+        </profile>
+
+          <profile>
+              <id>rc</id>
+              <distributionManagement>
+                  <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
                 <site>
                     <id>apache.website</id>
                     <name>Apache Commons Release Candidate Staging Site</name>
