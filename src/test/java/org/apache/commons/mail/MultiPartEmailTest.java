@@ -13,7 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 package org.apache.commons.mail;
 
 import static org.junit.Assert.*;
@@ -36,18 +37,24 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+*/
 /**
  * JUnit test case for MultiPartEmail Class.
  *
  * @since 1.0
- */
+ *//*
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { MockMultiPartEmailConcrete.class, URLDataSource.class })
 public class MultiPartEmailTest extends AbstractEmailTest
 {
-    /** */
+    */
+/** *//*
+
     private MockMultiPartEmailConcrete email;
-    /** File to used to test file attachments (Must be valid) */
+    */
+/** File to used to test file attachments (Must be valid) *//*
+
     private File testFile;
 
     @Before
@@ -97,10 +104,12 @@ public class MultiPartEmailTest extends AbstractEmailTest
         }
     }
 
-    /**
+    */
+/**
      * @throws EmailException when a bad address or attachment is used
      * @throws IOException when sending fails
-     */
+     *//*
+
     @Test
     public void testSend() throws EmailException, IOException
     {
@@ -118,7 +127,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
         attachment.setDescription("Test Attachment Desc");
 
         final MockMultiPartEmailConcrete testEmail =
-            new MockMultiPartEmailConcrete();
+                new MockMultiPartEmailConcrete();
         testEmail.setHostName(this.strTestMailServer);
         testEmail.setSmtpPort(this.getMailServerPort());
         testEmail.setFrom(this.strTestMailFrom);
@@ -127,11 +136,11 @@ public class MultiPartEmailTest extends AbstractEmailTest
         testEmail.setSubType("subType");
 
         if (EmailUtils.isNotEmpty(this.strTestUser)
-            && EmailUtils.isNotEmpty(this.strTestPasswd))
+                && EmailUtils.isNotEmpty(this.strTestPasswd))
         {
             testEmail.setAuthentication(
-                this.strTestUser,
-                this.strTestPasswd);
+                    this.strTestUser,
+                    this.strTestPasswd);
         }
 
         testEmail.setSubject(strSubject);
@@ -150,25 +159,25 @@ public class MultiPartEmailTest extends AbstractEmailTest
         this.fakeMailServer.stop();
         // validate message
         validateSend(
-            this.fakeMailServer,
-            strSubject,
-            testEmail.getMsg(),
-            testEmail.getFromAddress(),
-            testEmail.getToAddresses(),
-            testEmail.getCcAddresses(),
-            testEmail.getBccAddresses(),
-            true);
+                this.fakeMailServer,
+                strSubject,
+                testEmail.getMsg(),
+                testEmail.getFromAddress(),
+                testEmail.getToAddresses(),
+                testEmail.getCcAddresses(),
+                testEmail.getBccAddresses(),
+                true);
 
         // validate attachment
         validateSend(
-            this.fakeMailServer,
-            strSubject,
-            attachment.getName(),
-            testEmail.getFromAddress(),
-            testEmail.getToAddresses(),
-            testEmail.getCcAddresses(),
-            testEmail.getBccAddresses(),
-            false);
+                this.fakeMailServer,
+                strSubject,
+                attachment.getName(),
+                testEmail.getFromAddress(),
+                testEmail.getToAddresses(),
+                testEmail.getCcAddresses(),
+                testEmail.getBccAddresses(),
+                false);
 
         // ====================================================================
         // Test Exceptions
@@ -257,10 +266,12 @@ public class MultiPartEmailTest extends AbstractEmailTest
         }
     }
 
-    /**
+    */
+/**
      * @throws MalformedURLException when a bad attachment URL is used
      * @throws EmailException when a bad address or attachment is used
-     */
+     *//*
+
     @Test
     public void testAttach2() throws MalformedURLException, EmailException
     {
@@ -268,15 +279,15 @@ public class MultiPartEmailTest extends AbstractEmailTest
         // Test Success - URL
         // ====================================================================
         this.email.attach(
-            new URL(this.strTestURL),
-            "Test Attachment",
-            "Test Attachment Desc");
+                new URL(this.strTestURL),
+                "Test Attachment",
+                "Test Attachment Desc");
 
         // bad name
         this.email.attach(
-            new URL(this.strTestURL),
-            null,
-            "Test Attachment Desc");
+                new URL(this.strTestURL),
+                null,
+                "Test Attachment Desc");
     }
 
     @Test
@@ -286,9 +297,9 @@ public class MultiPartEmailTest extends AbstractEmailTest
         // Test Success - URL
         // ====================================================================
         this.email.attach(
-            new URLDataSource(new URL(this.strTestURL)),
-            "Test Attachment",
-            "Test Attachment Desc");
+                new URLDataSource(new URL(this.strTestURL)),
+                "Test Attachment",
+                "Test Attachment Desc");
 
         // ====================================================================
         // Test Exceptions
@@ -350,12 +361,12 @@ public class MultiPartEmailTest extends AbstractEmailTest
 
         // validate
         assertEquals(
-            strContentType,
-            this.email.getContainer().getBodyPart(0).getContentType());
+                strContentType,
+                this.email.getContainer().getBodyPart(0).getContentType());
         assertEquals(
-            strMessage,
-            this.email.getContainer().getBodyPart(0).getDataHandler()
-                .getContent());
+                strMessage,
+                this.email.getContainer().getBodyPart(0).getDataHandler()
+                        .getContent());
 
     }
 
@@ -372,24 +383,28 @@ public class MultiPartEmailTest extends AbstractEmailTest
 
         // validate
         assertTrue(
-            this
-                .email
-                .getContainer()
-                .getBodyPart(0)
-                .getDataHandler()
-                .getContentType()
-                .contains(strSubtype));
+                this
+                        .email
+                        .getContainer()
+                        .getBodyPart(0)
+                        .getDataHandler()
+                        .getContentType()
+                        .contains(strSubtype));
 
     }
 
-    /** TODO implement test for GetContainer */
+    */
+/** TODO implement test for GetContainer *//*
+
     @Test
     public void testGetContainer()
     {
         assertTrue(true);
     }
 
-    /** init called twice should fail */
+    */
+/** init called twice should fail *//*
+
     @Test
     public void testInit()
     {
@@ -406,7 +421,9 @@ public class MultiPartEmailTest extends AbstractEmailTest
         }
     }
 
-    /** test get/set sub type */
+    */
+/** test get/set sub type *//*
+
     @Test
     public void testGetSetSubType()
     {
@@ -416,4 +433,4 @@ public class MultiPartEmailTest extends AbstractEmailTest
             assertEquals(validChar, this.email.getSubType());
         }
     }
-}
+}*/

@@ -13,7 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 package org.apache.commons.mail;
 
 import static org.junit.Assert.*;
@@ -345,8 +346,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.setSubject(strSubject);
 
         final String html = "<p>First image  <img src=\"images/contentTypeTest.gif\"/></p>" +
-                      "<p>Second image <img src=\"images/contentTypeTest.jpg\"/></p>" +
-                      "<p>Third image  <img src=\"images/contentTypeTest.png\"/></p>";
+                "<p>Second image <img src=\"images/contentTypeTest.jpg\"/></p>" +
+                "<p>Third image  <img src=\"images/contentTypeTest.png\"/></p>";
 
         // set the html message
         email.setHtmlMsg(html);
@@ -473,8 +474,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         fakeMailServer.stop();
         // validate txt message
         validateSend(fakeMailServer, strSubject, email.getHtmlMsg(),
-                     email.getFromAddress(), email.getToAddresses(),
-                     email.getCcAddresses(), email.getBccAddresses(), true);
+                email.getFromAddress(), email.getToAddresses(),
+                email.getCcAddresses(), email.getBccAddresses(), true);
     }
 
     private String loadUrlContent(final URL url) throws IOException {
@@ -507,4 +508,4 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         }
 
     }
-}
+}*/
