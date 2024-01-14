@@ -102,7 +102,7 @@ public abstract class AbstractEmailTest {
     /**
      * Create a mocked URL object which always throws an IOException when the openStream() method is called.
      * <p>
-     * Several ISPs do resolve invalid URLs like {@code http://example.invalid} to some error page causing tests to fail otherwise.
+     * Several ISPs do resolve invalid URLs like {@code https://example.invalid} to some error page causing tests to fail otherwise.
      * </p>
      *
      * @return an invalid URL

@@ -87,7 +87,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     /**
      * Create a HTML email containing an URL pointing to a ZIP file to be downloaded. According to EMAIL-93 the resulting URL
-     * "http://paradisedelivery.homeip.net/delivery/?file=TZC268X93337..zip" contains TWO dots instead of one dot which breaks the link.
+     * "https://paradisedelivery.homeip.net/delivery/?file=TZC268X93337..zip" contains TWO dots instead of one dot which breaks the link.
      */
     @Test
     public void testAddZipUrl() throws Exception {

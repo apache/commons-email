@@ -70,7 +70,7 @@ public class EmailAttachmentTest extends AbstractEmailTest {
 
     @Test
     public void testGetSetURL() throws Exception {
-        final String[] tests = { "http://localhost/", "http://www.apache.org/", "http://foo.notexisting.org" };
+        final String[] tests = { "https://localhost/", "http://www.apache.org/", "http://foo.notexisting.org" };
 
         for (final String urlString : tests) {
             final URL testURL = new URL(urlString);

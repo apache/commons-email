@@ -222,7 +222,7 @@ public class HtmlEmail extends MultiPartEmail {
             // EMAIL-142: if we have both an HTML and TEXT body, but no attachments or
             // inline images, the root container should have mimetype
             // "multipart/alternative".
-            // reference: http://tools.ietf.org/html/rfc2046#section-5.1.4
+            // reference: https://tools.ietf.org/html/rfc2046#section-5.1.4
             if (!EmailUtils.isEmpty(inlineEmbeds) || isBoolHasAttachments()) {
                 // If both HTML and TEXT bodies are provided, create an alternative
                 // container and add it to the root container

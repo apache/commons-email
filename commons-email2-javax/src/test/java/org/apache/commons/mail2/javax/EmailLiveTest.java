@@ -44,7 +44,7 @@ import org.junit.jupiter.api.Test;
  * These are regression test sending REAL email to REAL mail servers using REAL recipients.
  *
  * The intention is to field-test certain aspects of email using a variety of mail clients since I'm not a mockist (see
- * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
+ * https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
 public class EmailLiveTest extends AbstractEmailTest {
     /**
@@ -97,7 +97,7 @@ public class EmailLiveTest extends AbstractEmailTest {
         System.setProperty("mail.mime.charset", StandardCharsets.UTF_8.name());
 
         // enforce encoding of non-ASCII characters (violating the MIME specification - see
-        // http://java.sun.com/products/javamail/javadocs/javax/mail/internet/package-summary.html
+        // https://java.sun.com/products/javamail/javadocs/javax/mail/internet/package-summary.html
         System.setProperty("mail.mime.encodefilename", "true");
     }
 

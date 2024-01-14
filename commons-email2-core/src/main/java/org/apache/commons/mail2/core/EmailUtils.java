@@ -91,7 +91,7 @@ public final class EmailUtils {
      *
      * @param input the input string to be URL encoded
      * @return a URL encoded string
-     * @see <a href="http://tools.ietf.org/html/rfc2392">RFC 2392</a>
+     * @see <a href="https://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
     public static String encodeUrl(final String input) {
         if (input == null) {
