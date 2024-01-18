@@ -23,11 +23,11 @@
   </properties>
 
   <body>
-    <release version="1.6.1" date="202Y-MM-DD" description="Feature release (Java 8 or above).">
+    <release version="2.0.0-M1" date="202Y-MM-DD" description="Feature release (Java 8 or above).">
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Checkstyle configuration.</action>
       <!-- UPDATE -->
-      <action type="update" due-to="Dependabot" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.9 to 2.0.10 #194.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.9 to 2.0.11.</action>
     </release>
     <release version="1.6.0" date="2023-12-17" description="Feature release (Java 8 or above).">
       <!-- FIX -->
