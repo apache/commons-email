@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for invalid Addresses in Email Class
  *
- * @since 1.0
  */
 public class InvalidAddressTest extends AbstractEmailTest {
 

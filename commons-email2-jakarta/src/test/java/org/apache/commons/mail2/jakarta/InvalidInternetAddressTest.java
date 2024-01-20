@@ -30,7 +30,6 @@ import jakarta.mail.internet.InternetAddress;
 /**
  * JUnit test case demonstrating InternetAddress validation.
  *
- * @since 1.0
  */
 public class InvalidInternetAddressTest extends AbstractEmailTest {
     /** */

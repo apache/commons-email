@@ -34,7 +34,6 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for SimpleEmailTest
  *
- * @since 1.0
  */
 public class SimpleEmailTest extends AbstractEmailTest {
 

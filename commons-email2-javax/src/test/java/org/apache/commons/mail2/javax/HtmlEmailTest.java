@@ -45,7 +45,6 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for HtmlEmail Class.
  *
- * @since 1.0
  */
 public class HtmlEmailTest extends AbstractEmailTest {
 

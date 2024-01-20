@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for EmailUtils Class
  *
- * @since 1.3
  */
 public class EmailUtilsTest {
 

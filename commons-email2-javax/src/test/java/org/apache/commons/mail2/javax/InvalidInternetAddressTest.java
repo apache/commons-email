@@ -30,7 +30,6 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case demonstrating InternetAddress validation.
  *
- * @since 1.0
  */
 public class InvalidInternetAddressTest extends AbstractEmailTest {
     /** */

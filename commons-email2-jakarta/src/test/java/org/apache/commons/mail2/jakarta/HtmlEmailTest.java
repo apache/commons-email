@@ -45,7 +45,6 @@ import jakarta.mail.internet.MimeMessage;
 /**
  * JUnit test case for HtmlEmail Class.
  *
- * @since 1.0
  */
 public class HtmlEmailTest extends AbstractEmailTest {
 

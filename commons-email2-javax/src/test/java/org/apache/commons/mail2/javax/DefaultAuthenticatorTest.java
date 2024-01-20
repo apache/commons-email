@@ -26,7 +26,6 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for DefaultAuthenticator Class.
  *
- * @since 1.0
  */
 public class DefaultAuthenticatorTest {
     @Test
