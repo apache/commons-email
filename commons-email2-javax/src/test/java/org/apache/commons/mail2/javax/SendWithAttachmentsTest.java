@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case verifying bugzilla issue 30973 is fixed.
- *
  */
 public class SendWithAttachmentsTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;

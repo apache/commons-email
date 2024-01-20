@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for DataSourceClassPathResolver.
- *
  */
 public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest {
 

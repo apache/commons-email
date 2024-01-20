@@ -25,7 +25,6 @@ import jakarta.mail.PasswordAuthentication;
 
 /**
  * JUnit test case for DefaultAuthenticator Class.
- *
  */
 public class DefaultAuthenticatorTest {
     @Test

@@ -30,7 +30,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for DataSourceUrlResolver.
- *
  */
 public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
 

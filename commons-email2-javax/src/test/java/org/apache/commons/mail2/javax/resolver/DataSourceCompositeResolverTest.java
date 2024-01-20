@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for DateSourceResolver.
- *
  */
 public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest {
 
