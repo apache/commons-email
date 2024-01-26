@@ -84,7 +84,7 @@
     <commons.bc.version>1.5</commons.bc.version>
     <!-- override the default commons encoding property -->
     <commons.encoding>UTF-8</commons.encoding>
-    <mockito-core.version>5.8.0</mockito-core.version>
+    <mockito-core.version>5.10.0</mockito-core.version>
     <japicmp.skip>true</japicmp.skip>
   </properties>
 
