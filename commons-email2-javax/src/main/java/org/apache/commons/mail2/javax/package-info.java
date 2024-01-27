@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * Commons-Email aims to provide a API for sending email. It is built on top of the Java Mail API, which it aims to simplify. All help is gratefully received.
  */
