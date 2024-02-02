@@ -86,6 +86,7 @@
     <commons.encoding>UTF-8</commons.encoding>
     <mockito-core.version>5.8.0</mockito-core.version>
     <japicmp.skip>true</japicmp.skip>
+    <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
   </properties>
 
   <build>
