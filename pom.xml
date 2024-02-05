@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>65</version>
+    <version>66</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>commons-email2-parent</artifactId>
@@ -71,6 +71,7 @@
     <commons.parent.dir>${basedir}</commons.parent.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <commons.componentid>email</commons.componentid>
@@ -84,7 +85,7 @@
     <commons.bc.version>1.5</commons.bc.version>
     <!-- override the default commons encoding property -->
     <commons.encoding>UTF-8</commons.encoding>
-    <mockito-core.version>5.8.0</mockito-core.version>
+    <mockito-core.version>5.10.0</mockito-core.version>
     <japicmp.skip>true</japicmp.skip>
     <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
   </properties>
