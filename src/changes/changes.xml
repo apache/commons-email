@@ -29,7 +29,7 @@
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Checkstyle configuration.</action>
       <!-- UPDATE -->
-      <action type="update" due-to="Dependabot" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.9 to 2.0.11.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.9 to 2.0.12.</action>
       <action type="update" due-to="Dependabot" dev="ggregory">Bump com.github.davidmoten:subethasmtp from 6.0.7 to 7.0.1.</action>
       <action type="update" due-to="Dependabot" dev="ggregory">Bump org.mockito:mockito-core from 5.8.0 to 5.10.0.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 65 to 66.</action>
