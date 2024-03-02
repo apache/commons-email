@@ -68,12 +68,12 @@
   </dependencyManagement>
 
   <properties>
-    <commons.parent.dir>${basedir}</commons.parent.dir>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <commons.parent.dir>${basedir}</commons.parent.dir>
     <commons.componentid>email</commons.componentid>
     <commons.module.name>org.apache.commons.mail2</commons.module.name>
     <commons.jira.id>EMAIL</commons.jira.id>
@@ -83,9 +83,11 @@
     <commons.release.desc>(Java 8 or above)</commons.release.desc>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.bc.version>1.5</commons.bc.version>
+    <commons.releaseNotesLocation>${commons.parent.dir}/RELEASE-NOTES.txt</commons.releaseNotesLocation>
     <!-- override the default commons encoding property -->
     <commons.encoding>UTF-8</commons.encoding>
     <mockito-core.version>5.10.0</mockito-core.version>
+    <!--Skip JApiCmp for 1.x to 2.0. -->
     <japicmp.skip>true</japicmp.skip>
     <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
   </properties>
@@ -135,16 +137,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <descriptors>
-            <descriptor>src/assembly/bin.xml</descriptor>
-            <descriptor>src/assembly/src.xml</descriptor>
-          </descriptors>
-          <tarLongFileMode>gnu</tarLongFileMode>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-scm-publish-plugin</artifactId>
         <configuration>
@@ -157,37 +149,6 @@
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
       </plugin>
-      <!-- Declaration place matters must be after gpg. -->
-      <plugin>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-release-plugin</artifactId>
-        <configuration>
-          <distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/email</distSvnStagingUrl>
-        </configuration>
-        <executions>
-          <execution>
-            <id>detatch-distributions</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>detach-distributions</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>compress-site</id>
-            <phase>site</phase>
-            <goals>
-              <goal>compress-site</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>stage-distributions</id>
-            <phase>deploy</phase>
-            <goals>
-              <goal>stage-distributions</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
@@ -195,6 +156,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <!-- Don't build the archives here. They are constructed in the distribution project -->
+          <execution>
+            <configuration>
+              <skipAssembly>true</skipAssembly>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
