@@ -23,6 +23,12 @@
   </properties>
 
   <body>
+    <section name="Using Jakarta or Javax packages">
+      <p>
+        You first need to decide whether you are using classes from the <code>commons-email2-jakarta</code> or <code>commons-email2-javax</code> module.
+        The example assume you are importing classes from one of these two modules.
+      </p>
+    </section>
     <section name="A simple text email">
       <p>
         Our first example will create a basic email message to "John Doe" and
@@ -65,7 +71,9 @@ email.send();
       </p>
       <source>
 <![CDATA[
-import org.apache.commons.mail.*;
+import org.apache.commons.mail2.jakarta.*;
+// or:
+import org.apache.commons.mail2.javax.*;
 ...
 
   // Create the attachment
@@ -100,7 +108,9 @@ import org.apache.commons.mail.*;
       </p>
       <source>
 <![CDATA[
-import org.apache.commons.mail.*;
+import org.apache.commons.mail2.jakarta.*;
+// or:
+import org.apache.commons.mail2.javax.*;
 ...
 
   // Create the attachment
@@ -138,7 +148,10 @@ import org.apache.commons.mail.*;
       </p>
       <source>
 <![CDATA[
-import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail2.jakarta.*;
+// or:
+import org.apache.commons.mail2.javax.*;
+
 ...
 
   // Create the email message
@@ -183,7 +196,9 @@ import org.apache.commons.mail.HtmlEmail;
       </p>        
       <source>
         <![CDATA[
-import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail2.jakarta.*;
+// or:
+import org.apache.commons.mail2.javax.*;
 ...
 
   // load your HTML email template

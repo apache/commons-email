@@ -28,6 +28,16 @@
                 It is built on top of the Java Mail API, which it aims to simplify.
             </p>
             <p>
+              The component is split into the following Maven modules (JAR files)
+            </p>
+            <ul>
+              <li><a href="commons-email2-bom/index.html">commons-email2-bom</a>: Specifies a Bill of Material Maven POM.</li>
+              <li><a href="commons-email2-core/index.html">commons-email2-core</a>: Contains core classes.</li>
+              <li><a href="commons-email2-distribution/index.html">commons-email2-distribution</a>: Builds the zip and tar gz distribution files.</li>
+              <li><a href="commons-email2-jakarta/index.html">commons-email2-jakarta</a>: Contains Jakarta-specific classes.</li>
+              <li><a href="commons-email2-javax/index.html">commons-email2-javax</a>: Contains Javax-specific classes.</li>
+            </ul>
+            <p>
                 Some of the mail classes that are provided are as follows:
                 <ul>
                     <li>
