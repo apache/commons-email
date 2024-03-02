@@ -40,13 +40,13 @@
  |                                                                      |
  +======================================================================+
 --->
-Apache Commons Email
+Apache Commons Email Parent POM
 ===================
 
 [![Java CI](https://github.com/apache/commons-email/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-email/actions/workflows/maven.yml)
 [![Coverage Status](https://codecov.io/gh/apache/commons-email/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-email)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email/?gav=true)
-[![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-email/1.6.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-email/1.6.0)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email2-parent/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-email2-parent/?gav=true)
+[![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-email2-parent/2.0.0-M1.svg)](https://javadoc.io/doc/org.apache.commons/commons-email2-parent/2.0.0-M1)
 [![CodeQL](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-email/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-email)
 
@@ -55,9 +55,9 @@ Apache Commons Email provides an API for sending email, simplifying the JavaMail
 Documentation
 -------------
 
-More information can be found on the [Apache Commons Email homepage](https://commons.apache.org/proper/commons-email).
+More information can be found on the [Apache Commons Email Parent POM homepage](https://commons.apache.org/proper/commons-email).
 The [Javadoc](https://commons.apache.org/proper/commons-email/apidocs) can be browsed.
-Questions related to the usage of Apache Commons Email should be posted to the [user mailing list](https://commons.apache.org/mail-lists.html).
+Questions related to the usage of Apache Commons Email Parent POM should be posted to the [user mailing list](https://commons.apache.org/mail-lists.html).
 
 Getting the latest release
 --------------------------
@@ -68,8 +68,8 @@ Alternatively, you can pull it from  the central Maven repositories:
 ```xml
 <dependency>
   <groupId>org.apache.commons</groupId>
-  <artifactId>commons-email</artifactId>
-  <version>1.6.0</version>
+  <artifactId>commons-email2-parent</artifactId>
+  <version>2.0.0-M1</version>
 </dependency>
 ```
 
@@ -102,7 +102,7 @@ See the `NOTICE.txt` file for required notices and attributions.
 
 Donating
 --------
-You like Apache Commons Email? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support development.
+You like Apache Commons Email Parent POM? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support development.
 
 Additional Resources
 --------------------

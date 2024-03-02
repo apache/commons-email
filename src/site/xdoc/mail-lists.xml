@@ -41,14 +41,14 @@ limitations under the License.
 -->
 <document>
   <properties>
-    <title>Apache Commons Email Mailing Lists</title>
+    <title>Apache Commons Email Parent POM Mailing Lists</title>
     <author email="dev@commons.apache.org">Apache Commons Documentation Team</author>
   </properties>
   <body>
 
     <section name="Overview">
       <p>
-        <a href="index.html">Apache Commons Email</a> shares mailing lists with all the other
+        <a href="index.html">Apache Commons Email Parent POM</a> shares mailing lists with all the other
         <a href="https://commons.apache.org/components.html">Commons Components</a>.
         To make it easier for people to only read messages related to components they are interested in,
         the convention in Commons is to prefix the subject line of messages with the component's name,
@@ -58,11 +58,11 @@ limitations under the License.
         </ul>
       </p>
       <p>
-        Questions related to the usage of Apache Commons Email should be posted to the
+        Questions related to the usage of Apache Commons Email Parent POM should be posted to the
         <a href="https://lists.apache.org/list.html?user@commons.apache.org">User List</a>.
         <br />
         The <a href="https://lists.apache.org/list.html?dev@commons.apache.org">Developer List</a>
-        is for questions and discussion related to the development of Apache Commons Email.
+        is for questions and discussion related to the development of Apache Commons Email Parent POM.
         <br />
         Please do not cross-post; developers are also subscribed to the user list.
         <br />
@@ -78,9 +78,9 @@ limitations under the License.
       </p>
     </section>
 
-    <section name="Apache Commons Email Mailing Lists">
+    <section name="Apache Commons Email Parent POM Mailing Lists">
       <p>
-        <strong>Please prefix the subject line of any messages for <a href="index.html">Apache Commons Email</a>
+        <strong>Please prefix the subject line of any messages for <a href="index.html">Apache Commons Email Parent POM</a>
         with <i>[email]</i></strong> - <i>thanks!</i>
         <br />
         <br />
@@ -101,7 +101,7 @@ limitations under the License.
           <td>
             <strong>Commons User List</strong>
             <br /><br />
-            Questions on using Apache Commons Email.
+            Questions on using Apache Commons Email Parent POM.
             <br /><br />
           </td>
           <td><a href="mailto:user-subscribe@commons.apache.org">Subscribe</a></td>
@@ -120,7 +120,7 @@ limitations under the License.
           <td>
             <strong>Commons Developer List</strong>
             <br /><br />
-            Discussion of development of Apache Commons Email.
+            Discussion of development of Apache Commons Email Parent POM.
             <br /><br />
           </td>
           <td><a href="mailto:dev-subscribe@commons.apache.org">Subscribe</a></td>

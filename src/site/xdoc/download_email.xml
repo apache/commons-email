@@ -58,11 +58,11 @@ limitations under the License.
 -->
 <document>
   <properties>
-    <title>Download Apache Commons Email</title>
+    <title>Download Apache Commons Email Parent POM</title>
     <author email="dev@commons.apache.org">Apache Commons Documentation Team</author>
   </properties>
   <body>
-    <section name="Download Apache Commons Email">
+    <section name="Download Apache Commons Email Parent POM">
     <subsection name="Using a Mirror">
       <p>
         We recommend you use a mirror to download our release
@@ -113,32 +113,32 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons Email 1.6.0 (Java 8 or above)">
+    <section name="Apache Commons Email Parent POM 2.0.0-M1 (Java 8 or above)">
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/email/binaries/commons-email-1.6.0-bin.tar.gz">commons-email-1.6.0-bin.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email-1.6.0-bin.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email-1.6.0-bin.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/email/binaries/commons-email2-parent-2.0.0-M1-bin.tar.gz">commons-email2-parent-2.0.0-M1-bin.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email2-parent-2.0.0-M1-bin.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email2-parent-2.0.0-M1-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/email/binaries/commons-email-1.6.0-bin.zip">commons-email-1.6.0-bin.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email-1.6.0-bin.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email-1.6.0-bin.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/email/binaries/commons-email2-parent-2.0.0-M1-bin.zip">commons-email2-parent-2.0.0-M1-bin.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email2-parent-2.0.0-M1-bin.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/binaries/commons-email2-parent-2.0.0-M1-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
       <subsection name="Source">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/email/source/commons-email-1.6.0-src.tar.gz">commons-email-1.6.0-src.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/source/commons-email-1.6.0-src.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/source/commons-email-1.6.0-src.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/email/source/commons-email2-parent-2.0.0-M1-src.tar.gz">commons-email2-parent-2.0.0-M1-src.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/source/commons-email2-parent-2.0.0-M1-src.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/source/commons-email2-parent-2.0.0-M1-src.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/email/source/commons-email-1.6.0-src.zip">commons-email-1.6.0-src.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/source/commons-email-1.6.0-src.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/email/source/commons-email-1.6.0-src.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/email/source/commons-email2-parent-2.0.0-M1-src.zip">commons-email2-parent-2.0.0-M1-src.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/source/commons-email2-parent-2.0.0-M1-src.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/email/source/commons-email2-parent-2.0.0-M1-src.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>

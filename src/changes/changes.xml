@@ -23,7 +23,7 @@
   </properties>
 
   <body>
-    <release version="2.0.0-M1" date="202Y-MM-DD" description="Feature release (Java 8 or above).">
+    <release version="2.0.0-M1" date="2024-03-02" description="Feature release (Java 8 or above).">
       <!-- ADD -->
       <action dev="ggregory" type="add" due-to="Gary Gregory">Add Maven property project.build.outputTimestamp for build reproducibility.</action>
       <!-- FIX -->

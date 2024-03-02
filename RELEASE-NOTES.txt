@@ -1,3 +1,49 @@
+Apache Commons Email Parent POM 2.0.0-M1-SNAPSHOT
+RELEASE NOTES
+
+The Apache Commons Email Parent POM team is pleased to announce the release of Apache Commons Email Parent POM 2.0.0-M1-SNAPSHOT.
+
+Apache Commons Email provides an API for sending email, simplifying the JavaMail API.
+
+
+Feature release (Java 8 or above).
+
+For complete information on Apache Commons Email Parent POM, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons Email Parent POM website:
+
+https://commons.apache.org/proper/commons-email/
+
+Download page: https://commons.apache.org/proper/commons-email/download_net.cgi
+
+Changes in this version
+----------------------
+
+New features
+------------
+
+*             Add Maven property project.build.outputTimestamp for build reproducibility. Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+
+*             Fix Checkstyle configuration. Thanks to Gary Gregory.
+
+Changes
+-------
+
+*             Bump org.slf4j:slf4j-jdk14 from 2.0.9 to 2.0.12. Thanks to Dependabot.
+*             Bump com.github.davidmoten:subethasmtp from 6.0.7 to 7.0.1. Thanks to Dependabot.
+*             Bump org.mockito:mockito-core from 5.8.0 to 5.10.0. Thanks to Dependabot.
+*             Bump commons-parent from 65 to 66. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-email/changes-report.html
+
+Enjoy!
+-Apache Commons Net team
+
+------------------------------------------------------------------------
+
 Apache Commons Email 1.6.0
 RELEASE NOTES
 
@@ -18,59 +64,65 @@ Download page: https://commons.apache.org/proper/commons-email/download_net.cgi
 Changes in this version include:
 ===============================
 
-New features:
-o             Add github/codeql-action #75. Thanks to Dependabot.
-o             Add Maven plugin JapiCmp and remove Clirr. Thanks to Gary Gregory.
+New features
+------------
+
+* Add github/codeql-action #75. Thanks to Dependabot.
+* Add Maven plugin JapiCmp and remove Clirr. Thanks to Gary Gregory.
 o EMAIL-176:  Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
 o EMAIL-207:  Add InputStreamDataSource. Thanks to Lee Jaeheon, Gary Gregory.
 o EMAIL-207:  Don't waste memory in MimeMessageParser#createDataSource(). Thanks to Lee Jaeheon, Gary Gregory.
-o             Add EmailConstants.SOCKET_TIMEOUT and deprecate SOCKET_TIMEOUT_MS. Thanks to Gary Gregory.
-o             Add Email.setSocketConnectionTimeout(Duration) and deprecate setSocketConnectionTimeout(int). Thanks to Gary Gregory.
-o             Add Email.setSocketTimeout(Duration) and deprecate setSocketTimeout(int). Thanks to Gary Gregory.
-o             Add PathDataSource. Thanks to Gary Gregory.
-o             Add DataSourcePathResolver. Thanks to Gary Gregory.
-o             Add MimeMessageUtils.createMimeMessage(Session, Path, OpenOption...). Thanks to Gary Gregory.
-o             Add MultiPartEmail.attach(Path, OpenOption...). Thanks to Gary Gregory.
+* Add EmailConstants.SOCKET_TIMEOUT and deprecate SOCKET_TIMEOUT_MS. Thanks to Gary Gregory.
+* Add Email.setSocketConnectionTimeout(Duration) and deprecate setSocketConnectionTimeout(int). Thanks to Gary Gregory.
+* Add Email.setSocketTimeout(Duration) and deprecate setSocketTimeout(int). Thanks to Gary Gregory.
+* Add PathDataSource. Thanks to Gary Gregory.
+* Add DataSourcePathResolver. Thanks to Gary Gregory.
+* Add MimeMessageUtils.createMimeMessage(Session, Path, OpenOption...). Thanks to Gary Gregory.
+* Add MultiPartEmail.attach(Path, OpenOption...). Thanks to Gary Gregory.
 
-Fixed Bugs:
+Fixed Bugs
+----------
+
 o EMAIL-190:  Fix broken JDK 9 build by updating "easymock" and other dependencies. Thanks to sgoeschl.
-o             Use JUnit 5 APIs #106, #108, #109, #114. Thanks to John Patrick, Gary Gregory.
-o             [StepSecurity] ci: Harden GitHub Actions #149. Thanks to step-security-bot, Gary Gregory.
-o             Better use of JUnit APIs #158. Thanks to Lee Jaeheon, sebbASF.
+* Use JUnit 5 APIs #106, #108, #109, #114. Thanks to John Patrick, Gary Gregory.
+* [StepSecurity] ci: Harden GitHub Actions #149. Thanks to step-security-bot, Gary Gregory.
+* Better use of JUnit APIs #158. Thanks to Lee Jaeheon, sebbASF.
 o EMAIL-205:  Update conversion code #153. Thanks to Dimitrios Efthymiou, Alex Herbert.
-o             Email.setBounceAddress no longer accepts invalid email addresses. Thanks to Alexander Lehmann.
-o             Throw more specific exceptions in MimeMessageParser #11. Thanks to Amir Behnam, Michael Osipov.
-o             Email.setMailSession(Session) throws the more precise exception NullPointerException. Thanks to Gary Gregory.
-o             Avoid possible NullPointerException in DataSourceClassPathResolver.resolve(String, boolean). Thanks to Gary Gregory.
-o             Complete half-baked test DataSourceUrlResolverTest.testResolvingHttpNonLenient(). Thanks to Gary Gregory.
+* Email.setBounceAddress no longer accepts invalid email addresses. Thanks to Alexander Lehmann.
+* Throw more specific exceptions in MimeMessageParser #11. Thanks to Amir Behnam, Michael Osipov.
+* Email.setMailSession(Session) throws the more precise exception NullPointerException. Thanks to Gary Gregory.
+* Avoid possible NullPointerException in DataSourceClassPathResolver.resolve(String, boolean). Thanks to Gary Gregory.
+* Complete half-baked test DataSourceUrlResolverTest.testResolvingHttpNonLenient(). Thanks to Gary Gregory.
 o EMAIL-206:  Use SharedByteArrayInputStream for memory usage #157. Thanks to Lee Jaeheon, Gary Gregory.
-o             Migrate to JUnit 5 #186. Thanks to Loki-Afro, Gary Gregory.
+* Migrate to JUnit 5 #186. Thanks to Loki-Afro, Gary Gregory.
 o EMAIL-174:  Bump javax.mail dependency to 1.6.1, so that i18n is supported for email addresses. Thanks to Vegard Stuen.
-o             Add missing getters and setters in EMail and subclasses; deprecate access to protected instance variables. Thanks to Loki-Afro, Gary Gregory.
-o             DataSourceUrlResolver.resolve(String, boolean) leaks InputStreams. Thanks to Gary Gregory.
-o             Use US-ASCII in MimeMessageUtils.createMimeMessage(Session, String). Thanks to Gary Gregory.
+* Add missing getters and setters in EMail and subclasses; deprecate access to protected instance variables. Thanks to Loki-Afro, Gary Gregory.
+* DataSourceUrlResolver.resolve(String, boolean) leaks InputStreams. Thanks to Gary Gregory.
+* Use US-ASCII in MimeMessageUtils.createMimeMessage(Session, String). Thanks to Gary Gregory.
 
-Changes:
-o             Bump org.slf4j:slf4j-jdk14 from 1.7.7 to 2.0.9 #165. Thanks to Dependabot.
-o             Bump mockito-core from 4.11.0 to 5.8.0 #187. Thanks to Dependabot.
-o             Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102. Thanks to Dependabot, Gary Gregory.
-o             Bump actions/checkout from 1 to 3.2.0, #25 #33, #67, #99, #117. Thanks to Dependabot, Gary Gregory.
-o             Bump actions/setup-java from 1.4.0 to v3.6.0 #30, #74, #103. Thanks to Dependabot, Gary Gregory.
-o             Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110. Thanks to Dependabot.
+Changes
+-------
+
+* Bump org.slf4j:slf4j-jdk14 from 1.7.7 to 2.0.9 #165. Thanks to Dependabot.
+* Bump mockito-core from 4.11.0 to 5.8.0 #187. Thanks to Dependabot.
+* Bump actions/cache from 2 to 3.0.11 #39, #48, #60, #70, #102. Thanks to Dependabot, Gary Gregory.
+* Bump actions/checkout from 1 to 3.2.0, #25 #33, #67, #99, #117. Thanks to Dependabot, Gary Gregory.
+* Bump actions/setup-java from 1.4.0 to v3.6.0 #30, #74, #103. Thanks to Dependabot, Gary Gregory.
+* Bump actions/upload-artifact from 3.1.0 to 3.1.1 #110. Thanks to Dependabot.
 o EMAIL-177:  Bump from Java 6 to 7. Thanks to Gary Gregory.
-o             Bump from Java 7 to 8. Thanks to Gary Gregory.
+* Bump from Java 7 to 8. Thanks to Gary Gregory.
 o EMAIL-183:  Bump javax.mail:1.6.1 to jakarta.mail:1.6.7. Thanks to Lukas Petrovicky, gitmotte, Dependabot, Gary Gregory.
-o             Bump commons-parent from 50 to 65, #118, #128. Thanks to Gary Gregory, Dependabot.
-o             Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18. Thanks to Dependabot, Gary Gregory.
-o             Bump spotbugs from 4.0.6 to 4.7.2 #40. Thanks to Dependabot.
-o             Bump junit from 4.13 to 4.13.2 #32. Thanks to Dependabot, Gary Gregory.
-o             Bump commons-release-plugin from 1.0 to 1.7 #23. Thanks to Dependabot.
-o             Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94. Thanks to Dependabot.
-o             Bump tests commons-io:commons-io 2.6 to 2.15.1. Thanks to Gary Gregory.
-o             Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17. Thanks to Gary Gregory.
-o             Bump org.easymock:easymock from 4.2 to 5.2.0, #107, #164. Thanks to Gary Gregory.
-o             Bump commons-release-plugin from 1.7 to 1.8.1 #73, #184. Thanks to Dependabot.
-o             Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87. Thanks to Dependabot.
+* Bump commons-parent from 50 to 65, #118, #128. Thanks to Gary Gregory, Dependabot.
+* Bump spotbugs-maven-plugin from 4.0.0 to 4.7.2 #18. Thanks to Dependabot, Gary Gregory.
+* Bump spotbugs from 4.0.6 to 4.7.2 #40. Thanks to Dependabot.
+* Bump junit from 4.13 to 4.13.2 #32. Thanks to Dependabot, Gary Gregory.
+* Bump commons-release-plugin from 1.0 to 1.7 #23. Thanks to Dependabot.
+* Bump maven-pmd-plugin from 3.13.0 to 3.19.0 #34, #72, #79, #94. Thanks to Dependabot.
+* Bump tests commons-io:commons-io 2.6 to 2.15.1. Thanks to Gary Gregory.
+* Bump jacoco from 0.8.6 to 0.8.8; fixes jacoco on Java 17. Thanks to Gary Gregory.
+* Bump org.easymock:easymock from 4.2 to 5.2.0, #107, #164. Thanks to Gary Gregory.
+* Bump commons-release-plugin from 1.7 to 1.8.1 #73, #184. Thanks to Dependabot.
+* Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87. Thanks to Dependabot.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-email/changes-report.html
@@ -78,14 +130,14 @@ Historical list of changes: https://commons.apache.org/proper/commons-email/chan
 Enjoy!
 -Apache Commons Net team
 
------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
                          Commons Email Package
                               Version 1.5
                              Release Notes
 
-INTRODUCTION:
--------------
+INTRODUCTION
+------------
 
 Commons Email aims to provide a API for sending email. It builds on the JavaMail
 API with the aim of presenting a simplified API which is easy for developers who
@@ -100,10 +152,11 @@ http://commons.apache.org/email/
 This is a major release which adds some new features and fixes several bugs
 present in the 1.4.0 release. All current users are encouraged to upgrade.
 
-CHANGES FROM 1.4:
------------------
+CHANGES FROM 1.4
+----------------
 
-== Compatibility ==
+Compatibility
+-------------
 
 * Java 6 or later is required.
 
@@ -116,7 +169,8 @@ CHANGES FROM 1.4:
     <version>1.5.6</version>
   </dependency>
 
-== New Features ==
+New Features
+------------
 
 * Add Support for International Domain Names. This change requires JDK 1.6+.
 Issue: EMAIL-160
@@ -124,7 +178,8 @@ Issue: EMAIL-160
 * Add Email#getHeader(String) and Email#getHeaders() methods.
 Issue: EMAIL-154. Thanks to Ken Geis, Balachandran Sivakumar
 
-== Updates ==
+Updates
+-------
 
 * Update Oracle JavaMail dependency from 1.5.2 to 1.5.6.
   Issue: EMAIL-165.
@@ -132,15 +187,17 @@ Issue: EMAIL-154. Thanks to Ken Geis, Balachandran Sivakumar
 * Remove "javax.activation" dependency since it is included in JDK 1.6
   Issue: EMAIL-161.
 
-== Fixed Bugs ==
+Fixed Bugs
+----------
 
 * DataSourceClassPathResolver doesn't close InputStream when resolving resources
 Issue: EMAIL-167. Thanks to Lucian Burja.
 
-CHANGES FROM 1.3.3:
------------------
+CHANGES FROM 1.3.3
+------------------
 
-== Compatibility ==
+Compatibility
+-------------
 
 * Java 5 or later is required (unchanged since 1.3).
 
@@ -166,7 +223,9 @@ CHANGES FROM 1.3.3:
 * Update Oracle JavaMail dependency from 1.4.5 to 1.5.2.
   Issue: EMAIL-144.
 
-== Fixed Bugs ==
+Fixed Bugs
+----------
+
 
 * "Email" threw an "EmailException" when trying to send the email if neither a from
   nor bounce address was specified, although a "mail.from" property was set in the mail session.
@@ -184,14 +243,17 @@ CHANGES FROM 1.3.3:
   Issue: EMAIL-142. Thanks to Marcin Tomiak.
 
 
-CHANGES FROM 1.3.2:
------------------
+CHANGES FROM 1.3.2
+------------------
 
-== Compatibility ==
+Compatibility
+-------------
 
 * Java 5 or later is required (unchanged since 1.3).
 
-== Fixed Bugs ==
+Fixed Bugs
+----------
+
 
 * The filename of an attachment was not properly encoded in case it contained
   non-ascii characters.
@@ -205,14 +267,17 @@ CHANGES FROM 1.3.2:
   Issue: EMAIL-136. Thanks to Ville Skyttä.
 
 
-CHANGES FROM 1.3.1:
------------------
+CHANGES FROM 1.3.1
+------------------
 
-== Compatibility ==
+Compatibility
+-------------
 
 * Java 5 or later is required (unchanged since 1.3).
 
-== Fixed Bugs ==
+Fixed Bugs
+----------
+
 
 * Change visibility of DataSourceUrlResourceResolver.createUrl(String) to protected so
   that sub-classes can override it.
@@ -235,14 +300,17 @@ CHANGES FROM 1.3.1:
   Issue: EMAIL-127. Thanks to Dominik Stadler.
 
 
-CHANGES FROM 1.3:
------------------
+CHANGES FROM 1.3
+----------------
 
-== Compatibility ==
+Compatibility
+-------------
 
 * Java 5 or later is required (unchanged since 1.3).
 
-== Fixed Bugs ==
+Fixed Bugs
+----------
+
 
 * DataSourceClassPathResolver will now correctly set the DataSource name for resolved
   resources. Additionally, it is now possible to set the name for a ByteArrayDataSource.
@@ -253,10 +321,11 @@ CHANGES FROM 1.3:
   Issue: EMAIL-124. Thanks to Stefan Schueffler.
 
 
-CHANGES FROM 1.2:
------------------
+CHANGES FROM 1.2
+----------------
 
-== Compatibility ==
+Compatibility
+-------------
 
 * Java 5 or later is now required.
 
@@ -272,7 +341,9 @@ CHANGES FROM 1.2:
 
 * Added MimeMessageParser and MimeMessageUtils. 
 
-== Fixed Bugs ==
+Fixed Bugs
+----------
+
 
 * Use the provided Content-ID in HtmlEmail#embed(File, String) instead of creating
   a random one. The used and returned Content-ID will be URL encoded (see RFC 2392).
