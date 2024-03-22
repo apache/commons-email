@@ -84,6 +84,7 @@
     <commons.rc.version>RC1</commons.rc.version>
     <commons.bc.version>1.5</commons.bc.version>
     <commons.releaseNotesLocation>${commons.parent.dir}/RELEASE-NOTES.txt</commons.releaseNotesLocation>
+    <commons.release.isDistModule>false</commons.release.isDistModule>
     <commons.siteOutputDirectory>${basedir}/target/site</commons.siteOutputDirectory>
     <!-- override the default commons encoding property -->
     <commons.encoding>UTF-8</commons.encoding>
