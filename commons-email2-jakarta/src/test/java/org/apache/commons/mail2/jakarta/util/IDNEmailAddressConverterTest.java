@@ -36,7 +36,7 @@ public class IDNEmailAddressConverterTest {
 
     @Test
     public void testConvertInvalidEmailAddressToAscii() {
-        assertEquals(null, idnEmailConverter.toASCII(null));
+        assertNull(idnEmailConverter.toASCII(null));
         assertEquals("", idnEmailConverter.toASCII(""));
         assertEquals("@", idnEmailConverter.toASCII("@"));
         assertEquals("@@", idnEmailConverter.toASCII("@@"));

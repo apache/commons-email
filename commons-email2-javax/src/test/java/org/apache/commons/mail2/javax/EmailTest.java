@@ -1009,7 +1009,7 @@ public class EmailTest extends AbstractEmailTest {
             email.setSubject(validChar);
             assertEquals(validChar, email.getSubject());
         }
-        assertEquals(null, email.setSubject(null).getSubject());
+        assertNull(email.setSubject(null).getSubject());
         assertEquals("", email.setSubject("").getSubject());
         assertEquals("   ", email.setSubject("   ").getSubject());
         assertEquals("\t", email.setSubject("\t").getSubject());
