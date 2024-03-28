@@ -17,6 +17,7 @@
 package org.apache.commons.mail2.javax.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import javax.mail.internet.InternetAddress;
 
