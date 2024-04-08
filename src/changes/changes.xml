@@ -33,7 +33,7 @@
       <action type="update" due-to="Dependabot" dev="ggregory">Bump com.github.davidmoten:subethasmtp from 6.0.7 to 7.0.2.</action>
       <action type="update" due-to="Dependabot" dev="ggregory">Bump org.mockito:mockito-core from 5.8.0 to 5.11.0 #222.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 65 to 67.</action>
-      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-io:commons-io from 2.15.1 to 2.16.0 #231.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-io:commons-io from 2.15.1 to 2.16.1 #231, #236.</action>
     </release>
     <release version="1.6.0" date="2023-12-17" description="Feature release (Java 8 or above).">
       <!-- FIX -->
