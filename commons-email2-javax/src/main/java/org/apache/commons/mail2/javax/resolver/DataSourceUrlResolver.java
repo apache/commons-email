@@ -24,6 +24,8 @@ import java.net.URL;
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 
+import org.apache.commons.mail2.core.EmailUtils;
+
 /**
  * Creates a {@code DataSource} based on an URL.
  *
@@ -68,7 +70,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
             return new URL(resourceLocation);
         }
         // if we get an non-existing location what we shall do?
-        if (resourceLocation == null || resourceLocation.isEmpty()) {
+        if (EmailUtils.isEmpty(resourceLocation)) {
             throw new IllegalArgumentException("No resource defined");
         }
         // if we get a stand-alone resource than ignore the base url

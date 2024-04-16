@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.commons.mail2.core.EmailUtils;
+
 import jakarta.activation.DataSource;
 import jakarta.activation.URLDataSource;
 
@@ -68,7 +70,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
             return new URL(resourceLocation);
         }
         // if we get an non-existing location what we shall do?
-        if (resourceLocation == null || resourceLocation.isEmpty()) {
+        if (EmailUtils.isEmpty(resourceLocation)) {
             throw new IllegalArgumentException("No resource defined");
         }
         // if we get a stand-alone resource than ignore the base url
