@@ -17,6 +17,7 @@
 package org.apache.commons.mail2.jakarta;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,11 +26,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -45,6 +48,9 @@ import org.junit.jupiter.api.Test;
 
 import jakarta.activation.DataSource;
 import jakarta.mail.internet.MimeMessage;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class ImageHtmlEmailTest extends HtmlEmailTest {
 
@@ -70,6 +76,8 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
 
     private static final URL TEST2_HTML_URL = ImageHtmlEmailTest.class.getResource("/attachments/classpathtest.html");
 
+    private static final Pattern imgSrcPattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
+    private static final Pattern scriptSrcPattern = Pattern.compile(ImageHtmlEmail.REGEX_SCRIPT_SRC);
     private MockImageHtmlEmailConcrete email;
 
     private String loadUrlContent(final URL url) throws IOException {
@@ -123,79 +131,82 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                 email.getBccAddresses(), true);
     }
 
-    @Test
-    public void testRegex() {
-        final Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
+    @ParameterizedTest
+    @MethodSource
+    public void testImgRegex(String inputHtml, List<String> srcMatches) {
+        Matcher matcher = imgSrcPattern.matcher(inputHtml);
+        for (String expectedMatch : srcMatches) {
+            assertTrue(matcher.find());
+            assertEquals(expectedMatch, matcher.group(2));
+        }
+        assertFalse(matcher.find());
+    }
 
-        // ensure that the regex that we use is catching the cases correctly
-        Matcher matcher = pattern.matcher("<html><body><img src=\"h\"/></body></html>");
-        assertTrue(matcher.find());
-        assertEquals("h", matcher.group(2));
+    private static Stream<Arguments> testImgRegex() {
+        Stream<Arguments> argumentsStream = Stream.of(
+                // ensure that the regex that we use is catching the cases correctly
+                Arguments.of("<html><body><img src=\"h\"/></body></html>", Arrays.asList("h")),
+                Arguments.of("<html><body><img id=\"laskdasdkj\" src=\"h\"/></body></html>", Arrays.asList("h")),
+                // uppercase
+                Arguments.of("<html><body><IMG id=\"laskdasdkj\" SRC=\"h\"/></body></html>", Arrays.asList("h")),
+                // matches twice
+                Arguments.of("<html><body><img id=\"laskdasdkj\" src=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>", Arrays.asList("http://dstadler1.org/", "http://dstadler2.org/")),
+                // what about newlines
+                Arguments.of("<html><body><img\n \rid=\"laskdasdkj\"\n \rsrc=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>", Arrays.asList("http://dstadler1.org/", "http://dstadler2.org/")),
+                // what about newlines and other whitespaces
+                Arguments.of("<html><body><img\n \t\rid=\"laskdasdkj\"\n \rsrc \n =\r  \"http://dstadler1.org/\"/><img  \r  id=\" laskdasdkj\"    src    =   \"http://dstadler2.org/\"/></body></html>", Arrays.asList("http://dstadler1.org/", "http://dstadler2.org/")),
+                // what about some real markup
+                Arguments.of("<img alt=\"Chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0\" src=\"/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0\"", Arrays.asList("/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0")),
+                // had a problem with multiple img-source tags
+                Arguments.of("<img src=\"file1\"/><img src=\"file2\"/>", Arrays.asList("file1", "file2")),
+                Arguments.of("<img src=\"file1\"/><img src=\"file2\"/><img src=\"file3\"/><img src=\"file4\"/><img src=\"file5\"/>", Arrays.asList("file1", "file2", "file3", "file4", "file5")),
+                // try with invalid HTML that is seen sometimes, i.e. without closing "/" or "</img>"
+                Arguments.of("<img src=\"file1\"><img src=\"file2\">", Arrays.asList("file1", "file2")),
+                // should not match some other tag
+                Arguments.of("<nomatch src=\"s\" />", Arrays.asList()),
+                Arguments.of("<imgx src=\"file1\">", Arrays.asList()),
+                Arguments.of("<img xsrc=\"file1\">", Arrays.asList())
+        );
+        return argumentsStream;
+    }
 
-        matcher = pattern.matcher("<html><body><img id=\"laskdasdkj\" src=\"h\"/></body></html>");
-        assertTrue(matcher.find());
-        assertEquals("h", matcher.group(2));
+    @ParameterizedTest
+    @MethodSource
+    public void testScriptRegex(String inputHtml, List<String> srcMatches) {
+        Matcher matcher = scriptSrcPattern.matcher(inputHtml);
+        for (String expectedMatch : srcMatches) {
+            assertTrue(matcher.find());
+            assertEquals(expectedMatch, matcher.group(2));
+        }
+        assertFalse(matcher.find());
+    }
 
-        // uppercase
-        matcher = pattern.matcher("<html><body><IMG id=\"laskdasdkj\" SRC=\"h\"/></body></html>");
-        assertTrue(matcher.find());
-        assertEquals("h", matcher.group(2));
-
-        // matches twice
-        matcher = pattern.matcher(
-                "<html><body><img id=\"laskdasdkj\" src=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>");
-        assertTrue(matcher.find());
-        assertEquals("http://dstadler1.org/", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("http://dstadler2.org/", matcher.group(2));
-
-        // what about newlines
-        matcher = pattern.matcher(
-                "<html><body><img\n \rid=\"laskdasdkj\"\n \rsrc=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>");
-        assertTrue(matcher.find());
-        assertEquals("http://dstadler1.org/", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("http://dstadler2.org/", matcher.group(2));
-
-        // what about newlines and other whitespaces
-        matcher = pattern.matcher(
-                "<html><body><img\n \t\rid=\"laskdasdkj\"\n \rsrc \n =\r  \"http://dstadler1.org/\"/><img  \r  id=\" laskdasdkj\"    src    =   \"http://dstadler2.org/\"/></body></html>");
-        assertTrue(matcher.find());
-        assertEquals("http://dstadler1.org/", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("http://dstadler2.org/", matcher.group(2));
-
-        // what about some real markup
-        matcher = pattern.matcher(
-                "<img alt=\"Chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0\" src=\"/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0\"");
-        assertTrue(matcher.find());
-        assertEquals("/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0", matcher.group(2));
-
-        // had a problem with multiple img-source tags
-        matcher = pattern.matcher("<img src=\"file1\"/><img src=\"file2\"/>");
-        assertTrue(matcher.find());
-        assertEquals("file1", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("file2", matcher.group(2));
-
-        matcher = pattern.matcher("<img src=\"file1\"/><img src=\"file2\"/><img src=\"file3\"/><img src=\"file4\"/><img src=\"file5\"/>");
-        assertTrue(matcher.find());
-        assertEquals("file1", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("file2", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("file3", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("file4", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("file5", matcher.group(2));
-
-        // try with invalid HTML that is seems sometimes, i.e. without closing "/" or "</img>"
-        matcher = pattern.matcher("<img src=\"file1\"><img src=\"file2\">");
-        assertTrue(matcher.find());
-        assertEquals("file1", matcher.group(2));
-        assertTrue(matcher.find());
-        assertEquals("file2", matcher.group(2));
+    private static Stream<Arguments> testScriptRegex() {
+        Stream<Arguments> argumentsStream = Stream.of(
+                // ensure that the regex that we use is catching the cases correctly
+                Arguments.of("<html><body><script src=\"s\"></script></body></html>", Arrays.asList("s")),
+                Arguments.of("<html><body><script blocking=\"render\" async src=\"s\"></script></body></html>", Arrays.asList("s")),
+                // uppercase
+                Arguments.of("<html><body><SCRIPT BLOCKING=\"render\" ASYNC SRC=\"s\"></script></body></html>", Arrays.asList("s")),
+                // matches twice
+                Arguments.of("<html><body><script src=\"s1\"></script><script src=\"s2\"></script></body></html>", Arrays.asList("s1", "s2")),
+                // what about newlines
+                Arguments.of("<html><body><script\n \rsrc=\"s1\"></script><script \nsrc=\"s2\"></script></body></html>", Arrays.asList("s1", "s2")),
+                // what about newlines and other whitespaces
+                Arguments.of("<html><body><script\n \rsrc  = \t \"s1\" ></script><script \nsrc =\t\"s2\" ></script></body></html>", Arrays.asList("s1", "s2")),
+                // what about some real markup
+                Arguments.of("<script defer=\"\" nomodule=\"\" nonce=\"\" src=\"/jkao/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js\"></script>", Arrays.asList("/jkao/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js")),
+                // try with 5
+                Arguments.of("<html><body><script src=\"s1\"></script><script src=\"s2\"></script><script src=\"s3\"></script><script src=\"s4\"></script><script src=\"s5\"></script></body></html>", Arrays.asList("s1", "s2", "s3", "s4", "s5")),
+                // try with invalid scripts
+                Arguments.of("<script src=\"s\" />", Arrays.asList("s")),
+                Arguments.of("<script src=\"s\">", Arrays.asList("s")),
+                // should not match some other tag
+                Arguments.of("<nomatch src=\"s\" />", Arrays.asList()),
+                Arguments.of("<scriptx src=\"s\" />", Arrays.asList()),
+                Arguments.of("<script xsrc=\"s\" />", Arrays.asList())
+        );
+        return argumentsStream;
     }
 
     @Test
@@ -485,5 +496,41 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         // validate txt message
         validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
+    }
+
+    @Test
+    public void testEmailWithScript() throws Exception {
+        Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
+
+        getMailServer();
+
+        final String strSubject = "Test HTML Send with Script";
+
+        // Create the email message
+        email = new MockImageHtmlEmailConcrete();
+        final DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", true);
+
+        email.setDataSourceResolver(dataSourceResolver);
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setSubject(strSubject);
+
+        // set the html message
+        email.setHtmlMsg("<html><body><script  type=\"text/javascript\" src=\"scripts/example-script.js\"/></body></html>");
+
+        // send the email
+        email.send();
+
+        fakeMailServer.stop();
+
+        assertEquals(1, fakeMailServer.getMessages().size());
+        final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testEmailWithScript.eml"));
+
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
+        assertEquals(1, mimeMessageParser.getAttachmentList().size());
     }
 }
