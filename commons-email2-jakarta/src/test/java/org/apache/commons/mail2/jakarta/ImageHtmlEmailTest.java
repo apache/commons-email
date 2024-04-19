@@ -131,43 +131,90 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                 email.getBccAddresses(), true);
     }
 
-    @ParameterizedTest
-    @MethodSource
-    public void testImgRegex(String inputHtml, List<String> srcMatches) {
-        Matcher matcher = imgSrcPattern.matcher(inputHtml);
-        for (String expectedMatch : srcMatches) {
-            assertTrue(matcher.find());
-            assertEquals(expectedMatch, matcher.group(2));
-        }
-        assertFalse(matcher.find());
-    }
+    @Test
+    public void testRegex() {
+        final Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
 
-    private static Stream<Arguments> testImgRegex() {
-        Stream<Arguments> argumentsStream = Stream.of(
-                // ensure that the regex that we use is catching the cases correctly
-                Arguments.of("<html><body><img src=\"h\"/></body></html>", Arrays.asList("h")),
-                Arguments.of("<html><body><img id=\"laskdasdkj\" src=\"h\"/></body></html>", Arrays.asList("h")),
-                // uppercase
-                Arguments.of("<html><body><IMG id=\"laskdasdkj\" SRC=\"h\"/></body></html>", Arrays.asList("h")),
-                // matches twice
-                Arguments.of("<html><body><img id=\"laskdasdkj\" src=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>", Arrays.asList("http://dstadler1.org/", "http://dstadler2.org/")),
-                // what about newlines
-                Arguments.of("<html><body><img\n \rid=\"laskdasdkj\"\n \rsrc=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>", Arrays.asList("http://dstadler1.org/", "http://dstadler2.org/")),
-                // what about newlines and other whitespaces
-                Arguments.of("<html><body><img\n \t\rid=\"laskdasdkj\"\n \rsrc \n =\r  \"http://dstadler1.org/\"/><img  \r  id=\" laskdasdkj\"    src    =   \"http://dstadler2.org/\"/></body></html>", Arrays.asList("http://dstadler1.org/", "http://dstadler2.org/")),
-                // what about some real markup
-                Arguments.of("<img alt=\"Chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0\" src=\"/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0\"", Arrays.asList("/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0")),
-                // had a problem with multiple img-source tags
-                Arguments.of("<img src=\"file1\"/><img src=\"file2\"/>", Arrays.asList("file1", "file2")),
-                Arguments.of("<img src=\"file1\"/><img src=\"file2\"/><img src=\"file3\"/><img src=\"file4\"/><img src=\"file5\"/>", Arrays.asList("file1", "file2", "file3", "file4", "file5")),
-                // try with invalid HTML that is seen sometimes, i.e. without closing "/" or "</img>"
-                Arguments.of("<img src=\"file1\"><img src=\"file2\">", Arrays.asList("file1", "file2")),
-                // should not match some other tag
-                Arguments.of("<nomatch src=\"s\" />", Arrays.asList()),
-                Arguments.of("<imgx src=\"file1\">", Arrays.asList()),
-                Arguments.of("<img xsrc=\"file1\">", Arrays.asList())
-        );
-        return argumentsStream;
+        // ensure that the regex that we use is catching the cases correctly
+        Matcher matcher = pattern.matcher("<html><body><img src=\"h\"/></body></html>");
+        assertTrue(matcher.find());
+        assertEquals("h", matcher.group(2));
+
+        matcher = pattern.matcher("<html><body><img id=\"laskdasdkj\" src=\"h\"/></body></html>");
+        assertTrue(matcher.find());
+        assertEquals("h", matcher.group(2));
+
+        // uppercase
+        matcher = pattern.matcher("<html><body><IMG id=\"laskdasdkj\" SRC=\"h\"/></body></html>");
+        assertTrue(matcher.find());
+        assertEquals("h", matcher.group(2));
+
+        // matches twice
+        matcher = pattern.matcher(
+                "<html><body><img id=\"laskdasdkj\" src=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>");
+        assertTrue(matcher.find());
+        assertEquals("http://dstadler1.org/", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("http://dstadler2.org/", matcher.group(2));
+
+        // what about newlines
+        matcher = pattern.matcher(
+                "<html><body><img\n \rid=\"laskdasdkj\"\n \rsrc=\"http://dstadler1.org/\"/><img id=\"laskdasdkj\" src=\"http://dstadler2.org/\"/></body></html>");
+        assertTrue(matcher.find());
+        assertEquals("http://dstadler1.org/", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("http://dstadler2.org/", matcher.group(2));
+
+        // what about newlines and other whitespaces
+        matcher = pattern.matcher(
+                "<html><body><img\n \t\rid=\"laskdasdkj\"\n \rsrc \n =\r  \"http://dstadler1.org/\"/><img  \r  id=\" laskdasdkj\"    src    =   \"http://dstadler2.org/\"/></body></html>");
+        assertTrue(matcher.find());
+        assertEquals("http://dstadler1.org/", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("http://dstadler2.org/", matcher.group(2));
+
+        // what about some real markup
+        matcher = pattern.matcher(
+                "<img alt=\"Chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0\" src=\"/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0\"");
+        assertTrue(matcher.find());
+        assertEquals("/chart?ck=xradar&amp;w=120&amp;h=120&amp;c=7fff00|7fff00&amp;m=4&amp;g=0.2&amp;l=A,C,S,T&amp;v=3.0,3.0,2.0,2.0", matcher.group(2));
+
+        // had a problem with multiple img-source tags
+        matcher = pattern.matcher("<img src=\"file1\"/><img src=\"file2\"/>");
+        assertTrue(matcher.find());
+        assertEquals("file1", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("file2", matcher.group(2));
+
+        matcher = pattern.matcher("<img src=\"file1\"/><img src=\"file2\"/><img src=\"file3\"/><img src=\"file4\"/><img src=\"file5\"/>");
+        assertTrue(matcher.find());
+        assertEquals("file1", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("file2", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("file3", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("file4", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("file5", matcher.group(2));
+
+        // try with invalid HTML that is seems sometimes, i.e. without closing "/" or "</img>"
+        matcher = pattern.matcher("<img src=\"file1\"><img src=\"file2\">");
+        assertTrue(matcher.find());
+        assertEquals("file1", matcher.group(2));
+        assertTrue(matcher.find());
+        assertEquals("file2", matcher.group(2));
+
+        // should not match any other tags
+        matcher = pattern.matcher("<nomatch src=\"s\" />");
+        assertFalse(matcher.find());
+
+        matcher = pattern.matcher("<imgx src=\"file1\">");
+        assertFalse(matcher.find());
+
+        // should not match any other attribute
+        matcher = pattern.matcher("<img xsrc=\"file1\">");
+        assertFalse(matcher.find());
     }
 
     @ParameterizedTest
@@ -201,9 +248,10 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
                 // try with invalid scripts
                 Arguments.of("<script src=\"s\" />", Arrays.asList("s")),
                 Arguments.of("<script src=\"s\">", Arrays.asList("s")),
-                // should not match some other tag
+                // should not match any other tags
                 Arguments.of("<nomatch src=\"s\" />", Arrays.asList()),
                 Arguments.of("<scriptx src=\"s\" />", Arrays.asList()),
+                // should not match any other attribute
                 Arguments.of("<script xsrc=\"s\" />", Arrays.asList())
         );
         return argumentsStream;
