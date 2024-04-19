@@ -29,8 +29,10 @@ public class ImageHtmlEmailBenchmark  {
 
     @Benchmark
     public void testRegularExpressions(BenchmarkContext context, Blackhole blackhole) {
-        blackhole.consume(context.matcherImg.find());
-        blackhole.consume(context.matcherScript.find());
+        for (int i = 0; i < context.matchesToFind; i++) {
+            blackhole.consume(context.matcherImg.find());
+            blackhole.consume(context.matcherScript.find());
+        }
         context.matcherImg.reset();
         context.matcherScript.reset();
     }
@@ -39,14 +41,20 @@ public class ImageHtmlEmailBenchmark  {
     public static class BenchmarkContext {
         Matcher matcherImg;
         Matcher matcherScript;
+        int matchesToFind = 50;
 
         @Setup
         public void prepare() {
+            String longUrl = new String(new char[200]).replace("\0", "a");
+            String longSpace = new String(new char[100]).replace("\0", " ");
             StringBuilder html = new StringBuilder();
             html.append("<html><body><pre>");
             html.append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-            html.append("<img    some=\"true\" other=\"1\" attributes=\"yes\"  src = \"this-might-be-a-long-url-url\">");
-            html.append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            for (int i = 0; i < matchesToFind; i++) {
+                html.append("<img" + longSpace +  "xxx=\"no-src-attribute\">");
+                html.append("<script    some=\"true\" other=\"1\" attributes=\"yes\"  src = \"" + longUrl + "\">");
+                html.append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            }
             html.append("</pre></body></html>");
             Pattern patternImg = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
             matcherImg = patternImg.matcher(html);
