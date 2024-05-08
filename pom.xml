@@ -90,6 +90,15 @@
     <!--Skip JApiCmp for 1.x to 2.0. -->
     <japicmp.skip>true</japicmp.skip>
     <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
+    <surefire.argline></surefire.argline>
+    <!-- JaCoCo: Don't make code coverage worse than: -->
+    <commons.jacoco.haltOnFailure>true</commons.jacoco.haltOnFailure>
+    <commons.jacoco.classRatio>1.00</commons.jacoco.classRatio>
+    <commons.jacoco.instructionRatio>1.00</commons.jacoco.instructionRatio>
+    <commons.jacoco.methodRatio>1.00</commons.jacoco.methodRatio>
+    <commons.jacoco.branchRatio>1.00</commons.jacoco.branchRatio>
+    <commons.jacoco.lineRatio>1.00</commons.jacoco.lineRatio>
+    <commons.jacoco.complexityRatio>1.00</commons.jacoco.complexityRatio>
   </properties>
 
   <build>
@@ -128,6 +137,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
+          <argLine>${argLine} ${surefire.argline}</argLine>
           <!-- exclude test case support classes -->
           <excludes>
             <exclude>org/apache/commons/mail/mocks/*</exclude>
@@ -219,31 +229,23 @@
       <activation>
         <jdk>[17,)</jdk>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>
-                --illegal-access=permit
-                --add-opens java.base/java.lang=ALL-UNNAMED
-                --add-opens java.base/java.net=ALL-UNNAMED
-                --add-opens java.base/java.io=ALL-UNNAMED
-                --add-opens java.base/java.util=ALL-UNNAMED
-                --add-opens
-                java.base/java.util.regex=ALL-UNNAMED
-                --add-opens
-                java.base/java.nio.charset=ALL-UNNAMED
-                --add-opens
-                java.base/sun.nio.cs=ALL-UNNAMED
-                --add-opens
-                java.logging/java.util.logging=ALL-UNNAMED
-              </argLine>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
+      <properties>
+        <surefire.argline>
+          --illegal-access=permit
+          --add-opens java.base/java.lang=ALL-UNNAMED
+          --add-opens java.base/java.net=ALL-UNNAMED
+          --add-opens java.base/java.io=ALL-UNNAMED
+          --add-opens java.base/java.util=ALL-UNNAMED
+          --add-opens
+          java.base/java.util.regex=ALL-UNNAMED
+          --add-opens
+          java.base/java.nio.charset=ALL-UNNAMED
+          --add-opens
+          java.base/sun.nio.cs=ALL-UNNAMED
+          --add-opens
+          java.logging/java.util.logging=ALL-UNNAMED
+        </surefire.argline>
+	  </properties>
     </profile>
     <profile>
       <id>java8</id>
