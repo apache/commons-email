@@ -1197,7 +1197,7 @@ public abstract class Email {
      * Sets the content.
      *
      * @param content the content.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setContent(final Object content) {
@@ -1221,7 +1221,7 @@ public abstract class Email {
      * Sets the content type.
      *
      * @param contentType the content type.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setContentType(final String contentType) {
@@ -1287,7 +1287,7 @@ public abstract class Email {
      * Sets the From address.
      *
      * @param fromAddress the From address.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setFromAddress(final InternetAddress fromAddress) {
@@ -1404,7 +1404,7 @@ public abstract class Email {
      * Sets whether to use POP3 before SMTP, and if so the settings.
      *
      * @param popBeforeSmtp whether to use POP3 before SMTP, and if so the settings.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopBeforeSmtp(final boolean popBeforeSmtp) {
@@ -1433,7 +1433,7 @@ public abstract class Email {
      * Sets the POP3 host.
      *
      * @param popHost The POP3 host.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopHost(final String popHost) {
@@ -1446,7 +1446,7 @@ public abstract class Email {
      * Sets the POP3 password.
      *
      * @param popPassword the POP3 password.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopPassword(final String popPassword) {
@@ -1459,7 +1459,7 @@ public abstract class Email {
      * Sets the POP3 user name.
      *
      * @param popUserName the POP3 user name.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopUsername(final String popUserName) {
