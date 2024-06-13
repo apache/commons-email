@@ -61,17 +61,20 @@ Questions related to the usage of Apache Commons Email Parent POM should be post
 
 Getting the latest release
 --------------------------
-You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-email/download_email.cgi).
+You can download source and binaries for 1.x from our [download page](https://commons.apache.org/proper/commons-email/download_email.cgi).
 
-Alternatively, you can pull it from  the central Maven repositories:
+Alternatively, you can pull down 2.0.0 snapshots from the [snapshot repositories](https://repository.apache.org/snapshots/):
 
 ```xml
 <dependency>
   <groupId>org.apache.commons</groupId>
-  <artifactId>commons-email2-parent</artifactId>
-  <version>2.0.0-M1</version>
+  <artifactId>commons-email2-bom</artifactId>
+  <version>2.0.0-M1-SNAPSHOT</version>
+  <scope>import</scopt>
 </dependency>
 ```
+
+Then bring in individual modules you need.
 
 Building
 --------
