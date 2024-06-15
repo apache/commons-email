@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email2-parent</artifactId>
-    <version>2.0.0-M1-SNAPSHOT</version>
+    <version>2.0.0-M1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -46,7 +46,7 @@
   <properties>
     <commons.parent.dir>${basedir}/..</commons.parent.dir>
     <commons.module.name>org.apache.commons.mail2.core</commons.module.name>
-    <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2024-06-15T13:06:11Z</project.build.outputTimestamp>
     <!-- JaCoCo: Don't make code coverage worse than: -->
     <commons.jacoco.classRatio>0.33</commons.jacoco.classRatio>
     <commons.jacoco.instructionRatio>0.35</commons.jacoco.instructionRatio>

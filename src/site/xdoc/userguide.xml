@@ -23,6 +23,14 @@
   </properties>
 
   <body>
+    <section name="Choose an implementation">
+      <p>
+        You must choose between the Javax <code>org.apache.commons:commons-email2-javax</code> or
+        Jakarta <code>org.apache.commons:commons-email2-jakarta</code> implementation. Either one
+        will bring in the Core <code>org.apache.commons:commons-email2-core</code> module when using
+        Maven.
+      </p>
+    </section>
     <section name="A simple text email">
       <p>
         Our first example will create a basic email message to "John Doe" and
@@ -65,7 +73,11 @@ email.send();
       </p>
       <source>
 <![CDATA[
-import org.apache.commons.mail.*;
+import org.apache.commons.mail2.core.*;
+...
+import org.apache.commons.mail2.jakarta.*;
+// or
+import org.apache.commons.mail2.javax.*;
 ...
 
   // Create the attachment
@@ -100,7 +112,11 @@ import org.apache.commons.mail.*;
       </p>
       <source>
 <![CDATA[
-import org.apache.commons.mail.*;
+import org.apache.commons.mail2.core.*;
+...
+import org.apache.commons.mail2.jakarta.*;
+// or
+import org.apache.commons.mail2.javax.*;
 ...
 
   // Create the attachment
@@ -183,7 +199,11 @@ import org.apache.commons.mail.HtmlEmail;
       </p>        
       <source>
         <![CDATA[
-import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail2.core.*;
+...
+import org.apache.commons.mail2.jakarta.*;
+// or
+import org.apache.commons.mail2.javax.*;
 ...
 
   // load your HTML email template
