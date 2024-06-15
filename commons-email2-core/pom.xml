@@ -21,7 +21,7 @@
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-email2-parent</artifactId>
     <version>2.0.0-M1-SNAPSHOT</version>
-    <relativePath>../</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>commons-email2-core</artifactId>

@@ -61,20 +61,17 @@ Questions related to the usage of Apache Commons Email Parent POM should be post
 
 Getting the latest release
 --------------------------
-You can download source and binaries for 1.x from our [download page](https://commons.apache.org/proper/commons-email/download_email.cgi).
+You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-email/download_email.cgi).
 
-Alternatively, you can pull down 2.0.0 snapshots from the [snapshot repositories](https://repository.apache.org/snapshots/):
+Alternatively, you can pull it from  the central Maven repositories:
 
 ```xml
 <dependency>
   <groupId>org.apache.commons</groupId>
-  <artifactId>commons-email2-bom</artifactId>
-  <version>2.0.0-M1-SNAPSHOT</version>
-  <scope>import</scopt>
+  <artifactId>commons-email2-parent</artifactId>
+  <version>2.0.0-M1</version>
 </dependency>
 ```
-
-Then bring in individual modules you need.
 
 Building
 --------
@@ -92,7 +89,9 @@ There are some guidelines which will make applying PRs easier for us:
 + No tabs! Please use spaces for indentation.
 + Respect the existing code style for each file.
 + Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-+ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running ```mvn```.
++ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running `mvn`.
++ Before you pushing a PR, run `mvn` (by itself), this runs the default goal, which contains all build checks.
++ To see the code coverage report, regardless of coverage failures, run `mvn clean site -Dcommons.jacoco.haltOnFailure=false`
 
 If you plan to contribute on a regular basis, please consider filing a [contributor license agreement](https://www.apache.org/licenses/#clas).
 You can learn more about contributing via GitHub in our [contribution guidelines](CONTRIBUTING.md).

@@ -1,3 +1,51 @@
+Apache Commons Email Parent POM 2.0.0-M1
+RELEASE NOTES
+
+The Apache Commons Email Parent POM team is pleased to announce the release of Apache Commons Email Parent POM 2.0.0-M1.
+
+Apache Commons Email provides an API for sending email, simplifying the JavaMail API.
+
+
+Feature release (Java 8 or above).
+
+For complete information on Apache Commons Email Parent POM, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons Email Parent POM website:
+
+https://commons.apache.org/proper/commons-email/
+
+Download page: https://commons.apache.org/proper/commons-email/download_net.cgi
+
+Changes in this version
+-----------------------
+
+New features
+------------
+
+*             Split into a multi-module project for javax vs. jakarta. Thanks to Gary Gregory.
+*             Add Maven property project.build.outputTimestamp for build reproducibility. Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+
+*             Fix Checkstyle configuration. Thanks to Gary Gregory.
+*             Fix PMD UnnecessaryFullyQualifiedName issues. Thanks to Gary Gregory.
+
+Changes
+-------
+
+*             Bump org.slf4j:slf4j-jdk14 from 2.0.9 to 2.0.13 #238. Thanks to Dependabot.
+*             Bump com.github.davidmoten:subethasmtp from 6.0.7 to 7.1.1 #252. Thanks to Dependabot.
+*             Bump org.mockito:mockito-core from 5.8.0 to 5.12.0 #222, #251. Thanks to Dependabot.
+*             Bump commons-parent from 65 to 71 #233. Thanks to Gary Gregory.
+*             Bump commons-io:commons-io from 2.15.1 to 2.16.1 #231, #236. Thanks to Dependabot.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-email/changes-report.html
+
+Enjoy!
+- The Apache Commons Team
+
+-----------------------------------------------------------------------------
 Apache Commons Email Parent POM 2.0.0-M1-SNAPSHOT
 RELEASE NOTES
 

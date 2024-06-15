@@ -23,8 +23,9 @@
   </properties>
 
   <body>
-    <release version="2.0.0-M1" date="YYYY-MM-DD" description="Feature release (Java 8 or above).">
+    <release version="2.0.0-M1" date="2024-06-15" description="Feature release (Java 8 or above).">
       <!-- ADD -->
+      <action dev="ggregory" type="add" due-to="Gary Gregory">Split into a multi-module project for javax vs. jakarta.</action>
       <action dev="ggregory" type="add" due-to="Gary Gregory">Add Maven property project.build.outputTimestamp for build reproducibility.</action>
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Checkstyle configuration.</action>
