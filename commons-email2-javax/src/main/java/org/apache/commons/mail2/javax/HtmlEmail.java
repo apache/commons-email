@@ -315,7 +315,7 @@ public class HtmlEmail extends MultiPartEmail {
                     + "; existing names cannot be rebound");
         }
 
-        final String cid = EmailUtils.toLower(EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH));
+        final String cid = EmailUtils.toLower(EmailUtils.randomAlphabetic(CID_LENGTH));
         return embed(dataSource, name, cid);
     }
 
@@ -357,7 +357,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.1
      */
     public String embed(final File file) throws EmailException {
-        return embed(file, EmailUtils.toLower(EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH)));
+        return embed(file, EmailUtils.toLower(EmailUtils.randomAlphabetic(CID_LENGTH)));
     }
 
     /**

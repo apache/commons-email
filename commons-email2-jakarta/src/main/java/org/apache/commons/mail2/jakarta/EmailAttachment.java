@@ -44,7 +44,7 @@ public class EmailAttachment {
     private URL url;
 
     /** The disposition. */
-    private String disposition = EmailAttachment.ATTACHMENT;
+    private String disposition = ATTACHMENT;
 
     /**
      * Constructs a new instance.
