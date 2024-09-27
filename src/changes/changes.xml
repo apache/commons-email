@@ -27,6 +27,7 @@
       <!-- FIX -->
       <!-- UPDATE -->
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 72 to 73 #279.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.14.0 #290.</action> 
     </release>
     <release version="2.0.0-M1" date="2024-06-15" description="Feature release (Java 8 or above).">
       <!-- ADD -->
