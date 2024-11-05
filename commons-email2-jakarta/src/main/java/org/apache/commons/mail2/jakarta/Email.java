@@ -378,10 +378,10 @@ public abstract class Email {
      */
     public void addHeader(final String name, final String value) {
         if (EmailUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("name can not be null or empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (EmailUtils.isEmpty(value)) {
-            throw new IllegalArgumentException("value can not be null or empty");
+            throw new IllegalArgumentException("value cannot be null or empty");
         }
         headers.put(name, value);
     }
@@ -607,10 +607,10 @@ public abstract class Email {
      */
     private String createFoldedHeaderValue(final String name, final String value) {
         if (EmailUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("name can not be null or empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (EmailUtils.isEmpty(value)) {
-            throw new IllegalArgumentException("value can not be null or empty");
+            throw new IllegalArgumentException("value cannot be null or empty");
         }
         try {
             return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value, charset, null));

@@ -253,7 +253,7 @@ public class HtmlEmail extends MultiPartEmail {
                     msgHtml.setContent(html, EmailConstants.TEXT_HTML + "; charset=" + getCharsetName());
                 } else {
                     // unfortunately, MimeUtility.getDefaultMIMECharset() is package private
-                    // and thus can not be used to set the default system charset in case
+                    // and thus cannot be used to set the default system charset in case
                     // no charset has been provided by the user
                     msgHtml.setContent(html, EmailConstants.TEXT_HTML);
                 }
