@@ -214,6 +214,11 @@ public abstract class Email {
     private boolean startTlsRequired;
 
     /**
+     * If true, use OAuth2 for authentication.
+     */
+    private boolean oauth2Required;
+
+    /**
      * Does the current transport use SSL/TLS encryption upon connection?
      */
     private boolean sslOnConnect;
@@ -822,6 +827,10 @@ public abstract class Email {
                 properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
             }
 
+            if(isOAuth2Required()) {
+                properties.put(EmailConstants.MAIL_SMTP_AUTH_MECHANISMS, "XOAUTH2");
+            }
+
             if (isSSLOnConnect()) {
                 properties.setProperty(EmailConstants.MAIL_PORT, sslSmtpPort);
                 properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT, sslSmtpPort);
@@ -1059,6 +1068,16 @@ public abstract class Email {
      */
     public boolean isStartTLSRequired() {
         return startTlsRequired;
+    }
+
+    /**
+     * Tests whether the client is configured to use OAuth2 authentication.
+     *
+     * @return true if using OAuth2 for authentication, false otherwise.
+     * @since 2.0
+     */
+    public boolean isOAuth2Required() {
+        return oauth2Required;
     }
 
     /**
@@ -1636,6 +1655,23 @@ public abstract class Email {
     public Email setStartTLSRequired(final boolean startTlsRequired) {
         checkSessionAlreadyInitialized();
         this.startTlsRequired = startTlsRequired;
+        return this;
+    }
+
+    /**
+     * Sets or disable OAuth2 authentication.
+     * <p>
+     * Defaults to {@link #smtpPort}; can be overridden by using {@link #setSmtpPort(int)}
+     * </p>
+     *
+     * @param oauth2Required true if OAUth2 authentication is required, false otherwise
+     * @return An Email.
+     * @throws IllegalStateException if the mail session is already initialized
+     * @since 2.0
+     */
+    public Email setOAuth2Required(final boolean oauth2Required) {
+        checkSessionAlreadyInitialized();
+        this.oauth2Required = oauth2Required;
         return this;
     }
 
