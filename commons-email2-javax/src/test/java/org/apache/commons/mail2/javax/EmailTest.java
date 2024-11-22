@@ -19,6 +19,7 @@ package org.apache.commons.mail2.javax;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -569,6 +570,17 @@ public class EmailTest extends AbstractEmailTest {
         // tests
         assertEquals(strUsername, retrievedAuth.getPasswordAuthentication().getUserName());
         assertEquals(strPassword, retrievedAuth.getPasswordAuthentication().getPassword());
+    }
+
+    @Test
+    public void testSetOAuth2Required() throws EmailException {
+        email.setHostName(strTestMailServer);
+        email.setOAuth2Required(true);
+        final Session mailSession = email.getMailSession();
+
+        // tests
+        assertNotNull(mailSession);
+        assertEquals("XOAUTH2", mailSession.getProperties().getProperty("mail.smtp.auth.mechanisms"));
     }
 
     @Test
