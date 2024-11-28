@@ -352,7 +352,6 @@ public class HtmlEmail extends MultiPartEmail {
      * @param file The {@code File} object to embed
      * @return A String with the Content-ID of the file.
      * @throws EmailException when the supplied {@code File} cannot be used; also see {@link javax.mail.internet.MimeBodyPart} for definitions
-     *
      * @see #embed(File, String)
      * @since 1.1
      */

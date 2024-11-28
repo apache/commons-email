@@ -28,7 +28,6 @@ import javax.mail.internet.InternetAddress;
  * @see <a href="https://en.wikipedia.org/wiki/Punycode">https://en.wikipedia.org/wiki/Punycode</a>
  * @see <a href="https://tools.ietf.org/html/rfc5891">https://tools.ietf.org/html/rfc5891</a>
  * @see <a href="https://en.wikipedia.org/wiki/Punycode">https://en.wikipedia.org/wiki/Punycode</a>
- *
  * @since 1.5
  */
 public class IDNEmailAddressConverter {

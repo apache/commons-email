@@ -35,7 +35,6 @@ import jakarta.activation.MimetypesFileTypeMap;
  * @see jakarta.activation.DataSource
  * @see jakarta.activation.FileTypeMap
  * @see jakarta.activation.MimetypesFileTypeMap
- *
  * @since 1.6.0
  */
 public final class PathDataSource implements DataSource {
