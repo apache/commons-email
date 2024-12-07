@@ -99,7 +99,7 @@ public final class EmailUtils {
         }
         final StringBuilder builder = new StringBuilder();
         for (final byte c : input.getBytes(StandardCharsets.US_ASCII)) {
-            final int b = c & 0xff;
+            final int b = Byte.toUnsignedInt(c);
             if (SAFE_URL.get(b)) {
                 builder.append((char) b);
             } else {
