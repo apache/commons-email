@@ -18,7 +18,12 @@
 package org.apache.commons.mail2.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +45,24 @@ public class EmailUtilsTest {
     }
 
     @Test
+    public void testIsEmptyMap() {
+        assertTrue(EmailUtils.isEmpty((Map<?, ?>) null));
+        final HashMap<String, String> map = new HashMap<>();
+        assertTrue(EmailUtils.isEmpty(map));
+        map.put("k", "v");
+        assertFalse(EmailUtils.isEmpty(map));
+    }
+
+    @Test
+    public void testIsEmptyString() {
+        assertTrue(EmailUtils.isEmpty((String) null));
+        assertTrue(EmailUtils.isEmpty(""));
+        assertFalse(EmailUtils.isEmpty("a"));
+    }
+
+    @Test
     public void testUrlEncoding() {
+        assertNull(EmailUtils.encodeUrl(null));
         assertEquals("abcdefg", EmailUtils.encodeUrl("abcdefg"));
         assertEquals("0123456789", EmailUtils.encodeUrl("0123456789"));
         assertEquals("Test%20CID", EmailUtils.encodeUrl("Test CID"));
