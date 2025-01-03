@@ -86,7 +86,7 @@
     <commons.releaseNotesLocation>${commons.parent.dir}/RELEASE-NOTES.txt</commons.releaseNotesLocation>
     <!-- override the default commons encoding property -->
     <commons.encoding>UTF-8</commons.encoding>
-    <mockito-core.version>5.14.2</mockito-core.version>
+    <mockito-core.version>5.15.2</mockito-core.version>
     <!--Skip JApiCmp for 1.x to 2.0. -->
     <japicmp.skip>true</japicmp.skip>
     <project.build.outputTimestamp>2024-06-27T19:30:55Z</project.build.outputTimestamp>
