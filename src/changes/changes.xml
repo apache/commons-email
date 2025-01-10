@@ -15,9 +15,9 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<document xmlns="http://maven.apache.org/changes/1.0.0"
+<document xmlns="http://maven.apache.org/changes/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 http://maven.apache.org/xsd/changes-2.0.0.xsd">
   <properties>
     <title>Apache Commons Email Release Notes</title>
   </properties>
@@ -26,7 +26,7 @@
       <!-- ADD -->
       <!-- FIX -->
       <!-- UPDATE -->
-      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">Bump commons-parent from 72 to 78 #279, #293, #297, #304.</action>
+      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">Bump commons-parent from 72 to 79 #279, #293, #297, #304.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.15.2 #290, #296, #302, #319.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.13 to 2.0.16 #278.</action>
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump commons-io:commons-io from 2.17.0 to 2.18.0 #311.</action>
