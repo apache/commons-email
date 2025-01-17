@@ -13,7 +13,7 @@ patches, or suggestions for improvement, see the Apache Commons Email Parent POM
 
 https://commons.apache.org/proper/commons-email/
 
-Download page: https://commons.apache.org/proper/commons-email/download_net.cgi
+Download page: https://commons.apache.org/proper/commons-email/download_email.cgi
 
 Changes in this version
 -----------------------
@@ -61,7 +61,7 @@ patches, or suggestions for improvement, see the Apache Commons Email Parent POM
 
 https://commons.apache.org/proper/commons-email/
 
-Download page: https://commons.apache.org/proper/commons-email/download_net.cgi
+Download page: https://commons.apache.org/proper/commons-email/download_email.cgi
 
 Changes in this version
 ----------------------
@@ -107,7 +107,7 @@ patches, or suggestions for improvement, see the Apache Commons Email website:
 
 https://commons.apache.org/proper/commons-email/
 
-Download page: https://commons.apache.org/proper/commons-email/download_net.cgi
+Download page: https://commons.apache.org/proper/commons-email/download_email.cgi
 
 Changes in this version include:
 ===============================
