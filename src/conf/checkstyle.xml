@@ -143,6 +143,7 @@
     <module name="ArrayTypeStyle" />
     <module name="TodoComment" />
     <module name="UpperEll" />
+    <module name="TypecastParenPad" />    
   </module>
   <!-- @author tags are deprecated -->
   <module name="RegexpSingleline">
