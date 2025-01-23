@@ -54,7 +54,6 @@ limitations under the License.
         Commons Email requires
         <a href="http://code.google.com/p/subethasmtp/">SubEtha SMTP</a>
         for its unit tests.
-        <br />
       </p>
       <p>
         This jar will be automatically installed to your local Maven repository
