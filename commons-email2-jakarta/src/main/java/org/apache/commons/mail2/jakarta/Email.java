@@ -647,7 +647,7 @@ public abstract class Email {
             // it will throw AddressException.
             address.validate();
             return address;
-        } catch (final AddressException | UnsupportedEncodingException e) {
+        } catch (final AddressException | UnsupportedEncodingException | IllegalArgumentException e) {
             throw new EmailException(e);
         }
     }
