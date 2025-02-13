@@ -55,6 +55,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
             "local.name@domain,com",
             "local.name@domain;com",
             "local.name@domain:com",
+            "local.name@domain..com",
             // "local.name@domain[com",
             "local.name@domain]com",
             "local.name@domain\\com",

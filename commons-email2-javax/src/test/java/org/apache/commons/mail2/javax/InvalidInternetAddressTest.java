@@ -59,6 +59,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
             "local.name@domain,com",
             "local.name@domain;com",
             "local.name@domain:com",
+            "local.name@domain..com",
             // "local.name@domain[com", -- works for javamail-1.5.5
             "local.name@domain]com",
             "local.name@domain\\com",
