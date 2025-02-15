@@ -629,7 +629,12 @@ public abstract class Email {
      */
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName) throws EmailException {
         try {
-            final InternetAddress address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            final InternetAddress address;
+            try {
+                address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            } catch (final IllegalArgumentException e) {
+                throw new EmailException(e);
+            }
             // check name input
             if (EmailUtils.isNotEmpty(name)) {
                 // check charset input.
@@ -646,7 +651,7 @@ public abstract class Email {
             // it will throw AddressException.
             address.validate();
             return address;
-        } catch (final AddressException | UnsupportedEncodingException | IllegalArgumentException e) {
+        } catch (final AddressException | UnsupportedEncodingException e) {
             throw new EmailException(e);
         }
     }
