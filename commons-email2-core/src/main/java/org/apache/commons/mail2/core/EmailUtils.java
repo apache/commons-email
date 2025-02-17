@@ -113,14 +113,32 @@ public final class EmailUtils {
         return builder.toString();
     }
 
+    /**
+     * Tests whether the given collection is null or empty.
+     *
+     * @param collection the collection to test.
+     * @return whether the given collection is null or empty.
+     */
     public static boolean isEmpty(final Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }
 
+    /**
+     * Tests whether the given map is null or empty.
+     *
+     * @param map the map to test.
+     * @return whether the given map is null or empty.
+     */
     public static boolean isEmpty(final Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
 
+    /**
+     * Tests whether the given array is null or empty.
+     *
+     * @param array the collection to test.
+     * @return whether the given array is null or empty.
+     */
     public static boolean isEmpty(final Object[] array) {
         return array == null || array.length == 0;
     }
@@ -245,6 +263,12 @@ public final class EmailUtils {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
     }
 
+    /**
+     * Converts the given string to lower case.
+     *
+     * @param value the input string.
+     * @return a lower case string.
+     */
     public static String toLower(final String value) {
         return value.toLowerCase(Locale.ROOT);
     }

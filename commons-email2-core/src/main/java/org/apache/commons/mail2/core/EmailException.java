@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.mail2.core;
 
 import java.io.OutputStreamWriter;
@@ -36,10 +35,19 @@ import java.util.function.Supplier;
  * @since 1.0
  */
 public class EmailException extends Exception {
-
     /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
 
+    /**
+     * Throws an EmailException if the supplier evaluates to true.
+     *
+     * @param <T>     the subject type to return if we don't throw.
+     * @param test    test condition.
+     * @param subject the subject to return if we don't throw.
+     * @param message the exception message.
+     * @return the given subject.
+     * @throws EmailException if the supplier evaluates to true.
+     */
     public static <T> T check(final Supplier<Boolean> test, final T subject, final Supplier<String> message) throws EmailException {
         if (test.get()) {
             throw new EmailException(message.get());
@@ -47,23 +55,58 @@ public class EmailException extends Exception {
         return subject;
     }
 
+    /**
+     * Throws an EmailException if the collection is empty.
+     *
+     * @param <T>     the type of elements in the collection.
+     * @param value   the value to test.
+     * @param message the exception message.
+     * @return the given subject.
+     * @throws EmailException if the collection is empty.
+     */
     public static <T> Collection<T> checkNonEmpty(final Collection<T> value, final Supplier<String> message) throws EmailException {
         return check(() -> EmailUtils.isEmpty(value), value, message);
     }
 
+    /**
+     * Throws an EmailException if the string is empty.
+     *
+     * @param message the exception message.
+     * @param value   the value to test.
+     * @return the given subject.
+     * @throws EmailException if the string is empty.
+     */
     public static String checkNonEmpty(final String value, final Supplier<String> message) throws EmailException {
         return check(() -> EmailUtils.isEmpty(value), value, message);
     }
 
+    /**
+     * Throws an EmailException if the array is empty.
+     *
+     * @param <T>     the array type.
+     * @param message the exception message.
+     * @param value   the value to test.
+     * @return the given subject.
+     * @throws EmailException if the array is empty.
+     */
     public static <T> T[] checkNonEmpty(final T[] value, final Supplier<String> message) throws EmailException {
         return check(() -> EmailUtils.isEmpty(value), value, message);
     }
 
-    public static <T> T checkNonNull(final T test, final Supplier<String> message) throws EmailException {
-        if (test == null) {
+    /**
+     * Throws an EmailException if the value is null.
+     *
+     * @param <T>     the value type.
+     * @param message the exception message.
+     * @param value   the value to test.
+     * @return the given subject.
+     * @throws EmailException if the value is null.
+     */
+    public static <T> T checkNonNull(final T value, final Supplier<String> message) throws EmailException {
+        if (value == null) {
             throw new EmailException(message.get());
         }
-        return test;
+        return value;
     }
 
     /**
