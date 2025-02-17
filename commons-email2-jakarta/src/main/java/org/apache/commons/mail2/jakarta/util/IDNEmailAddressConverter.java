@@ -66,6 +66,7 @@ public class IDNEmailAddressConverter {
      *
      * @param email email address.
      * @return The ASCII representation
+     * @throws IllegalArgumentException if the domain doesn't conform to RFC 3490 specification
      */
     public String toASCII(final String email) {
         return toString(email, IDN::toASCII);
