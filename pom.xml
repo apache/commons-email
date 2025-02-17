@@ -79,11 +79,11 @@
     <commons.module.name>org.apache.commons.mail2</commons.module.name>
     <commons.jira.id>EMAIL</commons.jira.id>
     <commons.jira.pid>12310474</commons.jira.pid>
-    <commons.release.version>2.0.0-M1</commons.release.version>
-    <commons.release.next>2.0.0-M2</commons.release.next>
+    <commons.release.version>2.0.0-M2</commons.release.version>
+    <commons.release.next>2.0.0-M3</commons.release.next>
     <commons.release.desc>(Java 8 or above)</commons.release.desc>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.bc.version>1.6.0</commons.bc.version>
+    <commons.bc.version>2.0.0-M1</commons.bc.version>
     <commons.releaseNotesLocation>${commons.parent.dir}/RELEASE-NOTES.txt</commons.releaseNotesLocation>
     <!-- override the default commons encoding property -->
     <commons.encoding>UTF-8</commons.encoding>
