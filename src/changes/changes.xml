@@ -25,8 +25,9 @@
     <release version="2.0.0-M2" date="YYY-MM-DD" description="Feature release (Java 8 or above).">
       <!-- ADD -->
       <!-- FIX -->
+      <action type="update" due-to="Derek Wickern, Gary Gregory" dev="ggregory">Handle IllegalArgumentException thrown for invalid email address #328.</action>
       <!-- UPDATE -->
-      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">Bump commons-parent from 72 to 79 #279, #293, #297, #304.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 72 to 79 #279, #293, #297, #304.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.15.2 #290, #296, #302, #319.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.13 to 2.0.16 #278.</action>
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump commons-io:commons-io from 2.17.0 to 2.18.0 #311.</action>
