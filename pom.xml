@@ -75,7 +75,9 @@
     <!-- project.build.outputTimestamp is managed by Maven plugins, see https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
     <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
     <commons.parent.dir>${basedir}</commons.parent.dir>
+    <!-- bare ID without major version or commons- prefix -->
     <commons.componentid>email</commons.componentid>
+    <commons.packageId>email2</commons.packageId>
     <commons.module.name>org.apache.commons.mail2</commons.module.name>
     <commons.jira.id>EMAIL</commons.jira.id>
     <commons.jira.pid>12310474</commons.jira.pid>
