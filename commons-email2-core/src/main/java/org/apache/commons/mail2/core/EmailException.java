@@ -16,10 +16,6 @@
  */
 package org.apache.commons.mail2.core;
 
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.function.Supplier;
 
@@ -143,38 +139,4 @@ public class EmailException extends Exception {
         super(rootCause);
     }
 
-    /**
-     * Prints the stack trace of this exception to the standard error stream.
-     */
-    @Override
-    public void printStackTrace() {
-        printStackTrace(System.err);
-    }
-
-    /**
-     * Prints the stack trace of this exception to the specified stream.
-     *
-     * @param out the {@code PrintStream} to use for output
-     */
-    @Override
-    public void printStackTrace(final PrintStream out) {
-        synchronized (out) {
-            final PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, Charset.defaultCharset()), false);
-            printStackTrace(pw);
-            // Flush the PrintWriter before it's GC'ed.
-            pw.flush();
-        }
-    }
-
-    /**
-     * Prints the stack trace of this exception to the specified writer.
-     *
-     * @param out the {@code PrintWriter} to use for output
-     */
-    @Override
-    public void printStackTrace(final PrintWriter out) {
-        synchronized (out) {
-            super.printStackTrace(out);
-        }
-    }
 }

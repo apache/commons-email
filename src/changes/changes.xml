@@ -34,6 +34,9 @@
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump com.github.davidmoten:subethasmtp from 7.1.1 to 7.1.3 #322.</action>
       <!-- REMOVE -->
       <action type="update" due-to="Gary Gregory" dev="ggregory">Remove unused EmailException.call(Callable).</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace().</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace(PrintStream).</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace(PrintWriter).</action>
     </release>
     <release version="2.0.0-M1" date="2024-06-15" description="Feature release (Java 8 or above).">
       <!-- ADD -->
