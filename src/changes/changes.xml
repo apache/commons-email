@@ -106,7 +106,7 @@
       <action type="update" due-to="Dependabot" dev="ggregory">Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87.</action>
     </release>
     <release version="1.5" date="2017-08-01">
-      <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
+      <!-- AFAICT the date attribute is not used anywhere so no point in adding it -->
       <action dev="kinow" type="fix" issue="EMAIL-172" due-to="Thomas Grainger">
         Grammar error in comment
       </action>

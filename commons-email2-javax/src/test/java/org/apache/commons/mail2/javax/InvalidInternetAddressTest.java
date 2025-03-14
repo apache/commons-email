@@ -95,7 +95,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
 
             final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe");
 
-            // N.B. validate() doesn't check addresses containing quotes or '['
+            // validate() doesn't check addresses containing quotes or '['
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
             final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
             final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;
@@ -125,7 +125,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
 
             final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", StandardCharsets.UTF_8.name());
 
-            // N.B. validate() doesn't check addresses containing quotes or '['
+            // validate() doesn't check addresses containing quotes or '['
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
             final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
             final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;
