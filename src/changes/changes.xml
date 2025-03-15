@@ -37,6 +37,8 @@
       <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace().</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace(PrintStream).</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace(PrintWriter).</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">org.apache.commons.mail2.jakarta.util.MimeMessageUtils.createMimeMessage(Session, File) now uses NIO.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">org.apache.commons.mail2.javax.util.MimeMessageUtils.createMimeMessage(Session, File) now uses NIO.</action>
     </release>
     <release version="2.0.0-M1" date="2024-06-15" description="Feature release (Java 8 or above).">
       <!-- ADD -->

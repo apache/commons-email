@@ -17,7 +17,6 @@
 package org.apache.commons.mail2.jakarta.util;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,9 +63,7 @@ public final class MimeMessageUtils {
      * @throws IOException        creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final File source) throws MessagingException, IOException {
-        try (InputStream inputStream = new FileInputStream(source)) {
-            return createMimeMessage(session, inputStream);
-        }
+        return createMimeMessage(session, source.toPath());
     }
 
     /**
