@@ -372,8 +372,8 @@ public abstract class Email {
      *
      * @param name  A String with the name.
      * @param value A String with the value.
-     * @since 1.0
      * @throws IllegalArgumentException if either {@code name} or {@code value} is null or empty
+     * @since 1.0
      */
     public void addHeader(final String name, final String value) {
         if (EmailUtils.isEmpty(name)) {
