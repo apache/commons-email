@@ -47,6 +47,7 @@ Apache Commons Email Parent POM
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.commons/commons-email2-parent?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.commons/commons-email2-parent)
 [![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-email2-parent/2.0.0-M1.svg)](https://javadoc.io/doc/org.apache.commons/commons-email2-parent/2.0.0-M1)
 [![CodeQL](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-email/actions/workflows/codeql-analysis.yml)
+[![libs.tech recommends](https://libs.tech/project/11335236/badge.svg)](https://libs.tech/project/11335236/commons-email)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-email/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-email)
 
 Apache Commons Email provides an API for sending email, simplifying the JavaMail API.
