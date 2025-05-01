@@ -53,8 +53,7 @@
 
   <module name="TreeWalker">
 
-    <module name="JavadocType">
-    </module>
+    <module name="JavadocType" />
     <module name="JavadocVariable" />
 
     <!-- Checks for Naming Conventions. -->
