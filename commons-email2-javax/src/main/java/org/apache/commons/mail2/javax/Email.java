@@ -1656,8 +1656,6 @@ public abstract class Email {
     /**
      * Sets or disable OAuth2 authentication.
      * <p>
-     * Defaults to {@link #smtpPort}; can be overridden by using {@link #setSmtpPort(int)}
-     * </p>
      *
      * @param oauth2Required true if OAUth2 authentication is required, false otherwise
      * @return An Email.
