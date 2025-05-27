@@ -339,7 +339,7 @@ import org.apache.commons.mail2.javax.*;
     </section>
     <section name="Using OAuth2 Authentication With Office 365">
       <p>
-        Checklist provided by mkomko to help future users of this feature
+        Checklist provided by user <em>mkomko</em> to help future users of this feature
         <ul>
           <li>Create an app registration in Entra ID with the permission "Office 365 Exchange Online - SMTP.SendAsApp"</li>
           <li>Create a service principal in Exchange Online for the app and give it permissions to the mailbox you want to send as, as described in https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#use-client-credentials-grant-flow-to-authenticate-smtp-imap-and-pop-connections</li>
