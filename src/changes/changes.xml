@@ -24,6 +24,7 @@
   <body>
     <release version="2.0.0-M2" date="YYY-MM-DD" description="Feature release (Java 8 or above).">
       <!-- ADD -->
+      <action type="add" issue="EMAIL-163" due-to="Siegfried Goeschl" dev="sgoeschl">Support for OAuth2 authentication.</action>
       <!-- FIX -->
       <action type="update" due-to="Derek Wickern, Gary Gregory" dev="ggregory">Handle IllegalArgumentException thrown for invalid email address #328.</action>
       <!-- UPDATE -->
