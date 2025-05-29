@@ -214,7 +214,7 @@ public abstract class Email {
     private boolean startTlsRequired;
 
     /**
-     * If true, use OAuth2 for authentication.
+     * If true, uses OAuth2 for authentication.
      */
     private boolean oauth2Required;
 

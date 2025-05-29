@@ -215,7 +215,7 @@ public abstract class Email {
     private boolean startTlsRequired;
 
     /**
-     * If true, use OAuth2 token for authentication.
+     * If true, uses OAuth2 token for authentication.
      */
     private boolean oauth2Required;
 
@@ -828,7 +828,7 @@ public abstract class Email {
                 properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
             }
 
-            if(isOAuth2Required()) {
+            if (isOAuth2Required()) {
                 properties.put(EmailConstants.MAIL_SMTP_AUTH_MECHANISMS, "XOAUTH2");
             }
 
@@ -1660,7 +1660,7 @@ public abstract class Email {
     }
 
     /**
-     * Sets or disable OAuth2 authentication.
+     * Sets or disables OAuth2 authentication.
      *
      * @param oauth2Required true if OAUth2 authentication is required, false otherwise
      * @return An Email.
