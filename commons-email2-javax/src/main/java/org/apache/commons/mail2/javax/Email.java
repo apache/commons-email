@@ -827,7 +827,7 @@ public abstract class Email {
                 properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
             }
 
-            if(isOAuth2Required()) {
+            if (isOAuth2Required()) {
                 properties.put(EmailConstants.MAIL_SMTP_AUTH_MECHANISMS, "XOAUTH2");
             }
 
