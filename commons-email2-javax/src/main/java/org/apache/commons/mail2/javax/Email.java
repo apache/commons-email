@@ -1659,7 +1659,7 @@ public abstract class Email {
     }
 
     /**
-     * Sets or disable OAuth2 authentication.
+     * Sets or disables OAuth2 authentication.
      *
      * @param oauth2Required true if OAUth2 authentication is required, false otherwise
      * @return An Email.
