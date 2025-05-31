@@ -56,6 +56,9 @@ public final class EmailConstants {
     /** If set to true, tries to authenticate the user using the AUTH command. */
     public static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
 
+    /** If set to true, tries to authenticate the user using an OAuth2 token. */
+    public static final String MAIL_SMTP_AUTH_MECHANISMS = "mail.smtp.auth.mechanisms";
+
     /** The SMTP user name. */
     public static final String MAIL_SMTP_USER = "mail.smtp.user";
 

@@ -24,6 +24,7 @@
   <body>
     <release version="2.0.0-M2" date="YYY-MM-DD" description="Feature release (Java 8 or above).">
       <!-- ADD -->
+      <action type="add" due-to="Siegfried Goeschl" dev="sgoeschl" issue="EMAIL-163">Support for OAuth2 authentication.</action>
       <!-- FIX -->
       <action type="update" due-to="Derek Wickern, Gary Gregory" dev="ggregory">Handle IllegalArgumentException thrown for invalid email address #328.</action>
       <!-- UPDATE -->
@@ -57,7 +58,7 @@
     <release version="1.6.0" date="2023-12-17" description="Feature release (Java 8 or above).">
       <!-- FIX -->
       <action issue="EMAIL-190" type="fix" due-to="sgoeschl">Fix broken JDK 9 build by updating "easymock" and other dependencies.</action>
-      <action type="fix" dev="ggregory" due-to="John Patrick, Gary Gregory">Use JUnit 5 APIs #106, #108, #109, #114.</action>     
+      <action type="fix" dev="ggregory" due-to="John Patrick, Gary Gregory">Use JUnit 5 APIs #106, #108, #109, #114.</action>
       <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">[StepSecurity] ci: Harden GitHub Actions #149.</action>
       <action dev="ggregory" type="fix" due-to="Lee Jaeheon, sebbASF">Better use of JUnit APIs #158.</action>
       <action issue="EMAIL-205" dev="ggregory" type="fix" due-to="Dimitrios Efthymiou, Alex Herbert">Update conversion code #153.</action>
@@ -307,29 +308,29 @@
         downloaded from HTTP or from the local file system.
       </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-95" date="2010-05-13">
-       Calling buildMimeMessage() before invoking send() caused
-       duplicated mime parts for HtmlEmail. The implementation now enforces
-       that an email can be only used once and throw an exception when
-       multiple invocations of buildMimeMessage() are detected.
+        Calling buildMimeMessage() before invoking send() caused
+        duplicated mime parts for HtmlEmail. The implementation now enforces
+        that an email can be only used once and throw an exception when
+        multiple invocations of buildMimeMessage() are detected.
       </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-91" date="2010-05-13" due-to="Kevin Lester">
         Incorrect SMTP Port number shown in error message when an email fails
         to send due to a blocked port and SSL is used.
-      </action>        
+      </action>
     </release>
     <release version="1.2" date="2009-10-26">
       <action dev="sgoeschl" type="update" date="2009-06-26">
-        Changing groupId from "commons-email" to "org.apache.commons" 
+        Changing groupId from "commons-email" to "org.apache.commons"
         because the 1.1 release was already using "org.apache.commons"
-      </action>    
+      </action>
       <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
         Using "http://example.invalid" for a bad url - ".invalid" is reserved
-        and not intended to be installed as a top-level domain in the global 
+        and not intended to be installed as a top-level domain in the global
         Domain Name System (DNS) of the Internet.
-      </action>    
+      </action>
       <action dev="sgoeschl" type="fix" date="2009-06-16" due-to="sebb">
         Made BaseEmailTestCase abstract and fixed a few coding issues.
-      </action>    
+      </action>
       <action dev="sgoeschl" type="fix" issue="EMAIL-87" date="2009-06-16" due-to="sebb">
         HtmlEmail invokes java.net.URL.equals(Object), which blocks to do domain name resolution. This
         is avoided by using "url.toExternalForm().equals()" instead of "url.equals()".
@@ -435,7 +436,7 @@
     <release version="1.0" date="2005-09-27"/>
     <release version="1.0-rc8" date="2005-09-07">
       <action dev="henning" type="fix">
-        Make sure that the unit tests don't fail under JDK 1.3.x with 
+        Make sure that the unit tests don't fail under JDK 1.3.x with
         java.net.BindException: Address already in use
       </action>
       <action dev="henning" type="update" due-to="Niall Pemberton" issue="EMAIL-49">
