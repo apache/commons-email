@@ -35,7 +35,7 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetDescription() {
+    void testGetSetDescription() {
         for (final String validChar : testCharsValid) {
             attachment.setDescription(validChar);
             assertEquals(validChar, attachment.getDescription());
@@ -43,7 +43,7 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetDisposition() {
+    void testGetSetDisposition() {
         for (final String validChar : testCharsValid) {
             attachment.setDisposition(validChar);
             assertEquals(validChar, attachment.getDisposition());
@@ -51,7 +51,7 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetName() {
+    void testGetSetName() {
         for (final String validChar : testCharsValid) {
             attachment.setName(validChar);
             assertEquals(validChar, attachment.getName());
@@ -59,7 +59,7 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetPath() {
+    void testGetSetPath() {
         for (final String validChar : testCharsValid) {
             attachment.setPath(validChar);
             assertEquals(validChar, attachment.getPath());
@@ -67,7 +67,7 @@ public class EmailAttachmentTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetURL() throws Exception {
+    void testGetSetURL() throws Exception {
         final String[] tests = { "http://localhost/", "http://www.apache.org/", "http://foo.notexisting.org" };
 
         for (final String urlString : tests) {

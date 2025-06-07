@@ -75,7 +75,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddInvalidBcc() throws Exception {
+    void testAddInvalidBcc() throws Exception {
         // Test adding invalid 'BCC' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
@@ -85,7 +85,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddInvalidCc() throws Exception {
+    void testAddInvalidCc() throws Exception {
         // Test adding invalid 'CC' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
@@ -95,7 +95,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddInvalidTo() throws Exception {
+    void testAddInvalidTo() throws Exception {
         // Test adding invalid 'to' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
@@ -105,7 +105,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testSetInvalidFrom() throws Exception {
+    void testSetInvalidFrom() throws Exception {
         // Test setting invalid 'from' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,

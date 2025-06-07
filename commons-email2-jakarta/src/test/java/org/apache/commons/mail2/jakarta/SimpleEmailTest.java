@@ -46,7 +46,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
 
     @Test
     @Disabled
-    public void testDefaultMimeCharset() throws EmailException, IOException {
+    void testDefaultMimeCharset() throws EmailException, IOException {
         /*
          * disabling this test as it is dependent on execution order. MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is
          * not defined, reverts to the default Java charset which is basically the system default file encoding.
@@ -86,7 +86,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetMsg() throws EmailException {
+    void testGetSetMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setMsg(validChar);
@@ -104,7 +104,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
      * @throws IOException    when sending fails TODO Add code to test the popBeforeSmtp() settings
      */
     @Test
-    public void testSend() throws EmailException, IOException {
+    void testSend() throws EmailException, IOException {
         // Test Success
         getMailServer();
 

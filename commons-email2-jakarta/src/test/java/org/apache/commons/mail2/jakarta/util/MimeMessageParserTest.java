@@ -45,7 +45,7 @@ public class MimeMessageParserTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testAttachmentOnly() throws Exception {
+    void testAttachmentOnly() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, Paths.get("./src/test/resources/eml/attachment-only.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -79,7 +79,7 @@ public class MimeMessageParserTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testMultipartTextAttachment() throws Exception {
+    void testMultipartTextAttachment() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -113,7 +113,7 @@ public class MimeMessageParserTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testMultipartTextAttachmentOnly() throws Exception {
+    void testMultipartTextAttachmentOnly() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment-only.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -142,7 +142,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseCreatedHtmlEmailWithMixedContent() throws Exception {
+    void testParseCreatedHtmlEmailWithMixedContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final HtmlEmail email = new HtmlEmail();
 
@@ -175,7 +175,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseCreatedHtmlEmailWithNoContent() throws Exception {
+    void testParseCreatedHtmlEmailWithNoContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
 
         final HtmlEmail email = new HtmlEmail();
@@ -206,7 +206,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseCreatedHtmlEmailWithTextContent() throws Exception {
+    void testParseCreatedHtmlEmailWithTextContent() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
 
         final HtmlEmail email = new HtmlEmail();
@@ -238,7 +238,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception {
+    void testParseHtmlEmailWithAttachmentAndEncodedFileName() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-encoded-filename.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -268,7 +268,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseHtmlEmailWithAttachments() throws Exception {
+    void testParseHtmlEmailWithAttachments() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -306,7 +306,7 @@ public class MimeMessageParserTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testParseHtmlEmailWithHtmlAttachment() throws Exception {
+    void testParseHtmlEmailWithHtmlAttachment() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment-content-disposition.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -335,7 +335,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseInlineCID() throws Exception {
+    void testParseInlineCID() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/html-attachment.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -369,7 +369,7 @@ public class MimeMessageParserTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testParseMultipartReport() throws Exception {
+    void testParseMultipartReport() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-report.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -404,7 +404,7 @@ public class MimeMessageParserTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception {
+    void testParseNoHeaderSeperatorWithOutOfMemory() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/outofmemory-no-header-seperation.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -424,7 +424,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseSimpleEmail() throws Exception {
+    void testParseSimpleEmail() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
@@ -447,7 +447,7 @@ public class MimeMessageParserTest {
     }
 
     @Test
-    public void testParseSimpleReplyEmail() throws Exception {
+    void testParseSimpleReplyEmail() throws Exception {
         final Session session = Session.getDefaultInstance(new Properties());
         final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/simple-reply.eml"));
         final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);

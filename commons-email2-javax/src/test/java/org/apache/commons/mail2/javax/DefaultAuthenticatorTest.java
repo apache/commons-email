@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  */
 public class DefaultAuthenticatorTest {
     @Test
-    public void testDefaultAuthenticatorConstructor() {
+    void testDefaultAuthenticatorConstructor() {
         // insert code testing basic functionality
         final String strUsername = "user.name";
         final String strPassword = "user.pwd";

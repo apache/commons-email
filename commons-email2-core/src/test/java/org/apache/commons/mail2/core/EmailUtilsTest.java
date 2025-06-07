@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 public class EmailUtilsTest {
 
     @Test
-    public void testClearEndOfLineCharacters() {
+    void testClearEndOfLineCharacters() {
         assertNull(EmailUtils.replaceEndOfLineCharactersWithSpaces(null));
         assertEquals("", EmailUtils.replaceEndOfLineCharactersWithSpaces(""));
         assertEquals("   ", EmailUtils.replaceEndOfLineCharactersWithSpaces("   "));
@@ -45,7 +45,7 @@ public class EmailUtilsTest {
     }
 
     @Test
-    public void testIsEmptyMap() {
+    void testIsEmptyMap() {
         assertTrue(EmailUtils.isEmpty((Map<?, ?>) null));
         final HashMap<String, String> map = new HashMap<>();
         assertTrue(EmailUtils.isEmpty(map));
@@ -54,14 +54,14 @@ public class EmailUtilsTest {
     }
 
     @Test
-    public void testIsEmptyString() {
+    void testIsEmptyString() {
         assertTrue(EmailUtils.isEmpty((String) null));
         assertTrue(EmailUtils.isEmpty(""));
         assertFalse(EmailUtils.isEmpty("a"));
     }
 
     @Test
-    public void testUrlEncoding() {
+    void testUrlEncoding() {
         assertNull(EmailUtils.encodeUrl(null));
         assertEquals("abcdefg", EmailUtils.encodeUrl("abcdefg"));
         assertEquals("0123456789", EmailUtils.encodeUrl("0123456789"));

@@ -33,12 +33,12 @@ import org.junit.jupiter.api.Test;
 public class InputStreamDataSourceTest {
 
     @Test
-    public void testGetContentType() {
+    void testGetContentType() {
         assertEquals("text/plain", new InputStreamDataSource(null, "text/plain").getContentType());
     }
 
     @Test
-    public void testGetInputStream() throws IOException {
+    void testGetInputStream() throws IOException {
         final byte[] testData = "Test data for InputStream".getBytes();
         final InputStream testInputStream = new ByteArrayInputStream(testData);
         final InputStreamDataSource dataSource = new InputStreamDataSource(testInputStream, "application/octet-stream");
@@ -51,18 +51,18 @@ public class InputStreamDataSourceTest {
     }
 
     @Test
-    public void testGetName() {
+    void testGetName() {
         assertEquals("document.pdf", new InputStreamDataSource(null, "application/pdf", "document.pdf").getName());
     }
 
     @Test
-    public void testGetOutputStream() {
+    void testGetOutputStream() {
         final InputStreamDataSource dataSource = new InputStreamDataSource(null, "text/html");
         assertThrows(UnsupportedOperationException.class, dataSource::getOutputStream);
     }
 
     @Test
-    public void testSetName() {
+    void testSetName() {
         assertEquals("image.jpg", new InputStreamDataSource(null, "image/jpeg", "image.jpg").getName());
     }
 

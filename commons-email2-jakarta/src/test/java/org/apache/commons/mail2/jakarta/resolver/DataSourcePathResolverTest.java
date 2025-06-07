@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 public class DataSourcePathResolverTest extends AbstractDataSourceResolverTest {
 
     @Test
-    public void testResolveLenient() throws Exception {
+    void testResolveLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourcePathResolver(Paths.get("./src/test/resources"), true);
         assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length);
         assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length);
@@ -43,7 +43,7 @@ public class DataSourcePathResolverTest extends AbstractDataSourceResolverTest {
     }
 
     @Test
-    public void testResolveStrict() throws Exception {
+    void testResolveStrict() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourcePathResolver(Paths.get("."), false);
         assertNotNull(dataSourceResolver.resolve("./src/test/resources/images/asf_logo_wide.gif"));
 
