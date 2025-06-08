@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for DataSourceUrlResolver.
  */
-public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
+class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
 
     /**
      * Shows how the DataSourceUrlResolver can resolve files as well but this should be done using a DataSourceFileResolver.

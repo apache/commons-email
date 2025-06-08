@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link MimeMessageParser}.
  */
-public class MimeMessageParserTest {
+class MimeMessageParserTest {
 
     /**
      * This test parses a SAP generated email which only contains a PDF but no email text.

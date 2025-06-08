@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for DataSourceClassPathResolver.
  */
-public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest {
+class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest {
 
     @Test
     void testResolvingClassPathLenient() throws Exception {

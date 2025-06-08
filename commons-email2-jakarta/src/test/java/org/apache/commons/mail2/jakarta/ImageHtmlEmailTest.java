@@ -46,7 +46,7 @@ import org.junit.jupiter.api.Test;
 import jakarta.activation.DataSource;
 import jakarta.mail.internet.MimeMessage;
 
-public class ImageHtmlEmailTest extends HtmlEmailTest {
+class ImageHtmlEmailTest extends HtmlEmailTest {
 
     private static final class MockDataSourceClassPathResolver extends DataSourceClassPathResolver {
 

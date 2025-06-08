@@ -39,7 +39,7 @@ import jakarta.activation.FileDataSource;
 import jakarta.activation.URLDataSource;
 import jakarta.mail.internet.MimeMultipart;
 
-public class MultiPartEmailTest extends AbstractEmailTest {
+class MultiPartEmailTest extends AbstractEmailTest {
 
     /** */
     private MockMultiPartEmailConcrete email;

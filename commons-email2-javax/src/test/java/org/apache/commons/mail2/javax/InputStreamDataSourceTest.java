@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link InputStreamDataSource}.
  */
-public class InputStreamDataSourceTest {
+class InputStreamDataSourceTest {
 
     @Test
     void testGetContentType() {

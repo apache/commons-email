@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for EmailAttachment Class.
  */
-public class EmailAttachmentTest extends AbstractEmailTest {
+class EmailAttachmentTest extends AbstractEmailTest {
     private EmailAttachment attachment;
 
     @BeforeEach

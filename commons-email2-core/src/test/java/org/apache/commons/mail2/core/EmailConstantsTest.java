@@ -17,7 +17,7 @@
 
 package org.apache.commons.mail2.core;
 
-public class EmailConstantsTest {
+class EmailConstantsTest {
 
     // empty for now
 

@@ -46,7 +46,7 @@ import org.apache.commons.mail2.javax.util.MimeMessageUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ImageHtmlEmailTest extends HtmlEmailTest {
+class ImageHtmlEmailTest extends HtmlEmailTest {
 
     private static final class MockDataSourceClassPathResolver extends DataSourceClassPathResolver {
 

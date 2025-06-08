@@ -46,7 +46,7 @@ import jakarta.mail.internet.MimeMessage;
  * The intention is to field-test certain aspects of email using a variety of mail clients since I'm not a mockist (see
  * https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
-public class EmailLiveTest extends AbstractEmailTest {
+class EmailLiveTest extends AbstractEmailTest {
     /**
      * Factory method to create a pre-configured email instance.
      *

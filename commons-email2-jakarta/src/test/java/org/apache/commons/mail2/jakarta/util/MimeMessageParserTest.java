@@ -37,7 +37,7 @@ import jakarta.mail.internet.MimeMessage;
 /**
  * Tests {@link MimeMessageParser}.
  */
-public class MimeMessageParserTest {
+class MimeMessageParserTest {
 
     /**
      * This test parses a SAP generated email which only contains a PDF but no email text.

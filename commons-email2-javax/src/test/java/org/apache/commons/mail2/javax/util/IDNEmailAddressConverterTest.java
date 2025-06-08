@@ -23,7 +23,7 @@ import javax.mail.internet.InternetAddress;
 
 import org.junit.jupiter.api.Test;
 
-public class IDNEmailAddressConverterTest {
+class IDNEmailAddressConverterTest {
 
     private static final String AUSTRIAN_IDN_EMAIL_ADDRESS = "noreply@d\u00F6m\u00E4in.example";
     private static final String CZECH_IDN_EMAIL_ADDRESS = "noreply@\u010Desk\u00E1republika.icom.museum";

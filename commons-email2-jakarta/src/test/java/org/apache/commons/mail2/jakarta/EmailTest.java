@@ -54,7 +54,7 @@ import jakarta.mail.internet.ParseException;
 /**
  * JUnit test case for Email Class
  */
-public class EmailTest extends AbstractEmailTest {
+class EmailTest extends AbstractEmailTest {
 
     private static final String[] VALID_EMAILS = { "me@home.com", "joe.doe@apache.org", "someone_here@work-address.com.au" };
 

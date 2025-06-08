@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for DateSourceResolver.
  */
-public class DataSourcePathResolverTest extends AbstractDataSourceResolverTest {
+class DataSourcePathResolverTest extends AbstractDataSourceResolverTest {
 
     @Test
     void testResolveLenient() throws Exception {
