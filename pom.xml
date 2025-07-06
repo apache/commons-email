@@ -43,7 +43,10 @@
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-email</developerConnection>
     <url>https://gitbox.apache.org/repos/asf/commons-email</url>
   </scm>
-
+  <ciManagement>
+    <system>GitHub</system>
+    <url>https://github.com/apache/commons-email/actions</url>
+  </ciManagement>
   <dependencyManagement>
     <dependencies>
       <dependency>
