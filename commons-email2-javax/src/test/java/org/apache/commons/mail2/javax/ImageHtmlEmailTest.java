@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -46,7 +46,7 @@ import org.apache.commons.mail2.javax.util.MimeMessageUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ImageHtmlEmailTest extends HtmlEmailTest {
+class ImageHtmlEmailTest extends HtmlEmailTest {
 
     private static final class MockDataSourceClassPathResolver extends DataSourceClassPathResolver {
 
@@ -95,7 +95,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     // Start of Tests
 
     @Test
-    public void testEmail127() throws Exception {
+    void testEmail127() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         getMailServer();
@@ -124,7 +124,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testRegex() {
+    void testRegex() {
         final Pattern pattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
 
         // ensure that the regex that we use is catching the cases correctly
@@ -199,7 +199,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendClassPathFileWithNullName() throws Exception {
+    void testSendClassPathFileWithNullName() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
@@ -238,7 +238,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendEmptyHTML() throws Exception {
+    void testSendEmptyHTML() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
@@ -250,7 +250,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendEmptyHTML2() throws Exception {
+    void testSendEmptyHTML2() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
@@ -263,7 +263,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendHtml() throws Exception {
+    void testSendHtml() throws Exception {
 
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
@@ -302,7 +302,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendHTMLAbsoluteLocalFile() throws Exception {
+    void testSendHTMLAbsoluteLocalFile() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
@@ -335,7 +335,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendHTMLAutoResolveFile() throws Exception {
+    void testSendHTMLAutoResolveFile() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
@@ -378,7 +378,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendHTMLAutoResolveMultipleFiles() throws Exception {
+    void testSendHTMLAutoResolveMultipleFiles() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
@@ -420,7 +420,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendHTMLClassPathFile() throws Exception {
+    void testSendHTMLClassPathFile() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         // Create the email message
@@ -459,7 +459,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
     }
 
     @Test
-    public void testSendHtmlUrl() throws Exception {
+    void testSendHtmlUrl() throws Exception {
         Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
 
         getMailServer();

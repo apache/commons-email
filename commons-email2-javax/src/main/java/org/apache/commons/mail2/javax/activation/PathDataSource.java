@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,6 @@ import javax.activation.MimetypesFileTypeMap;
  * @see javax.activation.DataSource
  * @see javax.activation.FileTypeMap
  * @see javax.activation.MimetypesFileTypeMap
- *
  * @since 1.6.0
  */
 public final class PathDataSource implements DataSource {
@@ -101,7 +100,7 @@ public final class PathDataSource implements DataSource {
     }
 
     /**
-     * Gets an InputStream representing the the data and will throw an IOException if it can not do so. This method will return a new instance of InputStream
+     * Gets an InputStream representing the the data and will throw an IOException if it cannot do so. This method will return a new instance of InputStream
      * with each invocation.
      *
      * @return an InputStream
@@ -123,7 +122,7 @@ public final class PathDataSource implements DataSource {
     }
 
     /**
-     * Gets an OutputStream representing the the data and will throw an IOException if it can not do so. This method will return a new instance of OutputStream
+     * Gets an OutputStream representing the the data and will throw an IOException if it cannot do so. This method will return a new instance of OutputStream
      * with each invocation.
      *
      * @return an OutputStream

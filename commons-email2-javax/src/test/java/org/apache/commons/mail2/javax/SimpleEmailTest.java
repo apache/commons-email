@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for SimpleEmailTest
  */
-public class SimpleEmailTest extends AbstractEmailTest {
+class SimpleEmailTest extends AbstractEmailTest {
 
     private MockSimpleEmail email;
 
@@ -46,7 +46,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
 
     @Test
     @Disabled
-    public void testDefaultMimeCharset() throws EmailException, IOException {
+    void testDefaultMimeCharset() throws EmailException, IOException {
         /*
          * disabling this test as it is dependent on execution order. MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is
          * not defined, reverts to the default Java charset which is basically the system default file encoding.
@@ -86,7 +86,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetMsg() throws EmailException {
+    void testGetSetMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setMsg(validChar);
@@ -104,7 +104,7 @@ public class SimpleEmailTest extends AbstractEmailTest {
      * @throws IOException    when sending fails TODO Add code to test the popBeforeSmtp() settings
      */
     @Test
-    public void testSend() throws EmailException, IOException {
+    void testSend() throws EmailException, IOException {
         // Test Success
         getMailServer();
 

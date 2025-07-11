@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,10 @@
  */
 
 /**
- * Commons-Email aims to provide a API for sending email. It is built on top of the Java Mail API, which it aims to simplify. All help is gratefully received.
+ * Commons-Email aims to provide a API for sending email. It is built on top of the Java Mail API, which it aims to simplify.
+ * <p>
+ * You must choose between the Javax {@code org.apache.commons:commons-email2-javax} or Jakarta {@code org.apache.commons:commons-email2-jakarta}
+ * implementation.
+ * </p>
  */
 package org.apache.commons.mail2.core;

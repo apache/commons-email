@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -46,7 +46,7 @@ import jakarta.mail.internet.MimeMessage;
  * The intention is to field-test certain aspects of email using a variety of mail clients since I'm not a mockist (see
  * https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
-public class EmailLiveTest extends AbstractEmailTest {
+class EmailLiveTest extends AbstractEmailTest {
     /**
      * Factory method to create a pre-configured email instance.
      *
@@ -109,7 +109,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testCorrectCharacterEncoding() throws Exception {
+    void testCorrectCharacterEncoding() throws Exception {
         // U+03B1 : GREEK SMALL LETTER ALPHA
         // U+03B2 : GREEK SMALL LETTER BETA
         // U+03B3 : GREEK SMALL LETTER GAMMA
@@ -136,7 +136,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testFoldedHeaderValue() throws Exception {
+    void testFoldedHeaderValue() throws Exception {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.setSubject("TestFoldedHeaderMail");
         email.setMsg("This is a test mail with a folded header value... :-)");
@@ -153,7 +153,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testHtmlMailMimeLayout() throws Exception {
+    void testHtmlMailMimeLayout() throws Exception {
         String textMsg;
         String htmlMsg;
 
@@ -230,7 +230,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testImageHtmlEmailLocal() throws Exception {
+    void testImageHtmlEmailLocal() throws Exception {
         // use a simple HTML page with one image
 
         final File htmlFile = new File("./src/test/resources/html/www.apache.org.html");
@@ -251,7 +251,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testImageHtmlEmailRemote() throws Exception {
+    void testImageHtmlEmailRemote() throws Exception {
         if (EmailConfiguration.MAIL_FORCE_SEND) {
             final URL url = new URL("https://commons.apache.org/email/");
             // URL url = new URL("http://www.dzone.com/links/index.html");
@@ -272,7 +272,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testMultiPartEmailFile() throws Exception {
+    void testMultiPartEmailFile() throws Exception {
         final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject("TestMultiPartMail");
         email.setMsg("This is a test mail ... :-)");
@@ -287,7 +287,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testMultiPartEmailPath() throws Exception {
+    void testMultiPartEmailPath() throws Exception {
         final MultiPartEmail email = (MultiPartEmail) create(MultiPartEmail.class);
         email.setSubject("TestMultiPartMail");
         email.setMsg("This is a test mail ... :-)");
@@ -304,7 +304,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed.
      */
     @Test
-    public void testPartialSend() throws Exception {
+    void testPartialSend() throws Exception {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.addTo(EmailConfiguration.TEST_TO);
         email.addTo("nobody@is.invalid");
@@ -325,7 +325,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed.
      */
     @Test
-    public void testSendingEmailsInBatch() throws Exception {
+    void testSendingEmailsInBatch() throws Exception {
         final List<SimpleEmail> emails = new ArrayList<>();
 
         // we need to instantiate an email to provide the mail session - a bit ugly
@@ -361,7 +361,7 @@ public class EmailLiveTest extends AbstractEmailTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testSimpleEmail() throws Exception {
+    void testSimpleEmail() throws Exception {
         final SimpleEmail email = (SimpleEmail) create(SimpleEmail.class);
         email.setSubject("TestSimpleMail");
         email.setMsg("This is a test mail ... :-)");

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for DateSourceResolver.
  */
-public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest {
+class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest {
 
     private DataSourceResolver[] dataSourceResolvers;
     private DataSourceResolver[] dataSourceResolversMissing;
@@ -45,7 +45,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testExternalModification() throws Exception {
+    void testExternalModification() throws Exception {
         final DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         final DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();
@@ -60,7 +60,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingFilesLenient() throws Exception {
+    void testResolvingFilesLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         // resolve using HTTP
@@ -71,7 +71,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingFilesNonLenient() {
+    void testResolvingFilesNonLenient() {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolversMissing, false);
 
         assertThrows(IOException.class, () -> dataSourceResolver.resolve("./image/does-not-exist.gif"));

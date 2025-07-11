@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import jakarta.mail.internet.InternetAddress;
 
-public class IDNEmailAddressConverterTest {
+class IDNEmailAddressConverterTest {
 
     private static final String AUSTRIAN_IDN_EMAIL_ADDRESS = "noreply@d\u00F6m\u00E4in.example";
     private static final String CZECH_IDN_EMAIL_ADDRESS = "noreply@\u010Desk\u00E1republika.icom.museum";
@@ -36,7 +36,7 @@ public class IDNEmailAddressConverterTest {
     private final IDNEmailAddressConverter idnEmailConverter = new IDNEmailAddressConverter();
 
     @Test
-    public void testConvertInvalidEmailAddressToAscii() {
+    void testConvertInvalidEmailAddressToAscii() {
         assertNull(idnEmailConverter.toASCII(null));
         assertEquals("", idnEmailConverter.toASCII(""));
         assertEquals("@", idnEmailConverter.toASCII("@"));
@@ -47,13 +47,13 @@ public class IDNEmailAddressConverterTest {
     }
 
     @Test
-    public void testIDNEmailAddressToAsciiConversion() {
+    void testIDNEmailAddressToAsciiConversion() {
         assertEquals("noreply@xn--dmin-moa0i.example", idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
         assertEquals("noreply@xn--h1alffa9f.xn--h1aegh.museum", idnEmailConverter.toASCII(RUSSIAN_IDN_EMAIL_ADDRESS));
     }
 
     @Test
-    public void testInternetAddressToAsciiConversion() throws Exception {
+    void testInternetAddressToAsciiConversion() throws Exception {
         final InternetAddress address = new InternetAddress(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS));
         assertEquals(AUSTRIAN_IDN_EMAIL_ADDRESS, idnEmailConverter.toUnicode(address));
 
@@ -62,17 +62,17 @@ public class IDNEmailAddressConverterTest {
     }
 
     @Test
-    public void testMultipleIDNEmailAddressToAsciiConversion() {
+    void testMultipleIDNEmailAddressToAsciiConversion() {
         assertEquals("noreply@xn--dmin-moa0i.example", idnEmailConverter.toASCII(idnEmailConverter.toASCII(AUSTRIAN_IDN_EMAIL_ADDRESS)));
     }
 
     @Test
-    public void testNonIDNEmailAddressToAsciiConversion() {
+    void testNonIDNEmailAddressToAsciiConversion() {
         assertEquals("me@home.com", idnEmailConverter.toASCII("me@home.com"));
     }
 
     @Test
-    public void testRoundTripConversionOfIDNEmailAddress() {
+    void testRoundTripConversionOfIDNEmailAddress() {
         for (final String email : IDN_EMAIL_ADDRESSES) {
             assertEquals(email, idnEmailConverter.toUnicode(idnEmailConverter.toASCII(email)));
         }

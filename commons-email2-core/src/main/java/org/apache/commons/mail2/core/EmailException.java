@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,15 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.mail2.core;
 
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.util.Collection;
-import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 /**
@@ -37,18 +31,19 @@ import java.util.function.Supplier;
  * @since 1.0
  */
 public class EmailException extends Exception {
-
     /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
 
-    public static <V> V call(final Callable<V> callable) throws EmailException {
-        try {
-            return callable.call();
-        } catch (final Exception e) {
-            throw new EmailException(e);
-        }
-    }
-
+    /**
+     * Throws an EmailException if the supplier evaluates to true.
+     *
+     * @param <T>     the subject type to return if we don't throw.
+     * @param test    test condition.
+     * @param subject the subject to return if we don't throw.
+     * @param message the exception message.
+     * @return the given subject.
+     * @throws EmailException if the supplier evaluates to true.
+     */
     public static <T> T check(final Supplier<Boolean> test, final T subject, final Supplier<String> message) throws EmailException {
         if (test.get()) {
             throw new EmailException(message.get());
@@ -56,23 +51,58 @@ public class EmailException extends Exception {
         return subject;
     }
 
+    /**
+     * Throws an EmailException if the collection is empty.
+     *
+     * @param <T>     the type of elements in the collection.
+     * @param value   the value to test.
+     * @param message the exception message.
+     * @return the given subject.
+     * @throws EmailException if the collection is empty.
+     */
     public static <T> Collection<T> checkNonEmpty(final Collection<T> value, final Supplier<String> message) throws EmailException {
         return check(() -> EmailUtils.isEmpty(value), value, message);
     }
 
+    /**
+     * Throws an EmailException if the string is empty.
+     *
+     * @param message the exception message.
+     * @param value   the value to test.
+     * @return the given subject.
+     * @throws EmailException if the string is empty.
+     */
     public static String checkNonEmpty(final String value, final Supplier<String> message) throws EmailException {
         return check(() -> EmailUtils.isEmpty(value), value, message);
     }
 
+    /**
+     * Throws an EmailException if the array is empty.
+     *
+     * @param <T>     the array type.
+     * @param message the exception message.
+     * @param value   the value to test.
+     * @return the given subject.
+     * @throws EmailException if the array is empty.
+     */
     public static <T> T[] checkNonEmpty(final T[] value, final Supplier<String> message) throws EmailException {
         return check(() -> EmailUtils.isEmpty(value), value, message);
     }
 
-    public static <T> T checkNonNull(final T test, final Supplier<String> message) throws EmailException {
-        if (test == null) {
+    /**
+     * Throws an EmailException if the value is null.
+     *
+     * @param <T>     the value type.
+     * @param message the exception message.
+     * @param value   the value to test.
+     * @return the given subject.
+     * @throws EmailException if the value is null.
+     */
+    public static <T> T checkNonNull(final T value, final Supplier<String> message) throws EmailException {
+        if (value == null) {
             throw new EmailException(message.get());
         }
-        return test;
+        return value;
     }
 
     /**
@@ -109,38 +139,4 @@ public class EmailException extends Exception {
         super(rootCause);
     }
 
-    /**
-     * Prints the stack trace of this exception to the standard error stream.
-     */
-    @Override
-    public void printStackTrace() {
-        printStackTrace(System.err);
-    }
-
-    /**
-     * Prints the stack trace of this exception to the specified stream.
-     *
-     * @param out the {@code PrintStream} to use for output
-     */
-    @Override
-    public void printStackTrace(final PrintStream out) {
-        synchronized (out) {
-            final PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, Charset.defaultCharset()), false);
-            printStackTrace(pw);
-            // Flush the PrintWriter before it's GC'ed.
-            pw.flush();
-        }
-    }
-
-    /**
-     * Prints the stack trace of this exception to the specified writer.
-     *
-     * @param out the {@code PrintWriter} to use for output
-     */
-    @Override
-    public void printStackTrace(final PrintWriter out) {
-        synchronized (out) {
-            super.printStackTrace(out);
-        }
-    }
 }

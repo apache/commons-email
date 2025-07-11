@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for DataSourceUrlResolver.
  */
-public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
+class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
 
     /**
      * Shows how the DataSourceUrlResolver can resolve files as well but this should be done using a DataSourceFileResolver.
@@ -39,7 +39,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testResolvingFilesLenient() throws Exception {
+    void testResolvingFilesLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new File("./src/test/resources").toURI().toURL(), true);
         assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("images/asf_logo_wide.gif")).length);
         assertEquals(IMG_SIZE, toByteArray(dataSourceResolver.resolve("./images/asf_logo_wide.gif")).length);
@@ -53,7 +53,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testResolvingHttpLenient() throws Exception {
+    void testResolvingHttpLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("https://www.apache.org"), true);
         assertTrue(toByteArray(dataSourceResolver.resolve("https://www.apache.org/images/feather-small.gif")).length > 1);
         assertTrue(toByteArray(dataSourceResolver.resolve("images/feather-small.gif")).length > 1);
@@ -67,7 +67,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testResolvingHttpLenientHost() throws Exception {
+    void testResolvingHttpLenientHost() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://does.not.exist"), true);
         assertNull(toByteArray(dataSourceResolver.resolve("/images/does-not-exist.gif")));
     }
@@ -78,7 +78,7 @@ public class DataSourceUrlResolverTest extends AbstractDataSourceResolverTest {
      * @throws Exception the test failed
      */
     @Test
-    public void testResolvingHttpNonLenient() throws Exception {
+    void testResolvingHttpNonLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceUrlResolver(new URL("http://does.not.exist"), false);
         assertThrows(IOException.class, () -> dataSourceResolver.resolve("images/asf_logo_wide.gif"));
         assertThrows(IOException.class, () -> dataSourceResolver.resolve("images/does-not-exist.gif"));

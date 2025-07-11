@@ -7,7 +7,7 @@
  (the "License"); you may not use this file except in compliance with
  the License.  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+     https://www.apache.org/licenses/LICENSE-2.0
 
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,44 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<document xmlns="http://maven.apache.org/changes/1.0.0"
+<document xmlns="http://maven.apache.org/changes/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <properties>
     <title>Apache Commons Email Release Notes</title>
   </properties>
-
   <body>
-    <release version="2.0.0-M1" date="YYYY-MM-DD" description="Feature release (Java 8 or above).">
+    <release version="2.0.0-M2" date="YYY-MM-DD" description="Feature release (Java 8 or above).">
       <!-- ADD -->
+      <!-- FIX -->
+      <action type="update" due-to="Derek Wickern, Gary Gregory" dev="ggregory">Handle IllegalArgumentException thrown for invalid email address #328.</action>
+      <!-- UPDATE -->
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 72 to 85 #279, #293, #297, #304, #350.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.18.0 #290, #296, #302, #319, #336, #338, #344, #353.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.13 to 2.0.17 #278, #333.</action>
+      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump commons-io:commons-io from 2.17.0 to 2.19.0 #311.</action>
+      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump com.github.davidmoten:subethasmtp from 7.1.1 to 7.1.7 #322, #337, #345.</action>
+      <!-- REMOVE -->
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Remove unused EmailException.call(Callable).</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace().</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace(PrintStream).</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace(PrintWriter).</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">org.apache.commons.mail2.jakarta.util.MimeMessageUtils.createMimeMessage(Session, File) now uses NIO.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">org.apache.commons.mail2.javax.util.MimeMessageUtils.createMimeMessage(Session, File) now uses NIO.</action>
+    </release>
+    <release version="2.0.0-M1" date="2024-06-15" description="Feature release (Java 8 or above).">
+      <!-- ADD -->
+      <action dev="ggregory" type="add" due-to="Gary Gregory">Split into a multi-module project for javax vs. jakarta.</action>
       <action dev="ggregory" type="add" due-to="Gary Gregory">Add Maven property project.build.outputTimestamp for build reproducibility.</action>
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Checkstyle configuration.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix PMD UnnecessaryFullyQualifiedName issues.</action>
       <!-- UPDATE -->
       <action type="update" due-to="Dependabot" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.9 to 2.0.13 #238.</action>
-      <action type="update" due-to="Dependabot" dev="ggregory">Bump com.github.davidmoten:subethasmtp from 6.0.7 to 7.0.2.</action>
-      <action type="update" due-to="Dependabot" dev="ggregory">Bump org.mockito:mockito-core from 5.8.0 to 5.11.0 #222.</action>
-      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 65 to 69 #233.</action>
-      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-io:commons-io from 2.15.1 to 2.16.1 #231, #236.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump com.github.davidmoten:subethasmtp from 6.0.7 to 7.1.1 #252.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump org.mockito:mockito-core from 5.8.0 to 5.13.0 #222, #251, #281.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 65 to 75 #233, #271, #282, #288.</action>
+      <action type="update" due-to="Dependabot" dev="ggregory">Bump commons-io:commons-io from 2.15.1 to 2.17.0 #231, #236, #287.</action>
     </release>
     <release version="1.6.0" date="2023-12-17" description="Feature release (Java 8 or above).">
       <!-- FIX -->
@@ -89,7 +108,7 @@
       <action type="update" due-to="Dependabot" dev="ggregory">Bump maven-checkstyle-plugin from 3.1.2 to 3.2.0 #87.</action>
     </release>
     <release version="1.5" date="2017-08-01">
-      <!-- N.B. AFAICT the date attribute is not used anywhere so no point in adding it -->
+      <!-- AFAICT the date attribute is not used anywhere so no point in adding it -->
       <action dev="kinow" type="fix" issue="EMAIL-172" due-to="Thomas Grainger">
         Grammar error in comment
       </action>

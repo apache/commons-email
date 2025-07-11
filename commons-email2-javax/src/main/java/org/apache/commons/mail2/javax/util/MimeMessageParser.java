@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -132,7 +132,7 @@ public class MimeMessageParser {
     /**
      * Gets the attachment list.
      *
-     * @return Returns the attachment list.
+     * @return the attachment list.
      */
     public List<DataSource> getAttachmentList() {
         return attachmentList;
@@ -221,7 +221,7 @@ public class MimeMessageParser {
     /**
      * Gets the htmlContent if any.
      *
-     * @return Returns the htmlContent if any
+     * @return the htmlContent if any
      */
     public String getHtmlContent() {
         return htmlContent;
@@ -230,7 +230,7 @@ public class MimeMessageParser {
     /**
      * Gets the MimeMessage.
      *
-     * @return Returns the mimeMessage.
+     * @return the mimeMessage.
      */
     public MimeMessage getMimeMessage() {
         return mimeMessage;
@@ -239,7 +239,7 @@ public class MimeMessageParser {
     /**
      * Gets the plain content if any.
      *
-     * @return Returns the plainContent if any
+     * @return the plainContent if any
      */
     public String getPlainContent() {
         return plainContent;
@@ -335,7 +335,7 @@ public class MimeMessageParser {
     /**
      * Tests whether this is multipart.
      *
-     * @return Returns the isMultiPart.
+     * @return the isMultiPart.
      */
     public boolean isMultipart() {
         return isMultiPart;

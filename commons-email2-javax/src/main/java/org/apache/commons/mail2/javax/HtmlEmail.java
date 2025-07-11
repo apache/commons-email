@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -253,7 +253,7 @@ public class HtmlEmail extends MultiPartEmail {
                     msgHtml.setContent(html, EmailConstants.TEXT_HTML + "; charset=" + getCharsetName());
                 } else {
                     // unfortunately, MimeUtility.getDefaultMIMECharset() is package private
-                    // and thus can not be used to set the default system charset in case
+                    // and thus cannot be used to set the default system charset in case
                     // no charset has been provided by the user
                     msgHtml.setContent(html, EmailConstants.TEXT_HTML);
                 }
@@ -315,7 +315,7 @@ public class HtmlEmail extends MultiPartEmail {
                     + "; existing names cannot be rebound");
         }
 
-        final String cid = EmailUtils.toLower(EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH));
+        final String cid = EmailUtils.toLower(EmailUtils.randomAlphabetic(CID_LENGTH));
         return embed(dataSource, name, cid);
     }
 
@@ -352,12 +352,11 @@ public class HtmlEmail extends MultiPartEmail {
      * @param file The {@code File} object to embed
      * @return A String with the Content-ID of the file.
      * @throws EmailException when the supplied {@code File} cannot be used; also see {@link javax.mail.internet.MimeBodyPart} for definitions
-     *
      * @see #embed(File, String)
      * @since 1.1
      */
     public String embed(final File file) throws EmailException {
-        return embed(file, EmailUtils.toLower(EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH)));
+        return embed(file, EmailUtils.toLower(EmailUtils.randomAlphabetic(CID_LENGTH)));
     }
 
     /**

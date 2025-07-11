@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case demonstrating InternetAddress validation.
  */
-public class InvalidInternetAddressTest extends AbstractEmailTest {
+class InvalidInternetAddressTest extends AbstractEmailTest {
     /** */
     private static final String VALID_QUOTED_EMAIL = "\"John O'Groats\"@domain.com";
 
@@ -59,6 +59,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
             "local.name@domain,com",
             "local.name@domain;com",
             "local.name@domain:com",
+            "local.name@domain..com",
             // "local.name@domain[com", -- works for javamail-1.5.5
             "local.name@domain]com",
             "local.name@domain\\com",
@@ -70,7 +71,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
     // @formatter:on
 
     @Test
-    public void testStrictConstructor() throws Exception {
+    void testStrictConstructor() throws Exception {
         // Prove InternetAddress constructor is throwing exception.
 
         // test Invalid Email addresses
@@ -86,7 +87,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testValidateMethod() throws Exception {
+    void testValidateMethod() throws Exception {
         // Prove InternetAddress constructor isn't throwing exception and
         // the validate() method is
 
@@ -94,7 +95,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
 
             final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe");
 
-            // N.B. validate() doesn't check addresses containing quotes or '['
+            // validate() doesn't check addresses containing quotes or '['
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
             final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
             final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;
@@ -116,7 +117,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testValidateMethodCharset() throws Exception {
+    void testValidateMethodCharset() throws Exception {
         // Prove InternetAddress constructor isn't throwing exception and
         // the validate() method is
 
@@ -124,7 +125,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
 
             final InternetAddress address = new InternetAddress(ARR_INVALID_EMAILS[i], "Joe", StandardCharsets.UTF_8.name());
 
-            // N.B. validate() doesn't check addresses containing quotes or '['
+            // validate() doesn't check addresses containing quotes or '['
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
             final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
             final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;

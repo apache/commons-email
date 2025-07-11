@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,6 @@ import jakarta.mail.internet.InternetAddress;
  * @see <a href="https://en.wikipedia.org/wiki/Punycode">https://en.wikipedia.org/wiki/Punycode</a>
  * @see <a href="https://tools.ietf.org/html/rfc5891">https://tools.ietf.org/html/rfc5891</a>
  * @see <a href="https://en.wikipedia.org/wiki/Punycode">https://en.wikipedia.org/wiki/Punycode</a>
- *
  * @since 1.5
  */
 public class IDNEmailAddressConverter {
@@ -67,6 +66,7 @@ public class IDNEmailAddressConverter {
      *
      * @param email email address.
      * @return The ASCII representation
+     * @throws IllegalArgumentException if the domain doesn't conform to RFC 3490 specification
      */
     public String toASCII(final String email) {
         return toString(email, IDN::toASCII);

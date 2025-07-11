@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -99,7 +99,7 @@ public final class EmailUtils {
         }
         final StringBuilder builder = new StringBuilder();
         for (final byte c : input.getBytes(StandardCharsets.US_ASCII)) {
-            final int b = c & 0xff;
+            final int b = Byte.toUnsignedInt(c);
             if (SAFE_URL.get(b)) {
                 builder.append((char) b);
             } else {
@@ -113,14 +113,32 @@ public final class EmailUtils {
         return builder.toString();
     }
 
+    /**
+     * Tests whether the given collection is null or empty.
+     *
+     * @param collection the collection to test.
+     * @return whether the given collection is null or empty.
+     */
     public static boolean isEmpty(final Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }
 
+    /**
+     * Tests whether the given map is null or empty.
+     *
+     * @param map the map to test.
+     * @return whether the given map is null or empty.
+     */
     public static boolean isEmpty(final Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
 
+    /**
+     * Tests whether the given array is null or empty.
+     *
+     * @param array the collection to test.
+     * @return whether the given array is null or empty.
+     */
     public static boolean isEmpty(final Object[] array) {
         return array == null || array.length == 0;
     }
@@ -245,6 +263,12 @@ public final class EmailUtils {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
     }
 
+    /**
+     * Converts the given string to lower case.
+     *
+     * @param value the input string.
+     * @return a lower case string.
+     */
     public static String toLower(final String value) {
         return value.toLowerCase(Locale.ROOT);
     }

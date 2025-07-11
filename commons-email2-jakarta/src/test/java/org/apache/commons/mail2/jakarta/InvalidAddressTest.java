@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for invalid Addresses in Email Class
  */
-public class InvalidAddressTest extends AbstractEmailTest {
+class InvalidAddressTest extends AbstractEmailTest {
 
     // @formatter:off
     private static final String[] ARR_INVALID_EMAILS = {
@@ -55,6 +55,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
             "local.name@domain,com",
             "local.name@domain;com",
             "local.name@domain:com",
+            "local.name@domain..com",
             // "local.name@domain[com",
             "local.name@domain]com",
             "local.name@domain\\com",
@@ -74,7 +75,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddInvalidBcc() throws Exception {
+    void testAddInvalidBcc() throws Exception {
         // Test adding invalid 'BCC' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
@@ -84,7 +85,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddInvalidCc() throws Exception {
+    void testAddInvalidCc() throws Exception {
         // Test adding invalid 'CC' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
@@ -94,7 +95,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddInvalidTo() throws Exception {
+    void testAddInvalidTo() throws Exception {
         // Test adding invalid 'to' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,
@@ -104,7 +105,7 @@ public class InvalidAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testSetInvalidFrom() throws Exception {
+    void testSetInvalidFrom() throws Exception {
         // Test setting invalid 'from' addresses
         // @formatter:off
         IntStream.range(0, ARR_INVALID_EMAILS.length).forEach(i -> assertThrows(EmailException.class,

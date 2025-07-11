@@ -7,7 +7,7 @@
  (the "License"); you may not use this file except in compliance with
  the License.  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+     https://www.apache.org/licenses/LICENSE-2.0
 
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,7 +18,7 @@
 <document>
     <properties>
         <title>Home</title>
-        <author email="dev@commons.apache.org">Commons Documentation Team</author>
+        <author email="dev@commons.apache.org">Apache Commons Team</author>
     </properties>
     <body>
         <!-- ================================================== -->
@@ -26,6 +26,14 @@
             <p>
                 Commons Email aims to provide a API for sending email.
                 It is built on top of the Java Mail API, which it aims to simplify.
+            </p>
+            <p>
+                You must choose between the Javax <code>org.apache.commons:commons-email2-javax</code> or
+                Jakarta <code>org.apache.commons:commons-email2-jakarta</code> implementation. Either one
+                will bring in the Core <code>org.apache.commons:commons-email2-core</code> module when using Maven.
+            </p>
+            <p>
+                See the <a href="modules.html">modules</a> page.
             </p>
             <p>
                 Some of the mail classes that are provided are as follows:
@@ -76,12 +84,13 @@
                 The Javadoc API documents are available online:
             </p>
             <ul>
-                <li>The
-                    <a href="/apidocs/index.html">Javadoc</a>
-                </li>
-                <li>The
-                    <a href="https://javadoc.io/doc/org.apache.commons/commons-email/latest/index.html">Javadoc Archive</a>
-                </li>
+                <li><a href="commons-email2-core/apidocs/index.html">Javadoc for Core</a></li>
+                <li><a href="commons-email2-jakarta/apidocs/index.html">Javadoc for Jakarta</a></li>
+                <li><a href="commons-email2-javax/apidocs/index.html">Javadoc for Javax</a></li>
+                <li><a href="https://javadoc.io/doc/org.apache.commons/commons-email2-core/latest/index.html">Javadoc 2.x Core Archive</a></li>
+                <li><a href="https://javadoc.io/doc/org.apache.commons/commons-email-jakarta/latest/index.html">Javadoc 2.x Jakarta Archive</a></li>
+                <li><a href="https://javadoc.io/doc/org.apache.commons/commons-email-javax/latest/index.html">Javadoc 2.x Javax Archive</a></li>
+                <li><a href="https://javadoc.io/doc/org.apache.commons/commons-email/latest/index.html">Javadoc 1.x Archive</a></li>
             </ul>
             <p>
                 The
@@ -97,7 +106,7 @@
                 <a href="https://commons.apache.org/email/download_email.cgi">Download now!</a>
                 <br/>
                 The full
-                <a href="changes-report.html">change log</a>
+                <a href="changes.html">change log</a>
                 is available
             </p>
             <p>

@@ -7,7 +7,7 @@
    (the "License"); you may not use this file except in compliance with
    the License.  You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       https://www.apache.org/licenses/LICENSE-2.0
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,6 @@
 
 <module name="Checker">
   <property name="localeLanguage" value="en" />
-  <property name="severity" value="warning" />
 
   <!-- Checks that a package.html file exists for each package. -->
   <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
@@ -53,8 +52,7 @@
 
   <module name="TreeWalker">
 
-    <module name="JavadocType">
-    </module>
+    <module name="JavadocType" />
     <module name="JavadocVariable" />
 
     <!-- Checks for Naming Conventions. -->
@@ -143,6 +141,7 @@
     <module name="ArrayTypeStyle" />
     <module name="TodoComment" />
     <module name="UpperEll" />
+    <module name="TypecastParenPad" />    
   </module>
   <!-- @author tags are deprecated -->
   <module name="RegexpSingleline">

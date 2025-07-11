@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -373,15 +373,15 @@ public abstract class Email {
      *
      * @param name  A String with the name.
      * @param value A String with the value.
-     * @since 1.0
      * @throws IllegalArgumentException if either {@code name} or {@code value} is null or empty
+     * @since 1.0
      */
     public void addHeader(final String name, final String value) {
         if (EmailUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("name can not be null or empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (EmailUtils.isEmpty(value)) {
-            throw new IllegalArgumentException("value can not be null or empty");
+            throw new IllegalArgumentException("value cannot be null or empty");
         }
         headers.put(name, value);
     }
@@ -607,10 +607,10 @@ public abstract class Email {
      */
     private String createFoldedHeaderValue(final String name, final String value) {
         if (EmailUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("name can not be null or empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (EmailUtils.isEmpty(value)) {
-            throw new IllegalArgumentException("value can not be null or empty");
+            throw new IllegalArgumentException("value cannot be null or empty");
         }
         try {
             return MimeUtility.fold(name.length() + 2, MimeUtility.encodeText(value, charset, null));
@@ -630,7 +630,12 @@ public abstract class Email {
      */
     private InternetAddress createInternetAddress(final String email, final String name, final String charsetName) throws EmailException {
         try {
-            final InternetAddress address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            final InternetAddress address;
+            try {
+                address = new InternetAddress(new IDNEmailAddressConverter().toASCII(email));
+            } catch (final IllegalArgumentException e) {
+                throw new EmailException(e);
+            }
             // check name input
             if (EmailUtils.isNotEmpty(name)) {
                 // check charset input.
@@ -1198,7 +1203,7 @@ public abstract class Email {
      * Sets the content.
      *
      * @param content the content.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setContent(final Object content) {
@@ -1222,7 +1227,7 @@ public abstract class Email {
      * Sets the content type.
      *
      * @param contentType the content type.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setContentType(final String contentType) {
@@ -1288,7 +1293,7 @@ public abstract class Email {
      * Sets the From address.
      *
      * @param fromAddress the From address.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setFromAddress(final InternetAddress fromAddress) {
@@ -1405,7 +1410,7 @@ public abstract class Email {
      * Sets whether to use POP3 before SMTP, and if so the settings.
      *
      * @param popBeforeSmtp whether to use POP3 before SMTP, and if so the settings.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopBeforeSmtp(final boolean popBeforeSmtp) {
@@ -1434,7 +1439,7 @@ public abstract class Email {
      * Sets the POP3 host.
      *
      * @param popHost The POP3 host.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopHost(final String popHost) {
@@ -1447,7 +1452,7 @@ public abstract class Email {
      * Sets the POP3 password.
      *
      * @param popPassword the POP3 password.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopPassword(final String popPassword) {
@@ -1460,7 +1465,7 @@ public abstract class Email {
      * Sets the POP3 user name.
      *
      * @param popUserName the POP3 user name.
-     * @return this.
+     * @return {@code this} instance.
      * @since 1.6.0
      */
     public Email setPopUsername(final String popUserName) {
