@@ -23,7 +23,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-email</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1-SNAPSHOT</version>
     <name>Apache Commons Email</name>
 
     <inceptionYear>2001</inceptionYear>
@@ -265,7 +265,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.15.1</version>
+            <version>2.20.0</version>
             <scope>test</scope>
         </dependency>
     	<dependency>
@@ -301,7 +301,7 @@
         <commons.release.next>1.6.1</commons.release.next>
         <commons.release.desc>(Java 8 or above)</commons.release.desc>
         <commons.rc.version>RC1</commons.rc.version>
-        <commons.bc.version>1.5</commons.bc.version>
+        <commons.bc.version>1.6.0</commons.bc.version>
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
         <mockito-core.version>5.8.0</mockito-core.version>
