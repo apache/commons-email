@@ -395,7 +395,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.addTo(strTestMailTo);
         email.setSubject(strSubject);
 
-        final String html = "<p>First image  <img src=\"images/contentTypeTest.gif\"/></p>" + "<p>Second image <img src=\"images/contentTypeTest.jpg\"/></p>"
+        final String html = "<p>First image  <img src=\"images/contentTypeTest.gif\"/></p><p>Second image <img src=\"images/contentTypeTest.jpg\"/></p>"
                 + "<p>Third image  <img src=\"images/contentTypeTest.png\"/></p>";
 
         // set the html message
