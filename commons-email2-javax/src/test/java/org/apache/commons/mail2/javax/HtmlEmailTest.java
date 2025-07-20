@@ -91,7 +91,7 @@ class HtmlEmailTest extends AbstractEmailTest {
     void testAddZipUrl() throws Exception {
         final String htmlMsg = "Please click on the following link: <br><br>"
                 + "<a href=\"http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip\">"
-                + "http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip" + "</a><br><br>Customer satisfaction is very important for us.";
+                + "http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip</a><br><br>Customer satisfaction is very important for us.";
 
         getMailServer();
 
