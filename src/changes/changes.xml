@@ -28,7 +28,7 @@
       <action type="update" due-to="Derek Wickern, Gary Gregory" dev="ggregory">Handle IllegalArgumentException thrown for invalid email address #328.</action>
       <!-- UPDATE -->
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump commons-parent from 72 to 85 #279, #293, #297, #304, #350.</action>
-      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.18.0 #290, #296, #302, #319, #336, #338, #344, #353.</action>
+      <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.19.0 #290, #296, #302, #319, #336, #338, #344, #353, #366.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.13 to 2.0.17 #278, #333.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump com.sun.mail:jakarta.mail from 2.0.1 to 2.0.2.</action>
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump commons-io:commons-io from 2.17.0 to 2.20.0 #311.</action>
