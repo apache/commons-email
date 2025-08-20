@@ -344,7 +344,7 @@ public class MimeMessageParser {
     /**
      * Does the actual extraction.
      *
-     * @return this instance
+     * @return {@code this} instance
      * @throws MessagingException parsing the mime message failed
      * @throws IOException        parsing the mime message failed
      */
