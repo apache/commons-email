@@ -32,7 +32,7 @@
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.13 to 2.0.17 #278, #333.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump com.sun.mail:jakarta.mail from 2.0.1 to 2.0.2.</action>
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump commons-io:commons-io from 2.17.0 to 2.20.0 #311.</action>
-      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump com.github.davidmoten:subethasmtp from 7.1.1 to 7.1.8 #322, #337, #345, #365.</actio 
+      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump com.github.davidmoten:subethasmtp from 7.1.1 to 7.1.8 #322, #337, #345, #365.</action>
       <!-- REMOVE -->
       <action type="update" due-to="Gary Gregory" dev="ggregory">Remove unused EmailException.call(Callable).</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">EmailException doesn't need to override printStackTrace().</action>
