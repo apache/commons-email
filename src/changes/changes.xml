@@ -457,7 +457,7 @@
         Improve MultiPartEmail to ease extending it.
       </action>
       <action dev="sgoeschl" type="update">
-        Refactoring the code to seperate creation of a MimeMessage and sending it.
+        Refactoring the code to separate creation of a MimeMessage and sending it.
       </action>
       <action dev="dion" type="update">Add serialVersionUID to EmailException</action>
       <action dev="dion" type="update">Use Dumbster 1.6 compiled with jdk13 for testing</action>
