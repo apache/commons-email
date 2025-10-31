@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>90</version>
+    <version>91</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>commons-email2-parent</artifactId>
@@ -116,8 +116,9 @@
           <artifactId>apache-rat-plugin</artifactId>
           <configuration>
             <excludes>
-              <exclude>src/test/resources/eml/**</exclude>
-              <exclude>src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
+              <exclude>**/src/test/resources/eml/**</exclude>
+              <exclude>**/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
+              <exclude>**/src/test/resources/attachments/logo.pdf</exclude>
             </excludes>
           </configuration>
         </plugin>
@@ -139,6 +140,10 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
