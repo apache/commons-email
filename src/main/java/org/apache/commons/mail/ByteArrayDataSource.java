@@ -171,7 +171,7 @@ public class ByteArrayDataSource implements DataSource {
         BufferedOutputStream osWriter = null;
         try {
             int length = 0;
-            final byte[] buffer = new byte[ByteArrayDataSource.BUFFER_SIZE];
+            final byte[] buffer = new byte[BUFFER_SIZE];
 
             bis = new BufferedInputStream(inputStream);
             outputStream = new ByteArrayOutputStream();
