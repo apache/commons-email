@@ -56,7 +56,7 @@
 
         <subsection name="Fixed in Apache Commons Email 1.5">
           <p><b>Low: SMTP header injection vulnerabilty</b> <a
-          href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9801">CVE-2017-9801</a></p>
+          href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9801">CVE-2017-9801</a></p>
 
           <p>When passing text that contains line-breaks as the
             subject of an email arbitrary SMTP headers can be added.</p>
@@ -72,7 +72,7 @@
           <p>Affects: 1.0 - 1.4</p>
 
           <p><b>Moderate: Insufficient input validation for bounce address</b>
-            <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1294">CVE-2018-1294</a></p>
+            <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1294">CVE-2018-1294</a></p>
 
             <p>When passing text that contains line-breaks as the bounce address of an Email, then
                the email details (SMTP headers, recipient list, contents) can be manipulated.</p>

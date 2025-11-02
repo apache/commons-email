@@ -24,7 +24,7 @@ limitations under the License.
     <section name="Overview">
       <p>
         Commons Email uses
-        <a href="http://maven.apache.org">Maven</a>.
+        <a href="https://maven.apache.org">Maven</a>.
       </p>
     </section>
     <section name="Maven Goals">
@@ -52,7 +52,7 @@ limitations under the License.
       </p>
       <p>
         Commons Email requires
-        <a href="http://code.google.com/p/subethasmtp/">SubEtha SMTP</a>
+        <a href="https://code.google.com/p/subethasmtp/">SubEtha SMTP</a>
         for its unit tests.
         <br />
       </p>

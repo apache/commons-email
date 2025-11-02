@@ -22,7 +22,7 @@ import java.time.Duration;
 /**
  * Constants used by Email classes.
  *
- * A description of the mail session parameter you find at <a href="http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html">
+ * A description of the mail session parameter you find at <a href="https://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html">
  * http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html</a>.
  *
  * @since 1.3
