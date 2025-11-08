@@ -57,119 +57,119 @@ public abstract class Email {
 
     private static final InternetAddress[] EMPTY_INTERNET_ADDRESS_ARRAY = {};
 
-    /** @deprecated since 1.3, use {@link EmailConstants#SENDER_EMAIL} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#SENDER_EMAIL} instead */
     @Deprecated
     public static final String SENDER_EMAIL = EmailConstants.SENDER_EMAIL;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#SENDER_NAME} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#SENDER_NAME} instead */
     @Deprecated
     public static final String SENDER_NAME = EmailConstants.SENDER_NAME;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#RECEIVER_EMAIL} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#RECEIVER_EMAIL} instead */
     @Deprecated
     public static final String RECEIVER_EMAIL = EmailConstants.RECEIVER_EMAIL;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#RECEIVER_NAME} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#RECEIVER_NAME} instead */
     @Deprecated
     public static final String RECEIVER_NAME = EmailConstants.RECEIVER_NAME;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#EMAIL_SUBJECT} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#EMAIL_SUBJECT} instead */
     @Deprecated
     public static final String EMAIL_SUBJECT = EmailConstants.EMAIL_SUBJECT;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#EMAIL_BODY} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#EMAIL_BODY} instead */
     @Deprecated
     public static final String EMAIL_BODY = EmailConstants.EMAIL_BODY;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#CONTENT_TYPE} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#CONTENT_TYPE} instead */
     @Deprecated
     public static final String CONTENT_TYPE = EmailConstants.CONTENT_TYPE;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#ATTACHMENTS} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#ATTACHMENTS} instead */
     @Deprecated
     public static final String ATTACHMENTS = EmailConstants.ATTACHMENTS;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#FILE_SERVER} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#FILE_SERVER} instead */
     @Deprecated
     public static final String FILE_SERVER = EmailConstants.FILE_SERVER;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#KOI8_R} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#KOI8_R} instead */
     @Deprecated
     public static final String KOI8_R = EmailConstants.KOI8_R;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#ISO_8859_1} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#ISO_8859_1} instead */
     @Deprecated
     public static final String ISO_8859_1 = EmailConstants.ISO_8859_1;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#US_ASCII} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#US_ASCII} instead */
     @Deprecated
     public static final String US_ASCII = EmailConstants.US_ASCII;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_DEBUG} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_DEBUG} instead */
     @Deprecated
     public static final String MAIL_DEBUG = EmailConstants.MAIL_DEBUG;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_HOST} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_HOST} instead */
     @Deprecated
     public static final String MAIL_HOST = EmailConstants.MAIL_HOST;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_PORT} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_PORT} instead */
     @Deprecated
     public static final String MAIL_PORT = EmailConstants.MAIL_PORT;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_FROM} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_FROM} instead */
     @Deprecated
     public static final String MAIL_SMTP_FROM = EmailConstants.MAIL_SMTP_FROM;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_AUTH} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_AUTH} instead */
     @Deprecated
     public static final String MAIL_SMTP_AUTH = EmailConstants.MAIL_SMTP_AUTH;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_USER} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_USER} instead */
     @Deprecated
     public static final String MAIL_SMTP_USER = EmailConstants.MAIL_SMTP_USER;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_PASSWORD} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_PASSWORD} instead */
     @Deprecated
     public static final String MAIL_SMTP_PASSWORD = EmailConstants.MAIL_SMTP_PASSWORD;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_TRANSPORT_PROTOCOL} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_TRANSPORT_PROTOCOL} instead */
     @Deprecated
     public static final String MAIL_TRANSPORT_PROTOCOL = EmailConstants.MAIL_TRANSPORT_PROTOCOL;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#SMTP} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#SMTP} instead */
     @Deprecated
     public static final String SMTP = EmailConstants.SMTP;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#TEXT_HTML} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#TEXT_HTML} instead */
     @Deprecated
     public static final String TEXT_HTML = EmailConstants.TEXT_HTML;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#TEXT_PLAIN} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#TEXT_PLAIN} instead */
     @Deprecated
     public static final String TEXT_PLAIN = EmailConstants.TEXT_PLAIN;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_TRANSPORT_TLS} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_TRANSPORT_TLS} instead */
     @Deprecated
     public static final String MAIL_TRANSPORT_TLS = EmailConstants.MAIL_TRANSPORT_TLS;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_FALLBACK} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_FALLBACK} instead */
     @Deprecated
     public static final String MAIL_SMTP_SOCKET_FACTORY_FALLBACK = EmailConstants.MAIL_SMTP_SOCKET_FACTORY_FALLBACK;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_CLASS} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_CLASS} instead */
     @Deprecated
     public static final String MAIL_SMTP_SOCKET_FACTORY_CLASS = EmailConstants.MAIL_SMTP_SOCKET_FACTORY_CLASS;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_PORT} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_SOCKET_FACTORY_PORT} instead */
     @Deprecated
     public static final String MAIL_SMTP_SOCKET_FACTORY_PORT = EmailConstants.MAIL_SMTP_SOCKET_FACTORY_PORT;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_CONNECTIONTIMEOUT} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_CONNECTIONTIMEOUT} instead */
     @Deprecated
     public static final String MAIL_SMTP_CONNECTIONTIMEOUT = EmailConstants.MAIL_SMTP_CONNECTIONTIMEOUT;
 
-    /** @deprecated since 1.3, use {@link EmailConstants#MAIL_SMTP_TIMEOUT} instead */
+    /** @deprecated Since 1.3, use {@link EmailConstants#MAIL_SMTP_TIMEOUT} instead */
     @Deprecated
     public static final String MAIL_SMTP_TIMEOUT = EmailConstants.MAIL_SMTP_TIMEOUT;
 
@@ -370,7 +370,7 @@ public abstract class Email {
     /**
      * Does server require TLS encryption for authentication?
      *
-     * @deprecated since 1.3, use setStartTLSEnabled() instead
+     * @deprecated Since 1.3, use setStartTLSEnabled() instead
      */
     @Deprecated
     protected boolean tls;
@@ -378,7 +378,7 @@ public abstract class Email {
     /**
      * Does the current transport use SSL/TLS encryption upon connection?
      *
-     * @deprecated since 1.3, use setSSLOnConnect() instead
+     * @deprecated Since 1.3, use setSSLOnConnect() instead
      */
     @Deprecated
     protected boolean ssl;
@@ -1211,7 +1211,7 @@ public abstract class Email {
      * Tests whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
      *
      * @return true if SSL enabled for the transport.
-     * @deprecated since 1.3, use {@link #isSSLOnConnect()} instead.
+     * @deprecated Since 1.3, use {@link #isSSLOnConnect()} instead.
      */
     @Deprecated
     public boolean isSSL() {
@@ -1261,7 +1261,7 @@ public abstract class Email {
     /**
      * Tests whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
      *
-     * @deprecated since 1.3, use {@link #isStartTLSEnabled()} instead.
+     * @deprecated Since 1.3, use {@link #isStartTLSEnabled()} instead.
      * @return true if using STARTTLS for authentication, false otherwise.
      * @since 1.1
      */
@@ -1803,7 +1803,7 @@ public abstract class Email {
      * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
      *
      * @param ssl whether to enable the SSL transport
-     * @deprecated since 1.3, use {@link #setSSLOnConnect(boolean)} instead.
+     * @deprecated Since 1.3, use {@link #setSSLOnConnect(boolean)} instead.
      */
     @Deprecated
     public void setSSL(final boolean ssl) {
@@ -1904,7 +1904,7 @@ public abstract class Email {
      *
      * @param withTLS true if STARTTLS requested, false otherwise
      * @since 1.1
-     * @deprecated since 1.3, use {@link #setStartTLSEnabled(boolean)} instead.
+     * @deprecated Since 1.3, use {@link #setStartTLSEnabled(boolean)} instead.
      */
     @Deprecated
     public void setTLS(final boolean withTLS) {

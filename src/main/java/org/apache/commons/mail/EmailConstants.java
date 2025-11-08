@@ -29,39 +29,39 @@ import java.time.Duration;
  */
 public final class EmailConstants {
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String SENDER_EMAIL = "sender.email";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String SENDER_NAME = "sender.name";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String RECEIVER_EMAIL = "receiver.email";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String RECEIVER_NAME = "receiver.name";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String EMAIL_SUBJECT = "email.subject";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String EMAIL_BODY = "email.body";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String CONTENT_TYPE = "content.type";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String ATTACHMENTS = "attachments";
 
-    /** @deprecated since 1.3, not in use since 1.0 */
+    /** @deprecated Since 1.3, not in use since 1.0 */
     @Deprecated
     public static final String FILE_SERVER = "file.server";
 
@@ -119,7 +119,7 @@ public final class EmailConstants {
     // since 1.1
     /////////////////////////////////////////////////////////////////////////
 
-    /** @deprecated since 1.3 */
+    /** @deprecated Since 1.3 */
     @Deprecated
     public static final String MAIL_TRANSPORT_TLS = "mail.smtp.starttls.enable";
 
