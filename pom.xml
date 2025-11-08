@@ -34,7 +34,6 @@
   <url>https://commons.apache.org/proper/commons-email/</url>
 
   <issueManagement>
-    <system>jira</system>
     <url>https://issues.apache.org/jira/browse/EMAIL</url>
   </issueManagement>
 
