@@ -114,11 +114,11 @@
           <groupId>org.apache.rat</groupId>
           <artifactId>apache-rat-plugin</artifactId>
           <configuration>
-            <excludes>
-              <exclude>**/src/test/resources/eml/**</exclude>
-              <exclude>**/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
-              <exclude>**/src/test/resources/attachments/logo.pdf</exclude>
-            </excludes>
+            <inputExcludes>
+              <inputExclude>**/src/test/resources/eml/**</inputExclude>
+              <inputExclude>**/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</inputExclude>
+              <inputExclude>**/src/test/resources/attachments/logo.pdf</inputExclude>
+            </inputExcludes>
           </configuration>
         </plugin>
         <plugin>
