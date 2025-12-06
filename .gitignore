@@ -8,3 +8,7 @@ target
 .classpath
 .project
 .settings
+
+# NetBeans files
+nb-configuration.xml
+nbactions.xml
