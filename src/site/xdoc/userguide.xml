@@ -232,7 +232,7 @@ import org.apache.commons.mail.HtmlEmail;
     <section name="Authentication">
       <p>
         If you need to authenticate to your SMTP server, you can call the
-        <code>setAuthentication(userName,password)</code> method before sending
+        <code>setAuthentication(userName, password)</code> method before sending
         your email.  This will create an instance of
         <code>DefaultAuthenticator</code> which will be used by the JavaMail
         API when the email is sent.  Your server must support RFC2554 in
