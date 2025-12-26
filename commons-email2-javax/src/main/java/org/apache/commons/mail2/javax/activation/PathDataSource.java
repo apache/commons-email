@@ -100,7 +100,7 @@ public final class PathDataSource implements DataSource {
     }
 
     /**
-     * Gets an InputStream representing the the data and will throw an IOException if it cannot do so. This method will return a new instance of InputStream
+     * Gets an InputStream representing the data and will throw an IOException if it cannot do so. This method will return a new instance of InputStream
      * with each invocation.
      *
      * @return an InputStream
@@ -122,7 +122,7 @@ public final class PathDataSource implements DataSource {
     }
 
     /**
-     * Gets an OutputStream representing the the data and will throw an IOException if it cannot do so. This method will return a new instance of OutputStream
+     * Gets an OutputStream representing the data and will throw an IOException if it cannot do so. This method will return a new instance of OutputStream
      * with each invocation.
      *
      * @return an OutputStream
