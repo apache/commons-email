@@ -426,7 +426,7 @@ public class EmailTest extends AbstractEmailTest {
      * parameter. See https://issues.apache.org/jira/browse/EMAIL-1.
      *
      *
-     * Case 1: Setting a default charset results in adding that charset info to to the content type of a text/based content object.
+     * Case 1: Setting a default charset results in adding that charset info to the content type of a text/based content object.
      *
      * @throws Exception on any error
      */
