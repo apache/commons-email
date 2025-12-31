@@ -1261,9 +1261,9 @@ public abstract class Email {
     /**
      * Tests whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
      *
-     * @deprecated Since 1.3, use {@link #isStartTLSEnabled()} instead.
      * @return true if using STARTTLS for authentication, false otherwise.
      * @since 1.1
+     * @deprecated Since 1.3, use {@link #isStartTLSEnabled()} instead.
      */
     @Deprecated
     public boolean isTLS() {
