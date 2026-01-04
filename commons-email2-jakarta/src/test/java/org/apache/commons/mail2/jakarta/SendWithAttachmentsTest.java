@@ -103,8 +103,8 @@ class SendWithAttachmentsTest extends AbstractEmailTest {
         email.setFrom(strTestMailFrom);
         email.addTo(strTestMailTo);
 
-        /** File to be used to test file attachments (Must be valid) */
-        /** Use umlaut characters to test if the file name is properly encoded */
+        // File to be used to test file attachments (Must be valid).
+        // Use umlaut characters to test if the file name is properly encoded.
         // use short name to avoid folding. Otherwise need to unfold when checking result.
         attachment.setName("a>ä, o>ö, u>ü, au>äu");
         attachment.setDescription("Test Attachment Desc");
