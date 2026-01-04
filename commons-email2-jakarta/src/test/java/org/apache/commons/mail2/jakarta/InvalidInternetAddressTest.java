@@ -31,6 +31,7 @@ import jakarta.mail.internet.InternetAddress;
  * JUnit test case demonstrating InternetAddress validation.
  */
 class InvalidInternetAddressTest extends AbstractEmailTest {
+
     /** */
     private static final String VALID_QUOTED_EMAIL = "\"John O'Groats\"@domain.com";
 

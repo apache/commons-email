@@ -30,6 +30,7 @@ import jakarta.mail.util.ByteArrayDataSource;
  * @since 1.3
  */
 public class DataSourceClassPathResolver extends DataSourceBaseResolver {
+
     /** The base string of the resource relative to the classpath when resolving relative paths */
     private final String classPathBase;
 

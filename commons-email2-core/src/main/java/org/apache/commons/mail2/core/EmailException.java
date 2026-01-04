@@ -31,6 +31,7 @@ import java.util.function.Supplier;
  * @since 1.0
  */
 public class EmailException extends Exception {
+
     /** Serializable version identifier. */
     private static final long serialVersionUID = 5550674499282474616L;
 

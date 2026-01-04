@@ -49,6 +49,7 @@ import jakarta.mail.internet.MimeMessage;
  * Base test case for Email test classes.
  */
 public abstract class AbstractEmailTest {
+
     /** Padding at end of body added by wiser/send */
     public static final int BODY_END_PAD = 3;
 
