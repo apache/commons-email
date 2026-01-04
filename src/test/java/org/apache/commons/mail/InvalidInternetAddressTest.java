@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
  * @since 1.0
  */
 public class InvalidInternetAddressTest extends AbstractEmailTest {
+
     /** */
     private static final String VALID_QUOTED_EMAIL = "\"John O'Groats\"@domain.com";
 

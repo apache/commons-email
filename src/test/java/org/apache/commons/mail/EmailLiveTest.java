@@ -45,6 +45,7 @@ import org.junit.jupiter.api.Test;
  * http://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
  */
 public class EmailLiveTest extends AbstractEmailTest {
+
     /**
      * Factory method to create a pre-configured email instance.
      *

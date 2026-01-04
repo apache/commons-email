@@ -50,6 +50,7 @@ import org.subethamail.wiser.WiserMessage;
  * @since 1.0
  */
 public abstract class AbstractEmailTest {
+
     /** Padding at end of body added by wiser/send */
     public static final int BODY_END_PAD = 3;
 
