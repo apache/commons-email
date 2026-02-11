@@ -39,7 +39,7 @@
     <dependency>
       <groupId>com.sun.mail</groupId>
       <artifactId>jakarta.mail</artifactId>
-      <version>1.6.7</version>
+      <version>1.6.8</version>
     </dependency>
     <dependency>
       <groupId>org.subethamail</groupId>
