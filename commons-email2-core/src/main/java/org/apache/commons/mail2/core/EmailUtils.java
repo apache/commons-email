@@ -17,11 +17,16 @@
 
 package org.apache.commons.mail2.core;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -84,6 +89,44 @@ public final class EmailUtils {
         SAFE_URL.set(')');
         SAFE_URL.set(',');
         SAFE_URL.set('@');
+    }
+
+    /**
+     * Checks that the given file exists and is not a directory.
+     *
+     * @param file the file to check.
+     * @return the given file if it exists and is not a directory.
+     * @throws IOException if the given file does not exist or is a directory.
+     * @since 2.0.0-M2
+     */
+    public static File check(final File file) throws IOException {
+        Objects.requireNonNull(file, "file");
+        if (!file.exists()) {
+            throw new IOException("\"" + file + "\" does not exist");
+        }
+        if (file.isDirectory()) {
+            throw new IOException("\"" + file + "\" is a directory");
+        }
+        return file;
+    }
+
+    /**
+     * Checks that the given file exists and is not a directory.
+     *
+     * @param file the file to check.
+     * @return the given file if it exists and is not a directory.
+     * @throws IOException if the given file does not exist or is a directory.
+     * @since 2.0.0-M2
+     */
+    public static Path check(final Path file) throws IOException {
+        Objects.requireNonNull(file, "file");
+        if (!Files.exists(file)) {
+            throw new IOException("\"" + file + "\" does not exist");
+        }
+        if (Files.isDirectory(file)) {
+            throw new IOException("\"" + file + "\" is a directory");
+        }
+        return file;
     }
 
     /**

@@ -27,6 +27,7 @@
       <!-- FIX -->
       <action type="update" due-to="Derek Wickern, Gary Gregory" dev="ggregory">Handle IllegalArgumentException thrown for invalid email address #328.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Apache RAT plugin console warnings.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory, Henri Cook, Sebb">MultiPartEmail attach methods now throw an IOException if the given file is a directory.</action>
       <!-- UPDATE -->
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">Bump commons-parent from 72 to 96 #279, #293, #297, #304, #350, #376, #386, #390, #392.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.21.0 #290, #296, #302, #319, #336, #338, #344, #353, #366.</action>

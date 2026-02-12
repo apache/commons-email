@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.util.Objects;
@@ -202,7 +201,7 @@ public class MultiPartEmail extends Email {
             String fileName = null;
             try {
                 fileName = attachment.getPath();
-                final File file = new File(fileName);
+                final File file = EmailUtils.check(new File(fileName));
                 if (!file.exists()) {
                     throw new IOException("\"" + fileName + "\" does not exist");
                 }
@@ -225,14 +224,11 @@ public class MultiPartEmail extends Email {
      * @since 1.3
      */
     public MultiPartEmail attach(final File file) throws EmailException {
-        final String fileName = file.getAbsolutePath();
         try {
-            if (!file.exists()) {
-                throw new IOException("\"" + fileName + "\" does not exist");
-            }
+            EmailUtils.check(file);
             return attach(new FileDataSource(file), file.getName(), null, EmailAttachment.ATTACHMENT);
         } catch (final IOException e) {
-            throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
+            throw new EmailException("Cannot attach file \"" + file + "\"", e);
         }
     }
 
@@ -246,15 +242,12 @@ public class MultiPartEmail extends Email {
      * @since 1.6.0
      */
     public MultiPartEmail attach(final Path file, final OpenOption... options) throws EmailException {
-        final Path fileName = file.toAbsolutePath();
         try {
-            if (!Files.exists(file)) {
-                throw new IOException("\"" + fileName + "\" does not exist");
-            }
+            EmailUtils.check(file);
             return attach(new PathDataSource(file, FileTypeMap.getDefaultFileTypeMap(), options), Objects.toString(file.getFileName(), null), null,
                     EmailAttachment.ATTACHMENT);
         } catch (final IOException e) {
-            throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
+            throw new EmailException("Cannot attach file \"" + file + "\"", e);
         }
     }
 
@@ -307,7 +300,6 @@ public class MultiPartEmail extends Email {
                 // before a multipart message can be sent, we must make sure that
                 // the content for the main body part was actually set. If not,
                 // an IOException will be thrown during super.send().
-
                 final BodyPart body = getPrimaryBodyPart();
                 try {
                     body.getContent();
@@ -318,11 +310,9 @@ public class MultiPartEmail extends Email {
                     // throw new EmailException(e);
                 }
             }
-
             if (subType != null) {
                 getContainer().setSubType(subType);
             }
-
             super.buildMimeMessage();
         } catch (final MessagingException e) {
             throw new EmailException(e);
