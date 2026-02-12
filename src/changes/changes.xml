@@ -27,6 +27,8 @@
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix minor PMD violations (Unnecessary qualifier).</action>     
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Apache RAT plugin console warnings.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix tests on Java 25 and up.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory, Henri Cook, Sebb">MultiPartEmail attach methods now throw an IOException if the given file is a directory.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 65 to 96.</action>

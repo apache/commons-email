@@ -133,6 +133,10 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         final EmailAttachment attachment4 = new EmailAttachment();
         attachment4.setPath("");
         assertThrows(EmailException.class, () -> email.attach(attachment4));
+        attachment4.setPath("ThisFileDoesNotExist.txt");
+        assertThrows(EmailException.class, () -> email.attach(attachment4));
+        attachment4.setPath("target"); // a directory, not a file
+        assertThrows(EmailException.class, () -> email.attach(attachment4));
     }
 
     @Test
@@ -175,6 +179,10 @@ public class MultiPartEmailTest extends AbstractEmailTest {
         // bad file
         final EmailAttachment attachment4 = new EmailAttachment();
         attachment4.setPath("");
+        assertThrows(EmailException.class, () -> email.attach(attachment4));
+        attachment4.setPath("ThisFileDoesNotExist.txt");
+        assertThrows(EmailException.class, () -> email.attach(attachment4));
+        attachment4.setPath("target"); // a directory, not a file
         assertThrows(EmailException.class, () -> email.attach(attachment4));
     }
 

@@ -463,7 +463,6 @@
             </plugin>
         </plugins>
     </reporting>
-
     <profiles>
       <profile>
         <id>java17</id>
@@ -471,6 +470,9 @@
         <activation>
           <jdk>[17,)</jdk>
         </activation>
+        <properties>
+          <mockito-core.version>5.21.0</mockito-core.version>
+        </properties>
         <build>
           <plugins>
             <plugin>
@@ -495,14 +497,13 @@
       </profile>
       <profile>
         <id>java8</id>
-          <activation>
-              <jdk>[1.8,11)</jdk>
-          </activation>
-          <properties>
-            <mockito-core.version>4.11.0</mockito-core.version>
-          </properties>
+        <activation>
+          <jdk>[1.8,11)</jdk>
+        </activation>
+        <properties>
+          <mockito-core.version>4.11.0</mockito-core.version>
+        </properties>
       </profile>
-
         <profile>
             <id>rc</id>
             <distributionManagement>
@@ -515,5 +516,4 @@
             </distributionManagement>
         </profile>
     </profiles>
-
 </project>
