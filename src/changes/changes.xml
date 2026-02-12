@@ -33,6 +33,7 @@
       <!-- UPDATE -->
       <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 65 to 96.</action>
       <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-io:commons-io from 2.20.0 to 2.21.0.</action>
+      <action type="update" dev="ggregory" due-to="Gary Gregory, Henri Cook">Bump com.sun.mail:jakarta.mail from 1.6.7 to 1.6.8.</action>
     </release>
     <release version="1.6.0" date="2023-12-17" description="Feature release (Java 8 or above).">
       <!-- FIX -->
