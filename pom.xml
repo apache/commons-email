@@ -278,7 +278,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito-core.version}</version>
+            <version>${commons.mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -299,7 +299,7 @@
         <commons.bc.version>1.6.0</commons.bc.version>
         <!-- override the default commons encoding property -->
         <commons.encoding>UTF-8</commons.encoding>
-        <mockito-core.version>5.8.0</mockito-core.version>
+        <commons.mockito.version>5.8.0</commons.mockito.version>
     </properties>
 
     <build>
@@ -471,7 +471,7 @@
           <jdk>[17,)</jdk>
         </activation>
         <properties>
-          <mockito-core.version>5.21.0</mockito-core.version>
+          <commons.mockito.version>5.21.0</commons.mockito.version>
         </properties>
         <build>
           <plugins>
@@ -501,7 +501,7 @@
           <jdk>[1.8,11)</jdk>
         </activation>
         <properties>
-          <mockito-core.version>4.11.0</mockito-core.version>
+          <commons.mockito.version>4.11.0</commons.mockito.version>
         </properties>
       </profile>
         <profile>
