@@ -471,7 +471,7 @@
           <jdk>[17,)</jdk>
         </activation>
         <properties>
-          <commons.mockito.version>5.21.0</commons.mockito.version>
+          <commons.mockito.version>5.23.0</commons.mockito.version>
         </properties>
         <build>
           <plugins>
