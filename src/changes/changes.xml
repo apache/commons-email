@@ -33,7 +33,7 @@
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.mockito:mockito-core from 5.13.0 to 5.23.0 #290, #296, #302, #319, #336, #338, #344, #353, #366, #397.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump org.slf4j:slf4j-jdk14 from 2.0.13 to 2.0.17 #278, #333.</action>
       <action type="update" due-to="Gary Gregory" dev="ggregory">Bump com.sun.mail:jakarta.mail from 2.0.1 to 2.0.2.</action>
-      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump commons-io:commons-io from 2.17.0 to 2.21.0 #311.</action>
+      <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump commons-io:commons-io from 2.17.0 to 2.22.0 #311.</action>
       <action type="update" due-to="Gary Gregory, Dependabot" dev="ggregory">[test] Bump com.github.davidmoten:subethasmtp from 7.1.1 to 7.2.2 #322, #337, #345, #365, #374, #396.</action>
       <action type="update" due-to="Gary Gregory, Henri Cook" dev="ggregory">Bump commons-email2-jakarta from com.sun.mail:jakarta.mail:2.0.2 to org.eclipse.angus:jakarta.mail:2.0.5.</action>
       <action type="update" due-to="Gary Gregory, Henri Cook" dev="ggregory">Bump commons-email2-javax from com.sun.mail:jakarta.mail 1.6.7 to 1.6.8.</action>
