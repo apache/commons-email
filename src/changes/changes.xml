@@ -32,7 +32,7 @@
       <!-- ADD -->
       <!-- UPDATE -->
       <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 65 to 98.</action>
-      <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-io:commons-io from 2.20.0 to 2.21.0.</action>
+      <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-io:commons-io from 2.20.0 to 2.22.0.</action>
       <action type="update" dev="ggregory" due-to="Gary Gregory, Henri Cook">Bump com.sun.mail:jakarta.mail from 1.6.7 to 1.6.8.</action>
       <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons.mockito.version from 5.21.0 to 5.23.0 on Java 17+.</action>
     </release>
