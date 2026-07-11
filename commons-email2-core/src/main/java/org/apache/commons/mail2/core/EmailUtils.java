@@ -95,7 +95,7 @@ public final class EmailUtils {
      * Checks that the given file exists and is not a directory.
      *
      * @param file the file to check.
-     * @return the given file if it exists and is not a directory.
+     * @return The given file if it exists and is not a directory.
      * @throws IOException if the given file does not exist or is a directory.
      * @since 2.0.0-M2
      */
@@ -114,7 +114,7 @@ public final class EmailUtils {
      * Checks that the given file exists and is not a directory.
      *
      * @param file the file to check.
-     * @return the given file if it exists and is not a directory.
+     * @return The given file if it exists and is not a directory.
      * @throws IOException if the given file does not exist or is a directory.
      * @since 2.0.0-M2
      */
@@ -236,7 +236,7 @@ public final class EmailUtils {
      * @param numbers only allow numbers?
      * @param chars   the set of chars to choose randoms from. If {@code null}, then it will use the set of all chars.
      * @param random  a source of randomness.
-     * @return the random string
+     * @return The random string
      * @throws IllegalArgumentException if {@code count} &lt; 0.
      */
     private static String random(int count, int start, int end, final boolean letters, final boolean numbers, final char[] chars, final Random random) {
@@ -290,7 +290,7 @@ public final class EmailUtils {
      * </p>
      *
      * @param count the length of random string to create
-     * @return the random string
+     * @return The random string
      */
     public static String randomAlphabetic(final int count) {
         return random(count, 0, 0, true, false, null, RANDOM);

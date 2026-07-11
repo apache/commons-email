@@ -88,7 +88,7 @@ public class MimeMessageParser {
      *
      * @param parent the parent multi-part
      * @param part   the current part to be processed
-     * @return the DataSource
+     * @return The DataSource
      * @throws MessagingException creating the DataSource failed
      * @throws IOException        error getting InputStream or unsupported encoding
      */
@@ -107,7 +107,7 @@ public class MimeMessageParser {
      * </p>
      *
      * @param cid the content-id of the attachment
-     * @return the corresponding datasource or null if nothing was found
+     * @return The corresponding datasource or null if nothing was found
      * @since 1.3.4
      */
     public DataSource findAttachmentByCid(final String cid) {
@@ -118,7 +118,7 @@ public class MimeMessageParser {
      * Find an attachment using its name.
      *
      * @param name the name of the attachment
-     * @return the corresponding datasource or null if nothing was found
+     * @return The corresponding datasource or null if nothing was found
      */
     public DataSource findAttachmentByName(final String name) {
         for (final DataSource dataSource : getAttachmentList()) {
@@ -132,7 +132,7 @@ public class MimeMessageParser {
     /**
      * Gets the attachment list.
      *
-     * @return the attachment list.
+     * @return The attachment list.
      */
     public List<DataSource> getAttachmentList() {
         return attachmentList;
@@ -142,7 +142,7 @@ public class MimeMessageParser {
      * Gets the MIME type.
      *
      * @param fullMimeType the mime type from the mail API
-     * @return the real mime type
+     * @return The real mime type
      */
     private String getBaseMimeType(final String fullMimeType) {
         final int pos = fullMimeType.indexOf(';');
@@ -152,7 +152,7 @@ public class MimeMessageParser {
     /**
      * Gets the BCC Address list.
      *
-     * @return the 'BCC' recipients of the message
+     * @return The 'BCC' recipients of the message
      * @throws MessagingException determining the recipients failed
      */
     public List<Address> getBcc() throws MessagingException {
@@ -162,7 +162,7 @@ public class MimeMessageParser {
     /**
      * Gets the CC Address list.
      *
-     * @return the 'CC' recipients of the message
+     * @return The 'CC' recipients of the message
      * @throws MessagingException determining the recipients failed
      */
     public List<Address> getCc() throws MessagingException {
@@ -175,7 +175,7 @@ public class MimeMessageParser {
      * The content-ids are stripped of any angle brackets, i.e. "part1" instead of "&lt;part1&gt;".
      * </p>
      *
-     * @return the collection of content ids.
+     * @return The collection of content ids.
      * @since 1.3.4
      */
     public Collection<String> getContentIds() {
@@ -187,7 +187,7 @@ public class MimeMessageParser {
      *
      * @param part       the mail part
      * @param dataSource the data source
-     * @return the name of the data source or {@code null} if no name can be determined
+     * @return The name of the data source or {@code null} if no name can be determined
      * @throws MessagingException           accessing the part failed
      * @throws UnsupportedEncodingException decoding the text failed
      */
@@ -207,7 +207,7 @@ public class MimeMessageParser {
     /**
      * Gets the FROM field.
      *
-     * @return the FROM field of the message
+     * @return The FROM field of the message
      * @throws MessagingException parsing the mime message failed
      */
     public String getFrom() throws MessagingException {
@@ -221,7 +221,7 @@ public class MimeMessageParser {
     /**
      * Gets the htmlContent if any.
      *
-     * @return the htmlContent if any
+     * @return The htmlContent if any
      */
     public String getHtmlContent() {
         return htmlContent;
@@ -230,7 +230,7 @@ public class MimeMessageParser {
     /**
      * Gets the MimeMessage.
      *
-     * @return the mimeMessage.
+     * @return The mimeMessage.
      */
     public MimeMessage getMimeMessage() {
         return mimeMessage;
@@ -239,7 +239,7 @@ public class MimeMessageParser {
     /**
      * Gets the plain content if any.
      *
-     * @return the plainContent if any
+     * @return The plainContent if any
      */
     public String getPlainContent() {
         return plainContent;
@@ -248,7 +248,7 @@ public class MimeMessageParser {
     /**
      * Gets the 'replyTo' address of the email.
      *
-     * @return the 'replyTo' address of the email
+     * @return The 'replyTo' address of the email
      * @throws MessagingException parsing the mime message failed
      */
     public String getReplyTo() throws MessagingException {
@@ -262,7 +262,7 @@ public class MimeMessageParser {
     /**
      * Gets the MIME message subject.
      *
-     * @return the MIME message subject.
+     * @return The MIME message subject.
      * @throws MessagingException parsing the mime message failed.
      */
     public String getSubject() throws MessagingException {
@@ -272,7 +272,7 @@ public class MimeMessageParser {
     /**
      * Gets the MIME message 'to' list.
      *
-     * @return the 'to' recipients of the message.
+     * @return The 'to' recipients of the message.
      * @throws MessagingException determining the recipients failed
      */
     public List<Address> getTo() throws MessagingException {
@@ -335,7 +335,7 @@ public class MimeMessageParser {
     /**
      * Tests whether this is multipart.
      *
-     * @return the isMultiPart.
+     * @return The isMultiPart.
      */
     public boolean isMultipart() {
         return isMultiPart;

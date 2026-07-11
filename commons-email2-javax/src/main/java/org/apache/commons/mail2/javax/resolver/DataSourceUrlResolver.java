@@ -60,7 +60,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
      * Create an URL based on a base URL and a resource location suitable for loading the resource.
      *
      * @param resourceLocation a resource location
-     * @return the corresponding URL
+     * @return The corresponding URL
      * @throws java.net.MalformedURLException creating the URL failed
      */
     protected URL createUrl(final String resourceLocation) throws MalformedURLException {
@@ -83,7 +83,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     /**
      * Gets the base URL used for resolving relative resource locations.
      *
-     * @return the baseUrl
+     * @return The baseUrl
      */
     public URL getBaseUrl() {
         return baseUrl;

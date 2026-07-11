@@ -95,7 +95,7 @@ public class ImageHtmlEmail extends HtmlEmail {
     /**
      * Gets the data source resolver.
      *
-     * @return the resolver
+     * @return The resolver
      */
     public DataSourceResolver getDataSourceResolver() {
         return dataSourceResolver;
@@ -106,7 +106,7 @@ public class ImageHtmlEmail extends HtmlEmail {
      *
      * @param htmlMessage the HTML message to analyze
      * @param pattern     the regular expression to find resources
-     * @return the HTML message containing "cid" references
+     * @return The HTML message containing "cid" references
      * @throws EmailException creating the email failed
      * @throws IOException    resolving the resources failed
      */

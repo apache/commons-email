@@ -76,7 +76,7 @@ public final class DataSourcePathResolver extends DataSourceBaseResolver {
     /**
      * Gets the base directory used for resolving relative resource locations.
      *
-     * @return the baseUrl
+     * @return The baseUrl
      */
     public Path getBaseDir() {
         return baseDir;

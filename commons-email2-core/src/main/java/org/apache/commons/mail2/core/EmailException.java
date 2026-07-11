@@ -42,7 +42,7 @@ public class EmailException extends Exception {
      * @param test    test condition.
      * @param subject the subject to return if we don't throw.
      * @param message the exception message.
-     * @return the given subject.
+     * @return The given subject.
      * @throws EmailException if the supplier evaluates to true.
      */
     public static <T> T check(final Supplier<Boolean> test, final T subject, final Supplier<String> message) throws EmailException {
@@ -58,7 +58,7 @@ public class EmailException extends Exception {
      * @param <T>     the type of elements in the collection.
      * @param value   the value to test.
      * @param message the exception message.
-     * @return the given subject.
+     * @return The given subject.
      * @throws EmailException if the collection is empty.
      */
     public static <T> Collection<T> checkNonEmpty(final Collection<T> value, final Supplier<String> message) throws EmailException {
@@ -70,7 +70,7 @@ public class EmailException extends Exception {
      *
      * @param message the exception message.
      * @param value   the value to test.
-     * @return the given subject.
+     * @return The given subject.
      * @throws EmailException if the string is empty.
      */
     public static String checkNonEmpty(final String value, final Supplier<String> message) throws EmailException {
@@ -83,7 +83,7 @@ public class EmailException extends Exception {
      * @param <T>     the array type.
      * @param message the exception message.
      * @param value   the value to test.
-     * @return the given subject.
+     * @return The given subject.
      * @throws EmailException if the array is empty.
      */
     public static <T> T[] checkNonEmpty(final T[] value, final Supplier<String> message) throws EmailException {
@@ -96,7 +96,7 @@ public class EmailException extends Exception {
      * @param <T>     the value type.
      * @param message the exception message.
      * @param value   the value to test.
-     * @return the given subject.
+     * @return The given subject.
      * @throws EmailException if the value is null.
      */
     public static <T> T checkNonNull(final T value, final Supplier<String> message) throws EmailException {

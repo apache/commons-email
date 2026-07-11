@@ -323,7 +323,7 @@ public class MultiPartEmail extends Email {
     /**
      * Creates a body part object. Can be overridden if you don't want to create a BodyPart.
      *
-     * @return the created body part
+     * @return The created body part
      */
     protected BodyPart createBodyPart() {
         return new MimeBodyPart();
@@ -332,7 +332,7 @@ public class MultiPartEmail extends Email {
     /**
      * Creates a mime multipart object.
      *
-     * @return the created mime part
+     * @return The created mime part
      */
     protected MimeMultipart createMimeMultipart() {
         return new MimeMultipart();

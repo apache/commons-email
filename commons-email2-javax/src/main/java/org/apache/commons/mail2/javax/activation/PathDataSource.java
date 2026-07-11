@@ -91,7 +91,7 @@ public final class PathDataSource implements DataSource {
      * By default, the {@link FileTypeMap} used will be a {@link MimetypesFileTypeMap}.
      * </p>
      *
-     * @return the MIME Type
+     * @return The MIME Type
      * @see FileTypeMap#getDefaultFileTypeMap
      */
     @Override
@@ -113,7 +113,7 @@ public final class PathDataSource implements DataSource {
     /**
      * Gets the <em>name</em> of this object. The FileDataSource will return the file name of the object.
      *
-     * @return the name of the object or null.
+     * @return The name of the object or null.
      * @see javax.activation.DataSource
      */
     @Override
@@ -135,7 +135,7 @@ public final class PathDataSource implements DataSource {
     /**
      * Gets the File object that corresponds to this PathDataSource.
      *
-     * @return the File object for the file represented by this object.
+     * @return The File object for the file represented by this object.
      */
     public Path getPath() {
         return path;

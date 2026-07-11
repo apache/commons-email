@@ -146,7 +146,7 @@ public abstract class AbstractEmailTest {
     /**
      * Gets the mail server port.
      *
-     * @return the port the server is running on.
+     * @return The port the server is running on.
      */
     protected int getMailServerPort() {
         return mailServerPort;
