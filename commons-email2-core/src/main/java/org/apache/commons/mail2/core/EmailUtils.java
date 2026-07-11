@@ -133,7 +133,7 @@ public final class EmailUtils {
      * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
      *
      * @param input the input string to be URL encoded
-     * @return a URL encoded string
+     * @return A URL encoded string
      * @see <a href="https://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
     public static String encodeUrl(final String input) {
@@ -300,7 +300,7 @@ public final class EmailUtils {
      * Replaces end-of-line characters with spaces.
      *
      * @param input the input string to be scanned.
-     * @return a clean string
+     * @return A clean string
      */
     public static String replaceEndOfLineCharactersWithSpaces(final String input) {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
@@ -310,7 +310,7 @@ public final class EmailUtils {
      * Converts the given string to lower case.
      *
      * @param value the input string.
-     * @return a lower case string.
+     * @return A lower case string.
      */
     public static String toLower(final String value) {
         return value.toLowerCase(Locale.ROOT);

@@ -767,7 +767,7 @@ public abstract class Email {
     /**
      * Gets all headers on an Email.
      *
-     * @return a Map of all headers.
+     * @return A Map of all headers.
      * @since 1.5
      */
     public Map<String, String> getHeaders() {

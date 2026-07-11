@@ -388,7 +388,7 @@ public class MimeMessageParser {
      * Strips the content id of any whitespace and angle brackets.
      *
      * @param contentId the string to strip
-     * @return a stripped version of the content id
+     * @return A stripped version of the content id
      */
     private String stripContentId(final String contentId) {
         return contentId == null ? null : contentId.trim().replaceAll("[\\<\\>]", "");
