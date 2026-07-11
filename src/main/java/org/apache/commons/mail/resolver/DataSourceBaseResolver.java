@@ -47,7 +47,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
     /**
      * Tests whether the argument is a content id.
      *
-     * @param resourceLocation the resource location to test.
+     * @param resourceLocation The resource location to test.
      * @return true if it is a CID.
      */
     protected boolean isCid(final String resourceLocation) {
@@ -57,7 +57,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
     /**
      * Tests whether this a file URL.
      *
-     * @param urlString the URL string.
+     * @param urlString The URL string.
      * @return true if it is a file URL.
      */
     protected boolean isFileUrl(final String urlString) {
@@ -67,7 +67,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
     /**
      * Tests whether this a HTTP or HTTPS URL.
      *
-     * @param urlString the URL string to test.
+     * @param urlString The URL string to test.
      * @return true if it is a HTTP or HTTPS URL.
      */
     protected boolean isHttpUrl(final String urlString) {

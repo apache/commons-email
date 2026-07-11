@@ -44,7 +44,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param classPathBase a base class path
+     * @param classPathBase A base class path
      */
     public DataSourceClassPathResolver(final String classPathBase) {
         this(classPathBase, false);
@@ -53,7 +53,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param classPathBase a base class path
+     * @param classPathBase A base class path
      * @param lenient       shall we ignore resources not found or throw an exception?
      */
     public DataSourceClassPathResolver(final String classPathBase, final boolean lenient) {
@@ -73,7 +73,7 @@ public class DataSourceClassPathResolver extends DataSourceBaseResolver {
     /**
      * Returns the resource name for a given resource location.
      *
-     * @param resourceLocation the resource location
+     * @param resourceLocation The resource location
      * @return {@link #getClassPathBase()} + {@code resourceLocation}
      * @see #getClassPathBase()
      */

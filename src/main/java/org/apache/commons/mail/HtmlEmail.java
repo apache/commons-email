@@ -97,9 +97,9 @@ public class HtmlEmail extends MultiPartEmail {
         /**
          * Creates an InlineImage object to represent the specified content ID and {@code MimeBodyPart}.
          *
-         * @param cid          the generated content ID, not null.
-         * @param dataSource   the {@code DataSource} that represents the content, not null.
-         * @param mimeBodyPart the {@code MimeBodyPart} that contains the encoded data, not null.
+         * @param cid          The generated content ID, not null.
+         * @param dataSource   The {@code DataSource} that represents the content, not null.
+         * @param mimeBodyPart The {@code MimeBodyPart} that contains the encoded data, not null.
          */
         private InlineImage(final String cid, final DataSource dataSource, final MimeBodyPart mimeBodyPart) {
             this.cid = Objects.requireNonNull(cid, "cid");
@@ -306,8 +306,8 @@ public class HtmlEmail extends MultiPartEmail {
     /**
      * Embeds the specified {@code DataSource} in the HTML using a randomly generated Content-ID. Returns the generated Content-ID string.
      *
-     * @param dataSource the {@code DataSource} to embed
-     * @param name       the name that will be set in the file name header field
+     * @param dataSource The {@code DataSource} to embed
+     * @param name       The name that will be set in the file name header field
      * @return The generated Content-ID for this {@code DataSource}
      * @throws EmailException if the embedding fails or if {@code name} is null or empty
      * @see #embed(DataSource, String, String)
@@ -334,9 +334,9 @@ public class HtmlEmail extends MultiPartEmail {
     /**
      * Embeds the specified {@code DataSource} in the HTML using the specified Content-ID. Returns the specified Content-ID string.
      *
-     * @param dataSource the {@code DataSource} to embed
-     * @param name       the name that will be set in the file name header field
-     * @param cid        the Content-ID to use for this {@code DataSource}
+     * @param dataSource The {@code DataSource} to embed
+     * @param name       The name that will be set in the file name header field
+     * @param cid        The Content-ID to use for this {@code DataSource}
      * @return The URL encoded Content-ID for this {@code DataSource}
      * @throws EmailException if the embedding fails or if {@code name} is null or empty
      * @since 1.1
@@ -386,7 +386,7 @@ public class HtmlEmail extends MultiPartEmail {
      * changed.
      *
      * @param file The {@code File} to embed
-     * @param cid  the Content-ID to use for the embedded {@code File}
+     * @param cid  The Content-ID to use for the embedded {@code File}
      * @return A String with the Content-ID of the file.
      * @throws EmailException when the supplied {@code File} cannot be used or if the file has already been embedded; also see
      *                        {@link javax.mail.internet.MimeBodyPart} for definitions
@@ -551,7 +551,7 @@ public class HtmlEmail extends MultiPartEmail {
      * message is formatted in HTML for the HTML part of the message; it is left as is in the alternate text part.
      * </p>
      *
-     * @param msg the message text to use
+     * @param msg The message text to use
      * @return this {@code HtmlEmail}
      * @throws EmailException if msg is null or empty; see javax.mail.internet.MimeBodyPart for definitions
      * @since 1.0

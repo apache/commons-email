@@ -42,7 +42,7 @@ public class DataSourceFileResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param baseDir the base directory of the resource when resolving relative paths
+     * @param baseDir The base directory of the resource when resolving relative paths
      */
     public DataSourceFileResolver(final File baseDir) {
         this.baseDir = baseDir;
@@ -51,7 +51,7 @@ public class DataSourceFileResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param baseDir the base directory of the resource when resolving relative paths
+     * @param baseDir The base directory of the resource when resolving relative paths
      * @param lenient shall we ignore resources not found or complain with an exception
      */
     public DataSourceFileResolver(final File baseDir, final boolean lenient) {

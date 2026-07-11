@@ -101,8 +101,8 @@ public class ImageHtmlEmail extends HtmlEmail {
     /**
      * Replace the regexp matching resource locations with "cid:..." references.
      *
-     * @param htmlMessage the HTML message to analyze
-     * @param pattern     the regular expression to find resources
+     * @param htmlMessage The HTML message to analyze
+     * @param pattern     The regular expression to find resources
      * @return The HTML message containing "cid" references
      * @throws EmailException creating the email failed
      * @throws IOException    resolving the resources failed
@@ -170,7 +170,7 @@ public class ImageHtmlEmail extends HtmlEmail {
     /**
      * Sets the data source resolver.
      *
-     * @param dataSourceResolver the resolver
+     * @param dataSourceResolver The resolver
      */
     public void setDataSourceResolver(final DataSourceResolver dataSourceResolver) {
         this.dataSourceResolver = dataSourceResolver;

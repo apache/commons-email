@@ -84,7 +84,7 @@ public class EmailException extends Exception {
     /**
      * Constructs a new {@code EmailException} with specified detail message.
      *
-     * @param msg the error message.
+     * @param msg The error message.
      */
     public EmailException(final String msg) {
         super(msg);
@@ -93,8 +93,8 @@ public class EmailException extends Exception {
     /**
      * Constructs a new {@code EmailException} with specified detail message and nested {@code Throwable} root cause.
      *
-     * @param msg       the error message.
-     * @param rootCause the exception or error that caused this exception to be thrown.
+     * @param msg       The error message.
+     * @param rootCause The exception or error that caused this exception to be thrown.
      */
     public EmailException(final String msg, final Throwable rootCause) {
         super(msg, rootCause);
@@ -103,7 +103,7 @@ public class EmailException extends Exception {
     /**
      * Constructs a new {@code EmailException} with specified nested {@code Throwable} root cause.
      *
-     * @param rootCause the exception or error that caused this exception to be thrown.
+     * @param rootCause The exception or error that caused this exception to be thrown.
      */
     public EmailException(final Throwable rootCause) {
         super(rootCause);
@@ -120,7 +120,7 @@ public class EmailException extends Exception {
     /**
      * Prints the stack trace of this exception to the specified stream.
      *
-     * @param out the {@code PrintStream} to use for output
+     * @param out The {@code PrintStream} to use for output
      */
     @Override
     public void printStackTrace(final PrintStream out) {
@@ -135,7 +135,7 @@ public class EmailException extends Exception {
     /**
      * Prints the stack trace of this exception to the specified writer.
      *
-     * @param out the {@code PrintWriter} to use for output
+     * @param out The {@code PrintWriter} to use for output
      */
     @Override
     public void printStackTrace(final PrintWriter out) {

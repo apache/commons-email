@@ -48,7 +48,7 @@ public final class DataSourcePathResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param baseDir the base directory of the resource when resolving relative paths
+     * @param baseDir The base directory of the resource when resolving relative paths
      */
     public DataSourcePathResolver(final Path baseDir) {
         this(baseDir, false);
@@ -57,7 +57,7 @@ public final class DataSourcePathResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param baseDir the base directory of the resource when resolving relative paths
+     * @param baseDir The base directory of the resource when resolving relative paths
      * @param lenient shall we ignore resources not found or complain with an exception
      * @param options options for opening streams.
      */

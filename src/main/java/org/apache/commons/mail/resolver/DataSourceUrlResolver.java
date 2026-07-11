@@ -37,7 +37,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param baseUrl the base URL used for resolving relative resource locations
+     * @param baseUrl The base URL used for resolving relative resource locations
      */
     public DataSourceUrlResolver(final URL baseUrl) {
         this.baseUrl = baseUrl;
@@ -46,7 +46,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param baseUrl the base URL used for resolving relative resource locations
+     * @param baseUrl The base URL used for resolving relative resource locations
      * @param lenient shall we ignore resources not found or complain with an exception
      */
     public DataSourceUrlResolver(final URL baseUrl, final boolean lenient) {
@@ -57,7 +57,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver {
     /**
      * Create an URL based on a base URL and a resource location suitable for loading the resource.
      *
-     * @param resourceLocation a resource location
+     * @param resourceLocation A resource location
      * @return The corresponding URL
      * @throws java.net.MalformedURLException creating the URL failed
      */

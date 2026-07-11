@@ -99,7 +99,7 @@ final class EmailUtils {
     /**
      * Checks that the given file exists and is not a directory.
      *
-     * @param file the file to check.
+     * @param file The file to check.
      * @return The given file if it exists and is not a directory.
      * @throws IOException if the given file does not exist or is a directory.
      */
@@ -117,7 +117,7 @@ final class EmailUtils {
     /**
      * Checks that the given file exists and is not a directory.
      *
-     * @param file the file to check.
+     * @param file The file to check.
      * @return The given file if it exists and is not a directory.
      * @throws IOException if the given file does not exist or is a directory.
      */
@@ -135,7 +135,7 @@ final class EmailUtils {
     /**
      * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
      *
-     * @param input the input string to be URL encoded
+     * @param input The input string to be URL encoded
      * @return A URL encoded string
      * @see <a href="https://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
@@ -177,7 +177,7 @@ final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 240418
      * </p>
      *
-     * @param str the String to check, may be null
+     * @param str The String to check, may be null
      * @return {@code true} if the String is empty or null
      */
     static boolean isEmpty(final String str) {
@@ -190,7 +190,7 @@ final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 240418
      * </p>
      *
-     * @param str the String to check, may be null
+     * @param str The String to check, may be null
      * @return {@code true} if the String is not empty and not null
      */
     static boolean isNotEmpty(final String str) {
@@ -214,13 +214,13 @@ final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 201930
      * </p>
      *
-     * @param count   the length of random string to create
-     * @param start   the position in set of chars to start at
-     * @param end     the position in set of chars to end before
+     * @param count   The length of random string to create
+     * @param start   The position in set of chars to start at
+     * @param end     The position in set of chars to end before
      * @param letters only allow letters?
      * @param numbers only allow numbers?
-     * @param chars   the set of chars to choose randoms from. If {@code null}, then it will use the set of all chars.
-     * @param random  a source of randomness.
+     * @param chars   The set of chars to choose randoms from. If {@code null}, then it will use the set of all chars.
+     * @param random  A source of randomness.
      * @return The random string
      * @throws IllegalArgumentException if {@code count} &lt; 0.
      */
@@ -274,7 +274,7 @@ final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 201930
      * </p>
      *
-     * @param count the length of random string to create
+     * @param count The length of random string to create
      * @return The random string
      */
     static String randomAlphabetic(final int count) {
@@ -284,7 +284,7 @@ final class EmailUtils {
     /**
      * Replaces end-of-line characters with spaces.
      *
-     * @param input the input string to be scanned.
+     * @param input The input string to be scanned.
      * @return A clean string
      */
     static String replaceEndOfLineCharactersWithSpaces(final String input) {
@@ -298,8 +298,8 @@ final class EmailUtils {
     /**
      * Convenience method to write a MimeMessage into a file.
      *
-     * @param resultFile  the file containing the MimeMessage
-     * @param mimeMessage the MimeMessage to write
+     * @param resultFile  The file containing the MimeMessage
+     * @param mimeMessage The MimeMessage to write
      * @throws IOException        writing the MimeMessage failed
      * @throws MessagingException writing the MimeMessage failed
      */
