@@ -77,7 +77,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
     /**
      * Tests whether to ignore resources not found or throw an exception.
      *
-     * @return the lenient flag.
+     * @return The lenient flag.
      */
     public boolean isLenient() {
         return lenient;

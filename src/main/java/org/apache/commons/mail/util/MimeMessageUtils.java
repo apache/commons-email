@@ -44,7 +44,7 @@ public final class MimeMessageUtils {
      *
      * @param session the mail session.
      * @param source  the input data.
-     * @return the MimeMessage.
+     * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
      */
@@ -59,7 +59,7 @@ public final class MimeMessageUtils {
      *
      * @param session the mail session.
      * @param source  the input data.
-     * @return the MimeMessage.
+     * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
      */
@@ -74,7 +74,7 @@ public final class MimeMessageUtils {
      *
      * @param session the mail session.
      * @param source  the input data.
-     * @return the MimeMessage.
+     * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      */
     public static MimeMessage createMimeMessage(final Session session, final InputStream source) throws MessagingException {
@@ -87,7 +87,7 @@ public final class MimeMessageUtils {
      * @param session the mail session.
      * @param source  the input data.
      * @param options options specifying how the file is opened.
-     * @return the MimeMessage.
+     * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
      */
@@ -102,7 +102,7 @@ public final class MimeMessageUtils {
      *
      * @param session the mail session.
      * @param source  the input data.
-     * @return the MimeMessage.
+     * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
      */

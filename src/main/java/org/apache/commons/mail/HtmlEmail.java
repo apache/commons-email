@@ -122,7 +122,7 @@ public class HtmlEmail extends MultiPartEmail {
         /**
          * Returns the unique content ID of this InlineImage.
          *
-         * @return the unique content ID of this InlineImage
+         * @return The unique content ID of this InlineImage
          */
         private String getCid() {
             return cid;
@@ -131,7 +131,7 @@ public class HtmlEmail extends MultiPartEmail {
         /**
          * Returns the {@code DataSource} that represents the encoded content.
          *
-         * @return the {@code DataSource} representing the encoded content
+         * @return The {@code DataSource} representing the encoded content
          */
         private DataSource getDataSource() {
             return dataSource;
@@ -140,7 +140,7 @@ public class HtmlEmail extends MultiPartEmail {
         /**
          * Returns the {@code MimeBodyPart} that contains the encoded InlineImage data.
          *
-         * @return the {@code MimeBodyPart} containing the encoded InlineImage data
+         * @return The {@code MimeBodyPart} containing the encoded InlineImage data
          */
         private MimeBodyPart getMimeBodyPart() {
             return mimeBodyPart;
@@ -308,7 +308,7 @@ public class HtmlEmail extends MultiPartEmail {
      *
      * @param dataSource the {@code DataSource} to embed
      * @param name       the name that will be set in the file name header field
-     * @return the generated Content-ID for this {@code DataSource}
+     * @return The generated Content-ID for this {@code DataSource}
      * @throws EmailException if the embedding fails or if {@code name} is null or empty
      * @see #embed(DataSource, String, String)
      * @since 1.1
@@ -337,7 +337,7 @@ public class HtmlEmail extends MultiPartEmail {
      * @param dataSource the {@code DataSource} to embed
      * @param name       the name that will be set in the file name header field
      * @param cid        the Content-ID to use for this {@code DataSource}
-     * @return the URL encoded Content-ID for this {@code DataSource}
+     * @return The URL encoded Content-ID for this {@code DataSource}
      * @throws EmailException if the embedding fails or if {@code name} is null or empty
      * @since 1.1
      */
@@ -513,7 +513,7 @@ public class HtmlEmail extends MultiPartEmail {
     /**
      * Gets the HTML content.
      *
-     * @return the HTML content.
+     * @return The HTML content.
      * @since 1.6.0
      */
     public String getHtml() {
@@ -523,7 +523,7 @@ public class HtmlEmail extends MultiPartEmail {
     /**
      * Gets the message text.
      *
-     * @return the message text.
+     * @return The message text.
      * @since 1.6.0
      */
     public String getText() {

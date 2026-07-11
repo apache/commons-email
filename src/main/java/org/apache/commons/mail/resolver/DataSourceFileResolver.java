@@ -62,7 +62,7 @@ public class DataSourceFileResolver extends DataSourceBaseResolver {
     /**
      * Gets the base directory used for resolving relative resource locations.
      *
-     * @return the baseUrl
+     * @return The baseUrl
      */
     public File getBaseDir() {
         return baseDir;

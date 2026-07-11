@@ -792,7 +792,7 @@ public abstract class Email {
      *
      * @param name  the name of the header
      * @param value the value of the header
-     * @return the folded header value
+     * @return The folded header value
      * @throws IllegalArgumentException if either the name or value is null or empty
      */
     private String createFoldedHeaderValue(final String name, final String value) {
@@ -846,7 +846,7 @@ public abstract class Email {
      * Creates a customized MimeMessage which can be implemented by a derived class, e.g. to set the message id.
      *
      * @param aSession mail session to be used
-     * @return the newly created message
+     * @return The newly created message
      */
     protected MimeMessage createMimeMessage(final Session aSession) {
         return new MimeMessage(aSession);
@@ -855,7 +855,7 @@ public abstract class Email {
     /**
      * Gets the authenticator.
      *
-     * @return the authenticator.
+     * @return The authenticator.
      * @since 1.6.0
      */
     public Authenticator getAuthenticator() {
@@ -874,7 +874,7 @@ public abstract class Email {
     /**
      * Gets the "bounce address" of this email.
      *
-     * @return the bounce address as string
+     * @return The bounce address as string
      * @since 1.4
      */
     public String getBounceAddress() {
@@ -893,7 +893,7 @@ public abstract class Email {
     /**
      * Gets the Charset.
      *
-     * @return the Charset.
+     * @return The Charset.
      * @since 1.6.0
      */
     public String getCharsetName() {
@@ -903,7 +903,7 @@ public abstract class Email {
     /**
      * Gets the content.
      *
-     * @return the content.
+     * @return The content.
      * @since 1.6.0
      */
     public Object getContent() {
@@ -913,7 +913,7 @@ public abstract class Email {
     /**
      * Gets the content type.
      *
-     * @return the content type.
+     * @return The content type.
      * @since 1.6.0
      */
     public String getContentType() {
@@ -923,7 +923,7 @@ public abstract class Email {
     /**
      * Gets the email body.
      *
-     * @return the email body.
+     * @return The email body.
      * @since 1.6.0
      */
     public MimeMultipart getEmailBody() {
@@ -1041,7 +1041,7 @@ public abstract class Email {
     /**
      * Gets the message.
      *
-     * @return the message.
+     * @return The message.
      * @since 1.6.0
      */
     public MimeMessage getMessage() {
@@ -1051,7 +1051,7 @@ public abstract class Email {
     /**
      * Gets the internal MimeMessage. Please note that the MimeMessage is built by the buildMimeMessage() method.
      *
-     * @return the MimeMessage
+     * @return The MimeMessage
      */
     public MimeMessage getMimeMessage() {
         return message;
@@ -1060,7 +1060,7 @@ public abstract class Email {
     /**
      * Gets the POP3 host.
      *
-     * @return the POP3 host.
+     * @return The POP3 host.
      * @since 1.6.0
      */
     public String getPopHost() {
@@ -1070,7 +1070,7 @@ public abstract class Email {
     /**
      * Gets the POP3 password.
      *
-     * @return the POP3 password.
+     * @return The POP3 password.
      * @since 1.6.0
      */
     public String getPopPassword() {
@@ -1080,7 +1080,7 @@ public abstract class Email {
     /**
      * Gets the POP3 user name.
      *
-     * @return the POP3 user name.
+     * @return The POP3 user name.
      * @since 1.6.0
      */
     public String getPopUserName() {
@@ -1127,7 +1127,7 @@ public abstract class Email {
     /**
      * Gets the socket connection timeout value in milliseconds.
      *
-     * @return the timeout in milliseconds.
+     * @return The timeout in milliseconds.
      * @since 1.2
      */
     public int getSocketConnectionTimeout() {
@@ -1137,7 +1137,7 @@ public abstract class Email {
     /**
      * Gets the socket I/O timeout value in milliseconds.
      *
-     * @return the socket I/O timeout
+     * @return The socket I/O timeout
      * @since 1.2
      */
     public int getSocketTimeout() {
@@ -1147,7 +1147,7 @@ public abstract class Email {
     /**
      * Gets the current SSL port used by the SMTP transport.
      *
-     * @return the current SSL port used by the SMTP transport
+     * @return The current SSL port used by the SMTP transport
      */
     public String getSslSmtpPort() {
         if (session != null) {
@@ -1273,7 +1273,7 @@ public abstract class Email {
     /**
      * Sends the email. Internally we build a MimeMessage which is afterwards sent to the SMTP server.
      *
-     * @return the message id of the underlying MimeMessage
+     * @return The message id of the underlying MimeMessage
      * @throws IllegalStateException if the MimeMessage was already built, that is, {@link #buildMimeMessage()} was already called
      * @throws EmailException        the sending failed
      */
@@ -1285,7 +1285,7 @@ public abstract class Email {
     /**
      * Sends the previously created MimeMessage to the SMTP server.
      *
-     * @return the message id of the underlying MimeMessage
+     * @return The message id of the underlying MimeMessage
      * @throws IllegalArgumentException if the MimeMessage has not been created
      * @throws EmailException           the sending failed
      */
