@@ -51,7 +51,7 @@ class EmailLiveTest extends AbstractEmailTest {
     /**
      * Factory method to create a pre-configured email instance.
      *
-     * @param clazz the requested implementation class
+     * @param clazz The requested implementation class
      * @return The new instance
      * @throws Exception creating the Email instance failed
      */

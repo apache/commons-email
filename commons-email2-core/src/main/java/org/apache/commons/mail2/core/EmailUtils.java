@@ -94,7 +94,7 @@ public final class EmailUtils {
     /**
      * Checks that the given file exists and is not a directory.
      *
-     * @param file the file to check.
+     * @param file The file to check.
      * @return The given file if it exists and is not a directory.
      * @throws IOException if the given file does not exist or is a directory.
      * @since 2.0.0-M2
@@ -113,7 +113,7 @@ public final class EmailUtils {
     /**
      * Checks that the given file exists and is not a directory.
      *
-     * @param file the file to check.
+     * @param file The file to check.
      * @return The given file if it exists and is not a directory.
      * @throws IOException if the given file does not exist or is a directory.
      * @since 2.0.0-M2
@@ -132,7 +132,7 @@ public final class EmailUtils {
     /**
      * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
      *
-     * @param input the input string to be URL encoded
+     * @param input The input string to be URL encoded
      * @return A URL encoded string
      * @see <a href="https://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
@@ -159,7 +159,7 @@ public final class EmailUtils {
     /**
      * Tests whether the given collection is null or empty.
      *
-     * @param collection the collection to test.
+     * @param collection The collection to test.
      * @return whether the given collection is null or empty.
      */
     public static boolean isEmpty(final Collection<?> collection) {
@@ -169,7 +169,7 @@ public final class EmailUtils {
     /**
      * Tests whether the given map is null or empty.
      *
-     * @param map the map to test.
+     * @param map The map to test.
      * @return whether the given map is null or empty.
      */
     public static boolean isEmpty(final Map<?, ?> map) {
@@ -179,7 +179,7 @@ public final class EmailUtils {
     /**
      * Tests whether the given array is null or empty.
      *
-     * @param array the collection to test.
+     * @param array The collection to test.
      * @return whether the given array is null or empty.
      */
     public static boolean isEmpty(final Object[] array) {
@@ -192,7 +192,7 @@ public final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 240418
      * </p>
      *
-     * @param str the String to check, may be null
+     * @param str The String to check, may be null
      * @return {@code true} if the String is empty or null
      */
     public static boolean isEmpty(final String str) {
@@ -205,7 +205,7 @@ public final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 240418
      * </p>
      *
-     * @param str the String to check, may be null
+     * @param str The String to check, may be null
      * @return {@code true} if the String is not empty and not null
      */
     public static boolean isNotEmpty(final String str) {
@@ -229,13 +229,13 @@ public final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 201930
      * </p>
      *
-     * @param count   the length of random string to create
-     * @param start   the position in set of chars to start at
-     * @param end     the position in set of chars to end before
+     * @param count   The length of random string to create
+     * @param start   The position in set of chars to start at
+     * @param end     The position in set of chars to end before
      * @param letters only allow letters?
      * @param numbers only allow numbers?
-     * @param chars   the set of chars to choose randoms from. If {@code null}, then it will use the set of all chars.
-     * @param random  a source of randomness.
+     * @param chars   The set of chars to choose randoms from. If {@code null}, then it will use the set of all chars.
+     * @param random  A source of randomness.
      * @return The random string
      * @throws IllegalArgumentException if {@code count} &lt; 0.
      */
@@ -289,7 +289,7 @@ public final class EmailUtils {
      * Copied from Commons Lang 2.1, svn 201930
      * </p>
      *
-     * @param count the length of random string to create
+     * @param count The length of random string to create
      * @return The random string
      */
     public static String randomAlphabetic(final int count) {
@@ -299,7 +299,7 @@ public final class EmailUtils {
     /**
      * Replaces end-of-line characters with spaces.
      *
-     * @param input the input string to be scanned.
+     * @param input The input string to be scanned.
      * @return A clean string
      */
     public static String replaceEndOfLineCharactersWithSpaces(final String input) {
@@ -309,7 +309,7 @@ public final class EmailUtils {
     /**
      * Converts the given string to lower case.
      *
-     * @param value the input string.
+     * @param value The input string.
      * @return A lower case string.
      */
     public static String toLower(final String value) {

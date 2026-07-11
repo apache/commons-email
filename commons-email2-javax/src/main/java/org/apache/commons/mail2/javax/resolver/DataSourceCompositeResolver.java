@@ -35,7 +35,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param dataSourceResolvers a list of resolvers being used
+     * @param dataSourceResolvers A list of resolvers being used
      */
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers) {
         this.dataSourceResolvers = dataSourceResolvers.clone();
@@ -44,7 +44,7 @@ public class DataSourceCompositeResolver extends DataSourceBaseResolver {
     /**
      * Constructs a new instance.
      *
-     * @param dataSourceResolvers a list of resolvers being used
+     * @param dataSourceResolvers A list of resolvers being used
      * @param isLenient           shall we ignore resources not found or throw an exception?
      */
     public DataSourceCompositeResolver(final DataSourceResolver[] dataSourceResolvers, final boolean isLenient) {

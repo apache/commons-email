@@ -415,7 +415,7 @@ public class MultiPartEmail extends Email {
     /**
      * Sets whether there are attachments.
      *
-     * @param hasAttachments the attachments flag
+     * @param hasAttachments The attachments flag
      * @since 1.0
      */
     public void setBoolHasAttachments(final boolean hasAttachments) {
@@ -425,7 +425,7 @@ public class MultiPartEmail extends Email {
     /**
      * Sets the initialized status of this object.
      *
-     * @param initialized the initialized status flag
+     * @param initialized The initialized status flag
      */
     protected void setInitialized(final boolean initialized) {
         this.initialized = initialized;

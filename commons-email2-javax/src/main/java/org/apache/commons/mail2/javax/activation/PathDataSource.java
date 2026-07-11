@@ -62,7 +62,7 @@ public final class PathDataSource implements DataSource {
      * <p>
      * The type map defaults to {@link FileTypeMap#getDefaultFileTypeMap()}.
      *
-     * @param path the path
+     * @param path The path
      */
     public PathDataSource(final Path path) {
         this(path, FileTypeMap.getDefaultFileTypeMap());
@@ -74,8 +74,8 @@ public final class PathDataSource implements DataSource {
      * The file will not actually be opened until a method is called that requires the path to be opened.
      * </p>
      *
-     * @param path    the path, non-null.
-     * @param typeMap the type map, non-null.
+     * @param path    The path, non-null.
+     * @param typeMap The type map, non-null.
      * @param options options for opening file streams.
      */
     public PathDataSource(final Path path, final FileTypeMap typeMap, final OpenOption... options) {

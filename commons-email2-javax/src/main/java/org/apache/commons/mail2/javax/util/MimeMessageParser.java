@@ -70,7 +70,7 @@ public class MimeMessageParser {
     /**
      * Constructs an instance with the MimeMessage to be extracted.
      *
-     * @param mimeMessage the message to parse
+     * @param mimeMessage The message to parse
      */
     public MimeMessageParser(final MimeMessage mimeMessage) {
         this.attachmentList = new ArrayList<>();
@@ -86,8 +86,8 @@ public class MimeMessageParser {
     /**
      * Parses the MimePart to create a DataSource.
      *
-     * @param parent the parent multi-part
-     * @param part   the current part to be processed
+     * @param parent The parent multi-part
+     * @param part   The current part to be processed
      * @return The DataSource
      * @throws MessagingException creating the DataSource failed
      * @throws IOException        error getting InputStream or unsupported encoding
@@ -106,7 +106,7 @@ public class MimeMessageParser {
      * The content-id must be stripped of any angle brackets, i.e. "part1" instead of "&lt;part1&gt;".
      * </p>
      *
-     * @param cid the content-id of the attachment
+     * @param cid The content-id of the attachment
      * @return The corresponding datasource or null if nothing was found
      * @since 1.3.4
      */
@@ -117,7 +117,7 @@ public class MimeMessageParser {
     /**
      * Find an attachment using its name.
      *
-     * @param name the name of the attachment
+     * @param name The name of the attachment
      * @return The corresponding datasource or null if nothing was found
      */
     public DataSource findAttachmentByName(final String name) {
@@ -141,7 +141,7 @@ public class MimeMessageParser {
     /**
      * Gets the MIME type.
      *
-     * @param fullMimeType the mime type from the mail API
+     * @param fullMimeType The mime type from the mail API
      * @return The real mime type
      */
     private String getBaseMimeType(final String fullMimeType) {
@@ -185,8 +185,8 @@ public class MimeMessageParser {
     /**
      * Determines the name of the data source if it is not already set.
      *
-     * @param part       the mail part
-     * @param dataSource the data source
+     * @param part       The mail part
+     * @param dataSource The data source
      * @return The name of the data source or {@code null} if no name can be determined
      * @throws MessagingException           accessing the part failed
      * @throws UnsupportedEncodingException decoding the text failed
@@ -317,8 +317,8 @@ public class MimeMessageParser {
     /**
      * Tests whether the MimePart contains an object of the given mime type.
      *
-     * @param part     the current MimePart
-     * @param mimeType the mime type to check
+     * @param part     The current MimePart
+     * @param mimeType The mime type to check
      * @return {@code true} if the MimePart matches the given mime type, {@code false} otherwise
      * @throws MessagingException parsing the MimeMessage failed
      */
@@ -356,8 +356,8 @@ public class MimeMessageParser {
     /**
      * Extracts the content of a MimeMessage recursively.
      *
-     * @param parent the parent multi-part
-     * @param part   the current MimePart
+     * @param parent The parent multi-part
+     * @param part   The current MimePart
      * @throws MessagingException parsing the MimeMessage failed
      * @throws IOException        parsing the MimeMessage failed
      */
@@ -387,7 +387,7 @@ public class MimeMessageParser {
     /**
      * Strips the content id of any whitespace and angle brackets.
      *
-     * @param contentId the string to strip
+     * @param contentId The string to strip
      * @return A stripped version of the content id
      */
     private String stripContentId(final String contentId) {

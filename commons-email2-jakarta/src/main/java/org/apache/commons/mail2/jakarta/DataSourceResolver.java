@@ -30,7 +30,7 @@ public interface DataSourceResolver {
     /**
      * Resolves the given resource location to a {@code DataSource}.
      *
-     * @param resourceLocation the location of the resource
+     * @param resourceLocation The location of the resource
      * @return The {@code DataSource}
      * @throws IOException the resource was not found
      */
@@ -39,7 +39,7 @@ public interface DataSourceResolver {
     /**
      * Resolves the given resource location to a {@code DataSource}.
      *
-     * @param resourceLocation the location of the resource
+     * @param resourceLocation The location of the resource
      * @param isLenient        shall we ignore resources not found or complain with an exception?
      * @return The data source containing the resource or null if the resource was not found in lenient mode
      * @throws IOException resolving the resource failed

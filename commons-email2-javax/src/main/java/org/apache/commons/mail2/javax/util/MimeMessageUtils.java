@@ -41,8 +41,8 @@ public final class MimeMessageUtils {
     /**
      * Creates a MimeMessage.
      *
-     * @param session the mail session.
-     * @param source  the input data.
+     * @param session The mail session.
+     * @param source  The input data.
      * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
@@ -56,8 +56,8 @@ public final class MimeMessageUtils {
     /**
      * Creates a MimeMessage.
      *
-     * @param session the mail session.
-     * @param source  the input data.
+     * @param session The mail session.
+     * @param source  The input data.
      * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
@@ -69,8 +69,8 @@ public final class MimeMessageUtils {
     /**
      * Creates a MimeMessage.
      *
-     * @param session the mail session.
-     * @param source  the input data.
+     * @param session The mail session.
+     * @param source  The input data.
      * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      */
@@ -81,8 +81,8 @@ public final class MimeMessageUtils {
     /**
      * Creates a MimeMessage.
      *
-     * @param session the mail session.
-     * @param source  the input data.
+     * @param session The mail session.
+     * @param source  The input data.
      * @param options options specifying how the file is opened.
      * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
@@ -97,8 +97,8 @@ public final class MimeMessageUtils {
     /**
      * Creates a MimeMessage using the platform's default character encoding.
      *
-     * @param session the mail session.
-     * @param source  the input data.
+     * @param session The mail session.
+     * @param source  The input data.
      * @return The MimeMessage.
      * @throws MessagingException creating the MimeMessage failed.
      * @throws IOException        creating the MimeMessage failed.
@@ -111,8 +111,8 @@ public final class MimeMessageUtils {
     /**
      * Writes a MimeMessage into a file.
      *
-     * @param mimeMessage the MimeMessage to write.
-     * @param resultFile  the file containing the MimeMessage.
+     * @param mimeMessage The MimeMessage to write.
+     * @param resultFile  The file containing the MimeMessage.
      * @throws MessagingException accessing MimeMessage failed.
      * @throws IOException        writing the MimeMessage failed.
      */

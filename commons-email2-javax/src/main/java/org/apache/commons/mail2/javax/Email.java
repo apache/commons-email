@@ -599,8 +599,8 @@ public abstract class Email {
     /**
      * Creates a folded header value containing 76 character chunks.
      *
-     * @param name  the name of the header
-     * @param value the value of the header
+     * @param name  The name of the header
+     * @param value The value of the header
      * @return The folded header value
      * @throws IllegalArgumentException if either the name or value is null or empty
      */
@@ -1112,7 +1112,7 @@ public abstract class Email {
      * This method should be used when your outgoing mail server requires authentication. Your mail server must also support RFC2554.
      * </p>
      *
-     * @param authenticator the {@code Authenticator} object.
+     * @param authenticator The {@code Authenticator} object.
      * @see Authenticator
      * @since 1.0
      */
@@ -1201,7 +1201,7 @@ public abstract class Email {
     /**
      * Sets the content.
      *
-     * @param content the content.
+     * @param content The content.
      * @return {@code this} instance.
      * @since 1.6.0
      */
@@ -1225,7 +1225,7 @@ public abstract class Email {
     /**
      * Sets the content type.
      *
-     * @param contentType the content type.
+     * @param contentType The content type.
      * @return {@code this} instance.
      * @since 1.6.0
      */
@@ -1291,7 +1291,7 @@ public abstract class Email {
     /**
      * Sets the From address.
      *
-     * @param fromAddress the From address.
+     * @param fromAddress The From address.
      * @return {@code this} instance.
      * @since 1.6.0
      */
@@ -1389,7 +1389,7 @@ public abstract class Email {
     /**
      * Sets the MIME message.
      *
-     * @param message the MIME message.
+     * @param message The MIME message.
      */
     public void setMessage(final MimeMessage message) {
         this.message = message;
@@ -1450,7 +1450,7 @@ public abstract class Email {
     /**
      * Sets the POP3 password.
      *
-     * @param popPassword the POP3 password.
+     * @param popPassword The POP3 password.
      * @return {@code this} instance.
      * @since 1.6.0
      */
@@ -1463,7 +1463,7 @@ public abstract class Email {
     /**
      * Sets the POP3 user name.
      *
-     * @param popUserName the POP3 user name.
+     * @param popUserName The POP3 user name.
      * @return {@code this} instance.
      * @since 1.6.0
      */
@@ -1541,7 +1541,7 @@ public abstract class Email {
     /**
      * Sets the socket connection timeout value in milliseconds. Default is a 60 second timeout.
      *
-     * @param socketConnectionTimeout the connection timeout
+     * @param socketConnectionTimeout The connection timeout
      * @throws IllegalStateException if the mail session is already initialized
      * @since 1.6.0
      */
@@ -1553,7 +1553,7 @@ public abstract class Email {
     /**
      * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
      *
-     * @param socketTimeout the socket I/O timeout
+     * @param socketTimeout The socket I/O timeout
      * @throws IllegalStateException if the mail session is already initialized
      * @since 1.6.0
      */
@@ -1598,7 +1598,7 @@ public abstract class Email {
     /**
      * Sets the SSL port to use for the SMTP transport. Defaults to the standard port, 465.
      *
-     * @param sslSmtpPort the SSL port to use for the SMTP transport
+     * @param sslSmtpPort The SSL port to use for the SMTP transport
      * @throws IllegalStateException if the mail session is already initialized
      * @see #setSmtpPort(int)
      */

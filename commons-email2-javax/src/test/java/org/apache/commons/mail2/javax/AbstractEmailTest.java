@@ -153,7 +153,7 @@ public abstract class AbstractEmailTest {
     }
 
     /**
-     * @param intMsgNo the message to retrieve
+     * @param intMsgNo The message to retrieve
      * @return message as string
      */
     public String getMessageAsString(final int intMsgNo) {
@@ -368,7 +368,7 @@ public abstract class AbstractEmailTest {
      *
      * @param mailServer     reference to the fake mail server
      * @param strSubject     expected subject
-     * @param content        the expected message content
+     * @param content        The expected message content
      * @param fromAdd        expected from address
      * @param toAdd          list of expected to addresses
      * @param ccAdd          list of expected cc addresses
@@ -398,7 +398,7 @@ public abstract class AbstractEmailTest {
      *
      * @param mailServer     reference to the fake mail server
      * @param strSubject     expected subject
-     * @param strMessage     the expected message as a string
+     * @param strMessage     The expected message as a string
      * @param fromAdd        expected from address
      * @param toAdd          list of expected to addresses
      * @param ccAdd          list of expected cc addresses

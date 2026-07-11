@@ -40,8 +40,8 @@ public class EmailException extends Exception {
      *
      * @param <T>     the subject type to return if we don't throw.
      * @param test    test condition.
-     * @param subject the subject to return if we don't throw.
-     * @param message the exception message.
+     * @param subject The subject to return if we don't throw.
+     * @param message The exception message.
      * @return The given subject.
      * @throws EmailException if the supplier evaluates to true.
      */
@@ -56,8 +56,8 @@ public class EmailException extends Exception {
      * Throws an EmailException if the collection is empty.
      *
      * @param <T>     the type of elements in the collection.
-     * @param value   the value to test.
-     * @param message the exception message.
+     * @param value   The value to test.
+     * @param message The exception message.
      * @return The given subject.
      * @throws EmailException if the collection is empty.
      */
@@ -68,8 +68,8 @@ public class EmailException extends Exception {
     /**
      * Throws an EmailException if the string is empty.
      *
-     * @param message the exception message.
-     * @param value   the value to test.
+     * @param message The exception message.
+     * @param value   The value to test.
      * @return The given subject.
      * @throws EmailException if the string is empty.
      */
@@ -81,8 +81,8 @@ public class EmailException extends Exception {
      * Throws an EmailException if the array is empty.
      *
      * @param <T>     the array type.
-     * @param message the exception message.
-     * @param value   the value to test.
+     * @param message The exception message.
+     * @param value   The value to test.
      * @return The given subject.
      * @throws EmailException if the array is empty.
      */
@@ -94,8 +94,8 @@ public class EmailException extends Exception {
      * Throws an EmailException if the value is null.
      *
      * @param <T>     the value type.
-     * @param message the exception message.
-     * @param value   the value to test.
+     * @param message The exception message.
+     * @param value   The value to test.
      * @return The given subject.
      * @throws EmailException if the value is null.
      */
@@ -115,7 +115,7 @@ public class EmailException extends Exception {
     /**
      * Constructs a new {@code EmailException} with specified detail message.
      *
-     * @param msg the error message.
+     * @param msg The error message.
      */
     public EmailException(final String msg) {
         super(msg);
@@ -124,8 +124,8 @@ public class EmailException extends Exception {
     /**
      * Constructs a new {@code EmailException} with specified detail message and nested {@code Throwable} root cause.
      *
-     * @param msg       the error message.
-     * @param rootCause the exception or error that caused this exception to be thrown.
+     * @param msg       The error message.
+     * @param rootCause The exception or error that caused this exception to be thrown.
      */
     public EmailException(final String msg, final Throwable rootCause) {
         super(msg, rootCause);
@@ -134,7 +134,7 @@ public class EmailException extends Exception {
     /**
      * Constructs a new {@code EmailException} with specified nested {@code Throwable} root cause.
      *
-     * @param rootCause the exception or error that caused this exception to be thrown.
+     * @param rootCause The exception or error that caused this exception to be thrown.
      */
     public EmailException(final Throwable rootCause) {
         super(rootCause);
