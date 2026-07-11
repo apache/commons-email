@@ -105,7 +105,7 @@ public abstract class AbstractEmailTest {
      * Several ISPs do resolve invalid URLs like {@code http://example.invalid} to some error page causing tests to fail otherwise.
      * </p>
      *
-     * @return an invalid URL
+     * @return An invalid URL
      */
     @SuppressWarnings("resource") // openStream() returns null.
     protected URL createInvalidURL() throws Exception {

@@ -93,7 +93,7 @@ public final class PathDataSource implements DataSource {
      * Gets an InputStream representing the data and will throw an IOException if it can not do so. This method will return a new instance of InputStream
      * with each invocation.
      *
-     * @return an InputStream
+     * @return An InputStream
      */
     @Override
     public InputStream getInputStream() throws IOException {
@@ -115,7 +115,7 @@ public final class PathDataSource implements DataSource {
      * Gets an OutputStream representing the data and will throw an IOException if it can not do so. This method will return a new instance of OutputStream
      * with each invocation.
      *
-     * @return an OutputStream
+     * @return An OutputStream
      */
     @Override
     public OutputStream getOutputStream() throws IOException {

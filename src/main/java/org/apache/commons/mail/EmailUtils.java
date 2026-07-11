@@ -136,7 +136,7 @@ final class EmailUtils {
      * Encodes an input string according to RFC 2392. Unsafe characters are escaped.
      *
      * @param input the input string to be URL encoded
-     * @return a URL encoded string
+     * @return A URL encoded string
      * @see <a href="https://tools.ietf.org/html/rfc2392">RFC 2392</a>
      */
     static String encodeUrl(final String input) {
@@ -285,7 +285,7 @@ final class EmailUtils {
      * Replaces end-of-line characters with spaces.
      *
      * @param input the input string to be scanned.
-     * @return a clean string
+     * @return A clean string
      */
     static String replaceEndOfLineCharactersWithSpaces(final String input) {
         return input == null ? null : input.replace('\n', ' ').replace('\r', ' ');
