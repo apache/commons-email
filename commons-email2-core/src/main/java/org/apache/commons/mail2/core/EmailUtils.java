@@ -96,7 +96,7 @@ public final class EmailUtils {
      *
      * @param file The file to check.
      * @return The given file if it exists and is not a directory.
-     * @throws IOException if the given file does not exist or is a directory.
+     * @throws IOException Thrown if the given file does not exist or is a directory.
      * @since 2.0.0-M2
      */
     public static File check(final File file) throws IOException {
@@ -115,7 +115,7 @@ public final class EmailUtils {
      *
      * @param file The file to check.
      * @return The given file if it exists and is not a directory.
-     * @throws IOException if the given file does not exist or is a directory.
+     * @throws IOException Thrown if the given file does not exist or is a directory.
      * @since 2.0.0-M2
      */
     public static Path check(final Path file) throws IOException {
