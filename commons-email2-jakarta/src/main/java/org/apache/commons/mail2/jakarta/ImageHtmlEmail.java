@@ -29,8 +29,9 @@ import jakarta.activation.DataSource;
 
 /**
  * <p>
- * Small wrapper class on top of HtmlEmail which encapsulates the required logic to retrieve images that are contained in "&lt;img src=../&gt;" elements in the
- * HTML code. This is done by replacing all img-src-elements with "cid:"-entries and embedding images in the email.
+ * Small wrapper class on top of HtmlEmail which encapsulates the required logic to retrieve images and scripts that are contained in
+ * "&lt;img src=../&gt;" and "&lt;script src=../&gt;" elements in the HTML code.
+ * This is done by replacing all the src-elements with "cid:"-entries and embedding the images/scripts in the email.
  * </p>
  * <p>
  * For local files the class tries to either load them via an absolute path or - if available - use a relative path starting from a base directory. For files
@@ -49,10 +50,10 @@ public class ImageHtmlEmail extends HtmlEmail {
     // can be arbitrary text between "IMG" and "SRC" like IDs and other things.
 
     /** Regexp for extracting {@code <img>} tags */
-    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg]\\s*[^>]*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_IMG_SRC = "(<[Ii][Mm][Gg](?=\\s)[^>]*?\\s[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+)([\"'])";
 
     /** Regexp for extracting {@code <script>} tags */
-    public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt]\\s*.*?\\s+[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+?)([\"'])";
+    public static final String REGEX_SCRIPT_SRC = "(<[Ss][Cc][Rr][Ii][Pp][Tt](?=\\s)[^>]*?\\s[Ss][Rr][Cc]\\s*=\\s*[\"'])([^\"']+)([\"'])";
 
     // this pattern looks for the HTML image tag which indicates embedded images,
     // the grouping is necessary to allow to replace the element with the CID
