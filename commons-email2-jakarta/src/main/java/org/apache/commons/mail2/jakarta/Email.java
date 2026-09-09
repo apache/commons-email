@@ -221,9 +221,9 @@ public abstract class Email {
 
     /**
      * If set to true, check the server identity as specified by RFC 2595. These additional checks based on the content of the server's certificate are intended
-     * to prevent man-in-the-middle attacks. Defaults to false.
+     * to prevent man-in-the-middle attacks. Defaults to true.
      */
-    private boolean sslCheckServerIdentity;
+    private boolean sslCheckServerIdentity = true;
 
     /**
      * If set to true, and a message has some valid and some invalid addresses, send the message anyway, reporting the partial failure with a
@@ -830,8 +830,8 @@ public abstract class Email {
                 properties.setProperty(EmailConstants.MAIL_SMTP_SOCKET_FACTORY_FALLBACK, "false");
             }
 
-            if ((isSSLOnConnect() || isStartTLSEnabled()) && isSSLCheckServerIdentity()) {
-                properties.setProperty(EmailConstants.MAIL_SMTP_SSL_CHECKSERVERIDENTITY, "true");
+            if (isSSLOnConnect() || isStartTLSEnabled()) {
+                properties.setProperty(EmailConstants.MAIL_SMTP_SSL_CHECKSERVERIDENTITY, String.valueOf(isSSLCheckServerIdentity()));
             }
 
             if (bounceAddress != null) {
