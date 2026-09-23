@@ -17,6 +17,7 @@
 package org.apache.commons.mail2.jakarta;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,11 +26,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -45,6 +48,9 @@ import org.junit.jupiter.api.Test;
 
 import jakarta.activation.DataSource;
 import jakarta.mail.internet.MimeMessage;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class ImageHtmlEmailTest extends HtmlEmailTest {
 
@@ -70,6 +76,8 @@ class ImageHtmlEmailTest extends HtmlEmailTest {
 
     private static final URL TEST2_HTML_URL = ImageHtmlEmailTest.class.getResource("/attachments/classpathtest.html");
 
+    private static final Pattern imgSrcPattern = Pattern.compile(ImageHtmlEmail.REGEX_IMG_SRC);
+    private static final Pattern scriptSrcPattern = Pattern.compile(ImageHtmlEmail.REGEX_SCRIPT_SRC);
     private MockImageHtmlEmailConcrete email;
 
     private String loadUrlContent(final URL url) throws IOException {
@@ -196,6 +204,57 @@ class ImageHtmlEmailTest extends HtmlEmailTest {
         assertEquals("file1", matcher.group(2));
         assertTrue(matcher.find());
         assertEquals("file2", matcher.group(2));
+
+        // should not match any other tags
+        matcher = pattern.matcher("<nomatch src=\"s\" />");
+        assertFalse(matcher.find());
+
+        matcher = pattern.matcher("<imgx src=\"file1\">");
+        assertFalse(matcher.find());
+
+        // should not match any other attribute
+        matcher = pattern.matcher("<img xsrc=\"file1\">");
+        assertFalse(matcher.find());
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    public void testScriptRegex(String inputHtml, List<String> srcMatches) {
+        Matcher matcher = scriptSrcPattern.matcher(inputHtml);
+        for (String expectedMatch : srcMatches) {
+            assertTrue(matcher.find());
+            assertEquals(expectedMatch, matcher.group(2));
+        }
+        assertFalse(matcher.find());
+    }
+
+    private static Stream<Arguments> testScriptRegex() {
+        Stream<Arguments> argumentsStream = Stream.of(
+                // ensure that the regex that we use is catching the cases correctly
+                Arguments.of("<html><body><script src=\"s\"></script></body></html>", Arrays.asList("s")),
+                Arguments.of("<html><body><script blocking=\"render\" async src=\"s\"></script></body></html>", Arrays.asList("s")),
+                // uppercase
+                Arguments.of("<html><body><SCRIPT BLOCKING=\"render\" ASYNC SRC=\"s\"></script></body></html>", Arrays.asList("s")),
+                // matches twice
+                Arguments.of("<html><body><script src=\"s1\"></script><script src=\"s2\"></script></body></html>", Arrays.asList("s1", "s2")),
+                // what about newlines
+                Arguments.of("<html><body><script\n \rsrc=\"s1\"></script><script \nsrc=\"s2\"></script></body></html>", Arrays.asList("s1", "s2")),
+                // what about newlines and other whitespaces
+                Arguments.of("<html><body><script\n \rsrc  = \t \"s1\" ></script><script \nsrc =\t\"s2\" ></script></body></html>", Arrays.asList("s1", "s2")),
+                // what about some real markup
+                Arguments.of("<script defer=\"\" nomodule=\"\" nonce=\"\" src=\"/jkao/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js\"></script>", Arrays.asList("/jkao/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js")),
+                // try with 5
+                Arguments.of("<html><body><script src=\"s1\"></script><script src=\"s2\"></script><script src=\"s3\"></script><script src=\"s4\"></script><script src=\"s5\"></script></body></html>", Arrays.asList("s1", "s2", "s3", "s4", "s5")),
+                // try with invalid scripts
+                Arguments.of("<script src=\"s\" />", Arrays.asList("s")),
+                Arguments.of("<script src=\"s\">", Arrays.asList("s")),
+                // should not match any other tags
+                Arguments.of("<nomatch src=\"s\" />", Arrays.asList()),
+                Arguments.of("<scriptx src=\"s\" />", Arrays.asList()),
+                // should not match any other attribute
+                Arguments.of("<script xsrc=\"s\" />", Arrays.asList())
+        );
+        return argumentsStream;
     }
 
     @Test
@@ -485,5 +544,41 @@ class ImageHtmlEmailTest extends HtmlEmailTest {
         // validate txt message
         validateSend(fakeMailServer, strSubject, email.getHtml(), email.getFromAddress(), email.getToAddresses(), email.getCcAddresses(),
                 email.getBccAddresses(), true);
+    }
+
+    @Test
+    public void testEmailWithScript() throws Exception {
+        Logger.getLogger(ImageHtmlEmail.class.getName()).setLevel(Level.FINEST);
+
+        getMailServer();
+
+        final String strSubject = "Test HTML Send with Script";
+
+        // Create the email message
+        email = new MockImageHtmlEmailConcrete();
+        final DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", true);
+
+        email.setDataSourceResolver(dataSourceResolver);
+        email.setHostName(strTestMailServer);
+        email.setSmtpPort(getMailServerPort());
+        email.setFrom(strTestMailFrom);
+        email.addTo(strTestMailTo);
+        email.setSubject(strSubject);
+
+        // set the html message
+        email.setHtmlMsg("<html><body><script  type=\"text/javascript\" src=\"scripts/example-script.js\"/></body></html>");
+
+        // send the email
+        email.send();
+
+        fakeMailServer.stop();
+
+        assertEquals(1, fakeMailServer.getMessages().size());
+        final MimeMessage mimeMessage = fakeMailServer.getMessages().get(0).getMimeMessage();
+        MimeMessageUtils.writeMimeMessage(mimeMessage, new File("./target/test-emails/testEmailWithScript.eml"));
+
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(mimeMessage).parse();
+        assertTrue(mimeMessageParser.getHtmlContent().contains("\"cid:"));
+        assertEquals(1, mimeMessageParser.getAttachmentList().size());
     }
 }
