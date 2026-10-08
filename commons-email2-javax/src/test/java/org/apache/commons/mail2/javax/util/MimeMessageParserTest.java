@@ -23,9 +23,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.InputStream;
+import org.apache.commons.io.IOUtils;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
+
+import java.nio.charset.StandardCharsets;
 
 import javax.activation.DataSource;
 import javax.mail.Session;
@@ -469,4 +473,26 @@ class MimeMessageParserTest {
         assertFalse(mimeMessageParser.hasAttachments());
     }
 
+    @Test
+    void testParseMultipartEndingEmail() throws Exception {
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-ending-boundary.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message);
+
+        mimeMessageParser.parse();
+
+        assertTrue(mimeMessageParser.isMultipart());
+        assertTrue(mimeMessageParser.hasAttachments());
+
+        final List<?> attachmentList = mimeMessageParser.getAttachmentList();
+        assertEquals(1, attachmentList.size());
+
+        final DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
+        assertNotNull(dataSource);
+        assertEquals("text/plain", dataSource.getContentType());
+
+        InputStream inputStream = dataSource.getInputStream();
+        String content = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        assertEquals("test\n\n--------------010700020404090103050203--MORE", content);
+    }
 }
