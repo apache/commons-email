@@ -16,6 +16,8 @@
 github:
   description: "Apache Commons Email"
   homepage: https://commons.apache.org/email/
+  autolink_jira:
+    - EMAIL
 
 notifications:
     commits:      commits@commons.apache.org
