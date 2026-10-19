@@ -16,13 +16,18 @@
  */
 package org.apache.commons.mail2.javax.util;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
@@ -31,6 +36,7 @@ import javax.activation.DataSource;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail2.javax.HtmlEmail;
 import org.junit.jupiter.api.Test;
 
@@ -105,6 +111,47 @@ class MimeMessageParserTest {
         final DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
         assertNotNull(dataSource);
         assertEquals("text/plain", dataSource.getContentType());
+    }
+
+    private static byte[] read(final DataSource dataSource) throws IOException {
+        try (InputStream inputStream = dataSource.getInputStream()) {
+            return IOUtils.toByteArray(inputStream);
+        }
+    }
+
+    /**
+     * Tests that each call of {@link DataSource#getInputStream()} of an attachment returns a new stream positioned at the beginning of the data, as the
+     * {@link DataSource} contract requires.
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    void testAttachmentCanBeReadTwice() throws Exception {
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, new File("./src/test/resources/eml/multipart-text-attachment.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message).parse();
+
+        final DataSource dataSource = mimeMessageParser.findAttachmentByName("test.txt");
+        assertEquals("test", new String(read(dataSource), StandardCharsets.UTF_8).trim());
+        assertEquals("test", new String(read(dataSource), StandardCharsets.UTF_8).trim());
+        assertThrows(UnsupportedOperationException.class, dataSource::getOutputStream);
+    }
+
+    /**
+     * Tests that a base64 encoded attachment can be read more than once.
+     *
+     * @throws Exception the test failed
+     */
+    @Test
+    void testBase64AttachmentCanBeReadTwice() throws Exception {
+        final Session session = Session.getDefaultInstance(new Properties());
+        final MimeMessage message = MimeMessageUtils.createMimeMessage(session, Paths.get("./src/test/resources/eml/attachment-only.eml"));
+        final MimeMessageParser mimeMessageParser = new MimeMessageParser(message).parse();
+
+        final DataSource dataSource = mimeMessageParser.findAttachmentByName("Kunde 100029   Auftrag   3600.pdf");
+        final byte[] content = read(dataSource);
+        assertEquals("%PDF", new String(content, 0, 4, StandardCharsets.US_ASCII));
+        assertArrayEquals(content, read(dataSource));
     }
 
     /**
