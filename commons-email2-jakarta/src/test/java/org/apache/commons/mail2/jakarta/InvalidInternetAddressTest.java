@@ -18,7 +18,6 @@ package org.apache.commons.mail2.jakarta;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.nio.charset.StandardCharsets;
 import java.util.stream.IntStream;
@@ -100,16 +99,10 @@ class InvalidInternetAddressTest extends AbstractEmailTest {
             final boolean quoted = ARR_INVALID_EMAILS[i].contains("\"");
             final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
             final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;
-            try {
+            if (quoted || domainBracket) {
                 address.validate();
-
-                if (!(quoted || domainBracket)) {
-                    fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-                }
-            } catch (final Exception ex) {
-                if (quoted || domainBracket) {
-                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i] + " - " + ex.getMessage());
-                }
+            } else {
+                assertThrows(Exception.class, address::validate, () -> "Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             }
         }
 
@@ -131,16 +124,10 @@ class InvalidInternetAddressTest extends AbstractEmailTest {
             final int atIndex = ARR_INVALID_EMAILS[i].indexOf("@");
             final boolean domainBracket = atIndex >= 0 && ARR_INVALID_EMAILS[i].indexOf("[", atIndex) >= 0;
 
-            try {
+            if (quoted || domainBracket) {
                 address.validate();
-                if (!(quoted || domainBracket)) {
-                    fail("Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
-                }
-
-            } catch (final Exception ex) {
-                if (quoted || domainBracket) {
-                    fail("Validate " + i + " failed: " + ARR_INVALID_EMAILS[i] + " - " + ex.getMessage());
-                }
+            } else {
+                assertThrows(Exception.class, address::validate, () -> "Validate " + i + " passed: " + ARR_INVALID_EMAILS[i]);
             }
 
         }
