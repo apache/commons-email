@@ -19,7 +19,9 @@ package org.apache.commons.mail2.javax;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,6 +41,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -666,6 +669,152 @@ class EmailTest extends AbstractEmailTest {
         email.setMailSession(mySession);
         assertEquals(mySession, email.getMailSession());
 
+    }
+
+    @Test
+    void testSetMailSessionSmtpsProtocolPrecedence() {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "smtps");
+        properties.setProperty("mail.smtps.auth", "true");
+        properties.setProperty("mail.smtps.user", "fixture-user");
+        properties.setProperty("mail.smtps.password", "fixture-password");
+        properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
+        properties.setProperty(EmailConstants.MAIL_SMTP_USER, "smtp-user");
+        properties.setProperty(EmailConstants.MAIL_SMTP_PASSWORD, "smtp-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        final DefaultAuthenticator retrievedAuth = (DefaultAuthenticator) email.getAuthenticator();
+        assertEquals("fixture-user", retrievedAuth.getPasswordAuthentication().getUserName());
+        assertEquals("fixture-password", retrievedAuth.getPasswordAuthentication().getPassword());
+    }
+
+    @Test
+    void testSetMailSessionUnsetProtocolDefaultsToSmtp() {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
+        properties.setProperty(EmailConstants.MAIL_SMTP_USER, "fixture-user");
+        properties.setProperty(EmailConstants.MAIL_SMTP_PASSWORD, "fixture-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        final DefaultAuthenticator retrievedAuth = (DefaultAuthenticator) email.getAuthenticator();
+        assertEquals("fixture-user", retrievedAuth.getPasswordAuthentication().getUserName());
+        assertEquals("fixture-password", retrievedAuth.getPasswordAuthentication().getPassword());
+    }
+
+    @Test
+    void testSetMailSessionSmtpsMissingCredentialsKeepsSession() throws Exception {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "smtps");
+        properties.setProperty("mail.smtps.auth", "true");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        assertSame(mySession, email.getMailSession());
+    }
+
+    @Test
+    void testSetMailSessionSmtpsAuthDisabledKeepsSession() throws Exception {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "smtps");
+        properties.setProperty("mail.smtps.auth", "false");
+        properties.setProperty("mail.smtps.user", "fixture-user");
+        properties.setProperty("mail.smtps.password", "fixture-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        assertSame(mySession, email.getMailSession());
+    }
+
+    @Test
+    void testSetMailSessionSmtpsOnlyAuthVerifiedByRequestPasswordAuthentication() throws Exception {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "smtps");
+        properties.setProperty("mail.smtps.auth", "true");
+        properties.setProperty("mail.smtps.user", "fixture-user");
+        properties.setProperty("mail.smtps.password", "fixture-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        final PasswordAuthentication passwordAuthentication = email.getMailSession().requestPasswordAuthentication(null, -1, "smtps", null, null);
+        assertNotNull(passwordAuthentication);
+        assertEquals("fixture-user", passwordAuthentication.getUserName());
+        assertEquals("fixture-password", passwordAuthentication.getPassword());
+    }
+
+    @Test
+    void testSetMailSessionSmtpsPartialCredentialsNoSmtpFallback() throws Exception {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "smtps");
+        properties.setProperty("mail.smtps.auth", "true");
+        properties.setProperty("mail.smtps.user", "fixture-user");
+        properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
+        properties.setProperty(EmailConstants.MAIL_SMTP_USER, "smtp-user");
+        properties.setProperty(EmailConstants.MAIL_SMTP_PASSWORD, "smtp-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        assertSame(mySession, email.getMailSession());
+    }
+
+    @Test
+    void testSetMailSessionSmtpsEmptyPasswordNoSmtpFallback() throws Exception {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "smtps");
+        properties.setProperty("mail.smtps.auth", "true");
+        properties.setProperty("mail.smtps.user", "fixture-user");
+        properties.setProperty("mail.smtps.password", "");
+        properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
+        properties.setProperty(EmailConstants.MAIL_SMTP_USER, "smtp-user");
+        properties.setProperty(EmailConstants.MAIL_SMTP_PASSWORD, "smtp-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        assertSame(mySession, email.getMailSession());
+    }
+
+    @Test
+    void testSetMailSessionSmtpsAuthDisabledWithSmtpCredentialsKeepsSession() throws Exception {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "smtps");
+        properties.setProperty("mail.smtps.auth", "false");
+        properties.setProperty("mail.smtps.user", "fixture-user");
+        properties.setProperty("mail.smtps.password", "fixture-password");
+        properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
+        properties.setProperty(EmailConstants.MAIL_SMTP_USER, "smtp-user");
+        properties.setProperty(EmailConstants.MAIL_SMTP_PASSWORD, "smtp-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        assertSame(mySession, email.getMailSession());
+    }
+
+    @Test
+    void testSetMailSessionOtherProtocolUsesSmtpCredentials() {
+        final Properties properties = new Properties();
+        properties.setProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL, "other");
+        properties.setProperty("mail.smtps.auth", "true");
+        properties.setProperty("mail.smtps.user", "smtps-user");
+        properties.setProperty("mail.smtps.password", "smtps-password");
+        properties.setProperty(EmailConstants.MAIL_SMTP_AUTH, "true");
+        properties.setProperty(EmailConstants.MAIL_SMTP_USER, "fixture-user");
+        properties.setProperty(EmailConstants.MAIL_SMTP_PASSWORD, "fixture-password");
+
+        final Session mySession = Session.getInstance(properties, null);
+        email.setMailSession(mySession);
+
+        final DefaultAuthenticator retrievedAuth = (DefaultAuthenticator) email.getAuthenticator();
+        assertEquals("fixture-user", retrievedAuth.getPasswordAuthentication().getUserName());
+        assertEquals("fixture-password", retrievedAuth.getPasswordAuthentication().getPassword());
     }
 
     @Test
