@@ -1333,26 +1333,36 @@ public abstract class Email {
      * Sets a mail Session object to use. Please note that passing a user name and password (in the case of mail authentication) will create a new mail session
      * with a DefaultAuthenticator. This is a convenience but might come unexpected.
      *
-     * If mail authentication is used but NO user name and password is supplied the implementation assumes that you have set a authenticator and will use the
-     * existing mail session (as expected).
+     * <p>
+     * If mail authentication is used but no user name or password is supplied, the implementation assumes that you have set an authenticator and uses the
+     * existing mail session.
+     * </p>
+     *
+     * <p>
+     * When {@code mail.transport.protocol} is {@code smtps}, authentication uses the {@code mail.smtps.auth}, {@code mail.smtps.user} and
+     * {@code mail.smtps.password} properties. Otherwise, the corresponding {@code mail.smtp.*} properties are used. Credentials from the two namespaces
+     * are not combined.
+     * </p>
      *
      * @param session mail session to be used
-     * @throws NullPointerException if {@code aSession} is {@code null}
+     * @throws NullPointerException if {@code session} is {@code null}
      * @since 1.0
      */
     public void setMailSession(final Session session) {
         Objects.requireNonNull(session, "no mail session supplied");
 
         final Properties sessionProperties = session.getProperties();
-        final String auth = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_AUTH);
+        final String protocol = sessionProperties.getProperty(EmailConstants.MAIL_TRANSPORT_PROTOCOL);
+        final boolean smtps = "smtps".equals(protocol);
+        final String auth = sessionProperties.getProperty(smtps ? "mail.smtps.auth" : EmailConstants.MAIL_SMTP_AUTH);
 
         if (Boolean.parseBoolean(auth)) {
-            final String userName = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_USER);
-            final String password = sessionProperties.getProperty(EmailConstants.MAIL_SMTP_PASSWORD);
+            final String userName = sessionProperties.getProperty(smtps ? "mail.smtps.user" : EmailConstants.MAIL_SMTP_USER);
+            final String password = sessionProperties.getProperty(smtps ? "mail.smtps.password" : EmailConstants.MAIL_SMTP_PASSWORD);
 
             if (EmailUtils.isNotEmpty(userName) && EmailUtils.isNotEmpty(password)) {
                 // only create a new mail session with an authenticator if
-                // authentication is required and no user name is given
+                // authentication is required and both credentials are supplied
                 authenticator = new DefaultAuthenticator(userName, password);
                 this.session = Session.getInstance(sessionProperties, authenticator);
             } else {
