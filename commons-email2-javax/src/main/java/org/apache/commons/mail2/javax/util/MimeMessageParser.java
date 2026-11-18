@@ -17,6 +17,8 @@
 package org.apache.commons.mail2.javax.util;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,8 +41,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimePart;
 import javax.mail.internet.MimeUtility;
 import javax.mail.internet.ParseException;
-
-import org.apache.commons.mail2.javax.activation.InputStreamDataSource;
 
 /**
  * Parses a MimeMessage and stores the individual parts such a plain text, HTML text and attachments.
@@ -92,12 +92,13 @@ public class MimeMessageParser {
      * @throws MessagingException creating the DataSource failed
      * @throws IOException        error getting InputStream or unsupported encoding
      */
-    @SuppressWarnings("resource") // Caller closes InputStream
     protected DataSource createDataSource(final Multipart parent, final MimePart part) throws MessagingException, IOException {
         final DataSource dataSource = part.getDataHandler().getDataSource();
         final String contentType = getBaseMimeType(dataSource.getContentType());
         final String dataSourceName = getDataSourceName(part, dataSource);
-        return new InputStreamDataSource(dataSource.getInputStream(), contentType, dataSourceName);
+        // Fail while parsing if the content cannot be read, as before; AttachmentDataSource opens a new stream on each read.
+        dataSource.getInputStream().close();
+        return new AttachmentDataSource(dataSource, contentType, dataSourceName);
     }
 
     /**
@@ -392,5 +393,58 @@ public class MimeMessageParser {
      */
     private String stripContentId(final String contentId) {
         return contentId == null ? null : contentId.trim().replaceAll("[\\<\\>]", "");
+    }
+
+    /**
+     * A {@link DataSource} of an attachment that opens a new stream of the part's content on each call of {@link #getInputStream()}, as the
+     * {@link DataSource} contract requires, without keeping a copy of the content.
+     */
+    private static final class AttachmentDataSource implements DataSource {
+
+        /**
+         * The data source of the part.
+         */
+        private final DataSource partDataSource;
+
+        /**
+         * The base MIME content type.
+         */
+        private final String contentType;
+
+        /**
+         * The name, may be null.
+         */
+        private final String name;
+
+        private AttachmentDataSource(final DataSource partDataSource, final String contentType, final String name) {
+            this.partDataSource = partDataSource;
+            this.contentType = contentType;
+            this.name = name;
+        }
+
+        @Override
+        public String getContentType() {
+            return contentType;
+        }
+
+        @Override
+        public InputStream getInputStream() throws IOException {
+            return partDataSource.getInputStream();
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * Always throws {@link UnsupportedOperationException}.
+         *
+         * @throws UnsupportedOperationException Always throws {@link UnsupportedOperationException}.
+         */
+        @Override
+        public OutputStream getOutputStream() {
+            throw new UnsupportedOperationException();
+        }
     }
 }
